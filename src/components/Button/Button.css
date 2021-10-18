@@ -1,0 +1,26 @@
+/* default props describe the general design of component */
+.button {
+    border: none;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: filter 300ms;
+}
+
+.button:hover {
+    filter: brightness(90%);
+}
+
+.button:active {
+    filter: brightness(75%);
+}
+
+/* variants should be defined as followed */
+.button.default {
+    background: #ff5757;
+}
+
+.button.secondary {
+    background: #57aeff
+}
