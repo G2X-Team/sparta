@@ -9,9 +9,12 @@ module.exports = {
           autoprefixer(),
         ],
         inject: true,
-        extract: !!options.writeMeta,
+        extract: false,
+        modules: true,
+        autoModules: true,
       }),
     );
+    
     return config;
   },
 };
