@@ -9,9 +9,9 @@ module.exports = {
           autoprefixer(),
         ],
         inject: true,
-        extract: false,
-        modules: true,
-        autoModules: true,
+        extract: !!options.writeMeta,
+        // modules: true,
+        // autoModules: true,
       }),
     );
     
