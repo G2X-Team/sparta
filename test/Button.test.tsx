@@ -15,7 +15,7 @@ describe('Button', () => {
 
     it("can be clicked", () => {
         // given
-        let onClick = jest.fn();
+        let onClick: jest.Mock<any, any> = jest.fn();
         render(<Button onClick={onClick}>Trying my best</Button>);
 
         // when
