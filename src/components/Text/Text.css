@@ -1,0 +1,48 @@
+.apollo-component-library-typography-component {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+.apollo-component-library-typography-component.first-header {
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.apollo-component-library-typography-component.second-header {
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.apollo-component-library-typography-component.third-header {
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.apollo-component-library-typography-component.no-margins {
+    margin: 0;
+}
+
+.apollo-component-library-typography-component.inline {
+    display: inline-block;
+}
+
+.apollo-component-library-typography-component.bold {
+    font-weight: bold;
+}
+
+.apollo-component-library-typography-component.italic {
+    font-style: italic;
+}
+
+.apollo-component-library-typography-component.underline {
+    text-decoration: underline;
+}
