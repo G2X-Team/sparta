@@ -1,0 +1,59 @@
+.apollo-component-library-switch-component-label {
+    position: relative;
+    display: inline-block;
+    padding-left: 36px;
+}
+
+.apollo-component-library-switch-component-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.apollo-component-library-switch-component {
+    position: absolute;
+    cursor: pointer;
+    top: 16px;
+    left: 5px;
+    background-color: rgb(226, 226, 226);
+    transition: 400ms;
+    width: 36px;
+    height: 20px;
+    border-radius: 20px;
+}
+
+.apollo-component-library-switch-component:before {
+    content: " ";
+    position: absolute;
+    min-height: 16px;
+    min-width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background: white;
+    transition: 400ms;
+    border-radius: 100px;
+}
+
+.apollo-component-library-switch-component-input:checked + .apollo-component-library-switch-component:before {
+    transform: translate(16px);
+}
+
+.apollo-component-library-switch-component-input:checked + .apollo-component-library-switch-component.default:before {
+    background: lightcoral;
+}
+
+.apollo-component-library-switch-component-input:checked + .apollo-component-library-switch-component.secondary:before {
+    background: lightskyblue;
+}
+
+.apollo-component-library-switch-component-input:disabled + .apollo-component-library-switch-component:before {
+    background: darkgray;
+}
+
+.apollo-component-library-switch-component-input:disabled + .apollo-component-library-switch-component.default:before {
+    background: darkgray;
+}
+
+.apollo-component-library-switch-component-input:disabled + .apollo-component-library-switch-component.secondary:before {
+    background: darkgray;
+}
