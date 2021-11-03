@@ -5,7 +5,7 @@ import './Checkbox.css';
 export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Tags must be have value in between */
     children: ReactNode;
-    /** Value that the checkbox represents, also serves as name */
+    /** Value that the checkbox represents */
     value?: string;
     /** Determines whether the user can change the input */
     disabled?: boolean;
