@@ -7,7 +7,7 @@ import { Default as Radio } from '../stories/Radio.stories';
 describe('Radio', () => {
     it('renders correctly', () => {
         // given
-        render(<Radio>Hello World!</Radio>);
+        render(<Radio value="something">Hello World!</Radio>);
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
@@ -16,7 +16,7 @@ describe('Radio', () => {
     it('triggers onChange method when clicked', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
-        render(<Radio onChange={onChange}>Hello World!</Radio>)
+        render(<Radio value="something" onChange={onChange}>Hello World!</Radio>)
         const radio: HTMLElement = screen.getByRole('radio');
 
         // when
@@ -29,7 +29,7 @@ describe('Radio', () => {
     it('will not trigger onChange when disabled', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
-        render(<Radio disabled onChange={onChange}>Hello World!</Radio>);
+        render(<Radio value="something" disabled onChange={onChange}>Hello World!</Radio>);
         const radio: HTMLElement = screen.getByRole('radio');
 
         // when

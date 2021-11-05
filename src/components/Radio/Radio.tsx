@@ -8,7 +8,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Determines whether input is disabled */
     disabled?: boolean;
     /** Value that the radio represents*/
-    value?: string;
+    value: string;
 }
 
 /** 
@@ -26,3 +26,5 @@ export const Radio = ({children, ...props}: Props) => {
         </label>
     )
 }
+
+Radio.displayName = "Radio";
