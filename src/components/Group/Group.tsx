@@ -1,10 +1,11 @@
 import React, { HTMLAttributes, ReactNode, useState, useEffect } from 'react';
 import './Group.css';
 
-import { findAll, FoundChild, FoundChildren } from '../../util/findAll'
+import { findAll, FoundChild, FoundChildren, getComponents } from '../../util/findAll'
 
 import { Radio } from '../Radio/Radio';
 import { Checkbox } from '../Checkbox/Checkbox';
+import { View } from '../View/View';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Group must contain element between tags */
@@ -41,26 +42,23 @@ export const Group = ({children, name, type, onGroupChange, ...props}: Props) =>
     /**
      * Renders all inputs determinant on the specific type
      */
-    const renderAll = (): ReactNode[] => {
+    const renderAll = (viewChildren: ReactNode): ReactNode[] => {
         // determine what component we are looking for
         const input: ReactNode = type === "radio" ? Radio : Checkbox;
+        const inputType: string = type.slice(0, 1).toUpperCase() + type.slice(1);
 
         // get all instances of the input
-        const components: FoundChildren = findAll(children, [input]);
+        const components: FoundChildren = findAll(viewChildren, [input, View]);
 
         // get all inputs
-        const inputs: FoundChild[] = type === "radio" 
+        components[inputType] = type === "radio" 
             ? formatRadios(components.Radio)
             : formatCheckboxes(components.Checkbox)
+        
+        // gets all views
+        components.View = formatViews(components?.View);
 
-        // store all components
-        const all: ReactNode[] = [];
-
-        // sort all components
-        [...inputs, ...components.other].forEach((child: FoundChild) => all[child.index] = child.component);
-
-        // return inputs as ReactNodes
-        return all;
+        return getComponents(components);
     }
 
     /**
@@ -159,9 +157,31 @@ export const Group = ({children, name, type, onGroupChange, ...props}: Props) =>
         })
     }
 
+    /**
+     * Formats all View components for final rendering
+     * 
+     * @param views all found views
+     * @returns formatted views
+     */
+    const formatViews = (views: FoundChild[]): FoundChild[] => {
+        return views?.map((view: FoundChild) => {
+            // abstract the component for cleaner code
+            const component: JSX.Element = view.component;
+
+            return {
+                component: (
+                    <View {...component.props} key={Math.random()}>
+                        {renderAll(component.props.children)}
+                    </View>
+                ),
+                index: view.index
+            }
+        })
+    }
+
     return (
         <div {...props}>
-            {renderAll()}
+            {renderAll(children)}
         </div>
     )
 }

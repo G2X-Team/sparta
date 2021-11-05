@@ -14,12 +14,13 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
 /**
  * An input object that is a list of items where a single entry can be selected
  */
-export const Checkbox = ({children, ...props}: Props) => {
+export const Checkbox = ({children, disabled = false, ...props}: Props) => {
     return (
         <label>
             <input
                 {...props}
                 type="checkbox"
+                disabled={disabled}
                 className="apollo-component-library-checkbox-component"
             />
             <Text inline>{ children }</Text>
