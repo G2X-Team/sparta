@@ -3,10 +3,10 @@ import { Text } from '../Text/Text';
 import './Checkbox.css';
 
 export interface Props extends HTMLAttributes<HTMLInputElement> {
-    /** Tags must be have value in between */
-    children: ReactNode;
+    /**  Can have children between tags */
+    children?: ReactNode;
     /** Value that the checkbox represents */
-    value?: string;
+    value: string;
     /** Determines whether the user can change the input */
     disabled?: boolean;
 }

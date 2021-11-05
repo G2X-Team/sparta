@@ -5,10 +5,9 @@ import { Checkbox, Props } from '../src/components/Checkbox/Checkbox';
 const meta: Meta = {
     title: "Form/Checkbox",
     component: Checkbox,
-    argTypes: {
-        children: {
-            defaultValue: "This is a checkbox"
-        }
+    args: {
+        children: "This is a checkbox",
+        value: "checkbox value"
     }
 }
 
