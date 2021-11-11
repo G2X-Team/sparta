@@ -160,4 +160,40 @@ describe('Group', () => {
         // when then
         expect(screen.getAllByText(/option /i)).toHaveLength(4);
     })
+
+    it('can disable all checkboxes when the group is disabled', () => {
+        // given 
+        const onChange: jest.Mock<any, any> = jest.fn();
+        render(
+            <Group name="group" type="checkbox" disabled>
+                <Checkbox value="value 1" onChange={onChange}>Option 1</Checkbox>
+                <Checkbox value="value 2" onChange={onChange}>Option 2</Checkbox>
+            </Group>
+        )
+        const inputs: HTMLElement[] = screen.getAllByRole('checkbox');
+
+        // when
+        inputs.forEach((input: HTMLElement) => userEvent.clear(input));
+
+        // then
+        expect(onChange).not.toHaveBeenCalled();
+    })
+
+    it('can disable all radios when the group is disabled', () => {
+        // given 
+        const onChange: jest.Mock<any, any> = jest.fn();
+        render(
+            <Group name="group" type="radio" disabled>
+                <Radio value="value 1" onChange={onChange}>Option 1</Radio>
+                <Radio value="value 2" onChange={onChange}>Option 2</Radio>
+            </Group>
+        )
+        const inputs: HTMLElement[] = screen.getAllByRole('radio');
+
+        // when
+        inputs.forEach((input: HTMLElement) => userEvent.click(input));
+
+        // then
+        expect(onChange).not.toHaveBeenCalled();
+    })
 })

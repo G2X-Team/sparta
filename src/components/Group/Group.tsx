@@ -16,13 +16,15 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     type: "radio" | "checkbox";
     /** Method that impacts onChange */
     onGroupChange?: (groupValue: string[] | string) => void;
+    /** Determines whether inputs are disabled or not */
+    disabled?: boolean;
 }
 
 /** 
  * Component that will represent values derived from radios and checkboxes and pass them
  * as parameters to its repsective on change function
  */
-export const Group = ({children, name, type, onGroupChange, ...props}: Props) => {
+export const Group = ({children, name, type, disabled = false, onGroupChange, ...props}: Props) => {
     // define group value
     const [radioValue, setRadioValue] = useState("");
     const [checkboxValue, setCheckboxValue] = useState<string[]>([]);
@@ -80,18 +82,20 @@ export const Group = ({children, name, type, onGroupChange, ...props}: Props) =>
 
         // get group name to later assign to all Radios
         const groupName: string = name;
+        const groupDisabled: boolean = disabled;
 
         return radios.map((radio: FoundChild) => {
             // abstracts the radio component for cleaner code
             const component: JSX.Element = radio.component;
             
             // gets all non-conflicting radio props
-            const {onChange, name, checked, ...radioProps} = component.props;
+            const {onChange, name, checked, disabled, ...radioProps} = component.props;
 
             return {
                 component: (
                     <Radio 
                         {...radioProps}
+                        disabled={groupDisabled || disabled}
                         name={groupName}
                         key={Math.random()}
                         checked={component.props.value === radioValue}
@@ -134,18 +138,20 @@ export const Group = ({children, name, type, onGroupChange, ...props}: Props) =>
 
         // get group name to later assign to all checkboxes
         const groupName: string = name;
+        const groupDisabled: boolean = disabled;
 
         return checkboxes.map((checkbox: FoundChild) => {
             // abstracts the checkbox component for cleaner code
             const component: JSX.Element = checkbox.component;
             
             // gets all non-conflicting checkbox props
-            const {onChange, name, checked, ...checkboxProps} = component.props;
+            const {onChange, name, checked, disabled, ...checkboxProps} = component.props;
 
             return {
                 component: (
                     <Checkbox 
                         {...checkboxProps}
+                        disabled={groupDisabled || disabled}
                         name={groupName}
                         key={Math.random()}
                         checked={isChecked[component.props.value]}
