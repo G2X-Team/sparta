@@ -1,0 +1,71 @@
+.apollo-component-library-dropdown {
+    position: relative;
+}
+
+.apollo-component-library-dropdown-button-component {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+}
+
+.apollo-component-library-dropdown-menu-component {
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 5px 0;
+    border: 1px solid lightgray;
+    position: absolute;
+    max-width: 150px;
+    background: white;
+    min-width: 100px;
+}
+
+.apollo-component-library-dropdown-menu-component.o-top {
+    bottom: 0;
+}
+
+.apollo-component-library-dropdown-menu-component.o-bottom{
+    top: 0;
+}
+
+.apollo-component-library-dropdown-menu-component.a-left {
+    left: 0;
+}
+
+/* * ignores left alignment  */
+.apollo-component-library-dropdown-menu-component.a-left.o-left {
+    left: auto;
+}
+
+.apollo-component-library-dropdown-menu-component.a-right {
+    right: 0;
+}
+
+.apollo-component-library-dropdown-portal.top {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.apollo-component-library-dropdown-portal.bottom {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.apollo-component-library-dropdown-portal.left {
+    position: absolute;
+}
+
+.apollo-component-library-dropdown-portal.left > div {
+    right: 10px;
+}
+
+.apollo-component-library-dropdown-portal.right {
+    position: absolute;
+}
+
+.apollo-component-library-dropdown-portal.right > div {
+    left: 10px;
+}
