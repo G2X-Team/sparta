@@ -20,11 +20,11 @@
 }
 
 .apollo-component-library-dropdown-menu-component.o-top {
-    bottom: 0;
+    bottom: 5px;
 }
 
 .apollo-component-library-dropdown-menu-component.o-bottom{
-    top: 0;
+    top: 5px;
 }
 
 .apollo-component-library-dropdown-menu-component.a-left {

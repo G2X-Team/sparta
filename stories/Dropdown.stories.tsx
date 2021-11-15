@@ -22,3 +22,13 @@ export const Default: Story<Props> = (args) => (
         <Option>Goodbye</Option>
     </Dropdown>
 )
+
+export const AnotherExample: Story<Props> = (args) => (
+    <Dropdown {...args}>
+        <Button>
+            <Button>What's good</Button>
+        </Button>
+        <Option>Hello</Option>
+        <Option>Goodbye</Option>
+    </Dropdown>
+)

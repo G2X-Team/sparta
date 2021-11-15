@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactNode, useState, useEffect } from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 import { findAll, FoundChild, FoundChildren } from '../../util/findAll';
 import { detectOutsideClick } from '../../util/detectOutsideClick';
 import './Dropdown.css';
@@ -25,8 +25,7 @@ export const Dropdown = ({
         orientation = "bottom", 
         alignment = "left", 
         menuHeight,
-        menuWidth,
-        ...props
+        menuWidth
     }: Props) => {
     // ref containing dropdown button
     const dropdown = React.useRef<HTMLDivElement>(null);
