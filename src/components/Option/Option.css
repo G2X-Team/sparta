@@ -1,0 +1,11 @@
+.apollo-component-library-option-component {
+    padding: 5px 10px;
+    background: white;
+    transition: background 300ms;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.apollo-component-library-option-component:hover {
+    background: lightcoral;
+}
