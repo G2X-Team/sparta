@@ -105,22 +105,20 @@ export const Dropdown = ({
             options.map((option: FoundChild) => option.component);
 
         // define styling options
-        let style: { [key: string]: string | number } = {
-            display: open ? "inline-block" : "none",
-        }
+        let style: { [key: string]: string | number } = {};
 
         if (menuHeight) style["height"] = menuHeight;
         if (menuWidth) style["minWidth"] = menuWidth;
 
         // return all of the options in a menu
-        return (
+        return open ? (
             <div 
                 className={`apollo-component-library-dropdown-menu-component o-${orientation} a-${alignment}`}
                 style={style}
             >
                 {optionComponents}
             </div>
-        )
+        ) : null;
     }
 
     return (
