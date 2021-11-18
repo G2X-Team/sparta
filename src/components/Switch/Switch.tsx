@@ -26,7 +26,7 @@ export const Switch = ({children, variant="default", ...props}: Props) => {
                 className="apollo-component-library-switch-component-input"
             />
             <span className={`apollo-component-library-switch-component ${variant}`}/>
-            <Text inline>{children}</Text>
+            <Text inline margins>{children}</Text>
         </label>
     )
 }

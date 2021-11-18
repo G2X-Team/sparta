@@ -22,6 +22,8 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     lower?: boolean;
     /** Determines whether the first letter of every word is capital or not */
     pascal?: boolean;
+    /** Decide the color of the text without accessing the style props */
+    color?: string;
 }
 
 /**
@@ -30,7 +32,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
 export const Text = ({
     children, 
     header = 0, 
-    margins = true,
+    margins = false,
     inline = false,
     bold = false,
     italic = false,
@@ -38,6 +40,8 @@ export const Text = ({
     upper = false,
     lower = false,
     pascal = false,
+    color,
+    style,
     ...props
 }: Props) => {
     /**
@@ -96,6 +100,12 @@ export const Text = ({
     }
 
     return (
-        <p {...props} className={getVariant()}>{getCorrectCasing()}</p>
+        <p 
+            {...props}
+            style={{color, ...style}}
+            className={getVariant()}
+        >
+            {getCorrectCasing()}
+        </p>
     )
 }
