@@ -1,0 +1,11 @@
+.apollo-component-library-card-component {
+    border: 1px solid lightgray;
+    padding: 10px 15px;
+    border-radius: 15px;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.apollo-component-library-card-component-body {
+    flex: 1;
+}

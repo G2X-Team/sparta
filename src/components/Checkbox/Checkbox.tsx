@@ -23,7 +23,7 @@ export const Checkbox = ({children, disabled = false, ...props}: Props) => {
                 disabled={disabled}
                 className="apollo-component-library-checkbox-component"
             />
-            <Text inline>{ children }</Text>
+            <Text inline margins>{ children }</Text>
         </label>
     )
 }
