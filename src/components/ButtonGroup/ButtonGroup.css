@@ -1,0 +1,63 @@
+.apollo-component-library-button-group-button-component {
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: filter 300ms;
+}
+
+
+
+.apollo-component-library-button-group-button-component.large {
+    padding: 15px 20px;
+}
+
+.apollo-component-library-button-group-button-component.medium {
+    padding: 10px 15px;
+}
+
+.apollo-component-library-button-group-button-component.small {
+    padding: 5px 10px;
+}
+
+.apollo-component-library-button-group-button-component:hover {
+    filter: brightness(90%);
+}
+
+.apollo-component-library-button-group-button-component:active {
+    filter: brightness(75%);
+}
+
+/* variants should be defined as followed */
+.apollo-component-library-button-group-button-component.default {
+    background: #ff5757;
+    border-right: 1px solid #c43d3d;
+
+}
+
+.apollo-component-library-button-group-button-component.secondary {
+    background: #57aeff;
+    border-right: 1px solid #4395e2;
+}
+
+.apollo-component-library-button-group-button-component:first-child {
+    border-radius: 15px 0 0 15px;
+}
+
+.apollo-component-library-button-group-button-component:last-child {
+    border-radius: 0 15px 15px 0;
+    border-right: none;
+}
+
+.apollo-component-library-button-group-button-component:disabled {
+    background: lightgray;
+    border-right: 1px solid gray;
+    cursor: default;
+}
+
+.apollo-component-library-button-group-button-component:disabled:last-child {
+    border-right: none;
+}
+
+.apollo-component-library-button-group-button-component:disabled:hover {
+    filter: brightness(100%);
+}
