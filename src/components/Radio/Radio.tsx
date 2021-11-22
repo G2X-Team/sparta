@@ -22,7 +22,7 @@ export const Radio = ({children, ...props}: Props) => {
                 type="radio" 
                 className="apollo-component-library-radio-component"    
             />
-            <Text inline>{children}</Text>
+            <Text inline margins>{children}</Text>
         </label>
     )
 }
