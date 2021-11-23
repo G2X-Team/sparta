@@ -1,9 +1,10 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Button, TextInput, Text, Checkbox, Radio, Switch, Group, ButtonGroup, Dropdown, Option, Card, Header, Footer } from '../.';
+import { Button, TextInput, Text, Checkbox, Radio, Switch, Group, ButtonGroup, Dropdown, Option, Card, Header, Footer, Drawer, Divider } from '../.';
 
 const App = () => {
+  const [open, toggleOpen] = React.useState(false);
   return (
     <div>
       <Button>Something</Button>
@@ -44,7 +45,22 @@ const App = () => {
         <Footer style={{borderTop: "1px solid lightgray"}}>
             <Text italic style={{marginTop: 10}}>per request :)</Text>
         </Footer>
-    </Card>
+      </Card>
+      <br />
+      <br />
+      <Button onClick={() => toggleOpen(true)}>Click me</Button>
+        <Drawer open={open} toggleOpen={() => toggleOpen(!open)}>
+          <Header>
+            <Text header={1} bold>Drawer</Text>
+          </Header>
+          <Option>This is your first option</Option>
+          <Option>This is your second option</Option>
+          <Divider />
+          <Option>This is your third option</Option>
+          <Footer>
+            <Text color="gray" bold>This is an important text</Text>
+          </Footer>
+        </Drawer>
     </div>
   );
 };
