@@ -1,7 +1,7 @@
 import { useState, useEffect, MutableRefObject, Dispatch, SetStateAction } from 'react';
 
 export const detectOutsideClick = 
-    (element: MutableRefObject<any>, initial: boolean): 
+    (element: MutableRefObject<any>, initial: boolean, outsideMethod?: (value: boolean) => any): 
         [boolean, Dispatch<SetStateAction<boolean>>] => {
     const [open, toggleOpen] = useState(initial);
 
@@ -16,6 +16,7 @@ export const detectOutsideClick =
             if (element.current !== null && !element.current.contains(event.target)) {
                 // toggle if it is active
                 toggleOpen(!open);
+                outsideMethod && outsideMethod(open);
             }
         };
 
