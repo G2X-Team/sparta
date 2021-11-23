@@ -57,21 +57,22 @@ export const findAll = (children: ReactNode, components: any[]) => {
  * child objects in O(n) time
  * 
  * @param found all found children
+ * @param offset when templating components, sometimes it necessary to have an offset to correct the index
  * @returns all found components
  */
-export const getComponents = (found: FoundChildren): ReactNode[] => {
+export const getComponents = (found: FoundChildren, offset: number = 0): ReactNode[] => {
     // array storing sorted
     const sorted: ReactNode[] = [];
 
     // spread 
     let spreadFound: FoundChild[] = [];
     Object.keys(found).forEach((key: string) => {
-        spreadFound = [...spreadFound, ...found[key]];
+        if (found[key]) spreadFound = [...spreadFound, ...found[key]];
     })
 
     // loop through all children and extract the component and store it in array according to index
     for (let i: number = 0; i < spreadFound.length; i++) {
-        sorted[spreadFound[i].index] = spreadFound[i].component;
+        sorted[spreadFound[i].index - offset] = spreadFound[i].component;
     }
 
     return sorted;
