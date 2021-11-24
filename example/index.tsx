@@ -1,10 +1,11 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Button, TextInput, Text, Checkbox, Radio, Switch, Group, ButtonGroup, Dropdown, Option, Card, Header, Footer, Drawer, Divider } from '../.';
+import { Button, TextInput, Text, Checkbox, Radio, Switch, Group, ButtonGroup, Dropdown, Option, Card, Header, Footer, Drawer, Divider, Modal} from '../.';
 
 const App = () => {
   const [open, toggleOpen] = React.useState(false);
+  const [modal, toggleModal] = React.useState(false);
   return (
     <div>
       <Button>Something</Button>
@@ -61,6 +62,21 @@ const App = () => {
             <Text color="gray" bold>This is an important text</Text>
           </Footer>
         </Drawer>
+        <br />
+        <br />
+        <Button onClick={() => toggleModal(!open)}>Open Modal</Button>
+        <Modal open={modal} toggleModal={() => toggleModal(!modal)}>
+            <Header>
+                <Text header={2} bold>This is a Modal</Text>
+            </Header>
+            <Text>This is a modal that shows dialogue.</Text>
+            <Footer>
+                <ButtonGroup>
+                    <Button variant="secondary">Accept</Button>
+                    <Button>Decline</Button>
+                </ButtonGroup>
+            </Footer>
+        </Modal>
     </div>
   );
 };
