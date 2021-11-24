@@ -96,7 +96,6 @@ export const Drawer = ({
         if (Headers.length > 1) throw new Error("Drawer can only have one Header component");
         if (Footers.length > 1) throw new Error("Drawer can only have one Footer component");
 
-        // if the header and/or footer exists, make sure to get them both
         // get the header/footer if it exists and assign it into a variable
         const header: ReactNode = 
             components.Header.length > 0 ? (
