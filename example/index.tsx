@@ -1,7 +1,25 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Button, TextInput, Text, Checkbox, Radio, Switch, Group, ButtonGroup, Dropdown, Option, Card, Header, Footer, Drawer, Divider, Modal} from '../.';
+import { 
+  Button, 
+  TextInput,
+  Text,
+  Checkbox,
+  Radio,
+  Switch,
+  Group,
+  ButtonGroup,
+  Dropdown,
+  Option,
+  Card,
+  Header,
+  Footer,
+  Drawer,
+  Divider,
+  Modal,
+  Icon
+} from '../.';
 
 const App = () => {
   const [open, toggleOpen] = React.useState(false);
@@ -77,6 +95,11 @@ const App = () => {
                 </ButtonGroup>
             </Footer>
         </Modal>
+        <br />
+        <br />
+        <Icon name="keyboard_arrow_right"/>
+        <br />
+        <Icon onClick={() => console.log("Hello World")} name="keyboard_arrow_right"/>
     </div>
   );
 };
