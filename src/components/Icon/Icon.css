@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.apollo-component-library-icon-component {
+    user-select: none;
+}
+
+.apollo-component-library-icon-component.default {
+    background: transparent;
+    transition: background 300ms;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.apollo-component-library-icon-component.default:hover {
+    cursor: pointer;
+    background: rgba(240, 128, 128, 0.555);
+}
+
+.apollo-component-library-icon-component.default:active {
+    background: rgb(240, 128, 128);
+}
