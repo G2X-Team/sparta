@@ -1,0 +1,85 @@
+.apollo-component-library-loadingstate-component-container {
+    position: absolute;
+    z-index: 5;
+    transition: opacity 300ms;
+    top: 0;
+    left: 0;
+}
+
+.apollo-component-library-loadingstate-component-container > div {
+    position: relative;
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Absolute type LoadingState begins*/
+
+.apollo-component-library-loadingstate-component.absolute {
+    
+    border: 16px solid #f3f3f3;
+    z-index: 9999;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+.apollo-component-library-loadingstate-component-backdrop.absolute {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,0.5);
+}
+/* Absolute type LoadingState ends*/
+/* Inline type LoadingState begins */
+
+.apollo-component-library-loadingstate-component.inline {
+    
+    border: 16px solid #f3f3f3;
+    z-index: 9999;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 11px;
+    display: flex;
+    flex-direction: column;
+    height: 11px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin-left: 11%;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+.apollo-component-library-loadingstate-component-backdrop.inline {
+    position: inline;
+}
+
+/* Inline type LoadingState ends */
+

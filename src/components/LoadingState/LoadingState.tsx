@@ -1,0 +1,66 @@
+import React, { useState, useEffect, HTMLAttributes, ReactNode } from 'react';
+import "./LoadingState.css";
+
+
+
+export interface Props extends HTMLAttributes<HTMLDivElement> {
+    /** Determines the type of LoadingState whether Absolute or Inline*/
+    type?: "absolute" | "inline";
+    /** Determines whether the LoadingState is open or not */
+    open?: boolean;
+    /** Toggles the LoadingState between open and closed */
+    isLoading?: () => any;
+    manual?: boolean;
+}
+
+export const LoadingState = ({className, type, manual = false, children, style, open = false, isLoading, ...props}: Props) => {
+    // usestate variables
+    const [display, toggleDisplay] = useState(open);
+    const [effect, toggleEffect] = useState(open);
+
+    // Keeping track of open call
+    useEffect(() => {
+        if (open !== display) {
+            if (display) {
+                toggleEffect(false);
+                setTimeout(() => toggleDisplay(false), 300);
+            } else {
+                toggleDisplay(true);
+                setTimeout(() => toggleEffect(true), 100);
+            }
+        }
+    }, [open])
+
+    /**
+     * Renders the LoadingState and all of its children formatted as intended
+     */
+    const renderLoadingState = (): ReactNode => {
+
+        return (
+            <div
+                {...props}
+                className={`apollo-component-library-loadingstate-component ${type}`}
+            >
+                
+            </div>
+        )
+    }
+
+    return (
+        <React.Fragment>
+            {
+                display ? (
+                    <div style={{opacity: effect ? 1 : 0}} className="apollo-component-library-loadingstate-component-container">
+                        <div>
+                            { renderLoadingState() }
+                            <div 
+                                onClick={isLoading}
+                                className={`apollo-component-library-loadingstate-component-backdrop ${type}`} 
+                            />
+                        </div>
+                    </div>
+                ) : null
+            }
+        </React.Fragment>
+    )
+}
