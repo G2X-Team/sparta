@@ -18,7 +18,8 @@ import {
   Drawer,
   Divider,
   Modal,
-  Icon
+  Icon,
+  Label
 } from '../.';
 
 const App = () => {
@@ -47,12 +48,12 @@ const App = () => {
       </ButtonGroup>
       <br />
       <Dropdown>
-        <Button>
-          <Button>Coolio</Button>
-        </Button>
-        <Option>What</Option>
-        <Option>What</Option>
-        <Option>What</Option>
+    	<Button>
+    	  <Button>Coolio</Button>
+    	</Button>
+    	<Option>What</Option>
+    	<Option>What</Option>
+    	<Option>What</Option>
       </Dropdown>
       <br />
       <Card style={{height: 200, width: 300}}>
@@ -69,16 +70,16 @@ const App = () => {
       <br />
       <Button onClick={() => toggleOpen(true)}>Click me</Button>
         <Drawer open={open} toggleOpen={() => toggleOpen(!open)}>
-          <Header>
-            <Text header={1} bold>Drawer</Text>
-          </Header>
-          <Option>This is your first option</Option>
-          <Option>This is your second option</Option>
-          <Divider />
-          <Option>This is your third option</Option>
-          <Footer>
-            <Text color="gray" bold>This is an important text</Text>
-          </Footer>
+          	<Header>
+            	<Text header={1} bold>Drawer</Text>
+          	</Header>
+          	<Option>This is your first option</Option>
+          	<Option>This is your second option</Option>
+          	<Divider />
+          	<Option>This is your third option</Option>
+          	<Footer>
+            	<Text color="gray" bold>This is an important text</Text>
+          	</Footer>
         </Drawer>
         <br />
         <br />
@@ -100,6 +101,10 @@ const App = () => {
         <Icon name="keyboard_arrow_right"/>
         <br />
         <Icon onClick={() => console.log("Hello World")} name="keyboard_arrow_right"/>
+		<br />
+        <Label value="This is a text input">
+        	<TextInput placeholder="Text Input"/>
+        </Label>
     </div>
   );
 };

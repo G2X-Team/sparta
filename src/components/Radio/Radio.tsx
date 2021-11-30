@@ -12,7 +12,8 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
 }
 
 /** 
- * An input object that is a list of items where a single entry can be selected
+ * An input component that belongs to a list of others where when selected is the only representative
+ * value of that group.
  */
 export const Radio = ({children, ...props}: Props) => {
     return (

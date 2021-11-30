@@ -7,7 +7,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 /** 
- * Interface component that anchors to the top of another element
+ * Interface component that's intended purpose is to anchor to the top of another element
  */
 export const Header = ({children, className, ...props}: Props) => {
     return (

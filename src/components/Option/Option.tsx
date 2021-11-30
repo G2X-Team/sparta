@@ -10,6 +10,9 @@ export interface Props extends HTMLAttributes<HTMLElement> {
     onClick?: () => void;
 }
 
+/**
+ * Interfacing component used to describe an object pertaining to a menu.
+ */
 export const Option = ({children, ...props}: Props) => {
     return (
         <div {...props} className="apollo-component-library-option-component">

@@ -19,6 +19,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     manual?: boolean;
 }
 
+/**
+ * Popup that will appear based on the value of it's open prop. Also known as dialogue.
+ */
 export const Modal = ({className, manual = false, children, style, open = false, toggleModal, ...props}: Props) => {
     // state variables
     const [display, toggleDisplay] = useState(open);
