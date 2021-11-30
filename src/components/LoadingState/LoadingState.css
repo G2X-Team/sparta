@@ -21,12 +21,10 @@
     z-index: 9999;
     border-radius: 50%;
     border-top: 16px solid #3498db;
-    width: 120px;
     align-self: center;
     justify-self: center;
     display: flex;
     flex-direction: column;
-    height: 120px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
   }
@@ -57,10 +55,8 @@
     z-index: 9999;
     border-radius: 50%;
     border-top: 16px solid #3498db;
-    width: 11px;
     display: flex;
     flex-direction: column;
-    height: 11px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
     margin-left: 11%;
@@ -83,3 +79,19 @@
 
 /* Inline type LoadingState ends */
 
+/* LoadingState size begins*/
+.small{
+  width: 11px;
+  height: 11px;
+}
+
+.medium{
+  width: 60px;
+  height: 60px;
+}
+
+.large{
+  width: 120px;
+  height: 120px;
+}
+/* LoadingState size ends*/

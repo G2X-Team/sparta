@@ -6,6 +6,8 @@ import "./LoadingState.css";
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines the type of LoadingState whether Absolute or Inline*/
     type?: "absolute" | "inline";
+    /** Determines the size of LoadingState whether small , medium, or large */
+    size?: "small" | "medium" | "large";
     /** Determines whether the LoadingState is open or not */
     open?: boolean;
     /** Toggles the LoadingState between open and closed */
@@ -13,7 +15,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     manual?: boolean;
 }
 
-export const LoadingState = ({className, type, manual = false, children, style, open = false, isLoading, ...props}: Props) => {
+export const LoadingState = ({className, type, size, manual = false, children, style, open = false, isLoading, ...props}: Props) => {
     // usestate variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);
@@ -39,7 +41,7 @@ export const LoadingState = ({className, type, manual = false, children, style, 
         return (
             <div
                 {...props}
-                className={`apollo-component-library-loadingstate-component ${type}`}
+                className={`apollo-component-library-loadingstate-component ${type} ${size}`}
             >
                 
             </div>
