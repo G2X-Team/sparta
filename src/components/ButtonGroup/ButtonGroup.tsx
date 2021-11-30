@@ -25,7 +25,7 @@ export const ButtonGroup = ({children, variant = "default", disabled = false, si
     const renderButtons = (): ReactNode[] => {
         // find all buttons
         const components: FoundChildren = findAll(children, [Button]);
-        if (components.other.length > 0) throw "ButtonGroup can only have Button elements as children";
+        if (components.other.length > 0) throw new Error("ButtonGroup can only have Button elements as children");
         
         const groupDisabled: boolean = disabled;
         const buttons: JSX.Element[] = components.Button.map((button: FoundChild) => {

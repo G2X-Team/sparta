@@ -25,8 +25,8 @@ export const Card = ({children, ...props}: Props) => {
         const components: FoundChildren = findAll(children, [Header, Footer]);
 
         // check to see that we have one footer and one header MAX
-        if (components.Header.length > 1) throw "Cannot have more than one header";
-        if (components.Footer.length > 1) throw "Cannot have more than one footer";
+        if (components.Header.length > 1) throw new Error("Cannot have more than one header");
+        if (components.Footer.length > 1) throw new Error("Cannot have more than one footer");
 
         // get the header/footer if it exists and assign it into a variable
         const header: ReactNode = 

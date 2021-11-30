@@ -27,7 +27,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
 }
 
 /**
- * Typography component for the Apollo Component Library
+ * Typography component that allows for extensive customization via prop changes
  */
 export const Text = ({
     children, 
