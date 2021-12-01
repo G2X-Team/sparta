@@ -40,10 +40,7 @@ export const Dropdown = ({
 
         // separate comopnents
         const DropdownButton: ReactNode = getButton(components.Button);
-        if (!DropdownButton) {
-            console.error("Dropdown component needs button");
-            return;
-        }
+        if (!DropdownButton) throw new Error("Dropdown component needs button");
 
         // get the option menu
         const Menu: ReactNode = getOptionMenu(components.Option);

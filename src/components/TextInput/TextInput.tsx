@@ -10,10 +10,14 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     password?: boolean;
     /** Determines what type of text input will be shown */
     variant?: "default" | "secondary";
+    /** Determines whether the input is required for form submission */
+    required?: boolean;
+    /** Function that will determine whether input is valid for form submission */
+    validator?: () => { valid: boolean; message: string }
 }
 
 /** 
- * Text Input from the Apollo Component Library 
+ * Input that allows for user input via keyboard
  */
 export const TextInput = ({variant = 'default', password = false, ...props}: Props) => {
     return (
