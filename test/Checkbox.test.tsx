@@ -11,12 +11,16 @@ describe('Checkbox', () => {
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
-    })
+    });
 
     it('triggers onChange event when checked', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
-        render(<Checkbox value="value" onChange={onChange}>Hello World!</Checkbox>);
+        render(
+            <Checkbox value="value" onChange={onChange}>
+                Hello World!
+            </Checkbox>
+        );
         const checkbox: HTMLElement = screen.getByRole('checkbox');
 
         // when
@@ -24,12 +28,16 @@ describe('Checkbox', () => {
 
         // then
         expect(onChange).toHaveBeenCalled();
-    })
+    });
 
     it('will not trigger onChange when disabled', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
-        render(<Checkbox value="value" onChange={onChange} disabled>Failed</Checkbox>);
+        render(
+            <Checkbox value="value" onChange={onChange} disabled>
+                Failed
+            </Checkbox>
+        );
         const checkbox: HTMLElement = screen.getByRole('checkbox');
 
         // when
@@ -37,5 +45,5 @@ describe('Checkbox', () => {
 
         // then
         expect(onChange).not.toHaveBeenCalled();
-    })
-})
+    });
+});

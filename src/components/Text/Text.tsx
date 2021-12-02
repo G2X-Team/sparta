@@ -30,8 +30,8 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  * Typography component that allows for extensive customization via prop changes
  */
 export const Text = ({
-    children, 
-    header = 0, 
+    children,
+    header = 0,
     margins = false,
     inline = false,
     bold = false,
@@ -46,12 +46,13 @@ export const Text = ({
 }: Props) => {
     /**
      * Gets all the special conditions and translates it to a special className combination granting all conditions
-     * 
+     *
      * @returns the full variant title
      */
     const getVariant = (): string => {
         // determine custom variant
-        let customVariant: string = 'apollo-component-library-typography-component ';
+        let customVariant: string =
+            'apollo-component-library-typography-component ';
 
         // check if its a header or not
         if (header == 1) customVariant += 'first-header ';
@@ -62,15 +63,15 @@ export const Text = ({
         if (!margins) customVariant += 'no-margins ';
         if (inline) customVariant += 'inline ';
         if (italic) customVariant += 'italic ';
-        if (bold) customVariant += 'bold '
+        if (bold) customVariant += 'bold ';
         if (underline) customVariant += 'underline ';
 
         return customVariant;
-    }
+    };
 
     /**
      * Given a valid string the method will convert the first word of each letter to uppercase and the rest lowercase
-     * 
+     *
      * @param target string that needs to be converted
      * @returns converted string
      */
@@ -80,32 +81,31 @@ export const Text = ({
         });
 
         return outputArr.join(' ');
-    }
+    };
 
     /**
      * If the children object is also a string, it will convert according to the provided properties
-     * 
+     *
      * @returns correctly cased string, or corresponding children
      */
     const getCorrectCasing = (): string | ReactNode => {
         if (typeof children === 'string') {
             switch (true) {
-                case upper: return children.toUpperCase();
-                case lower: return children.toLowerCase();
-                case pascal: return convertPascal(children);
+                case upper:
+                    return children.toUpperCase();
+                case lower:
+                    return children.toLowerCase();
+                case pascal:
+                    return convertPascal(children);
             }
         }
 
         return children;
-    }
+    };
 
     return (
-        <p 
-            {...props}
-            style={{color, ...style}}
-            className={getVariant()}
-        >
+        <p {...props} style={{ color, ...style }} className={getVariant()}>
             {getCorrectCasing()}
         </p>
-    )
-}
+    );
+};

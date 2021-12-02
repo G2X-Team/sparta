@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
-import { Text } from '../Text/Text'
+import { Text } from '../Text/Text';
 import './Radio.css';
 
 export interface Props extends HTMLAttributes<HTMLInputElement> {
@@ -11,21 +11,23 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     value: string;
 }
 
-/** 
+/**
  * An input component that belongs to a list of others where when selected is the only representative
  * value of that group.
  */
-export const Radio = ({children, ...props}: Props) => {
+export const Radio = ({ children, ...props }: Props) => {
     return (
         <label>
-            <input 
-                {...props} 
-                type="radio" 
-                className="apollo-component-library-radio-component"    
+            <input
+                {...props}
+                type="radio"
+                className="apollo-component-library-radio-component"
             />
-            <Text inline margins>{children}</Text>
+            <Text inline margins>
+                {children}
+            </Text>
         </label>
-    )
-}
+    );
+};
 
-Radio.displayName = "Radio";
+Radio.displayName = 'Radio';

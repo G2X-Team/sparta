@@ -11,7 +11,7 @@ describe('Switch', () => {
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
-    })
+    });
 
     it('can be found in the document by its role', () => {
         // given
@@ -19,7 +19,7 @@ describe('Switch', () => {
 
         // when then
         expect(screen.getByRole('switch')).toBeInTheDocument();
-    })
+    });
 
     it('will trigger onChange when clicked', () => {
         // given
@@ -31,17 +31,21 @@ describe('Switch', () => {
 
         // then
         expect(onChange).toHaveBeenCalled();
-    })
+    });
 
     it('will not trigger onChange when disabled', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
-        render(<Switch disabled onChange={onChange}>Hello World!</Switch>);
+        render(
+            <Switch disabled onChange={onChange}>
+                Hello World!
+            </Switch>
+        );
 
         // when
         userEvent.click(screen.getByRole('switch'));
 
         // then
         expect(onChange).not.toHaveBeenCalled();
-    })
-})
+    });
+});

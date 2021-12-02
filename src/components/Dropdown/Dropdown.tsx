@@ -3,14 +3,14 @@ import { findAll, FoundChild, FoundChildren } from '../../util/findAll';
 import { detectOutsideClick } from '../../util/detectOutsideClick';
 import './Dropdown.css';
 
-import { Button } from '../Button/Button'
-import { Option } from '../Option/Option'
+import { Button } from '../Button/Button';
+import { Option } from '../Option/Option';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines where the menu will appear from */
-    orientation?: "top" | "bottom" | "left" | "right"; 
+    orientation?: 'top' | 'bottom' | 'left' | 'right';
     /** Determines menu alignment, when orientation is left or right, alignment doesn't do anything */
-    alignment?: "left" | "center" | "right";
+    alignment?: 'left' | 'center' | 'right';
     /** Determines the max height of the menu */
     menuHeight?: string;
     /** Determines the max width of the menu */
@@ -21,12 +21,12 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  * The Dropdown component enables any element to have its own menu on click
  */
 export const Dropdown = ({
-        children, 
-        orientation = "bottom", 
-        alignment = "left", 
-        menuHeight,
-        menuWidth
-    }: Props) => {
+    children,
+    orientation = 'bottom',
+    alignment = 'left',
+    menuHeight,
+    menuWidth,
+}: Props) => {
     // ref containing dropdown button
     const dropdown = React.useRef<HTMLDivElement>(null);
 
@@ -40,87 +40,90 @@ export const Dropdown = ({
 
         // separate comopnents
         const DropdownButton: ReactNode = getButton(components.Button);
-        if (!DropdownButton) throw new Error("Dropdown component needs button");
+        if (!DropdownButton) throw new Error('Dropdown component needs button');
 
         // get the option menu
         const Menu: ReactNode = getOptionMenu(components.Option);
         const Portal: JSX.Element = (
-            <span className={`apollo-component-library-dropdown-portal ${orientation}`}>
-                { Menu }
+            <span
+                className={`apollo-component-library-dropdown-portal ${orientation}`}
+            >
+                {Menu}
             </span>
-        )
+        );
         return (
             <span className="apollo-component-library-dropdown">
-                { orientation === "top" || orientation === "left" ? Portal : null }
-                { DropdownButton }
-                { orientation === "bottom" || orientation === "right" ? Portal : null }
+                {orientation === 'top' || orientation === 'left'
+                    ? Portal
+                    : null}
+                {DropdownButton}
+                {orientation === 'bottom' || orientation === 'right'
+                    ? Portal
+                    : null}
             </span>
-        )
-    }
+        );
+    };
 
     /**
      * This method will only get the first button and consider it the main
      * point of entry for dropdown purposes
-     * 
+     *
      * @param buttons all button components found in the dropdown
      */
     const getButton = (buttons: FoundChild[]): ReactNode => {
         // checks if there are any buttons to select from
         if (!buttons.length) return null;
         const button: JSX.Element = buttons[0].component;
-        const {onClick, ...buttonProps} = button.props;
+        const { onClick, ...buttonProps } = button.props;
 
         /**
-         * Modifies the original button onClick so that it can also open and 
+         * Modifies the original button onClick so that it can also open and
          * close the menu
          */
         const buttonOnClick = (): void => {
             toggleOpen(!open);
             onClick && onClick();
-        }
+        };
 
         return (
-            <div 
+            <div
                 {...buttonProps}
                 className="apollo-component-library-dropdown-button-component"
                 onClick={buttonOnClick}
                 ref={dropdown}
             >
-                { button.props.children }
+                {button.props.children}
             </div>
         );
-    }
+    };
 
     /**
      * Finds all option components and renders them in a menu
-     * 
+     *
      * @param options Option components
      */
     const getOptionMenu = (options: FoundChild[]): ReactNode => {
         // get all option components and condense them in an array
-        const optionComponents: JSX.Element[] = 
-            options.map((option: FoundChild) => option.component);
+        const optionComponents: JSX.Element[] = options.map(
+            (option: FoundChild) => option.component
+        );
 
         // define styling options
         let style: { [key: string]: string | number } = {};
 
-        if (menuHeight) style["height"] = menuHeight;
-        if (menuWidth) style["minWidth"] = menuWidth;
+        if (menuHeight) style['height'] = menuHeight;
+        if (menuWidth) style['minWidth'] = menuWidth;
 
         // return all of the options in a menu
         return open ? (
-            <div 
+            <div
                 className={`apollo-component-library-dropdown-menu-component o-${orientation} a-${alignment}`}
                 style={style}
             >
                 {optionComponents}
             </div>
         ) : null;
-    }
+    };
 
-    return (
-        <div>
-            {renderDropdown()}
-        </div>
-    )
-}
+    return <div>{renderDropdown()}</div>;
+};

@@ -1,18 +1,23 @@
 import React, { useState, useEffect, HTMLAttributes, ReactNode } from 'react';
-import { findAll, FoundChildren, FoundChild, getComponents } from '../../util/findAll';
-import "./Modal.css";
+import {
+    findAll,
+    FoundChildren,
+    FoundChild,
+    getComponents,
+} from '../../util/findAll';
+import './Modal.css';
 
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { ButtonGroup } from '../ButtonGroup/ButtonGroup';
-import { Button } from '../Button/Button'
+import { Button } from '../Button/Button';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines whether the modal is open or not */
     open?: boolean;
     /** Toggles the model between open and closed */
     toggleModal?: () => any;
-    /** 
+    /**
      * By default the modal closes on button click when clicked in the footer button group.
      * By adding this prop, the default behavior is nullified
      */
@@ -22,7 +27,15 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 /**
  * Popup that will appear based on the value of it's open prop. Also known as dialogue.
  */
-export const Modal = ({className, manual = false, children, style, open = false, toggleModal, ...props}: Props) => {
+export const Modal = ({
+    className,
+    manual = false,
+    children,
+    style,
+    open = false,
+    toggleModal,
+    ...props
+}: Props) => {
     // state variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);
@@ -38,52 +51,59 @@ export const Modal = ({className, manual = false, children, style, open = false,
                 setTimeout(() => toggleEffect(true), 100);
             }
         }
-    }, [open])
+    }, [open]);
 
     /**
      * Renders the modal and all of its children formatted as intended
      */
     const renderModal = (): ReactNode => {
         // find all specified components
-        const components: FoundChildren = 
-            findAll(children, [Header, Footer]);
+        const components: FoundChildren = findAll(children, [Header, Footer]);
         const Headers: FoundChild[] = components.Header;
         const Footers: FoundChild[] = components.Footer;
 
         // check that the appropriate amount of headers is found
-        if (Headers.length > 1) throw new Error("Modal can only have 1 Header component");
-        if (Footers.length > 1) throw new Error("Modal can only have 1 Footer component");
+        if (Headers.length > 1)
+            throw new Error('Modal can only have 1 Header component');
+        if (Footers.length > 1)
+            throw new Error('Modal can only have 1 Footer component');
 
         // if Header or Footer is found make sure to store them
-        const header: ReactNode = 
+        const header: ReactNode =
             Headers.length > 0 ? (
-                <Header 
-                    {...components.Header[0].component.props} 
-                    style={{marginBottom: 10, ...components.Header[0].component.props.style}}
+                <Header
+                    {...components.Header[0].component.props}
+                    style={{
+                        marginBottom: 10,
+                        ...components.Header[0].component.props.style,
+                    }}
                 />
             ) : null;
-        
-        const footer: ReactNode = Footers.length > 0 ? formatFooter(Footers[0]) : null;
-        const others: ReactNode[] = components.other.map((child: FoundChild) => child.component);
+
+        const footer: ReactNode =
+            Footers.length > 0 ? formatFooter(Footers[0]) : null;
+        const others: ReactNode[] = components.other.map(
+            (child: FoundChild) => child.component
+        );
 
         return (
             <div
                 {...props}
                 className={`apollo-component-library-modal-component ${className}`}
             >
-                { header }
+                {header}
                 <div className="apollo-component-library-modal-component-body">
-                    { others } 
+                    {others}
                 </div>
-                { footer }
+                {footer}
             </div>
-        )
-    }
+        );
+    };
 
     /**
      * Formats the footer in case there is a button group in it that needs to be
      * styled specifically
-     * 
+     *
      * @param footer footer FoundChild
      * @return Formatted Footer
      */
@@ -92,12 +112,19 @@ export const Modal = ({className, manual = false, children, style, open = false,
         const component: JSX.Element = footer.component;
 
         // find button groups in the footer props
-        const footerComponents: FoundChildren = findAll(component.props.children, [ButtonGroup]);
+        const footerComponents: FoundChildren = findAll(
+            component.props.children,
+            [ButtonGroup]
+        );
         const ButtonGroups: FoundChild[] = footerComponents.ButtonGroup;
 
         // check that there is no more than one button group
-        if (ButtonGroups.length > 1) throw new Error("The Footer of the Modal can only have 1 ButtonGroup component");
-        const buttonGroup: ReactNode = ButtonGroups.length > 0 ? formatButtonGroup(ButtonGroups[0]) : null;
+        if (ButtonGroups.length > 1)
+            throw new Error(
+                'The Footer of the Modal can only have 1 ButtonGroup component'
+            );
+        const buttonGroup: ReactNode =
+            ButtonGroups.length > 0 ? formatButtonGroup(ButtonGroups[0]) : null;
 
         // clean the button group components from the previous found children
         footerComponents.ButtonGroup = [];
@@ -106,16 +133,16 @@ export const Modal = ({className, manual = false, children, style, open = false,
         const other: ReactNode[] = getComponents(footerComponents);
 
         return (
-            <Footer style={{position: "relative", ...component.props.style}}>
+            <Footer style={{ position: 'relative', ...component.props.style }}>
                 {other}
                 {buttonGroup}
             </Footer>
-        )
-    }
+        );
+    };
 
     /**
      * Formats the ButtonGroup to meet the modal standards
-     * 
+     *
      * @param buttonGroup button group FoundChild
      * @return Formatted ButtonGroup
      */
@@ -124,7 +151,10 @@ export const Modal = ({className, manual = false, children, style, open = false,
         const component: JSX.Element = buttonGroup.component;
 
         // find the buttons in the button group
-        const buttonGroupComponents: FoundChildren = findAll(component.props.children, [Button]);
+        const buttonGroupComponents: FoundChildren = findAll(
+            component.props.children,
+            [Button]
+        );
         const Buttons: FoundChild[] = buttonGroupComponents.Button;
 
         // change buttons to new format
@@ -138,41 +168,42 @@ export const Modal = ({className, manual = false, children, style, open = false,
              */
             const onButtonClick = () => {
                 onClick && onClick();
-                !manual && (toggleModal && toggleModal());
-            }
+                !manual && toggleModal && toggleModal();
+            };
 
             return (
-                <button 
+                <button
                     key={Math.random()}
                     {...buttonProps}
                     onClick={onButtonClick}
                     className={`apollo-component-library-modal-component-button-group-button ${buttonProps.variant}`}
                 />
-            )
-        })
+            );
+        });
 
         return (
             <div className="apollo-component-library-modal-component-button-group">
-                { buttons }
+                {buttons}
             </div>
-        )
-    }
+        );
+    };
 
     return (
         <React.Fragment>
-            {
-                display ? (
-                    <div style={{opacity: effect ? 1 : 0}} className="apollo-component-library-modal-component-container">
-                        <div>
-                            { renderModal() }
-                            <div 
-                                onClick={toggleModal}
-                                className="apollo-component-library-modal-component-backdrop" 
-                            />
-                        </div>
+            {display ? (
+                <div
+                    style={{ opacity: effect ? 1 : 0 }}
+                    className="apollo-component-library-modal-component-container"
+                >
+                    <div>
+                        {renderModal()}
+                        <div
+                            onClick={toggleModal}
+                            className="apollo-component-library-modal-component-backdrop"
+                        />
                     </div>
-                ) : null
-            }
+                </div>
+            ) : null}
         </React.Fragment>
-    )
-}
+    );
+};

@@ -5,17 +5,17 @@ import { Props, Group } from '../src/components/Group/Group';
 import { Radio, Checkbox, View } from '../src';
 
 const meta: Meta = {
-    title: "Form/Group",
+    title: 'Form/Group',
     component: Group,
-}
+};
 
 export default meta;
 
-const Template: Story<Props> = (args) => <Group {...args}/>;
+const Template: Story<Props> = (args) => <Group {...args} />;
 
 const onChange = (groupValue: string | string[]): void => {
     console.log(groupValue);
-}
+};
 
 export const RadioGroup = () => (
     <Group name="something" type="radio" onGroupChange={onChange}>

@@ -6,16 +6,16 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     children?: ReactNode;
 }
 
-/** 
+/**
  * Interface component that's intended purpose is to anchor to the top of another element
  */
-export const Header = ({children, className, ...props}: Props) => {
+export const Header = ({ children, className, ...props }: Props) => {
     return (
-        <div 
+        <div
             {...props}
             className={`apollo-component-library-header-component ${className}`}
         >
             {children}
         </div>
-    )
-}
+    );
+};

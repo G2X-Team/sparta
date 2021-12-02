@@ -5,9 +5,9 @@ import { Modal, Props } from '../src/components/Modal/Modal';
 import { Button, Text, Header, Footer, ButtonGroup } from '../src';
 
 const meta: Meta = {
-    title: "Layout/Modal",
-    component: Modal
-}
+    title: 'Layout/Modal',
+    component: Modal,
+};
 
 export default meta;
 
@@ -19,7 +19,9 @@ const Template: Story<Props> = (args) => {
             <Button onClick={() => toggleModal(!open)}>Open Modal</Button>
             <Modal open={open} toggleModal={() => toggleModal(!open)}>
                 <Header>
-                    <Text header={2} bold>This is a Modal</Text>
+                    <Text header={2} bold>
+                        This is a Modal
+                    </Text>
                 </Header>
                 <Text>This is a modal that shows dialogue.</Text>
                 <Footer>
@@ -30,7 +32,7 @@ const Template: Story<Props> = (args) => {
                 </Footer>
             </Modal>
         </React.Fragment>
-    )
-}
+    );
+};
 
 export const Default = Template.bind({});

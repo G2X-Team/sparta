@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
-import { Text } from '../Text/Text'
+import { Text } from '../Text/Text';
 import './Switch.css';
 
 export interface Props extends HTMLAttributes<HTMLInputElement> {
@@ -10,23 +10,27 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Value that the switch represents */
     value?: string;
     /** Variant of switch */
-    variant?: "default" | "secondary";
+    variant?: 'default' | 'secondary';
 }
 
 /**
  * UI element that slides a button from on to off.
  */
-export const Switch = ({children, variant="default", ...props}: Props) => {
+export const Switch = ({ children, variant = 'default', ...props }: Props) => {
     return (
         <label className="apollo-component-library-switch-component-label">
-            <input 
-                {...props} 
-                type="checkbox" 
+            <input
+                {...props}
+                type="checkbox"
                 role="switch"
                 className="apollo-component-library-switch-component-input"
             />
-            <span className={`apollo-component-library-switch-component ${variant}`}/>
-            <Text inline margins>{children}</Text>
+            <span
+                className={`apollo-component-library-switch-component ${variant}`}
+            />
+            <Text inline margins>
+                {children}
+            </Text>
         </label>
-    )
-}
+    );
+};

@@ -3,14 +3,14 @@ import { Meta, Story } from '@storybook/react';
 import { Text, Props } from '../src/components/Text/Text';
 
 const meta: Meta = {
-    title: "Layout/Text",
+    title: 'Layout/Text',
     component: Text,
     argTypes: {
         children: {
-            defaultValue: "This is a text component"
-        }
-    }
-}
+            defaultValue: 'This is a text component',
+        },
+    },
+};
 
 export default meta;
 
@@ -31,7 +31,9 @@ export const DifferentStyles = () => (
         <Text bold>Bold</Text>
         <Text italic>Italic</Text>
         <Text underline>Underline</Text>
-        <Text bold italic underline>All Three</Text>
+        <Text bold italic underline>
+            All Three
+        </Text>
     </React.Fragment>
 );
 
@@ -44,9 +46,18 @@ export const DifferentCasing = () => (
 );
 
 export const TextInsideOfText = () => (
-        <Text>
-            This is the story of how <Text bold inline pascal>captain barnacles</Text> defeated 
-            the <Text italic upper inline>evil monster</Text> and became 
-            the <Text inline underline pascal>king of the pirates.</Text>
+    <Text>
+        This is the story of how{' '}
+        <Text bold inline pascal>
+            captain barnacles
+        </Text>{' '}
+        defeated the{' '}
+        <Text italic upper inline>
+            evil monster
+        </Text>{' '}
+        and became the{' '}
+        <Text inline underline pascal>
+            king of the pirates.
         </Text>
+    </Text>
 );
