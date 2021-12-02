@@ -11,7 +11,7 @@ describe('Drawer', () => {
 
         // when then
         expect(screen.getByText(/hello world/i)).toBeInTheDocument();
-    })
+    });
 
     it('is not visible when collapsed in all types except "permanent"', () => {
         // given
@@ -24,21 +24,27 @@ describe('Drawer', () => {
 
         // when then
         expect(screen.queryAllByText(/hello world absolute/i)).toHaveLength(0);
-    })
+    });
 
     it('will be visible when not collapsed in all types', () => {
         // given
         render(
             <React.Fragment>
-                <Drawer open={true} type="absolute">Hello World</Drawer>
-                <Drawer open={true} type="persistent">Hello World</Drawer>
-                <Drawer open={true} type="permanent">Hello World</Drawer>
+                <Drawer open={true} type="absolute">
+                    Hello World
+                </Drawer>
+                <Drawer open={true} type="persistent">
+                    Hello World
+                </Drawer>
+                <Drawer open={true} type="permanent">
+                    Hello World
+                </Drawer>
             </React.Fragment>
         );
 
         // when then
         expect(screen.queryAllByText(/hello world/i)).toHaveLength(3);
-    })
+    });
 
     it('will render the header', () => {
         // given
@@ -51,7 +57,7 @@ describe('Drawer', () => {
 
         // when then
         expect(screen.getByText(/header/i)).toBeInTheDocument();
-    })
+    });
 
     it('will render the footer', () => {
         // given
@@ -64,7 +70,7 @@ describe('Drawer', () => {
 
         // when then
         expect(screen.getByText(/footer/i)).toBeInTheDocument();
-    })
+    });
 
     it('will render dividers', () => {
         // given
@@ -77,7 +83,7 @@ describe('Drawer', () => {
 
         // when then
         expect(screen.getByRole('separator')).toBeInTheDocument();
-    })
+    });
 
     it('will render options', () => {
         // given
@@ -89,7 +95,7 @@ describe('Drawer', () => {
 
         // when then
         expect(screen.getByText(/this is an option/i)).toBeInTheDocument();
-    })
+    });
 
     it('triggers option on click callback', () => {
         // given
@@ -101,9 +107,9 @@ describe('Drawer', () => {
         );
 
         // when
-        userEvent.click(screen.getByText(/this is an option/i))
+        userEvent.click(screen.getByText(/this is an option/i));
 
         // then
         expect(onClick).toHaveBeenCalled();
-    })
-})
+    });
+});

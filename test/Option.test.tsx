@@ -11,7 +11,7 @@ describe('Option', () => {
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
-    })
+    });
 
     it('will perform on click callback', () => {
         // given
@@ -23,5 +23,5 @@ describe('Option', () => {
 
         // then
         expect(onClick).toHaveBeenCalled();
-    })
-})
+    });
+});

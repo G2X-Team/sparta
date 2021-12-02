@@ -4,13 +4,13 @@ import { Meta, Story } from '@storybook/react';
 import { Icon, Props } from '../src/components/Icon/Icon';
 
 const meta: Meta = {
-    title: "Layout/Icon",
+    title: 'Layout/Icon',
     component: Icon,
     args: {
-        name: "navigate_next",
-        onClick: undefined
-    }
-}
+        name: 'navigate_next',
+        onClick: undefined,
+    },
+};
 
 export default meta;
 

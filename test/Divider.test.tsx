@@ -10,5 +10,5 @@ describe('Divider', () => {
 
         // when then
         expect(screen.getByRole('separator')).toBeInTheDocument();
-    })
-})
+    });
+});

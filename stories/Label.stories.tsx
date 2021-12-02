@@ -5,20 +5,20 @@ import { Label, Props } from '../src/components/Label/Label';
 import { TextInput } from '../src';
 
 const meta: Meta = {
-    title: "Form/Label",
+    title: 'Form/Label',
     component: Label,
     args: {
-        value: "This is a label",
-        hint: "This is a hint"
-    }
-}
+        value: 'This is a label',
+        hint: 'This is a hint',
+    },
+};
 
 export default meta;
 
 const Template: Story<Props> = (args) => (
     <Label {...args}>
-        <TextInput placeholder="Text Input"/>
+        <TextInput placeholder="Text Input" />
     </Label>
-)
+);
 
 export const Default = Template.bind({});
