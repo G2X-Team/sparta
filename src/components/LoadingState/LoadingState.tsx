@@ -8,14 +8,17 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     type?: "absolute" | "inline";
     /** Determines the size of LoadingState whether small , medium, or large */
     size?: "small" | "medium" | "large";
+    /** Determines the size of LoadingState whether small , medium, or large */
+    variant?: "static" | "progress";
     /** Determines whether the LoadingState is open or not */
     open?: boolean;
     /** Toggles the LoadingState between open and closed */
     isLoading?: () => any;
+    move?: () => any;
     manual?: boolean;
 }
 
-export const LoadingState = ({className, type, size, manual = false, children, style, open = false, isLoading, ...props}: Props) => {
+export const LoadingState = ({className, type, size, variant, manual = false, children, style, open = false, isLoading, move, ...props}: Props) => {
     // usestate variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);
@@ -37,17 +40,46 @@ export const LoadingState = ({className, type, size, manual = false, children, s
      * Renders the LoadingState and all of its children formatted as intended
      */
     const renderLoadingState = (): ReactNode => {
-
+        if (variant == "progress") {
         return (
             <div
                 {...props}
-                className={`apollo-component-library-loadingstate-component ${type} ${size}`}
+                className={`apollo-component-library-loadingstate-component-progressbar ${type}`}
             >
                 
             </div>
         )
+        } else {
+            return (
+                <div
+                    {...props}
+                    className={`apollo-component-library-loadingstate-component ${type} ${size}`}
+                >
+                    
+                </div>
+            )
+        }
     }
-
+    
+    if (variant == "progress") {
+    return (
+        <React.Fragment>
+            {
+                display ? (
+                    <div style={{opacity: effect ? 1 : 0}} className="apollo-component-library-loadingstate-component-container">
+                        <div>
+                            { renderLoadingState() }
+                            <div 
+                                onClick={move}
+                                
+                            />
+                        </div>
+                    </div>
+                ) : null
+            }
+        </React.Fragment>
+    )
+} else {
     return (
         <React.Fragment>
             {
@@ -65,4 +97,5 @@ export const LoadingState = ({className, type, size, manual = false, children, s
             }
         </React.Fragment>
     )
+        }
 }

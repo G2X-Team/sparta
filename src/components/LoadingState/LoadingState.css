@@ -95,3 +95,62 @@
   height: 120px;
 }
 /* LoadingState size ends*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Absolute type LoadingState begins*/
+
+.apollo-component-library-loadingstate-component-progressbar.absolute {
+    
+  width: 10%;
+  height: 30px;
+  background-color: #04AA6D;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
+
+/* Absolute type LoadingState ends*/
+/* Inline type LoadingState begins */
+
+.apollo-component-library-loadingstate-component-progressbar.inline {
+  
+  border: 16px solid #f3f3f3;
+  z-index: 9999;
+  border-radius: 50%;
+  border-top: 16px solid red;
+  display: flex;
+  flex-direction: column;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin-left: 11%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Inline type LoadingState ends */
