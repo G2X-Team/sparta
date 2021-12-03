@@ -26,7 +26,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "yarn eslint src test stories"
+            "precommit": "yarn eslint src test stories"
         }
     },
     "prettier": {

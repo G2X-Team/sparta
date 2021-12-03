@@ -27,7 +27,7 @@
     "plugins": ["react", "@typescript-eslint", "prettier"],
     "rules": {
         "no-use-before-define": "off",
-        "indent": ["error", 4, { "SwitchCase": 1}],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
         "react/jsx-filename-extension": [
             "warn",
             {
