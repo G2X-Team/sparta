@@ -10,14 +10,12 @@ describe('TextInput', () => {
         render(<TextInput placeholder="Hello World!" />);
 
         // when then
-        expect(
-            screen.getByPlaceholderText(/hello world!/i)
-        ).toBeInTheDocument();
+        expect(screen.getByPlaceholderText(/hello world!/i)).toBeInTheDocument();
     });
 
     it('can take input', () => {
         // given
-        const input: string = 'hello';
+        const input = 'hello';
         render(<TextInput />);
         const textInput: HTMLElement = screen.getByRole('textbox');
 
@@ -30,7 +28,7 @@ describe('TextInput', () => {
 
     it('can be found by its input', () => {
         // given
-        const input: string = 'hello';
+        const input = 'hello';
         render(<TextInput />);
         const textInput: HTMLElement = screen.getByRole('textbox');
 
@@ -44,8 +42,7 @@ describe('TextInput', () => {
     it('changes input to password mode when password prop is provided', () => {
         // given
         render(<TextInput placeholder="Type Password!" password />);
-        const textInput: HTMLElement =
-            screen.getByPlaceholderText(/type password!/i);
+        const textInput: HTMLElement = screen.getByPlaceholderText(/type password!/i);
 
         // when then
         expect(textInput).toHaveAttribute('type', 'password');
@@ -53,7 +50,7 @@ describe('TextInput', () => {
 
     it('will not take input when disabled', () => {
         // given
-        const input: string = 'hello';
+        const input = 'hello';
         render(<TextInput disabled />);
         const textInput: HTMLElement = screen.getByRole('textbox');
 

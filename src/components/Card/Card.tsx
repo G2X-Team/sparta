@@ -13,22 +13,22 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 /**
  * The card will be used as a general interface to provide general structure to a UI component. The
  * structure will be as a minified page-like element header, footer, body.
+ *
+ * @return Card component
  */
-export const Card = ({ children, ...props }: Props) => {
+export const Card = ({ children, ...props }: Props): JSX.Element => {
     /**
      * Renderes all components
      *
      * @return html elements
      */
-    const renderAll = () => {
+    const renderAll = (): JSX.Element => {
         // get all the children from the components
         const components: FoundChildren = findAll(children, [Header, Footer]);
 
         // check to see that we have one footer and one header MAX
-        if (components.Header.length > 1)
-            throw new Error('Cannot have more than one header');
-        if (components.Footer.length > 1)
-            throw new Error('Cannot have more than one footer');
+        if (components.Header.length > 1) throw new Error('Cannot have more than one header');
+        if (components.Footer.length > 1) throw new Error('Cannot have more than one footer');
 
         // get the header/footer if it exists and assign it into a variable
         const header: ReactNode =

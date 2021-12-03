@@ -40,7 +40,7 @@ describe('ButtonGroup', () => {
 
     it('allows for links and redirects', () => {
         // given
-        const link: string = 'https://google.com';
+        const link = 'https://google.com';
         render(
             <ButtonGroup>
                 <Button href={link}>First Button</Button>
@@ -48,10 +48,7 @@ describe('ButtonGroup', () => {
         );
 
         // when then
-        expect(screen.getByText(/first button/i).closest('a')).toHaveAttribute(
-            'href',
-            link
-        );
+        expect(screen.getByText(/first button/i).closest('a')).toHaveAttribute('href', link);
     });
 
     it('will disable all buttons when the button group is disabled', () => {

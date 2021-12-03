@@ -18,7 +18,7 @@ const Template: Story<Props> = (args) => <Text {...args} />;
 
 export const Default = Template.bind({});
 
-export const Headers = () => (
+export const Headers = (): JSX.Element => (
     <React.Fragment>
         <Text header={1}>This is an h1</Text>
         <Text header={2}>This is an h2</Text>
@@ -26,7 +26,7 @@ export const Headers = () => (
     </React.Fragment>
 );
 
-export const DifferentStyles = () => (
+export const DifferentStyles = (): JSX.Element => (
     <React.Fragment>
         <Text bold>Bold</Text>
         <Text italic>Italic</Text>
@@ -37,7 +37,7 @@ export const DifferentStyles = () => (
     </React.Fragment>
 );
 
-export const DifferentCasing = () => (
+export const DifferentCasing = (): JSX.Element => (
     <React.Fragment>
         <Text upper>upper case</Text>
         <Text lower>LOWER CASE</Text>
@@ -45,7 +45,7 @@ export const DifferentCasing = () => (
     </React.Fragment>
 );
 
-export const TextInsideOfText = () => (
+export const TextInsideOfText = (): JSX.Element => (
     <Text>
         This is the story of how{' '}
         <Text bold inline pascal>

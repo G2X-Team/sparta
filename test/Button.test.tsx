@@ -15,13 +15,11 @@ describe('Button', () => {
 
     it('can be clicked', () => {
         // given
-        let onClick: jest.Mock<any, any> = jest.fn();
+        const onClick: jest.Mock<any, any> = jest.fn();
         render(<Button onClick={onClick}>Trying my best</Button>);
 
         // when
-        userEvent.click(
-            screen.getByRole('button', { name: /trying my best/i })
-        );
+        userEvent.click(screen.getByRole('button', { name: /trying my best/i }));
 
         // then
         expect(onClick).toHaveBeenCalledTimes(1);

@@ -17,7 +17,7 @@ const onChange = (groupValue: string | string[]): void => {
     console.log(groupValue);
 };
 
-export const RadioGroup = () => (
+export const RadioGroup = (): JSX.Element => (
     <Group name="something" type="radio" onGroupChange={onChange}>
         <Radio value="something 1">Option 1</Radio>
         <Radio value="something 2">Option 2</Radio>
@@ -25,7 +25,7 @@ export const RadioGroup = () => (
     </Group>
 );
 
-export const CheckboxGroup = () => (
+export const CheckboxGroup = (): JSX.Element => (
     <Group name="something" type="checkbox" onGroupChange={onChange}>
         <Checkbox value="something 1">Option 1</Checkbox>
         <Checkbox value="something 2">Option 2</Checkbox>
@@ -33,7 +33,7 @@ export const CheckboxGroup = () => (
     </Group>
 );
 
-export const ComplexGroup = () => (
+export const ComplexGroup = (): JSX.Element => (
     <Group name="something" type="checkbox" onGroupChange={onChange}>
         <View>
             <Checkbox value="something 1">Option 1</Checkbox>

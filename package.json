@@ -14,7 +14,7 @@
         "start": "tsdx watch",
         "build": "tsdx build",
         "test": "tsdx test --passWithNoTests",
-        "lint": "tsdx lint",
+        "lint": "yarn eslint src test stories",
         "prepare": "tsdx build",
         "size": "size-limit",
         "analyze": "size-limit --why",
@@ -26,14 +26,15 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "tsdx lint"
+            "pre-commit": "yarn eslint src test stories"
         }
     },
     "prettier": {
-        "printWidth": 80,
+        "printWidth": 100,
         "semi": true,
         "singleQuote": true,
-        "trailingComma": "es5"
+        "trailingComma": "es5",
+        "tabWidth": 4
     },
     "name": "apollo",
     "author": "Eddie Lopez",
@@ -61,11 +62,15 @@
         "@testing-library/user-event": "^13.5.0",
         "@types/react": "^17.0.30",
         "@types/react-dom": "^17.0.9",
+        "@typescript-eslint/eslint-plugin": "^5.5.0",
+        "@typescript-eslint/parser": "^5.5.0",
         "autoprefixer": "^10.3.7",
         "babel-loader": "^8.2.2",
         "eslint": "^8.3.0",
+        "eslint-config-google": "^0.14.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.27.1",
         "husky": "^7.0.2",
         "identity-obj-proxy": "^3.0.0",
         "node-fetch": "^3.0.0",
@@ -87,6 +92,5 @@
         "moduleNameMapper": {
             "\\.(css|less|scss|sass)$": "identity-obj-proxy"
         }
-    },
-    "dependencies": {}
+    }
 }

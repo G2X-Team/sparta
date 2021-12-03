@@ -28,7 +28,7 @@ describe('Label', () => {
         expect(screen.getByText(/this is a hint/i)).toBeInTheDocument();
     });
 
-    it('will add an asterisk when one of its children has its required prop toggled to true', () => {
+    it('will add an asterisk when one of its children has its required prop toggled', () => {
         // given
         render(
             <Label value="Hello World!">

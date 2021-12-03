@@ -12,8 +12,10 @@ export interface Props extends HTMLAttributes<HTMLElement> {
 
 /**
  * Interfacing component used to describe an object pertaining to a menu.
+ *
+ * @return Option component
  */
-export const Option = ({ children, ...props }: Props) => {
+export const Option = ({ children, ...props }: Props): JSX.Element => {
     return (
         <div {...props} className="apollo-component-library-option-component">
             <Text margins={false}>{children}</Text>

@@ -13,8 +13,6 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<HTMLAttributes<HTMLDivElement>> = (args) => (
-    <View {...args} />
-);
+const Template: Story<HTMLAttributes<HTMLDivElement>> = (args) => <View {...args} />;
 
 export const Default = Template.bind({});

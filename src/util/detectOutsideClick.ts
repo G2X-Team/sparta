@@ -1,11 +1,13 @@
-import {
-    useState,
-    useEffect,
-    MutableRefObject,
-    Dispatch,
-    SetStateAction,
-} from 'react';
+import { useState, useEffect, MutableRefObject, Dispatch, SetStateAction } from 'react';
 
+/**
+ * Will give a state that takes into consideration outside clicks
+ *
+ * @param element reference of componetn
+ * @param initial the initial state
+ * @param outsideMethod method that is triggered when a click occurs outside specified element
+ * @return useState variables that adjust based on outside clicks
+ */
 export const detectOutsideClick = (
     element: MutableRefObject<any>,
     initial: boolean,
@@ -19,12 +21,9 @@ export const detectOutsideClick = (
          *
          * @param event Click event
          */
-        const onClick = (event: MouseEvent) => {
-            // checks to see if the element is clicked and the event was clicked outside of the target element
-            if (
-                element.current !== null &&
-                !element.current.contains(event.target)
-            ) {
+        const onClick = (event: MouseEvent): void => {
+            // checks to see if the event was clicked outside of the target element
+            if (element.current !== null && !element.current.contains(event.target)) {
                 // toggle if it is active
                 toggleOpen(!open);
                 outsideMethod && outsideMethod(open);

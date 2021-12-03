@@ -1,12 +1,7 @@
 import React, { HTMLAttributes, ReactNode, useState, useEffect } from 'react';
 import './Group.css';
 
-import {
-    findAll,
-    FoundChild,
-    FoundChildren,
-    getComponents,
-} from '../../util/findAll';
+import { findAll, FoundChild, FoundChildren, getComponents } from '../../util/findAll';
 
 import { Radio } from '../Radio/Radio';
 import { Checkbox } from '../Checkbox/Checkbox';
@@ -28,6 +23,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 /**
  * Component that will represent values derived from radios and checkboxes and pass them
  * as parameters to its repsective on change function
+ *
+ * @return Group component
  */
 export const Group = ({
     children,
@@ -36,7 +33,7 @@ export const Group = ({
     disabled = false,
     onGroupChange,
     ...props
-}: Props) => {
+}: Props): JSX.Element => {
     // define group value
     const [radioValue, setRadioValue] = useState('');
     const [checkboxValue, setCheckboxValue] = useState<string[]>([]);
@@ -55,12 +52,14 @@ export const Group = ({
 
     /**
      * Renders all inputs determinant on the specific type
+     *
+     * @param viewChildren implements children view when available
+     * @return rendered components
      */
     const renderAll = (viewChildren: ReactNode): ReactNode[] => {
         // determine what component we are looking for
         const input: ReactNode = type === 'radio' ? Radio : Checkbox;
-        const inputType: string =
-            type.slice(0, 1).toUpperCase() + type.slice(1);
+        const inputType: string = type.slice(0, 1).toUpperCase() + type.slice(1);
 
         // get all instances of the input
         const components: FoundChildren = findAll(viewChildren, [input, View]);
@@ -89,29 +88,32 @@ export const Group = ({
          *
          * @param radio radio component
          */
-        const radioOnChange = (radio: any) => {
+        const radioOnChange = (radio: JSX.Element): void => {
             setRadioValue(radio.props.value);
             radio?.props?.onChange && radio?.props?.onChange();
         };
 
         // get group name to later assign to all Radios
-        const groupName: string = name;
-        const groupDisabled: boolean = disabled;
-
         return radios.map((radio: FoundChild) => {
             // abstracts the radio component for cleaner code
-            const component: JSX.Element = radio.component;
+            const { component } = radio;
+            const { props } = component;
 
             // gets all non-conflicting radio props
-            const { onChange, name, checked, disabled, ...radioProps } =
-                component.props;
+            const {
+                onChange,
+                name: radioName,
+                checked,
+                disabled: radioDisabled,
+                ...radioProps
+            } = props;
 
             return {
                 component: (
                     <Radio
                         {...radioProps}
-                        disabled={groupDisabled || disabled}
-                        name={groupName}
+                        disabled={disabled || radioDisabled}
+                        name={name}
                         key={Math.random()}
                         checked={component.props.value === radioValue}
                         onChange={() => radioOnChange(component)}
@@ -134,14 +136,12 @@ export const Group = ({
          *
          * @param checkbox radio component
          */
-        const checkboxOnChange = (checkbox: any) => {
+        const checkboxOnChange = (checkbox: JSX.Element): void => {
             // add to values if it is checked, remove it if it isn't
             if (isChecked[checkbox.props.value]) {
                 isChecked[checkbox.props.value] = false;
                 setCheckboxValue(
-                    checkboxValue.filter(
-                        (value: string) => value !== checkbox.props.value
-                    )
+                    checkboxValue.filter((value: string) => value !== checkbox.props.value)
                 );
             } else {
                 isChecked[checkbox.props.value] = true;
@@ -155,24 +155,26 @@ export const Group = ({
             checkbox?.props?.onChange && checkbox?.props?.onChange();
         };
 
-        // get group name to later assign to all checkboxes
-        const groupName: string = name;
-        const groupDisabled: boolean = disabled;
-
         return checkboxes.map((checkbox: FoundChild) => {
             // abstracts the checkbox component for cleaner code
-            const component: JSX.Element = checkbox.component;
+            const { component } = checkbox;
+            const { props } = component;
 
             // gets all non-conflicting checkbox props
-            const { onChange, name, checked, disabled, ...checkboxProps } =
-                component.props;
+            const {
+                onChange,
+                name: checkboxName,
+                checked,
+                disabled: checkboxDisabled,
+                ...checkboxProps
+            } = props;
 
             return {
                 component: (
                     <Checkbox
                         {...checkboxProps}
-                        disabled={groupDisabled || disabled}
-                        name={groupName}
+                        disabled={disabled || checkboxDisabled}
+                        name={name}
                         key={Math.random()}
                         checked={isChecked[component.props.value]}
                         onChange={() => checkboxOnChange(component)}
@@ -187,12 +189,12 @@ export const Group = ({
      * Formats all View components for final rendering
      *
      * @param views all found views
-     * @returns formatted views
+     * @return formatted views
      */
     const formatViews = (views: FoundChild[]): FoundChild[] => {
         return views?.map((view: FoundChild) => {
             // abstract the component for cleaner code
-            const component: JSX.Element = view.component;
+            const { component } = view;
 
             return {
                 component: (

@@ -4,7 +4,10 @@ import './Text.css';
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     /** Text needs to exist between tags */
     children: ReactNode;
-    /** Determines whether it is a header or not, number directly relates to the kind of header tag i.e. header={1} => h1 */
+    /**
+     * Determines whether it is a header or not, number directly relates to the kind of header
+     * tag i.e. header={1} => h1
+     */
     header?: 0 | 1 | 2 | 3;
     /** Determines whether the element has margins or not */
     margins?: boolean;
@@ -28,6 +31,8 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
 
 /**
  * Typography component that allows for extensive customization via prop changes
+ *
+ * @return Text component
  */
 export const Text = ({
     children,
@@ -43,16 +48,16 @@ export const Text = ({
     color,
     style,
     ...props
-}: Props) => {
+}: Props): JSX.Element => {
     /**
-     * Gets all the special conditions and translates it to a special className combination granting all conditions
+     * Gets all the special conditions and translates it to a special className combination
+     * granting all conditions
      *
-     * @returns the full variant title
+     * @return the full variant title
      */
     const getVariant = (): string => {
         // determine custom variant
-        let customVariant: string =
-            'apollo-component-library-typography-component ';
+        let customVariant = 'apollo-component-library-typography-component ';
 
         // check if its a header or not
         if (header == 1) customVariant += 'first-header ';
@@ -70,13 +75,14 @@ export const Text = ({
     };
 
     /**
-     * Given a valid string the method will convert the first word of each letter to uppercase and the rest lowercase
+     * Given a valid string the method will convert the first word of each letter to uppercase and
+     * the rest lowercase
      *
      * @param target string that needs to be converted
-     * @returns converted string
+     * @return converted string
      */
     const convertPascal = (target: string): string => {
-        let outputArr: string[] = target.split(' ').map((word: string) => {
+        const outputArr: string[] = target.split(' ').map((word: string) => {
             return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
         });
 
@@ -84,9 +90,10 @@ export const Text = ({
     };
 
     /**
-     * If the children object is also a string, it will convert according to the provided properties
+     * If the children object is also a string, it will convert according to the provided
+     * properties
      *
-     * @returns correctly cased string, or corresponding children
+     * @return correctly cased string, or corresponding children
      */
     const getCorrectCasing = (): string | ReactNode => {
         if (typeof children === 'string') {

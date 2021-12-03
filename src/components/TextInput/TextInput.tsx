@@ -18,12 +18,14 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
 
 /**
  * Input that allows for user input via keyboard
+ *
+ * @return TextInput component
  */
 export const TextInput = ({
     variant = 'default',
     password = false,
     ...props
-}: Props) => {
+}: Props): JSX.Element => {
     return (
         <input
             {...props}

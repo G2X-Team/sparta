@@ -14,14 +14,10 @@ export interface Props extends HTMLAttributes<HTMLLabelElement> {
 /**
  * Label for all form components that will allow for label standardization across all
  * components
+ *
+ * @return Label component
  */
-export const Label = ({
-    value,
-    hint,
-    children,
-    className,
-    ...props
-}: Props) => {
+export const Label = ({ value, hint, children, className, ...props }: Props): JSX.Element => {
     // will keep track if label is parent to a required input
     const [required, toggleRequired] = useState(false);
 
@@ -38,16 +34,9 @@ export const Label = ({
     }, []);
 
     return (
-        <label
-            className={`apollo-component-library-label-component ${
-                className || ''
-            }`}
-            {...props}
-        >
+        <label className={`apollo-component-library-label-component ${className || ''}`} {...props}>
             {value?.length ? (
-                <Text bold style={{ marginBottom: 5 }}>{`${value}${
-                    required ? '*' : ''
-                }`}</Text>
+                <Text bold style={{ marginBottom: 5 }}>{`${value}${required ? '*' : ''}`}</Text>
             ) : null}
             {children}
             {hint?.length ? (

@@ -59,7 +59,7 @@ describe('Dropdown', () => {
         expect(screen.queryAllByText(/option /i)).toHaveLength(3);
     });
 
-    it('general flow (no items when not clicked, items when clicked, no items when clicked again)', () => {
+    it('will follow throuhg with the general flow', () => {
         // given
         render(
             <Dropdown>
@@ -102,8 +102,7 @@ describe('Dropdown', () => {
             </React.Fragment>
         );
         const dropdownButton: HTMLElement = screen.getByText(/hello world/i);
-        const otherElement: HTMLElement =
-            screen.getByText(/some other element/i);
+        const otherElement: HTMLElement = screen.getByText(/some other element/i);
 
         // when
         // should open on click

@@ -8,13 +8,12 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 
 /**
  * Interface component that's intended purpose is to anchor to the top of another element
+ *
+ * @return Header component
  */
-export const Header = ({ children, className, ...props }: Props) => {
+export const Header = ({ children, className, ...props }: Props): JSX.Element => {
     return (
-        <div
-            {...props}
-            className={`apollo-component-library-header-component ${className}`}
-        >
+        <div {...props} className={`apollo-component-library-header-component ${className}`}>
             {children}
         </div>
     );

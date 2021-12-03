@@ -22,8 +22,8 @@ describe('Card', () => {
         );
 
         // when then
-        expect(screen.getByText(/hello world/i)).toBeInTheDocument(); // proves header is rendered
-        expect(screen.getByText(/this is the body/i)).toBeInTheDocument(); // prove that the body is in document
+        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+        expect(screen.getByText(/this is the body/i)).toBeInTheDocument();
     });
 
     it('renders a footer, while maintaining other content', () => {
@@ -36,8 +36,8 @@ describe('Card', () => {
         );
 
         // when then
-        expect(screen.getByText(/hello world/i)).toBeInTheDocument(); // proves footer is rendered
-        expect(screen.getByText(/this is the body/i)).toBeInTheDocument(); // prove that the body is rendered
+        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+        expect(screen.getByText(/this is the body/i)).toBeInTheDocument();
     });
 
     it('can render both the header, footer, and body at the same time', () => {
@@ -51,8 +51,8 @@ describe('Card', () => {
         );
 
         // when then
-        expect(screen.getByText(/this is the header/i)).toBeInTheDocument(); // proves header is rendered
-        expect(screen.getByText(/this is the body/i)).toBeInTheDocument(); // prove that the body is rendered
-        expect(screen.getByText(/this is the footer/i)).toBeInTheDocument(); // proves footer is rendered
+        expect(screen.getByText(/this is the header/i)).toBeInTheDocument();
+        expect(screen.getByText(/this is the body/i)).toBeInTheDocument();
+        expect(screen.getByText(/this is the footer/i)).toBeInTheDocument();
     });
 });

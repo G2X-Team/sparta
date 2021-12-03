@@ -34,7 +34,7 @@ describe('Group', () => {
     it('will update the group value when radio is clicked', () => {
         // given
         const onGroupChange: jest.Mock<any, any> = jest.fn();
-        const groupValue: string = '1';
+        const groupValue = '1';
         render(
             <Group type="radio" name="group" onGroupChange={onGroupChange}>
                 <Radio value={groupValue}>Option 1</Radio>
@@ -51,7 +51,7 @@ describe('Group', () => {
     it('will not update the group value if radio is disabled', () => {
         // given
         const onGroupChange: jest.Mock<any, any> = jest.fn();
-        const groupValue: string = '1';
+        const groupValue = '1';
         render(
             <Group type="radio" name="group" onGroupChange={onGroupChange}>
                 <Radio disabled value={groupValue}>

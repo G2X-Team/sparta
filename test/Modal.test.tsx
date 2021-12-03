@@ -81,9 +81,7 @@ describe('Modal', () => {
         );
 
         // when
-        screen
-            .getAllByText(/button /i)
-            .forEach((button: HTMLElement) => userEvent.click(button));
+        screen.getAllByText(/button /i).forEach((button: HTMLElement) => userEvent.click(button));
 
         // then
         expect(onClick).toHaveBeenCalledTimes(2);

@@ -12,17 +12,15 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
 }
 
 /**
- * An input component that belongs to a list of others where when selected is the only representative
- * value of that group.
+ * An input component that belongs to a list of others where when selected is the only
+ * representative value of that group.
+ *
+ * @return Radio component
  */
-export const Radio = ({ children, ...props }: Props) => {
+export const Radio = ({ children, ...props }: Props): JSX.Element => {
     return (
         <label>
-            <input
-                {...props}
-                type="radio"
-                className="apollo-component-library-radio-component"
-            />
+            <input {...props} type="radio" className="apollo-component-library-radio-component" />
             <Text inline margins>
                 {children}
             </Text>

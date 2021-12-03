@@ -15,8 +15,10 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
 
 /**
  * UI element that slides a button from on to off.
+ *
+ * @return Switch component
  */
-export const Switch = ({ children, variant = 'default', ...props }: Props) => {
+export const Switch = ({ children, variant = 'default', ...props }: Props): JSX.Element => {
     return (
         <label className="apollo-component-library-switch-component-label">
             <input
@@ -25,9 +27,7 @@ export const Switch = ({ children, variant = 'default', ...props }: Props) => {
                 role="switch"
                 className="apollo-component-library-switch-component-input"
             />
-            <span
-                className={`apollo-component-library-switch-component ${variant}`}
-            />
+            <span className={`apollo-component-library-switch-component ${variant}`} />
             <Text inline margins>
                 {children}
             </Text>

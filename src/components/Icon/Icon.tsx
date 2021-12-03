@@ -15,7 +15,11 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     variant?: string;
 }
 
-/** Icon component that doubles as a button when necessary */
+/**
+ * Icon component that doubles as a button when necessary
+ *
+ * @return Icon component
+ */
 export const Icon = ({
     name,
     onClick,
@@ -25,21 +29,19 @@ export const Icon = ({
     disabled,
     style,
     ...props
-}: Props) => {
+}: Props): JSX.Element => {
     // check on render if the component has hany children
     useEffect(() => {
         const iconChildren: FoundChildren = findAll(children, []);
-        if (iconChildren.other.length > 0)
-            throw new Error('Icon component cannot have children');
+        if (iconChildren.other.length > 0) throw new Error('Icon component cannot have children');
     }, []);
 
     return (
         <i
             {...props}
             style={{ color: disabled ? 'gray' : color, ...style }}
-            className={`material-icons apollo-component-library-icon-component ${
-                onClick && variant
-            }`}
+            className={`material-icons apollo-component-library-icon-component 
+                ${onClick && variant}`}
             onClick={onClick}
         >
             {name}

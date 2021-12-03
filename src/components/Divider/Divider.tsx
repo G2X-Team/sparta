@@ -8,13 +8,18 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
     height?: number;
 }
 
+/**
+ * Component that serves as an hr for ease of templating
+ *
+ * @return Divider component
+ */
 export const Divider = ({
     color = 'lightgray',
     className,
     height = 1,
     style,
     ...props
-}: Props) => {
+}: Props): JSX.Element => {
     return (
         <hr
             role="separator"
