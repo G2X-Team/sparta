@@ -11,25 +11,33 @@ describe('Radio', () => {
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
-    })
+    });
 
     it('triggers onChange method when clicked', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
-        render(<Radio value="something" onChange={onChange}>Hello World!</Radio>)
+        render(
+            <Radio value="something" onChange={onChange}>
+                Hello World!
+            </Radio>
+        );
         const radio: HTMLElement = screen.getByRole('radio');
 
         // when
-        userEvent.click(radio)
+        userEvent.click(radio);
 
         // then
         expect(onChange).toHaveBeenCalled();
-    })
+    });
 
     it('will not trigger onChange when disabled', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
-        render(<Radio value="something" disabled onChange={onChange}>Hello World!</Radio>);
+        render(
+            <Radio value="something" disabled onChange={onChange}>
+                Hello World!
+            </Radio>
+        );
         const radio: HTMLElement = screen.getByRole('radio');
 
         // when
@@ -37,5 +45,5 @@ describe('Radio', () => {
 
         // then
         expect(onChange).not.toHaveBeenCalled();
-    })
-})
+    });
+});

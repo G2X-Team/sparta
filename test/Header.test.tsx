@@ -5,10 +5,10 @@ import { Default as Header } from '../stories/Header.stories';
 
 describe('Header', () => {
     it('renders correctly', () => {
-        // given 
+        // given
         render(<Header>Hello World</Header>);
 
         // when then
         expect(screen.getByText(/hello world/i)).toBeInTheDocument();
-    })
-})
+    });
+});

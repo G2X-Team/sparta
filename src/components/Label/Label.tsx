@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
 import { findAll, FoundChildren, FoundChild } from '../../util/findAll';
-import "./Label.css";
+import './Label.css';
 
 import { Text } from '../Text/Text';
 
@@ -12,10 +12,12 @@ export interface Props extends HTMLAttributes<HTMLLabelElement> {
 }
 
 /**
- * Label for all form components that will allow for label standardization across all 
+ * Label for all form components that will allow for label standardization across all
  * components
+ *
+ * @return Label component
  */
-export const Label = ({value, hint, children, className,...props}: Props) => {
+export const Label = ({ value, hint, children, className, ...props }: Props): JSX.Element => {
     // will keep track if label is parent to a required input
     const [required, toggleRequired] = useState(false);
 
@@ -23,7 +25,7 @@ export const Label = ({value, hint, children, className,...props}: Props) => {
     useEffect(() => {
         // get all formatted children
         const labelChildren: FoundChildren = findAll(children, []);
-        
+
         // loop through all other children
         labelChildren.other.forEach((child: FoundChild) => {
             // check if there is a child component with its required prop toggled
@@ -32,13 +34,16 @@ export const Label = ({value, hint, children, className,...props}: Props) => {
     }, []);
 
     return (
-        <label 
-            className={`apollo-component-library-label-component ${className || ""}`} 
-            {...props}
-        >
-            { value?.length ? <Text bold style={{marginBottom: 5}}>{`${value}${required ? "*" : "" }`}</Text> : null }
-            { children }
-            { hint?.length ? <Text color="gray" style={{fontSize: "0.8rem", marginTop: 4}}>{hint}</Text> : null }
+        <label className={`apollo-component-library-label-component ${className || ''}`} {...props}>
+            {value?.length ? (
+                <Text bold style={{ marginBottom: 5 }}>{`${value}${required ? '*' : ''}`}</Text>
+            ) : null}
+            {children}
+            {hint?.length ? (
+                <Text color="gray" style={{ fontSize: '0.8rem', marginTop: 4 }}>
+                    {hint}
+                </Text>
+            ) : null}
         </label>
-    )
-}
+    );
+};

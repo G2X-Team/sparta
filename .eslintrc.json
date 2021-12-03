@@ -1,0 +1,92 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "google",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "prettier/prettier",
+        "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "prettier"],
+    "rules": {
+        "no-use-before-define": "off",
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "react/jsx-filename-extension": [
+            "warn",
+            {
+                "extensions": [".tsx"]
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-unused-vars": 0,
+        "valid-jsdoc": [
+            "error",
+            {
+                "requireParamType": false,
+                "requireParamDescription": true,
+                "requireReturn": false,
+                "requireReturnDescription": true,
+                "requireReturnType": false,
+                "prefer": {
+                    "returns": "return",
+                    "arg": "param",
+                    "argument": "param"
+                }
+            }
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+            "error",
+            {
+                "allowExpressions": true
+            }
+        ],
+        "prefer-const": "error",
+        "prefer-destructuring": [
+            "error",
+            {
+                "VariableDeclarator": {
+                    "array": true,
+                    "object": true
+                },
+                "AssignmentExpression": {
+                    "array": true,
+                    "object": true
+                }
+            },
+            {
+                "enforceForRenamedProperties": true
+            }
+        ],
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
+        ],
+        "max-len": ["warn", { "code": 100 }],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ]
+    }
+}

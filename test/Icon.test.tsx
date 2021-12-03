@@ -7,11 +7,11 @@ import { Icon } from '../src';
 describe('Icon', () => {
     it('renders correctly', () => {
         // given
-        render(<Icon name="close"/>);
+        render(<Icon name="close" />);
 
         // when then
         expect(screen.getByText(/close/i)).toBeInTheDocument();
-    })
+    });
 
     it('will trigger on click callback', () => {
         // given
@@ -23,5 +23,5 @@ describe('Icon', () => {
 
         // then
         expect(onClick).toHaveBeenCalled();
-    })
-})
+    });
+});

@@ -16,11 +16,11 @@ describe('Dropdown', () => {
                 <Option>Option 2</Option>
                 <Option>Option 3</Option>
             </Dropdown>
-        )
+        );
 
         // when then
         expect(screen.getByText(/hello world/i)).toBeInTheDocument();
-    })
+    });
 
     it('does not render the items initially', () => {
         // given
@@ -33,11 +33,11 @@ describe('Dropdown', () => {
                 <Option>Option 2</Option>
                 <Option>Option 3</Option>
             </Dropdown>
-        )
+        );
 
         // when then
         expect(screen.queryAllByText(/option /i)).toHaveLength(0);
-    })
+    });
 
     it('renders item when button is clicked', () => {
         // given
@@ -50,16 +50,16 @@ describe('Dropdown', () => {
                 <Option>Option 2</Option>
                 <Option>Option 3</Option>
             </Dropdown>
-        )
+        );
 
         // when
         userEvent.click(screen.getByText(/hello world/i));
 
         // then
         expect(screen.queryAllByText(/option /i)).toHaveLength(3);
-    })
+    });
 
-    it('general flow (no items when not clicked, items when clicked, no items when clicked again)', () => {
+    it('will follow throuhg with the general flow', () => {
         // given
         render(
             <Dropdown>
@@ -70,7 +70,7 @@ describe('Dropdown', () => {
                 <Option>Option 2</Option>
                 <Option>Option 3</Option>
             </Dropdown>
-        )
+        );
         const dropdownButton: HTMLElement = screen.getByText(/hello world/i);
 
         // when then
@@ -84,7 +84,7 @@ describe('Dropdown', () => {
         // should close the menu on second click
         userEvent.click(dropdownButton);
         expect(screen.queryAllByText(/option /i)).toHaveLength(0);
-    })
+    });
 
     it('will closed when clicked outside the button', () => {
         // given
@@ -100,10 +100,10 @@ describe('Dropdown', () => {
                 </Dropdown>
                 <Text>Some other element</Text>
             </React.Fragment>
-        )
+        );
         const dropdownButton: HTMLElement = screen.getByText(/hello world/i);
-        const  otherElement: HTMLElement = screen.getByText(/some other element/i);
-        
+        const otherElement: HTMLElement = screen.getByText(/some other element/i);
+
         // when
         // should open on click
         userEvent.click(dropdownButton);
@@ -112,9 +112,9 @@ describe('Dropdown', () => {
         // click outside element
         userEvent.click(otherElement);
 
-        // then 
+        // then
         expect(screen.queryAllByText(/option /i)).toHaveLength(0);
-    })
+    });
 
     it('allows on click callback to execute for all options', () => {
         // given
@@ -130,8 +130,8 @@ describe('Dropdown', () => {
                 <Option onClick={secondClick}>Option 2</Option>
                 <Option onClick={thridClick}>Option 3</Option>
             </Dropdown>
-        )
-        
+        );
+
         // when
         for (let i = 1; i <= 3; i++) {
             userEvent.click(screen.getByText(/hello world/i));
@@ -142,5 +142,5 @@ describe('Dropdown', () => {
         expect(firstClick).toHaveBeenCalled();
         expect(secondClick).toHaveBeenCalled();
         expect(thridClick).toHaveBeenCalled();
-    })
-})
+    });
+});

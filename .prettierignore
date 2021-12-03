@@ -1,0 +1,4 @@
+# Ignore build, node_modules, examples
+dist
+node_modules
+example
