@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
-import { findAll, FoundChildren, FoundChild } from '../../util/findAll';
+import FormattedChildren from '../../util/FormattedChildren';
 import './Label.css';
 
 import { Text } from '../Text/Text';
@@ -17,20 +17,26 @@ export interface Props extends HTMLAttributes<HTMLLabelElement> {
  *
  * @return Label component
  */
-export const Label = ({ value, hint, children, className, ...props }: Props): JSX.Element => {
+export const Label: React.FC<Props> = ({
+    value,
+    hint,
+    children,
+    className,
+    ...props
+}: Props): JSX.Element => {
     // will keep track if label is parent to a required input
     const [required, toggleRequired] = useState(false);
 
     // checks if there is a child with a required prop toggled on mount
     useEffect(() => {
         // get all formatted children
-        const labelChildren: FoundChildren = findAll(children, []);
+        const formatted = new FormattedChildren(children, []);
 
         // loop through all other children
-        labelChildren.other.forEach((child: FoundChild) => {
-            // check if there is a child component with its required prop toggled
-            child.component?.props?.required && toggleRequired(true);
-        });
+        formatted.getOther().forEach((component: JSX.Element) => {
+            const { props: { required } } = component;
+            required && toggleRequired(true);
+        })
     }, []);
 
     return (

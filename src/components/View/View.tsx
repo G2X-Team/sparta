@@ -5,6 +5,9 @@ import React, { HTMLAttributes } from 'react';
  *
  * @return View component
  */
-export const View = ({ children, ...props }: HTMLAttributes<HTMLDivElement>): JSX.Element => {
+export const View: React.FC<Props> = ({
+    children,
+    ...props
+}: HTMLAttributes<HTMLDivElement>): JSX.Element => {
     return <div {...props}>{children}</div>;
 };

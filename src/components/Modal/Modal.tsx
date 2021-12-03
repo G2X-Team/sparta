@@ -1,5 +1,5 @@
 import React, { useState, useEffect, HTMLAttributes, ReactNode } from 'react';
-import { findAll, FoundChildren, FoundChild, getComponents } from '../../util/findAll';
+import FormattedChildren from '../../util/FormattedChildren';
 import './Modal.css';
 
 import { Header } from '../Header/Header';
@@ -24,7 +24,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Modal component
  */
-export const Modal = ({
+export const Modal: React.FC<Props> = ({
     className,
     manual = false,
     children,
@@ -51,39 +51,76 @@ export const Modal = ({
     }, [open]);
 
     /**
-     * Renders the modal and all of its children formatted as intended
+     * Formats the header component
      *
-     * @return formatted modal component
+     * @param header unformatted header
+     * @returns formatted header
      */
-    const renderModal = (): ReactNode => {
-        // find all specified components
-        const components: FoundChildren = findAll(children, [Header, Footer]);
-        const { Header: headers, Footer: footers } = components;
-
-        // check that the appropriate amount of headers is found
-        if (headers.length > 1) throw new Error('Modal can only have 1 Header component');
-        if (footers.length > 1) throw new Error('Modal can only have 1 Footer component');
-
-        // if Header or Footer is found make sure to store them
-        const header: ReactNode =
-            headers.length > 0 ? (
-                <Header
-                    {...headers[0].component.props}
-                    style={{
-                        marginBottom: 10,
-                        ...headers[0].component.props.style,
-                    }}
-                />
-            ) : null;
-
-        const footer: ReactNode = footers.length > 0 ? formatFooter(footers[0]) : null;
-        const others: ReactNode[] = components.other.map((child: FoundChild) => child.component);
+    const formatHeader = (header: JSX.Element): JSX.Element => {
+        const { props: headerProps } = header;
+        const { style: headerStyle } = headerProps;
 
         return (
-            <div {...props} className={`apollo-component-library-modal-component ${className}`}>
-                {header}
-                <div className="apollo-component-library-modal-component-body">{others}</div>
-                {footer}
+            <Header
+                {...headerProps}
+                style={{
+                    marginBottom: 10,
+                    ...headerStyle,
+                }}
+            />
+        );
+    };
+
+    // change buttons to new format
+    const formatButton = (button: JSX.Element): JSX.Element => {
+        // retrieve the onClick method from props and extract the rest
+        const { props: buttonProps } = button;
+        const { onClick: buttonOnClick, variant: buttonVariant } = buttonProps;
+
+        /**
+         * Will toggle the modal to close after executing original on click call back
+         * if manual prop is set to false
+         */
+        const onClick = (): void => {
+            buttonOnClick && buttonOnClick();
+            !manual && toggleModal && toggleModal();
+        };
+
+        return (
+            <button
+                key={Math.random()}
+                {...buttonProps}
+                onClick={onClick}
+                className={`apollo-component-library-modal-component-button-group-button 
+                    ${buttonVariant}`}
+            />
+        )
+    }
+
+    /**
+     * Formats the ButtonGroup to meet the modal standards
+     *
+     * @param buttonGroup button group FoundChild
+     * @return Formatted ButtonGroup
+     */
+    const formatButtonGroup = (buttonGroup: JSX.Element): JSX.Element => {
+        // abstract the button group comopnent
+        const { props: buttonGroupProps } = buttonGroup;
+        const { children: buttonGroupChildren } = buttonGroupProps;
+
+        // find the buttons in the button group
+        const formattedButtonGroup = new FormattedChildren(buttonGroupChildren, [Button])
+
+        // check that there are only buttons in the button group
+        if (formattedButtonGroup.getOther().length > 0) 
+            throw new Error("Only buttons are allowed in button groups");
+
+        // format buttons in button group
+        formattedButtonGroup.format(Button, formatButton)
+
+        return (
+            <div className="apollo-component-library-modal-component-button-group">
+                {formattedButtonGroup.getAll()}
             </div>
         );
     };
@@ -95,79 +132,63 @@ export const Modal = ({
      * @param footer footer FoundChild
      * @return Formatted Footer
      */
-    const formatFooter = (footer: FoundChild): ReactNode => {
+    const formatFooter = (footer: JSX.Element): JSX.Element => {
         // abstract the footer
-        const { component } = footer;
+        const { props } = footer;
+        const { children: footerChildren, style: footerStyle } = props;
 
-        // find button groups in the footer props
-        const footerComponents: FoundChildren = findAll(component.props.children, [ButtonGroup]);
-        const { ButtonGroup: buttonGroups } = footerComponents;
+        // find button groups
+        const formattedFooter = new FormattedChildren(footerChildren, [ButtonGroup]);
+
+        // format and extract button groups
+        formattedFooter.format(ButtonGroup, formatButtonGroup);
+        const buttonGroups = formattedFooter.extract(ButtonGroup);
 
         // check that there is no more than one button group
         if (buttonGroups.length > 1)
             throw new Error('The Footer of the Modal can only have 1 ButtonGroup component');
-        const buttonGroup: ReactNode =
-            buttonGroups.length > 0 ? formatButtonGroup(buttonGroups[0]) : null;
-
-        // clean the button group components from the previous found children
-        footerComponents.ButtonGroup = [];
-
-        // get the rest of the children
-        const other: ReactNode[] = getComponents(footerComponents);
+        
+        // get the button group
+        const [ buttonGroup ] = buttonGroups;
 
         return (
-            <Footer style={{ position: 'relative', ...component.props.style }}>
-                {other}
+            <Footer style={{ position: 'relative', ...footerStyle }}>
+                {formattedFooter.getAll()}
                 {buttonGroup}
             </Footer>
         );
     };
 
     /**
-     * Formats the ButtonGroup to meet the modal standards
+     * Renders the modal and all of its children formatted as intended
      *
-     * @param buttonGroup button group FoundChild
-     * @return Formatted ButtonGroup
+     * @return formatted modal component
      */
-    const formatButtonGroup = (buttonGroup: FoundChild): ReactNode => {
-        // abstract the button group comopnent
-        const { component } = buttonGroup;
+    const renderModal = (): ReactNode => {
+        // find all specified components
+        const formatted = new FormattedChildren(children, [Header, Footer]);
 
-        // find the buttons in the button group
-        const buttonGroupComponents: FoundChildren = findAll(component.props.children, [Button]);
-        const { Button: buttons } = buttonGroupComponents;
+        // format header and footer
+        formatted.format(Header, formatHeader);
+        formatted.format(Footer, formatFooter);
 
-        // change buttons to new format
-        const formattedButtons: ReactNode[] = buttons.map((button: FoundChild) => {
-            // retrieve the onClick method from props and extract the rest
-            const {
-                component: { props },
-            } = button;
-            const { onClick, ...buttonProps } = props;
+        // extract header and footer components
+        const headers = formatted.extract(Header);
+        const footers = formatted.extract(Footer);
 
-            /**
-             * Will toggle the modal to close after executing original on click call back
-             * if manual prop is set to false
-             */
-            const onButtonClick = (): void => {
-                onClick && onClick();
-                !manual && toggleModal && toggleModal();
-            };
+        // check that the appropriate amount of headers is found
+        if (headers.length > 1) throw new Error('Modal can only have 1 Header component');
+        if (footers.length > 1) throw new Error('Modal can only have 1 Footer component');
 
-            return (
-                <button
-                    key={Math.random()}
-                    {...buttonProps}
-                    onClick={onButtonClick}
-                    className={`apollo-component-library-modal-component-button-group-button 
-                        ${buttonProps.variant}`}
-                />
-            );
-        });
+        // get the header and footer
+        const [header] = headers;
+        const [footer] = footers;
 
         return (
-            <div className="apollo-component-library-modal-component-button-group">
-                {formattedButtons}
+            <div {...props} className={`apollo-component-library-modal-component ${className}`}>
+                {header}
+                <div className="apollo-component-library-modal-component-body">{formatted.getOther()}</div>
+                {footer}
             </div>
         );
     };
