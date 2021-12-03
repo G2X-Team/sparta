@@ -17,7 +17,7 @@ describe('LoadingState', () => {
         )
 
         // when
-        screen.getAllByText(/Submit /i).forEach((button: HTMLElement) => userEvent.click(button));
+        screen.getAllByText(/submit /i).forEach((button: HTMLElement) => userEvent.click(button));
 
         // then
         expect(onClick).toHaveBeenCalledTimes(1);
