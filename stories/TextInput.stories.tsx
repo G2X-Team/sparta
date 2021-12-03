@@ -9,6 +9,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template Text Input
+ *
+ * @param args storybook arguments
+ * @return template text input
+ */
 const Template: Story<Props> = (args) => <TextInput {...args} />;
 
 export const Default = Template.bind({});

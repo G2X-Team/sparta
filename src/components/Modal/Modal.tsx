@@ -71,7 +71,12 @@ export const Modal: React.FC<Props> = ({
         );
     };
 
-    // change buttons to new format
+    /**
+     * Formats button components
+     *
+     * @param button unformatted button
+     * @return formatted button
+     */
     const formatButton = (button: JSX.Element): JSX.Element => {
         // retrieve the onClick method from props and extract the rest
         const { props: buttonProps } = button;

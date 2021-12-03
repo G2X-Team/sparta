@@ -87,6 +87,9 @@
             {
                 "endOfLine": "auto"
             }
-        ]
+        ],
+        "require-jsdoc": ["error", { 
+            "require": {"ArrowFunctionExpression": true}
+        }]
     }
 }

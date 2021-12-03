@@ -14,10 +14,21 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template card component
+ *
+ * @param args storybook arguments
+ * @return template card
+ */
 const Template: Story<Props> = (args) => <Card {...args} />;
 
 export const Default = Template.bind({});
 
+/**
+ * Card with Header
+ *
+ * @return card with header
+ */
 export const CardWithHeader = (): JSX.Element => (
     <Card>
         <Header>This is the header</Header>
@@ -25,6 +36,11 @@ export const CardWithHeader = (): JSX.Element => (
     </Card>
 );
 
+/**
+ * Card with Footer
+ *
+ * @return card with Footer
+ */
 export const CardWithFooter = (): JSX.Element => (
     <Card>
         Hello World
@@ -32,6 +48,11 @@ export const CardWithFooter = (): JSX.Element => (
     </Card>
 );
 
+/**
+ * Card with Header and Footer
+ *
+ * @return card with header and footer
+ */
 export const CardWithHeaderAndFooter = (): JSX.Element => (
     <Card>
         <Header>This is the header</Header>
@@ -40,6 +61,11 @@ export const CardWithHeaderAndFooter = (): JSX.Element => (
     </Card>
 );
 
+/**
+ * Custom Card
+ *
+ * @return custom card
+ */
 export const CustomCard = (): JSX.Element => (
     <Card style={{ height: 200, width: 300 }}>
         <Header>
