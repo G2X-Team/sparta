@@ -30,10 +30,10 @@ export const ButtonGroup: React.FC<Props> = ({
     ...props
 }: Props): JSX.Element => {
     /**
-     * Formats 
-     * 
+     * Formats
+     *
      * @param button unformatted button component
-     * @returns formatted button component
+     * @return formatted button component
      */
     const formatButton = (button: JSX.Element): JSX.Element => {
         // extract props from button
@@ -59,7 +59,7 @@ export const ButtonGroup: React.FC<Props> = ({
                 {href ? <a href={href}>{buttonChildren}</a> : buttonChildren}
             </button>
         );
-    }
+    };
 
     /**
      * Will look for any button components and render them appropriately
@@ -68,7 +68,7 @@ export const ButtonGroup: React.FC<Props> = ({
      */
     const renderButtons = (): ReactNode[] => {
         const formatted = new FormattedChildren(children, [Button]);
-        if (formatted.getOther.length > 0) 
+        if (formatted.getOther.length > 0)
             throw new Error('ButtonGroup can only have Button elements as children');
 
         formatted.format(Button, formatButton);

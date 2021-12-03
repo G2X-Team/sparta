@@ -54,7 +54,7 @@ export const Modal: React.FC<Props> = ({
      * Formats the header component
      *
      * @param header unformatted header
-     * @returns formatted header
+     * @return formatted header
      */
     const formatHeader = (header: JSX.Element): JSX.Element => {
         const { props: headerProps } = header;
@@ -94,8 +94,8 @@ export const Modal: React.FC<Props> = ({
                 className={`apollo-component-library-modal-component-button-group-button 
                     ${buttonVariant}`}
             />
-        )
-    }
+        );
+    };
 
     /**
      * Formats the ButtonGroup to meet the modal standards
@@ -109,14 +109,14 @@ export const Modal: React.FC<Props> = ({
         const { children: buttonGroupChildren } = buttonGroupProps;
 
         // find the buttons in the button group
-        const formattedButtonGroup = new FormattedChildren(buttonGroupChildren, [Button])
+        const formattedButtonGroup = new FormattedChildren(buttonGroupChildren, [Button]);
 
         // check that there are only buttons in the button group
-        if (formattedButtonGroup.getOther().length > 0) 
-            throw new Error("Only buttons are allowed in button groups");
+        if (formattedButtonGroup.getOther().length > 0)
+            throw new Error('Only buttons are allowed in button groups');
 
         // format buttons in button group
-        formattedButtonGroup.format(Button, formatButton)
+        formattedButtonGroup.format(Button, formatButton);
 
         return (
             <div className="apollo-component-library-modal-component-button-group">
@@ -147,9 +147,9 @@ export const Modal: React.FC<Props> = ({
         // check that there is no more than one button group
         if (buttonGroups.length > 1)
             throw new Error('The Footer of the Modal can only have 1 ButtonGroup component');
-        
+
         // get the button group
-        const [ buttonGroup ] = buttonGroups;
+        const [buttonGroup] = buttonGroups;
 
         return (
             <Footer style={{ position: 'relative', ...footerStyle }}>
@@ -187,7 +187,9 @@ export const Modal: React.FC<Props> = ({
         return (
             <div {...props} className={`apollo-component-library-modal-component ${className}`}>
                 {header}
-                <div className="apollo-component-library-modal-component-body">{formatted.getOther()}</div>
+                <div className="apollo-component-library-modal-component-body">
+                    {formatted.getOther()}
+                </div>
                 {footer}
             </div>
         );

@@ -87,11 +87,11 @@ export const Drawer: React.FC<Props> = ({
 
     /**
      * Formats the header component
-     * 
+     *
      * @param header unformatted header
-     * @returns formatted header
+     * @return formatted header
      */
-     const formatHeader = (header: JSX.Element): JSX.Element => {
+    const formatHeader = (header: JSX.Element): JSX.Element => {
         const { props: headerProps } = header;
         const { style: headerStyle } = headerProps;
 
@@ -103,14 +103,14 @@ export const Drawer: React.FC<Props> = ({
                     ...headerStyle,
                 }}
             />
-        )
-    }
+        );
+    };
 
     /**
      * Formats the footer component
-     * 
+     *
      * @param footer unformatted footer
-     * @returns formatted footer
+     * @return formatted footer
      */
     const formatFooter = (footer: JSX.Element): JSX.Element => {
         const { props: footerProps } = footer;
@@ -124,19 +124,19 @@ export const Drawer: React.FC<Props> = ({
                     ...footerStyle,
                 }}
             />
-        )
-    }
+        );
+    };
 
     /**
      * Changes style of options to match
      *
-     * @param options unformatted options
+     * @param option unformatted options
      * @return formatted options
      */
     const formatOption = (option: JSX.Element): JSX.Element => {
         const { props: optionProps } = option;
         const { style: optionStyle, children: optionChildren } = optionProps;
-        
+
         return (
             <Option
                 key={Math.random()}
@@ -153,7 +153,6 @@ export const Drawer: React.FC<Props> = ({
         );
     };
 
-
     /**
      * Finds all target components and renders them in final drawer component
      *
@@ -162,7 +161,7 @@ export const Drawer: React.FC<Props> = ({
     const renderDrawer = (): ReactNode => {
         // gets all found children
         const formatted = new FormattedChildren(children, [Header, Footer, Option]);
-        
+
         // format header and footer
         formatted.format(Header, formatHeader);
         formatted.format(Footer, formatFooter);

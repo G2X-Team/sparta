@@ -33,8 +33,7 @@ export const Icon: React.FC<Props> = ({
     // check on render if the component has hany children
     useEffect(() => {
         const formatted = new FormattedChildren(children, []);
-        if (formatted.getOther().length > 0) 
-            throw new Error('Icon component cannot have children');
+        if (formatted.getOther().length > 0) throw new Error('Icon component cannot have children');
     }, []);
 
     return (
