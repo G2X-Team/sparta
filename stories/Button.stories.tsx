@@ -15,6 +15,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template FC for button
+ *
+ * @param args story args
+ * @return template button
+ */
 const Template: Story<Props> = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});

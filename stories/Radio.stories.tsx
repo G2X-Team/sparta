@@ -13,6 +13,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template Radio
+ *
+ * @param args storybook arguments
+ * @return template radio component
+ */
 const Template: Story<Props> = (args) => <Radio {...args} />;
 
 export const Default = Template.bind({});

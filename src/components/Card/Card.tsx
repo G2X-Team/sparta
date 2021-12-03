@@ -19,9 +19,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Element => {
     /**
      * Formats the header component
-     * 
+     *
      * @param header unformatted header
-     * @returns formatted header
+     * @return formatted header
      */
     const formatHeader = (header: JSX.Element): JSX.Element => {
         const { props: headerProps } = header;
@@ -35,14 +35,14 @@ export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Elemen
                     ...headerStyle,
                 }}
             />
-        )
-    }
+        );
+    };
 
     /**
      * Formats the footer component
-     * 
+     *
      * @param footer unformatted footer
-     * @returns formatted footer
+     * @return formatted footer
      */
     const formatFooter = (footer: JSX.Element): JSX.Element => {
         const { props: footerProps } = footer;
@@ -56,9 +56,9 @@ export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Elemen
                     ...footerStyle,
                 }}
             />
-        )
-    }
-    
+        );
+    };
+
     /**
      * Renderes all components
      *

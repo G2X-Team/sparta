@@ -34,9 +34,11 @@ export const Label: React.FC<Props> = ({
 
         // loop through all other children
         formatted.getOther().forEach((component: JSX.Element) => {
-            const { props: { required } } = component;
+            const {
+                props: { required },
+            } = component;
             required && toggleRequired(true);
-        })
+        });
     }, []);
 
     return (

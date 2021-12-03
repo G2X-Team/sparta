@@ -11,6 +11,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template component for button group
+ *
+ * @param args storybook arguments
+ * @return template component
+ */
 const Template: Story<Props> = (args) => (
     <ButtonGroup {...args}>
         <Button>First Button</Button>

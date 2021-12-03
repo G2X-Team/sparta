@@ -16,6 +16,10 @@ export interface FoundChildren {
     other: FoundChild[];
 }
 
+/**
+ * This component simplifies the process of formatting component children and relieves
+ * the user from worrying about specific typing, sorting, and labeling of children
+ */
 class FormattedChildren {
     /** Object that keeps track of all found children including their index and component*/
     foundChildren: FoundChildren;
@@ -60,7 +64,7 @@ class FormattedChildren {
      * childs that match the parameter
      *
      * @param child child to be extracted
-     * @returns ordered list of specified child
+     * @return ordered list of specified child
      */
     extract = (child: React.FC<any>): JSX.Element[] => {
         // check if the specified child exists within the class variable
@@ -121,7 +125,7 @@ class FormattedChildren {
     /**
      * Gets all other components not sought out and returns them
      *
-     * @returns all other components
+     * @return all other components
      */
     getOther = (): JSX.Element[] =>
         this.foundChildren.other.map((child: FoundChild) => child.component);
@@ -130,7 +134,7 @@ class FormattedChildren {
      * Gets all components sorted in the order they were rendered from the foundChildren class
      * variable
      *
-     * @returns all formatted children's components
+     * @return all formatted children's components
      */
     getAll = (): JSX.Element[] => {
         // array storing sorted
@@ -142,7 +146,7 @@ class FormattedChildren {
             if (this.foundChildren[key]) spreadFound = [...spreadFound, ...this.foundChildren[key]];
         });
 
-        // loop through all children and extract the component and store it in array according to index
+        // loop through all children and extract the component and store it in array
         for (const foundChild of spreadFound) {
             const { component, index } = foundChild;
             sorted[index] = component;

@@ -52,7 +52,7 @@ export const Group: React.FC<Props> = ({
     /**
      * Formats all Radio components for final rendering
      *
-     * @param radios all raw radio components
+     * @param radio all raw radio components
      * @return reformated radio objects
      */
     const formatRadio = (radio: JSX.Element): JSX.Element => {
@@ -84,7 +84,7 @@ export const Group: React.FC<Props> = ({
                 checked={radioValues === radioValue}
                 onChange={onChange}
             />
-        )
+        );
     };
 
     /**
@@ -113,9 +113,7 @@ export const Group: React.FC<Props> = ({
             // add to values if it is checked, remove it if it isn't
             if (isChecked[checkboxValue]) {
                 isChecked[checkboxValue] = false;
-                setCheckboxValue(
-                    checkboxValues.filter((value: string) => value !== checkboxValue)
-                );
+                setCheckboxValue(checkboxValues.filter((value: string) => value !== checkboxValue));
             } else {
                 isChecked[checkboxValue] = true;
                 setCheckboxValue([...checkboxValues, checkboxValue]);
@@ -137,18 +135,18 @@ export const Group: React.FC<Props> = ({
                 checked={isChecked[checkboxValue]}
                 onChange={onChange}
             />
-        )
+        );
     };
 
     /**
      * Formats all View components for final rendering
      *
-     * @param views all found views
+     * @param view all found views
      * @return formatted views
      */
     const formatView = (view: JSX.Element): JSX.Element => {
-        const { props } = view;
-        const { children: viewChildren, ...viewProps } = props;
+        const { props: viewProps } = view;
+        const { children: viewChildren } = viewProps;
 
         return (
             <View {...viewProps} key={Math.random()}>
@@ -160,7 +158,7 @@ export const Group: React.FC<Props> = ({
     /**
      * Renders all inputs determinant on the specific type
      *
-     * @param viewChildren implements children view when available
+     * @param childrenProp implements children view when available
      * @return rendered components
      */
     const renderAll = (childrenProp: ReactNode): ReactNode[] => {

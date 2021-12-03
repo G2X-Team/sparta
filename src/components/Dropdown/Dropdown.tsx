@@ -39,7 +39,7 @@ export const Dropdown: React.FC<Props> = ({
      * This method will only get the first button and consider it the main
      * point of entry for dropdown purposes
      *
-     * @param buttons all button components found in the dropdown
+     * @param button all button components found in the dropdown
      * @return button component
      */
     const formatButton = (button: JSX.Element): JSX.Element => {
