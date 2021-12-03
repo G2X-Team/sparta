@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { LoadingState, Button, Text} from '../src';
+import { LoadingState, Button} from '../src';
 
 describe('LoadingState', () => {
     it('allows for button to be clicked', () => {
