@@ -81,6 +81,12 @@
                 "unnamedComponents": "arrow-function"
             }
         ],
-        "max-len": ["warn", { "code": 100 }]
+        "max-len": ["warn", { "code": 100 }],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ]
     }
 }
