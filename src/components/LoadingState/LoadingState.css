@@ -117,18 +117,21 @@
 
 .apollo-component-library-loadingstate-component-progressbar.absolute {
     
-  background-color: rgb(229,233,235);
-    height: 1em;
+  background-color: #e04542;
+    height: 10px;
     position: relative;
-    width: 100%;
+    width: 10%;
+
 }
 
 
 .progress {
   background-size: 23em 0.25em;
-  height: 100%;
+  height: 12px;
   position: relative;
   background-color: #e04542;
+
+  display: flex;
   animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
       -o-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
       -ms-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
@@ -143,7 +146,7 @@
       width: 0;
   }
   100% {
-      width: 100%;
+      width: 80%;
   }
 }
 
@@ -155,7 +158,7 @@
       width: 0;
   }
   100% {
-      width: 100%;
+      width: 80%;
   }
 }
 
@@ -167,7 +170,7 @@
       width: 0;
   }
   100% {
-      width: 100%;
+      width: 80%;
   }
 }
 
@@ -179,7 +182,7 @@
       width: 0;
   }
   100% {
-      width: 100%;
+      width: 80%;
   }
 }
 
@@ -191,7 +194,7 @@
       width: 0;
   }
   100% {
-      width: 100%;
+      width: 80%;
   }
 }
 

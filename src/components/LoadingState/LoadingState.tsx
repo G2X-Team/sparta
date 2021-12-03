@@ -44,7 +44,7 @@ export const LoadingState = ({className, type, size, variant, manual = false, ch
         return (
             <div
                 {...props}
-                className={`apollo-component-library-loadingstate-component-progressbar ${type}`}
+                className={`apollo-component-library-loadingstate-component-progressbar ${type} ${move ? "" : "progress"}`}
                 
             >
                 
@@ -72,7 +72,7 @@ export const LoadingState = ({className, type, size, variant, manual = false, ch
                             { renderLoadingState() }
                             <div 
                                 onClick={move}
-                                className={`${variant}`}
+                                
                             />
                         </div>
                     </div>
