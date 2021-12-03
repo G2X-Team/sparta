@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode, useEffect, useState, useRef } from 'react';
-import { findAll, FoundChildren, FoundChild, getComponents } from '../../util/findAll';
+import FormattedChildren from '../../util/FormattedChildren';
 import './Drawer.css';
 
 import { Header } from '../Header/Header';
@@ -39,7 +39,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Drawer Component
  */
-export const Drawer = ({
+export const Drawer: React.FC<Props> = ({
     children,
     className,
     type = 'absolute',
@@ -86,52 +86,101 @@ export const Drawer = ({
     }, [open]);
 
     /**
+     * Formats the header component
+     * 
+     * @param header unformatted header
+     * @returns formatted header
+     */
+     const formatHeader = (header: JSX.Element): JSX.Element => {
+        const { props: headerProps } = header;
+        const { style: headerStyle } = headerProps;
+
+        return (
+            <Header
+                {...headerProps}
+                style={{
+                    marginBottom: 10,
+                    ...headerStyle,
+                }}
+            />
+        )
+    }
+
+    /**
+     * Formats the footer component
+     * 
+     * @param footer unformatted footer
+     * @returns formatted footer
+     */
+    const formatFooter = (footer: JSX.Element): JSX.Element => {
+        const { props: footerProps } = footer;
+        const { style: footerStyle } = footerProps;
+
+        return (
+            <footer
+                {...footerProps}
+                style={{
+                    marginTop: 10,
+                    ...footerStyle,
+                }}
+            />
+        )
+    }
+
+    /**
+     * Changes style of options to match
+     *
+     * @param options unformatted options
+     * @return formatted options
+     */
+    const formatOption = (option: JSX.Element): JSX.Element => {
+        const { props: optionProps } = option;
+        const { style: optionStyle, children: optionChildren } = optionProps;
+        
+        return (
+            <Option
+                key={Math.random()}
+                {...optionProps}
+                style={{
+                    height: '2rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    ...optionStyle,
+                }}
+            >
+                {optionChildren}
+            </Option>
+        );
+    };
+
+
+    /**
      * Finds all target components and renders them in final drawer component
      *
      * @return render ready drawer component
      */
     const renderDrawer = (): ReactNode => {
         // gets all found children
-        const components: FoundChildren = findAll(children, [Header, Footer, Option]);
-        const { Header: headers, Footer: footers } = components;
+        const formatted = new FormattedChildren(children, [Header, Footer, Option]);
+        
+        // format header and footer
+        formatted.format(Header, formatHeader);
+        formatted.format(Footer, formatFooter);
+        formatted.format(Option, formatOption);
+
+        // extract headers and footers
+        const headers = formatted.extract(Header);
+        const footers = formatted.extract(Footer);
 
         // check that there is only one header and footer max
         if (headers.length > 1) throw new Error('Drawer can only have one Header component');
         if (footers.length > 1) throw new Error('Drawer can only have one Footer component');
 
         // get the header/footer if it exists and assign it into a variable
-        const header: ReactNode =
-            headers.length > 0 ? (
-                <Header
-                    {...headers[0].component.props}
-                    style={{
-                        marginBottom: 10,
-                        ...headers[0].component.props.style,
-                    }}
-                />
-            ) : null;
-        const footer: ReactNode =
-            footers.length > 0 ? (
-                <Footer
-                    {...footers[0].component.props}
-                    style={{
-                        marginTop: 10,
-                        ...footers[0].component.props.style,
-                    }}
-                />
-            ) : null;
+        const [header] = headers;
+        const [footer] = footers;
 
-        // format options
-        const formattedOptions: FoundChild[] = formatOptions(components.Option);
-
-        // create a FoundChildren object to represent all other components
-        const otherComponents: FoundChildren = {
-            Option: formattedOptions,
-            other: components.other,
-        };
-
-        // get all other components and store in variable
-        const otherChildren: ReactNode[] = getComponents(otherComponents);
+        // define the conatiner style
         const containerStyle = {
             [orientation]: 0,
             [modifiedDimension]: type === 'permanent' || effect ? dimension : 0,
@@ -139,6 +188,7 @@ export const Drawer = ({
             ...style,
         };
 
+        // define drawer style
         const drawerStyle = {
             [modifiedDimension]: dimension,
             ...style,
@@ -153,47 +203,12 @@ export const Drawer = ({
                 <div {...props} ref={drawer} style={drawerStyle}>
                     {header}
                     <div className="apollo-component-library-drawer-component-body">
-                        {otherChildren}
+                        {formatted.getAll()}
                     </div>
                     {footer}
                 </div>
             </div>
         );
-    };
-
-    /**
-     * Changes style of options to match
-     *
-     * @param options unformatted options
-     * @return formatted options
-     */
-    const formatOptions = (options: FoundChild[]): FoundChild[] => {
-        return options?.map((option: FoundChild) => {
-            // abstract component from option
-            const {
-                component: { props },
-            } = option;
-
-            // extract specific props to get new props
-            const { style, children, ...optionProps } = props;
-            return {
-                component: (
-                    <Option
-                        key={Math.random()}
-                        {...optionProps}
-                        style={{
-                            height: '2rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            ...style,
-                        }}
-                    >
-                        {children}
-                    </Option>
-                ),
-                index: option.index,
-            };
-        });
     };
 
     return (

@@ -15,7 +15,7 @@ export interface Props extends HTMLAttributes<HTMLElement> {
  *
  * @return Option component
  */
-export const Option = ({ children, ...props }: Props): JSX.Element => {
+export const Option: React.FC<Props> = ({ children, ...props }: Props): JSX.Element => {
     return (
         <div {...props} className="apollo-component-library-option-component">
             <Text margins={false}>{children}</Text>

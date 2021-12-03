@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect } from 'react';
-import { findAll, FoundChildren } from '../../util/findAll';
+import FormattedChildren from '../../util/FormattedChildren';
 import './Icon.css';
 
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
@@ -20,7 +20,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Icon component
  */
-export const Icon = ({
+export const Icon: React.FC<Props> = ({
     name,
     onClick,
     children,
@@ -32,8 +32,9 @@ export const Icon = ({
 }: Props): JSX.Element => {
     // check on render if the component has hany children
     useEffect(() => {
-        const iconChildren: FoundChildren = findAll(children, []);
-        if (iconChildren.other.length > 0) throw new Error('Icon component cannot have children');
+        const formatted = new FormattedChildren(children, []);
+        if (formatted.getOther().length > 0) 
+            throw new Error('Icon component cannot have children');
     }, []);
 
     return (

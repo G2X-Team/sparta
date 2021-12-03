@@ -21,7 +21,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return TextInput component
  */
-export const TextInput = ({
+export const TextInput: React.FC<Props> = ({
     variant = 'default',
     password = false,
     ...props

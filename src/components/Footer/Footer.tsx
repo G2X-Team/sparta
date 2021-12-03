@@ -11,7 +11,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Footer component
  */
-export const Footer = ({ children, className, ...props }: Props): JSX.Element => {
+export const Footer: React.FC<Props> = ({ children, className, ...props }: Props): JSX.Element => {
     return (
         <div {...props} className={`apollo-component-library-footer-component ${className}`}>
             {children}
