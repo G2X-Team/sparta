@@ -5,21 +5,11 @@ import userEvent from '@testing-library/user-event';
 import { LoadingState, Button } from '../src';
 
 describe('LoadingState', () => {
-    it('allows for button to be clicked', () => {
+    it('renders correctly', () => {
         // given
-        const onClick: jest.Mock<any, any> = jest.fn();
-        render(
-            <div>
-            <Button onClick={onClick}>Button</Button>
-            <LoadingState open>
-            </LoadingState>
-            </div>
-        )
+        render(<LoadingState>Hello World!</LoadingState>);
 
-        // when
-        screen.getAllByText(/button /i).forEach((button: HTMLElement) => userEvent.click(button));
-
-        // then
-        expect(onClick).toHaveBeenCalledTimes(1);
+        // when then
+        expect(screen.queryByText(/hello world!/i)).not.toBeInTheDocument();
     })
 })
