@@ -10,7 +10,7 @@ describe('LoadingState', () => {
         const onClick: jest.Mock<any, any> = jest.fn();
         render(
             <div>
-            <Button onClick={onClick}>Button</Button>
+            <Button onClick={onClick}>Submit</Button>
             <LoadingState open>
             </LoadingState>
             </div>
