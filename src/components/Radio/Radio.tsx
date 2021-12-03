@@ -17,7 +17,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Radio component
  */
-export const Radio = ({ children, ...props }: Props): JSX.Element => {
+export const Radio: React.FC<Props> = ({ children, ...props }: Props): JSX.Element => {
     return (
         <label>
             <input {...props} type="radio" className="apollo-component-library-radio-component" />

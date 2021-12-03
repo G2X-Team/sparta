@@ -15,6 +15,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template label component
+ *
+ * @param args storybook arguments
+ * @return template label component
+ */
 const Template: Story<Props> = (args) => (
     <Label {...args}>
         <TextInput placeholder="Text Input" />

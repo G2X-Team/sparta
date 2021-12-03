@@ -1,7 +1,6 @@
 import React, { HTMLAttributes, ReactNode, useState, useEffect } from 'react';
+import FormattedChildren from '../../util/FormattedChildren';
 import './Group.css';
-
-import { findAll, FoundChild, FoundChildren, getComponents } from '../../util/findAll';
 
 import { Radio } from '../Radio/Radio';
 import { Checkbox } from '../Checkbox/Checkbox';
@@ -26,7 +25,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Group component
  */
-export const Group = ({
+export const Group: React.FC<Props> = ({
     children,
     name,
     type,
@@ -35,8 +34,8 @@ export const Group = ({
     ...props
 }: Props): JSX.Element => {
     // define group value
-    const [radioValue, setRadioValue] = useState('');
-    const [checkboxValue, setCheckboxValue] = useState<string[]>([]);
+    const [radioValues, setRadioValue] = useState('');
+    const [checkboxValues, setCheckboxValue] = useState<string[]>([]);
 
     // for checkboxes we want instant access to whether a checkbox is checked or not
     const [isChecked, updateChecked] = useState<{ [key: string]: boolean }>({});
@@ -44,108 +43,80 @@ export const Group = ({
     // every time there is a state change, invoke the onGroupChange method if it exists
     useEffect(() => {
         if (type === 'radio') {
-            onGroupChange && onGroupChange(radioValue);
+            onGroupChange && onGroupChange(radioValues);
         } else {
-            onGroupChange && onGroupChange(checkboxValue);
+            onGroupChange && onGroupChange(checkboxValues);
         }
     });
 
     /**
-     * Renders all inputs determinant on the specific type
-     *
-     * @param viewChildren implements children view when available
-     * @return rendered components
-     */
-    const renderAll = (viewChildren: ReactNode): ReactNode[] => {
-        // determine what component we are looking for
-        const input: ReactNode = type === 'radio' ? Radio : Checkbox;
-        const inputType: string = type.slice(0, 1).toUpperCase() + type.slice(1);
-
-        // get all instances of the input
-        const components: FoundChildren = findAll(viewChildren, [input, View]);
-
-        // get all inputs
-        components[inputType] =
-            type === 'radio'
-                ? formatRadios(components.Radio)
-                : formatCheckboxes(components.Checkbox);
-
-        // gets all views
-        components.View = formatViews(components?.View);
-
-        return getComponents(components);
-    };
-
-    /**
      * Formats all Radio components for final rendering
      *
-     * @param radios all raw radio components
+     * @param radio all raw radio components
      * @return reformated radio objects
      */
-    const formatRadios = (radios: FoundChild[]): FoundChild[] => {
+    const formatRadio = (radio: JSX.Element): JSX.Element => {
+        // get props
+        const { props } = radio;
+        const {
+            onChange: radioOnChange,
+            name: radioName,
+            checked: radioChecked,
+            disabled: radioDisabled,
+            value: radioValue,
+            ...radioProps
+        } = props;
+
         /**
          * Updates value and fires original onChange method
-         *
-         * @param radio radio component
          */
-        const radioOnChange = (radio: JSX.Element): void => {
-            setRadioValue(radio.props.value);
-            radio?.props?.onChange && radio?.props?.onChange();
+        const onChange = (): void => {
+            setRadioValue(radioValue);
+            radioOnChange && radioOnChange();
         };
 
-        // get group name to later assign to all Radios
-        return radios.map((radio: FoundChild) => {
-            // abstracts the radio component for cleaner code
-            const { component } = radio;
-            const { props } = component;
-
-            // gets all non-conflicting radio props
-            const {
-                onChange,
-                name: radioName,
-                checked,
-                disabled: radioDisabled,
-                ...radioProps
-            } = props;
-
-            return {
-                component: (
-                    <Radio
-                        {...radioProps}
-                        disabled={disabled || radioDisabled}
-                        name={name}
-                        key={Math.random()}
-                        checked={component.props.value === radioValue}
-                        onChange={() => radioOnChange(component)}
-                    />
-                ),
-                index: radio.index,
-            };
-        });
+        return (
+            <Radio
+                {...radioProps}
+                disabled={disabled || radioDisabled}
+                name={name}
+                key={Math.random()}
+                checked={radioValues === radioValue}
+                onChange={onChange}
+            />
+        );
     };
 
     /**
      * Formats all checkbox components for final rendering
      *
-     * @param checkboxes all raw checkbox components
+     * @param checkbox all raw checkbox components
      * @return reformated checkbox objects
      */
-    const formatCheckboxes = (checkboxes: FoundChild[]): FoundChild[] => {
+    const formatCheckbox = (checkbox: JSX.Element): JSX.Element => {
+        const { props } = checkbox;
+
+        // gets all non-conflicting checkbox props
+        const {
+            name: checkboxName,
+            checked: checkboxChecked,
+            disabled: checkboxDisabled,
+            value: checkboxValue,
+            onChange: checkboxOnChange,
+            ...checkboxProps
+        } = props;
+
         /**
          * Updates value and fires original onChange method
-         *
-         * @param checkbox radio component
          */
-        const checkboxOnChange = (checkbox: JSX.Element): void => {
+        const onChange = (): void => {
             // add to values if it is checked, remove it if it isn't
-            if (isChecked[checkbox.props.value]) {
-                isChecked[checkbox.props.value] = false;
-                setCheckboxValue(
-                    checkboxValue.filter((value: string) => value !== checkbox.props.value)
-                );
+            if (isChecked[checkboxValue]) {
+                isChecked[checkboxValue] = false;
+                setCheckboxValue(checkboxValues.filter((value: string) => value !== checkboxValue));
             } else {
-                isChecked[checkbox.props.value] = true;
-                setCheckboxValue([...checkboxValue, checkbox.props.value]);
+                isChecked[checkboxValue] = true;
+                setCheckboxValue([...checkboxValues, checkboxValue]);
             }
 
             // update checked checkboxes
@@ -155,56 +126,53 @@ export const Group = ({
             checkbox?.props?.onChange && checkbox?.props?.onChange();
         };
 
-        return checkboxes.map((checkbox: FoundChild) => {
-            // abstracts the checkbox component for cleaner code
-            const { component } = checkbox;
-            const { props } = component;
-
-            // gets all non-conflicting checkbox props
-            const {
-                onChange,
-                name: checkboxName,
-                checked,
-                disabled: checkboxDisabled,
-                ...checkboxProps
-            } = props;
-
-            return {
-                component: (
-                    <Checkbox
-                        {...checkboxProps}
-                        disabled={disabled || checkboxDisabled}
-                        name={name}
-                        key={Math.random()}
-                        checked={isChecked[component.props.value]}
-                        onChange={() => checkboxOnChange(component)}
-                    />
-                ),
-                index: checkbox.index,
-            };
-        });
+        return (
+            <Checkbox
+                {...checkboxProps}
+                disabled={disabled || checkboxDisabled}
+                name={name}
+                key={Math.random()}
+                checked={isChecked[checkboxValue]}
+                onChange={onChange}
+            />
+        );
     };
 
     /**
      * Formats all View components for final rendering
      *
-     * @param views all found views
+     * @param view all found views
      * @return formatted views
      */
-    const formatViews = (views: FoundChild[]): FoundChild[] => {
-        return views?.map((view: FoundChild) => {
-            // abstract the component for cleaner code
-            const { component } = view;
+    const formatView = (view: JSX.Element): JSX.Element => {
+        const { props: viewProps } = view;
+        const { children: viewChildren } = viewProps;
 
-            return {
-                component: (
-                    <View {...component.props} key={Math.random()}>
-                        {renderAll(component.props.children)}
-                    </View>
-                ),
-                index: view.index,
-            };
-        });
+        return (
+            <View {...viewProps} key={Math.random()}>
+                {renderAll(viewChildren)}
+            </View>
+        );
+    };
+
+    /**
+     * Renders all inputs determinant on the specific type
+     *
+     * @param childrenProp implements children view when available
+     * @return rendered components
+     */
+    const renderAll = (childrenProp: ReactNode): ReactNode[] => {
+        // determine what component we are looking for
+        const Input: React.FC<any> = type === 'radio' ? Radio : Checkbox;
+
+        // get all instances of the input
+        const formatted = new FormattedChildren(childrenProp, [Input, View]);
+
+        // get all inputs
+        formatted.format(Input, type === 'radio' ? formatRadio : formatCheckbox);
+        formatted.format(View, formatView);
+
+        return formatted.getAll();
     };
 
     return <div {...props}>{renderAll(children)}</div>;

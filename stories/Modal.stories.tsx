@@ -11,6 +11,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template Modal
+ *
+ * @param args storybook arguments
+ * @return template modal component
+ */
 const Template: Story<Props> = (args) => {
     const [open, toggleModal] = useState(false);
 
