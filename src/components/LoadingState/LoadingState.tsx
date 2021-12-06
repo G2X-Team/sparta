@@ -105,5 +105,5 @@ export const LoadingState = ({
                 }
             </React.Fragment>
         );
-    }
+    };
 };
