@@ -50,3 +50,10 @@ export const TextInsideOfText = () => (
             the <Text inline underline pascal>king of the pirates.</Text>
         </Text>
 );
+
+
+export const TextHighlightDisabled = () => (
+    <React.Fragment>
+        <Text disabled>This text is disabled which means it can't be highlighend or copied</Text>
+    </React.Fragment>
+);

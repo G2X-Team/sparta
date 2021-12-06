@@ -34,4 +34,13 @@ describe('Text', () => {
         // when then
         expect(screen.getByText('Pascal Casing')).toBeInTheDocument();
     })
+
+
+    it('makes the whole text disabled', () => {
+        // given
+        render(<Text pascal>disabled text</Text>);
+
+        // when then
+        expect(screen.getByText('disabled')).toBeInTheDocument();
+    })
 })
