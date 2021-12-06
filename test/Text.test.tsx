@@ -41,6 +41,6 @@ describe('Text', () => {
         render(<Text pascal>disabled text</Text>);
 
         // when then
-        expect(screen.getByText('disabled')).toBeInTheDocument();
+        expect(screen.getByText('disabled text')).toBeInTheDocument();
     })
 })
