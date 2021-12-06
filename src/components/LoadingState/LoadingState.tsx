@@ -48,6 +48,7 @@ export const LoadingState = ({
 
     /**
      * Renders the LoadingState and all of its children formatted as intended
+     * @return formatted modal component
      */
     const renderLoadingState = (): ReactNode => {
         if (variant == 'progress') {
@@ -57,7 +58,7 @@ export const LoadingState = ({
                     className={`apollo-component-library-loadingstate-component-progressbar ${type} ${move ? "" : "progress"}`}
                 >
                 </div>
-            )
+            );
         } else {
             return (
                 <div
