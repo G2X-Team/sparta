@@ -1,15 +1,15 @@
 import React, { useState, useEffect, HTMLAttributes, ReactNode } from 'react';
-import "./LoadingState.css";
+import './LoadingState.css';
 
 
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines the type of LoadingState whether Absolute or Inline*/
-    type?: "absolute" | "inline";
+    type?: 'absolute' | 'inline';
     /** Determines the size of LoadingState whether small , medium, or large */
-    size?: "small" | "medium" | "large";
+    size?: 'small' | 'medium' | 'large';
     /** Determines the size of LoadingState whether small , medium, or large */
-    variant?: "static" | "progress";
+    variant?: 'static' | 'progress';
     /** Determines whether the LoadingState is open or not */
     open?: boolean;
     /** Toggles the LoadingState between open and closed */
@@ -40,7 +40,7 @@ export const LoadingState = ({className, type, size, variant, manual = false, ch
      * Renders the LoadingState and all of its children formatted as intended
      */
     const renderLoadingState = (): ReactNode => {
-        if (variant == "progress") {
+        if (variant == 'progress') {
         return (
             <div
                 {...props}
@@ -62,7 +62,7 @@ export const LoadingState = ({className, type, size, variant, manual = false, ch
         }
     }
     
-    if (variant == "progress") {
+    if (variant == 'progress') {
     return (
         <React.Fragment>
             {
