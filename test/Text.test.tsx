@@ -38,9 +38,9 @@ describe('Text', () => {
 
     it('makes the whole text disabled', () => {
         // given
-        render(<Text pascal>disabled text</Text>);
+        render(<Text disabled>disabled text</Text>);
 
         // when then
-        expect(screen.getByText('disabled text')).toBeInTheDocument();
+        expect(screen.getByText(/disabled text/i)).toBeInTheDocument();
     })
 })
