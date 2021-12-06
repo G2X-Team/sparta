@@ -16,7 +16,7 @@
 .apollo-component-library-drawer-component-backdrop {
     height: 100%;
     width: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     transition: opacity 300ms;
     position: absolute;
 }
@@ -32,7 +32,7 @@
 
 /* Absolute Styling */
 .apollo-component-library-drawer-component.absolute {
-    position: absolute
+    position: absolute;
 }
 
 .apollo-component-library-drawer-component-container.absolute {
@@ -48,26 +48,28 @@
 .apollo-component-library-drawer-component.absolute.right {
     height: 100%;
     border-radius: 15px 0 0 15px;
-} 
+}
 
 .apollo-component-library-drawer-component.absolute.left {
     height: 100%;
     border-radius: 0 15px 15px 0;
-} 
+}
 
-.apollo-component-library-drawer-component.absolute.right > div, .apollo-component-library-drawer-component.absolute.left > div {
-    height: 100%
+.apollo-component-library-drawer-component.absolute.right > div,
+.apollo-component-library-drawer-component.absolute.left > div {
+    height: 100%;
 }
 
 .apollo-component-library-drawer-component.absolute.top {
     width: 100%;
     border-radius: 0 0 15px 15px;
-} 
+}
 .apollo-component-library-drawer-component.absolute.bottom {
     width: 100%;
     border-radius: 15px 15px 0 0;
-} 
-.apollo-component-library-drawer-component.absolute.top > div, .apollo-component-library-drawer-component.absolute.bottom > div {
+}
+.apollo-component-library-drawer-component.absolute.top > div,
+.apollo-component-library-drawer-component.absolute.bottom > div {
     width: 100%;
 }
 
@@ -79,24 +81,26 @@
 .apollo-component-library-drawer-component.persistent.right {
     height: 100%;
     border-left: 1px solid lightgray;
-} 
+}
 .apollo-component-library-drawer-component.persistent.left {
     height: 100%;
     border-right: 1px solid lightgray;
-} 
-.apollo-component-library-drawer-component.persistent.right > div, .apollo-component-library-drawer-component.permanent.left > div {
+}
+.apollo-component-library-drawer-component.persistent.right > div,
+.apollo-component-library-drawer-component.permanent.left > div {
     height: 100%;
 }
 
 .apollo-component-library-drawer-component.persistent.top {
     width: 100%;
     border-bottom: 1px solid lightgray;
-} 
+}
 .apollo-component-library-drawer-component.persistent.bottom {
     width: 100%;
     border-top: 1px solid lightgray;
-} 
-.apollo-component-library-drawer-component.persistent.top > div, .apollo-component-library-drawer-component.persistent.bottom > div {
+}
+.apollo-component-library-drawer-component.persistent.top > div,
+.apollo-component-library-drawer-component.persistent.bottom > div {
     width: 100%;
 }
 
@@ -112,24 +116,26 @@
 .apollo-component-library-drawer-component.permanent.right {
     height: 100%;
     border-left: 1px solid lightgray;
-} 
+}
 .apollo-component-library-drawer-component.permanent.left {
     height: 100%;
     border-right: 1px solid lightgray;
-} 
-.apollo-component-library-drawer-component.permanent.right > div, .apollo-component-library-drawer-component.permanent.left > div {
+}
+.apollo-component-library-drawer-component.permanent.right > div,
+.apollo-component-library-drawer-component.permanent.left > div {
     height: 100%;
 }
 
 .apollo-component-library-drawer-component.permanent.top {
     width: 100%;
     border-bottom: 1px solid lightgray;
-} 
+}
 .apollo-component-library-drawer-component.permanent.bottom {
     width: 100%;
     border-top: 1px solid lightgray;
-} 
-.apollo-component-library-drawer-component.permanent.top > div, .apollo-component-library-drawer-component.permanent.bottom > div {
+}
+.apollo-component-library-drawer-component.permanent.top > div,
+.apollo-component-library-drawer-component.permanent.bottom > div {
     width: 100%;
 }
 

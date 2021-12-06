@@ -10,5 +10,5 @@ describe('View', () => {
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
-    })
-})
+    });
+});

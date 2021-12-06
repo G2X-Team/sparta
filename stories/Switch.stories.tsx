@@ -1,16 +1,16 @@
-import React from 'react'
-import { Meta, Story } from '@storybook/react'
+import React from 'react';
+import { Meta, Story } from '@storybook/react';
 import { Switch, Props } from '../src/components/Switch/Switch';
 
 const meta: Meta = {
-    title: "Form/Switch",
+    title: 'Form/Switch',
     component: Switch,
     argTypes: {
         children: {
-            defaultValue: "This is a switch component"
-        }
-    }
-}
+            defaultValue: 'This is a switch component',
+        },
+    },
+};
 
 export default meta;
 
@@ -20,6 +20,6 @@ export const Default = Template.bind({});
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-    children: "This is the secondary switch style",
-    variant: "secondary"
-}
+    children: 'This is the secondary switch style',
+    variant: 'secondary',
+};

@@ -23,7 +23,7 @@
 }
 
 .apollo-component-library-switch-component:before {
-    content: " ";
+    content: ' ';
     position: absolute;
     min-height: 16px;
     min-width: 16px;
@@ -34,26 +34,32 @@
     border-radius: 100px;
 }
 
-.apollo-component-library-switch-component-input:checked + .apollo-component-library-switch-component:before {
+.apollo-component-library-switch-component-input:checked
+    + .apollo-component-library-switch-component:before {
     transform: translate(16px);
 }
 
-.apollo-component-library-switch-component-input:checked + .apollo-component-library-switch-component.default:before {
+.apollo-component-library-switch-component-input:checked
+    + .apollo-component-library-switch-component.default:before {
     background: lightcoral;
 }
 
-.apollo-component-library-switch-component-input:checked + .apollo-component-library-switch-component.secondary:before {
+.apollo-component-library-switch-component-input:checked
+    + .apollo-component-library-switch-component.secondary:before {
     background: lightskyblue;
 }
 
-.apollo-component-library-switch-component-input:disabled + .apollo-component-library-switch-component:before {
+.apollo-component-library-switch-component-input:disabled
+    + .apollo-component-library-switch-component:before {
     background: darkgray;
 }
 
-.apollo-component-library-switch-component-input:disabled + .apollo-component-library-switch-component.default:before {
+.apollo-component-library-switch-component-input:disabled
+    + .apollo-component-library-switch-component.default:before {
     background: darkgray;
 }
 
-.apollo-component-library-switch-component-input:disabled + .apollo-component-library-switch-component.secondary:before {
+.apollo-component-library-switch-component-input:disabled
+    + .apollo-component-library-switch-component.secondary:before {
     background: darkgray;
 }
