@@ -1,5 +1,4 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
-import * as CSS from 'csstype';
 import './Text.css';
 
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
@@ -27,7 +26,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     /** Determines whether the first letter of every word is capital or not */
     pascal?: boolean;
     /** Decide the color of the text without accessing the style props */
-    color?: CSS.Property.Color;
+    color?: string;
     /** Determines whether the text is disabled or not */
     disabled?: boolean;
 }
@@ -76,9 +75,6 @@ export const Text: React.FC<Props> = ({
         if (bold) customVariant += 'bold ';
         if (underline) customVariant += 'underline ';
         if (disabled) customVariant += 'disabled ';
-
-        // add className
-        customVariant += className;
 
         return customVariant;
     };
