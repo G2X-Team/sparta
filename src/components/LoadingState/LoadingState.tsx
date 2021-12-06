@@ -16,7 +16,19 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     manual?: boolean;
 }
 
-export const LoadingState = ({ className, type, size, variant, manual = false, children, style, open = false, isLoading, move, ...props }: Props) => {
+export const LoadingState = ({
+    className,
+    type,
+    size,
+    variant,
+    manual = false,
+    children,
+    style,
+    open = false,
+    isLoading,
+    move,
+    ...props
+}: Props) => {
     // usestate variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);
