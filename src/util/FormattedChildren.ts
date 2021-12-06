@@ -17,7 +17,7 @@ export interface FoundChildren {
 }
 
 /**
- * This component simplifies the process of formatting component children and relieves
+ * This helper simplifies the process of formatting component children and relieves
  * the user from worrying about specific typing, sorting, and labeling of children
  */
 class FormattedChildren {

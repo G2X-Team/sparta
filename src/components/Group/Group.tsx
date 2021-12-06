@@ -6,7 +6,7 @@ import { Radio } from '../Radio/Radio';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { View } from '../View/View';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
     /** Group must contain element between tags */
     children: ReactNode;
     /** Identifies the group's selection */
@@ -14,9 +14,13 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Type of inputs this group will focus on */
     type: 'radio' | 'checkbox';
     /** Method that impacts onChange */
-    onGroupChange?: (groupValue: string[] | string) => void;
+    onChange?: (groupValue: string[] | string) => void;
     /** Determines whether inputs are disabled or not */
     disabled?: boolean;
+    /** Validates group value and determines whether it is submission ready */
+    validator?: (value: string | string[]) => string | null;
+    /** Determines whether the group requires a selection */
+    required?: boolean;
 }
 
 /**
@@ -30,7 +34,7 @@ export const Group: React.FC<Props> = ({
     name,
     type,
     disabled = false,
-    onGroupChange,
+    onChange,
     ...props
 }: Props): JSX.Element => {
     // define group value
@@ -40,14 +44,14 @@ export const Group: React.FC<Props> = ({
     // for checkboxes we want instant access to whether a checkbox is checked or not
     const [isChecked, updateChecked] = useState<{ [key: string]: boolean }>({});
 
-    // every time there is a state change, invoke the onGroupChange method if it exists
+    // every time there is a state change, invoke the onChange method if it exists
     useEffect(() => {
         if (type === 'radio') {
-            onGroupChange && onGroupChange(radioValues);
+            onChange && onChange(radioValues);
         } else {
-            onGroupChange && onGroupChange(checkboxValues);
+            onChange && onChange(checkboxValues);
         }
-    });
+    }, [checkboxValues, radioValues]);
 
     /**
      * Formats all Radio components for final rendering
@@ -57,15 +61,15 @@ export const Group: React.FC<Props> = ({
      */
     const formatRadio = (radio: JSX.Element): JSX.Element => {
         // get props
-        const { props } = radio;
         const {
-            onChange: radioOnChange,
-            name: radioName,
-            checked: radioChecked,
-            disabled: radioDisabled,
-            value: radioValue,
-            ...radioProps
-        } = props;
+            props: {
+                onChange: radioOnChange,
+                name: radioName,
+                disabled: radioDisabled,
+                value: radioValue,
+                ...radioProps
+            },
+        } = radio;
 
         /**
          * Updates value and fires original onChange method

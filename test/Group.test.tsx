@@ -33,10 +33,10 @@ describe('Group', () => {
 
     it('will update the group value when radio is clicked', () => {
         // given
-        const onGroupChange: jest.Mock<any, any> = jest.fn();
+        const onChange: jest.Mock<any, any> = jest.fn();
         const groupValue = '1';
         render(
-            <Group type="radio" name="group" onGroupChange={onGroupChange}>
+            <Group type="radio" name="group" onChange={onChange}>
                 <Radio value={groupValue}>Option 1</Radio>
             </Group>
         );
@@ -45,15 +45,15 @@ describe('Group', () => {
         userEvent.click(screen.getByRole('radio'));
 
         // then
-        expect(onGroupChange).toHaveBeenLastCalledWith(groupValue);
+        expect(onChange).toHaveBeenLastCalledWith(groupValue);
     });
 
     it('will not update the group value if radio is disabled', () => {
         // given
-        const onGroupChange: jest.Mock<any, any> = jest.fn();
+        const onChange: jest.Mock<any, any> = jest.fn();
         const groupValue = '1';
         render(
-            <Group type="radio" name="group" onGroupChange={onGroupChange}>
+            <Group type="radio" name="group" onChange={onChange}>
                 <Radio disabled value={groupValue}>
                     Option 1
                 </Radio>
@@ -64,7 +64,7 @@ describe('Group', () => {
         userEvent.click(screen.getByRole('radio'));
 
         // then
-        expect(onGroupChange).not.toHaveBeenLastCalledWith(groupValue);
+        expect(onChange).not.toHaveBeenLastCalledWith(groupValue);
     });
 
     it('will call radio onChange method', () => {
@@ -87,10 +87,10 @@ describe('Group', () => {
 
     it('will update the group value correctly for checkboxes', () => {
         // given
-        const onGroupChange: jest.Mock<any, any> = jest.fn();
+        const onChange: jest.Mock<any, any> = jest.fn();
         const groupValue: string[] = ['value 1', 'value 2'];
         render(
-            <Group name="group" type="checkbox" onGroupChange={onGroupChange}>
+            <Group name="group" type="checkbox" onChange={onChange}>
                 <Checkbox value={groupValue[0]}>Option 1</Checkbox>
                 <Checkbox value={groupValue[1]}>Option 2</Checkbox>
             </Group>
@@ -103,22 +103,22 @@ describe('Group', () => {
         });
 
         // then
-        expect(onGroupChange).toHaveBeenCalledTimes(2);
+        expect(onChange).toHaveBeenCalledTimes(2);
 
         /* because react testing-library doesn't really support multiple toHaveBeenCalledWith 
            as long as we see value change in an array, we can consider this enough for this 
            test to pass 
            
            source: https://github.com/jasmine/jasmine/issues/228 */
-        expect(onGroupChange).toHaveBeenLastCalledWith([groupValue[0]]);
+        expect(onChange).toHaveBeenLastCalledWith([groupValue[0]]);
     });
 
     it('will not update the group value when checkboxes are disabled', () => {
         // given
-        const onGroupChange: jest.Mock<any, any> = jest.fn();
+        const onChange: jest.Mock<any, any> = jest.fn();
         const groupValue: string[] = ['value 1', 'value 2'];
         render(
-            <Group name="group" type="checkbox" onGroupChange={onGroupChange}>
+            <Group name="group" type="checkbox" onChange={onChange}>
                 <Checkbox disabled value={groupValue[0]}>
                     Option 1
                 </Checkbox>
@@ -135,7 +135,7 @@ describe('Group', () => {
         });
 
         // then
-        expect(onGroupChange).not.toHaveBeenCalledTimes(2);
+        expect(onChange).not.toHaveBeenCalledTimes(2);
     });
 
     it('will call checkbox onChange method', () => {
