@@ -8,7 +8,7 @@ const meta: Meta = {
     component: Alert,
     argTypes: {
         children: {
-            defaultValue: 'This is a text component',
+            defaultValue: 'This is a alert component',
         },
     },
 };

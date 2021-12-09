@@ -1,83 +1,47 @@
 .apollo-component-library-alert-component.danger-AlertType {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 0.87);
-    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    border-radius: 4px;
-    box-shadow: none;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.43;
-    letter-spacing: 0.01071em;
-    background-color: rgb(253, 237, 237);
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 6px 16px;
-    color: rgb(95, 33, 32);
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    padding: 0 25px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
+    border-radius: 25px;
+    background-color: #fdeded;
+    width: 50px;
 }
 
 .apollo-component-library-alert-component.warning-AlertType {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 0.87);
-    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    border-radius: 4px;
-    box-shadow: none;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.43;
-    letter-spacing: 0.01071em;
-    background-color: rgb(255, 244, 229);
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 6px 16px;
-    color: rgb(95, 33, 32);
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    padding: 0 25px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
+    border-radius: 25px;
+    background-color: #fff4e5;
+    width: 50px;
 }
 
 .apollo-component-library-alert-component.info-AlertType {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 0.87);
-    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    border-radius: 4px;
-    box-shadow: none;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.43;
-    letter-spacing: 0.01071em;
-    background-color: rgb(229, 246, 253);
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 6px 16px;
-    color: rgb(95, 33, 32);
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    padding: 0 25px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
+    border-radius: 25px;
+    background-color: #e5f6fd;
+    width: 50px;
 }
 
 .apollo-component-library-alert-component.success-AlertType {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 0.87);
-    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    border-radius: 4px;
-    box-shadow: none;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.43;
-    letter-spacing: 0.01071em;
-    background-color: rgb(237, 247, 237);
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 6px 16px;
-    color: rgb(95, 33, 32);
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    padding: 0 25px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
+    border-radius: 25px;
+    background-color: #edf7ed;
+    width: 50px;
 }
