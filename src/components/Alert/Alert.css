@@ -1,0 +1,21 @@
+.apollo-component-library-alert-component {
+    display: inline-flex;
+    padding: 10px 15px;
+    border-radius: 25px;
+}
+
+.apollo-component-library-alert-component.danger {
+    background-color: #fdeded;
+}
+
+.apollo-component-library-alert-component.warning {
+    background-color: #fff4e5;
+}
+
+.apollo-component-library-alert-component.info {
+    background-color: #e5f6fd;
+}
+
+.apollo-component-library-alert-component.success {
+    background-color: #edf7ed;
+}

@@ -16,7 +16,7 @@ export { Divider } from './components/Divider/Divider';
 export { Drawer } from './components/Drawer/Drawer';
 export { Modal } from './components/Modal/Modal';
 export { Icon } from './components/Icon/Icon';
-export { Label } from './components/Label/Label';
+export { Alert } from './components/Alert/Alert';
 export { Form } from './components/Form/Form';
 export { NavigationBar } from './components/NavigationBar/NavigationBar';
 export { Section } from './components/Section/Section';
