@@ -2,11 +2,11 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Form, Button, TextInput, Group, Radio, Checkbox, Text, Label } from '../src';
+import { Form, Button, TextInput, Text, Label } from '../src';
 
 // error message when test validator doesn't pass input
 const errorMessage = 'Needs to be 5 characters in length at least';
-const radioMessage = 'Need to select more than one checkbox';
+// const radioMessage = 'Need to select more than one checkbox';
 
 /**
  * Validator that test on submit functionality
@@ -15,18 +15,18 @@ const radioMessage = 'Need to select more than one checkbox';
  * @return error message if there is one
  */
 const testValidator = (value: string): string | null => {
-    return value.length > 5 ? errorMessage : null;
+    return value.length < 5 ? errorMessage : null;
 };
 
-/**
- * Validator that will test on submit functionality when groups are involved
- *
- * @param value value of checkbox group
- * @return error message if there is one
- */
-const checkboxValidator = (value: string[]): string | null => {
-    return value.length < 2 ? radioMessage : null;
-};
+// /**
+//  * Validator that will test on submit functionality when groups are involved
+//  *
+//  * @param value value of checkbox group
+//  * @return error message if there is one
+//  */
+// const checkboxValidator = (value: string[]): string | null => {
+//     return value.length < 2 ? radioMessage : null;
+// };
 
 describe('Form', () => {
     it('renders correctly', () => {
@@ -50,7 +50,8 @@ describe('Form', () => {
 
         // when then
         expect(screen.getByText(/log in/i)).toBeInTheDocument();
-        expect(screen.queryAllByRole('textbox')).toHaveLength(2);
+        expect(screen.getByRole('textbox')).toBeInTheDocument();
+        expect(screen.getByPlaceholderText('********')).toBeInTheDocument();
         expect(screen.getByText(/submit/i)).toBeInTheDocument();
     });
 
@@ -78,14 +79,15 @@ describe('Form', () => {
         userEvent.click(screen.getByText(/submit/i));
 
         // then
-        expect(onSubmit).toBeCalledWith(expect.objectContaining(expected));
+        expect(onSubmit).toBeCalledWith(expect.anything(), expect.objectContaining(expected));
     });
 
     it('it will not submit if form has missing required fields', () => {
         // given
+        const onFail: jest.Mock<any, any> = jest.fn();
         const onSubmit: jest.Mock<any, any> = jest.fn();
         render(
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} onFail={onFail}>
                 <TextInput required name="username" placeholder="UserName" />
                 <TextInput required name="password" placeholder="password" password />
                 <Button>Submit</Button>
@@ -97,12 +99,14 @@ describe('Form', () => {
 
         // then
         expect(onSubmit).not.toHaveBeenCalled();
+        expect(onFail).toHaveBeenCalled();
     });
 
     it('will not submit if an input with a validator does not meet requirements', () => {
         // given
         const onSubmit: jest.Mock<any, any> = jest.fn();
         const onFail: jest.Mock<any, any> = jest.fn();
+        const invalidPassword = '32f';
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
                 <TextInput name="username" placeholder="UserName" />
@@ -118,10 +122,10 @@ describe('Form', () => {
         );
 
         // when
+        userEvent.type(screen.getByPlaceholderText(/password/i), invalidPassword);
         userEvent.click(screen.getByText(/submit/i));
 
         // then
-        expect(onSubmit).not.toHaveBeenCalled();
         expect(onFail).toHaveBeenCalledWith(expect.arrayContaining<string>([errorMessage]));
     });
 
@@ -149,7 +153,7 @@ describe('Form', () => {
         userEvent.click(screen.getByText(/submit/i));
 
         // then
-        expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining(expected));
+        expect(onSubmit).toHaveBeenCalledWith(expect.anything(), expect.objectContaining(expected));
         expect(onFail).not.toHaveBeenCalledWith();
     });
 
@@ -204,7 +208,7 @@ describe('Form', () => {
         userEvent.click(screen.getByText(/submit/i));
 
         // then
-        expect(onSubmit).toBeCalledWith(expect.objectContaining(expected));
+        expect(onSubmit).toBeCalledWith(expect.anything(), expect.objectContaining(expected));
     });
 
     it('will not submit if group validator does not meet requirements', () => {

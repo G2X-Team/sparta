@@ -31,10 +31,12 @@ export const Form: React.FC<Props> = ({
     const [formValue, setFormValue] = useState<{ [input: string]: string | string[] }>({});
     const [validMap, setValidMap] = useState<{ [input: string]: boolean }>({});
     const [errorMessages, setErrorMessages] = useState<{ [input: string]: string }>({});
+    const [required, setRequired] = useState<{ [input: string]: string }>({});
 
     // activate on change when form value changes
     useEffect(() => {
         onChange && onChange(formValue);
+        setRequired(required);
     }, [formValue]);
 
     /**
@@ -73,13 +75,23 @@ export const Form: React.FC<Props> = ({
      */
     const formatGroup = (group: JSX.Element): JSX.Element => {
         // extract props
-        const { props: groupProps } = group;
         const {
-            children: groupChildren,
-            onChange: groupOnChange,
-            name: groupName,
-            required: groupRequired,
-        } = groupProps;
+            props: {
+                children: groupChildren,
+                onChange: groupOnChange,
+                name: groupName,
+                required: groupRequired,
+                ...groupProps
+            },
+        } = group;
+
+        // set default value in valid map
+        validMap[groupName] = true;
+
+        // set required if applicable
+        if (groupRequired) {
+            required[groupName] = `${groupName} is required, please select an option.`;
+        }
 
         /**
          * Modifies group's on change callback to modify the form value
@@ -112,14 +124,20 @@ export const Form: React.FC<Props> = ({
      */
     const formatTextInput = (textInput: JSX.Element): JSX.Element => {
         // extract props
-        const { props: textInputProps } = textInput;
         const {
-            validator,
-            required: textInputRequired,
-            name: textInputName,
-            onChange: textInputOnChange,
-            ...textInputRest
-        } = textInputProps;
+            props: {
+                validator,
+                required: textInputRequired,
+                name: textInputName,
+                onChange: textInputOnChange,
+                ...textInputProps
+            },
+        } = textInput;
+
+        // add to required map if required
+        if (textInputRequired) {
+            required[textInputName] = `${textInputName} is a required field and cannot be empty.`;
+        }
 
         /**
          * Modifies on change to keep track of text input validity
@@ -163,7 +181,7 @@ export const Form: React.FC<Props> = ({
 
         return (
             <TextInput
-                {...textInputRest}
+                {...textInputProps}
                 required={textInputRequired}
                 valid={validMap[textInputName]}
                 onChange={modifiedOnChange}
@@ -179,7 +197,7 @@ export const Form: React.FC<Props> = ({
      */
     const renderAll = (childrenProp: ReactNode): JSX.Element[] => {
         // get all formatted children
-        const formatted = new FormattedChildren(childrenProp, [Label, Group, TextInput]);
+        const formatted = new FormattedChildren(childrenProp, [Label, Group, TextInput, View]);
 
         // format all components
         formatted.format(Label, formatLabel);
@@ -198,19 +216,33 @@ export const Form: React.FC<Props> = ({
     const formOnSubmit = (event: SyntheticEvent): void => {
         event.preventDefault();
 
-        // make variable thta checks if the form can be submitted
-        let canBeSubmitted = true;
-
         // check if all inputs are valid
-        Object.keys(validMap).forEach((input: string) => {
-            if (!validMap[input]) {
-                onFail(Object.keys(errorMessages).map((key: string) => errorMessages[key]));
-                canBeSubmitted = false;
+        const errors: string[] = [];
+        // find if there are required fields not yet in valid map
+        Object.keys(required).forEach((input: string) => {
+            if (validMap[input] === undefined) {
+                errors.push(required[input]);
             }
         });
 
+        if (errors.length > 0) {
+            onFail(errors);
+            return;
+        }
+
+        Object.keys(validMap).forEach((input: string) => {
+            if (!validMap[input]) {
+                errors.push(errorMessages[input]);
+            }
+        });
+
+        if (errors.length > 0) {
+            onFail(errors);
+            return;
+        }
+
         // if everything checks out, run the on submit callback
-        canBeSubmitted && onSubmit && onSubmit(event, formValue);
+        onSubmit && onSubmit(event, formValue);
     };
 
     return (
