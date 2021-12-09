@@ -28,7 +28,7 @@ export const LoadingState = ({
     isLoading,
     move,
     ...props
-}: Props) => {
+}: Props): JSX.Element => {
     // usestate variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);
@@ -44,7 +44,12 @@ export const LoadingState = ({
                 setTimeout(() => toggleEffect(true), 100);
             }
         }
-    }, [open])
+    }, [open]);
+    /**
+     * Renders the modal and all of its children formatted as intended
+     *
+     * @return formatted modal component
+     */
 
     /**
      * Renders the LoadingState and all of its children formatted as intended
@@ -55,17 +60,16 @@ export const LoadingState = ({
             return (
                 <div
                     {...props}
-                    className={`apollo-component-library-loadingstate-component-progressbar ${type} ${move ? "" : "progress"}`}
-                >
-                </div>
+                    className={`apollo-component-library-loadingstate-component-progressbar ${type}
+                    ${move ? '' : 'progress'}`}
+                ></div>
             );
         } else {
             return (
                 <div
                     {...props}
                     className={`apollo-component-library-loadingstate-component ${type} ${size}`}
-                >
-                </div>
+                ></div>
             );
         }
     };
@@ -73,38 +77,38 @@ export const LoadingState = ({
     if (variant == 'progress') {
         return (
             <React.Fragment>
-                {
-                    display ? (
-                        <div style={{ opacity: effect ? 1 : 0 }} className="apollo-component-library-loadingstate-component-container">
-                            <div>
-                                {renderLoadingState()}
-                                <div
-                                    onClick={move}
-
-                                />
-                            </div>
+                {display ? (
+                    <div
+                        style={{ opacity: effect ? 1 : 0 }}
+                        className="apollo-component-library-loadingstate-component-container"
+                    >
+                        <div>
+                            {renderLoadingState()}
+                            <div onClick={move} />
                         </div>
-                    ) : null
-                }
+                    </div>
+                ) : null}
             </React.Fragment>
         );
     } else {
         return (
             <React.Fragment>
-                {
-                    display ? (
-                        <div style={{ opacity: effect ? 1 : 0 }} className="apollo-component-library-loadingstate-component-container">
-                            <div>
-                                {renderLoadingState()}
-                                <div
-                                    onClick={isLoading}
-                                    className={`apollo-component-library-loadingstate-component-backdrop ${type}`}
-                                />
-                            </div>
+                {display ? (
+                    <div
+                        style={{ opacity: effect ? 1 : 0 }}
+                        className="apollo-component-library-loadingstate-component-container"
+                    >
+                        <div>
+                            {renderLoadingState()}
+                            <div
+                                onClick={isLoading}
+                                className={`apollo-component-library-loadingstate-component-backdrop
+                                ${type}`}
+                            />
                         </div>
-                    ) : null
-                }
+                    </div>
+                ) : null}
             </React.Fragment>
         );
-    };
+    }
 };
