@@ -33,14 +33,16 @@ export const AnotherExample: Story<Props> = (args) => {
 
     return (
         <React.Fragment>
-            <Text onClick={() => isLoading(!open)}>Inline Loading shown here</Text>
-            <LoadingState
-                open={open}
-                isLoading={() => isLoading(!open)}
-                type="inline"
-                size="small"
-                variant="static"
-            ></LoadingState>
+            <Text onClick={() => isLoading(!open)}>
+                Inline Loading shown here
+                <LoadingState
+                    open={open}
+                    isLoading={() => isLoading(!open)}
+                    type="inline"
+                    size="small"
+                    variant="static"
+                ></LoadingState>
+            </Text>
         </React.Fragment>
     );
 };
