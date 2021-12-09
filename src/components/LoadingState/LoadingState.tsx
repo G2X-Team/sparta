@@ -12,6 +12,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     open?: boolean;
     /** Toggles the LoadingState between open and closed */
     isLoading?: () => any;
+    /** Starts the LoadingState Progress variant */
     move?: () => any;
     manual?: boolean;
 }
