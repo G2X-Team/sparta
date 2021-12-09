@@ -17,4 +17,5 @@ export { Drawer } from './components/Drawer/Drawer';
 export { Modal } from './components/Modal/Modal';
 export { Label } from './components/Label/Label';
 export { Icon } from './components/Icon/Icon';
+export { Alert } from './components/Alert/Alert';
 export { LoadingState } from './components/LoadingState/LoadingState';
