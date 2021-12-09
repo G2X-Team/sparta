@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Default as Text } from '../stories/Text.stories'
+import { Default as Text } from '../stories/Text.stories';
 
 describe('Text', () => {
     it('renders correctly', () => {
@@ -9,15 +9,15 @@ describe('Text', () => {
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
-    })
+    });
 
     it('converts all letters to lowercase', () => {
-        // given 
+        // given
         render(<Text lower>LOWERCASE</Text>);
 
         // when then
         expect(screen.getByText('lowercase')).toBeInTheDocument();
-    })
+    });
 
     it('converts all letters to uppercase', () => {
         // given
@@ -25,7 +25,7 @@ describe('Text', () => {
 
         // when then
         expect(screen.getByText('UPPERCASE')).toBeInTheDocument();
-    })
+    });
 
     it('converts the first letter of every word to uppercase', () => {
         // given
@@ -33,8 +33,7 @@ describe('Text', () => {
 
         // when then
         expect(screen.getByText('Pascal Casing')).toBeInTheDocument();
-    })
-
+    });
 
     it('makes the whole text disabled', () => {
         // given
@@ -42,5 +41,5 @@ describe('Text', () => {
 
         // when then
         expect(screen.getByText(/disabled text/i)).toBeInTheDocument();
-    })
-})
+    });
+});

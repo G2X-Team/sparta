@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
-import { Text } from '../Text/Text'
+import { Text } from '../Text/Text';
 import './Radio.css';
 
 export interface Props extends HTMLAttributes<HTMLInputElement> {
@@ -11,20 +11,21 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     value: string;
 }
 
-/** 
- * An input object that is a list of items where a single entry can be selected
+/**
+ * An input component that belongs to a list of others where when selected is the only
+ * representative value of that group.
+ *
+ * @return Radio component
  */
-export const Radio = ({children, ...props}: Props) => {
+export const Radio = ({ children, ...props }: Props): JSX.Element => {
     return (
         <label>
-            <input 
-                {...props} 
-                type="radio" 
-                className="apollo-component-library-radio-component"    
-            />
-            <Text inline margins>{children}</Text>
+            <input {...props} type="radio" className="apollo-component-library-radio-component" />
+            <Text inline margins>
+                {children}
+            </Text>
         </label>
-    )
-}
+    );
+};
 
-Radio.displayName = "Radio";
+Radio.displayName = 'Radio';

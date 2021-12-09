@@ -10,5 +10,5 @@ describe('LoadingState', () => {
 
         // when then
         expect(screen.queryByText(/hello world!/i)).not.toBeInTheDocument();
-    })
-})
+    });
+});

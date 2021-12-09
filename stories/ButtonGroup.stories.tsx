@@ -5,9 +5,9 @@ import { ButtonGroup, Props } from '../src/components/ButtonGroup/ButtonGroup';
 import { Button } from '../src';
 
 const meta: Meta = {
-    title: "Layout/Button Group",
+    title: 'Layout/Button Group',
     component: ButtonGroup,
-}
+};
 
 export default meta;
 
@@ -17,6 +17,6 @@ const Template: Story<Props> = (args) => (
         <Button>Second Button</Button>
         <Button>Third Button Button</Button>
     </ButtonGroup>
-)
+);
 
 export const Default = Template.bind({});

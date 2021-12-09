@@ -6,16 +6,15 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     children?: ReactNode;
 }
 
-/** 
+/**
  * Interface component that anchors to the bottom of another element
+ *
+ * @return Footer component
  */
-export const Footer = ({children, className, ...props}: Props) => {
+export const Footer = ({ children, className, ...props }: Props): JSX.Element => {
     return (
-        <div 
-            {...props}
-            className={`apollo-component-library-footer-component ${className}`}
-        >
+        <div {...props} className={`apollo-component-library-footer-component ${className}`}>
             {children}
         </div>
-    )
-}
+    );
+};
