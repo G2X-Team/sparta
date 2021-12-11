@@ -14,7 +14,6 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     isLoading?: () => any;
     /** Starts the LoadingState Progress variant */
     move?: () => any;
-    manual?: boolean;
 }
 
 export const LoadingState = ({
@@ -22,7 +21,6 @@ export const LoadingState = ({
     type,
     size,
     variant,
-    manual = false,
     children,
     style,
     open = false,
