@@ -6,21 +6,21 @@ import { LoadingState } from '../src';
 describe('LoadingState', () => {
     it('it renders correctly', () => {
         // given
-        render(<LoadingState>Hello World!</LoadingState>);
+        render(<LoadingState>Hello World</LoadingState>);
 
         // when then
-        expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
+        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('is not visible when collapsed in all types', () => {
         // given
         render(
             <React.Fragment>
-                <LoadingState type="inline">Hello World!</LoadingState>
+                <LoadingState type="inline">Hello World</LoadingState>
             </React.Fragment>
         );
         // when then
-        expect(screen.queryAllByText(/Hello World!/i)).toHaveLength(0);
+        expect(screen.queryAllByText(/Hello World/i)).toHaveLength(0);
     });
 
     it('will be visible when not collapsed in all types', () => {
@@ -28,10 +28,10 @@ describe('LoadingState', () => {
         render(
             <React.Fragment>
                 <LoadingState open={true} type="inline">
-                    Hello World!
+                    Hello World
                 </LoadingState>
                 <LoadingState open={true} type="absolute">
-                    Hello World!
+                    Hello World
                 </LoadingState>
             </React.Fragment>
         );
@@ -43,43 +43,43 @@ describe('LoadingState', () => {
         // given
         render(
             <LoadingState type="absolute" size="large" variant="static">
-                Hello World!
+                Hello World
             </LoadingState>
         );
         // when then
-        expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
+        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('will render the medium size', () => {
         // given
         render(
             <LoadingState type="absolute" size="medium" variant="static">
-                Hello World!
+                Hello World
             </LoadingState>
         );
         // when then
-        expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
+        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('will render the small size', () => {
         // given
         render(
             <LoadingState type="absolute" size="small" variant="static">
-                Hello World!
+                Hello World
             </LoadingState>
         );
         // when then
-        expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
+        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('will render the progress varrient', () => {
         // given
         render(
             <LoadingState type="absolute" size="small" variant="progress">
-                Hello World!
+                Hello World
             </LoadingState>
         );
         // when then
-        expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
+        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
     });
 });
