@@ -3,7 +3,7 @@ import { screen, render } from '@testing-library/react';
 
 import { LoadingState } from '../src';
 
-describe('Drawer', () => {
+describe('LoadingState', () => {
     it('it renders correctly', () => {
         // given
         render(<LoadingState>Hello World</LoadingState>);
