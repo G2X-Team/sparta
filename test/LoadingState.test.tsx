@@ -6,7 +6,7 @@ import { LoadingState } from '../src';
 describe('Drawer', () => {
     it('it renders correctly', () => {
         // given
-        render(<LoadingState>Hello World!</LoadingState>);
+        render(<LoadingState>Hello World</LoadingState>);
 
         // when then
         expect(screen.getByText(/hello world/i)).toBeInTheDocument();
