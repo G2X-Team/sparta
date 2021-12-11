@@ -9,7 +9,7 @@ describe('LoadingState', () => {
         render(<LoadingState>Hello World</LoadingState>);
 
         // when then
-        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('is not visible when collapsed in all types', () => {
@@ -47,7 +47,7 @@ describe('LoadingState', () => {
             </LoadingState>
         );
         // when then
-        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('will render the medium size', () => {
@@ -58,7 +58,7 @@ describe('LoadingState', () => {
             </LoadingState>
         );
         // when then
-        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('will render the small size', () => {
@@ -69,7 +69,7 @@ describe('LoadingState', () => {
             </LoadingState>
         );
         // when then
-        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('will render the progress varrient', () => {
@@ -80,6 +80,6 @@ describe('LoadingState', () => {
             </LoadingState>
         );
         // when then
-        expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
     });
 });
