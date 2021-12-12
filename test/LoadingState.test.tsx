@@ -1,12 +1,16 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 
-import { LoadingState } from '../src';
+import { LoadingState, Text, Button } from '../src';
 
 describe('LoadingState', () => {
     it('it renders correctly', () => {
         // given
-        render(<LoadingState>Hello World</LoadingState>);
+        render(
+            <Text>
+                Hello World<LoadingState open></LoadingState>
+            </Text>
+        );
 
         // when then
         expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
@@ -16,70 +20,84 @@ describe('LoadingState', () => {
         // given
         render(
             <React.Fragment>
-                <LoadingState type="inline">Hello World</LoadingState>
+                <Text>
+                    <LoadingState type="inline">Hello World</LoadingState>
+                </Text>
             </React.Fragment>
         );
         // when then
-        expect(screen.queryAllByText(/Hello World/i)).toHaveLength(0);
+        expect(screen.queryByText(/hello world/i)).not.toBeInTheDocument();
     });
 
     it('will be visible when not collapsed in all types', () => {
         // given
         render(
             <React.Fragment>
-                <LoadingState open={true} type="inline">
-                    Hello World
-                </LoadingState>
-                <LoadingState open={true} type="absolute">
-                    Hello World
-                </LoadingState>
+                <Text>
+                    <LoadingState open type="inline">
+                        Hello World
+                    </LoadingState>
+                </Text>
+                <Button>
+                    <LoadingState open type="absolute">
+                        Hello World
+                    </LoadingState>
+                </Button>
             </React.Fragment>
         );
         // when then
-        expect(screen.queryAllByText(/hello world!/i)).toHaveLength(3);
+        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
     });
 
     it('will render the large size', () => {
         // given
         render(
-            <LoadingState type="absolute" size="large" variant="static">
-                Hello World
-            </LoadingState>
+            <Text>
+                <LoadingState type="absolute" size="large" variant="static">
+                    Hello World
+                </LoadingState>
+            </Text>
         );
         // when then
-        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
+        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
     });
 
     it('will render the medium size', () => {
         // given
         render(
-            <LoadingState type="absolute" size="medium" variant="static">
-                Hello World
-            </LoadingState>
+            <Text>
+                <LoadingState type="absolute" size="medium" variant="static">
+                    Hello World
+                </LoadingState>
+            </Text>
         );
         // when then
-        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
+        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
     });
 
     it('will render the small size', () => {
         // given
         render(
-            <LoadingState type="absolute" size="small" variant="static">
-                Hello World
-            </LoadingState>
+            <Text>
+                <LoadingState type="absolute" size="small" variant="static">
+                    Hello World
+                </LoadingState>
+            </Text>
         );
         // when then
-        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
+        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
     });
 
     it('will render the progress varrient', () => {
         // given
         render(
-            <LoadingState type="absolute" size="small" variant="progress">
-                Hello World
-            </LoadingState>
+            <Button>
+                <LoadingState type="absolute" size="small" variant="progress">
+                    Hello World
+                </LoadingState>
+            </Button>
         );
         // when then
-        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
+        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
     });
 });
