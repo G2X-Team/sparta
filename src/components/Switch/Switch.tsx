@@ -11,6 +11,10 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     value?: string;
     /** Variant of switch */
     variant?: 'default' | 'secondary';
+    /** Form name */
+    name: string;
+    /** Determines whether input is required or not */
+    required?: boolean;
 }
 
 /**
@@ -18,7 +22,11 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Switch component
  */
-export const Switch = ({ children, variant = 'default', ...props }: Props): JSX.Element => {
+export const Switch: React.FC<Props> = ({
+    children,
+    variant = 'default',
+    ...props
+}: Props): JSX.Element => {
     return (
         <label className="apollo-component-library-switch-component-label">
             <input

@@ -15,6 +15,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template Drawer
+ *
+ * @param args storybook arguments
+ * @return template drawer
+ */
 const Template: Story<Props> = (args) => {
     const [open, toggleOpen] = useState(false);
 
@@ -41,6 +47,12 @@ const Template: Story<Props> = (args) => {
     );
 };
 
+/**
+ * Template Persistent Drawer
+ *
+ * @param args storybook arguments
+ * @return template persistent drawer
+ */
 const PersistentTemplate: Story<Props> = (args) => {
     const [open, toggleOpen] = useState(false);
 
@@ -251,6 +263,12 @@ const PersistentTemplate: Story<Props> = (args) => {
     );
 };
 
+/**
+ * Template Pemanent Drawer
+ *
+ * @param args storybook arguments
+ * @return template pernmanent drawer
+ */
 const PermanentTemplate: Story<Props> = (args) => {
     const [open, toggleOpen] = useState(false);
 

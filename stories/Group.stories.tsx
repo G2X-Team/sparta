@@ -11,30 +11,48 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<Props> = (args) => <Group {...args} />;
-
+/**
+ * On change callback method
+ *
+ * @param groupValue value of the group
+ */
 const onChange = (groupValue: string | string[]): void => {
     console.log(groupValue);
 };
 
+/**
+ * Radio Group
+ *
+ * @return radio group
+ */
 export const RadioGroup = (): JSX.Element => (
-    <Group name="something" type="radio" onGroupChange={onChange}>
+    <Group name="something" type="radio" onChange={onChange}>
         <Radio value="something 1">Option 1</Radio>
         <Radio value="something 2">Option 2</Radio>
         <Radio value="something 3">Option 3</Radio>
     </Group>
 );
 
+/**
+ * Checkbox Group
+ *
+ * @return checkbox group
+ */
 export const CheckboxGroup = (): JSX.Element => (
-    <Group name="something" type="checkbox" onGroupChange={onChange}>
+    <Group name="something" type="checkbox" onChange={onChange}>
         <Checkbox value="something 1">Option 1</Checkbox>
         <Checkbox value="something 2">Option 2</Checkbox>
         <Checkbox value="something 3">Option 3</Checkbox>
     </Group>
 );
 
+/**
+ * Complex Group
+ *
+ * @return complex group
+ */
 export const ComplexGroup = (): JSX.Element => (
-    <Group name="something" type="checkbox" onGroupChange={onChange}>
+    <Group name="something" type="checkbox" onChange={onChange}>
         <View>
             <Checkbox value="something 1">Option 1</Checkbox>
         </View>

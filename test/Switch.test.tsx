@@ -7,7 +7,7 @@ import { Default as Switch } from '../stories/Switch.stories';
 describe('Switch', () => {
     it('renders correctly', () => {
         // given
-        render(<Switch>Hello World!</Switch>);
+        render(<Switch name="switch">Hello World!</Switch>);
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
@@ -15,7 +15,7 @@ describe('Switch', () => {
 
     it('can be found in the document by its role', () => {
         // given
-        render(<Switch>This is a switch</Switch>);
+        render(<Switch name="switch">This is a switch</Switch>);
 
         // when then
         expect(screen.getByRole('switch')).toBeInTheDocument();
@@ -24,7 +24,11 @@ describe('Switch', () => {
     it('will trigger onChange when clicked', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
-        render(<Switch onChange={onChange}>Hello World!</Switch>);
+        render(
+            <Switch name="switch" onChange={onChange}>
+                Hello World!
+            </Switch>
+        );
 
         // when
         userEvent.click(screen.getByRole('switch'));
@@ -37,7 +41,7 @@ describe('Switch', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
         render(
-            <Switch disabled onChange={onChange}>
+            <Switch name="switch" disabled onChange={onChange}>
                 Hello World!
             </Switch>
         );

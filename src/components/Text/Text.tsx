@@ -36,7 +36,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Text component
  */
-export const Text = ({
+export const Text: React.FC<Props> = ({
     children,
     header = 0,
     margins = false,
