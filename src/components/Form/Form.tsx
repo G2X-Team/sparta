@@ -48,9 +48,13 @@ export const Form: React.FC<Props> = ({
     const formatLabel = (label: JSX.Element): JSX.Element => {
         // extract props
         const { props: labelProps } = label;
-        const { children: labelChildren } = labelProps;
+        const { children: labelChildren, value: labelValue } = labelProps;
 
-        return <Label {...labelProps}>{renderAll(labelChildren)}</Label>;
+        return (
+            <Label key={labelValue} {...labelProps}>
+                {renderAll(labelChildren)}
+            </Label>
+        );
     };
 
     /**
@@ -77,6 +81,7 @@ export const Form: React.FC<Props> = ({
         // extract props
         const {
             props: {
+                validator: groupValidator,
                 children: groupChildren,
                 onChange: groupOnChange,
                 name: groupName,
@@ -84,9 +89,6 @@ export const Form: React.FC<Props> = ({
                 ...groupProps
             },
         } = group;
-
-        // set default value in valid map
-        validMap[groupName] = true;
 
         // set required if applicable
         if (groupRequired) {
@@ -100,13 +102,18 @@ export const Form: React.FC<Props> = ({
          */
         const modifiedOnChange = (value: string | string[]): void => {
             // check that its valid
-            if (groupRequired && !value.length) validMap[groupName] = false;
+            if (groupValidator) {
+                const validity = groupRequired && value.length;
+                const error = groupValidator(value);
+                setValidMap({ ...validMap, [groupName]: validity && !error });
+
+                if (error) errorMessages[groupName] = error;
+                else delete errorMessages[groupName];
+            }
 
             // update form value
-            formValue[groupName] = value;
-            groupOnChange && groupOnChange();
-
             setFormValue({ ...formValue, [groupName]: value });
+            groupOnChange && groupOnChange();
         };
 
         return (
@@ -220,29 +227,27 @@ export const Form: React.FC<Props> = ({
         const errors: string[] = [];
         // find if there are required fields not yet in valid map
         Object.keys(required).forEach((input: string) => {
-            if (validMap[input] === undefined) {
+            if (validMap[input] === undefined || !formValue[input].length) {
                 errors.push(required[input]);
             }
         });
 
         if (errors.length > 0) {
             onFail(errors);
-            return;
-        }
+        } else {
+            Object.keys(validMap).forEach((input: string) => {
+                if (!validMap[input]) {
+                    errors.push(errorMessages[input]);
+                }
+            });
 
-        Object.keys(validMap).forEach((input: string) => {
-            if (!validMap[input]) {
-                errors.push(errorMessages[input]);
+            if (errors.length > 0) {
+                onFail(errors);
+            } else {
+                // if everything checks out, run the on submit callback
+                onSubmit && onSubmit(event, formValue);
             }
-        });
-
-        if (errors.length > 0) {
-            onFail(errors);
-            return;
         }
-
-        // if everything checks out, run the on submit callback
-        onSubmit && onSubmit(event, formValue);
     };
 
     return (

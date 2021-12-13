@@ -17,6 +17,10 @@ export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> 
     onChange?: (groupValue: string[] | string) => void;
     /** Determines whether inputs are disabled or not */
     disabled?: boolean;
+    /** Validates group value and determines whether it is submission ready */
+    validator?: (value: string | string[]) => string | null;
+    /** Determines whether the group requires a selection */
+    required?: boolean;
 }
 
 /**
@@ -47,7 +51,7 @@ export const Group: React.FC<Props> = ({
         } else {
             onChange && onChange(checkboxValues);
         }
-    });
+    }, [checkboxValues, radioValues]);
 
     /**
      * Formats all Radio components for final rendering
