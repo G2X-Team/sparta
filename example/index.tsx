@@ -19,12 +19,26 @@ import {
   Divider,
   Modal,
   Icon,
-  Label
+  Label,
+  Form
 } from '../.';
 
 const App = () => {
   const [open, toggleOpen] = React.useState(false);
   const [modal, toggleModal] = React.useState(false);
+
+    /**
+     * Checks if the password matches the validator requirements
+     *
+     * @param value value in the input
+     * @return object describing validaty and errors
+     */
+    const passwordValidator = (value: string): string | null => {
+        if (value.length < 8) return 'Password must be 8 characters';
+
+        return null;
+    };
+  
   return (
     <div>
       <Button>Something</Button>
@@ -105,6 +119,55 @@ const App = () => {
         <Label value="This is a text input">
         	<TextInput placeholder="Text Input"/>
         </Label>
+
+        <Form
+        onSubmit={(event, value) => window.alert('Success!')}
+        onChange={(value) => console.log(value)}
+    >
+        <Text header={1} bold margins>
+            Survey
+        </Text>
+        <Label value="Full Name">
+            <TextInput name="full-name" required placeholder="John Smith" />
+        </Label>
+        <br />
+        <Label value="Survey Password" hint="Please enter given 8 character password.">
+            <TextInput
+                password
+                required
+                name="password"
+                placeholder="********"
+                validator={passwordValidator}
+            />
+        </Label>
+        <br />
+        <br />
+        <Label value="What video(s) did you watch for class?">
+            <Group name="movie" type="checkbox" required>
+                <Checkbox value="the-night-before-christmas">The Night Before Christmas</Checkbox>
+                <br />
+                <Checkbox value="jack-frost">Jack Frost</Checkbox>
+                <br />
+                <Checkbox value="frosty-the-snowman">Frosty the Snowman</Checkbox>
+                <br />
+            </Group>
+        </Label>
+        <br />
+        <br />
+        <Label value="Please rate the class from 1-5">
+            <Group name="rating" type="radio" required>
+                <Radio value="1">1</Radio>
+                <Radio value="2">2</Radio>
+                <Radio value="3">3</Radio>
+                <Radio value="4">4</Radio>
+                <Radio value="5">5</Radio>
+            </Group>
+        </Label>
+        <br />
+        <Switch name="do-again">What you like to do this again?</Switch>
+        <br />
+        <Button>Submit</Button>
+    </Form>
     </div>
   );
 };

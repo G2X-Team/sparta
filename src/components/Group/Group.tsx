@@ -61,15 +61,15 @@ export const Group: React.FC<Props> = ({
      */
     const formatRadio = (radio: JSX.Element): JSX.Element => {
         // get props
-        const { props } = radio;
         const {
-            onChange: radioOnChange,
-            name: radioName,
-            checked: radioChecked,
-            disabled: radioDisabled,
-            value: radioValue,
-            ...radioProps
-        } = props;
+            props: {
+                onChange: radioOnChange,
+                name: radioName,
+                disabled: radioDisabled,
+                value: radioValue,
+                ...radioProps
+            },
+        } = radio;
 
         /**
          * Updates value and fires original onChange method

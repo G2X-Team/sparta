@@ -5,14 +5,18 @@ import { Label } from '../Label/Label';
 import { Group } from '../Group/Group';
 import { TextInput } from '../TextInput/TextInput';
 import { View } from '../View/View';
+import { Switch } from '../Switch/Switch';
 
 export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onChange'> {
     /** if the submission occurs with invalid inputs, it will call the on fail instead*/
     onFail?: (errors: string[]) => void;
     /** on submit call back method */
-    onSubmit?: (event: SyntheticEvent, value: { [input: string]: string | string[] }) => void;
+    onSubmit?: (
+        event: SyntheticEvent,
+        value: { [input: string]: string | string[] | boolean }
+    ) => void;
     // on change method updates form object
-    onChange?: (value: { [input: string]: string | string[] }) => void;
+    onChange?: (value: { [input: string]: string | string[] | boolean }) => void;
 }
 
 /**
@@ -28,7 +32,9 @@ export const Form: React.FC<Props> = ({
     ...props
 }: Props) => {
     // state
-    const [formValue, setFormValue] = useState<{ [input: string]: string | string[] }>({});
+    const [formValue, setFormValue] = useState<{ [input: string]: string | string[] | boolean }>(
+        {}
+    );
     const [validMap, setValidMap] = useState<{ [input: string]: boolean }>({});
     const [errorMessages, setErrorMessages] = useState<{ [input: string]: string }>({});
     const [required, setRequired] = useState<{ [input: string]: string }>({});
@@ -38,6 +44,47 @@ export const Form: React.FC<Props> = ({
         onChange && onChange(formValue);
         setRequired(required);
     }, [formValue]);
+
+    /**
+     * Formats Switch components
+     *
+     * @param switchComponent unformatted switch components
+     * @return formatted Switch Component
+     */
+    const formatSwitch = (switchComponent: JSX.Element): JSX.Element => {
+        const {
+            props: {
+                checked: switchChecked,
+                name: switchName,
+                onChange: switchOnChange,
+                required: switchRequired,
+                children: switchChildren,
+                ...switchProps
+            },
+        } = switchComponent;
+
+        // set required if applicable
+        if (switchRequired && !required[switchName]) {
+            setRequired({
+                ...required,
+                [switchName]: `${switchName} is required, please toggle on.`,
+            });
+        }
+
+        /**
+         * Modifies switch on change
+         */
+        const modifiedOnChange = (): void => {
+            setFormValue({ ...formValue, [switchName]: formValue[switchName] ? false : true });
+            switchOnChange && switchOnChange();
+        };
+
+        return (
+            <Switch {...switchProps} name={switchName} onChange={modifiedOnChange}>
+                {switchChildren}
+            </Switch>
+        );
+    };
 
     /**
      * Formats label component
@@ -91,8 +138,11 @@ export const Form: React.FC<Props> = ({
         } = group;
 
         // set required if applicable
-        if (groupRequired) {
-            required[groupName] = `${groupName} is required, please select an option.`;
+        if (groupRequired && !required[groupName]) {
+            setRequired({
+                ...required,
+                [groupName]: `${groupName} is required, please select an option.`,
+            });
         }
 
         /**
@@ -109,6 +159,8 @@ export const Form: React.FC<Props> = ({
 
                 if (error) errorMessages[groupName] = error;
                 else delete errorMessages[groupName];
+            } else {
+                setValidMap({ ...validMap, [groupName]: true });
             }
 
             // update form value
@@ -142,8 +194,11 @@ export const Form: React.FC<Props> = ({
         } = textInput;
 
         // add to required map if required
-        if (textInputRequired) {
-            required[textInputName] = `${textInputName} is a required field and cannot be empty.`;
+        if (textInputRequired && !required[textInputName]) {
+            setRequired({
+                ...required,
+                [textInputName]: `${textInputName} is a required field and cannot be empty.`,
+            });
         }
 
         /**
@@ -204,13 +259,20 @@ export const Form: React.FC<Props> = ({
      */
     const renderAll = (childrenProp: ReactNode): JSX.Element[] => {
         // get all formatted children
-        const formatted = new FormattedChildren(childrenProp, [Label, Group, TextInput, View]);
+        const formatted = new FormattedChildren(childrenProp, [
+            Label,
+            Group,
+            TextInput,
+            View,
+            Switch,
+        ]);
 
         // format all components
         formatted.format(Label, formatLabel);
         formatted.format(Group, formatGroup);
         formatted.format(TextInput, formatTextInput);
         formatted.format(View, formatView);
+        formatted.format(Switch, formatSwitch);
 
         return formatted.getAll();
     };
@@ -227,7 +289,7 @@ export const Form: React.FC<Props> = ({
         const errors: string[] = [];
         // find if there are required fields not yet in valid map
         Object.keys(required).forEach((input: string) => {
-            if (validMap[input] === undefined || !formValue[input].length) {
+            if (validMap[input] === undefined || !formValue[input]) {
                 errors.push(required[input]);
             }
         });

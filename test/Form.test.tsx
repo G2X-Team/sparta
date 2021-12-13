@@ -2,11 +2,11 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Form, Button, TextInput, Text, Label, Checkbox, Group } from '../src';
+import { Form, Button, TextInput, Text, Label, Checkbox, Group, Switch } from '../src';
 
 // error message when test validator doesn't pass input
 const errorMessage = 'Needs to be 5 characters in length at least';
-const radioMessage = 'Need to select more than one checkbox';
+const radioMessage = 'somethings is required, please select an option.';
 
 /**
  * Validator that test on submit functionality
@@ -225,6 +225,7 @@ describe('Form', () => {
                     <Checkbox value="something-1">Something 1</Checkbox>
                     <Checkbox value="something-2">Something 2</Checkbox>
                 </Group>
+                <Button>Submit</Button>
             </Form>
         );
 
@@ -256,5 +257,46 @@ describe('Form', () => {
         // when then
         expect(onSubmit).not.toHaveBeenCalled();
         expect(onFail).toHaveBeenCalledWith(['somethings is required, please select an option.']);
+    });
+
+    it('will register switch changes in the form value', () => {
+        // given
+        const onSubmit: jest.Mock<any, any> = jest.fn();
+        const formValue = {
+            switch: true,
+        };
+
+        render(
+            <Form onSubmit={onSubmit}>
+                <Switch name="switch">Switch</Switch>
+                <Button>Submit</Button>
+            </Form>
+        );
+
+        // when
+        userEvent.click(screen.getByText(/switch/i));
+        userEvent.click(screen.getByText(/submit/i));
+
+        // then
+        expect(onSubmit).toHaveBeenCalledWith(expect.anything(), formValue);
+    });
+
+    it('will not submit and call onFail', () => {
+        // given
+        const onSubmit: jest.Mock<any, any> = jest.fn();
+        const onFail: jest.Mock<any, any> = jest.fn();
+        render(
+            <Form onFail={onFail} onSubmit={onSubmit}>
+                <Switch name="switch" required />
+                <Button>Submit</Button>
+            </Form>
+        );
+
+        // when
+        userEvent.click(screen.getByText(/submit/i));
+
+        // when then
+        expect(onSubmit).not.toHaveBeenCalled();
+        expect(onFail).toHaveBeenCalledWith(['switch is required, please toggle on.']);
     });
 });

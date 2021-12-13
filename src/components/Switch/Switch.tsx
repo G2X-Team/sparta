@@ -11,6 +11,10 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     value?: string;
     /** Variant of switch */
     variant?: 'default' | 'secondary';
+    /** Form name */
+    name: string;
+    /** Determines whether input is required or not */
+    required?: boolean;
 }
 
 /**
