@@ -61,3 +61,9 @@ export const TextInsideOfText = (): JSX.Element => (
         </Text>
     </Text>
 );
+
+export const TextHighlightDisabled = (): JSX.Element => (
+    <React.Fragment>
+        <Text disabled>This text is disabled which means it can not be highlighend or copied</Text>
+    </React.Fragment>
+);
