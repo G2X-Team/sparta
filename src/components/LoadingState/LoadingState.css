@@ -97,22 +97,6 @@
 /* LoadingState size ends*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Absolute type LoadingState begins*/
 
 .apollo-component-library-loadingstate-component-progressbar.absolute {
@@ -125,7 +109,7 @@
 }
 
 
-.progress {
+.TenPercent-progress {
   background-size: 23em 0.25em;
   height: 12px;
   position: relative;

@@ -7,7 +7,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines the size of LoadingState whether small , medium, or large */
     size?: 'small' | 'medium' | 'large';
     /** Determines the size of LoadingState whether small , medium, or large */
-    variant?: 'static' | 'progress';
+    progress?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     /** Determines whether the LoadingState is open or not */
     open?: boolean;
     /** Toggles the LoadingState between open and closed */
@@ -20,7 +20,7 @@ export const LoadingState = ({
     className,
     type,
     size,
-    variant,
+    progress = 0,
     children,
     style,
     open = false,
@@ -31,6 +31,26 @@ export const LoadingState = ({
     // usestate variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);
+
+    const getVariant = (): string => {
+        // determine custom variant
+        let customVariant = 'apollo-component-library-loadingstate-component ';
+
+        // check if its a header or not
+        if (progress == 0) customVariant == customVariant;
+        if (progress == 1) customVariant += 'TenPercent-progress ';
+        if (progress == 2) customVariant += 'TwentyPercent-progress ';
+        if (progress == 3) customVariant += 'ThirtyPercent-progress ';
+        if (progress == 4) customVariant += 'FourtyPercent-progress ';
+        if (progress == 5) customVariant += 'FiftyPercent-progress ';
+        if (progress == 6) customVariant += 'SixtyPercent-progress ';
+        if (progress == 7) customVariant += 'SeventyPercent-progress ';
+        if (progress == 8) customVariant += 'EightyPercent-progress ';
+        if (progress == 9) customVariant += 'NightyPercent-progress ';
+        if (progress == 10) customVariant += 'HundredPercent-progress ';
+
+        return customVariant;
+    };
 
     // Keeping track of open call
     useEffect(() => {
@@ -55,11 +75,11 @@ export const LoadingState = ({
      * @return formatted modal component
      */
     const renderLoadingState = (): ReactNode => {
-        if (variant == 'progress') {
+        if (progress != 0) {
             return (
                 <div
                     {...props}
-                    className={`apollo-component-library-loadingstate-component-progressbar ${type}
+                    className={`${getVariant()} ${type}
                     ${move ? '' : 'progress'}`}
                 ></div>
             );
@@ -73,13 +93,14 @@ export const LoadingState = ({
         }
     };
 
-    if (variant == 'progress') {
+    if (progress != 0) {
         return (
             <React.Fragment>
                 {display ? (
                     <div
                         style={{ opacity: effect ? 1 : 0 }}
-                        className="apollo-component-library-loadingstate-component-container"
+                        className={`${getVariant()} ${type}
+                        ${move ? '' : 'progress'}`}
                     >
                         <div>
                             {renderLoadingState()}
