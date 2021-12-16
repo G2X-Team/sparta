@@ -16,6 +16,11 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     move?: () => any;
 }
 
+/**
+ * Loader that will appear based on the value of it's open prop. Also known as dialogue.
+ *
+ * @return LoadingState component
+ */
 export const LoadingState = ({
     className,
     type,

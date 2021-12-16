@@ -11,6 +11,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template LoadingState
+ *
+ * @param args storybook arguments
+ * @return template LoadingState component
+ */
 export const Default: Story<Props> = (args) => {
     const [open, isLoading] = useState(false);
 
@@ -28,6 +34,12 @@ export const Default: Story<Props> = (args) => {
     );
 };
 
+/**
+ * Template Inline LoadingState
+ *
+ * @param args storybook arguments
+ * @return template inline LoadingState component
+ */
 export const AnotherExample: Story<Props> = (args) => {
     const [open, isLoading] = useState(false);
 
@@ -47,6 +59,12 @@ export const AnotherExample: Story<Props> = (args) => {
     );
 };
 
+/**
+ * Template Large LoadingState
+ *
+ * @param args storybook arguments
+ * @return template large LoadingState component
+ */
 export const LargeSize: Story<Props> = (args) => {
     const [open, isLoading] = useState(false);
 
@@ -64,6 +82,12 @@ export const LargeSize: Story<Props> = (args) => {
     );
 };
 
+/**
+ * Template Medium LoadingState
+ *
+ * @param args storybook arguments
+ * @return template medium LoadingState component
+ */
 export const MediumSize: Story<Props> = (args) => {
     const [open, isLoading] = useState(false);
 
@@ -81,6 +105,12 @@ export const MediumSize: Story<Props> = (args) => {
     );
 };
 
+/**
+ * Template Small LoadingState
+ *
+ * @param args storybook arguments
+ * @return template small LoadingState component
+ */
 export const SmallSize: Story<Props> = (args) => {
     const [open, isLoading] = useState(false);
 
@@ -98,6 +128,12 @@ export const SmallSize: Story<Props> = (args) => {
     );
 };
 
+/**
+ * Template Progress LoadingState
+ *
+ * @param args storybook arguments
+ * @return template progress LoadingState component
+ */
 export const ProgressVarient: Story<Props> = (args) => {
     const [open, isLoading] = useState(false);
 
