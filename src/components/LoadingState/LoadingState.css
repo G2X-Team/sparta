@@ -1,202 +1,32 @@
 .apollo-component-library-loadingstate-component-container {
-    position: absolute;
-    z-index: 5;
-    transition: opacity 300ms;
-    top: 0;
-    left: 0;
+  position: absolute;
+  z-index: 5;
+  transition: opacity 300ms;
+  top: 0;
+  left: 0;
 }
 
 .apollo-component-library-loadingstate-component-container > div {
-    position: relative;
-    display: grid;
-    height: 100vh;
-    width: 100vw;
+  position: relative;
+  display: grid;
+  height: 100vh;
+  width: 100vw;
 }
 
 /* Absolute type LoadingState begins*/
 
 .apollo-component-library-loadingstate-component.absolute {
-    
-    border: 16px solid #f3f3f3;
-    z-index: 9999;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    align-self: center;
-    justify-self: center;
-    display: flex;
-    flex-direction: column;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-.apollo-component-library-loadingstate-component-backdrop.absolute {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    background: rgba(0,0,0,0.5);
-}
-/* Absolute type LoadingState ends*/
-/* Inline type LoadingState begins */
-
-.apollo-component-library-loadingstate-component.inline {
-    
-    border: 16px solid #f3f3f3;
-    z-index: 9999;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    display: flex;
-    flex-direction: column;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-    margin-left: 11%;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-.apollo-component-library-loadingstate-component-backdrop.inline {
-    position: inline;
-}
-
-/* Inline type LoadingState ends */
-
-/* LoadingState size begins*/
-.small{
-  width: 11px;
-  height: 11px;
-}
-
-.medium{
-  width: 60px;
-  height: 60px;
-}
-
-.large{
-  width: 120px;
-  height: 120px;
-}
-/* LoadingState size ends*/
-
-
-/* Absolute type LoadingState begins*/
-
-.apollo-component-library-loadingstate-component-progressbar.absolute {
-    
-  background-color: #e04542;
-    height: 10px;
-    position: relative;
-    width: 10%;
-
-}
-
-
-.TenPercent-progress {
-  background-size: 23em 0.25em;
-  height: 12px;
-  position: relative;
-  background-color: #e04542;
-
-  display: flex;
-  animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-      -o-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-      -ms-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-      -webkit-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-      -moz-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-}
-@keyframes cssload-width {
-  0%, 100% {
-      transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
-}
-
-@-o-keyframes cssload-width {
-  0%, 100% {
-      -o-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
-}
-
-@-ms-keyframes cssload-width {
-  0%, 100% {
-      -ms-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
-}
-
-@-webkit-keyframes cssload-width {
-  0%, 100% {
-      -webkit-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
-}
-
-@-moz-keyframes cssload-width {
-  0%, 100% {
-      -moz-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
-}
-
-
-/* Absolute type LoadingState ends*/
-/* Inline type LoadingState begins */
-
-.apollo-component-library-loadingstate-component-progressbar.inline {
   
   border: 16px solid #f3f3f3;
   z-index: 9999;
   border-radius: 50%;
-  border-top: 16px solid red;
+  border-top: 16px solid #3498db;
+  align-self: center;
+  justify-self: center;
   display: flex;
   flex-direction: column;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
-  margin-left: 11%;
 }
 
 /* Safari */
@@ -208,6 +38,203 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.apollo-component-library-loadingstate-component-backdrop.absolute {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0,0,0,0.5);
+}
+/* Absolute type LoadingState ends*/
+/* Inline type LoadingState begins */
+
+.apollo-component-library-loadingstate-component.inline {
+  
+  border: 16px solid #f3f3f3;
+  z-index: 9999;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  display: flex;
+  flex-direction: column;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+.apollo-component-library-loadingstate-component.inline:after {
+  
+  border: 16px solid #f3f3f3;
+  z-index: 9999;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  display: flex;
+  flex-direction: column;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.apollo-component-library-loadingstate-component-backdrop.inline {
+  position: inline;
+}
+
+/* Inline type LoadingState ends */
+
+/* LoadingState size begins*/
+.small{
+width: 11px;
+height: 11px;
+}
+
+.medium{
+width: 60px;
+height: 60px;
+}
+
+.large{
+width: 120px;
+height: 120px;
+}
+/* LoadingState size ends*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Absolute type LoadingState begins*/
+
+.apollo-component-library-loadingstate-component-progressbar.absolute {
+  
+background-color: #e04542;
+  height: 10px;
+  position: relative;
+  width: 10%;
+
+}
+
+
+.progress {
+background-size: 23em 0.25em;
+height: 12px;
+position: relative;
+background-color: #e04542;
+
+display: flex;
+animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+    -o-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+    -ms-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+    -webkit-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+    -moz-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
+}
+@keyframes cssload-width {
+0%, 100% {
+    transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
+}
+0% {
+    width: 0;
+}
+100% {
+    width: 80%;
+}
+}
+
+@-o-keyframes cssload-width {
+0%, 100% {
+    -o-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
+}
+0% {
+    width: 0;
+}
+100% {
+    width: 80%;
+}
+}
+
+@-ms-keyframes cssload-width {
+0%, 100% {
+    -ms-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
+}
+0% {
+    width: 0;
+}
+100% {
+    width: 80%;
+}
+}
+
+@-webkit-keyframes cssload-width {
+0%, 100% {
+    -webkit-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
+}
+0% {
+    width: 0;
+}
+100% {
+    width: 80%;
+}
+}
+
+@-moz-keyframes cssload-width {
+0%, 100% {
+    -moz-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
+}
+0% {
+    width: 0;
+}
+100% {
+    width: 80%;
+}
+}
+
+
+/* Absolute type LoadingState ends*/
+/* Inline type LoadingState begins */
+
+.apollo-component-library-loadingstate-component-progressbar.inline {
+
+border: 16px solid #f3f3f3;
+z-index: 9999;
+border-radius: 50%;
+border-top: 16px solid red;
+display: flex;
+flex-direction: column;
+-webkit-animation: spin 2s linear infinite; /* Safari */
+animation: spin 2s linear infinite;
+margin-left: 11%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }
 
 /* Inline type LoadingState ends */

@@ -22,7 +22,7 @@ export const Default: Story<Props> = (args) => {
                 isLoading={() => isLoading(!open)}
                 type="absolute"
                 size="medium"
-                progress={0}
+                variant="static"
             ></LoadingState>
         </React.Fragment>
     );
@@ -33,16 +33,16 @@ export const AnotherExample: Story<Props> = (args) => {
 
     return (
         <React.Fragment>
-            <Text onClick={() => isLoading(!open)}>
+            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
                 Inline Loading shown here
-                <LoadingState
-                    open={open}
-                    isLoading={() => isLoading(!open)}
-                    type="inline"
-                    size="small"
-                    progress={0}
-                ></LoadingState>
             </Text>
+            <LoadingState
+                open={open}
+                isLoading={() => isLoading(!open)}
+                type="inline"
+                size="small"
+                variant="static"
+            ></LoadingState>
         </React.Fragment>
     );
 };
@@ -58,7 +58,7 @@ export const LargeSize: Story<Props> = (args) => {
                 isLoading={() => isLoading(!open)}
                 type="absolute"
                 size="large"
-                progress={0}
+                variant="static"
             ></LoadingState>
         </React.Fragment>
     );
@@ -75,7 +75,7 @@ export const MediumSize: Story<Props> = (args) => {
                 isLoading={() => isLoading(!open)}
                 type="absolute"
                 size="medium"
-                progress={0}
+                variant="static"
             ></LoadingState>
         </React.Fragment>
     );
@@ -92,7 +92,7 @@ export const SmallSize: Story<Props> = (args) => {
                 isLoading={() => isLoading(!open)}
                 type="absolute"
                 size="small"
-                progress={0}
+                variant="static"
             ></LoadingState>
         </React.Fragment>
     );
@@ -108,7 +108,7 @@ export const ProgressVarient: Story<Props> = (args) => {
                 open={open}
                 isLoading={() => isLoading(!open)}
                 type="absolute"
-                progress={1}
+                variant="progress"
             ></LoadingState>
         </React.Fragment>
     );
