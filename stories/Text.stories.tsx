@@ -14,10 +14,21 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template text component
+ *
+ * @param args storybook arguments
+ * @return template text
+ */
 const Template: Story<Props> = (args) => <Text {...args} />;
 
 export const Default = Template.bind({});
 
+/**
+ * Header Text
+ *
+ * @return header text
+ */
 export const Headers = (): JSX.Element => (
     <React.Fragment>
         <Text header={1}>This is an h1</Text>
@@ -26,6 +37,11 @@ export const Headers = (): JSX.Element => (
     </React.Fragment>
 );
 
+/**
+ * Different types of Text
+ *
+ * @return different styles of text
+ */
 export const DifferentStyles = (): JSX.Element => (
     <React.Fragment>
         <Text bold>Bold</Text>
@@ -37,6 +53,11 @@ export const DifferentStyles = (): JSX.Element => (
     </React.Fragment>
 );
 
+/**
+ * Different types of casing
+ *
+ * @return different types of casing
+ */
 export const DifferentCasing = (): JSX.Element => (
     <React.Fragment>
         <Text upper>upper case</Text>
@@ -45,6 +66,11 @@ export const DifferentCasing = (): JSX.Element => (
     </React.Fragment>
 );
 
+/**
+ * Text inside of text
+ *
+ * @return text inside of text
+ */
 export const TextInsideOfText = (): JSX.Element => (
     <Text>
         This is the story of how{' '}
@@ -60,4 +86,15 @@ export const TextInsideOfText = (): JSX.Element => (
             king of the pirates.
         </Text>
     </Text>
+);
+
+/**
+ * Demo of blocking text highlight
+ *
+ * @return Text block highlight demo
+ */
+export const TextHighlightDisabled = (): JSX.Element => (
+    <React.Fragment>
+        <Text disabled>This text is disabled which means it can not be highlighend or copied</Text>
+    </React.Fragment>
 );

@@ -13,6 +13,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template view
+ *
+ * @param args storybook arguments
+ * @return template view
+ */
 const Template: Story<HTMLAttributes<HTMLDivElement>> = (args) => <View {...args} />;
 
 export const Default = Template.bind({});

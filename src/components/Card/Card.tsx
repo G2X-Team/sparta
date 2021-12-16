@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
-import { findAll, FoundChildren, FoundChild } from '../../util/findAll';
+import FormattedChildren from '../../util/FormattedChildren';
 import './Card.css';
 
 import { Header } from '../Header/Header';
@@ -16,7 +16,49 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Card component
  */
-export const Card = ({ children, ...props }: Props): JSX.Element => {
+export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Element => {
+    /**
+     * Formats the header component
+     *
+     * @param header unformatted header
+     * @return formatted header
+     */
+    const formatHeader = (header: JSX.Element): JSX.Element => {
+        const { props: headerProps } = header;
+        const { style: headerStyle } = headerProps;
+
+        return (
+            <Header
+                {...headerProps}
+                style={{
+                    marginBottom: 10,
+                    ...headerStyle,
+                }}
+            />
+        );
+    };
+
+    /**
+     * Formats the footer component
+     *
+     * @param footer unformatted footer
+     * @return formatted footer
+     */
+    const formatFooter = (footer: JSX.Element): JSX.Element => {
+        const { props: footerProps } = footer;
+        const { style: footerStyle } = footerProps;
+
+        return (
+            <footer
+                {...footerProps}
+                style={{
+                    marginTop: 10,
+                    ...footerStyle,
+                }}
+            />
+        );
+    };
+
     /**
      * Renderes all components
      *
@@ -24,45 +66,30 @@ export const Card = ({ children, ...props }: Props): JSX.Element => {
      */
     const renderAll = (): JSX.Element => {
         // get all the children from the components
-        const components: FoundChildren = findAll(children, [Header, Footer]);
+        const formatted = new FormattedChildren(children, [Header, Footer]);
+
+        // format header and footer
+        formatted.format(Header, formatHeader);
+        formatted.format(Footer, formatFooter);
+
+        // extract header and footer
+        const headers = formatted.extract(Header);
+        const footers = formatted.extract(Footer);
 
         // check to see that we have one footer and one header MAX
-        if (components.Header.length > 1) throw new Error('Cannot have more than one header');
-        if (components.Footer.length > 1) throw new Error('Cannot have more than one footer');
+        if (headers.length > 1) throw new Error('Cannot have more than one header');
+        if (footers.length > 1) throw new Error('Cannot have more than one footer');
 
-        // get the header/footer if it exists and assign it into a variable
-        const header: ReactNode =
-            components.Header.length > 0 ? (
-                <Header
-                    {...components.Header[0].component.props}
-                    style={{
-                        marginBottom: 10,
-                        ...components.Header[0].component.props.style,
-                    }}
-                />
-            ) : null;
-        const footer: ReactNode =
-            components.Footer.length > 0 ? (
-                <Footer
-                    {...components.Footer[0].component.props}
-                    style={{
-                        marginTop: 10,
-                        ...components.Footer[0].component.props.style,
-                    }}
-                />
-            ) : null;
-
-        // get other components
-        const otherComponents: ReactNode[] = components.other.map(
-            (child: FoundChild) => child.component
-        );
+        // get the header and footer
+        const [header] = headers;
+        const [footer] = footers;
 
         // return the structured content
         return (
             <div {...props} className="apollo-component-library-card-component">
                 {header}
                 <div className="apollo-component-library-card-component-body">
-                    {otherComponents}
+                    {formatted.getAll()}
                 </div>
                 {footer}
             </div>

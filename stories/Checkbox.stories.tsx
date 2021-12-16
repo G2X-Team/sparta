@@ -13,6 +13,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Temlpate checkbox
+ *
+ * @param args storybook arguments
+ * @return Template checkbox
+ */
 const Template: Story<Props> = (args) => <Checkbox {...args} />;
 
 export const Default = Template.bind({});

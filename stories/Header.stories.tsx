@@ -13,6 +13,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template header component
+ *
+ * @param args storybook arguments
+ * @return template header
+ */
 const Template: Story<Props> = (args) => <Header {...args} />;
 
 export const Default = Template.bind({});

@@ -27,6 +27,8 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     pascal?: boolean;
     /** Decide the color of the text without accessing the style props */
     color?: string;
+    /** Determines whether the text is disabled or not */
+    disabled?: boolean;
 }
 
 /**
@@ -34,7 +36,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Text component
  */
-export const Text = ({
+export const Text: React.FC<Props> = ({
     children,
     header = 0,
     margins = false,
@@ -45,6 +47,7 @@ export const Text = ({
     upper = false,
     lower = false,
     pascal = false,
+    disabled = false,
     color,
     style,
     ...props
@@ -70,6 +73,7 @@ export const Text = ({
         if (italic) customVariant += 'italic ';
         if (bold) customVariant += 'bold ';
         if (underline) customVariant += 'underline ';
+        if (disabled) customVariant += 'disabled ';
 
         return customVariant;
     };

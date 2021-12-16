@@ -10,6 +10,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template Divider
+ *
+ * @param args storybook args
+ * @return template divider
+ */
 const Template: Story<Props> = (args) => <Divider {...args} />;
 
 export const Default = Template.bind({});

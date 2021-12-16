@@ -17,7 +17,12 @@ export interface Props extends HTMLAttributes<HTMLButtonElement> {
  *
  * @return Button component
  */
-export const Button = ({ children, href, variant = 'default', ...props }: Props): JSX.Element => {
+export const Button: React.FC<Props> = ({
+    children,
+    href,
+    variant = 'default',
+    ...props
+}: Props): JSX.Element => {
     const button: JSX.Element = (
         <button {...props} className={`apollo-component-library-button ${variant}`}>
             {children}
