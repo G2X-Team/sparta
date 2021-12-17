@@ -14,6 +14,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template Icon
+ *
+ * @param args storybook arguments
+ * @return template icon
+ */
 const Template: Story<Props> = (args) => <Icon {...args} />;
 
 export const Default = Template.bind({});

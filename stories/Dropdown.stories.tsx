@@ -13,6 +13,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template Dropdown
+ *
+ * @param args storybook arguments
+ * @return template dropdown
+ */
 export const Default: Story<Props> = (args) => (
     <Dropdown {...args}>
         <Button>
@@ -23,6 +29,12 @@ export const Default: Story<Props> = (args) => (
     </Dropdown>
 );
 
+/**
+ * Template Button Dropdown
+ *
+ * @param args storybook arguments
+ * @return template button dropdown
+ */
 export const AnotherExample: Story<Props> = (args) => (
     <Dropdown {...args}>
         <Button>

@@ -13,7 +13,11 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Determines whether the input is required for form submission */
     required?: boolean;
     /** Function that will determine whether input is valid for form submission */
-    validator?: () => { valid: boolean; message: string };
+    validator?: (value: string) => string | null;
+    /** Determines whether input is valid or not */
+    valid?: boolean;
+    /** Name of input */
+    name?: string;
 }
 
 /**
@@ -21,15 +25,19 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return TextInput component
  */
-export const TextInput = ({
+export const TextInput: React.FC<Props> = ({
     variant = 'default',
     password = false,
+    valid = true,
     ...props
 }: Props): JSX.Element => {
     return (
         <input
             {...props}
-            className={`apollo-component-library-text-input ${variant}`}
+            className={`apollo-component-library-text-input 
+                ${variant} 
+                ${valid ? 'valid' : 'invalid'}
+            `}
             type={password ? 'password' : 'text'}
         />
     );

@@ -13,7 +13,7 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
  *
  * @return Divider component
  */
-export const Divider = ({
+export const Divider: React.FC<Props> = ({
     color = 'lightgray',
     className,
     height = 1,

@@ -26,7 +26,7 @@
     },
     "plugins": ["react", "@typescript-eslint", "prettier"],
     "rules": {
-        "no-use-before-define": "off",
+        "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": false }],
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "react/jsx-filename-extension": [
             "warn",
@@ -87,6 +87,9 @@
             {
                 "endOfLine": "auto"
             }
-        ]
+        ],
+        "require-jsdoc": ["error", { 
+            "require": {"ArrowFunctionExpression": true}
+        }]
     }
 }

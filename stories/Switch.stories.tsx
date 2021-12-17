@@ -14,6 +14,12 @@ const meta: Meta = {
 
 export default meta;
 
+/**
+ * Template Switch
+ *
+ * @param args storybook arguments
+ * @return template switch
+ */
 const Template: Story<Props> = (args) => <Switch {...args} />;
 
 export const Default = Template.bind({});
