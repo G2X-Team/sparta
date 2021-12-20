@@ -25,7 +25,26 @@ export const Divider: React.FC<Props> = ({
             role="separator"
             {...props}
             className={`apollo-component-library-divider-component ${className}`}
-            style={{ borderTop: `${height}px solid ${color}`, ...style }}
+            style={getStyle(style, height, color)}
         />
     );
+};
+
+/**
+ * Gets the style object for the divider
+ *
+ * @param style original style object
+ * @param height adjusted height of divider
+ * @param color adjusted color of divider
+ * @return style object for divider
+ */
+const getStyle = (
+    style: React.CSSProperties | undefined,
+    height: number,
+    color: string
+): React.CSSProperties => {
+    return {
+        borderTop: `${height}px solid ${color}`,
+        ...style,
+    };
 };

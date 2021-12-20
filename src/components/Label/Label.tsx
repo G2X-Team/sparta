@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
-import FormattedChildren from '../../util/FormattedChildren';
+import FormatChildren from '../../util/FormatChildren';
 import './Label.css';
 
 import { Text } from '../Text/Text';
@@ -30,28 +30,34 @@ export const Label: React.FC<Props> = ({
     // checks if there is a child with a required prop toggled on mount
     useEffect(() => {
         // get all formatted children
-        const formatted = new FormattedChildren(children, []);
+        const formatted = new FormatChildren({ children }, []);
+        if (formatted.getAll().length > 1) throw new Error('Label cannot have more than one child');
 
-        // loop through all other children
-        formatted.getOther().forEach((component: JSX.Element) => {
-            const {
-                props: { required },
-            } = component;
-            required && toggleRequired(true);
-        });
+        // get required prop from child
+        const [child] = formatted.getAll();
+        toggleRequired(child.props.required);
     }, []);
 
     return (
         <label className={`apollo-component-library-label-component ${className || ''}`} {...props}>
             {value?.length ? (
-                <Text bold style={{ marginBottom: 5 }}>{`${value}${required ? '*' : ''}`}</Text>
+                <Text bold style={labelStyle}>{`${value}${required ? '*' : ''}`}</Text>
             ) : null}
             {children}
             {hint?.length ? (
-                <Text color="gray" style={{ fontSize: '0.8rem', marginTop: 4 }}>
+                <Text color="gray" style={hintStyle}>
                     {hint}
                 </Text>
             ) : null}
         </label>
     );
+};
+
+const labelStyle: React.CSSProperties = {
+    marginBottom: 5,
+};
+
+const hintStyle: React.CSSProperties = {
+    fontSize: '0.8rem',
+    marginTop: 4,
 };

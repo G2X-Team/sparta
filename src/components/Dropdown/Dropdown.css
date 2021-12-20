@@ -6,6 +6,10 @@
     cursor: pointer;
     display: inline-block;
     margin: 0;
+    background: none;
+    border: none;
+    outline: none;
+    margin: none;
 }
 
 .apollo-component-library-dropdown-menu-component {

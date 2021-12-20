@@ -19,18 +19,6 @@ describe('Group', () => {
         expect(screen.getAllByText(/option /i)).toHaveLength(3);
     });
 
-    it('assigns group name to every input', () => {
-        // given
-        render(
-            <Group type="radio" name="group">
-                <Radio value="1">Option 1</Radio>
-            </Group>
-        );
-
-        // when then
-        expect(screen.getByRole('radio')).toHaveAttribute('name', 'group');
-    });
-
     it('will update the group value when radio is clicked', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
@@ -103,14 +91,14 @@ describe('Group', () => {
         });
 
         // then
-        expect(onChange).toHaveBeenCalledTimes(2);
+        expect(onChange).toHaveBeenCalledTimes(3);
 
         /* because react testing-library doesn't really support multiple toHaveBeenCalledWith 
            as long as we see value change in an array, we can consider this enough for this 
            test to pass 
            
            source: https://github.com/jasmine/jasmine/issues/228 */
-        expect(onChange).toHaveBeenLastCalledWith([groupValue[0]]);
+        expect(onChange).toHaveBeenLastCalledWith([...groupValue]);
     });
 
     it('will not update the group value when checkboxes are disabled', () => {

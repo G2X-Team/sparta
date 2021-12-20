@@ -5,10 +5,8 @@ import { Text, Props } from '../src/components/Text/Text';
 const meta: Meta = {
     title: 'Layout/Text',
     component: Text,
-    argTypes: {
-        children: {
-            defaultValue: 'This is a text component',
-        },
+    args: {
+        children: 'This is a text component',
     },
 };
 

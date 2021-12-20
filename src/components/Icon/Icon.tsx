@@ -1,5 +1,4 @@
-import React, { HTMLAttributes, useEffect } from 'react';
-import FormattedChildren from '../../util/FormattedChildren';
+import React, { HTMLAttributes } from 'react';
 import './Icon.css';
 
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
@@ -13,6 +12,8 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     disabled?: boolean;
     /** Determines preset style of icon */
     variant?: string;
+    /** This component must not have children */
+    children?: undefined;
 }
 
 /**
@@ -30,16 +31,10 @@ export const Icon: React.FC<Props> = ({
     style,
     ...props
 }: Props): JSX.Element => {
-    // check on render if the component has hany children
-    useEffect(() => {
-        const formatted = new FormattedChildren(children, []);
-        if (formatted.getOther().length > 0) throw new Error('Icon component cannot have children');
-    }, []);
-
     return (
         <i
             {...props}
-            style={{ color: disabled ? 'gray' : color, ...style }}
+            style={getIconStyle(disabled, color, style)}
             className={`material-icons apollo-component-library-icon-component 
                 ${onClick && variant}`}
             onClick={onClick}
@@ -47,4 +42,20 @@ export const Icon: React.FC<Props> = ({
             {name}
         </i>
     );
+};
+
+/**
+ * Gets Icon style object
+ *
+ * @param disabled boolean determining whether icon is disabled or not
+ * @param color alternative color for icon
+ * @param style style component prop
+ * @return icon style object
+ */
+const getIconStyle = (
+    disabled: boolean | undefined,
+    color: string,
+    style: React.CSSProperties | undefined
+): React.CSSProperties => {
+    return { color: disabled ? 'gray' : color, ...style };
 };
