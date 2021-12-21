@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props as ButtonProps } from '../Button/Button';
+import { Props as ButtonProps } from '../../Button/Button';
 
 interface Props extends ButtonProps {
     parentProps: any;
@@ -10,7 +10,7 @@ interface Props extends ButtonProps {
  *
  * @return ButtonGroup component
  */
-export const Button: React.FC<Props> = ({ ...props }: Props): JSX.Element => {
+const Button: React.FC<Props> = ({ ...props }: Props): JSX.Element => {
     // extract props from button
     const {
         children: buttonChildren,

@@ -77,7 +77,7 @@ class FormatChildren {
      * @return all instances of the specified child
      */
     get = (child: React.FC<any>): JSX.Element[] => {
-        const childName: string = child.displayName || child.name || '';
+        const childName: string = child.displayName || child.name;
         return this.foundChildren[childName] ? this.foundChildren[childName] : [];
     };
 
@@ -94,6 +94,66 @@ class FormatChildren {
      * @return all other components
      */
     getOther = (): JSX.Element[] => this.foundChildren.other;
+
+    /**
+     * Will remove all instances of a given child from the stored formatted children at the cost
+     * of an extra iteration of all of them.
+     *
+     * @param child child wanting to remove from formatted children
+     * @return all instances of child
+     */
+    extract = (child: React.FC<any>): JSX.Element[] => {
+        const childName: string = child.displayName || child.name;
+        const {
+            foundChildren: { [childName]: children },
+        } = this;
+
+        delete this.foundChildren[childName];
+
+        // removes all instances of the child
+        this.allChildren = this.allChildren.filter((child: JSX.Element) => {
+            const name: string = child.type.displayName || child.type.name;
+            return name != childName;
+        });
+
+        return children;
+    };
+
+    /**
+     * Extracts all instances and matches of given children from stored formatted children at the
+     * cost of an extra iteration of all of them plus an iteration of the input array.
+     *
+     * @param children children wanting to remove from formatted children
+     * @return all instances of extracted children returned a matrix the same order it was
+     * inputted in the parameters;
+     */
+    extractMultiple = (children: React.FC<any>[]): JSX.Element[][] => {
+        const extracted: JSX.Element[][] = [];
+        let comparator = '';
+
+        // loop through every child and get the comparator string
+        children.forEach((component: React.FC<any>, index: number) => {
+            // get the name
+            let componentName: string = component.displayName || component.name;
+
+            // push the values to the extracted array and then remove it from the found children
+            extracted.push(this.foundChildren[componentName]);
+            delete this.foundChildren[componentName];
+
+            // determine whether there is another comparison that needs to be made after
+            if (index !== children.length - 1) componentName += '|';
+
+            comparator += componentName;
+        });
+
+        // find all the children who don't match the extracted
+        this.allChildren.filter((child: JSX.Element) => {
+            const childName: string = child.type.displayName || child.type.name;
+            return !childName.match(comparator);
+        });
+
+        return extracted;
+    };
 }
 
 export default FormatChildren;

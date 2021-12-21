@@ -1,9 +1,9 @@
-import React, { HTMLAttributes, ReactNode, memo } from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 import './ButtonGroup.css';
 
 import FormatChildren from '../../util/FormatChildren';
 
-import Button from './Button';
+import Button from './overload/Button';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Disables all buttons within button group */
@@ -21,7 +21,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return ButtonGroup component
  */
-export const _ButtonGroup: React.FC<Props> = ({
+export const ButtonGroup: React.FC<Props> = ({
     children,
     variant = 'default',
     disabled = false,
@@ -35,8 +35,9 @@ export const _ButtonGroup: React.FC<Props> = ({
      * @return formatted buttons
      */
     const renderButtons = (): JSX.Element[] => {
+        // get new formatted children
         const formatted = new FormatChildren({ children, disabled, size, variant }, [Button]);
-        if (formatted.getOther.length)
+        if (formatted.getOther().length)
             throw new Error('ButtonGroup can only accept Buttons as children');
 
         return formatted.getAll();
@@ -48,5 +49,3 @@ export const _ButtonGroup: React.FC<Props> = ({
         </div>
     );
 };
-
-export const ButtonGroup = memo(_ButtonGroup);

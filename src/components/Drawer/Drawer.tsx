@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode, useEffect, useState, useRef } from 'react';
-import FormattedChildren from '../../util/FormattedChildren';
+import FormatChildren from '../../util/FormatChildren';
 import './Drawer.css';
 
 import { Header } from '../Header/Header';
@@ -86,48 +86,6 @@ export const Drawer: React.FC<Props> = ({
     }, [open]);
 
     /**
-     * Formats the header component
-     *
-     * @param header unformatted header
-     * @return formatted header
-     */
-    const formatHeader = (header: JSX.Element): JSX.Element => {
-        const { props: headerProps } = header;
-        const { style: headerStyle } = headerProps;
-
-        return (
-            <Header
-                {...headerProps}
-                style={{
-                    marginBottom: 10,
-                    ...headerStyle,
-                }}
-            />
-        );
-    };
-
-    /**
-     * Formats the footer component
-     *
-     * @param footer unformatted footer
-     * @return formatted footer
-     */
-    const formatFooter = (footer: JSX.Element): JSX.Element => {
-        const { props: footerProps } = footer;
-        const { style: footerStyle } = footerProps;
-
-        return (
-            <footer
-                {...footerProps}
-                style={{
-                    marginTop: 10,
-                    ...footerStyle,
-                }}
-            />
-        );
-    };
-
-    /**
      * Changes style of options to match
      *
      * @param option unformatted options
@@ -160,16 +118,10 @@ export const Drawer: React.FC<Props> = ({
      */
     const renderDrawer = (): ReactNode => {
         // gets all found children
-        const formatted = new FormattedChildren(children, [Header, Footer, Option]);
+        const formatted = new FormatChildren(props, [Header, Footer, Option]);
 
         // format header and footer
-        formatted.format(Header, formatHeader);
-        formatted.format(Footer, formatFooter);
-        formatted.format(Option, formatOption);
-
-        // extract headers and footers
-        const headers = formatted.extract(Header);
-        const footers = formatted.extract(Footer);
+        const [headers, footers] = formatted.extractMultiple([Header, Footer]);
 
         // check that there is only one header and footer max
         if (headers.length > 1) throw new Error('Drawer can only have one Header component');
