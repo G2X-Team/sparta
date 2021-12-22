@@ -4,7 +4,7 @@ import './Drawer.css';
 
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import { Option } from '../Option/Option';
+import Option from './overload/Option';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /**
@@ -86,39 +86,13 @@ export const Drawer: React.FC<Props> = ({
     }, [open]);
 
     /**
-     * Changes style of options to match
-     *
-     * @param option unformatted options
-     * @return formatted options
-     */
-    const formatOption = (option: JSX.Element): JSX.Element => {
-        const { props: optionProps } = option;
-        const { style: optionStyle, children: optionChildren } = optionProps;
-
-        return (
-            <Option
-                key={Math.random()}
-                {...optionProps}
-                style={{
-                    height: '2rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    ...optionStyle,
-                }}
-            >
-                {optionChildren}
-            </Option>
-        );
-    };
-
-    /**
      * Finds all target components and renders them in final drawer component
      *
      * @return render ready drawer component
      */
     const renderDrawer = (): ReactNode => {
         // gets all found children
-        const formatted = new FormatChildren(props, [Header, Footer, Option]);
+        const formatted = new FormatChildren({ children }, [Header, Footer, Option]);
 
         // format header and footer
         const [headers, footers] = formatted.extractMultiple([Header, Footer]);
@@ -147,9 +121,11 @@ export const Drawer: React.FC<Props> = ({
 
         return (
             <div
-                className={`apollo-component-library-drawer-component 
-                    ${className} ${orientation} ${type}`}
                 style={containerStyle}
+                className={`
+                    apollo-component-library-drawer-component 
+                    ${className} ${orientation} ${type}
+                `}
             >
                 <div {...props} ref={drawer} style={drawerStyle}>
                     {header}

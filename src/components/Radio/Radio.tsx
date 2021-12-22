@@ -9,6 +9,8 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     disabled?: boolean;
     /** Value that the radio represents*/
     value: string;
+    /** Determines whether component is checked */
+    checked?: boolean;
 }
 
 /**

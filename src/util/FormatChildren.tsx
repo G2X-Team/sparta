@@ -54,20 +54,17 @@ class FormatChildren {
                 } = child;
 
                 // assign props and finalize component format
-                const formattedComponent: JSX.Element = (
-                    <Component {...childProps} parentProps={parentProps} key={index} />
-                );
+                const formattedComponent: JSX.Element = <Component {...childProps} key={index} />;
+                const cloned: JSX.Element = React.cloneElement(formattedComponent, { parentProps });
 
                 // push to storage
-                this.foundChildren[childName].push(formattedComponent);
-                this.allChildren.push(formattedComponent);
+                this.foundChildren[childName].push(cloned);
+                this.allChildren.push(cloned);
             } else {
                 this.foundChildren.other.push(child);
                 this.allChildren.push(child);
             }
         });
-
-        console.log(this.foundChildren);
     }
 
     /**
@@ -147,7 +144,7 @@ class FormatChildren {
         });
 
         // find all the children who don't match the extracted
-        this.allChildren.filter((child: JSX.Element) => {
+        this.allChildren = this.allChildren.filter((child: JSX.Element) => {
             const childName: string = child.type.displayName || child.type.name;
             return !childName.match(comparator);
         });

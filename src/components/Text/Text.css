@@ -1,6 +1,8 @@
 .apollo-component-library-typography-component {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .apollo-component-library-typography-component.first-header {

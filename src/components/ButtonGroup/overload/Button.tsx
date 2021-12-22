@@ -1,35 +1,29 @@
 import React from 'react';
-import { Props as ButtonProps } from '../../Button/Button';
-
-interface Props extends ButtonProps {
-    parentProps: any;
-}
+import { Props } from '../../Button/Button';
+import Overload from '../../../interfaces/Overload';
 
 /**
  * Component that formats buttons in a way that groups them together
  *
  * @return ButtonGroup component
  */
-const Button: React.FC<Props> = ({ ...props }: Props): JSX.Element => {
-    // extract props from button
-    const {
-        children: buttonChildren,
-        className: buttonClassName,
-        href: buttonHref,
-        parentProps: { disabled, variant, size },
-        ...buttonProps
-    } = props;
-
+const Button: React.FC<Overload<Props>> = ({
+    parentProps: { disabled, variant, size },
+    children,
+    className,
+    href,
+    ...props
+}: Overload<Props>): JSX.Element => {
     return (
         <button
-            {...buttonProps}
+            {...props}
             disabled={disabled}
             className={`apollo-component-library-button-group-button-component 
-                ${buttonClassName} 
+                ${className} 
                 ${variant} 
                 ${size}`}
         >
-            {buttonHref ? <a href={buttonHref}>{buttonChildren}</a> : buttonChildren}
+            {href ? <a href={href}>{children}</a> : children}
         </button>
     );
 };

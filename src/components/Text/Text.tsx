@@ -115,8 +115,8 @@ export const Text: React.FC<Props> = ({
     };
 
     return (
-        <p {...props} style={{ color, ...style }} className={getVariant()}>
+        <span {...props} style={{ color, ...style }} className={getVariant()}>
             {getCorrectCasing()}
-        </p>
+        </span>
     );
 };
