@@ -22,7 +22,8 @@
         "build-storybook": "build-storybook"
     },
     "peerDependencies": {
-        "react": ">=16"
+        "react": ">=16",
+        "react-icons": "4.x"
     },
     "husky": {
         "hooks": {
@@ -78,6 +79,7 @@
         "prettier": "2.5.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "react-icons": "^4.3.1",
         "react-is": "^17.0.2",
         "rollup-plugin-postcss": "^4.0.1",
         "size-limit": "^6.0.3",
@@ -92,5 +94,6 @@
         "moduleNameMapper": {
             "\\.(css|less|scss|sass)$": "identity-obj-proxy"
         }
-    }
+    },
+    "dependencies": {}
 }
