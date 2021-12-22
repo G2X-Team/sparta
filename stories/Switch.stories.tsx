@@ -5,10 +5,8 @@ import { Switch, Props } from '../src/components/Switch/Switch';
 const meta: Meta = {
     title: 'Form/Switch',
     component: Switch,
-    argTypes: {
-        children: {
-            defaultValue: 'This is a switch component',
-        },
+    args: {
+        children: 'This is a switch component',
     },
 };
 

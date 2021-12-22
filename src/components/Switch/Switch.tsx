@@ -15,6 +15,8 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     name: string;
     /** Determines whether input is required or not */
     required?: boolean;
+    /** Determines whether input is checked or not */
+    checked?: boolean;
 }
 
 /**

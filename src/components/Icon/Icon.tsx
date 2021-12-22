@@ -1,5 +1,4 @@
-import React, { HTMLAttributes, useEffect } from 'react';
-import FormattedChildren from '../../util/FormattedChildren';
+import React, { HTMLAttributes } from 'react';
 import './Icon.css';
 
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
@@ -13,6 +12,8 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     disabled?: boolean;
     /** Determines preset style of icon */
     variant?: string;
+    /** This component must not have children */
+    children?: undefined;
 }
 
 /**
@@ -30,12 +31,6 @@ export const Icon: React.FC<Props> = ({
     style,
     ...props
 }: Props): JSX.Element => {
-    // check on render if the component has hany children
-    useEffect(() => {
-        const formatted = new FormattedChildren(children, []);
-        if (formatted.getOther().length > 0) throw new Error('Icon component cannot have children');
-    }, []);
-
     return (
         <i
             {...props}

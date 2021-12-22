@@ -3,7 +3,7 @@ import { Props, Radio as CRadio } from '../../Radio/Radio';
 import Overload from '../../../interfaces/Overload';
 
 /**
- * Formats Radio component
+ * Overloaded Radio formatted to update group value on change
  *
  * @return Formatted Radio
  */
@@ -13,7 +13,7 @@ const Radio: React.FC<Overload<Props>> = ({
     disabled,
     value,
     ...props
-}: Overload<Props>) => {
+}: Overload<Props>): JSX.Element => {
     /**
      * Updates value and fires original onChange method
      *

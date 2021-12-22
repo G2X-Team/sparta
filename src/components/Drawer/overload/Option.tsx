@@ -7,12 +7,7 @@ import Overload from '../../../interfaces/Overload';
  *
  * @return Overloaded option
  */
-const Option: React.FC<Overload<Props>> = ({
-    style,
-    children,
-    parentProps,
-    ...props
-}: Overload<Props>) => {
+const Option: React.FC<Overload<Props>> = ({ style, children, ...props }: Overload<Props>) => {
     return (
         <COption {...props} style={{ ...style, ...optionStyle }}>
             {children}

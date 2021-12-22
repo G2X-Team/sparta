@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
-import FormattedChildren from '../../util/FormattedChildren';
+import FormatChildren from '../../util/FormatChildren';
 import './Label.css';
 
 import { Text } from '../Text/Text';
@@ -30,15 +30,12 @@ export const Label: React.FC<Props> = ({
     // checks if there is a child with a required prop toggled on mount
     useEffect(() => {
         // get all formatted children
-        const formatted = new FormattedChildren(children, []);
+        const formatted = new FormatChildren({ children }, []);
+        if (formatted.getAll().length > 1) throw new Error('Label cannot have more than one child');
 
-        // loop through all other children
-        formatted.getOther().forEach((component: JSX.Element) => {
-            const {
-                props: { required },
-            } = component;
-            required && toggleRequired(true);
-        });
+        // get required prop from child
+        const [child] = formatted.getAll();
+        toggleRequired(child.props.required);
     }, []);
 
     return (
