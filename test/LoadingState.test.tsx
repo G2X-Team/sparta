@@ -92,7 +92,7 @@ describe('LoadingState', () => {
         // given
         render(
             <Button>
-                <LoadingState type="absolute" size="small" variant="progress">
+                <LoadingState type="absolute" size="small" variant="progress" progressFilled={1}>
                     Hello World
                 </LoadingState>
             </Button>
