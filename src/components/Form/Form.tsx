@@ -84,6 +84,9 @@ export const Form: React.FC<Props> = ({
         const errors: string[] = [];
         // find if there are required fields not yet in valid map
         Object.keys(required).forEach((input: string) => {
+            // if (input === 'the-username' || input === 'the-password') {
+            //     console.log(input, validMap[input] === undefined, !formValue[input]);
+            // }
             if (validMap[input] === undefined || !formValue[input]) {
                 errors.push(required[input]);
             }

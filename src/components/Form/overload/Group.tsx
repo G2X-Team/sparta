@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props as GroupProps, Group as CGroup } from '../../Group/Group';
 
@@ -29,13 +29,16 @@ const Group: React.FC<Props> = ({
     name,
     ...props
 }: Props): JSX.Element => {
-    // set required if applicable
-    if (required && !parentRequired[name]) {
-        setParentRequired({
-            ...parentRequired,
-            [name]: `${name} is required, please select an option.`,
-        });
-    }
+    // on mount determine whether component is required
+    useEffect(() => {
+        // set required if applicable
+        if (required && !parentRequired[name]) {
+            setParentRequired({
+                ...parentRequired,
+                [name]: `${name} is required, please select an option.`,
+            });
+        }
+    });
 
     /**
      * Modifies group's on change callback to modify the form value

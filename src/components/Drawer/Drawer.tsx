@@ -98,8 +98,8 @@ export const Drawer: React.FC<Props> = ({
         const [headers, footers] = formatted.extractMultiple([Header, Footer]);
 
         // check that there is only one header and footer max
-        if (headers.length > 1) throw new Error('Drawer can only have one Header component');
-        if (footers.length > 1) throw new Error('Drawer can only have one Footer component');
+        if (headers?.length > 1) throw new Error('Drawer can only have one Header component');
+        if (footers?.length > 1) throw new Error('Drawer can only have one Footer component');
 
         // get the header/footer if it exists and assign it into a variable
         const [header] = headers;

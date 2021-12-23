@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props as SwitchProps, Switch as CSwitch } from '../../Switch/Switch';
 
@@ -13,7 +13,7 @@ interface Props extends Overload<SwitchProps> {
  * @return Formatted Switch
  */
 const Switch: React.FC<Props> = ({
-    parentProps: { parentRequired, setParentRequired, formValue, setFormValue },
+    parentProps: { parentRequired, formValue, setFormValue },
     checked,
     name,
     onChange,
@@ -22,12 +22,11 @@ const Switch: React.FC<Props> = ({
     ...props
 }: Props): JSX.Element => {
     // set required if applicable
-    if (required && !parentRequired[name]) {
-        setParentRequired({
-            ...parentRequired,
-            [name]: `${name} is required, please toggle on.`,
-        });
-    }
+    useEffect(() => {
+        if (required && !parentRequired[name]) {
+            parentRequired[name] = `${name} is required, please toggle on.`;
+        }
+    }, []);
 
     /**
      * Modifies switch on change

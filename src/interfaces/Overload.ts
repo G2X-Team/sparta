@@ -3,7 +3,7 @@
  */
 type Overload<Props extends { [value: string]: any }> = Props & {
     /** Props inherited by parents */
-    parentProps: any;
+    parentProps?: any;
 };
 
 export default Overload;

@@ -74,7 +74,7 @@ class FormatChildren {
      * @return all instances of the specified child
      */
     get = (child: React.FC<any>): JSX.Element[] => {
-        const childName: string = child.displayName || child.name;
+        const childName: string = child?.displayName || child?.name;
         return this.foundChildren[childName] ? this.foundChildren[childName] : [];
     };
 
@@ -100,7 +100,7 @@ class FormatChildren {
      * @return all instances of child
      */
     extract = (child: React.FC<any>): JSX.Element[] => {
-        const childName: string = child.displayName || child.name;
+        const childName: string = child?.displayName || child?.name;
         const {
             foundChildren: { [childName]: children },
         } = this;
@@ -109,11 +109,11 @@ class FormatChildren {
 
         // removes all instances of the child
         this.allChildren = this.allChildren.filter((child: JSX.Element) => {
-            const name: string = child.type.displayName || child.type.name;
+            const name: string = child?.type?.displayName || child?.type?.name;
             return name != childName;
         });
 
-        return children;
+        return children || [];
     };
 
     /**
@@ -131,10 +131,10 @@ class FormatChildren {
         // loop through every child and get the comparator string
         children.forEach((component: React.FC<any>, index: number) => {
             // get the name
-            let componentName: string = component.displayName || component.name;
+            let componentName: string = component?.displayName || component?.name || '';
 
             // push the values to the extracted array and then remove it from the found children
-            extracted.push(this.foundChildren[componentName]);
+            extracted.push(this.foundChildren[componentName] || []);
             delete this.foundChildren[componentName];
 
             // determine whether there is another comparison that needs to be made after
@@ -145,8 +145,8 @@ class FormatChildren {
 
         // find all the children who don't match the extracted
         this.allChildren = this.allChildren.filter((child: JSX.Element) => {
-            const childName: string = child.type.displayName || child.type.name;
-            return !childName.match(comparator);
+            const childName: string = child?.type?.displayName || child?.type?.name;
+            return !childName?.match(comparator);
         });
 
         return extracted;

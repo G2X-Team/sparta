@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props as TextInputProps, TextInput as CTextInput } from '../../TextInput/TextInput';
 
@@ -15,7 +15,6 @@ interface Props extends Overload<TextInputProps> {
 const TextInput: React.FC<Props> = ({
     parentProps: {
         parentRequired,
-        setParentRequired,
         setFormValue,
         setValidMap,
         validMap,
@@ -29,13 +28,13 @@ const TextInput: React.FC<Props> = ({
     onChange,
     ...props
 }: Props): JSX.Element => {
-    // add to required map if required
-    if (required && !parentRequired[name]) {
-        setParentRequired({
-            ...parentRequired,
-            [name]: `${name} is a required field and cannot be empty.`,
-        });
-    }
+    // on mount determine whether component is required
+    useEffect(() => {
+        // add to required map if required
+        if (required && !parentRequired[name]) {
+            parentRequired[name] = `${name} is a required field and cannot be empty.`;
+        }
+    }, []);
 
     /**
      * Modifies on change to keep track of text input validity
