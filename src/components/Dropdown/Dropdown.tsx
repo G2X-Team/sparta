@@ -6,12 +6,13 @@ import './Dropdown.css';
 import Button from './overload/Button';
 import Menu from './components/Menu';
 import { Option } from '../Option/Option';
+import { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines where the menu will appear from */
-    orientation?: 'top' | 'bottom' | 'left' | 'right';
+    orientation?: ComponentOrientation;
     /** Determines menu alignment, when orientation is left or right */
-    alignment?: 'left' | 'center' | 'right';
+    alignment?: ComponentAlignment;
     /** Determines the max height of the menu */
     menuHeight?: string;
     /** Determines the max width of the menu */

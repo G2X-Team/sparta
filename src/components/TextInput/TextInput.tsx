@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from 'react';
+import { StyleVariant } from '../../interfaces/Properties';
 import './TextInput.css';
 
 export interface Props extends HTMLAttributes<HTMLInputElement> {
@@ -9,7 +10,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Determines whether the text input is a password */
     password?: boolean;
     /** Determines what type of text input will be shown */
-    variant?: 'default' | 'secondary';
+    variant?: StyleVariant;
     /** Determines whether the input is required for form submission */
     required?: boolean;
     /** Function that will determine whether input is valid for form submission */

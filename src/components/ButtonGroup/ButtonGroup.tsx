@@ -2,6 +2,7 @@ import React, { HTMLAttributes, ReactNode } from 'react';
 import './ButtonGroup.css';
 
 import FormatChildren from '../../util/FormatChildren';
+import { StyleVariant, ComponentSize } from '../../interfaces/Properties';
 
 import Button from './overload/Button';
 
@@ -9,11 +10,11 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Disables all buttons within button group */
     disabled?: boolean;
     /** toggle between different button group sizes */
-    size?: 'small' | 'medium' | 'large';
+    size?: ComponentSize;
     /** requires children */
     children: ReactNode;
     /** select from preset style */
-    variant?: 'default' | 'secondary';
+    variant?: StyleVariant;
 }
 
 /**

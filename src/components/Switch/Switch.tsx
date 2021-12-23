@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
+import { StyleVariant } from '../../interfaces/Properties';
 import { Text } from '../Text/Text';
 import './Switch.css';
 
@@ -10,7 +11,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Value that the switch represents */
     value?: string;
     /** Variant of switch */
-    variant?: 'default' | 'secondary';
+    variant?: StyleVariant;
     /** Form name */
     name: string;
     /** Determines whether input is required or not */
