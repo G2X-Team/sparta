@@ -87,7 +87,7 @@ export const Modal: React.FC<Props> = ({
         <>
             {display ? (
                 <div
-                    style={{ opacity: effect ? 1 : 0 }}
+                    style={getModalStyle(effect)}
                     className="apollo-component-library-modal-component-container"
                 >
                     <div>
@@ -101,4 +101,14 @@ export const Modal: React.FC<Props> = ({
             ) : null}
         </>
     );
+};
+
+/**
+ * Gets modal style object
+ *
+ * @param effect boolean determining when to change the opacity
+ * @return modal style object
+ */
+const getModalStyle = (effect: boolean): React.CSSProperties => {
+    return { opacity: effect ? 1 : 0 };
 };

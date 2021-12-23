@@ -34,7 +34,7 @@ export const Icon: React.FC<Props> = ({
     return (
         <i
             {...props}
-            style={{ color: disabled ? 'gray' : color, ...style }}
+            style={getIconStyle(disabled, color, style)}
             className={`material-icons apollo-component-library-icon-component 
                 ${onClick && variant}`}
             onClick={onClick}
@@ -42,4 +42,20 @@ export const Icon: React.FC<Props> = ({
             {name}
         </i>
     );
+};
+
+/**
+ * Gets Icon style object
+ *
+ * @param disabled boolean determining whether icon is disabled or not
+ * @param color alternative color for icon
+ * @param style style component prop
+ * @return icon style object
+ */
+const getIconStyle = (
+    disabled: boolean | undefined,
+    color: string,
+    style: React.CSSProperties | undefined
+): React.CSSProperties => {
+    return { color: disabled ? 'gray' : color, ...style };
 };

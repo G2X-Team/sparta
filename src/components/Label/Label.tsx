@@ -41,14 +41,23 @@ export const Label: React.FC<Props> = ({
     return (
         <label className={`apollo-component-library-label-component ${className || ''}`} {...props}>
             {value?.length ? (
-                <Text bold style={{ marginBottom: 5 }}>{`${value}${required ? '*' : ''}`}</Text>
+                <Text bold style={labelStyle}>{`${value}${required ? '*' : ''}`}</Text>
             ) : null}
             {children}
             {hint?.length ? (
-                <Text color="gray" style={{ fontSize: '0.8rem', marginTop: 4 }}>
+                <Text color="gray" style={hintStyle}>
                     {hint}
                 </Text>
             ) : null}
         </label>
     );
+};
+
+const labelStyle: React.CSSProperties = {
+    marginBottom: 5,
+};
+
+const hintStyle: React.CSSProperties = {
+    fontSize: '0.8rem',
+    marginTop: 4,
 };

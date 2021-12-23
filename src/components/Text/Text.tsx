@@ -115,8 +115,22 @@ export const Text: React.FC<Props> = ({
     };
 
     return (
-        <span {...props} style={{ color, ...style }} className={getVariant()}>
+        <span {...props} style={getTextStyle(color, style)} className={getVariant()}>
             {getCorrectCasing()}
         </span>
     );
+};
+
+/**
+ * Gets text style object
+ *
+ * @param color string determing alternative color
+ * @param style text style property
+ * @return text style object
+ */
+const getTextStyle = (
+    color: string | undefined,
+    style: React.CSSProperties | undefined
+): React.CSSProperties => {
+    return { color, ...style };
 };

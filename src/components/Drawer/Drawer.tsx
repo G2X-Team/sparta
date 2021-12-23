@@ -106,18 +106,18 @@ export const Drawer: React.FC<Props> = ({
         const [footer] = footers;
 
         // define the conatiner style
-        const containerStyle = {
-            [orientation]: 0,
-            [modifiedDimension]: type === 'permanent' || effect ? dimension : 0,
-            transition: `${modifiedDimension} ${transition}ms`,
-            ...style,
-        };
+        const containerStyle = getDrawerContainerStyle(
+            orientation,
+            modifiedDimension,
+            type,
+            effect,
+            dimension,
+            transition,
+            style
+        );
 
         // define drawer style
-        const drawerStyle = {
-            [modifiedDimension]: dimension,
-            ...style,
-        };
+        const bodyStyle = getDrawerBodyStyle(modifiedDimension, dimension, style);
 
         return (
             <div
@@ -127,7 +127,7 @@ export const Drawer: React.FC<Props> = ({
                     ${className} ${orientation} ${type}
                 `}
             >
-                <div {...props} ref={drawer} style={drawerStyle}>
+                <div {...props} ref={drawer} style={bodyStyle}>
                     {header}
                     <div className="apollo-component-library-drawer-component-body">
                         {formatted.getAll()}
@@ -139,7 +139,7 @@ export const Drawer: React.FC<Props> = ({
     };
 
     return (
-        <React.Fragment>
+        <>
             {type === 'permanent' || display ? (
                 <div className={`apollo-component-library-drawer-component-container ${type}`}>
                     <div>
@@ -149,12 +149,70 @@ export const Drawer: React.FC<Props> = ({
                                 onClick={toggleOpen}
                                 className={`apollo-component-library-drawer-component-backdrop 
                                     ${type}`}
-                                style={{ opacity: effect ? 1 : 0 }}
+                                style={getBackdropStyle(effect)}
                             />
                         ) : null}
                     </div>
                 </div>
             ) : null}
-        </React.Fragment>
+        </>
     );
+};
+
+/**
+ * Gets the style for the drawer backdrop
+ *
+ * @param effect boolean determining when to change the opacity
+ * @return style object
+ */
+const getBackdropStyle = (effect: boolean): React.CSSProperties => {
+    return { opacity: effect ? 1 : 0 };
+};
+
+/**
+ * Gets the drawer container style
+ *
+ * @param orientation string that determines the orientation of container
+ * @param modifiedDimension string representing what dimension is being changed
+ * @param type string that determines type of container
+ * @param effect boolean that determines when to toggle dimension
+ * @param dimension the scalar representing the size of the dimension
+ * @param transition time in MS that it taks to close menu
+ * @param style component css props
+ * @return style object
+ */
+const getDrawerContainerStyle = (
+    orientation: string,
+    modifiedDimension: string,
+    type: string,
+    effect: boolean,
+    dimension: number | string,
+    transition: number,
+    style: React.CSSProperties | undefined
+): React.CSSProperties => {
+    return {
+        [orientation]: 0,
+        [modifiedDimension]: type === 'permanent' || effect ? dimension : 0,
+        transition: `${modifiedDimension} ${transition}ms`,
+        ...style,
+    };
+};
+
+/**
+ * Gets body drawer style
+ *
+ * @param modifiedDimension string representing what dimension is being changed
+ * @param dimension the scalar representing the size of the dimension
+ * @param style component css props
+ * @return style object
+ */
+const getDrawerBodyStyle = (
+    modifiedDimension: string,
+    dimension: number | string,
+    style: React.CSSProperties | undefined
+): React.CSSProperties => {
+    return {
+        [modifiedDimension]: dimension,
+        ...style,
+    };
 };
