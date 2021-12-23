@@ -9,6 +9,8 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     value: string;
     /** Determines whether the user can change the input */
     disabled?: boolean;
+    /** Determines whether component is checked or not */
+    checked?: boolean;
 }
 
 /**
