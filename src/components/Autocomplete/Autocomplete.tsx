@@ -1,10 +1,12 @@
 /* eslint-disable require-jsdoc */
 import React from 'react';
+import { IconType } from 'react-icons';
 import { BsCaretDownFill, BsCaretUpFill } from 'react-icons/bs';
 import './Autocomplete.css';
 
 interface Option {
     getDisplayLabel: () => string;
+    getSubtitle?: () => string;
     getSearchString?: () => string;
     getIcon?: () => JSX.Element;
     renderTile?: () => JSX.Element;
@@ -13,8 +15,32 @@ interface Option {
 export interface Props {
     placeholder: string;
     options: Option[];
+    onSelect: (option: Option) => void;
     required?: boolean;
+    icons?: {
+        open: IconType;
+        closed: IconType;
+        clear: IconType;
+    };
 }
+
+interface InternalProps extends Props {
+    isOpen: boolean;
+    toggle: () => void;
+    searchString: string;
+    setSearchString: (searchString: string) => void;
+}
+
+interface DropdownOptionProps {
+    option: Option;
+    toggle: () => void;
+}
+
+const pokemons = [
+    { getDisplayLabel: () => 'Bulbasaur' },
+    { getDisplayLabel: () => 'Charmander' },
+    { getDisplayLabel: () => 'Squirtle' },
+];
 
 /**
  * Autocomplete component that allows the users to select from a list of options
@@ -23,7 +49,24 @@ export interface Props {
  * @return Autocomplete component
  */
 export const Autocomplete: React.FC<Props> = (props) => {
-    return <SearchInput {...props} />;
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [searchString, setSearchString] = React.useState('');
+    const [selectedOption, setSelectedOption] = React.useState<Option>();
+    const internalProps = {
+        ...props,
+        options: pokemons,
+        isOpen,
+        toggle: () => setIsOpen(!isOpen),
+        searchString,
+        setSearchString,
+    };
+
+    return (
+        <div className="autocomplete-root">
+            <SearchInput {...internalProps} />
+            <DropdownList {...internalProps} />
+        </div>
+    );
 };
 
 /**
@@ -32,36 +75,49 @@ export const Autocomplete: React.FC<Props> = (props) => {
  * @param props - Set of properties to configure the autocomplete
  * @return Autocomplete component
  */
-export const SearchInput: React.FC<{ required?: boolean }> = ({ required }) => {
+export const SearchInput: React.FC<InternalProps> = (props) => {
     return (
-        <div
-            style={{
-                display: 'flex',
-                width: 300,
-                padding: 10,
-                border: '1px solid grey',
-                borderRadius: 5,
-            }}
-        >
+        <div className="search-wrapper">
             <input
-                required={required}
-                type="search"
+                type="text"
                 placeholder="Pokemon"
-                className="autocomplete-input"
-                style={{ flexGrow: 1 }}
+                className="search-input"
+                onChange={(e) => props.setSearchString(e.target.value)}
             />
-            <IconButton />
+            <SearchButton {...props} />
         </div>
     );
 };
 
-export const IconButton: React.FC = () => {
-    const [isOpen, setIsOpen] = React.useState(false);
+export const SearchButton: React.FC<InternalProps> = ({ isOpen, toggle }) => {
     const IconComponent = isOpen ? BsCaretUpFill : BsCaretDownFill;
 
     return (
-        <button className="transparent-button" onClick={() => setIsOpen(!isOpen)}>
+        <button className="search-button" onClick={toggle}>
             <IconComponent />
         </button>
     );
+};
+
+export const DropdownList: React.FC<InternalProps> = ({ isOpen, toggle, options }) => {
+    if (!isOpen) {
+        return null;
+    }
+    console.log(options);
+    return (
+        <div className="dropdown-wrapper">
+            {options.map((option) => (
+                <DropdownOption key={option.getDisplayLabel()} option={option} toggle={toggle} />
+            ))}
+        </div>
+    );
+};
+
+export const DropdownOption: React.FC<DropdownOptionProps> = ({ option, toggle }) => {
+    if (option.renderTile) {
+        return option.renderTile();
+    }
+
+    console.log(option.getDisplayLabel());
+    return <div onClick={toggle}>{option.getDisplayLabel()}</div>;
 };

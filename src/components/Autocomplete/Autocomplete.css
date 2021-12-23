@@ -1,9 +1,20 @@
-.autocomplete-input {
-    border: none;
-    outline: none;
+.autocomplete-root {
+    width: 300px;
+}
+.search-wrapper {
+    display: flex;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.transparent-button {
+.search-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+}
+
+.search-button {
     width: 1em;
     height: 1em;
     font-size: 1em;
@@ -22,4 +33,15 @@
 
 .transparent-button:hover {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-wrapper {
+    max-height: 40vh;
+    border: none;
+    border-radius: 5px;
+    z-index: 1300;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px,
+        rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+    overflow-y: auto;
+    overflow-x: auto;
 }
