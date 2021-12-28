@@ -30,7 +30,7 @@ export const Label: React.FC<Props> = ({
     // checks if there is a child with a required prop toggled on mount
     useEffect(() => {
         // get all formatted children
-        const formatted = new FormatChildren({ children }, []);
+        const formatted = new FormatChildren({ children });
         if (formatted.getAll().length > 1) throw new Error('Label cannot have more than one child');
 
         // get required prop from child

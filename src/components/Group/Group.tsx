@@ -75,9 +75,10 @@ export const Group: React.FC<Props> = ({
 
         // determine what component we are looking for
         const Input: React.FC<any> = type === 'radio' ? Radio : Checkbox;
+        const inputName: string = type === 'radio' ? 'Radio' : 'Checkbox';
 
         // get all instances of the input
-        const formatted = new FormatChildren(parentProps, [Input, View]);
+        const formatted = new FormatChildren(parentProps, { [inputName]: Input, View });
 
         return formatted.getAll();
     };

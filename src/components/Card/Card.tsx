@@ -24,7 +24,7 @@ export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Elemen
      */
     const renderAll = (): JSX.Element => {
         // get all the children from the components
-        const formatted = new FormatChildren({ children }, [Header, Footer]);
+        const formatted = new FormatChildren({ children }, { Header, Footer });
 
         // extract header and footer
         const headers = formatted.get(Header);

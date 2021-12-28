@@ -93,18 +93,18 @@ export const Drawer: React.FC<Props> = ({
      */
     const renderDrawer = (): ReactNode => {
         // gets all found children
-        const formatted = new FormatChildren({ children }, [Header, Footer, Option]);
+        const formatted = new FormatChildren({ children }, { Header, Footer, Option });
 
         // format header and footer
-        const [headers, footers] = formatted.extractMultiple([Header, Footer]);
+        const { Header: headers, Footer: footers } = formatted.extract({ Header, Footer });
 
         // check that there is only one header and footer max
         if (headers?.length > 1) throw new Error('Drawer can only have one Header component');
         if (footers?.length > 1) throw new Error('Drawer can only have one Footer component');
 
         // get the header/footer if it exists and assign it into a variable
-        const [header] = headers;
-        const [footer] = footers;
+        const [header] = headers || [];
+        const [footer] = footers || [];
 
         // define the conatiner style
         const containerStyle = getDrawerContainerStyle(

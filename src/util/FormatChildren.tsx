@@ -8,7 +8,12 @@ export interface FoundChildren {
     other: JSX.Element[];
 }
 
-export interface FormatMap {
+interface ComponentDictionary {
+    /** Used to get all components given a specific display name */
+    [displayName: string]: JSX.Element[];
+}
+
+export interface ComponentMap {
     /** All different sought out components */
     [displayName: string]: React.FC<any>;
 }
@@ -22,31 +27,24 @@ class FormatChildren {
      * constructor will identify and format them.
      *
      * @param parentProps props pertaining to the parent component
-     * @param components these are formatted components with the same name as the sought out
+     * @param componentMap these are formatted components with the same name as the sought out
      * components. When found by this constructor, the sought out will be replaced by the
      * formatted.
      */
-    constructor(parentProps: any, components: React.FC<any>[]) {
+    constructor(parentProps: any, componentMap: ComponentMap = {}) {
         // destructure children from parent props
         const { children } = parentProps;
-        const formatMap: FormatMap = {};
-
-        // loop through all sought out component types
-        components.forEach((component: React.FC<any>) => {
-            const componentName: string = component.displayName || component.name;
-            formatMap[componentName] = component;
-        });
 
         // loop through all children
         Children.forEach(children, (child: JSX.Element, index: number) => {
             const childName: string = child?.type?.displayName || child?.type?.name;
 
             // hande whether sought out component is found
-            if (formatMap[childName]) {
+            if (componentMap[childName]) {
                 if (!this.foundChildren[childName]) this.foundChildren[childName] = [];
 
                 // get component format
-                const { [childName]: Component } = formatMap;
+                const { [childName]: Component } = componentMap;
 
                 // get required props
                 const {
@@ -93,60 +91,34 @@ class FormatChildren {
     getOther = (): JSX.Element[] => this.foundChildren.other;
 
     /**
-     * Will remove all instances of a given child from the stored formatted children at the cost
-     * of an extra iteration of all of them.
+     * Will remove all instances of a given child in the component map from the stored
+     * formatted children at the cost of an extra iteration of all of them.
      *
-     * @param child child wanting to remove from formatted children
+     * @param componentMap child wanting to remove from formatted children
      * @return all instances of child
      */
-    extract = (child: React.FC<any>): JSX.Element[] => {
-        const childName: string = child?.displayName || child?.name;
-        const {
-            foundChildren: { [childName]: children },
-        } = this;
-
-        delete this.foundChildren[childName];
+    extract = (componentMap: ComponentMap): ComponentDictionary => {
+        // define an object to keep track of all extracted components
+        const extracted: ComponentDictionary = {};
 
         // removes all instances of the child
         this.allChildren = this.allChildren.filter((child: JSX.Element) => {
             const name: string = child?.type?.displayName || child?.type?.name;
-            return name != childName;
-        });
 
-        return children || [];
-    };
+            // determine whether display name is present in both maps
+            if (componentMap[name] && this.foundChildren[name]) {
+                // if found get the extracted components and move them to the extracted dictionary
+                const {
+                    foundChildren: { [name]: extractedComponents },
+                } = this;
+                extracted[name] = extractedComponents;
 
-    /**
-     * Extracts all instances and matches of given children from stored formatted children at the
-     * cost of an extra iteration of all of them plus an iteration of the input array.
-     *
-     * @param children children wanting to remove from formatted children
-     * @return all instances of extracted children returned a matrix the same order it was
-     * inputted in the parameters;
-     */
-    extractMultiple = (children: React.FC<any>[]): JSX.Element[][] => {
-        const extracted: JSX.Element[][] = [];
-        let comparator = '';
+                // delete the component from found children
+                delete this.foundChildren[name];
+            }
 
-        // loop through every child and get the comparator string
-        children.forEach((component: React.FC<any>, index: number) => {
-            // get the name
-            let componentName: string = component?.displayName || component?.name || '';
-
-            // push the values to the extracted array and then remove it from the found children
-            extracted.push(this.foundChildren[componentName] || []);
-            delete this.foundChildren[componentName];
-
-            // determine whether there is another comparison that needs to be made after
-            if (index !== children.length - 1) componentName += '|';
-
-            comparator += componentName;
-        });
-
-        // find all the children who don't match the extracted
-        this.allChildren = this.allChildren.filter((child: JSX.Element) => {
-            const childName: string = child?.type?.displayName || child?.type?.name;
-            return !childName?.match(comparator);
+            // only add component to list if it not in the given component map
+            return !componentMap[name];
         });
 
         return extracted;

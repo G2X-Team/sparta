@@ -37,7 +37,7 @@ export const ButtonGroup: React.FC<Props> = ({
      */
     const renderButtons = (): JSX.Element[] => {
         // get new formatted children
-        const formatted = new FormatChildren({ children, disabled, size, variant }, [Button]);
+        const formatted = new FormatChildren({ children, disabled, size, variant }, { Button });
         if (formatted.getOther().length)
             throw new Error('ButtonGroup can only accept Buttons as children');
 
