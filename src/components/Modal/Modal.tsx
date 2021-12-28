@@ -54,11 +54,13 @@ export const Modal: React.FC<Props> = ({
      * @return formatted modal component
      */
     const renderModal = (): ReactNode => {
+        const parentProps = { children, manual, toggleModal, open };
+
         // find all specified components
-        const formatted = new FormatChildren({ children, manual, toggleModal, open }, [
+        const formatted = new FormatChildren(parentProps, {
             Header,
             Footer,
-        ]);
+        });
 
         // extract header and footer components
         const headers = formatted.get(Header);

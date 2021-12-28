@@ -52,7 +52,7 @@ export const Dropdown: React.FC<Props> = ({
         };
 
         // find all targeted components
-        const formatted = new FormatChildren(structured, [Button, Option]);
+        const formatted = new FormatChildren(structured, { Button, Option });
 
         // get buttons
         const buttons: JSX.Element[] = formatted.get(Button);

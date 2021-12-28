@@ -13,8 +13,11 @@ const Footer: React.FC<Props> = ({
     parentProps: { children, ...parentProps },
     ...props
 }: Props) => {
+    // gets all props
+    const allProps = { ...props, ...parentProps };
+
     // find button groups
-    const formattedFooter = new FormatChildren({ ...props, ...parentProps }, [ButtonGroup]);
+    const formattedFooter = new FormatChildren(allProps, { ButtonGroup });
 
     // format and extract button groups
     const buttonGroups = formattedFooter.get(ButtonGroup);

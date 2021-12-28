@@ -14,8 +14,11 @@ const ButtonGroup: React.FC<Overload<Props>> = ({
     parentProps: { children, ...parentProps },
     ...props
 }: Overload<Props>) => {
+    // get all props
+    const allProps = { ...props, ...parentProps };
+
     // find the buttons in the button group
-    const formattedButtonGroup = new FormatChildren({ ...props, ...parentProps }, [Button]);
+    const formattedButtonGroup = new FormatChildren(allProps, { Button });
 
     // check that there are only buttons in the button group
     if (formattedButtonGroup.getOther().length > 0)

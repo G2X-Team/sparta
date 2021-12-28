@@ -67,7 +67,13 @@ export const Form: React.FC<Props> = ({
         };
 
         // get all formatted children
-        const formatted = new FormatChildren(parentProps, [Label, Group, TextInput, View, Switch]);
+        const formatted = new FormatChildren(parentProps, {
+            Label,
+            Group,
+            TextInput,
+            View,
+            Switch,
+        });
 
         return formatted.getAll();
     };
