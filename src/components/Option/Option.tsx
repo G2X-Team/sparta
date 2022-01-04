@@ -20,10 +20,11 @@ export interface Props extends Overload<HTMLAttributes<HTMLElement>> {
 export const Option: React.FC<Props> = ({
     children,
     parentProps,
+    className = '',
     ...props
 }: Props): JSX.Element => {
     return (
-        <div {...props} className="apollo-component-library-option-component">
+        <div {...props} className={`apollo-component-library-option-component ${className}`}>
             <Text margins={false}>{children}</Text>
         </div>
     );

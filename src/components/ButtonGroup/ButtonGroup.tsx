@@ -23,7 +23,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  * @return ButtonGroup component
  */
 export const ButtonGroup: React.FC<Props> = ({
-    children,
+    children = '',
     variant = 'default',
     disabled = false,
     size = 'medium',

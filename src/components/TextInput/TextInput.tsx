@@ -28,6 +28,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  */
 export const TextInput: React.FC<Props> = ({
     variant = 'default',
+    className = '',
     password = false,
     valid = true,
     ...props
@@ -38,6 +39,7 @@ export const TextInput: React.FC<Props> = ({
             className={`apollo-component-library-text-input 
                 ${variant} 
                 ${valid ? 'valid' : 'invalid'}
+                ${className}
             `}
             type={password ? 'password' : 'text'}
         />

@@ -16,7 +16,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Card component
  */
-export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Element => {
+export const Card: React.FC<Props> = ({ children, className, ...props }: Props): JSX.Element => {
     /**
      * Renderes all components
      *
@@ -40,15 +40,19 @@ export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Elemen
 
         // return the structured content
         return (
-            <div {...props} className="apollo-component-library-card-component">
+            <>
                 {header}
                 <div className="apollo-component-library-card-component-body">
                     {formatted.getOther()}
                 </div>
                 {footer}
-            </div>
+            </>
         );
     };
 
-    return renderAll();
+    return (
+        <div {...props} className={`apollo-component-library-card-component ${className}`}>
+            {renderAll()}
+        </div>
+    );
 };

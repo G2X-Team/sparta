@@ -14,7 +14,7 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  */
 export const Header: React.FC<Props> = ({
     children,
-    className,
+    className = '',
     parentProps,
     ...props
 }: Props): JSX.Element => {

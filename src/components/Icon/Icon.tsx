@@ -27,6 +27,7 @@ export const Icon: React.FC<Props> = ({
     children,
     variant = 'default',
     color = 'black',
+    className = '',
     disabled,
     style,
     ...props
@@ -36,7 +37,7 @@ export const Icon: React.FC<Props> = ({
             {...props}
             style={getIconStyle(disabled, color, style)}
             className={`material-icons apollo-component-library-icon-component 
-                ${onClick && variant}`}
+                ${onClick && variant} ${className}`}
             onClick={onClick}
         >
             {name}

@@ -38,6 +38,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  */
 export const Text: React.FC<Props> = ({
     children,
+    className = '',
     header = 0,
     margins = false,
     inline = false,
@@ -74,6 +75,9 @@ export const Text: React.FC<Props> = ({
         if (bold) customVariant += 'bold ';
         if (underline) customVariant += 'underline ';
         if (disabled) customVariant += 'disabled ';
+
+        // add className
+        customVariant += className;
 
         return customVariant;
     };
