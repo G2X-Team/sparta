@@ -17,6 +17,7 @@ jobs:
     executor: main
     steps:
       - checkout
+      - node/install-yarn
       - node/install-packages:
           pkg-manager: yarn
       - run:
