@@ -21,6 +21,7 @@ workflows:
           pkg-manager: yarn
           yarn-run: lint
 
+      # Building code
       - node/run:
           matrix: 
             parameters: 
