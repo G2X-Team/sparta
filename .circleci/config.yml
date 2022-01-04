@@ -17,11 +17,10 @@ jobs:
     executor: main
     steps:
       - checkout
-      - node/install-yarn
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          command: yarn run test && yarn run lint && yarn run build
+          command: yarn run test
           name: Run YARN tests
 
 workflows:
