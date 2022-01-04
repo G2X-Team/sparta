@@ -28,6 +28,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
 export const Switch: React.FC<Props> = ({
     children,
     variant = 'default',
+    className = '',
     ...props
 }: Props): JSX.Element => {
     return (
@@ -38,7 +39,7 @@ export const Switch: React.FC<Props> = ({
                 role="switch"
                 className="apollo-component-library-switch-component-input"
             />
-            <span className={`apollo-component-library-switch-component ${variant}`} />
+            <span className={`apollo-component-library-switch-component ${variant} ${className}`} />
             <Text inline margins>
                 {children}
             </Text>

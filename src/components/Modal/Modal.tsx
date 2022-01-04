@@ -23,7 +23,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  * @return Modal component
  */
 export const Modal: React.FC<Props> = ({
-    className,
+    className = '',
     manual = false,
     children,
     style,

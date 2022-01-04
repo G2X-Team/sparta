@@ -15,7 +15,7 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
  */
 export const Divider: React.FC<Props> = ({
     color = 'lightgray',
-    className,
+    className = '',
     height = 1,
     style,
     ...props

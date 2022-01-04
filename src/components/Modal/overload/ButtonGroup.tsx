@@ -12,6 +12,7 @@ import { Props } from '../../ButtonGroup/ButtonGroup';
  */
 const ButtonGroup: React.FC<Overload<Props>> = ({
     parentProps: { children, ...parentProps },
+    className = '',
     ...props
 }: Overload<Props>) => {
     // get all props
@@ -25,7 +26,7 @@ const ButtonGroup: React.FC<Overload<Props>> = ({
         throw new Error('Only buttons are allowed in button groups');
 
     return (
-        <div className="apollo-component-library-modal-component-button-group">
+        <div className={`apollo-component-library-modal-component-button-group ${className}`}>
             {formattedButtonGroup.getAll()}
         </div>
     );
