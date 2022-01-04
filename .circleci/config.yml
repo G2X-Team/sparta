@@ -19,6 +19,7 @@ workflows:
           version: '16.10'
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: yarn
+
       - node/test:
           # This is the node version to use for the `cimg/node` tag
           # Relevant tags can be found on the CircleCI Developer Hub
@@ -26,3 +27,5 @@ workflows:
           version: '14.17'
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: yarn
+      - node/run:
+          yarn-run: lint
