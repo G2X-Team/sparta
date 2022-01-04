@@ -3,11 +3,18 @@ version: 2.1
 orbs:
   node: circleci/node@4.7
 
+executors:
+  main:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          # ensure you have first added these secrets
+          # visit app.circleci.com/settings/project/github/MileMarker10/apollo-component-library/environment-variables
+          username: $DOCKER_HUB_USER
+          password: $DOCKER_HUB_PASSWORD
 jobs:
-  CI v16:
-    executor:
-      name: node/default
-      tag: '16'
+  ci-v16:
+    executor: main
     steps:
       - checkout
       - node/install-packages:
@@ -19,7 +26,7 @@ jobs:
 workflows:
   sample:
     jobs:
-      - CI v16
+      - ci-v16
       # Testing code
       - node/test:
           version: '16.10'
