@@ -4,7 +4,7 @@ orbs:
   node: circleci/node@4.7
 
 workflows:
-  Test-Lint-All-Versions:
+  Test-Lint-Build-All-Versions:
     jobs:
       # Testing code
       - node/test:
@@ -20,3 +20,10 @@ workflows:
               version: ['16.10', '14.17', '12.22']
           pkg-manager: yarn
           yarn-run: lint
+
+      - node/run:
+          matrix: 
+            parameters: 
+              version: ['16.10', '14.17', '12.22']
+          pkg-manager: yarn
+          yarn-run: build
