@@ -21,7 +21,7 @@ export const Label: React.FC<Props> = ({
     value,
     hint,
     children,
-    className,
+    className = '',
     ...props
 }: Props): JSX.Element => {
     // will keep track if label is parent to a required input
@@ -39,7 +39,7 @@ export const Label: React.FC<Props> = ({
     }, []);
 
     return (
-        <label className={`apollo-component-library-label-component ${className || ''}`} {...props}>
+        <label className={`apollo-component-library-label-component ${className}`} {...props}>
             {value?.length ? (
                 <Text bold style={labelStyle}>{`${value}${required ? '*' : ''}`}</Text>
             ) : null}

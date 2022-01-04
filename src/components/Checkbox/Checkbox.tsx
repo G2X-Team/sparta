@@ -20,6 +20,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  */
 export const Checkbox: React.FC<Props> = ({
     children,
+    className,
     disabled = false,
     ...props
 }: Props): JSX.Element => {
@@ -29,7 +30,7 @@ export const Checkbox: React.FC<Props> = ({
                 {...props}
                 type="checkbox"
                 disabled={disabled}
-                className="apollo-component-library-checkbox-component"
+                className={`apollo-component-library-checkbox-component ${className}`}
             />
             <Text inline margins>
                 {children}

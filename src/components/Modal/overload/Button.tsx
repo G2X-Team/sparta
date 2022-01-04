@@ -11,6 +11,7 @@ const Button: React.FC<Overload<Props>> = ({
     parentProps: { toggleModal, manual, open },
     onClick,
     variant,
+    className = '',
     ...props
 }: Overload<Props>): JSX.Element => {
     /**
@@ -27,7 +28,7 @@ const Button: React.FC<Overload<Props>> = ({
             {...props}
             onClick={buttonOnClick}
             className={`apollo-component-library-modal-component-button-group-button 
-                ${variant}`}
+                ${className} ${variant}`}
         />
     );
 };

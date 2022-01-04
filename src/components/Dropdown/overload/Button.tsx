@@ -11,6 +11,7 @@ const Button: React.FC<Overload<Props>> = ({
     parentProps: { dropdownRef, toggleOpen, open },
     onClick,
     children,
+    className = '',
     ...props
 }: Overload<Props>) => {
     /**
@@ -25,7 +26,7 @@ const Button: React.FC<Overload<Props>> = ({
     return (
         <span
             {...props}
-            className="apollo-component-library-dropdown-button-component"
+            className={`apollo-component-library-dropdown-button-component ${className}`}
             onClick={buttonOnClick}
             ref={dropdownRef}
         >

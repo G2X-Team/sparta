@@ -42,7 +42,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  */
 export const Drawer: React.FC<Props> = ({
     children,
-    className,
+    className = '',
     type = 'absolute',
     orientation = 'left',
     open = false,

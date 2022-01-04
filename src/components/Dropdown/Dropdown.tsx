@@ -26,6 +26,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  */
 export const Dropdown: React.FC<Props> = ({
     children,
+    className = '',
     orientation = 'bottom',
     alignment = 'left',
     menuHeight,
@@ -81,5 +82,7 @@ export const Dropdown: React.FC<Props> = ({
         );
     };
 
-    return <span className="apollo-component-library-dropdown">{renderDropdown()}</span>;
+    return (
+        <span className={`apollo-component-library-dropdown ${className}`}>{renderDropdown()}</span>
+    );
 };
