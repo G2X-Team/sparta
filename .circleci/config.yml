@@ -28,5 +28,6 @@ workflows:
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: yarn
       - node/run:
+          version: '16.10'
           pkg-manager: yarn
           yarn-run: lint
