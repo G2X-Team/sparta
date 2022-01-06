@@ -19,3 +19,4 @@ export { Icon } from './components/Icon/Icon';
 export { Label } from './components/Label/Label';
 export { Form } from './components/Form/Form';
 export { NavigationBar } from './components/NavigationBar/NavigationBar';
+export { Section } from './components/Section/Section';
