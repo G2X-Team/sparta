@@ -5,7 +5,7 @@ import './Drawer.css';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import Option from './overload/Option';
-import { ComponentGeneralOrientation, ComponentOrientation } from '../../interfaces/Properties';
+import { ComponentOrientation } from '../../interfaces/Properties';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /**
@@ -19,7 +19,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
      * the anchoring point for the drawer. When `type="persistent"` OR `type="permanent"`, the
      * values will determine where the border separating the content will appear
      */
-    orientation?: ComponentOrientation | ComponentGeneralOrientation;
+    orientation?: ComponentOrientation;
     /** Executes a method when the **open** prop is going from `true` to `false` */
     onClose?: () => void;
     /** Determines the time in milliseconds it will take to open/close, won't do anything when

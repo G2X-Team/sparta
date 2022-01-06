@@ -18,3 +18,4 @@ export { Modal } from './components/Modal/Modal';
 export { Icon } from './components/Icon/Icon';
 export { Label } from './components/Label/Label';
 export { Form } from './components/Form/Form';
+export { NavigationBar } from './components/NavigationBar/NavigationBar';
