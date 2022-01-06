@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from 'react';
+import * as CSS from 'csstype';
 import './Icon.css';
 
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
@@ -7,7 +8,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     /** Specification of an onClick method will convert icon into a button */
     onClick?: () => void;
     /** Color value that you want to assign to icon */
-    color?: string;
+    color?: CSS.Property.Color;
     /** determines whether icon has disabled styling or not */
     disabled?: boolean;
     /** Determines preset style of icon */
