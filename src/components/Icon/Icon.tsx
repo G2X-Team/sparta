@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from 'react';
+import * as CSS from 'csstype';
 import './Icon.css';
 
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
@@ -7,13 +8,15 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     /** Specification of an onClick method will convert icon into a button */
     onClick?: () => void;
     /** Color value that you want to assign to icon */
-    color?: string;
+    color?: CSS.Property.Color;
     /** determines whether icon has disabled styling or not */
     disabled?: boolean;
     /** Determines preset style of icon */
     variant?: string;
     /** This component must not have children */
     children?: undefined;
+    /** Determines whether component is clickable or not */
+    clickable?: boolean;
 }
 
 /**
@@ -24,6 +27,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
 export const Icon: React.FC<Props> = ({
     name,
     onClick,
+    clickable = onClick && true,
     children,
     variant = 'default',
     color = 'black',
@@ -33,15 +37,15 @@ export const Icon: React.FC<Props> = ({
     ...props
 }: Props): JSX.Element => {
     return (
-        <i
+        <span
             {...props}
             style={getIconStyle(disabled, color, style)}
             className={`material-icons apollo-component-library-icon-component 
-                ${onClick && variant} ${className}`}
+                ${clickable && variant} ${className}`}
             onClick={onClick}
         >
             {name}
-        </i>
+        </span>
     );
 };
 

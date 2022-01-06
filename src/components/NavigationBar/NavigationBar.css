@@ -1,0 +1,48 @@
+.apollo-component-library-navigation-bar-component {
+    display: flex;
+    background-color: white; 
+    width: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    box-shadow: 0px 0 2px 3px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    position: relative;
+}
+
+.apollo-component-library-navigation-bar-component.absolute {
+    position: absolute;
+}
+
+.apollo-component-library-navigation-bar-component.fixed {
+    position: fixed;
+}
+
+.apollo-component-library-navigation-bar-component.absolute {
+    position: absolute;
+}
+
+.apollo-component-library-navigation-bar-component.top {
+    top: 0;
+    left: 0;
+}
+
+.apollo-component-library-navigation-bar-component.bottom {
+    bottom: 0;
+    left: 0;
+}
+
+.apollo-component-library-navigation-bar-component-title {
+    padding-right: 10px;
+    cursor: default;
+    user-select: none;
+}
+
+.apollo-component-library-navigation-bar-component-title.clickable {
+    cursor: pointer;
+}
+
+.apollo-component-library-navigation-bar-component-title.mobile {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%)
+}
