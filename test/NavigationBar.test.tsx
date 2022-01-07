@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { NavigationBar, Option, Section } from '../src';
+import { NavigationBar } from '../src';
 
 describe('NavigationBar', () => {
     it('will render correctly', () => {
