@@ -17,6 +17,32 @@
     position: fixed;
 }
 
+.apollo-component-library-navigation-bar-component.absolute {
+    position: absolute;
+}
+
+.apollo-component-library-navigation-bar-component.top {
+    top: 0;
+    left: 0;
+}
+
+.apollo-component-library-navigation-bar-component.bottom {
+    bottom: 0;
+    left: 0;
+}
+
 .apollo-component-library-navigation-bar-component-title {
     padding-right: 10px;
+    cursor: default;
+    user-select: none;
+}
+
+.apollo-component-library-navigation-bar-component-title.clickable {
+    cursor: pointer;
+}
+
+.apollo-component-library-navigation-bar-component-title.mobile {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%)
 }

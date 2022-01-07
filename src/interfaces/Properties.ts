@@ -5,4 +5,4 @@ export type ComponentOrientation = ComponentVerticalOrientation | ComponentHoriz
 export type ComponentGeneralOrientation = 'horizontal' | 'vertical';
 export type ComponentSize = 'small' | 'medium' | 'large';
 export type ComponentAlignment = 'left' | 'center' | 'right';
-export type ComponentPosition = 'static' | 'absolute' | 'sticky' | 'fixed';
+export type ComponentPosition = 'static' | 'absolute' | 'fixed';

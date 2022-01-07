@@ -1,9 +1,18 @@
-import React, { CSSProperties, HTMLAttributes, ReactNode, useState, useEffect } from 'react';
+import React, {
+    CSSProperties,
+    HTMLAttributes,
+    ReactNode,
+    useState,
+    useEffect,
+    useRef,
+} from 'react';
 import {
     ComponentPosition,
     ComponentSize,
     ComponentVerticalOrientation,
 } from '../../interfaces/Properties';
+import * as CSS from 'csstype';
+
 import FormatChildren from '../../util/FormatChildren';
 import './NavigationBar.css';
 
@@ -19,6 +28,10 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     size?: ComponentSize;
     /** Title of the navigation bar can be any kind of element, string, or number */
     titleElement?: ReactNode;
+    /** Method that executes when the title is clicked */
+    onTitleClick?: () => void;
+    /** Title color, also determines the color of the hamburger menu if applicable */
+    titleColor?: CSS.Property.Color;
 }
 
 /**
@@ -29,14 +42,25 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 export const NavigationBar: React.FC<Props> = ({
     size = 'medium',
     position = 'static',
-    orientation,
+    orientation = 'top',
     children,
     titleElement,
+    onTitleClick,
     style,
     ...props
 }: Props) => {
+    // refs
+    const navigationBar = useRef<HTMLDivElement>(null);
     // state
     const [mobile, setMobile] = useState(false);
+
+    useEffect(() => {
+        if (navigationBar?.current?.offsetWidth && navigationBar?.current?.offsetWidth < 700) {
+            setMobile(true);
+        } else {
+            setMobile(false);
+        }
+    }, [navigationBar.current?.offsetWidth]);
 
     /**
      * Render all navigation bar children components
@@ -44,7 +68,7 @@ export const NavigationBar: React.FC<Props> = ({
      * @return formatted components
      */
     const renderAll = (): JSX.Element[] => {
-        const parentProps = { children };
+        const parentProps = { children, mobile };
         const formatted = new FormatChildren(parentProps, { Section });
 
         return formatted.getAll();
@@ -53,13 +77,19 @@ export const NavigationBar: React.FC<Props> = ({
     return (
         <div
             {...props}
-            className="apollo-component-library-navigation-bar-component"
+            className={`apollo-component-library-navigation-bar-component 
+                ${position} ${orientation}
+            `}
             style={getNavigationStyle(size, style)}
+            ref={navigationBar}
         >
             <Text
                 header={3}
                 bold
-                className="apollo-component-library-navigation-bar-component-title"
+                onClick={onTitleClick}
+                className={`apollo-component-library-navigation-bar-component-title 
+                    ${mobile && 'mobile'} ${onTitleClick && 'clickable'}
+                `}
             >
                 {titleElement}
             </Text>
