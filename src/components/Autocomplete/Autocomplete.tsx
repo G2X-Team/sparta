@@ -6,9 +6,9 @@ import './Autocomplete.css';
 
 interface Option {
     getDisplayLabel: () => string;
-    getSubtitle?: () => string;
     getSearchString?: () => string;
-    getIcon?: () => JSX.Element;
+    getIcon?: () => JSX.Element | string;
+    getDisplayContent?: () => JSX.Element;
     renderTile?: () => JSX.Element;
 }
 
@@ -37,9 +37,21 @@ interface DropdownOptionProps {
 }
 
 const pokemons = [
-    { getDisplayLabel: () => 'Bulbasaur' },
-    { getDisplayLabel: () => 'Charmander' },
-    { getDisplayLabel: () => 'Squirtle' },
+    {
+        getDisplayLabel: () => 'Bulbasaur',
+        getIcon: () =>
+            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+    },
+    {
+        getDisplayLabel: () => 'Charmander',
+        getIcon: () =>
+            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
+    },
+    {
+        getDisplayLabel: () => 'Squirtle',
+        getIcon: () =>
+            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png',
+    },
 ];
 
 /**
@@ -103,7 +115,7 @@ export const DropdownList: React.FC<InternalProps> = ({ isOpen, toggle, options 
     if (!isOpen) {
         return null;
     }
-    console.log(options);
+
     return (
         <div className="dropdown-wrapper">
             {options.map((option) => (
@@ -118,6 +130,34 @@ export const DropdownOption: React.FC<DropdownOptionProps> = ({ option, toggle }
         return option.renderTile();
     }
 
-    console.log(option.getDisplayLabel());
-    return <div onClick={toggle}>{option.getDisplayLabel()}</div>;
+    return (
+        <div onClick={toggle} className="dropdown-option-wrapper">
+            <DropdownOptionIcon option={option} />
+            <DropdownOptionContent option={option} />
+        </div>
+    );
+};
+
+export const DropdownOptionIcon: React.FC<{ option: Option }> = ({ option }) => {
+    if (!option.getIcon) {
+        return null;
+    }
+    const icon = option.getIcon();
+    if (typeof icon === 'string') {
+        return (
+            <div className="dropdown-option-icon">
+                <img src={icon} style={{ maxHeight: 50 }} />
+            </div>
+        );
+    }
+
+    return <div className="dropdown-option-icon">{option.getIcon()}</div>;
+};
+
+export const DropdownOptionContent: React.FC<{ option: Option }> = ({ option }) => {
+    if (option.getDisplayContent) {
+        return option.getDisplayContent();
+    }
+
+    return <div className="dropdown-option-content">{option.getDisplayLabel()}</div>;
 };

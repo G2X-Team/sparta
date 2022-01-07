@@ -1,5 +1,5 @@
 .autocomplete-root {
-    width: 300px;
+    width: 400px;
 }
 .search-wrapper {
     display: flex;
@@ -44,4 +44,24 @@
         rgb(0 0 0 / 12%) 0px 1px 3px 0px;
     overflow-y: auto;
     overflow-x: auto;
+}
+
+.dropdown-option-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 7px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+.dropdown-option-icon {
+    border-right: 1px solid #ccc;
+}
+
+.dropdown-option-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 5px;
 }
