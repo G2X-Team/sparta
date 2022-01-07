@@ -9,10 +9,17 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
     height?: number | string;
     /** value that determines the width of section */
     width?: number | string;
+    /** value that determines the min width of the section */
+    minWidth?: number | string;
     /** justify content value */
     justifyContent?: CSS.Property.JustifyContent;
     /** align items value */
     alignItems?: CSS.Property.AlignItems;
+    /**
+     * if section is a navigation bar, it will compress to a hamburger given it shrinks past
+     * its min-width
+     */
+    navigation?: boolean;
 }
 
 /**

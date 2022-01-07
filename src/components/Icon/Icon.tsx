@@ -15,6 +15,8 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     variant?: string;
     /** This component must not have children */
     children?: undefined;
+    /** Determines whether component is clickable or not */
+    clickable?: boolean;
 }
 
 /**
@@ -25,6 +27,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
 export const Icon: React.FC<Props> = ({
     name,
     onClick,
+    clickable = onClick && true,
     children,
     variant = 'default',
     color = 'black',
@@ -34,15 +37,15 @@ export const Icon: React.FC<Props> = ({
     ...props
 }: Props): JSX.Element => {
     return (
-        <i
+        <span
             {...props}
             style={getIconStyle(disabled, color, style)}
             className={`material-icons apollo-component-library-icon-component 
-                ${onClick && variant} ${className}`}
+                ${clickable && variant} ${className}`}
             onClick={onClick}
         >
             {name}
-        </i>
+        </span>
     );
 };
 

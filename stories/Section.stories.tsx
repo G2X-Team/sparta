@@ -5,6 +5,10 @@ import { Meta, Story } from '@storybook/react';
 const meta: Meta = {
     title: 'Interfacing/Section',
     component: Section,
+    args: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 };
 
 export default meta;
@@ -17,7 +21,7 @@ export default meta;
  */
 const Template: Story<Props> = (args) => (
     <div style={{ display: 'flex', height: 300, width: 500 }}>
-        <Section style={{ background: 'red' }} alignItems="center" justifyContent="space-around">
+        <Section {...args} style={{ background: 'red' }}>
             1
         </Section>
         <Section style={{ background: 'blue' }} alignItems="center" justifyContent="space-around">
