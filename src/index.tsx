@@ -20,3 +20,5 @@ export { Icon } from './components/Icon/Icon';
 export { Alert } from './components/Alert/Alert';
 export { LoadingState } from './components/LoadingState/LoadingState';
 export { Form } from './components/Form/Form';
+export { NavigationBar } from './components/NavigationBar/NavigationBar';
+export { Section } from './components/Section/Section';

@@ -1,11 +1,11 @@
 import React, { HTMLAttributes, SyntheticEvent, ReactNode, useState, useEffect } from 'react';
-import FormattedChildren from '../../util/FormattedChildren';
+import FormatChildren from '../../util/FormatChildren';
 
-import { Label } from '../Label/Label';
-import { Group } from '../Group/Group';
-import { TextInput } from '../TextInput/TextInput';
-import { View } from '../View/View';
-import { Switch } from '../Switch/Switch';
+import Label from './overload/Label';
+import Group from './overload/Group';
+import TextInput from './overload/TextInput';
+import View from './overload/View';
+import Switch from './overload/Switch';
 
 export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onChange'> {
     /** if the submission occurs with invalid inputs, it will call the on fail instead*/
@@ -46,233 +46,34 @@ export const Form: React.FC<Props> = ({
     }, [formValue]);
 
     /**
-     * Formats Switch components
-     *
-     * @param switchComponent unformatted switch components
-     * @return formatted Switch Component
-     */
-    const formatSwitch = (switchComponent: JSX.Element): JSX.Element => {
-        const {
-            props: {
-                checked: switchChecked,
-                name: switchName,
-                onChange: switchOnChange,
-                required: switchRequired,
-                children: switchChildren,
-                ...switchProps
-            },
-        } = switchComponent;
-
-        // set required if applicable
-        if (switchRequired && !required[switchName]) {
-            setRequired({
-                ...required,
-                [switchName]: `${switchName} is required, please toggle on.`,
-            });
-        }
-
-        /**
-         * Modifies switch on change
-         */
-        const modifiedOnChange = (): void => {
-            setFormValue({ ...formValue, [switchName]: formValue[switchName] ? false : true });
-            switchOnChange && switchOnChange();
-        };
-
-        return (
-            <Switch {...switchProps} name={switchName} onChange={modifiedOnChange}>
-                {switchChildren}
-            </Switch>
-        );
-    };
-
-    /**
-     * Formats label component
-     *
-     * @param label unformatted label component
-     * @return formatted label component
-     */
-    const formatLabel = (label: JSX.Element): JSX.Element => {
-        // extract props
-        const { props: labelProps } = label;
-        const { children: labelChildren, value: labelValue } = labelProps;
-
-        return (
-            <Label key={labelValue} {...labelProps}>
-                {renderAll(labelChildren)}
-            </Label>
-        );
-    };
-
-    /**
-     * Format view component
-     *
-     * @param view unformatted view
-     * @return formatted view
-     */
-    const formatView = (view: JSX.Element): JSX.Element => {
-        // extract props
-        const { props: viewProps } = view;
-        const { children: viewChildren } = viewProps;
-
-        return <View {...viewProps}>{viewChildren}</View>;
-    };
-
-    /**
-     * Formats group component
-     *
-     * @param group unformatted group component
-     * @return formatted group component
-     */
-    const formatGroup = (group: JSX.Element): JSX.Element => {
-        // extract props
-        const {
-            props: {
-                validator: groupValidator,
-                children: groupChildren,
-                onChange: groupOnChange,
-                name: groupName,
-                required: groupRequired,
-                ...groupProps
-            },
-        } = group;
-
-        // set required if applicable
-        if (groupRequired && !required[groupName]) {
-            setRequired({
-                ...required,
-                [groupName]: `${groupName} is required, please select an option.`,
-            });
-        }
-
-        /**
-         * Modifies group's on change callback to modify the form value
-         *
-         * @param value group value
-         */
-        const modifiedOnChange = (value: string | string[]): void => {
-            // check that its valid
-            if (groupValidator) {
-                const validity = groupRequired && value.length;
-                const error = groupValidator(value);
-                setValidMap({ ...validMap, [groupName]: validity && !error });
-
-                if (error) errorMessages[groupName] = error;
-                else delete errorMessages[groupName];
-            } else {
-                setValidMap({ ...validMap, [groupName]: true });
-            }
-
-            // update form value
-            setFormValue({ ...formValue, [groupName]: value });
-            groupOnChange && groupOnChange();
-        };
-
-        return (
-            <Group name={groupName} onChange={modifiedOnChange} {...groupProps}>
-                {groupChildren}
-            </Group>
-        );
-    };
-
-    /**
-     * Formatted text input
-     *
-     * @param textInput unformatted text input
-     * @return formatted text input
-     */
-    const formatTextInput = (textInput: JSX.Element): JSX.Element => {
-        // extract props
-        const {
-            props: {
-                validator,
-                required: textInputRequired,
-                name: textInputName,
-                onChange: textInputOnChange,
-                ...textInputProps
-            },
-        } = textInput;
-
-        // add to required map if required
-        if (textInputRequired && !required[textInputName]) {
-            setRequired({
-                ...required,
-                [textInputName]: `${textInputName} is a required field and cannot be empty.`,
-            });
-        }
-
-        /**
-         * Modifies on change to keep track of text input validity
-         *
-         * @param event form event
-         */
-        const modifiedOnChange = (event: React.FormEvent<HTMLInputElement>): void => {
-            // extract input value from event
-            const {
-                currentTarget: { value: inputValue },
-            } = event;
-            const trimmedValue = inputValue.trim();
-
-            // update form value
-            setFormValue({
-                ...formValue,
-                [textInputName]: inputValue.trim(),
-            });
-
-            const validity = textInputRequired ? trimmedValue.length > 0 : true;
-            setValidMap({ ...validMap, [textInputName]: validity });
-
-            // check if there is a validator
-            if (validator) {
-                // get validator values
-                const error = validator(inputValue);
-                setValidMap({ ...validMap, [textInputName]: validity && !error });
-                if (error || !trimmedValue.length) {
-                    errorMessages[textInputName] = trimmedValue.length
-                        ? error
-                        : `${textInputName} is a required value`;
-                } else delete errorMessages[textInputName];
-
-                // set modified state
-                setErrorMessages(errorMessages);
-            }
-
-            // execute on change if it exists
-            textInputOnChange && textInputOnChange(event);
-        };
-
-        return (
-            <TextInput
-                {...textInputProps}
-                required={textInputRequired}
-                valid={validMap[textInputName]}
-                onChange={modifiedOnChange}
-            />
-        );
-    };
-
-    /**
      * Renders all children formatted accordingly
      *
      * @param childrenProp children provided by parent component
      * @return formatted react
      */
     const renderAll = (childrenProp: ReactNode): JSX.Element[] => {
+        // restructure props and add pass through functionality
+        const parentProps = {
+            parentRequired: required,
+            setParentRequired: setRequired,
+            children: childrenProp,
+            formValue,
+            setFormValue,
+            validMap,
+            setValidMap,
+            errorMessages,
+            setErrorMessages,
+            renderAll,
+        };
+
         // get all formatted children
-        const formatted = new FormattedChildren(childrenProp, [
+        const formatted = new FormatChildren(parentProps, {
             Label,
             Group,
             TextInput,
             View,
             Switch,
-        ]);
-
-        // format all components
-        formatted.format(Label, formatLabel);
-        formatted.format(Group, formatGroup);
-        formatted.format(TextInput, formatTextInput);
-        formatted.format(View, formatView);
-        formatted.format(Switch, formatSwitch);
+        });
 
         return formatted.getAll();
     };

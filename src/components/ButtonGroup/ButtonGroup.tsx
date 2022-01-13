@@ -1,19 +1,20 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
 import './ButtonGroup.css';
 
-import FormattedChildren from '../../util/FormattedChildren';
+import FormatChildren from '../../util/FormatChildren';
+import { StyleVariant, ComponentSize } from '../../interfaces/Properties';
 
-import { Button } from '../Button/Button';
+import Button from './overload/Button';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Disables all buttons within button group */
     disabled?: boolean;
     /** toggle between different button group sizes */
-    size?: 'small' | 'medium' | 'large';
+    size?: ComponentSize;
     /** requires children */
     children: ReactNode;
     /** select from preset style */
-    variant?: 'default' | 'secondary';
+    variant?: StyleVariant;
 }
 
 /**
@@ -22,7 +23,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  * @return ButtonGroup component
  */
 export const ButtonGroup: React.FC<Props> = ({
-    children,
+    children = '',
     variant = 'default',
     disabled = false,
     size = 'medium',
@@ -30,50 +31,17 @@ export const ButtonGroup: React.FC<Props> = ({
     ...props
 }: Props): JSX.Element => {
     /**
-     * Formats
+     * Renders all button group buttons and caches chlidren
      *
-     * @param button unformatted button component
-     * @return formatted button component
+     * @return formatted buttons
      */
-    const formatButton = (button: JSX.Element): JSX.Element => {
-        // extract props from button
-        const { props } = button;
-        const {
-            children: buttonChildren,
-            disabled: buttonDisabled,
-            className: buttonClassName,
-            href,
-            ...buttonProps
-        } = props;
+    const renderButtons = (): JSX.Element[] => {
+        // get new formatted children
+        const formatted = new FormatChildren({ children, disabled, size, variant }, { Button });
+        if (formatted.getOther().length)
+            throw new Error('ButtonGroup can only accept Buttons as children');
 
-        return (
-            <button
-                {...buttonProps}
-                disabled={disabled}
-                key={Math.random()}
-                className={`apollo-component-library-button-group-button-component 
-                    ${buttonClassName} 
-                    ${variant} 
-                    ${size}`}
-            >
-                {href ? <a href={href}>{buttonChildren}</a> : buttonChildren}
-            </button>
-        );
-    };
-
-    /**
-     * Will look for any button components and render them appropriately
-     *
-     * @return array of button elements
-     */
-    const renderButtons = (): ReactNode[] => {
-        const formatted = new FormattedChildren(children, [Button]);
-        if (formatted.getOther.length > 0)
-            throw new Error('ButtonGroup can only have Button elements as children');
-
-        formatted.format(Button, formatButton);
-
-        return formatted.get(Button);
+        return formatted.getAll();
     };
 
     return (

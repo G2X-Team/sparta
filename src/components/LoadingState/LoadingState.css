@@ -6,17 +6,17 @@
     left: 0;
 }
 
-.apollo-component-library-loadingstate-component-container > div {
+.apollo-component-library-loadingstate-component-container>div {
     position: relative;
     display: grid;
     height: 100vh;
     width: 100vw;
 }
 
+
 /* Absolute type LoadingState begins*/
 
 .apollo-component-library-loadingstate-component.absolute {
-    
     border: 16px solid #f3f3f3;
     z-index: 9999;
     border-radius: 50%;
@@ -25,205 +25,767 @@
     justify-self: center;
     display: flex;
     flex-direction: column;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
     animation: spin 2s linear infinite;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+}
+
+
+/* Safari */
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .apollo-component-library-loadingstate-component-backdrop.absolute {
     position: absolute;
     height: 100vh;
     width: 100vw;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
+
+
 /* Absolute type LoadingState ends*/
+
+
 /* Inline type LoadingState begins */
 
 .apollo-component-library-loadingstate-component.inline {
-    
     border: 16px solid #f3f3f3;
     z-index: 9999;
     border-radius: 50%;
     border-top: 16px solid #3498db;
     display: flex;
     flex-direction: column;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
     animation: spin 2s linear infinite;
-    margin-left: 11%;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+}
+
+.apollo-component-library-loadingstate-component.inline:after {
+    border: 16px solid #f3f3f3;
+    z-index: 9999;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    display: flex;
+    flex-direction: column;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+
+/* Safari */
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .apollo-component-library-loadingstate-component-backdrop.inline {
     position: inline;
 }
 
+
 /* Inline type LoadingState ends */
 
+
 /* LoadingState size begins*/
-.small{
-  width: 11px;
-  height: 11px;
+
+.small {
+    width: 11px;
+    height: 11px;
 }
 
-.medium{
-  width: 60px;
-  height: 60px;
+.medium {
+    width: 60px;
+    height: 60px;
 }
 
-.large{
-  width: 120px;
-  height: 120px;
+.large {
+    width: 120px;
+    height: 120px;
 }
+
+
 /* LoadingState size ends*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Absolute type LoadingState begins*/
-
-.apollo-component-library-loadingstate-component-progressbar.absolute {
-    
-  background-color: #e04542;
-    height: 10px;
-    position: relative;
-    width: 10%;
-
-}
-
+/* Absolute type LoadingState for progress varrient begins*/
 
 .progress {
-  background-size: 23em 0.25em;
-  height: 12px;
-  position: relative;
-  background-color: #e04542;
-
-  display: flex;
-  animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-      -o-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-      -ms-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-      -webkit-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-      -moz-animation: cssload-width 3.45s cubic-bezier(0.45, 0, 1, 1) infinite;
-}
-@keyframes cssload-width {
-  0%, 100% {
-      transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
+    background-size: 23em 0.25em;
+    height: 12px;
+    position: relative;
+    background-color: #e04542;
+    display: flex;
 }
 
-@-o-keyframes cssload-width {
-  0%, 100% {
-      -o-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
+.apollo-component-library-loadingstate-component-progressbar.zero-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 0%;
+    animation: cssload-width-zero 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-zero 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-zero 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-zero 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-zero 3.45s ease-in-out(0.45, 0, 1, 1);
 }
 
-@-ms-keyframes cssload-width {
-  0%, 100% {
-      -ms-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
+@keyframes cssload-width-zero {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 0%;
+    }
 }
 
-@-webkit-keyframes cssload-width {
-  0%, 100% {
-      -webkit-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
+@-o-keyframes cssload-width-zero {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 0%;
+    }
 }
 
-@-moz-keyframes cssload-width {
-  0%, 100% {
-      -moz-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.85);
-  }
-  0% {
-      width: 0;
-  }
-  100% {
-      width: 80%;
-  }
+@-ms-keyframes cssload-width-zero {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 0%;
+    }
+}
+
+@-webkit-keyframes cssload-width-zero {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 0%;
+    }
+}
+
+@-moz-keyframes cssload-width-zero {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 0%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.ten-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 10%;
+    animation: cssload-width-ten 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-ten 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-ten 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-ten 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-ten 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-ten {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 10%;
+    }
+}
+
+@-o-keyframes cssload-width-ten {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 10%;
+    }
+}
+
+@-ms-keyframes cssload-width-ten {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 10%;
+    }
+}
+
+@-webkit-keyframes cssload-width-ten {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 10%;
+    }
+}
+
+@-moz-keyframes cssload-width-ten {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 10%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.twenty-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 20%;
+    animation: cssload-width-twenty 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-twenty {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 20%;
+    }
+}
+
+@-o-keyframes cssload-width-twenty {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 20%;
+    }
+}
+
+@-ms-keyframes cssload-width-twenty {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 20%;
+    }
+}
+
+@-webkit-keyframes cssload-width-twenty {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 20%;
+    }
+}
+
+@-moz-keyframes cssload-width-twenty {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+        width: 20%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.thirty-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 30%;
+    animation: cssload-width-thirty 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-thirty {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 30%;
+    }
+}
+
+@-o-keyframes cssload-width-thirty {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 30%;
+    }
+}
+
+@-ms-keyframes cssload-width-thirty {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 30%;
+    }
+}
+
+@-webkit-keyframes cssload-width-thirty {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 30%;
+    }
+}
+
+@-moz-keyframes cssload-width-thirty {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 30%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.fourty-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 40%;
+    animation: cssload-width-fourty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-fourty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-fourty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-fourty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-fourty 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-fourty {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 40%;
+    }
+}
+
+@-o-keyframes cssload-width-fourty {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 40%;
+    }
+}
+
+@-ms-keyframes cssload-width-fourty {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 40%;
+    }
+}
+
+@-webkit-keyframes cssload-width-fourty {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 40%;
+    }
+}
+
+@-moz-keyframes cssload-width-fourty {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 40%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.fifty-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 50%;
+    animation: cssload-width-fifty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-fifty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-fifty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-fifty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-fifty 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-fifty {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 50%;
+    }
+}
+
+@-o-keyframes cssload-width-fifty {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 50%;
+    }
+}
+
+@-ms-keyframes cssload-width-fifty {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 50%;
+    }
+}
+
+@-webkit-keyframes cssload-width-fifty {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 50%;
+    }
+}
+
+@-moz-keyframes cssload-width-fifty {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 50%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.sixty-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 60%;
+    animation: cssload-width-sixty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-sixty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-sixty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-sixty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-sixty 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-sixty {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 60%;
+    }
+}
+
+@-o-keyframes cssload-width-sixty {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 60%;
+    }
+}
+
+@-ms-keyframes cssload-width-sixty {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 60%;
+    }
+}
+
+@-webkit-keyframes cssload-width-sixty {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 60%;
+    }
+}
+
+@-moz-keyframes cssload-width-sixty {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 60%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.seventy-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 70%;
+    animation: cssload-width-seventy 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-seventy 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-seventy 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-seventy 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-seventy 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-seventy {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 70%;
+    }
+}
+
+@-o-keyframes cssload-width-seventy {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 70%;
+    }
+}
+
+@-ms-keyframes cssload-width-seventy {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 70%;
+    }
+}
+
+@-webkit-keyframes cssload-width-seventy {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 70%;
+    }
+}
+
+@-moz-keyframes cssload-width-seventy {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 70%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.eighty-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 80%;
+    animation: cssload-width-eighty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-eighty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-eighty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-eighty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-eighty 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-eighty {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 80%;
+    }
+}
+
+@-o-keyframes cssload-width-eighty {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 80%;
+    }
+}
+
+@-ms-keyframes cssload-width-eighty {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 80%;
+    }
+}
+
+@-webkit-keyframes cssload-width-eighty {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 80%;
+    }
+}
+
+@-moz-keyframes cssload-width-eighty {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 80%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.ninty-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 90%;
+    animation: cssload-width-ninty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-ninty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-ninty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-ninty 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-ninty 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-ninty {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 90%;
+    }
+}
+
+@-o-keyframes cssload-width-ninty {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 90%;
+    }
+}
+
+@-ms-keyframes cssload-width-ninty {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 90%;
+    }
+}
+
+@-webkit-keyframes cssload-width-ninty {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 90%;
+    }
+}
+
+@-moz-keyframes cssload-width-ninty {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 90%;
+    }
+}
+
+.apollo-component-library-loadingstate-component-progressbar.absolute.filled-progressFilled {
+    background-color: #e04542;
+    height: 10px;
+    position: relative;
+    max-width: 100%;
+    animation: cssload-width-filled 3.45s ease-in-out(0.45, 0, 1, 1);
+    -o-animation: cssload-width-filled 3.45s ease-in-out(0.45, 0, 1, 1);
+    -ms-animation: cssload-width-filled 3.45s ease-in-out(0.45, 0, 1, 1);
+    -webkit-animation: cssload-width-filled 3.45s ease-in-out(0.45, 0, 1, 1);
+    -moz-animation: cssload-width-filled 3.45s ease-in-out(0.45, 0, 1, 1);
+}
+
+@keyframes cssload-width-filled {
+    100% {
+        transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-o-keyframes cssload-width-filled {
+    100% {
+        -o-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-ms-keyframes cssload-width-filled {
+    100% {
+        -ms-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-webkit-keyframes cssload-width-filled {
+    100% {
+        -webkit-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-moz-keyframes cssload-width-filled {
+    100% {
+        -moz-transition-timing-function: ease-in-out(1, 0, 0.65, 0.85);
+    }
+    100% {
+        width: 100%;
+    }
 }
 
 
-/* Absolute type LoadingState ends*/
-/* Inline type LoadingState begins */
+/* Absolute type LoadingState for progress varrient ends*/
+
+
+/* Inline type LoadingState for progress varrient begins */
 
 .apollo-component-library-loadingstate-component-progressbar.inline {
-  
-  border: 16px solid #f3f3f3;
-  z-index: 9999;
-  border-radius: 50%;
-  border-top: 16px solid red;
-  display: flex;
-  flex-direction: column;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-  margin-left: 11%;
+    border: 16px solid #f3f3f3;
+    z-index: 9999;
+    border-radius: 50%;
+    border-top: 16px solid red;
+    display: flex;
+    flex-direction: column;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
+    margin-left: 11%;
 }
 
+
 /* Safari */
+
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-/* Inline type LoadingState ends */
+
+/* Inline type LoadingState for progress varrient ends */
