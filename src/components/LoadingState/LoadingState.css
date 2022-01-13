@@ -152,7 +152,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 0%;
+    max-width: 0%;
     animation: cssload-width-zero 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-zero 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-zero 3.45s ease-in-out(0.45, 0, 1, 1);
@@ -209,7 +209,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 10%;
+    max-width: 10%;
     animation: cssload-width-ten 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-ten 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-ten 3.45s ease-in-out(0.45, 0, 1, 1);
@@ -256,7 +256,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 20%;
+    max-width: 20%;
     animation: cssload-width-twenty 3.45s ease-in-out(0.45, 0, 1, 1);
 }
 
@@ -299,7 +299,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 30%;
+    max-width: 30%;
     animation: cssload-width-thirty 3.45s ease-in-out(0.45, 0, 1, 1);
 }
 
@@ -352,7 +352,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 40%;
+    max-width: 40%;
     animation: cssload-width-fourty 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-fourty 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-fourty 3.45s ease-in-out(0.45, 0, 1, 1);
@@ -409,7 +409,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 50%;
+    max-width: 50%;
     animation: cssload-width-fifty 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-fifty 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-fifty 3.45s ease-in-out(0.45, 0, 1, 1);
@@ -466,7 +466,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 60%;
+    max-width: 60%;
     animation: cssload-width-sixty 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-sixty 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-sixty 3.45s ease-in-out(0.45, 0, 1, 1);
@@ -523,7 +523,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 70%;
+    max-width: 70%;
     animation: cssload-width-seventy 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-seventy 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-seventy 3.45s ease-in-out(0.45, 0, 1, 1);
@@ -580,7 +580,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 80%;
+    max-width: 80%;
     animation: cssload-width-eighty 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-eighty 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-eighty 3.45s ease-in-out(0.45, 0, 1, 1);
@@ -637,7 +637,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 90%;
+    max-width: 90%;
     animation: cssload-width-ninty 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-ninty 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-ninty 3.45s ease-in-out(0.45, 0, 1, 1);
@@ -694,7 +694,7 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
-    width: 100%;
+    max-width: 100%;
     animation: cssload-width-filled 3.45s ease-in-out(0.45, 0, 1, 1);
     -o-animation: cssload-width-filled 3.45s ease-in-out(0.45, 0, 1, 1);
     -ms-animation: cssload-width-filled 3.45s ease-in-out(0.45, 0, 1, 1);
