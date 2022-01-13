@@ -1,4 +1,4 @@
-.apollo-component-library-alert-component.danger-AlertType {
+.apollo-component-library-alert-component.danger {
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
     padding: 0 25px;
@@ -9,7 +9,7 @@
     width: 50px;
 }
 
-.apollo-component-library-alert-component.warning-AlertType {
+.apollo-component-library-alert-component.warning {
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
     padding: 0 25px;
@@ -20,7 +20,7 @@
     width: 50px;
 }
 
-.apollo-component-library-alert-component.info-AlertType {
+.apollo-component-library-alert-component.info {
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
     padding: 0 25px;
@@ -31,7 +31,7 @@
     width: 50px;
 }
 
-.apollo-component-library-alert-component.success-AlertType {
+.apollo-component-library-alert-component.success {
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
     padding: 0 25px;

@@ -5,10 +5,10 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     /** Alert needs to exist between tags */
     children: ReactNode;
     /**
-     * Determines AlertType, number directly relates to the kind of AlertType
-     * tag i.e. AlertType={1} => warning-AlertType
+     * Determines type, number directly relates to the kind of type
+     * tag i.e. type=warning => warning
      */
-    AlertType?: 0 | 1 | 2 | 3;
+    type?: 'danger' | 'warning' | 'info' | 'success';
     /** Determines whether the element has margins or not */
 }
 
@@ -19,7 +19,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  */
 export const Alert = ({
     children,
-    AlertType = 0,
+    type = 'danger',
 
     ...props
 }: Props): JSX.Element => {
@@ -33,18 +33,18 @@ export const Alert = ({
         // determine custom variant
         let customVariant = 'apollo-component-library-alert-component ';
 
-        // check if its a AlertType or not
-        if (AlertType == 0) customVariant += 'danger-AlertType';
-        if (AlertType == 1) customVariant += 'warning-AlertType';
-        if (AlertType == 2) customVariant += 'info-AlertType';
-        if (AlertType == 3) customVariant += 'success-AlertType';
+        // check if its a type or not
+        if (type == 'danger') customVariant += 'danger';
+        if (type == 'warning') customVariant += 'warning';
+        if (type == 'info') customVariant += 'info';
+        if (type == 'success') customVariant += 'success';
 
         return customVariant;
     };
 
     return (
-        <p {...props} className={getVariant()}>
+        <div {...props} className={getVariant()}>
             {children}
-        </p>
+        </div>
     );
 };

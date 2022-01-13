@@ -15,20 +15,24 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<Props> = (args) => <Alert {...args} />;
-
+/**
+ * Template Alert
+ *
+ * @param args storybook arguments
+ * @return template Alert component
+ */
 export const AlertTypes = (): JSX.Element => (
     <React.Fragment>
-        <Alert AlertType={0}>
+        <Alert type="danger">
             <Text bold>Error</Text>
         </Alert>
-        <Alert AlertType={1}>
+        <Alert type="warning">
             <Text bold>Warning</Text>
         </Alert>
-        <Alert AlertType={2}>
+        <Alert type="info">
             <Text bold>Info</Text>
         </Alert>
-        <Alert AlertType={3}>
+        <Alert type="success">
             <Text bold>Success</Text>
         </Alert>
     </React.Fragment>
