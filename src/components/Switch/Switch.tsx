@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
+import { StyleVariant } from '../../interfaces/Properties';
 import { Text } from '../Text/Text';
 import './Switch.css';
 
@@ -10,11 +11,13 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Value that the switch represents */
     value?: string;
     /** Variant of switch */
-    variant?: 'default' | 'secondary';
+    variant?: StyleVariant;
     /** Form name */
     name: string;
     /** Determines whether input is required or not */
     required?: boolean;
+    /** Determines whether input is checked or not */
+    checked?: boolean;
 }
 
 /**
@@ -25,6 +28,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
 export const Switch: React.FC<Props> = ({
     children,
     variant = 'default',
+    className = '',
     ...props
 }: Props): JSX.Element => {
     return (
@@ -35,7 +39,7 @@ export const Switch: React.FC<Props> = ({
                 role="switch"
                 className="apollo-component-library-switch-component-input"
             />
-            <span className={`apollo-component-library-switch-component ${variant}`} />
+            <span className={`apollo-component-library-switch-component ${variant} ${className}`} />
             <Text inline margins>
                 {children}
             </Text>

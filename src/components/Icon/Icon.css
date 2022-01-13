@@ -2,6 +2,8 @@
 
 .apollo-component-library-icon-component {
     user-select: none;
+    margin: 0;
+    padding-top: 4px;
 }
 
 .apollo-component-library-icon-component.default {

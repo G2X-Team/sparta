@@ -76,7 +76,7 @@ export const CustomCard = (): JSX.Element => (
         <Text bold color="gray">
             What is this?
         </Text>
-        <Text margins>This is a glorified div that supports headers and footers</Text>
+        <Text margins> This is a glorified div that supports headers and footers</Text>
         <Footer style={{ borderTop: '1px solid lightgray' }}>
             <Text italic style={{ marginTop: 10 }}>
                 per request :)

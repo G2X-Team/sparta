@@ -1,10 +1,11 @@
 import React, { HTMLAttributes, ReactNode, useEffect, useState, useRef } from 'react';
-import FormattedChildren from '../../util/FormattedChildren';
+import FormatChildren from '../../util/FormatChildren';
 import './Drawer.css';
 
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import { Option } from '../Option/Option';
+import Option from './overload/Option';
+import { ComponentOrientation } from '../../interfaces/Properties';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /**
@@ -18,7 +19,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
      * the anchoring point for the drawer. When `type="persistent"` OR `type="permanent"`, the
      * values will determine where the border separating the content will appear
      */
-    orientation?: 'left' | 'right' | 'top' | 'bottom' | 'vertical' | 'horizontal';
+    orientation?: ComponentOrientation;
     /** Executes a method when the **open** prop is going from `true` to `false` */
     onClose?: () => void;
     /** Determines the time in milliseconds it will take to open/close, won't do anything when
@@ -41,7 +42,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  */
 export const Drawer: React.FC<Props> = ({
     children,
-    className,
+    className = '',
     type = 'absolute',
     orientation = 'left',
     open = false,
@@ -86,120 +87,48 @@ export const Drawer: React.FC<Props> = ({
     }, [open]);
 
     /**
-     * Formats the header component
-     *
-     * @param header unformatted header
-     * @return formatted header
-     */
-    const formatHeader = (header: JSX.Element): JSX.Element => {
-        const { props: headerProps } = header;
-        const { style: headerStyle } = headerProps;
-
-        return (
-            <Header
-                {...headerProps}
-                style={{
-                    marginBottom: 10,
-                    ...headerStyle,
-                }}
-            />
-        );
-    };
-
-    /**
-     * Formats the footer component
-     *
-     * @param footer unformatted footer
-     * @return formatted footer
-     */
-    const formatFooter = (footer: JSX.Element): JSX.Element => {
-        const { props: footerProps } = footer;
-        const { style: footerStyle } = footerProps;
-
-        return (
-            <footer
-                {...footerProps}
-                style={{
-                    marginTop: 10,
-                    ...footerStyle,
-                }}
-            />
-        );
-    };
-
-    /**
-     * Changes style of options to match
-     *
-     * @param option unformatted options
-     * @return formatted options
-     */
-    const formatOption = (option: JSX.Element): JSX.Element => {
-        const { props: optionProps } = option;
-        const { style: optionStyle, children: optionChildren } = optionProps;
-
-        return (
-            <Option
-                key={Math.random()}
-                {...optionProps}
-                style={{
-                    height: '2rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    ...optionStyle,
-                }}
-            >
-                {optionChildren}
-            </Option>
-        );
-    };
-
-    /**
      * Finds all target components and renders them in final drawer component
      *
      * @return render ready drawer component
      */
     const renderDrawer = (): ReactNode => {
         // gets all found children
-        const formatted = new FormattedChildren(children, [Header, Footer, Option]);
+        const formatted = new FormatChildren({ children }, { Header, Footer, Option });
 
         // format header and footer
-        formatted.format(Header, formatHeader);
-        formatted.format(Footer, formatFooter);
-        formatted.format(Option, formatOption);
-
-        // extract headers and footers
-        const headers = formatted.extract(Header);
-        const footers = formatted.extract(Footer);
+        const { Header: headers, Footer: footers } = formatted.extract({ Header, Footer });
 
         // check that there is only one header and footer max
-        if (headers.length > 1) throw new Error('Drawer can only have one Header component');
-        if (footers.length > 1) throw new Error('Drawer can only have one Footer component');
+        if (headers?.length > 1) throw new Error('Drawer can only have one Header component');
+        if (footers?.length > 1) throw new Error('Drawer can only have one Footer component');
 
         // get the header/footer if it exists and assign it into a variable
-        const [header] = headers;
-        const [footer] = footers;
+        const [header] = headers || [];
+        const [footer] = footers || [];
 
         // define the conatiner style
-        const containerStyle = {
-            [orientation]: 0,
-            [modifiedDimension]: type === 'permanent' || effect ? dimension : 0,
-            transition: `${modifiedDimension} ${transition}ms`,
-            ...style,
-        };
+        const containerStyle = getDrawerContainerStyle(
+            orientation,
+            modifiedDimension,
+            type,
+            effect,
+            dimension,
+            transition,
+            style
+        );
 
         // define drawer style
-        const drawerStyle = {
-            [modifiedDimension]: dimension,
-            ...style,
-        };
+        const bodyStyle = getDrawerBodyStyle(modifiedDimension, dimension, style);
 
         return (
             <div
-                className={`apollo-component-library-drawer-component 
-                    ${className} ${orientation} ${type}`}
                 style={containerStyle}
+                className={`
+                    apollo-component-library-drawer-component 
+                    ${className} ${orientation} ${type}
+                `}
             >
-                <div {...props} ref={drawer} style={drawerStyle}>
+                <div {...props} ref={drawer} style={bodyStyle}>
                     {header}
                     <div className="apollo-component-library-drawer-component-body">
                         {formatted.getAll()}
@@ -211,7 +140,7 @@ export const Drawer: React.FC<Props> = ({
     };
 
     return (
-        <React.Fragment>
+        <>
             {type === 'permanent' || display ? (
                 <div className={`apollo-component-library-drawer-component-container ${type}`}>
                     <div>
@@ -221,12 +150,70 @@ export const Drawer: React.FC<Props> = ({
                                 onClick={toggleOpen}
                                 className={`apollo-component-library-drawer-component-backdrop 
                                     ${type}`}
-                                style={{ opacity: effect ? 1 : 0 }}
+                                style={getBackdropStyle(effect)}
                             />
                         ) : null}
                     </div>
                 </div>
             ) : null}
-        </React.Fragment>
+        </>
     );
+};
+
+/**
+ * Gets the style for the drawer backdrop
+ *
+ * @param effect boolean determining when to change the opacity
+ * @return style object
+ */
+const getBackdropStyle = (effect: boolean): React.CSSProperties => {
+    return { opacity: effect ? 1 : 0 };
+};
+
+/**
+ * Gets the drawer container style
+ *
+ * @param orientation string that determines the orientation of container
+ * @param modifiedDimension string representing what dimension is being changed
+ * @param type string that determines type of container
+ * @param effect boolean that determines when to toggle dimension
+ * @param dimension the scalar representing the size of the dimension
+ * @param transition time in MS that it taks to close menu
+ * @param style component css props
+ * @return style object
+ */
+const getDrawerContainerStyle = (
+    orientation: string,
+    modifiedDimension: string,
+    type: string,
+    effect: boolean,
+    dimension: number | string,
+    transition: number,
+    style: React.CSSProperties | undefined
+): React.CSSProperties => {
+    return {
+        [orientation]: 0,
+        [modifiedDimension]: type === 'permanent' || effect ? dimension : 0,
+        transition: `${modifiedDimension} ${transition}ms`,
+        ...style,
+    };
+};
+
+/**
+ * Gets body drawer style
+ *
+ * @param modifiedDimension string representing what dimension is being changed
+ * @param dimension the scalar representing the size of the dimension
+ * @param style component css props
+ * @return style object
+ */
+const getDrawerBodyStyle = (
+    modifiedDimension: string,
+    dimension: number | string,
+    style: React.CSSProperties | undefined
+): React.CSSProperties => {
+    return {
+        [modifiedDimension]: dimension,
+        ...style,
+    };
 };

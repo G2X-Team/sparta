@@ -100,8 +100,8 @@ describe('Form', () => {
         // then
         expect(onSubmit).not.toHaveBeenCalled();
         expect(onFail).toHaveBeenCalledWith([
-            'password is a required field and cannot be empty.',
             'username is a required field and cannot be empty.',
+            'password is a required field and cannot be empty.',
         ]);
     });
 

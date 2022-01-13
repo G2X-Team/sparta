@@ -1,0 +1,30 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+workflows:
+  Test-Lint-Build-All-Versions:
+    jobs:
+      # Testing code
+      - node/test:
+          matrix:
+            parameters:
+              version: ['16.10', '14.17', '12.22']
+          pkg-manager: yarn
+
+      # Linting code
+      - node/run:
+          matrix: 
+            parameters: 
+              version: ['16.10', '14.17', '12.22']
+          pkg-manager: yarn
+          yarn-run: lint
+
+      # Building code
+      - node/run:
+          matrix: 
+            parameters: 
+              version: ['16.10', '14.17', '12.22']
+          pkg-manager: yarn
+          yarn-run: build

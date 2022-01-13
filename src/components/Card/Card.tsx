@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
-import FormattedChildren from '../../util/FormattedChildren';
+import FormatChildren from '../../util/FormatChildren';
 import './Card.css';
 
 import { Header } from '../Header/Header';
@@ -16,49 +16,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Card component
  */
-export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Element => {
-    /**
-     * Formats the header component
-     *
-     * @param header unformatted header
-     * @return formatted header
-     */
-    const formatHeader = (header: JSX.Element): JSX.Element => {
-        const { props: headerProps } = header;
-        const { style: headerStyle } = headerProps;
-
-        return (
-            <Header
-                {...headerProps}
-                style={{
-                    marginBottom: 10,
-                    ...headerStyle,
-                }}
-            />
-        );
-    };
-
-    /**
-     * Formats the footer component
-     *
-     * @param footer unformatted footer
-     * @return formatted footer
-     */
-    const formatFooter = (footer: JSX.Element): JSX.Element => {
-        const { props: footerProps } = footer;
-        const { style: footerStyle } = footerProps;
-
-        return (
-            <footer
-                {...footerProps}
-                style={{
-                    marginTop: 10,
-                    ...footerStyle,
-                }}
-            />
-        );
-    };
-
+export const Card: React.FC<Props> = ({ children, className, ...props }: Props): JSX.Element => {
     /**
      * Renderes all components
      *
@@ -66,19 +24,15 @@ export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Elemen
      */
     const renderAll = (): JSX.Element => {
         // get all the children from the components
-        const formatted = new FormattedChildren(children, [Header, Footer]);
-
-        // format header and footer
-        formatted.format(Header, formatHeader);
-        formatted.format(Footer, formatFooter);
+        const formatted = new FormatChildren({ children }, { Header, Footer });
 
         // extract header and footer
-        const headers = formatted.extract(Header);
-        const footers = formatted.extract(Footer);
+        const headers = formatted.get(Header);
+        const footers = formatted.get(Footer);
 
         // check to see that we have one footer and one header MAX
-        if (headers.length > 1) throw new Error('Cannot have more than one header');
-        if (footers.length > 1) throw new Error('Cannot have more than one footer');
+        if (headers.length > 1) throw new Error('Card cannot have more than one header.');
+        if (footers.length > 1) throw new Error('Card cannot have more than one footer.');
 
         // get the header and footer
         const [header] = headers;
@@ -86,15 +40,19 @@ export const Card: React.FC<Props> = ({ children, ...props }: Props): JSX.Elemen
 
         // return the structured content
         return (
-            <div {...props} className="apollo-component-library-card-component">
+            <>
                 {header}
                 <div className="apollo-component-library-card-component-body">
-                    {formatted.getAll()}
+                    {formatted.getOther()}
                 </div>
                 {footer}
-            </div>
+            </>
         );
     };
 
-    return renderAll();
+    return (
+        <div {...props} className={`apollo-component-library-card-component ${className}`}>
+            {renderAll()}
+        </div>
+    );
 };

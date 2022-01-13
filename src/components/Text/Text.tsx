@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
+import * as CSS from 'csstype';
 import './Text.css';
 
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
@@ -26,7 +27,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     /** Determines whether the first letter of every word is capital or not */
     pascal?: boolean;
     /** Decide the color of the text without accessing the style props */
-    color?: string;
+    color?: CSS.Property.Color;
     /** Determines whether the text is disabled or not */
     disabled?: boolean;
 }
@@ -38,6 +39,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  */
 export const Text: React.FC<Props> = ({
     children,
+    className = '',
     header = 0,
     margins = false,
     inline = false,
@@ -74,6 +76,9 @@ export const Text: React.FC<Props> = ({
         if (bold) customVariant += 'bold ';
         if (underline) customVariant += 'underline ';
         if (disabled) customVariant += 'disabled ';
+
+        // add className
+        customVariant += className;
 
         return customVariant;
     };
@@ -115,8 +120,22 @@ export const Text: React.FC<Props> = ({
     };
 
     return (
-        <p {...props} style={{ color, ...style }} className={getVariant()}>
+        <span {...props} style={getTextStyle(color, style)} className={getVariant()}>
             {getCorrectCasing()}
-        </p>
+        </span>
     );
+};
+
+/**
+ * Gets text style object
+ *
+ * @param color string determing alternative color
+ * @param style text style property
+ * @return text style object
+ */
+const getTextStyle = (
+    color: string | undefined,
+    style: React.CSSProperties | undefined
+): React.CSSProperties => {
+    return { color, ...style };
 };

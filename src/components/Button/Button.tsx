@@ -1,11 +1,12 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
+import { StyleVariant } from '../../interfaces/Properties';
 import './Button.css';
 
 export interface Props extends HTMLAttributes<HTMLButtonElement> {
     /** Required ReactNode that needs to exist between component tags */
     children: ReactNode;
     /** defines the type of button to be rendered */
-    variant?: 'default' | 'secondary';
+    variant?: StyleVariant;
     /** callback function to be called when there is a method click */
     onClick?: () => void;
     /** will allow for http redirect */
@@ -20,11 +21,12 @@ export interface Props extends HTMLAttributes<HTMLButtonElement> {
 export const Button: React.FC<Props> = ({
     children,
     href,
+    className = '',
     variant = 'default',
     ...props
 }: Props): JSX.Element => {
     const button: JSX.Element = (
-        <button {...props} className={`apollo-component-library-button ${variant}`}>
+        <button {...props} className={`apollo-component-library-button ${variant} ${className}`}>
             {children}
         </button>
     );

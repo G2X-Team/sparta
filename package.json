@@ -13,7 +13,7 @@
     "scripts": {
         "start": "tsdx watch",
         "build": "tsdx build",
-        "test": "tsdx test --passWithNoTests",
+        "test": "tsdx test --passWithNoTests --maxWorkers=4",
         "lint": "yarn eslint src test stories",
         "prepare": "husky install; tsdx build",
         "size": "size-limit",
