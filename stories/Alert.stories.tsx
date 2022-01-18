@@ -6,10 +6,8 @@ import { Text } from '../src';
 const meta: Meta = {
     title: 'Layout/Alert',
     component: Alert,
-    argTypes: {
-        children: {
-            defaultValue: 'This is a alert component',
-        },
+    args: {
+        children: 'This is an alert component',
     },
 };
 
@@ -21,19 +19,10 @@ export default meta;
  * @param args storybook arguments
  * @return template Alert component
  */
-export const AlertTypes = (): JSX.Element => (
+export const AlertTypes: Story<Props> = (args): JSX.Element => (
     <React.Fragment>
-        <Alert type="danger">
-            <Text bold>Error</Text>
-        </Alert>
-        <Alert type="warning">
-            <Text bold>Warning</Text>
-        </Alert>
-        <Alert type="info">
-            <Text bold>Info</Text>
-        </Alert>
-        <Alert type="success">
-            <Text bold>Success</Text>
+        <Alert {...args}>
+            <Text bold>{args.children}</Text>
         </Alert>
     </React.Fragment>
 );

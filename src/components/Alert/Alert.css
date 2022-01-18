@@ -1,43 +1,21 @@
-.apollo-component-library-alert-component.danger {
-    font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    padding: 0 25px;
-    height: 35px;
-    line-height: 35px;
+.apollo-component-library-alert-component {
+    display: inline-flex;
+    padding: 10px 15px;
     border-radius: 25px;
+}
+
+.apollo-component-library-alert-component.danger {
     background-color: #fdeded;
-    width: 50px;
 }
 
 .apollo-component-library-alert-component.warning {
-    font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    padding: 0 25px;
-    height: 35px;
-    line-height: 35px;
-    border-radius: 25px;
     background-color: #fff4e5;
-    width: 50px;
 }
 
 .apollo-component-library-alert-component.info {
-    font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    padding: 0 25px;
-    height: 35px;
-    line-height: 35px;
-    border-radius: 25px;
     background-color: #e5f6fd;
-    width: 50px;
 }
 
 .apollo-component-library-alert-component.success {
-    font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    padding: 0 25px;
-    height: 35px;
-    line-height: 35px;
-    border-radius: 25px;
     background-color: #edf7ed;
-    width: 50px;
 }
