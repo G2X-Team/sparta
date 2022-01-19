@@ -6,7 +6,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
      * Determines status of the progressbar where
      * progressFilled={0.1} => 10% filled progressbar
      */
-    progressFilled?: 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | 0.9 | 1;
+    progressFilled?: number;
     /** Determines the type of LoadingState whether Absolute or Inline*/
     type?: 'absolute' | 'inline';
     /** Determines the size of LoadingState whether small , medium, or large */
@@ -103,53 +103,32 @@ export const LoadingState = ({
             );
         }
     };
-
-    if (variant == 'progress') {
-        return (
-            <React.Fragment>
-                {display ? (
+    return (
+        <>
+            {display ? (
+                {variant == 'progress'}
                     <div
                         style={{ opacity: effect ? 1 : 0 }}
                         className="apollo-component-library-loadingstate-component-container"
                     >
                         <div>
                             {renderLoadingState()}
-                            <div onClick={move} />
-                        </div>
-                    </div>
-                ) : null}
-            </React.Fragment>
-        );
-    } else {
-        if (type == 'inline') {
-            return (
-                <React.Fragment>
-                    {display ? (
-                        <span style={{ display: 'inline-block' }}>{renderLoadingState()}</span>
-                    ) : null}
-                </React.Fragment>
-            );
-        } else {
-            return (
-                <React.Fragment>
-                    {display ? (
-                        <div
-                            style={{ opacity: effect ? 1 : 0 }}
-                            className="apollo-component-library-loadingstate-component-container"
-                        >
-                            <div>
-                                {renderLoadingState()}
+                            {variant == 'progress' ? (
+                                <div onClick={move} />
+                            ) : (
                                 <div
                                     onClick={isLoading}
                                     className={`
-                                    apollo-component-library-loadingstate-component-backdrop
-                                ${type}`}
+                                apollo-component-library-loadingstate-component-backdrop
+                            ${type}`}
                                 />
-                            </div>
+                            )}
                         </div>
-                    ) : null}
-                </React.Fragment>
-            );
-        }
-    }
+                    </div>
+                )
+            ) : (
+                <span style={{ display: 'inline-block' }}>{renderLoadingState()}</span>
+            )}
+        </>
+    );
 };
