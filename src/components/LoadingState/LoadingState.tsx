@@ -1,115 +1,115 @@
-import React, { useState, useEffect, HTMLAttributes, ReactNode } from 'react';
+import React, {
+    useState,
+    useEffect,
+    HTMLAttributes,
+    ReactNode,
+    useRef,
+    CSSProperties,
+} from 'react';
 import './LoadingState.css';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
-    /** Determines the type of LoadingState whether Absolute or Inline*/
-    type?: 'absolute' | 'inline';
+    /**
+     * Determines status of the progressbar where
+     * progressFilled={0.1} => 10% filled progressbar
+     */
+    progress?: number;
     /** Determines the size of LoadingState whether small , medium, or large */
     size?: 'small' | 'medium' | 'large';
-    /** Determines the size of LoadingState whether small , medium, or large */
-    variant?: 'static' | 'progress';
+    /** Determines the variant of LoadingState whether spinner or progress */
+    type?: 'spinner' | 'progress';
     /** Determines whether the LoadingState is open or not */
-    open?: boolean;
-    /** Toggles the LoadingState between open and closed */
-    isLoading?: () => any;
-    /** Starts the LoadingState Progress variant */
-    move?: () => any;
-    manual?: boolean;
+    loading?: boolean;
 }
 
+/**
+ * Loader that will appear based on the value of it's open prop. Also known as dialogue.
+ *
+ * @return LoadingState component
+ */
 export const LoadingState = ({
+    progress = 0,
+    type = 'spinner',
+    size = 'small',
+    loading = false,
     className,
-    type,
-    size,
-    variant,
-    manual = false,
-    children,
+    children = undefined,
     style,
-    open = false,
-    isLoading,
-    move,
     ...props
 }: Props): JSX.Element => {
-    // usestate variables
-    const [display, toggleDisplay] = useState(open);
-    const [effect, toggleEffect] = useState(open);
+    // ref
+    const progressRef = useRef<HTMLHeadingElement>(null);
 
-    // Keeping track of open call
+    // state variables
+    const [width, setwidth] = useState(0);
+
     useEffect(() => {
-        if (open !== display) {
-            if (display) {
-                toggleEffect(false);
-                setTimeout(() => toggleDisplay(false), 300);
-            } else {
-                toggleDisplay(true);
-                setTimeout(() => toggleEffect(true), 100);
-            }
+        if (progressRef.current !== null) {
+            setwidth(progressRef.current?.offsetWidth);
         }
-    }, [open]);
-    /**
-     * Renders the modal and all of its children formatted as intended
-     *
-     * @return formatted modal component
-     */
+    });
+
+    useEffect(() => {
+        if (progress > 1 || progress < 0) {
+            throw Error('The range is not valid. Must be number from 0 to 1');
+        }
+    }, [progress]);
 
     /**
      * Renders the LoadingState and all of its children formatted as intended
-     * @return formatted modal component
+     *
+     * @return formatted LoadingState component
      */
     const renderLoadingState = (): ReactNode => {
-        if (variant == 'progress') {
-            return (
-                <div
-                    {...props}
-                    className={`apollo-component-library-loadingstate-component-progressbar ${type}
-                    ${move ? '' : 'progress'}`}
-                ></div>
-            );
+        const containerName =
+            type === 'spinner'
+                ? 'apollo-component-library-loadingstate-component-spinner'
+                : 'apollo-component-library-container';
+
+        const loadingType =
+            type === 'spinner'
+                ? 'apollo-component-library-loadingstate-component'
+                : 'apollo-component-library-loadingstate-component-progressbar';
+
+        const loadingStyle: CSSProperties = {};
+
+        // give appropriate aria-props
+        const ariaProps: { [key: string]: string } = {};
+        if (type === 'progress') {
+            // assign width
+            loadingStyle.width = width * progress;
+
+            // assign aria props
+            ariaProps.role = 'progressbar';
+            ariaProps['aria-valuenow'] = `${progress * 100}`;
+            ariaProps['aria-valuemax'] = '100';
+            ariaProps['aria-valuemin'] = '0';
+            ariaProps['aria-valuetext'] = 'Loading Process';
         } else {
-            return (
+            ariaProps['aria-busy'] = loading ? 'true' : 'false';
+        }
+
+        return (
+            <div {...ariaProps} className={containerName} ref={progressRef}>
                 <div
                     {...props}
-                    className={`apollo-component-library-loadingstate-component ${type} ${size}`}
-                ></div>
-            );
-        }
+                    style={loadingStyle}
+                    className={`
+                        ${loadingType}
+                        ${size}
+                    `}
+                />
+            </div>
+        );
     };
 
-    if (variant == 'progress') {
-        return (
-            <React.Fragment>
-                {display ? (
-                    <div
-                        style={{ opacity: effect ? 1 : 0 }}
-                        className="apollo-component-library-loadingstate-component-container"
-                    >
-                        <div>
-                            {renderLoadingState()}
-                            <div onClick={move} />
-                        </div>
-                    </div>
-                ) : null}
-            </React.Fragment>
-        );
-    } else {
-        return (
-            <React.Fragment>
-                {display ? (
-                    <div
-                        style={{ opacity: effect ? 1 : 0 }}
-                        className="apollo-component-library-loadingstate-component-container"
-                    >
-                        <div>
-                            {renderLoadingState()}
-                            <div
-                                onClick={isLoading}
-                                className={`apollo-component-library-loadingstate-component-backdrop
-                                ${type}`}
-                            />
-                        </div>
-                    </div>
-                ) : null}
-            </React.Fragment>
-        );
-    }
+    return (
+        <>
+            {loading ? (
+                <div className="apollo-component-library-loadingstate-component-container">
+                    {renderLoadingState()}
+                </div>
+            ) : null}
+        </>
+    );
 };
