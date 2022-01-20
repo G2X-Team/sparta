@@ -1,4 +1,4 @@
-import React, { useState, useEffect, HTMLAttributes, ReactNode } from 'react';
+import React, { useState, useEffect, HTMLAttributes, ReactNode, useRef } from 'react';
 import './LoadingState.css';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -39,9 +39,19 @@ export const LoadingState = ({
     move,
     ...props
 }: Props): JSX.Element => {
+    // ref
+    const circleRef = useRef<HTMLDivElement>(null);
+    console.log({ circleRef });
     // usestate variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);
+    const [offset, setOffset] = useState(0);
+
+    // make a useEffect to determine what transition will be used, acts as on init
+    useEffect(() => {
+        const progressOffset = (100 * progressFilled) / 100;
+        setOffset(progressOffset);
+    }, [setOffset, progressFilled, offset]);
 
     // Keeping track of open call
     useEffect(() => {
@@ -58,55 +68,39 @@ export const LoadingState = ({
 
     /**
      * Renders the LoadingState and all of its children formatted as intended
-     *
-     * @return formatted LoadingState component
-     */
-    const getVariant = (): string => {
-        // determine custom variant
-        let customVariant = '';
-        // check how much a progressbar is filled where 0 is 0% and 1 is 100%
-        if (progressFilled == 0) customVariant += 'zero-progressFilled ';
-        if (progressFilled == 0.1) customVariant += 'ten-progressFilled ';
-        if (progressFilled == 0.2) customVariant += 'twenty-progressFilled ';
-        if (progressFilled == 0.3) customVariant += 'thirty-progressFilled ';
-        if (progressFilled == 0.4) customVariant += 'fourty-progressFilled ';
-        if (progressFilled == 0.5) customVariant += 'fifty-progressFilled ';
-        if (progressFilled == 0.6) customVariant += 'sixty-progressFilled ';
-        if (progressFilled == 0.7) customVariant += 'seventy-progressFilled ';
-        if (progressFilled == 0.8) customVariant += 'eighty-progressFilled ';
-        if (progressFilled == 0.9) customVariant += 'ninty-progressFilled ';
-        if (progressFilled == 1) customVariant += 'filled-progressFilled ';
-        return customVariant;
-    };
-    /**
-     * Renders the LoadingState and all of its children formatted as intended
      * @return formatted LoadingState component
      */
     const renderLoadingState = (): ReactNode => {
-        if (variant == 'progress') {
-            return (
-                <div
-                    {...props}
-                    className={`apollo-component-library-loadingstate-component-progressbar
-                    ${type}
-                    ${getVariant()}
-                    ${move ? '' : 'progress'}`}
-                ></div>
-            );
-        } else {
-            return (
-                <div
-                    {...props}
-                    className={`apollo-component-library-loadingstate-component ${type} ${size}
-                    ${getVariant()}`}
-                ></div>
-            );
-        }
+        return (
+            <>
+                {display ? (
+                    variant != 'static' ? (
+                        <div className={`apollo-component-library-container`}>
+                            <div
+                                {...props}
+                                ref={circleRef}
+                                className={`apollo-component-library-loadingstate-component-progressbar
+                                ${type}
+                                ${move ? '' : 'progress'}`}
+                                style={{ width: `${offset * progressFilled}%` }}
+                            ></div>
+                        </div>
+                    ) : (
+                        <div
+                            {...props}
+                            className={`apollo-component-library-loadingstate-component
+                            ${type} ${size}
+                    `}
+                        ></div>
+                    )
+                ) : null}
+            </>
+        );
     };
     return (
         <>
             {display ? (
-                {variant == 'progress'}
+                variant != 'static' ? (
                     <div
                         style={{ opacity: effect ? 1 : 0 }}
                         className="apollo-component-library-loadingstate-component-container"
@@ -119,16 +113,24 @@ export const LoadingState = ({
                                 <div
                                     onClick={isLoading}
                                     className={`
-                                apollo-component-library-loadingstate-component-backdrop
-                            ${type}`}
+                                    apollo-component-library-loadingstate-component-backdrop
+                                ${type}`}
+                                    style={{ width: `${offset * progressFilled}%` }}
                                 />
                             )}
                         </div>
                     </div>
+                ) : (
+                    <div
+                        onClick={isLoading}
+                        className={`
+                                    apollo-component-library-loadingstate-component-backdrop
+                                ${type}`}
+                    >
+                        {renderLoadingState()}
+                    </div>
                 )
-            ) : (
-                <span style={{ display: 'inline-block' }}>{renderLoadingState()}</span>
-            )}
+            ) : null}
         </>
     );
 };

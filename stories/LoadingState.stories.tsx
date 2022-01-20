@@ -144,7 +144,7 @@ export const ProgressVarient: Story<Props> = (args) => {
                 isLoading={() => isLoading(!open)}
                 type="absolute"
                 variant="progress"
-                progressFilled={1}
+                progressFilled={25}
             ></LoadingState>
         </React.Fragment>
     );
