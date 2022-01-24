@@ -148,9 +148,11 @@
     background-color: #e04542;
     height: 10px;
     position: relative;
+    transition: width 2s;
 }
 .apollo-component-library-container{
-    width: 100%;
+    max-width: 100%;
+    transition: width 2s;
 }
 
 
