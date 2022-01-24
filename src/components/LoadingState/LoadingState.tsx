@@ -48,11 +48,11 @@ export const LoadingState = ({
 
     // make a useEffect to determine what transition will be used, acts as on init
     useEffect(() => {
-        const progresswidth = (100 * progressFilled) / 100;
-        setwidth(progresswidth);
         if (null !== progressRef.current) {
             console.log(progressRef.current);
-            progressRef.current;
+            // eslint-disable-next-line prefer-destructuring
+            const progressWidth = progressRef.current.offsetWidth;
+            setwidth(progressWidth * progressFilled);
         }
     }, [setwidth, progressFilled, width]);
 
@@ -79,14 +79,13 @@ export const LoadingState = ({
             <>
                 {display ? (
                     variant != 'static' ? (
-                        <div className={`apollo-component-library-container`}>
+                        <div className={`apollo-component-library-container`} ref={progressRef}>
                             <div
-                                ref={progressRef}
                                 {...props}
                                 className={`apollo-component-library-loadingstate-component-progressbar
                                 ${type}
                                 ${move ? '' : 'progress'}`}
-                                style={{ width: `${width}%`, transition: 'width 2s;' }}
+                                style={{ width }}
                             ></div>
                         </div>
                     ) : (
@@ -109,21 +108,18 @@ export const LoadingState = ({
                         style={{ opacity: effect ? 1 : 0 }}
                         className="apollo-component-library-loadingstate-component-container"
                     >
-                        <div className={`apollo-component-library-container`}>
-                            {renderLoadingState()}
-                            {variant == 'progress' ? (
-                                <div onClick={move} />
-                            ) : (
-                                <div
-                                    ref={progressRef}
-                                    onClick={isLoading}
-                                    className={`
+                        {renderLoadingState()}
+                        {variant == 'progress' ? (
+                            <div onClick={move} />
+                        ) : (
+                            <div
+                                onClick={isLoading}
+                                className={`
                                     apollo-component-library-loadingstate-component-backdrop
                                 ${type}`}
-                                    style={{ width: `${width}%`, transition: 'width 2s;' }}
-                                />
-                            )}
-                        </div>
+                                style={{ width }}
+                            />
+                        )}
                     </div>
                 ) : (
                     <div

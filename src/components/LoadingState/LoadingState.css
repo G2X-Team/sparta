@@ -4,10 +4,11 @@
     transition: opacity 300ms;
     top: 0;
     left: 0;
+    width: 100%;
 }
 
 .apollo-component-library-loadingstate-component-container>div {
-    position: relative;
+    position: absolute;
     display: grid;
     height: 100vh;
     width: 100vw;
