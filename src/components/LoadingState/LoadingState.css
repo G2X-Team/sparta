@@ -145,17 +145,17 @@
     transition: width 2s;
 }
 
-.apollo-component-library-loadingstate-component-progressbar{
+.apollo-component-library-loadingstate-component-progressbar {
     background-color: #e04542;
     height: 10px;
     position: relative;
     transition: width 2s;
 }
-.apollo-component-library-container{
+
+.apollo-component-library-container {
     max-width: 100%;
     transition: width 2s;
 }
-
 
 
 /* Absolute type LoadingState for progress varrient ends*/

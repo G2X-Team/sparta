@@ -82,6 +82,7 @@ export const LoadingState = ({
                         <div className={`apollo-component-library-container`} ref={progressRef}>
                             <div
                                 {...props}
+                                // eslint-disable-next-line max-len
                                 className={`apollo-component-library-loadingstate-component-progressbar
                                 ${type}
                                 ${move ? '' : 'progress'}`}
