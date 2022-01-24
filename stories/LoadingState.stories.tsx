@@ -134,17 +134,17 @@ export const SmallSize: Story<Props> = (args) => {
  * @return template progress LoadingState component
  */
 export const ProgressVarient: Story<Props> = (args) => {
-    const [open, isLoading] = useState(false);
+    const [open, isLoading] = useState(true);
 
     return (
         <React.Fragment>
             <Button onClick={() => isLoading(!open)}>Submit</Button>
             <LoadingState
-                open={open}
                 isLoading={() => isLoading(!open)}
-                type="absolute"
                 variant="progress"
-                progressFilled={0.2}
+                type="absolute"
+                progressFilled={1}
+                open={open}
             ></LoadingState>
         </React.Fragment>
     );

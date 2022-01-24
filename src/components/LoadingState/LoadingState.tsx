@@ -29,9 +29,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 export const LoadingState = ({
     progressFilled = 0,
     className,
+    variant = 'static',
     type = 'absolute',
     size = 'medium',
-    variant = 'static',
     children,
     style,
     open = false,
