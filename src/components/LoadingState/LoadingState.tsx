@@ -40,8 +40,7 @@ export const LoadingState = ({
     ...props
 }: Props): JSX.Element => {
     // ref
-    const circleRef = useRef<HTMLDivElement>(null);
-    console.log({ circleRef });
+    const circleRef = useRef<HTMLHeadingElement>(null);
     // usestate variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);
@@ -51,6 +50,10 @@ export const LoadingState = ({
     useEffect(() => {
         const progressOffset = (100 * progressFilled) / 100;
         setOffset(progressOffset);
+        if (null !== circleRef.current) {
+            console.log(circleRef.current);
+            circleRef.current;
+        }
     }, [setOffset, progressFilled, offset]);
 
     // Keeping track of open call
@@ -61,6 +64,7 @@ export const LoadingState = ({
                 setTimeout(() => toggleDisplay(false), 300);
             } else {
                 toggleDisplay(true);
+                // circleRef.current.style = 'transition: width 850ms ease-in-out;';
                 setTimeout(() => toggleEffect(true), 100);
             }
         }
@@ -75,14 +79,16 @@ export const LoadingState = ({
             <>
                 {display ? (
                     variant != 'static' ? (
-                        <div className={`apollo-component-library-container`}>
+                        <div
+                            className={`apollo-component-library-container`}
+                            style={{ width: '100%' }}
+                        >
                             <div
                                 {...props}
-                                ref={circleRef}
                                 className={`apollo-component-library-loadingstate-component-progressbar
                                 ${type}
                                 ${move ? '' : 'progress'}`}
-                                style={{ width: `${offset * progressFilled}%` }}
+                                style={{ width: `${offset}%` }}
                             ></div>
                         </div>
                     ) : (
@@ -111,11 +117,12 @@ export const LoadingState = ({
                                 <div onClick={move} />
                             ) : (
                                 <div
+                                    ref={circleRef}
                                     onClick={isLoading}
                                     className={`
                                     apollo-component-library-loadingstate-component-backdrop
                                 ${type}`}
-                                    style={{ width: `${offset * progressFilled}%` }}
+                                    style={{ width: `${offset}%` }}
                                 />
                             )}
                         </div>
