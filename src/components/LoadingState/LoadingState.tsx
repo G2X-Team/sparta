@@ -79,15 +79,17 @@ export const LoadingState = ({
             <>
                 {display ? (
                     variant != 'static' ? (
-                        <div className={`apollo-component-library-container`} ref={progressRef}>
-                            <div
-                                {...props}
-                                // eslint-disable-next-line max-len
-                                className={`apollo-component-library-loadingstate-component-progressbar
+                        <div className={`progress ${size}`}>
+                            <div className={`apollo-component-library-container`} ref={progressRef}>
+                                <div
+                                    {...props}
+                                    // eslint-disable-next-line max-len
+                                    className={`apollo-component-library-loadingstate-component-progressbar
                                 ${type}
                                 ${move ? '' : 'progress'}`}
-                                style={{ width }}
-                            ></div>
+                                    style={{ width }}
+                                ></div>
+                            </div>
                         </div>
                     ) : (
                         <div
@@ -107,7 +109,7 @@ export const LoadingState = ({
                 variant != 'static' ? (
                     <div
                         style={{ opacity: effect ? 1 : 0 }}
-                        className="apollo-component-library-loadingstate-component-container"
+                        className={`apollo-component-library-loadingstate-component-container ${type}`}
                     >
                         {renderLoadingState()}
                         {variant == 'progress' ? (
@@ -124,12 +126,16 @@ export const LoadingState = ({
                     </div>
                 ) : (
                     <div
-                        onClick={isLoading}
-                        className={`
+                        className={`apollo-component-library-loadingstate-component-container ${type}`}
+                    >
+                        <div
+                            onClick={isLoading}
+                            className={`
                                     apollo-component-library-loadingstate-component-backdrop
                                 ${type}`}
-                    >
-                        {renderLoadingState()}
+                        >
+                            {renderLoadingState()}
+                        </div>
                     </div>
                 )
             ) : null}

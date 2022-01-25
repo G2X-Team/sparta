@@ -1,4 +1,5 @@
-.apollo-component-library-loadingstate-component-container {
+/* Absolute type LoadingState Container */
+.apollo-component-library-loadingstate-component-container.absolute {
     position: absolute;
     z-index: 5;
     transition: opacity 300ms;
@@ -6,6 +7,18 @@
     left: 0;
     height: 100%;
     width: 100%;
+}
+
+/* Inline type LoadingState Container*/
+.apollo-component-library-loadingstate-component-container.inline {
+    position: absolute;
+    z-index: 5;
+    transition: opacity 300ms;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: contents;
 }
 
 
@@ -74,6 +87,27 @@
 
 
 /* LoadingState size ends*/
+
+
+/* LoadingState Progressbar size begins*/
+
+.progress.small {
+    width: 25% !important;
+    height: 25% !important;
+}
+
+.progress.medium {
+    width: 50% !important;
+    height: 50% !important;
+}
+
+.progress.large {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* LoadingState Progressbar size ends*/
 
 
 /* Absolute type LoadingState for progress varrient begins*/

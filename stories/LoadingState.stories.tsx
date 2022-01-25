@@ -145,6 +145,7 @@ export const ProgressVarient: Story<Props> = (args) => {
                 type="absolute"
                 progressFilled={1}
                 open={open}
+                size="large"
             ></LoadingState>
         </React.Fragment>
     );
