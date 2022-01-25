@@ -17,8 +17,6 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     open?: boolean;
     /** Toggles the LoadingState between open and closed */
     isLoading?: () => any;
-    /** Starts the LoadingState Progress variant */
-    move?: () => any;
 }
 
 /**
@@ -36,7 +34,6 @@ export const LoadingState = ({
     style,
     open = false,
     isLoading,
-    move,
     ...props
 }: Props): JSX.Element => {
     // ref
@@ -55,6 +52,12 @@ export const LoadingState = ({
             setwidth(progressWidth * progressFilled);
         }
     }, [setwidth, progressFilled, width]);
+
+    useEffect(() => {
+        if (progressFilled > 1 || progressFilled < 0) {
+            throw Error('The range is not valid');
+        }
+    }, [progressFilled]);
 
     // Keeping track of open call
     useEffect(() => {
@@ -85,8 +88,7 @@ export const LoadingState = ({
                                     {...props}
                                     // eslint-disable-next-line max-len
                                     className={`apollo-component-library-loadingstate-component-progressbar
-                                ${type}
-                                ${move ? '' : 'progress'}`}
+                                ${type} progress`}
                                     style={{ width }}
                                 ></div>
                             </div>
@@ -109,24 +111,20 @@ export const LoadingState = ({
                 variant != 'static' ? (
                     <div
                         style={{ opacity: effect ? 1 : 0 }}
-                        className={`apollo-component-library-loadingstate-component-container ${type}`}
+                        className={`apollo-component-library-loadingstate-component-container
+                        ${type}`}
                     >
-                        {renderLoadingState()}
-                        {variant == 'progress' ? (
-                            <div onClick={move} />
-                        ) : (
-                            <div
-                                onClick={isLoading}
-                                className={`
-                                    apollo-component-library-loadingstate-component-backdrop
-                                ${type}`}
-                                style={{ width }}
-                            />
-                        )}
+                        <div
+                            className={`
+                                    apollo-component-library-loadingstate-component-backdrop`}
+                        >
+                            {renderLoadingState()}
+                        </div>
                     </div>
                 ) : (
                     <div
-                        className={`apollo-component-library-loadingstate-component-container ${type}`}
+                        className={`apollo-component-library-loadingstate-component-container
+                        ${type}`}
                     >
                         <div
                             onClick={isLoading}
