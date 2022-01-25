@@ -150,3 +150,29 @@ export const ProgressVarient: Story<Props> = (args) => {
         </React.Fragment>
     );
 };
+
+/**
+ * Template Inline Progress LoadingState
+ *
+ * @param args storybook arguments
+ * @return template inline Progress LoadingState component
+ */
+export const InlineProgressBarExample: Story<Props> = (args) => {
+    const [open, isLoading] = useState(true);
+
+    return (
+        <React.Fragment>
+            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
+                Inline Loading shown here
+            </Text>
+            <LoadingState
+                isLoading={() => isLoading(!open)}
+                variant="progress"
+                type="inline"
+                progressFilled={1}
+                open={open}
+                size="medium"
+            ></LoadingState>
+        </React.Fragment>
+    );
+};

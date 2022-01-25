@@ -79,7 +79,7 @@ export const LoadingState = ({
             <>
                 {display ? (
                     variant != 'static' ? (
-                        <div className={`progress ${size}`}>
+                        <div className={`progress ${type} ${size}`}>
                             <div className={`apollo-component-library-container`} ref={progressRef}>
                                 <div
                                     {...props}

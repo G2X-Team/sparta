@@ -134,19 +134,22 @@
 
 /* Inline type LoadingState for progress varrient begins */
 
-.apollo-component-library-loadingstate-component-progressbar.inline {
-    border: 16px solid #f3f3f3;
-    z-index: 9999;
-    border-radius: 50%;
-    border-top: 16px solid red;
-    display: flex;
-    flex-direction: column;
-    -webkit-animation: spin 2s linear infinite;
-    /* Safari */
-    animation: spin 2s linear infinite;
-    margin-left: 11%;
+.progress.inline {
+    border-radius: 20px;
+    margin-top: -1%;
+    margin-left: 8%;
 }
 
+.apollo-component-library-loadingstate-component-progressbar.inline {
+    background-color: #e04542;
+    height: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: width 2s ease-in-out;
+}
+
+
+/* Inline type LoadingState for progress varrient ends */
 
 /* Safari */
 
@@ -167,6 +170,3 @@
         transform: rotate(360deg);
     }
 }
-
-
-/* Inline type LoadingState for progress varrient ends */
