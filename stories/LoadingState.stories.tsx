@@ -6,6 +6,9 @@ import { Button, Text } from '../src';
 const meta: Meta = {
     title: 'Layout/LoadingState',
     component: LoadingState,
+    args: {
+        type: 'spinner',
+    },
 };
 
 export default meta;
@@ -18,40 +21,24 @@ export default meta;
  */
 const Template: Story<Props> = (args) => {
     const [open, isLoading] = useState(false);
+    const buttonText = `${args.type} loading shown here`;
 
     return (
-        <React.Fragment>
-            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
-                Static Loading shown here
-            </Text>
-            <LoadingState open={open} isLoading={() => isLoading(!open)} {...args}></LoadingState>
-        </React.Fragment>
+        <>
+            <Button onClick={() => isLoading(!open)}>
+                <Text pascal>{buttonText}</Text>
+            </Button>
+            <br />
+            <br />
+            <LoadingState loading={open} {...args}></LoadingState>
+        </>
     );
 };
 
-export const Default = Template.bind({});
+export const Spinner = Template.bind({});
 
-/**
- * Template Inline Progress LoadingState
- *
- * @param args storybook arguments
- * @return template Progress LoadingState component
- */
-export const ProgressBarExample: Story<Props> = (args) => {
-    const [open, isLoading] = useState(true);
-
-    return (
-        <React.Fragment>
-            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
-                Inline Loading shown here
-            </Text>
-            <LoadingState
-                isLoading={() => isLoading(!open)}
-                variant="progress"
-                progressFilled={1}
-                open={open}
-                size="medium"
-            ></LoadingState>
-        </React.Fragment>
-    );
+export const ProgressBar = Template.bind({});
+ProgressBar.args = {
+    type: 'progress',
+    progress: 0.5,
 };

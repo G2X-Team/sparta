@@ -4,11 +4,12 @@ import { screen, render, waitFor } from '@testing-library/react';
 import { LoadingState, Text, Button } from '../src';
 
 describe('LoadingState', () => {
-    it('it renders correctly', () => {
+    it('renders correctly', () => {
         // given
         render(
             <Text>
-                Hello World<LoadingState open></LoadingState>
+                Hello World
+                <LoadingState loading></LoadingState>
             </Text>
         );
 
@@ -33,7 +34,7 @@ describe('LoadingState', () => {
         // given
         render(
             <Text>
-                <LoadingState size="large" variant="static">
+                <LoadingState size="large" type="spinner">
                     Hello World
                 </LoadingState>
             </Text>
@@ -46,7 +47,7 @@ describe('LoadingState', () => {
         // given
         render(
             <Text>
-                <LoadingState size="medium" variant="static">
+                <LoadingState size="medium" type="spinner">
                     Hello World
                 </LoadingState>
             </Text>
@@ -59,7 +60,7 @@ describe('LoadingState', () => {
         // given
         render(
             <Text>
-                <LoadingState size="small" variant="static">
+                <LoadingState size="small" type="spinner">
                     Hello World
                 </LoadingState>
             </Text>
@@ -68,11 +69,11 @@ describe('LoadingState', () => {
         waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
     });
 
-    it('will render the progress varrient', () => {
+    it('will render the progress type', () => {
         // given
         render(
             <Button>
-                <LoadingState size="small" variant="progress" progressFilled={1}>
+                <LoadingState size="small" type="progress" progress={1}>
                     Hello World
                 </LoadingState>
             </Button>

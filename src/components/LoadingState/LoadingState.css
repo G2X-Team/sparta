@@ -29,17 +29,17 @@
 
 
 /* LoadingState size begins*/
-.small {
+.apollo-component-library-loadingstate-component.small {
     width: 11px;
     height: 11px;
 }
 
-.medium {
+.apollo-component-library-loadingstate-component.medium {
     width: 60px;
     height: 60px;
 }
 
-.large {
+.apollo-component-library-loadingstate-component.large {
     width: 120px;
     height: 120px;
 }
@@ -51,46 +51,26 @@
     max-width: 100%;
 }
 
-.progress {
+.apollo-component-library-loadingstate-component-progressbar {
     border-radius: 20px;
+    background-color: #e04542;
+    display: flex;
+    flex-direction: column;
+    transition: width 2s ease-in-out;
 }
 
 .apollo-component-library-loadingstate-component-progressbar.large {
-    background-color: #e04542;
     height: 26px;
-    display: flex;
-    flex-direction: column;
-    transition: width 2s ease-in-out;
 }
 
 .apollo-component-library-loadingstate-component-progressbar.medium {
-    background-color: #e04542;
     height: 18px;
-    display: flex;
-    flex-direction: column;
-    transition: width 2s ease-in-out;
 }
 
 .apollo-component-library-loadingstate-component-progressbar.small {
-    background-color: #e04542;
     height: 10px;
-    display: flex;
-    flex-direction: column;
-    transition: width 2s ease-in-out;
 }
 /* LoadingState for progress varrient ends*/
-
-/* Safari */
-
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
 @keyframes spin {
     0% {
         transform: rotate(0deg);
