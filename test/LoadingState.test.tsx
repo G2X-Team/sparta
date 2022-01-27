@@ -29,22 +29,6 @@ describe('LoadingState', () => {
         expect(screen.queryByText(/hello world/i)).not.toBeInTheDocument();
     });
 
-    it('will be visible when not collapsed in all types', () => {
-        // given
-        render(
-            <React.Fragment>
-                <Text>
-                    <LoadingState open>Hello World</LoadingState>
-                </Text>
-                <Button>
-                    <LoadingState open>Hello World</LoadingState>
-                </Button>
-            </React.Fragment>
-        );
-        // when then
-        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
-    });
-
     it('will render the large size', () => {
         // given
         render(
