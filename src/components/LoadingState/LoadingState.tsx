@@ -108,26 +108,17 @@ export const LoadingState = ({
                 variant != 'static' ? (
                     <div
                         style={{ opacity: effect ? 1 : 0 }}
-                        className={`apollo-component-library-loadingstate-component-container`}
+                        className={`apollo-component-library-loadingstate-component-container
+                        `}
                     >
-                        <div
-                            className={`
-                                    apollo-component-library-loadingstate-component-backdrop`}
-                        >
-                            {renderLoadingState()}
-                        </div>
+                        {renderLoadingState()}
                     </div>
                 ) : (
                     <div
                         className={`apollo-component-library-loadingstate-component-container
-                        `}
+                    `}
                     >
-                        <div
-                            onClick={isLoading}
-                            className={`apollo-component-library-loadingstate-component-backdrop`}
-                        >
-                            {renderLoadingState()}
-                        </div>
+                        <div onClick={isLoading}>{renderLoadingState()}</div>
                     </div>
                 )
             ) : null}

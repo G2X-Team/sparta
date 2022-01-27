@@ -12,7 +12,7 @@
 
 
 /* LoadingState begins */
-.apollo-component-library-loadingstate-component {
+.apollo-component-library-loadingstate-component.inline {
     border: 16px solid #f3f3f3;
     z-index: 9999;
     border-radius: 50%;
@@ -22,9 +22,6 @@
     animation: spin 2s linear infinite;
 }
 
-.apollo-component-library-loadingstate-component-backdrop {
-    display: inline-block;
-}
 /* LoadingState ends */
 
 
@@ -47,11 +44,6 @@
 
 
 /* LoadingState for progress varrient begins*/
-.progress {
-    border-radius: 20px;
-    margin-top: 7%;
-}
-
 .apollo-component-library-container {
     max-width: 100%;
 }
