@@ -22,7 +22,7 @@ const Template: Story<Props> = (args) => {
     return (
         <React.Fragment>
             <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
-                Click to load a default Loading State
+                Static Loading shown here
             </Text>
             <LoadingState open={open} isLoading={() => isLoading(!open)} {...args}></LoadingState>
         </React.Fragment>
@@ -32,112 +32,12 @@ const Template: Story<Props> = (args) => {
 export const Default = Template.bind({});
 
 /**
- * Template Inline LoadingState
- *
- * @param args storybook arguments
- * @return template inline LoadingState component
- */
-export const AnotherExample: Story<Props> = (args) => {
-    const [open, isLoading] = useState(false);
-
-    return (
-        <React.Fragment>
-            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
-                Static Loading shown here
-            </Text>
-            <LoadingState
-                open={open}
-                isLoading={() => isLoading(!open)}
-                size="small"
-                variant="static"
-                progressFilled={0}
-            ></LoadingState>
-        </React.Fragment>
-    );
-};
-
-/**
- * Template Large LoadingState
- *
- * @param args storybook arguments
- * @return template large LoadingState component
- */
-export const LargeSize: Story<Props> = (args) => {
-    const [open, isLoading] = useState(false);
-
-    return (
-        <React.Fragment>
-            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
-                Static Loading shown here in large size
-            </Text>
-            <LoadingState
-                open={open}
-                isLoading={() => isLoading(!open)}
-                size="large"
-                variant="static"
-                progressFilled={0}
-            ></LoadingState>
-        </React.Fragment>
-    );
-};
-
-/**
- * Template Medium LoadingState
- *
- * @param args storybook arguments
- * @return template medium LoadingState component
- */
-export const MediumSize: Story<Props> = (args) => {
-    const [open, isLoading] = useState(false);
-
-    return (
-        <React.Fragment>
-            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
-                Static Loading shown here in medium size
-            </Text>
-            <LoadingState
-                open={open}
-                isLoading={() => isLoading(!open)}
-                size="medium"
-                variant="static"
-                progressFilled={0}
-            ></LoadingState>
-        </React.Fragment>
-    );
-};
-
-/**
- * Template Small LoadingState
- *
- * @param args storybook arguments
- * @return template small LoadingState component
- */
-export const SmallSize: Story<Props> = (args) => {
-    const [open, isLoading] = useState(false);
-
-    return (
-        <React.Fragment>
-            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
-                Static Loading shown here in small size
-            </Text>
-            <LoadingState
-                open={open}
-                isLoading={() => isLoading(!open)}
-                size="small"
-                variant="static"
-                progressFilled={0}
-            ></LoadingState>
-        </React.Fragment>
-    );
-};
-
-/**
  * Template Inline Progress LoadingState
  *
  * @param args storybook arguments
- * @return template inline Progress LoadingState component
+ * @return template Progress LoadingState component
  */
-export const InlineProgressBarExample: Story<Props> = (args) => {
+export const ProgressBarExample: Story<Props> = (args) => {
     const [open, isLoading] = useState(true);
 
     return (

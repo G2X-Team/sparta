@@ -26,7 +26,7 @@ export const LoadingState = ({
     progressFilled = 0,
     className,
     variant = 'static',
-    size = 'medium',
+    size = 'small',
     children,
     style,
     open = false,
