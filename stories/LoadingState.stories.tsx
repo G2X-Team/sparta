@@ -21,7 +21,9 @@ const Template: Story<Props> = (args) => {
 
     return (
         <React.Fragment>
-            <Button onClick={() => isLoading(!open)}>Submit</Button>
+            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
+                Click to load a default Loading State
+            </Text>
             <LoadingState open={open} isLoading={() => isLoading(!open)} {...args}></LoadingState>
         </React.Fragment>
     );
@@ -41,12 +43,11 @@ export const AnotherExample: Story<Props> = (args) => {
     return (
         <React.Fragment>
             <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
-                Inline Loading shown here
+                Static Loading shown here
             </Text>
             <LoadingState
                 open={open}
                 isLoading={() => isLoading(!open)}
-                type="inline"
                 size="small"
                 variant="static"
                 progressFilled={0}
@@ -66,11 +67,12 @@ export const LargeSize: Story<Props> = (args) => {
 
     return (
         <React.Fragment>
-            <Button onClick={() => isLoading(!open)}>Submit</Button>
+            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
+                Static Loading shown here in large size
+            </Text>
             <LoadingState
                 open={open}
                 isLoading={() => isLoading(!open)}
-                type="absolute"
                 size="large"
                 variant="static"
                 progressFilled={0}
@@ -90,11 +92,12 @@ export const MediumSize: Story<Props> = (args) => {
 
     return (
         <React.Fragment>
-            <Button onClick={() => isLoading(!open)}>Submit</Button>
+            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
+                Static Loading shown here in medium size
+            </Text>
             <LoadingState
                 open={open}
                 isLoading={() => isLoading(!open)}
-                type="absolute"
                 size="medium"
                 variant="static"
                 progressFilled={0}
@@ -114,38 +117,15 @@ export const SmallSize: Story<Props> = (args) => {
 
     return (
         <React.Fragment>
-            <Button onClick={() => isLoading(!open)}>Submit</Button>
+            <Text style={{ display: 'inline-block' }} onClick={() => isLoading(!open)}>
+                Static Loading shown here in small size
+            </Text>
             <LoadingState
                 open={open}
                 isLoading={() => isLoading(!open)}
-                type="absolute"
                 size="small"
                 variant="static"
                 progressFilled={0}
-            ></LoadingState>
-        </React.Fragment>
-    );
-};
-
-/**
- * Template Progress LoadingState
- *
- * @param args storybook arguments
- * @return template progress LoadingState component
- */
-export const ProgressVarient: Story<Props> = (args) => {
-    const [open, isLoading] = useState(true);
-
-    return (
-        <React.Fragment>
-            <Button onClick={() => isLoading(!open)}>Submit</Button>
-            <LoadingState
-                isLoading={() => isLoading(!open)}
-                variant="progress"
-                type="absolute"
-                progressFilled={1}
-                open={open}
-                size="large"
             ></LoadingState>
         </React.Fragment>
     );
@@ -168,7 +148,6 @@ export const InlineProgressBarExample: Story<Props> = (args) => {
             <LoadingState
                 isLoading={() => isLoading(!open)}
                 variant="progress"
-                type="inline"
                 progressFilled={1}
                 open={open}
                 size="medium"

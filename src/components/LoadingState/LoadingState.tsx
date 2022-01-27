@@ -7,8 +7,6 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
      * progressFilled={0.1} => 10% filled progressbar
      */
     progressFilled?: number;
-    /** Determines the type of LoadingState whether Absolute or Inline*/
-    type?: 'absolute' | 'inline';
     /** Determines the size of LoadingState whether small , medium, or large */
     size?: 'small' | 'medium' | 'large';
     /** Determines the variant of LoadingState whether static or progress */
@@ -28,7 +26,6 @@ export const LoadingState = ({
     progressFilled = 0,
     className,
     variant = 'static',
-    type = 'absolute',
     size = 'medium',
     children,
     style,
@@ -82,13 +79,13 @@ export const LoadingState = ({
             <>
                 {display ? (
                     variant != 'static' ? (
-                        <div className={`progress ${type} ${size}`}>
+                        <div className={`progress`}>
                             <div className={`apollo-component-library-container`} ref={progressRef}>
                                 <div
                                     {...props}
                                     // eslint-disable-next-line max-len
                                     className={`apollo-component-library-loadingstate-component-progressbar
-                                ${type} progress`}
+                                progress ${size}`}
                                     style={{ width }}
                                 ></div>
                             </div>
@@ -97,7 +94,7 @@ export const LoadingState = ({
                         <div
                             {...props}
                             className={`apollo-component-library-loadingstate-component
-                            ${type} ${size}
+                            ${size}
                     `}
                         ></div>
                     )
@@ -111,8 +108,7 @@ export const LoadingState = ({
                 variant != 'static' ? (
                     <div
                         style={{ opacity: effect ? 1 : 0 }}
-                        className={`apollo-component-library-loadingstate-component-container
-                        ${type}`}
+                        className={`apollo-component-library-loadingstate-component-container`}
                     >
                         <div
                             className={`
@@ -124,13 +120,11 @@ export const LoadingState = ({
                 ) : (
                     <div
                         className={`apollo-component-library-loadingstate-component-container
-                        ${type}`}
+                        `}
                     >
                         <div
                             onClick={isLoading}
-                            className={`
-                                    apollo-component-library-loadingstate-component-backdrop
-                                ${type}`}
+                            className={`apollo-component-library-loadingstate-component-backdrop`}
                         >
                             {renderLoadingState()}
                         </div>

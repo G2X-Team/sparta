@@ -1,16 +1,5 @@
-/* Absolute type LoadingState Container */
-.apollo-component-library-loadingstate-component-container.absolute {
-    position: absolute;
-    z-index: 5;
-    transition: opacity 300ms;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
-
-/* Inline type LoadingState Container*/
-.apollo-component-library-loadingstate-component-container.inline {
+/* LoadingState Container */
+.apollo-component-library-loadingstate-component-container {
     position: absolute;
     z-index: 5;
     transition: opacity 300ms;
@@ -22,35 +11,8 @@
 }
 
 
-/* Absolute type LoadingState begins*/
-
-.apollo-component-library-loadingstate-component.absolute {
-    border: 16px solid #f3f3f3;
-    z-index: 9999;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    align-self: center;
-    justify-self: center;
-    display: flex;
-    flex-direction: column;
-    animation: spin 2s linear infinite;
-}
-
-.apollo-component-library-loadingstate-component-backdrop.absolute {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    background: rgba(0, 0, 0, 0.5);
-    display: grid;
-}
-
-
-/* Absolute type LoadingState ends*/
-
-
-/* Inline type LoadingState begins */
-
-.apollo-component-library-loadingstate-component.inline {
+/* LoadingState begins */
+.apollo-component-library-loadingstate-component {
     border: 16px solid #f3f3f3;
     z-index: 9999;
     border-radius: 50%;
@@ -60,16 +22,13 @@
     animation: spin 2s linear infinite;
 }
 
-.apollo-component-library-loadingstate-component-backdrop.inline {
+.apollo-component-library-loadingstate-component-backdrop {
     display: inline-block;
 }
-
-
-/* Inline type LoadingState ends */
+/* LoadingState ends */
 
 
 /* LoadingState size begins*/
-
 .small {
     width: 11px;
     height: 11px;
@@ -84,72 +43,49 @@
     width: 120px;
     height: 120px;
 }
-
-
 /* LoadingState size ends*/
 
 
-/* LoadingState Progressbar size begins*/
-
-.progress.small {
-    width: 25% !important;
-    height: 25% !important;
-}
-
-.progress.medium {
-    width: 50% !important;
-    height: 50% !important;
-}
-
-.progress.large {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-
-/* LoadingState Progressbar size ends*/
-
-
-/* Absolute type LoadingState for progress varrient begins*/
-
+/* LoadingState for progress varrient begins*/
 .progress {
     border-radius: 20px;
     margin-top: 7%;
-}
-
-.apollo-component-library-loadingstate-component-progressbar {
-    background-color: #e04542;
-    height: 10px;
-    position: relative;
-    transition: width 2s ease-in-out;
 }
 
 .apollo-component-library-container {
     max-width: 100%;
 }
 
-
-/* Absolute type LoadingState for progress varrient ends*/
-
-
-/* Inline type LoadingState for progress varrient begins */
-
-.progress.inline {
+.progress {
     border-radius: 20px;
     margin-top: -1%;
     margin-left: 8%;
 }
 
-.apollo-component-library-loadingstate-component-progressbar.inline {
+.apollo-component-library-loadingstate-component-progressbar.large {
+    background-color: #e04542;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    transition: width 2s ease-in-out;
+}
+
+.apollo-component-library-loadingstate-component-progressbar.medium {
+    background-color: #e04542;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    transition: width 2s ease-in-out;
+}
+
+.apollo-component-library-loadingstate-component-progressbar.small {
     background-color: #e04542;
     height: 10px;
     display: flex;
     flex-direction: column;
     transition: width 2s ease-in-out;
 }
-
-
-/* Inline type LoadingState for progress varrient ends */
+/* LoadingState for progress varrient ends*/
 
 /* Safari */
 
