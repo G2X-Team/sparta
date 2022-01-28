@@ -25,6 +25,7 @@ describe('LoadingState', () => {
     it('will render the progressbar type', () => {
         // given
         render(<LoadingState loading size="large" type="progress" progress={0.5} />);
+
         // when then
         expect(screen.getByRole('progressbar')).toBeInTheDocument();
     });
