@@ -1,36 +1,25 @@
 import React from 'react';
 import { screen, render, waitFor } from '@testing-library/react';
 
-import { LoadingState, Text, Button } from '../src';
+import { LoadingState, Text } from '../src';
 
 describe('LoadingState', () => {
     it('renders correctly', () => {
         // given
-        render(
-            <Text>
-                Hello World
-                <LoadingState loading></LoadingState>
-            </Text>
-        );
+        render(<LoadingState>Hello World!</LoadingState>);
 
         // when then
-        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
+        expect(screen.queryByText(/hello world!/i)).not.toBeInTheDocument();
     });
 
-    it('is not visible when collapsed in all types', () => {
+    it('will render the progressbar type', () => {
         // given
-        render(
-            <React.Fragment>
-                <Text>
-                    <LoadingState>Hello World</LoadingState>
-                </Text>
-            </React.Fragment>
-        );
+        render(<LoadingState size="large" type="progress" progress={0.5}></LoadingState>);
         // when then
-        expect(screen.queryByText(/hello world/i)).not.toBeInTheDocument();
+        waitFor(() => expect(screen.getByRole('progressbar')).toBeInTheDocument());
     });
 
-    it('will render the large size', () => {
+    it('will render the spinner type', () => {
         // given
         render(
             <Text>
@@ -40,45 +29,7 @@ describe('LoadingState', () => {
             </Text>
         );
         // when then
-        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
-    });
-
-    it('will render the medium size', () => {
-        // given
-        render(
-            <Text>
-                <LoadingState size="medium" type="spinner">
-                    Hello World
-                </LoadingState>
-            </Text>
-        );
-        // when then
-        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
-    });
-
-    it('will render the small size', () => {
-        // given
-        render(
-            <Text>
-                <LoadingState size="small" type="spinner">
-                    Hello World
-                </LoadingState>
-            </Text>
-        );
-        // when then
-        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
-    });
-
-    it('will render the progress type', () => {
-        // given
-        render(
-            <Button>
-                <LoadingState size="small" type="progress" progress={1}>
-                    Hello World
-                </LoadingState>
-            </Button>
-        );
-        // when then
-        waitFor(() => expect(screen.queryByText(/hello world/i)).toBeInTheDocument());
+        const label = screen.queryByText(/hello world/i);
+        waitFor(() => expect(label).toHaveAttribute('aria-busy', 'true'));
     });
 });
