@@ -64,6 +64,7 @@
         "@types/react-dom": "^17.0.9",
         "@typescript-eslint/eslint-plugin": "^5.5.0",
         "@typescript-eslint/parser": "^5.5.0",
+        "ansi-regex": "^6.0.1",
         "autoprefixer": "^10.3.7",
         "babel-loader": "^8.2.2",
         "eslint": "^8.3.0",
@@ -71,11 +72,13 @@
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react": "^7.27.1",
+        "glob-parent": "^6.0.2",
         "husky": "^7.0.4",
         "identity-obj-proxy": "^3.0.0",
-        "node-fetch": "^3.0.0",
+        "node-fetch": "^3.1.1",
         "postcss": "^8.3.9",
         "prettier": "2.5.0",
+        "prismjs": "^1.26.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-is": "^17.0.2",
@@ -84,6 +87,13 @@
         "tsdx": "^0.14.1",
         "tslib": "^2.3.1",
         "typescript": "^4.4.4"
+    },
+    "resolutions": {
+        "node-fetch": "^3.1.1",
+        "ansi-regex": "^6.0.1",
+        "prismjs": "^1.26.0",
+        "glob-parent": "^6.0.2"
+
     },
     "jest": {
         "setupFilesAfterEnv": [
