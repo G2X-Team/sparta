@@ -1,4 +1,5 @@
 import React, { FormEvent, useEffect } from 'react';
+import type { FC } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props as SwitchProps, Switch as CSwitch } from '../../Switch/Switch';
 
@@ -12,7 +13,7 @@ interface Props extends Overload<SwitchProps> {
  *
  * @return Formatted Switch
  */
-const Switch: React.FC<Props> = ({
+const Switch: FC<Props> = ({
     parentProps: { parentRequired, formValue, setFormValue },
     checked,
     name,

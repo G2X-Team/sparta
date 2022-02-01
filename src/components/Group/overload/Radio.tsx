@@ -1,4 +1,5 @@
 import React, { FormEvent } from 'react';
+import type { FC } from 'react';
 import { Props, Radio as CRadio } from '../../Radio/Radio';
 import Overload from '../../../interfaces/Overload';
 
@@ -7,7 +8,7 @@ import Overload from '../../../interfaces/Overload';
  *
  * @return Formatted Radio
  */
-const Radio: React.FC<Overload<Props>> = ({
+const Radio: FC<Overload<Props>> = ({
     parentProps: { parentDisabled, radioValues, setRadioValue },
     onChange,
     disabled,

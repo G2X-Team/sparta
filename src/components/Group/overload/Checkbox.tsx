@@ -1,4 +1,5 @@
 import React, { FormEvent } from 'react';
+import type { FC } from 'react';
 import { Props, Checkbox as CCheckbox } from '../../Checkbox/Checkbox';
 import Overload from '../../../interfaces/Overload';
 
@@ -7,7 +8,7 @@ import Overload from '../../../interfaces/Overload';
  *
  * @return Formatted Checkbox
  */
-const Checkbox: React.FC<Overload<Props>> = ({
+const Checkbox: FC<Overload<Props>> = ({
     parentProps: { parentDisabled, checkboxValues, setCheckboxValue, isChecked, updateChecked },
     onChange,
     disabled,

@@ -1,8 +1,12 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { ReactNode } from 'react';
+import type { FC } from 'react';
 import './ButtonGroup.css';
 
 import FormatChildren from '../../util/FormatChildren';
-import { StyleVariant, ComponentSize } from '../../interfaces/Properties';
+import type { StyleVariant } from '../../interfaces/Properties';
+import type { ComponentSize } from '../../interfaces/Properties';
 
 import Button from './overload/Button';
 
@@ -22,7 +26,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return ButtonGroup component
  */
-export const ButtonGroup: React.FC<Props> = ({
+export const ButtonGroup: FC<Props> = ({
     children = '',
     variant = 'default',
     disabled = false,

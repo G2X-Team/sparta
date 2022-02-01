@@ -1,4 +1,6 @@
-import React, { HTMLAttributes, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Label.css';
 
@@ -17,7 +19,7 @@ export interface Props extends HTMLAttributes<HTMLLabelElement> {
  *
  * @return Label component
  */
-export const Label: React.FC<Props> = ({
+export const Label: FC<Props> = ({
     value,
     hint,
     children,

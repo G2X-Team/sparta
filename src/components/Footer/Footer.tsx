@@ -1,4 +1,7 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { ReactNode } from 'react';
+import type { FC } from 'react';
 import Overload from '../../interfaces/Overload';
 import './Footer.css';
 
@@ -12,7 +15,7 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return Footer component
  */
-export const Footer: React.FC<Props> = ({
+export const Footer: FC<Props> = ({
     children,
     className = '',
     parentProps,

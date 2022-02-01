@@ -1,4 +1,7 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { ReactNode } from 'react';
+import type { FC } from 'react';
 import { Text } from '../Text/Text';
 import './Checkbox.css';
 
@@ -18,7 +21,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Checkbox component
  */
-export const Checkbox: React.FC<Props> = ({
+export const Checkbox: FC<Props> = ({
     children,
     className,
     disabled = false,

@@ -1,11 +1,6 @@
-import React, {
-    useState,
-    useEffect,
-    HTMLAttributes,
-    ReactNode,
-    useRef,
-    CSSProperties,
-} from 'react';
+import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import './LoadingState.css';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -27,7 +22,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return LoadingState component
  */
-export const LoadingState = ({
+export const LoadingState: FC<Props> = ({
     progress = 0,
     type = 'spinner',
     size = 'small',

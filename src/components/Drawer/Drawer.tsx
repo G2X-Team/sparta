@@ -1,4 +1,7 @@
-import React, { HTMLAttributes, ReactNode, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { ReactNode } from 'react';
+import type { FC } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Drawer.css';
 
@@ -40,7 +43,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Drawer Component
  */
-export const Drawer: React.FC<Props> = ({
+export const Drawer: FC<Props> = ({
     children,
     className = '',
     type = 'absolute',

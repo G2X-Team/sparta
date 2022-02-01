@@ -1,4 +1,6 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import { detectOutsideClick } from '../../util/detectOutsideClick';
 import './Dropdown.css';
@@ -6,7 +8,8 @@ import './Dropdown.css';
 import Button from './overload/Button';
 import Menu from './components/Menu';
 import { Option } from '../Option/Option';
-import { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
+import type { ComponentAlignment } from '../../interfaces/Properties';
+import type { ComponentOrientation } from '../../interfaces/Properties';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines where the menu will appear from */
@@ -24,7 +27,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Dropdown component
  */
-export const Dropdown: React.FC<Props> = ({
+export const Dropdown: FC<Props> = ({
     children,
     className = '',
     orientation = 'bottom',

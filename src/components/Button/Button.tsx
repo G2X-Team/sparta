@@ -1,5 +1,8 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
-import { StyleVariant } from '../../interfaces/Properties';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { ReactNode } from 'react';
+import type { FC } from 'react';
+import type { StyleVariant } from '../../interfaces/Properties';
 import './Button.css';
 
 export interface Props extends HTMLAttributes<HTMLButtonElement> {
@@ -18,7 +21,7 @@ export interface Props extends HTMLAttributes<HTMLButtonElement> {
  *
  * @return Button component
  */
-export const Button: React.FC<Props> = ({
+export const Button: FC<Props> = ({
     children,
     href,
     className = '',

@@ -1,4 +1,5 @@
 import React from 'react';
+import type { FC } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props, Label as CLabel } from '../../Label/Label';
 
@@ -7,7 +8,7 @@ import { Props, Label as CLabel } from '../../Label/Label';
  *
  * @return Formatted Label
  */
-const Label: React.FC<Overload<Props>> = ({
+const Label: FC<Overload<Props>> = ({
     parentProps: { renderAll },
     children,
     ...props

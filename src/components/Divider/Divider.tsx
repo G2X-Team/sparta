@@ -1,4 +1,6 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import './Divider.css';
 
 export interface Props extends HTMLAttributes<HTMLHRElement> {
@@ -13,7 +15,7 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
  *
  * @return Divider component
  */
-export const Divider: React.FC<Props> = ({
+export const Divider: FC<Props> = ({
     color = 'lightgray',
     className = '',
     height = 1,

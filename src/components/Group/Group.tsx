@@ -1,4 +1,6 @@
-import React, { HTMLAttributes, ReactNode, useState, useEffect } from 'react';
+import React, { ReactNode, useState, useEffect } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Group.css';
 
@@ -29,7 +31,7 @@ export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> 
  *
  * @return Group component
  */
-export const Group: React.FC<Props> = ({
+export const Group: FC<Props> = ({
     children,
     name,
     type,

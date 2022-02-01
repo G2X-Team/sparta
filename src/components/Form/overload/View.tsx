@@ -1,4 +1,6 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { View as CView } from '../../View/View';
 
@@ -7,7 +9,7 @@ import { View as CView } from '../../View/View';
  *
  * @return Formatted View
  */
-const View: React.FC<Overload<HTMLAttributes<HTMLDivElement>>> = ({
+const View: FC<Overload<HTMLAttributes<HTMLDivElement>>> = ({
     parentProps: { renderAll },
     children,
     ...props

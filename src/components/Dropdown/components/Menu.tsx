@@ -1,4 +1,6 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import { Props as DropdownProps } from '../Dropdown';
 
 interface Props extends HTMLAttributes<HTMLDivElement>, DropdownProps {
@@ -11,7 +13,7 @@ interface Props extends HTMLAttributes<HTMLDivElement>, DropdownProps {
  *
  * @return Menu with all options
  */
-const Menu: React.FC<Props> = ({
+const Menu: FC<Props> = ({
     orientation,
     alignment,
     menuHeight,
