@@ -1,4 +1,5 @@
-import React, { HTMLAttributes } from 'react';
+import type { HTMLAttributes, FC } from 'react';
+import React from 'react';
 import * as CSS from 'csstype';
 import './Icon.css';
 
@@ -24,7 +25,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Icon component
  */
-export const Icon: React.FC<Props> = ({
+export const Icon: FC<Props> = ({
     name,
     onClick,
     clickable = onClick && true,
@@ -35,7 +36,7 @@ export const Icon: React.FC<Props> = ({
     disabled,
     style,
     ...props
-}: Props): JSX.Element => {
+}) => {
     return (
         <span
             {...props}

@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, ReactNode, useState, useEffect } from 'react';
+import type { HTMLAttributes, FC } from 'react';
+import React, { ReactNode, useState, useEffect } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Group.css';
 
@@ -29,14 +30,14 @@ export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> 
  *
  * @return Group component
  */
-export const Group: React.FC<Props> = ({
+export const Group: FC<Props> = ({
     children,
     name,
     type,
     disabled = false,
     onChange,
     ...props
-}: Props): JSX.Element => {
+}) => {
     // define group value
     const [radioValues, setRadioValue] = useState('');
     const [checkboxValues, setCheckboxValue] = useState<string[]>([]);

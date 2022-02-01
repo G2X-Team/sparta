@@ -1,11 +1,13 @@
-import React, { HTMLAttributes } from 'react';
+import type { HTMLAttributes, FC } from 'react';
+import React from 'react';
+import * as CSS from 'csstype';
 import './Divider.css';
 
 export interface Props extends HTMLAttributes<HTMLHRElement> {
     /** color of desired divider */
-    color?: string;
+    color?: CSS.Property.Color;
     /** height of divider in pixels */
-    height?: number;
+    height?: CSS.Property.Height;
 }
 
 /**
@@ -13,13 +15,7 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
  *
  * @return Divider component
  */
-export const Divider: React.FC<Props> = ({
-    color = 'lightgray',
-    className = '',
-    height = 1,
-    style,
-    ...props
-}: Props): JSX.Element => {
+export const Divider: FC<Props> = ({ color, className = '', height, style, ...props }) => {
     return (
         <hr
             role="separator"
@@ -40,8 +36,8 @@ export const Divider: React.FC<Props> = ({
  */
 const getStyle = (
     style: React.CSSProperties | undefined,
-    height: number,
-    color: string
+    height: CSS.Property.Height | undefined,
+    color: CSS.Property.Color | undefined
 ): React.CSSProperties => {
     return {
         borderTop: `${height}px solid ${color}`,

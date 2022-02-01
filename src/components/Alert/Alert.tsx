@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode, FC } from 'react';
+import React from 'react';
 import './Alert.css';
 
 export interface Props extends HTMLAttributes<HTMLParagraphElement> {
@@ -17,12 +18,12 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Alert component
  */
-export const Alert = ({
+export const Alert: FC<Props> = ({
     children,
     type = 'danger',
 
     ...props
-}: Props): JSX.Element => {
+}) => {
     /**
      * Gets all the special conditions and translates it to a special className combination
      * granting all conditions

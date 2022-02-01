@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode, FC } from 'react';
+import React from 'react';
 import { StyleVariant } from '../../interfaces/Properties';
 import { Text } from '../Text/Text';
 import './Switch.css';
@@ -25,12 +26,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Switch component
  */
-export const Switch: React.FC<Props> = ({
-    children,
-    variant = 'default',
-    className = '',
-    ...props
-}: Props): JSX.Element => {
+export const Switch: FC<Props> = ({ children, variant = 'default', className = '', ...props }) => {
     return (
         <label className="apollo-component-library-switch-component-label">
             <input

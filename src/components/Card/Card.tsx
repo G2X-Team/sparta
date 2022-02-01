@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode, FC } from 'react';
+import React from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Card.css';
 
@@ -16,7 +17,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Card component
  */
-export const Card: React.FC<Props> = ({ children, className, ...props }: Props): JSX.Element => {
+export const Card: FC<Props> = ({ children, className, ...props }) => {
     /**
      * Renderes all components
      *

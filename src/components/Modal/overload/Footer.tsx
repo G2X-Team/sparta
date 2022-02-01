@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import React from 'react';
 import FormatChildren from '../../../util/FormatChildren';
 
@@ -9,10 +10,7 @@ import { Props, Footer as CFooter } from '../../Footer/Footer';
  *
  * @return formatted footer
  */
-const Footer: React.FC<Props> = ({
-    parentProps: { children, ...parentProps },
-    ...props
-}: Props) => {
+const Footer: FC<Props> = ({ parentProps: { children, ...parentProps }, ...props }: Props) => {
     // gets all props
     const allProps = { ...props, ...parentProps };
 

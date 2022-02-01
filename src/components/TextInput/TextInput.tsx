@@ -1,4 +1,5 @@
-import React, { HTMLAttributes } from 'react';
+import type { HTMLAttributes, FC } from 'react';
+import React from 'react';
 import { StyleVariant } from '../../interfaces/Properties';
 import './TextInput.css';
 
@@ -26,13 +27,13 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return TextInput component
  */
-export const TextInput: React.FC<Props> = ({
+export const TextInput: FC<Props> = ({
     variant = 'default',
     className = '',
     password = false,
     valid = true,
     ...props
-}: Props): JSX.Element => {
+}) => {
     return (
         <input
             {...props}

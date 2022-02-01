@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import type { FC } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props as TextInputProps, TextInput as CTextInput } from '../../TextInput/TextInput';
 
@@ -12,7 +13,7 @@ interface Props extends Overload<TextInputProps> {
  *
  * @return Formatted Text Input
  */
-const TextInput: React.FC<Props> = ({
+const TextInput: FC<Props> = ({
     parentProps: {
         parentRequired,
         setFormValue,

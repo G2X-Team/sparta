@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import React from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props } from '../../Button/Button';
@@ -7,7 +8,7 @@ import { Props } from '../../Button/Button';
  *
  * @return Button component
  */
-const Button: React.FC<Overload<Props>> = ({
+const Button: FC<Overload<Props>> = ({
     parentProps: { toggleModal, manual, open },
     onClick,
     variant,
