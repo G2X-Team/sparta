@@ -7,6 +7,7 @@ import './Dropdown.css';
 
 import Button from './overload/Button';
 import Menu from './components/Menu';
+import * as CSS from 'csstype';
 import { Option } from '../Option/Option';
 import type { ComponentAlignment } from '../../interfaces/Properties';
 import type { ComponentOrientation } from '../../interfaces/Properties';
@@ -17,9 +18,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines menu alignment, when orientation is left or right */
     alignment?: ComponentAlignment;
     /** Determines the max height of the menu */
-    menuHeight?: string;
+    menuHeight?: CSS.Property.MaxHeight;
     /** Determines the max width of the menu */
-    menuWidth?: string;
+    menuWidth?: CSS.Property.MaxWidth;
 }
 
 /**

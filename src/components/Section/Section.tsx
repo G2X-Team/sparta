@@ -6,13 +6,13 @@ import * as CSS from 'csstype';
 
 export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
     /** value that determines the flex style prop of section */
-    flex?: number;
+    flex?: CSS.Property.Flex;
     /** value that determines the height of section */
-    height?: number | string;
+    height?: CSS.Property.Height;
     /** value that determines the width of section */
-    width?: number | string;
+    width?: CSS.Property.Width;
     /** value that determines the min width of the section */
-    minWidth?: number | string;
+    minWidth?: CSS.Property.MinWidth;
     /** justify content value */
     justifyContent?: CSS.Property.JustifyContent;
     /** align items value */
@@ -64,9 +64,9 @@ export const Section: FC<Props> = ({
  * @return section style object
  */
 const getSectionStyle = (
-    flex: number,
-    height: number | string | undefined,
-    width: number | string | undefined,
+    flex: CSS.Property.Flex | undefined,
+    height: CSS.Property.Height | undefined,
+    width: CSS.Property.Width | undefined,
     alignItems: CSS.Property.AlignItems | undefined,
     justifyContent: CSS.Property.JustifyContent | undefined,
     style: CSSProperties | undefined
