@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import type { FC } from 'react';
+import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props as GroupProps, Group as CGroup } from '../../Group/Group';
 

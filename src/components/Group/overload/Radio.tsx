@@ -1,5 +1,5 @@
-import React, { FormEvent } from 'react';
 import type { FC } from 'react';
+import React, { FormEvent } from 'react';
 import { Props, Radio as CRadio } from '../../Radio/Radio';
 import Overload from '../../../interfaces/Overload';
 

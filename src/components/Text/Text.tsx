@@ -1,6 +1,5 @@
+import type { HTMLAttributes, FC } from 'react';
 import React, { ReactNode } from 'react';
-import type { HTMLAttributes } from 'react';
-import type { FC } from 'react';
 import * as CSS from 'csstype';
 import './Text.css';
 

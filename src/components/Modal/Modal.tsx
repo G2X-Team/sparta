@@ -1,6 +1,5 @@
+import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect, ReactNode } from 'react';
-import type { HTMLAttributes } from 'react';
-import type { FC } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Modal.css';
 

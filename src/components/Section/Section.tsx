@@ -1,6 +1,5 @@
+import type { HTMLAttributes, FC } from 'react';
 import React, { CSSProperties } from 'react';
-import type { HTMLAttributes } from 'react';
-import type { FC } from 'react';
 import Overload from '../../interfaces/Overload';
 import * as CSS from 'csstype';
 

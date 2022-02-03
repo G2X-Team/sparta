@@ -1,6 +1,5 @@
+import type { HTMLAttributes, FC } from 'react';
 import React, { SyntheticEvent, ReactNode, useState, useEffect } from 'react';
-import type { HTMLAttributes } from 'react';
-import type { FC } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 
 import Label from './overload/Label';

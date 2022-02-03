@@ -1,7 +1,5 @@
+import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
-import type { HTMLAttributes } from 'react';
-import type { ReactNode } from 'react';
-import type { FC } from 'react';
 import { StyleVariant } from '../../interfaces/Properties';
 import { Text } from '../Text/Text';
 import './Switch.css';

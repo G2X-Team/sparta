@@ -1,10 +1,7 @@
+import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React, { CSSProperties, useState, useEffect, useRef } from 'react';
-import type { HTMLAttributes } from 'react';
-import type { ReactNode } from 'react';
-import type { FC } from 'react';
 import { ComponentSize } from '../../interfaces/Properties';
-import type { ComponentPosition } from '../../interfaces/Properties';
-import type { ComponentVerticalOrientation } from '../../interfaces/Properties';
+import type { ComponentPosition, ComponentVerticalOrientation } from '../../interfaces/Properties';
 import * as CSS from 'csstype';
 
 import FormatChildren from '../../util/FormatChildren';

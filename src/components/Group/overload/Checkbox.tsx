@@ -1,5 +1,5 @@
-import React, { FormEvent } from 'react';
 import type { FC } from 'react';
+import React, { FormEvent } from 'react';
 import { Props, Checkbox as CCheckbox } from '../../Checkbox/Checkbox';
 import Overload from '../../../interfaces/Overload';
 

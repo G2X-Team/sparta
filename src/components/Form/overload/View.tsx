@@ -1,6 +1,5 @@
+import type { HTMLAttributes, FC } from 'react';
 import React from 'react';
-import type { HTMLAttributes } from 'react';
-import type { FC } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { View as CView } from '../../View/View';
 

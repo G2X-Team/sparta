@@ -1,5 +1,5 @@
-import React from 'react';
 import type { FC } from 'react';
+import React from 'react';
 import FormatChildren from '../../../util/FormatChildren';
 
 import ButtonGroup from './ButtonGroup';

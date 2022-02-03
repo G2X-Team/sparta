@@ -1,6 +1,5 @@
+import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 'react';
-import type { HTMLAttributes } from 'react';
-import type { FC } from 'react';
 import './LoadingState.css';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
