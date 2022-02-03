@@ -1,4 +1,6 @@
-import React, { CSSProperties, HTMLAttributes } from 'react';
+import React, { CSSProperties } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import Overload from '../../interfaces/Overload';
 import * as CSS from 'csstype';
 
@@ -27,7 +29,7 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return section component
  */
-export const Section: React.FC<Props> = ({
+export const Section: FC<Props> = ({
     parentProps,
     flex = 1,
     children,

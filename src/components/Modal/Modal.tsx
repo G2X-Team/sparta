@@ -1,4 +1,6 @@
-import React, { useState, useEffect, HTMLAttributes, ReactNode } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Modal.css';
 
@@ -22,7 +24,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Modal component
  */
-export const Modal: React.FC<Props> = ({
+export const Modal: FC<Props> = ({
     className = '',
     manual = false,
     children,

@@ -1,4 +1,6 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import './Option.css';
 
 import Overload from '../../interfaces/Overload';
@@ -17,7 +19,7 @@ export interface Props extends Overload<HTMLAttributes<HTMLElement>> {
  *
  * @return Option component
  */
-export const Option: React.FC<Props> = ({
+export const Option: FC<Props> = ({
     children,
     parentProps,
     className = '',

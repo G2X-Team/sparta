@@ -1,4 +1,6 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { FC } from 'react';
 import * as CSS from 'csstype';
 import './Text.css';
 
@@ -37,7 +39,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Text component
  */
-export const Text: React.FC<Props> = ({
+export const Text: FC<Props> = ({
     children,
     className = '',
     header = 0,

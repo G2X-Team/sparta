@@ -1,16 +1,10 @@
-import React, {
-    CSSProperties,
-    HTMLAttributes,
-    ReactNode,
-    useState,
-    useEffect,
-    useRef,
-} from 'react';
-import {
-    ComponentPosition,
-    ComponentSize,
-    ComponentVerticalOrientation,
-} from '../../interfaces/Properties';
+import React, { CSSProperties, useState, useEffect, useRef } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { ReactNode } from 'react';
+import type { FC } from 'react';
+import { ComponentSize } from '../../interfaces/Properties';
+import type { ComponentPosition } from '../../interfaces/Properties';
+import type { ComponentVerticalOrientation } from '../../interfaces/Properties';
 import * as CSS from 'csstype';
 
 import FormatChildren from '../../util/FormatChildren';
@@ -39,7 +33,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Navigation Bar component
  */
-export const NavigationBar: React.FC<Props> = ({
+export const NavigationBar: FC<Props> = ({
     size = 'medium',
     position = 'static',
     orientation = 'top',

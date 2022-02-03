@@ -1,4 +1,5 @@
 import React from 'react';
+import type { FC } from 'react';
 import Overload from '../../../interfaces/Overload';
 import FormatChildren from '../../../util/FormatChildren';
 
@@ -10,7 +11,7 @@ import { Props } from '../../ButtonGroup/ButtonGroup';
  *
  * @return Formatted ButtonGroup
  */
-const ButtonGroup: React.FC<Overload<Props>> = ({
+const ButtonGroup: FC<Overload<Props>> = ({
     parentProps: { children, ...parentProps },
     className = '',
     ...props
