@@ -21,12 +21,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Checkbox component
  */
-export const Checkbox: FC<Props> = ({
-    children,
-    className,
-    disabled = false,
-    ...props
-}: Props): JSX.Element => {
+export const Checkbox: FC<Props> = ({ children, className, disabled = false, ...props }) => {
     return (
         <label>
             <input

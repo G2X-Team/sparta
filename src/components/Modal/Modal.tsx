@@ -32,7 +32,7 @@ export const Modal: FC<Props> = ({
     open = false,
     toggleModal,
     ...props
-}: Props): JSX.Element => {
+}) => {
     // state variables
     const [display, toggleDisplay] = useState(open);
     const [effect, toggleEffect] = useState(open);

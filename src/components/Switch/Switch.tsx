@@ -28,12 +28,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Switch component
  */
-export const Switch: FC<Props> = ({
-    children,
-    variant = 'default',
-    className = '',
-    ...props
-}: Props): JSX.Element => {
+export const Switch: FC<Props> = ({ children, variant = 'default', className = '', ...props }) => {
     return (
         <label className="apollo-component-library-switch-component-label">
             <input

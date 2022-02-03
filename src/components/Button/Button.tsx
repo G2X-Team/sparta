@@ -27,7 +27,7 @@ export const Button: FC<Props> = ({
     className = '',
     variant = 'default',
     ...props
-}: Props): JSX.Element => {
+}) => {
     const button: JSX.Element = (
         <button {...props} className={`apollo-component-library-button ${variant} ${className}`}>
             {children}

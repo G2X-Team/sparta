@@ -31,7 +31,7 @@ export const LoadingState: FC<Props> = ({
     children = undefined,
     style,
     ...props
-}: Props): JSX.Element => {
+}) => {
     // ref
     const progressRef = useRef<HTMLHeadingElement>(null);
 

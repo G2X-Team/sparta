@@ -37,7 +37,7 @@ export const Icon: FC<Props> = ({
     disabled,
     style,
     ...props
-}: Props): JSX.Element => {
+}) => {
     return (
         <span
             {...props}

@@ -55,7 +55,7 @@ export const Drawer: FC<Props> = ({
     toggleOpen,
     style,
     ...props
-}: Props): JSX.Element => {
+}) => {
     // ref
     const drawer = useRef<HTMLDivElement>(null);
 

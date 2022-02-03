@@ -15,12 +15,7 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return Footer component
  */
-export const Footer: FC<Props> = ({
-    children,
-    className = '',
-    parentProps,
-    ...props
-}: Props): JSX.Element => {
+export const Footer: FC<Props> = ({ children, className = '', parentProps, ...props }) => {
     return (
         <div {...props} className={`apollo-component-library-footer-component ${className}`}>
             {children}

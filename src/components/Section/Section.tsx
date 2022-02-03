@@ -40,7 +40,7 @@ export const Section: FC<Props> = ({
     justifyContent,
     alignItems,
     ...props
-}: Props): JSX.Element => {
+}) => {
     return (
         <div
             {...props}

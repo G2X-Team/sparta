@@ -22,7 +22,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Radio component
  */
-export const Radio: FC<Props> = ({ children, className, ...props }: Props): JSX.Element => {
+export const Radio: FC<Props> = ({ children, className, ...props }) => {
     return (
         <label>
             <input

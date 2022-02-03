@@ -13,13 +13,7 @@ interface Props extends HTMLAttributes<HTMLDivElement>, DropdownProps {
  *
  * @return Menu with all options
  */
-const Menu: FC<Props> = ({
-    orientation,
-    alignment,
-    menuHeight,
-    menuWidth,
-    options,
-}: Props): JSX.Element => {
+const Menu: FC<Props> = ({ orientation, alignment, menuHeight, menuWidth, options }) => {
     // define styling options
     const style: { [key: string]: string | number } = {};
 

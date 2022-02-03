@@ -35,7 +35,7 @@ export const Dropdown: FC<Props> = ({
     alignment = 'left',
     menuHeight,
     menuWidth,
-}: Props): JSX.Element => {
+}) => {
     // ref containing dropdown button
     const dropdown = React.useRef<HTMLDivElement>(null);
 

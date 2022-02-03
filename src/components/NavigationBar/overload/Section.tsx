@@ -16,7 +16,7 @@ const Section: FC<Props> = ({
     children,
     navigation,
     ...props
-}: Props): JSX.Element => {
+}) => {
     // state
     const [sectionChildren, setSectionChildren] = useState(children);
 

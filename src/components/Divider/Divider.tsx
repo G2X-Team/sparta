@@ -16,13 +16,7 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
  *
  * @return Divider component
  */
-export const Divider: FC<Props> = ({
-    color,
-    className = '',
-    height,
-    style,
-    ...props
-}: Props): JSX.Element => {
+export const Divider: FC<Props> = ({ color, className = '', height, style, ...props }) => {
     return (
         <hr
             role="separator"

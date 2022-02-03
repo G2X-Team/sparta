@@ -34,7 +34,7 @@ export const TextInput: FC<Props> = ({
     password = false,
     valid = true,
     ...props
-}: Props): JSX.Element => {
+}) => {
     return (
         <input
             {...props}

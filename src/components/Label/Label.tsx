@@ -19,13 +19,7 @@ export interface Props extends HTMLAttributes<HTMLLabelElement> {
  *
  * @return Label component
  */
-export const Label: FC<Props> = ({
-    value,
-    hint,
-    children,
-    className = '',
-    ...props
-}: Props): JSX.Element => {
+export const Label: FC<Props> = ({ value, hint, children, className = '', ...props }) => {
     // will keep track if label is parent to a required input
     const [required, toggleRequired] = useState(false);
 

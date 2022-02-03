@@ -33,7 +33,7 @@ export const ButtonGroup: FC<Props> = ({
     size = 'medium',
     className,
     ...props
-}: Props): JSX.Element => {
+}) => {
     /**
      * Renders all button group buttons and caches chlidren
      *

@@ -15,12 +15,7 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return Header component
  */
-export const Header: FC<Props> = ({
-    children,
-    className = '',
-    parentProps,
-    ...props
-}: Props): JSX.Element => {
+export const Header: FC<Props> = ({ children, className = '', parentProps, ...props }) => {
     return (
         <div {...props} className={`apollo-component-library-header-component ${className}`}>
             {children}

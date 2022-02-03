@@ -19,7 +19,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Card component
  */
-export const Card: FC<Props> = ({ children, className, ...props }: Props): JSX.Element => {
+export const Card: FC<Props> = ({ children, className, ...props }) => {
     /**
      * Renderes all components
      *

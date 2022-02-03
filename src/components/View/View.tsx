@@ -13,6 +13,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return View component
  */
-export const View: FC<Props> = ({ children, ...props }: Props): JSX.Element => {
+export const View: FC<Props> = ({ children, ...props }) => {
     return <div {...props}>{children}</div>;
 };

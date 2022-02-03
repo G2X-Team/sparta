@@ -55,7 +55,7 @@ export const Text: FC<Props> = ({
     color,
     style,
     ...props
-}: Props): JSX.Element => {
+}) => {
     /**
      * Gets all the special conditions and translates it to a special className combination
      * granting all conditions

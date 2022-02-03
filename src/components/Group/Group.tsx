@@ -38,7 +38,7 @@ export const Group: FC<Props> = ({
     disabled = false,
     onChange,
     ...props
-}: Props): JSX.Element => {
+}) => {
     // define group value
     const [radioValues, setRadioValue] = useState('');
     const [checkboxValues, setCheckboxValue] = useState<string[]>([]);
