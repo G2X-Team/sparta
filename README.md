@@ -35,6 +35,9 @@ apollo-component-library
 │   │   └───Component folders
 │   │       └───Component Files
 │   │
+│   │───*interfaces*
+│   │   └───Types and interfaces
+│   │
 │   └───*util*
 │       └───Utility classes and functions
 │
