@@ -8,8 +8,7 @@ import Button from './overload/Button';
 import Menu from './components/Menu';
 import * as CSS from 'csstype';
 import { Option } from '../Option/Option';
-import type { ComponentAlignment } from '../../interfaces/Properties';
-import type { ComponentOrientation } from '../../interfaces/Properties';
+import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines where the menu will appear from */

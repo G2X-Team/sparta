@@ -3,8 +3,7 @@ import React from 'react';
 import './ButtonGroup.css';
 
 import FormatChildren from '../../util/FormatChildren';
-import type { StyleVariant } from '../../interfaces/Properties';
-import type { ComponentSize } from '../../interfaces/Properties';
+import type { StyleVariant, ComponentSize } from '../../interfaces/Properties';
 
 import Button from './overload/Button';
 
