@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, useEffect, useState } from 'react';
+import type { HTMLAttributes, FC } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Label.css';
 
@@ -17,13 +18,7 @@ export interface Props extends HTMLAttributes<HTMLLabelElement> {
  *
  * @return Label component
  */
-export const Label: React.FC<Props> = ({
-    value,
-    hint,
-    children,
-    className = '',
-    ...props
-}: Props): JSX.Element => {
+export const Label: FC<Props> = ({ value, hint, children, className = '', ...props }) => {
     // will keep track if label is parent to a required input
     const [required, toggleRequired] = useState(false);
 

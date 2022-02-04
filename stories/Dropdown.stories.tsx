@@ -9,6 +9,10 @@ import { Text } from '../src/components/Text/Text';
 const meta: Meta = {
     title: 'Layout/Dropdown',
     component: Dropdown,
+    args: {
+        menuHeight: '100',
+        menuWidth: '100',
+    },
 };
 
 export default meta;

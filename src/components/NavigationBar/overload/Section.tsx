@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { Props, Section as CSection } from '../../Section/Section';
 
@@ -10,12 +11,12 @@ import { Dropdown, Option, Button, Icon } from '../../..';
  *
  * @return Formatted section component
  */
-const Section: React.FC<Props> = ({
+const Section: FC<Props> = ({
     parentProps: { mobile, titleColor },
     children,
     navigation,
     ...props
-}: Props): JSX.Element => {
+}) => {
     // state
     const [sectionChildren, setSectionChildren] = useState(children);
 

@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode, FC } from 'react';
+import React from 'react';
 import Overload from '../../interfaces/Overload';
 import './Footer.css';
 
@@ -12,12 +13,7 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return Footer component
  */
-export const Footer: React.FC<Props> = ({
-    children,
-    className = '',
-    parentProps,
-    ...props
-}: Props): JSX.Element => {
+export const Footer: FC<Props> = ({ children, className = '', parentProps, ...props }) => {
     return (
         <div {...props} className={`apollo-component-library-footer-component ${className}`}>
             {children}

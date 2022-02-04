@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode, FC } from 'react';
+import React from 'react';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
     /** May have children */
@@ -10,6 +11,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return View component
  */
-export const View: React.FC<Props> = ({ children, ...props }: Props): JSX.Element => {
+export const View: FC<Props> = ({ children, ...props }) => {
     return <div {...props}>{children}</div>;
 };

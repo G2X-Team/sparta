@@ -1,5 +1,6 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
-import { StyleVariant } from '../../interfaces/Properties';
+import type { HTMLAttributes, ReactNode, FC } from 'react';
+import React from 'react';
+import type { StyleVariant } from '../../interfaces/Properties';
 import './Button.css';
 
 export interface Props extends HTMLAttributes<HTMLButtonElement> {
@@ -18,13 +19,13 @@ export interface Props extends HTMLAttributes<HTMLButtonElement> {
  *
  * @return Button component
  */
-export const Button: React.FC<Props> = ({
+export const Button: FC<Props> = ({
     children,
     href,
     className = '',
     variant = 'default',
     ...props
-}: Props): JSX.Element => {
+}) => {
     const button: JSX.Element = (
         <button {...props} className={`apollo-component-library-button ${variant} ${className}`}>
             {children}

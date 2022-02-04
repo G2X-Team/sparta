@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { Props as GroupProps, Group as CGroup } from '../../Group/Group';
@@ -12,7 +13,7 @@ interface Props extends Overload<GroupProps> {
  *
  * @return Formatted Group
  */
-const Group: React.FC<Props> = ({
+const Group: FC<Props> = ({
     parentProps: {
         parentRequired,
         setParentRequired,

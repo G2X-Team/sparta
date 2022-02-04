@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, SyntheticEvent, ReactNode, useState, useEffect } from 'react';
+import type { HTMLAttributes, FC } from 'react';
+import React, { SyntheticEvent, ReactNode, useState, useEffect } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 
 import Label from './overload/Label';
@@ -24,7 +25,7 @@ export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' 
  *
  * @return Form component
  */
-export const Form: React.FC<Props> = ({
+export const Form: FC<Props> = ({
     onFail = (errors) => window.alert(...errors),
     onSubmit,
     children,

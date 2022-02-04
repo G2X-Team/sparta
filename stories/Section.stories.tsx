@@ -6,6 +6,10 @@ const meta: Meta = {
     title: 'Interfacing/Section',
     component: Section,
     args: {
+        flex: '1',
+        height: '100',
+        width: '100',
+        minWidth: '1',
         alignItems: 'center',
         justifyContent: 'center',
     },

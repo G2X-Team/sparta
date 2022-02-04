@@ -1,12 +1,14 @@
-import React, { HTMLAttributes } from 'react';
+import type { HTMLAttributes, FC } from 'react';
+import React from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import { detectOutsideClick } from '../../util/detectOutsideClick';
 import './Dropdown.css';
 
 import Button from './overload/Button';
 import Menu from './components/Menu';
+import * as CSS from 'csstype';
 import { Option } from '../Option/Option';
-import { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
+import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines where the menu will appear from */
@@ -14,9 +16,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     /** Determines menu alignment, when orientation is left or right */
     alignment?: ComponentAlignment;
     /** Determines the max height of the menu */
-    menuHeight?: string;
+    menuHeight?: CSS.Property.MaxHeight;
     /** Determines the max width of the menu */
-    menuWidth?: string;
+    menuWidth?: CSS.Property.MaxWidth;
 }
 
 /**
@@ -24,14 +26,14 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Dropdown component
  */
-export const Dropdown: React.FC<Props> = ({
+export const Dropdown: FC<Props> = ({
     children,
     className = '',
     orientation = 'bottom',
     alignment = 'left',
     menuHeight,
     menuWidth,
-}: Props): JSX.Element => {
+}) => {
     // ref containing dropdown button
     const dropdown = React.useRef<HTMLDivElement>(null);
 

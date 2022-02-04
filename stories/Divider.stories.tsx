@@ -6,6 +6,10 @@ import { Props, Divider } from '../src/components/Divider/Divider';
 const meta: Meta = {
     title: 'Layout/Divider',
     component: Divider,
+    args: {
+        color: 'lightgray',
+        height: '1',
+    },
 };
 
 export default meta;
