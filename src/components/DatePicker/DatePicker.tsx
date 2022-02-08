@@ -1,25 +1,17 @@
-import type { HTMLAttributes, FC } from 'react';
-import React from 'react';
-import './DatePicker.css';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
 
-export interface Props extends HTMLAttributes<HTMLHRElement> {
-    /** Name given to the datepicker */
-    name?: string;
-    /** Text placeholder that will apear on an empty datepicker */
-    placeholder?: string;
-}
+import 'react-datepicker/dist/react-datepicker.css';
+
+// CSS Modules, react-datepicker-cssmodules.css
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 /**
  * Component that serves as an datepicker for ease of implamenting date timestamp
  *
  * @return DatePicker component
  */
-export const DatePicker: FC<Props> = ({ name, className = '', placeholder, style, ...props }) => {
-    return (
-        <hr
-            role="separator"
-            {...props}
-            className={`apollo-component-library-datepicker-component ${className}`}
-        />
-    );
+const Example = () => {
+    const [startDate, setStartDate] = useState(new Date());
+    return <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />;
 };
