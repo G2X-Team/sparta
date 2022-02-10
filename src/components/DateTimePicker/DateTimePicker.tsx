@@ -19,13 +19,13 @@ export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onChange'>
         | 'mm/dd/yyyy'
         | 'yyyy/MM/dd'
         | 'yyyy/dd/MM';
-    // on change method updates the date input field with selected date
+    /** on change method updates the date input field with selected date */
     onChange?: (value: { [input: string]: string | string[] | boolean }) => void;
-    // Determine the type of dropdown of year and month selecter
+    /**  Determine the type of dropdown of year and month selecter */
     mode?: 'select' | 'scroll';
-    // Placeholder for no date is selected
+    /** Placeholder for no date is selected */
     placeholder?: string;
-    // Date to be selected
+    /** Date to be selected */
     selectedDate?: Date;
 }
 
