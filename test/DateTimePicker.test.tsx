@@ -15,9 +15,18 @@ describe('DateTimePicker', () => {
     it('Should not allow year input lower than 1900', () => {
         // given
         render(<DateTimePicker />);
-        const year = document.querySelector('[value="1989"]');
+        const year = document.querySelector('[value="1889"]');
 
         // when then
         expect(year).not.toBeTruthy();
+    });
+
+    it('Should change the date', () => {
+        // given
+        render(<DateTimePicker selectedDate={'25/02/2022'} />);
+        const date = document.querySelector('input[value="24/02/2022"]');
+
+        // when then
+        expect(date).not.toBeTruthy();
     });
 });

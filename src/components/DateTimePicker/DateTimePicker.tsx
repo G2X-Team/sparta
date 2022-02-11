@@ -10,15 +10,7 @@ export interface Props {
      * Determines format of date to be displayed
      * tag i.e. format=dd/MM/yyyy => 24/12/2020
      */
-    format?:
-        | 'dd/MM/yyyy'
-        | 'mm/dd/yyyy'
-        | 'yyyy/MM/dd'
-        | 'yyyy/dd/MM'
-        | 'dd/MM/yyyy'
-        | 'mm/dd/yyyy'
-        | 'yyyy/MM/dd'
-        | 'yyyy/dd/MM';
+    format?: 'dd/MM/yyyy' | 'mm/dd/yyyy' | 'yyyy/MM/dd' | 'yyyy/dd/MM';
     /** on change method updates the date input field with selected date */
     onChange?: (date: Date | null, event: React.SyntheticEvent<any, Event> | undefined) => void;
     /**  Determine the type of dropdown of year and month selecter */
@@ -26,7 +18,7 @@ export interface Props {
     /** Placeholder for no date is selected */
     placeholder?: string;
     /** Date to be selected */
-    selectedDate?: Date;
+    selectedDate?: any;
 }
 /**
  * Component that serves as an datepicker input field to let the user select Date
