@@ -44,11 +44,11 @@ export const DateTimePicker: FC<Props> = ({
     return (
         <DatePicker
             className={`apollo-component-library-date-picker-component`}
-            placeholderText={`${placeholder}`}
-            dateFormat={`${format}`}
+            placeholderText={placeholder}
+            dateFormat={format}
             selected={startDate}
             onChange={(date) => date && setStartDate(date)}
-            dropdownMode={`${mode}`}
+            dropdownMode={mode}
             showMonthDropdown
             showYearDropdown
             adjustDateOnChange
