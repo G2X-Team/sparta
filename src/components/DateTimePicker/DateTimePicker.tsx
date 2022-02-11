@@ -20,7 +20,7 @@ export interface Props {
         | 'yyyy/MM/dd'
         | 'yyyy/dd/MM';
     /** on change method updates the date input field with selected date */
-    onChange?: (value: { [input: string]: boolean | Date | null }) => void;
+    onChange?: (date: Date | null, event: React.SyntheticEvent<any, Event> | undefined) => void;
     /**  Determine the type of dropdown of year and month selecter */
     mode?: 'select' | 'scroll';
     /** Placeholder for no date is selected */
@@ -40,15 +40,15 @@ export const DateTimePicker: FC<Props> = ({
     selectedDate = new Date(),
     onChange,
 }) => {
-    useState<Date | null>(selectedDate);
+    const [startDate, setStartDate] = useState<Date | null>(selectedDate);
+    onChange = (selectedDate) => selectedDate && setStartDate(selectedDate);
     return (
         <DatePicker
             className="apollo-component-library-date-picker-component"
             placeholderText={placeholder}
             dateFormat={format}
-            onChange={(date) => {
-                onChange && onChange({ selectedDate: date });
-            }}
+            selected={startDate}
+            onChange={onChange}
             dropdownMode={mode}
             showMonthDropdown
             showYearDropdown
