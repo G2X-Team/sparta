@@ -1,11 +1,11 @@
-import type { HTMLAttributes, FC } from 'react';
+import type { FC } from 'react';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import './DateTimePicker.css';
 
-export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onChange'> {
+export interface Props {
     /**
      * Determines format of date to be displayed
      * tag i.e. format=dd/MM/yyyy => 24/12/2020
@@ -20,7 +20,7 @@ export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onChange'>
         | 'yyyy/MM/dd'
         | 'yyyy/dd/MM';
     /** on change method updates the date input field with selected date */
-    onChange?: (value: { [input: string]: string | string[] | boolean }) => void;
+    onChange?: (value: { [input: string]: boolean | Date | null }) => void;
     /**  Determine the type of dropdown of year and month selecter */
     mode?: 'select' | 'scroll';
     /** Placeholder for no date is selected */
@@ -28,7 +28,6 @@ export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onChange'>
     /** Date to be selected */
     selectedDate?: Date;
 }
-
 /**
  * Component that serves as an datepicker input field to let the user select Date
  *
@@ -39,15 +38,17 @@ export const DateTimePicker: FC<Props> = ({
     mode = 'select',
     placeholder = 'Click to add a date',
     selectedDate = new Date(),
+    onChange,
 }) => {
-    const [startDate, setStartDate] = useState<Date | null>(selectedDate);
+    useState<Date | null>(selectedDate);
     return (
         <DatePicker
-            className={`apollo-component-library-date-picker-component`}
+            className="apollo-component-library-date-picker-component"
             placeholderText={placeholder}
             dateFormat={format}
-            selected={startDate}
-            onChange={(date) => date && setStartDate(date)}
+            onChange={(date) => {
+                onChange && onChange({ selectedDate: date });
+            }}
             dropdownMode={mode}
             showMonthDropdown
             showYearDropdown
