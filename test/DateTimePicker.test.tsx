@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { Default as DateTimePicker } from '../stories/DateTimePicker.stories';
 
@@ -23,10 +24,16 @@ describe('DateTimePicker', () => {
 
     it('Should change the date', () => {
         // given
-        render(<DateTimePicker selectedDate={'25/02/2022'} />);
-        const date = document.querySelector('input[value="24/02/2022"]');
+        const onChange: jest.Mock<any, any> = jest.fn();
+        const selectedDate = '25/02/2022';
+        render(<DateTimePicker placeholder="Hello World!" onChange={onChange}></DateTimePicker>);
 
-        // when then
-        expect(date).not.toBeTruthy();
+        const checkbox: HTMLElement = screen.getByPlaceholderText(/hello world!/i);
+
+        // when
+        userEvent.click(checkbox);
+
+        // then
+        expect(onChange).not.toHaveBeenLastCalledWith(selectedDate);
     });
 });
