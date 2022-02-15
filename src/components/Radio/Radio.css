@@ -1,3 +1,7 @@
 .apollo-component-library-radio-component {
     margin-right: 5px;
 }
+
+.apollo-component-library-radio-component.invalid {
+    outline: 2px solid #c70000;
+}

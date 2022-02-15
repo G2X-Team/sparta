@@ -79,7 +79,7 @@ const TextInput: FC<Props> = ({
         <CTextInput
             {...props}
             required={required}
-            valid={validMap[name]}
+            invalid={!validMap[name]}
             onChange={modifiedOnChange}
         />
     );
