@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
@@ -12,13 +13,13 @@ export interface Props {
      */
     format?: 'dd/MM/yyyy' | 'mm/dd/yyyy' | 'yyyy/MM/dd' | 'yyyy/dd/MM';
     /** on change method updates the date input field with selected date */
-    onChange?: (date: Date | null, event: React.SyntheticEvent<any, Event> | undefined) => void;
+    onChange?: (date: Date | null) => void;
     /**  Determine the type of dropdown of year and month selecter */
     mode?: 'select' | 'scroll';
     /** Placeholder for no date is selected */
     placeholder?: string;
     /** Date to be selected */
-    selectedDate?: any;
+    selectedDate?: Date;
 }
 /**
  * Component that serves as an datepicker input field to let the user select Date
@@ -33,14 +34,18 @@ export const DateTimePicker: FC<Props> = ({
     onChange,
 }) => {
     const [startDate, setStartDate] = useState<Date | null>(selectedDate);
-    onChange = (selectedDate) => selectedDate && setStartDate(selectedDate);
+    // eslint-disable-next-line require-jsdoc
+    const newOnChange = (selectedDate: React.SetStateAction<Date | null>) => {
+        onChange && onChange(startDate);
+        setStartDate(selectedDate);
+    };
     return (
         <DatePicker
             className="apollo-component-library-date-picker-component"
             placeholderText={placeholder}
             dateFormat={format}
             selected={startDate}
-            onChange={onChange}
+            onChange={newOnChange}
             dropdownMode={mode}
             showMonthDropdown
             showYearDropdown

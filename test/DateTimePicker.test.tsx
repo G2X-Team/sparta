@@ -26,19 +26,19 @@ describe('DateTimePicker', () => {
 
     it('Should change the date', () => {
         // given
-        render(<DateTimePicker placeholder="Hello World!"></DateTimePicker>);
+        const onChange: jest.Mock<any, any> = jest.fn();
+        render(<DateTimePicker placeholder="Hello World!" onChange={onChange}></DateTimePicker>);
 
         const dateTimePickerDiv: HTMLElement = screen.getByPlaceholderText(/hello world!/i);
 
         // when
         userEvent.click(dateTimePickerDiv);
-        const getByLabelText: HTMLElement = screen.getByLabelText(
+        const NewDateLabel: HTMLElement = screen.getByLabelText(
             'Choose Friday, February 25th, 2022'
         );
-        userEvent.click(getByLabelText);
-        const changedDate = document.querySelector('[value="25/02/2022"]');
+        userEvent.click(NewDateLabel);
 
         // then
-        expect(changedDate).toBeTruthy();
+        expect(onChange).toHaveBeenCalled();
     });
 });
