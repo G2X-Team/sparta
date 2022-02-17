@@ -66,7 +66,9 @@
         "@testing-library/react": "^12.1.2",
         "@testing-library/user-event": "^13.5.0",
         "@types/jest-axe": "^3.5.3",
+        "@types/lodash": "^4.14.178",
         "@types/react": "^17.0.30",
+        "@types/react-datepicker": "^4.3.4",
         "@types/react-dom": "^17.0.9",
         "@typescript-eslint/eslint-plugin": "^5.5.0",
         "@typescript-eslint/parser": "^5.5.0",
@@ -117,5 +119,8 @@
         "moduleNameMapper": {
             "\\.(css|less|scss|sass)$": "identity-obj-proxy"
         }
+    },
+    "dependencies": {
+        "react-datepicker": "^4.6.0"
     }
 }
