@@ -1,9 +1,16 @@
-import type { HTMLAttributes, FC } from 'react';
-import React from 'react';
-import { StyleVariant } from '../../interfaces/Properties';
+import type { HTMLAttributes, FC, CSSProperties } from 'react';
+import React, { useEffect } from 'react';
+
+import type { StyleVariant } from '../../interfaces/Properties';
 import './TextInput.css';
 
+import { Text } from '../Text/Text';
+
 export interface Props extends HTMLAttributes<HTMLInputElement> {
+    /** To comply with WCAG 2.0, all inputs **must** have labels */
+    label: string;
+    /** Gives further description on what the input should have to be valid */
+    hint?: string;
     /** Placeholder text for input */
     placeholder?: string;
     /** Determines whether user can type in the text input */
@@ -17,9 +24,11 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Function that will determine whether input is valid for form submission */
     validator?: (value: string) => string | null;
     /** Determines whether input is valid or not */
-    valid?: boolean;
+    invalid?: boolean;
     /** Name of input */
     name?: string;
+    /** Message displayed when input is invalid */
+    errorMessage?: string;
 }
 
 /**
@@ -31,18 +40,68 @@ export const TextInput: FC<Props> = ({
     variant = 'default',
     className = '',
     password = false,
-    valid = true,
+    invalid = false,
+    name,
+    errorMessage,
+    required,
+    id,
+    hint,
+    label,
     ...props
 }) => {
+    // will throw if you try to add an error message without a name
+    useEffect(() => {
+        if (errorMessage?.length && !name?.length)
+            throw new Error(
+                'To use error message in TextInput, you must specify name to use error messages' +
+                    ' to comply with WCAG 2.0'
+            );
+    }, []);
+
     return (
-        <input
-            {...props}
-            className={`apollo-component-library-text-input 
-                ${variant} 
-                ${valid ? 'valid' : 'invalid'}
-                ${className}
-            `}
-            type={password ? 'password' : 'text'}
-        />
+        <div className="apollo-component-library-text-input-label">
+            <label>
+                <Text bold style={labelTextStyle}>
+                    {label}{' '}
+                    {required ? (
+                        <Text inline color="red">
+                            *
+                        </Text>
+                    ) : null}
+                </Text>
+                {hint?.length ? <Text style={hintTextStyle}>{hint}</Text> : null}
+                <input
+                    {...props}
+                    aria-invalid={invalid}
+                    aria-errormessage={name ? `${name}-error` : undefined}
+                    type={password ? 'password' : 'text'}
+                    className={`apollo-component-library-text-input 
+                        ${variant} 
+                        ${!invalid ? 'valid' : 'invalid'}
+                        ${className}
+                    `}
+                />
+            </label>
+            {invalid && errorMessage ? (
+                <div role="alert" id={name ? `${name}-error` : undefined}>
+                    <Text color="#c90000" style={errorTextStyle}>
+                        {errorMessage}
+                    </Text>
+                </div>
+            ) : null}
+        </div>
     );
+};
+
+const labelTextStyle: CSSProperties = {
+    paddingBottom: 5,
+};
+
+const hintTextStyle: CSSProperties = {
+    fontSize: '0.8rem',
+    paddingBottom: 5,
+};
+
+const errorTextStyle: CSSProperties = {
+    paddingTop: 5,
 };

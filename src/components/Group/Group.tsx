@@ -1,13 +1,14 @@
-import type { HTMLAttributes, FC } from 'react';
+import type { HTMLAttributes, FC, CSSProperties } from 'react';
 import React, { ReactNode, useState, useEffect } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Group.css';
 
+import { Text } from '../Text/Text';
 import Radio from './overload/Radio';
 import Checkbox from './overload/Checkbox';
 import View from './overload/View';
 
-export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface Props extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
     /** Group must contain element between tags */
     children: ReactNode;
     /** Identifies the group's selection */
@@ -22,6 +23,14 @@ export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> 
     validator?: (value: string | string[]) => string | null;
     /** Determines whether the group requires a selection */
     required?: boolean;
+    /** Mandatory label to comply to WCAG 2.0 */
+    label: string;
+    /** Gives further description on what the input should have to be valid */
+    hint?: string;
+    /** Determines whether component is invalid or not */
+    invalid?: boolean;
+    /** Message that displays when component is invalid */
+    errorMessage?: string;
 }
 
 /**
@@ -36,6 +45,11 @@ export const Group: FC<Props> = ({
     type,
     disabled = false,
     onChange,
+    label,
+    hint,
+    required,
+    invalid,
+    errorMessage,
     ...props
 }) => {
     // define group value
@@ -44,6 +58,15 @@ export const Group: FC<Props> = ({
 
     // for checkboxes we want instant access to whether a checkbox is checked or not
     const [isChecked, updateChecked] = useState<{ [key: string]: boolean }>({});
+
+    // check if the user is using error message invalidly
+    useEffect(() => {
+        if (errorMessage?.length && !name?.length)
+            throw new Error(
+                'To use error message in Group, you must specify name to use error messages' +
+                    ' to comply with WCAG 2.0'
+            );
+    });
 
     // every time there is a state change, invoke the onChange method if it exists
     useEffect(() => {
@@ -84,5 +107,54 @@ export const Group: FC<Props> = ({
         return formatted.getAll();
     };
 
-    return <div {...props}>{renderAll(children)}</div>;
+    return (
+        <>
+            <fieldset
+                {...props}
+                className={`apollo-component-library-group ${invalid ? 'invalid' : ''}`}
+                aria-errormessage={name ? `${name}-error` : undefined}
+                aria-invalid={invalid}
+            >
+                <legend>
+                    <Text bold style={labelTextStyle}>
+                        {label}{' '}
+                        {required ? (
+                            <Text color="red" inline>
+                                *
+                            </Text>
+                        ) : null}
+                    </Text>
+                    {hint ? <Text style={hintTextStyle}>{hint}</Text> : null}
+                </legend>
+                <div
+                    className={`
+                        apollo-component-library-group-wrapper 
+                        ${invalid ? 'invalid' : ''}
+                    `}
+                >
+                    {renderAll(children)}
+                </div>
+                {invalid && errorMessage ? (
+                    <div role="alert" id={name ? `${name}-error` : undefined}>
+                        <Text color="#c90000" style={errorTextStyle}>
+                            {errorMessage}
+                        </Text>
+                    </div>
+                ) : null}
+            </fieldset>
+        </>
+    );
+};
+
+const labelTextStyle: CSSProperties = {
+    paddingBottom: 5,
+};
+
+const hintTextStyle: CSSProperties = {
+    fontSize: '0.8rem',
+    paddingBottom: 5,
+};
+
+const errorTextStyle: CSSProperties = {
+    paddingTop: 5,
 };
