@@ -2,7 +2,6 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { SyntheticEvent, ReactNode, useState, useEffect } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 
-import Label from './overload/Label';
 import Group from './overload/Group';
 import TextInput from './overload/TextInput';
 import View from './overload/View';
@@ -69,7 +68,6 @@ export const Form: FC<Props> = ({
 
         // get all formatted children
         const formatted = new FormatChildren(parentProps, {
-            Label,
             Group,
             TextInput,
             View,

@@ -12,6 +12,8 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     disabled?: boolean;
     /** Determines whether component is checked or not */
     checked?: boolean;
+    /** Determines whether component is invalid */
+    invalid?: boolean;
 }
 
 /**
@@ -19,18 +21,27 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Checkbox component
  */
-export const Checkbox: FC<Props> = ({ children, className, disabled = false, ...props }) => {
+export const Checkbox: FC<Props> = ({
+    children,
+    className,
+    invalid,
+    disabled = false,
+    ...props
+}) => {
     return (
         <label>
             <input
                 {...props}
+                aria-invalid={invalid}
                 type="checkbox"
                 disabled={disabled}
-                className={`apollo-component-library-checkbox-component ${className}`}
+                className={`
+                    apollo-component-library-checkbox-component 
+                    ${className}
+                    ${invalid ? 'invalid' : ''}
+                `}
             />
-            <Text inline margins>
-                {children}
-            </Text>
+            <Text inline>{children}</Text>
         </label>
     );
 };

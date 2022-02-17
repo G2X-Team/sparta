@@ -7,6 +7,9 @@ import { Radio, Checkbox, View } from '../src';
 const meta: Meta = {
     title: 'Form/Group',
     component: Group,
+    args: {
+        label: 'Radio Group',
+    },
 };
 
 export default meta;
@@ -23,10 +26,11 @@ const onChange = (groupValue: string | string[]): void => {
 /**
  * Radio Group
  *
+ * @param args arguments
  * @return radio group
  */
-export const RadioGroup = (): JSX.Element => (
-    <Group name="something" type="radio" onChange={onChange}>
+export const RadioGroup: Story<Props> = (args): JSX.Element => (
+    <Group {...args} name="something" type="radio" onChange={onChange}>
         <Radio value="something 1">Option 1</Radio>
         <Radio value="something 2">Option 2</Radio>
         <Radio value="something 3">Option 3</Radio>
@@ -39,7 +43,7 @@ export const RadioGroup = (): JSX.Element => (
  * @return checkbox group
  */
 export const CheckboxGroup = (): JSX.Element => (
-    <Group name="something" type="checkbox" onChange={onChange}>
+    <Group label="Checkbox Group" name="something" type="checkbox" onChange={onChange}>
         <Checkbox value="something 1">Option 1</Checkbox>
         <Checkbox value="something 2">Option 2</Checkbox>
         <Checkbox value="something 3">Option 3</Checkbox>
@@ -52,7 +56,7 @@ export const CheckboxGroup = (): JSX.Element => (
  * @return complex group
  */
 export const ComplexGroup = (): JSX.Element => (
-    <Group name="something" type="checkbox" onChange={onChange}>
+    <Group label="Checkbox Group" name="something" type="checkbox" onChange={onChange}>
         <View>
             <Checkbox value="something 1">Option 1</Checkbox>
         </View>
