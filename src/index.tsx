@@ -22,3 +22,4 @@ export { DateTimePicker } from './components/DateTimePicker/DateTimePicker';
 export { Form } from './components/Form/Form';
 export { NavigationBar } from './components/NavigationBar/NavigationBar';
 export { Section } from './components/Section/Section';
+export { Form as NewForm } from './components/NewForm/Form';

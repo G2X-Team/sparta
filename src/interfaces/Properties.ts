@@ -6,3 +6,5 @@ export type ComponentGeneralOrientation = 'horizontal' | 'vertical';
 export type ComponentSize = 'small' | 'medium' | 'large';
 export type ComponentAlignment = 'left' | 'center' | 'right';
 export type ComponentPosition = 'static' | 'absolute' | 'fixed';
+export type CSFormSubmitHandler = (data: { [key: string]: string | boolean | number }) => void;
+export type CSFormSubmitErrorHandler = (data: { [key: string]: string }) => void;

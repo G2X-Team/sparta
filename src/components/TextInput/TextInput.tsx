@@ -22,7 +22,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Determines whether the input is required for form submission */
     required?: boolean;
     /** Function that will determine whether input is valid for form submission */
-    validator?: (value: string) => string | null;
+    validator?: (value: string) => string | void;
     /** Determines whether input is valid or not */
     invalid?: boolean;
     /** Name of input */
