@@ -120,6 +120,7 @@
         }
     },
     "dependencies": {
-        "react-datepicker": "^4.6.0"
+        "react-datepicker": "^4.6.0",
+        "react-hook-form": "^7.27.0"
     }
 }

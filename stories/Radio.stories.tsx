@@ -8,6 +8,7 @@ const meta: Meta = {
     args: {
         children: 'This is a radio',
         value: 'radio value',
+        id: 'radio',
     },
 };
 

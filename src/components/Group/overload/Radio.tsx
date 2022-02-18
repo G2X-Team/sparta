@@ -1,5 +1,5 @@
-import type { FC } from 'react';
-import React, { FormEvent } from 'react';
+import type { ChangeEvent, FC } from 'react';
+import React from 'react';
 import { Props, Radio as CRadio } from '../../Radio/Radio';
 import Overload from '../../../interfaces/Overload';
 
@@ -9,10 +9,11 @@ import Overload from '../../../interfaces/Overload';
  * @return Formatted Radio
  */
 const Radio: FC<Overload<Props>> = ({
-    parentProps: { parentDisabled, radioValues, setRadioValue },
+    parentProps: { disabled: parentDisabled, onChange: groupOnChange, name, inline: parentInline },
     onChange,
     disabled,
     value,
+    inline,
     ...props
 }: Overload<Props>): JSX.Element => {
     /**
@@ -20,18 +21,22 @@ const Radio: FC<Overload<Props>> = ({
      *
      * @param event form event
      */
-    const radioOnChange = (event: FormEvent<HTMLInputElement>): void => {
-        setRadioValue(value);
+    const radioOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        // execute group on change method if any
+        groupOnChange && groupOnChange(event);
+
+        // execute standalone on change if any
         onChange && onChange(event);
     };
 
     return (
         <CRadio
             {...props}
+            name={name}
             value={value}
+            inline={parentInline}
             disabled={parentDisabled || disabled}
             onChange={radioOnChange}
-            checked={radioValues === value}
         />
     );
 };
