@@ -6,10 +6,6 @@ import { Props, Table } from '../src/components/Table/Table';
 const meta: Meta = {
     title: 'Layout/Table',
     component: Table,
-    args: {
-        color: 'lightgray',
-        height: '1',
-    },
 };
 
 export default meta;
