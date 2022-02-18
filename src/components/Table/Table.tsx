@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable require-jsdoc */
 import type { HTMLAttributes, FC } from 'react';
 import React, { useState } from 'react';
 import * as CSS from 'csstype';
@@ -38,19 +36,19 @@ export const Table: FC<Props> = ({
     ],
     colNames = ['id', 'name', 'Age'],
     pageNum = 0,
-    pageSize = 10,
+    pageSize = 15,
     width = '100%',
     height = '100%',
 }) => {
     const [page, setPage] = useState(pageNum);
 
-    // Function to navigate back to the last page
-    const onBack = () => {
+    /** Function to navigate back to the last page */
+    const onBack = (): void => {
         setPage(page - 1 > -1 ? page - 1 : page);
     };
 
-    // Function to navigate back to the next page
-    const onNext = () => {
+    /** Function to navigate back to the next page */
+    const onNext = (): void => {
         setPage(page + 1 < data.length / pageSize ? page + 1 : page);
     };
     return (
