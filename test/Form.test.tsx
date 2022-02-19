@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Form, Button, TextInput, Text, Label, Checkbox, Group, Switch } from '../src';
+import { Form, Button, TextInput, Text, Checkbox, Group, Switch } from '../src';
 
 // error message when test validator doesn't pass input
 const errorMessage = 'Needs to be 5 characters in length at least';
@@ -36,14 +36,15 @@ describe('Form', () => {
                 <Text header={1} bold margins>
                     Log in
                 </Text>
-                <Label value="Username">
-                    <TextInput name="username" required placeholder="UserName" />
-                </Label>
-                <br />
-                <Label value="Password" hint="Password must be 8 characters long">
-                    <TextInput password required name="password" placeholder="********" />
-                </Label>
-                <br />
+                <TextInput label="Username" name="username" required placeholder="UserName" />
+                <TextInput
+                    label="Password"
+                    hint="Password must be 8 characters long"
+                    password
+                    required
+                    name="password"
+                    placeholder="********"
+                />
                 <Button>Submit</Button>
             </Form>
         );
@@ -67,8 +68,8 @@ describe('Form', () => {
 
         render(
             <Form onSubmit={onSubmit}>
-                <TextInput name="username" placeholder="UserName" />
-                <TextInput name="password" placeholder="password" password />
+                <TextInput label="label" name="username" placeholder="UserName" />
+                <TextInput label="label" name="password" placeholder="password" password />
                 <Button>Submit</Button>
             </Form>
         );
@@ -88,8 +89,8 @@ describe('Form', () => {
         const onSubmit: jest.Mock<any, any> = jest.fn();
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
-                <TextInput required name="username" placeholder="UserName" />
-                <TextInput required name="password" placeholder="password" password />
+                <TextInput label="label" required name="username" placeholder="UserName" />
+                <TextInput label="label" required name="password" placeholder="password" password />
                 <Button>Submit</Button>
             </Form>
         );
@@ -112,8 +113,9 @@ describe('Form', () => {
         const invalidPassword = '32f';
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
-                <TextInput name="username" placeholder="UserName" />
+                <TextInput label="label" name="username" placeholder="UserName" />
                 <TextInput
+                    label="label"
                     required
                     name="password"
                     placeholder="password"
@@ -142,6 +144,7 @@ describe('Form', () => {
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
                 <TextInput
+                    label="label"
                     required
                     name="password"
                     placeholder="password"
@@ -168,6 +171,7 @@ describe('Form', () => {
         render(
             <Form>
                 <TextInput
+                    label="label"
                     required
                     name="password"
                     placeholder="password"
@@ -194,15 +198,14 @@ describe('Form', () => {
         const expected = { password };
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
-                <Label value="user name">
-                    <TextInput
-                        required
-                        name="password"
-                        placeholder="password"
-                        password
-                        validator={testValidator}
-                    />
-                </Label>
+                <TextInput
+                    label="user name"
+                    required
+                    name="password"
+                    placeholder="password"
+                    password
+                    validator={testValidator}
+                />
                 <Button>Submit</Button>
             </Form>
         );
@@ -221,7 +224,12 @@ describe('Form', () => {
         const onSubmit: jest.Mock<any, any> = jest.fn();
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
-                <Group name="somethings" type="checkbox" validator={checkboxValidator}>
+                <Group
+                    label="label"
+                    name="somethings"
+                    type="checkbox"
+                    validator={checkboxValidator}
+                >
                     <Checkbox value="something-1">Something 1</Checkbox>
                     <Checkbox value="something-2">Something 2</Checkbox>
                 </Group>
@@ -244,7 +252,12 @@ describe('Form', () => {
         const onSubmit: jest.Mock<any, any> = jest.fn();
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
-                <Group name="somethings" type="checkbox" validator={checkboxValidator}>
+                <Group
+                    label="label"
+                    name="somethings"
+                    type="checkbox"
+                    validator={checkboxValidator}
+                >
                     <Checkbox value="something-1">Something 1</Checkbox>
                     <Checkbox value="something-2">Something 2</Checkbox>
                 </Group>
@@ -287,7 +300,9 @@ describe('Form', () => {
         const onFail: jest.Mock<any, any> = jest.fn();
         render(
             <Form onFail={onFail} onSubmit={onSubmit}>
-                <Switch name="switch" required />
+                <Switch name="switch" required>
+                    Test
+                </Switch>
                 <Button>Submit</Button>
             </Form>
         );

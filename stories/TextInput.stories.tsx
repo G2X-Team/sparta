@@ -5,6 +5,9 @@ import { TextInput, Props } from '../src/components/TextInput/TextInput';
 const meta: Meta = {
     title: 'Form/Text Input',
     component: TextInput,
+    args: {
+        label: 'Label',
+    },
 };
 
 export default meta;

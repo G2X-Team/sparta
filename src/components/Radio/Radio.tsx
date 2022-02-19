@@ -12,6 +12,8 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     value: string;
     /** Determines whether component is checked */
     checked?: boolean;
+    /** Determines whether value in radio is invalid */
+    invalid?: boolean;
 }
 
 /**
@@ -20,17 +22,20 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Radio component
  */
-export const Radio: FC<Props> = ({ children, className, ...props }) => {
+export const Radio: FC<Props> = ({ children, className, invalid, ...props }) => {
     return (
         <label>
             <input
                 {...props}
+                aria-invalid={invalid}
                 type="radio"
-                className={`apollo-component-library-radio-component ${className}`}
+                className={`
+                    apollo-component-library-radio-component 
+                    ${className}
+                    ${invalid ? 'invalid' : ''}
+                `}
             />
-            <Text inline margins>
-                {children}
-            </Text>
+            <Text inline>{children}</Text>
         </label>
     );
 };

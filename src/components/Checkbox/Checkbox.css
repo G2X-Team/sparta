@@ -1,3 +1,7 @@
 .apollo-component-library-checkbox-component {
     margin-right: 5px;
 }
+
+.apollo-component-library-checkbox-component.invalid {
+    outline: 2px solid #c70000;
+}

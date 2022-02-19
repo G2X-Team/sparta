@@ -1,14 +1,53 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe, toHaveNoViolations } from 'jest-axe';
+expect.extend(toHaveNoViolations);
 
 import { Group, Radio, Checkbox } from '../src';
 
 describe('Group', () => {
+    it('complies with WCAG', async () => {
+        // given
+        const { container: validGroup } = render(
+            <Group label="something" type="radio">
+                <Radio value="something">something</Radio>
+            </Group>
+        );
+
+        const { container: validGroupWithHint } = render(
+            <Group label="something" type="radio" hint="hint">
+                <Radio value="something">something</Radio>
+            </Group>
+        );
+
+        const { container: invalidGroup } = render(
+            <Group label="something" type="radio" invalid>
+                <Radio value="something">something</Radio>
+            </Group>
+        );
+
+        const { container: invalidGroupWithMessage } = render(
+            <Group label="something" type="radio" name="name" invalid errorMessage="failed">
+                <Radio value="something">something</Radio>
+            </Group>
+        );
+
+        // when
+        const results = [];
+        results[0] = await axe(validGroup);
+        results[1] = await axe(validGroupWithHint);
+        results[2] = await axe(invalidGroup);
+        results[3] = await axe(invalidGroupWithMessage);
+
+        // then
+        results.forEach((result: any) => expect(result).toHaveNoViolations());
+    });
+
     it('renders correctly', () => {
         // given
         render(
-            <Group type="radio" name="group">
+            <Group label="label" type="radio" name="group">
                 <Radio value="1">Option 1</Radio>
                 <Radio value="1">Option 2</Radio>
                 <Radio value="1">Option 3</Radio>
@@ -19,12 +58,54 @@ describe('Group', () => {
         expect(screen.getAllByText(/option /i)).toHaveLength(3);
     });
 
+    it('will render label', () => {
+        // given
+        render(
+            <Group label="label" type="radio" name="group">
+                <Radio value="1">Option 1</Radio>
+                <Radio value="1">Option 2</Radio>
+                <Radio value="1">Option 3</Radio>
+            </Group>
+        );
+
+        // when then
+        expect(screen.getByText(/label/i)).toBeInTheDocument();
+    });
+
+    it('will render hint', () => {
+        // given
+        render(
+            <Group label="label" hint="hint" type="radio" name="group">
+                <Radio value="1">Option 1</Radio>
+                <Radio value="1">Option 2</Radio>
+                <Radio value="1">Option 3</Radio>
+            </Group>
+        );
+
+        // when then
+        expect(screen.getByText(/hint/i)).toBeInTheDocument();
+    });
+
+    it('will render an error message when conditions are met', () => {
+        // given
+        render(
+            <Group label="label" type="radio" name="group" invalid errorMessage="failed">
+                <Radio value="1">Option 1</Radio>
+                <Radio value="1">Option 2</Radio>
+                <Radio value="1">Option 3</Radio>
+            </Group>
+        );
+
+        // when then
+        expect(screen.getByText(/failed/i)).toBeInTheDocument();
+    });
+
     it('will update the group value when radio is clicked', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
         const groupValue = '1';
         render(
-            <Group type="radio" name="group" onChange={onChange}>
+            <Group label="label" type="radio" name="group" onChange={onChange}>
                 <Radio value={groupValue}>Option 1</Radio>
             </Group>
         );
@@ -41,7 +122,7 @@ describe('Group', () => {
         const onChange: jest.Mock<any, any> = jest.fn();
         const groupValue = '1';
         render(
-            <Group type="radio" name="group" onChange={onChange}>
+            <Group label="label" type="radio" name="group" onChange={onChange}>
                 <Radio disabled value={groupValue}>
                     Option 1
                 </Radio>
@@ -59,7 +140,7 @@ describe('Group', () => {
         // given
         const onRadioChange: jest.Mock<any, any> = jest.fn();
         render(
-            <Group type="radio" name="group">
+            <Group label="label" type="radio" name="group">
                 <Radio value="groupValue" onChange={onRadioChange}>
                     Option 1
                 </Radio>
@@ -78,7 +159,7 @@ describe('Group', () => {
         const onChange: jest.Mock<any, any> = jest.fn();
         const groupValue: string[] = ['value 1', 'value 2'];
         render(
-            <Group name="group" type="checkbox" onChange={onChange}>
+            <Group label="label" name="group" type="checkbox" onChange={onChange}>
                 <Checkbox value={groupValue[0]}>Option 1</Checkbox>
                 <Checkbox value={groupValue[1]}>Option 2</Checkbox>
             </Group>
@@ -106,7 +187,7 @@ describe('Group', () => {
         const onChange: jest.Mock<any, any> = jest.fn();
         const groupValue: string[] = ['value 1', 'value 2'];
         render(
-            <Group name="group" type="checkbox" onChange={onChange}>
+            <Group label="label" name="group" type="checkbox" onChange={onChange}>
                 <Checkbox disabled value={groupValue[0]}>
                     Option 1
                 </Checkbox>
@@ -130,7 +211,7 @@ describe('Group', () => {
         // given
         const onCheckboxChange: jest.Mock<any, any> = jest.fn();
         render(
-            <Group name="group" type="checkbox">
+            <Group label="label" name="group" type="checkbox">
                 <Checkbox onChange={onCheckboxChange} value="value 1">
                     Option 1
                 </Checkbox>
@@ -147,7 +228,7 @@ describe('Group', () => {
     it('can render any element other than the specified type', () => {
         // given
         render(
-            <Group type="checkbox" name="options">
+            <Group label="label" type="checkbox" name="options">
                 <Checkbox value="option 1">Option 1</Checkbox>
                 <Radio value="option 2">Option 2</Radio>
                 <p>option 3</p>
@@ -163,7 +244,7 @@ describe('Group', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
         render(
-            <Group name="group" type="checkbox" disabled>
+            <Group label="label" name="group" type="checkbox" disabled>
                 <Checkbox value="value 1" onChange={onChange}>
                     Option 1
                 </Checkbox>
@@ -185,7 +266,7 @@ describe('Group', () => {
         // given
         const onChange: jest.Mock<any, any> = jest.fn();
         render(
-            <Group name="group" type="radio" disabled>
+            <Group label="label" name="group" type="radio" disabled>
                 <Radio value="value 1" onChange={onChange}>
                     Option 1
                 </Radio>

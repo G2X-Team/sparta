@@ -6,6 +6,10 @@
     border-radius: 5px;
 }
 
+.apollo-component-library-text-input-label {
+    padding-bottom: 15px;
+}
+
 .apollo-component-library-text-input.default {
     border: 1px solid lightgray;
     box-shadow: 0px 0px 0px 0px red;
@@ -27,5 +31,6 @@
 }
 
 .apollo-component-library-text-input.invalid {
-    border: 1px solid #ff4747;
+    border: 1px solid #c90000;
+    
 }
