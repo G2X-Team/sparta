@@ -17,9 +17,8 @@ export default meta;
  * @param value value in the input
  * @return object describing validaty and errors
  */
-const passwordValidator = (value: string): string | void => {
-    if (value.length < 8) return 'Password must be 8 characters';
-};
+const passwordValidator = (value: string): string =>
+    value.length < 8 && 'Password must be 8 characters';
 
 /**
  * Form Template

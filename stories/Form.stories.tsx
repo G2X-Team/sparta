@@ -28,27 +28,27 @@ const passwordValidator = (value: string): string | null => {
  *
  * @return Default form
  */
-export const TextInputForm = (): JSX.Element => (
-    <Form
-        onSubmit={(event, value) => window.alert('Success!')}
-        onChange={(value) => console.log(value)}
-    >
-        <Text header={1} bold margins>
-            Log in
-        </Text>
-        <TextInput label="Username" name="username" required placeholder="UserName" />
-        <TextInput
-            label="Password"
-            hint="Password must be 8 characters long"
-            password
-            required
-            name="password"
-            placeholder="********"
-            validator={passwordValidator}
-        />
-        <Button>Submit</Button>
-    </Form>
-);
+export const TextInputForm = (): JSX.Element => {
+    console.log('component-refresh');
+    return (
+        <Form onSubmit={(event, value) => window.alert('Success!')}>
+            <Text header={1} bold margins>
+                Log in
+            </Text>
+            <TextInput label="Username" name="username" required placeholder="UserName" />
+            <TextInput
+                label="Password"
+                hint="Password must be 8 characters long"
+                password
+                required
+                name="password"
+                placeholder="********"
+                validator={passwordValidator}
+            />
+            <Button>Submit</Button>
+        </Form>
+    );
+};
 
 /**
  * Checks if the appropriate number of checkboxes are ticked

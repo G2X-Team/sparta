@@ -27,8 +27,19 @@ const TextInput: FC<Props> = ({
     useEffect(() => {
         if (!name?.length) throw new Error('Must use TextInput `name` prop when using Form.');
 
-        // register component manually
-        register(name, { required: { value: required, message: `${label} is required.` } });
+        // register component manually and create validation requirements for submission
+        register(name, {
+            required: { value: required, message: `${label} is required.` },
+            validate: {
+                validator: (v: string): string | boolean => {
+                    if (!validator) return true; // if there isn't a validator, automatically pass
+
+                    // get the error and return if truthy else pass
+                    const error = validator(v);
+                    return error?.length ? error : true;
+                },
+            },
+        });
     });
 
     /**
@@ -42,6 +53,9 @@ const TextInput: FC<Props> = ({
             target: { value },
         } = event;
 
+        // handle onChange
+        onChange && onChange(event);
+
         // update value on record
         setValue(name, value);
 
@@ -49,9 +63,6 @@ const TextInput: FC<Props> = ({
         if (errors[name]?.type === 'required' && value.length) {
             clearErrors(name);
         }
-
-        // handle onChange
-        onChange && onChange(event);
 
         // check if there is defined validator
         if (!validator) return;

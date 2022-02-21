@@ -19,6 +19,8 @@ export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' 
     onChange?: (value: { [input: string]: string | string[] | boolean }) => void;
 }
 
+let rerenders = -2;
+
 /**
  * Component that keeps track of all its children's inputs with validation baked in
  *
@@ -38,6 +40,9 @@ export const Form: FC<Props> = ({
     const [validMap, setValidMap] = useState<{ [input: string]: boolean }>({});
     const [errorMessages, setErrorMessages] = useState<{ [input: string]: string }>({});
     const [required, setRequired] = useState<{ [input: string]: string }>({});
+
+    rerenders++;
+    console.log('re-render: ' + rerenders);
 
     // activate on change when form value changes
     useEffect(() => {
