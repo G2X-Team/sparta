@@ -2,6 +2,15 @@
     margin-right: 5px;
 }
 
+.apollo-component-library-checkbox-component-label {
+    display: block;
+    padding-bottom: 5px;
+}
+
 .apollo-component-library-checkbox-component.invalid {
     outline: 2px solid #c70000;
+}
+
+.apollo-component-library-checkbox-component-label.inline{
+    display: inline-block;
 }

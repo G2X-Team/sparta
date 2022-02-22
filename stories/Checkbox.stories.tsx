@@ -8,6 +8,7 @@ const meta: Meta = {
     args: {
         children: 'This is a checkbox',
         value: 'checkbox value',
+        id: 'checkbox',
     },
 };
 
