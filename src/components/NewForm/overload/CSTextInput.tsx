@@ -1,6 +1,7 @@
 import type { ChangeEvent, FC } from 'react';
 import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
+import { CSTextValue } from '../../../interfaces/Properties';
 
 import { TextInput as CTextInput, Props as TextInputProps } from '../../TextInput/TextInput';
 
@@ -31,11 +32,11 @@ const TextInput: FC<Props> = ({
         register(name, {
             required: { value: required, message: `${label} is required.` },
             validate: {
-                validator: (v: string): string | boolean => {
+                validator: (d: CSTextValue): string | boolean => {
                     if (!validator) return true; // if there isn't a validator, automatically pass
 
                     // get the error and return if truthy else pass
-                    const error = validator(v);
+                    const error = validator(d);
                     return error?.length ? error : true;
                 },
             },
@@ -57,7 +58,8 @@ const TextInput: FC<Props> = ({
         onChange && onChange(event);
 
         // update value on record
-        setValue(name, value);
+        const textData: CSTextValue = { text: value };
+        setValue(name, textData);
 
         // check for required errors and update on input
         if (errors[name]?.type === 'required' && value.length) {
@@ -66,19 +68,17 @@ const TextInput: FC<Props> = ({
 
         // check if there is defined validator
         if (!validator) return;
-        const inputName = name || '';
 
         // check if there is an error
-        const error = validator(value);
+        const error = validator(textData);
         if (!error?.length) {
             // see if there was previously an error registered under this component
-            if (errors[inputName]?.message?.length) clearErrors(inputName);
+            if (errors[name]?.message?.length) clearErrors(name);
             return;
         }
 
         // check if we need to update errors
-        if (!errors[inputName]?.message?.length)
-            setError(inputName, { type: 'text-input', message: error });
+        if (!errors[name]?.message?.length) setError(name, { type: 'text-input', message: error });
     };
 
     return (

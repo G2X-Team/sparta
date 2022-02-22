@@ -5,7 +5,7 @@ import { Form, Props } from '../src/components/NewForm/Form';
 import { TextInput, Text, Button, Group, Radio, Checkbox, Switch } from '../src';
 
 const meta: Meta = {
-    title: 'Form/New Form',
+    title: 'Form/Client Side Form',
     component: Form,
 };
 
@@ -14,11 +14,10 @@ export default meta;
 /**
  * Checks if the password matches the validator requirements
  *
- * @param value value in the input
+ * @param data value in the input
  * @return object describing validaty and errors
  */
-const passwordValidator = (value: string): string =>
-    value.length < 8 && 'Password must be 8 characters';
+const passwordValidator = (data): string => data.text.length < 8 && 'Password must be 8 characters';
 
 /**
  * Form Template
@@ -28,10 +27,12 @@ const passwordValidator = (value: string): string =>
  */
 const TextInputFormTemplate: Story<Props> = (args) => {
     return (
-        <Form onSubmit={(data) => console.log(data)} onError={(data) => console.log(data)}>
-            <Text header={1} bold margins>
-                Log in
-            </Text>
+        <Form
+            onSubmit={(data) =>
+                window.alert(`username: ${data.username.text}\npassword: ${data.password.text}`)
+            }
+            onError={(data) => console.log(data)}
+        >
             <TextInput required name="username" label="Username" placeholder="Enter Username" />
             <TextInput
                 required
@@ -48,6 +49,86 @@ const TextInputFormTemplate: Story<Props> = (args) => {
 };
 
 export const TextInputForm = TextInputFormTemplate.bind({});
+
+/**
+ * Form Template
+ *
+ * @param args storybook arguments
+ * @return storybook template
+ */
+const RadioGroupFormTemplate: Story<Props> = (args) => {
+    return (
+        <Form
+            onSubmit={(data) => window.alert(data.rating.radio)}
+            onError={(data) => console.log(data)}
+        >
+            <Group required label="Please rate the class from 1-5" name="rating" inline>
+                <Radio value="1">1</Radio>
+                <Radio value="2">2</Radio>
+                <Radio value="3">3</Radio>
+                <Radio value="4">4</Radio>
+                <Radio value="5">5</Radio>
+            </Group>
+            <Button>Submit</Button>
+        </Form>
+    );
+};
+
+export const RadioGroupForm = RadioGroupFormTemplate.bind({});
+
+/**
+ * Form Template
+ *
+ * @param args storybook arguments
+ * @return storybook template
+ */
+const CheckboxGroupFormTemplate: Story<Props> = (args) => {
+    return (
+        <Form
+            onSubmit={(data) => window.alert(data.rating.checkbox)}
+            onError={(data) => console.log(data)}
+        >
+            <Group required label="Select options" name="rating">
+                <Checkbox value="1">Option 1</Checkbox>
+                <Checkbox value="2">Option 2</Checkbox>
+                <Checkbox value="3">Option 3</Checkbox>
+                <Checkbox value="4">Option 4</Checkbox>
+                <Checkbox value="5">Option 5</Checkbox>
+            </Group>
+            <Button>Submit</Button>
+        </Form>
+    );
+};
+
+export const CheckboxGroupForm = CheckboxGroupFormTemplate.bind({});
+
+/**
+ * Form Template
+ *
+ * @param args storybook arguments
+ * @return storybook template
+ */
+const IndividualInputFormTemplate: Story<Props> = (args) => {
+    return (
+        <Form
+            onSubmit={(data) => window.alert(data.rating.checkbox)}
+            onError={(data) => console.log(data)}
+        >
+            <Radio required id="radio" value="radio">
+                Sup
+            </Radio>
+            <Checkbox required name="checkbox" id="checkbox" value="checkbox">
+                Sup
+            </Checkbox>
+            <Switch required name="switch" id="switch" value="switch">
+                Sup
+            </Switch>
+            <Button>Submit</Button>
+        </Form>
+    );
+};
+
+export const IndividualInputForm = IndividualInputFormTemplate.bind({});
 
 /**
  * Form Example

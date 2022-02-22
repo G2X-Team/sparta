@@ -1,6 +1,8 @@
 import type { ChangeEvent, FC, ReactNode } from 'react';
 import React, { useEffect } from 'react';
+
 import Overload from '../../../interfaces/Overload';
+import { CSGroupValue } from '../../../interfaces/Properties';
 
 import { Group as CGroup, Props as GroupProps } from '../../Group/Group';
 
@@ -32,12 +34,18 @@ const Group: FC<Props> = ({
         register(name, {
             required: { value: required, message: `"${label}" is required.` },
             validate: {
-                validator: (d: { radio?: string; checkbox?: string[] }): string | boolean => {
+                validator: (d: CSGroupValue): string | boolean => {
                     if (!validator) return true; // if there isn't a validator, automatically pass
 
                     // get the error and return if truthy else pass
                     const error = validator(d);
                     return error?.length ? error : true;
+                },
+                required: (d: CSGroupValue): string | boolean => {
+                    if (!required) return true;
+                    if (!d.checkbox) return true;
+
+                    return required && !d.checkbox.length ? `"${label}" is required.` : true;
                 },
             },
         });
@@ -61,7 +69,7 @@ const Group: FC<Props> = ({
         if (type === 'organization') return;
 
         // define a variable to store group data
-        const groupData: { radio?: string; checkbox?: string[] } = {};
+        const groupData: CSGroupValue = {};
 
         // update accordingly
         if (event.target.type === 'radio') {
@@ -116,6 +124,7 @@ const Group: FC<Props> = ({
     return (
         <CGroup
             {...props}
+            required={required}
             type={type}
             label={label}
             onChange={handleChange}

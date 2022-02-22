@@ -7,6 +7,9 @@ import { useForm } from 'react-hook-form';
 
 import TextInput from '../overload/CSTextInput';
 import Group from '../overload/CSGroup';
+import Radio from '../overload/CSRadio';
+import Switch from '../overload/CSSwitch';
+import Checkbox from '../overload/CSCheckbox';
 
 export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
@@ -57,7 +60,13 @@ const CSForm: FC<Props> = ({ onSubmit, onError, children, ...props }) => {
             ...passthrough,
         };
 
-        const formatted = new FormatChildren(parentProps, { TextInput, Group });
+        const formatted = new FormatChildren(parentProps, {
+            TextInput,
+            Group,
+            Switch,
+            Radio,
+            Checkbox,
+        });
         return formatted.getAll();
     };
 

@@ -11,18 +11,17 @@ import { Switch as CSwitch, Props as SwitchProps } from '../../Switch/Switch';
  * @return formatted switch component
  */
 const Switch: FC<Overload<SwitchProps>> = ({
-    parentProps: { setValue, clearErrors, register, errors, groupExtension },
+    parentProps: { setValue, register },
     name,
-    required,
     ...props
 }) => {
+    // make sure that an id was provided
     useEffect(() => {
-        if (!name?.length) throw new Error('Must use Switch `name` prop when using Form.');
+        if (!name) throw new Error('Must use Checkbox `name` prop when use in Form without Group');
 
-        register(name, {
-            required: { value: required, message: `This setting is required.` },
-        });
-    });
+        // register name
+        register(name);
+    }, []);
 
     /**
      * Method that will handle on change validation while also allowing user-fed onChange callback
@@ -32,15 +31,10 @@ const Switch: FC<Overload<SwitchProps>> = ({
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         // extract value
         const {
-            target: { value },
+            target: { checked },
         } = event;
 
-        setValue(name, value);
-
-        // check for required errors and update on input
-        if (errors[name]?.type === 'required' && value.length) {
-            clearErrors(name);
-        }
+        setValue(name, { checked });
     };
 
     return <CSwitch {...props} name={name} onChange={handleChange} />;
