@@ -1,11 +1,11 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Story, Meta } from '@storybook/react';
 
 import { Form, Props } from '../src/components/Form/Form';
-import { Button, TextInput, Text, Group, Radio, Checkbox, Switch } from '../src';
+import { TextInput, Text, Button, Group, Radio, Checkbox, Switch } from '../src';
 
 const meta: Meta = {
-    title: 'Form/Form',
+    title: 'Form/Client Side Form',
     component: Form,
 };
 
@@ -14,33 +14,31 @@ export default meta;
 /**
  * Checks if the password matches the validator requirements
  *
- * @param value value in the input
+ * @param data value in the input
  * @return object describing validaty and errors
  */
-const passwordValidator = (value: string): string | null => {
-    if (value.length < 8) return 'Password must be 8 characters';
-
-    return null;
-};
+const passwordValidator = (data): string => data.text.length < 8 && 'Password must be 8 characters';
 
 /**
- * Default form
+ * Form Template
  *
- * @return Default form
+ * @param args storybook arguments
+ * @return storybook template
  */
-export const TextInputForm = (): JSX.Element => {
-    console.log('component-refresh');
+const TextInputFormTemplate: Story<Props> = (args) => {
     return (
-        <Form onSubmit={(event, value) => window.alert('Success!')}>
-            <Text header={1} bold margins>
-                Log in
-            </Text>
-            <TextInput label="Username" name="username" required placeholder="UserName" />
+        <Form
+            onSubmit={(data) =>
+                window.alert(`username: ${data.username.text}\npassword: ${data.password.text}`)
+            }
+            onError={(data) => console.log(data)}
+        >
+            <TextInput required name="username" label="Username" placeholder="Enter Username" />
             <TextInput
+                required
+                password
                 label="Password"
                 hint="Password must be 8 characters long"
-                password
-                required
                 name="password"
                 placeholder="********"
                 validator={passwordValidator}
@@ -50,49 +48,87 @@ export const TextInputForm = (): JSX.Element => {
     );
 };
 
+export const TextInputForm = TextInputFormTemplate.bind({});
+
 /**
- * Checks if the appropriate number of checkboxes are ticked
+ * Form Template
  *
- * @param data group data
- * @return error message if applicable
+ * @param args storybook arguments
+ * @return storybook template
  */
-const checkboxValidator = (data): string | null => {
-    return data?.checkboxes?.length < 2 ? 'Please select at least 2 options' : null;
+const RadioGroupFormTemplate: Story<Props> = (args) => {
+    return (
+        <Form
+            onSubmit={(data) => window.alert(data.rating.radio)}
+            onError={(data) => console.log(data)}
+        >
+            <Group required label="Please rate the class from 1-5" name="rating" inline>
+                <Radio value="1">1</Radio>
+                <Radio value="2">2</Radio>
+                <Radio value="3">3</Radio>
+                <Radio value="4">4</Radio>
+                <Radio value="5">5</Radio>
+            </Group>
+            <Button>Submit</Button>
+        </Form>
+    );
 };
 
-/**
- * Group form
- *
- * @return group form
- */
-export const GroupForm = (): JSX.Element => (
-    <Form
-        onSubmit={(event, value) => window.alert('Success!')}
-        onChange={(value) => console.log(value)}
-    >
-        <Group label="Options for stuff" required name="options" validator={checkboxValidator}>
-            <Checkbox value="option-1">Option 1</Checkbox>
-            <Checkbox value="option-2">Option 2</Checkbox>
-            <Checkbox value="option-3">Option 3</Checkbox>
-        </Group>
-        <Button>Submit</Button>
-    </Form>
-);
+export const RadioGroupForm = RadioGroupFormTemplate.bind({});
 
 /**
- * Switch form
+ * Form Template
  *
- * @return switch form
+ * @param args storybook arguments
+ * @return storybook template
  */
-export const SwitchForm = (): JSX.Element => (
-    <Form
-        onSubmit={(event, value) => window.alert('Success!')}
-        onChange={(value) => console.log(value)}
-    >
-        <Switch name="switch">Hello World</Switch>
-        <Button>Submit</Button>
-    </Form>
-);
+const CheckboxGroupFormTemplate: Story<Props> = (args) => {
+    return (
+        <Form
+            onSubmit={(data) => window.alert(data.rating.checkbox)}
+            onError={(data) => console.log(data)}
+        >
+            <Group required label="Select options" name="rating">
+                <Checkbox value="1">Option 1</Checkbox>
+                <Checkbox value="2">Option 2</Checkbox>
+                <Checkbox value="3">Option 3</Checkbox>
+                <Checkbox value="4">Option 4</Checkbox>
+                <Checkbox value="5">Option 5</Checkbox>
+            </Group>
+            <Button>Submit</Button>
+        </Form>
+    );
+};
+
+export const CheckboxGroupForm = CheckboxGroupFormTemplate.bind({});
+
+/**
+ * Form Template
+ *
+ * @param args storybook arguments
+ * @return storybook template
+ */
+const IndividualInputFormTemplate: Story<Props> = (args) => {
+    return (
+        <Form
+            onSubmit={(data) => window.alert(data.rating.checkbox)}
+            onError={(data) => console.log(data)}
+        >
+            <Radio required id="radio" value="radio">
+                Sup
+            </Radio>
+            <Checkbox required name="checkbox" id="checkbox" value="checkbox">
+                Sup
+            </Checkbox>
+            <Switch required name="switch" id="switch" value="switch">
+                Sup
+            </Switch>
+            <Button>Submit</Button>
+        </Form>
+    );
+};
+
+export const IndividualInputForm = IndividualInputFormTemplate.bind({});
 
 /**
  * Form Example
@@ -100,39 +136,32 @@ export const SwitchForm = (): JSX.Element => (
  * @return Example Form
  */
 export const ExampleForm = (): JSX.Element => (
-    <Form
-        onSubmit={(event, value) => window.alert('Success!')}
-        onChange={(value) => console.log(value)}
-    >
-        <Text header={1} bold margins>
-            Survey
-        </Text>
-        <TextInput label="Full Name" name="full-name" required placeholder="John Smith" />
-        <TextInput
-            label="Survey Password"
-            hint="Please enter given 8 character password."
-            password
-            required
-            name="password"
-            placeholder="********"
-            validator={passwordValidator}
-        />
-        <Group label="What video(s) did you watch for class" name="movie" required>
-            <Checkbox value="the-night-before-christmas">The Night Before Christmas</Checkbox>
-            <br />
-            <Checkbox value="jack-frost">Jack Frost</Checkbox>
-            <br />
-            <Checkbox value="frosty-the-snowman">Frosty the Snowman</Checkbox>
-            <br />
+    <Form onSubmit={(data) => console.log(data)} onError={(errors) => console.log(errors)}>
+        <Group label="Survey" name="survey" type="organization">
+            <TextInput label="Full Name" name="full-name" required placeholder="John Smith" />
+            <TextInput
+                label="Survey Password"
+                hint="Please enter given 8 character password."
+                password
+                required
+                name="password"
+                placeholder="********"
+                validator={passwordValidator}
+            />
+            <Group label="What video(s) did you watch for class" name="movie" required>
+                <Checkbox value="the-night-before-christmas">The Night Before Christmas</Checkbox>
+                <Checkbox value="jack-frost">Jack Frost</Checkbox>
+                <Checkbox value="frosty-the-snowman">Frosty the Snowman</Checkbox>
+            </Group>
+            <Group required label="Please rate the class from 1-5" name="rating" inline>
+                <Radio value="1">1</Radio>
+                <Radio value="2">2</Radio>
+                <Radio value="3">3</Radio>
+                <Radio value="4">4</Radio>
+                <Radio value="5">5</Radio>
+            </Group>
+            <Switch name="do-again">What you like to do this again?</Switch>
         </Group>
-        <Group label="Please rate the class from 1-5" name="rating" required>
-            <Radio value="1">1</Radio>
-            <Radio value="2">2</Radio>
-            <Radio value="3">3</Radio>
-            <Radio value="4">4</Radio>
-            <Radio value="5">5</Radio>
-        </Group>
-        <Switch name="do-again">What you like to do this again?</Switch>
         <Button>Submit</Button>
     </Form>
 );

@@ -35,8 +35,6 @@ const CSForm: FC<Props> = ({ onSubmit, onError, children, ...props }) => {
         formState: { errors },
     } = useForm();
 
-    console.log('re-render');
-
     /**
      * Formats and renders all children component
      *

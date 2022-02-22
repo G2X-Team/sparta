@@ -26,7 +26,7 @@ const Radio: FC<Props> = ({
         if (!id) throw new Error('Must use Radio `id` prop when use in Form without Group');
 
         // register id
-        register(id, { required: { message: 'This input is required', value: required } });
+        register(id, { required: { message: 'This input is required.', value: required } });
     }, []);
 
     /**
