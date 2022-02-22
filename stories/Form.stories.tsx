@@ -53,11 +53,11 @@ export const TextInputForm = (): JSX.Element => {
 /**
  * Checks if the appropriate number of checkboxes are ticked
  *
- * @param value checkbox string
+ * @param data group data
  * @return error message if applicable
  */
-const checkboxValidator = (value: string | string[]): string | null => {
-    return value.length < 2 ? 'Please select at least 2 options' : null;
+const checkboxValidator = (data): string | null => {
+    return data?.checkboxes?.length < 2 ? 'Please select at least 2 options' : null;
 };
 
 /**
@@ -70,13 +70,7 @@ export const GroupForm = (): JSX.Element => (
         onSubmit={(event, value) => window.alert('Success!')}
         onChange={(value) => console.log(value)}
     >
-        <Group
-            label="Options for stuff"
-            required
-            type="checkbox"
-            name="options"
-            validator={checkboxValidator}
-        >
+        <Group label="Options for stuff" required name="options" validator={checkboxValidator}>
             <Checkbox value="option-1">Option 1</Checkbox>
             <Checkbox value="option-2">Option 2</Checkbox>
             <Checkbox value="option-3">Option 3</Checkbox>
@@ -123,7 +117,7 @@ export const ExampleForm = (): JSX.Element => (
             placeholder="********"
             validator={passwordValidator}
         />
-        <Group label="What video(s) did you watch for class" name="movie" type="checkbox" required>
+        <Group label="What video(s) did you watch for class" name="movie" required>
             <Checkbox value="the-night-before-christmas">The Night Before Christmas</Checkbox>
             <br />
             <Checkbox value="jack-frost">Jack Frost</Checkbox>
@@ -131,7 +125,7 @@ export const ExampleForm = (): JSX.Element => (
             <Checkbox value="frosty-the-snowman">Frosty the Snowman</Checkbox>
             <br />
         </Group>
-        <Group label="Please rate the class from 1-5" name="rating" type="radio" required>
+        <Group label="Please rate the class from 1-5" name="rating" required>
             <Radio value="1">1</Radio>
             <Radio value="2">2</Radio>
             <Radio value="3">3</Radio>

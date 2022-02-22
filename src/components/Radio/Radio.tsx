@@ -14,6 +14,10 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     checked?: boolean;
     /** Determines whether value in radio is invalid */
     invalid?: boolean;
+    /** Describes the group it belongs to */
+    name?: string;
+    /** Determines whether radio is inline with other elements */
+    inline?: boolean;
 }
 
 /**
@@ -22,11 +26,24 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Radio component
  */
-export const Radio: FC<Props> = ({ children, className, invalid, ...props }) => {
+export const Radio: FC<Props> = ({
+    inline = false,
+    children,
+    className,
+    name,
+    invalid,
+    ...props
+}) => {
     return (
-        <label>
+        <label
+            className={`
+                apollo-component-library-radio-component-label 
+                ${inline ? 'inline' : ''}
+            `}
+        >
             <input
                 {...props}
+                name={name}
                 aria-invalid={invalid}
                 type="radio"
                 className={`

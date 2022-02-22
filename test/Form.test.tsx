@@ -1,8 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe, toHaveNoViolations } from 'jest-axe';
+expect.extend(toHaveNoViolations);
 
-import { Form, Button, TextInput, Text, Checkbox, Group, Switch } from '../src';
+import { Form, TextInput, Switch, Radio, Checkbox, Group, Button } from '../src';
 
 // error message when test validator doesn't pass input
 const errorMessage = 'Needs to be 5 characters in length at least';
@@ -21,39 +23,57 @@ const testValidator = (value: string): string | null => {
 /**
  * Validator that will test on submit functionality when groups are involved
  *
- * @param value value of checkbox group
+ * @param data data of checkbox group
  * @return error message if there is one
  */
-const checkboxValidator = (value: string | string[]): string | null => {
-    return value.length < 2 ? radioMessage : null;
+const checkboxValidator = (data: { checkbox?: string[] }): string | null => {
+    return data.checkbox.length < 2 ? radioMessage : null;
 };
 
-describe('Form', () => {
-    it('renders correctly', () => {
+describe('Client Side Form', () => {
+    it('complies with WCAG', async () => {
         // given
-        render(
+        const { container: validForm } = render(
             <Form>
-                <Text header={1} bold margins>
-                    Log in
-                </Text>
-                <TextInput label="Username" name="username" required placeholder="UserName" />
-                <TextInput
-                    label="Password"
-                    hint="Password must be 8 characters long"
-                    password
-                    required
-                    name="password"
-                    placeholder="********"
-                />
-                <Button>Submit</Button>
+                <Group label="options">
+                    <Radio value="option-1">Option 1</Radio>
+                    <Radio value="option-2">Option 2</Radio>
+                </Group>
+                <Group label="checkboxes">
+                    <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
+                    <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
+                </Group>
+                <TextInput label="input" />
+                <Switch name="switch" value="switch-1">
+                    Switch 1
+                </Switch>
             </Form>
         );
 
-        // when then
-        expect(screen.getByText(/log in/i)).toBeInTheDocument();
-        expect(screen.getByRole('textbox')).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('********')).toBeInTheDocument();
-        expect(screen.getByText(/submit/i)).toBeInTheDocument();
+        const { container: invalidForm } = render(
+            <Form>
+                <Group name="options" label="options" invalid errorMessage="failed">
+                    <Radio value="option-1">Option 1</Radio>
+                    <Radio value="option-2">Option 2</Radio>
+                </Group>
+                <Group name="checkboxes" label="checkboxes" invalid errorMessage="failed">
+                    <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
+                    <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
+                </Group>
+                <TextInput label="input" name="input" invalid errorMessage="failed" />
+                <Switch name="switch" value="switch-1" invalid errorMessage="failed">
+                    Switch 1
+                </Switch>
+            </Form>
+        );
+
+        // when
+        const results = [];
+        results[0] = await axe(validForm);
+        results[1] = await axe(invalidForm);
+
+        // then
+        results.forEach((result: any) => expect(result).toHaveNoViolations());
     });
 
     it('will submit when there are no requirement', () => {
@@ -190,46 +210,13 @@ describe('Form', () => {
         expect(onChange).toHaveBeenCalled();
     });
 
-    it('retains text input functionality within labels', () => {
-        // given
-        const onSubmit: jest.Mock<any, any> = jest.fn();
-        const onFail: jest.Mock<any, any> = jest.fn();
-        const password = 'password';
-        const expected = { password };
-        render(
-            <Form onSubmit={onSubmit} onFail={onFail}>
-                <TextInput
-                    label="user name"
-                    required
-                    name="password"
-                    placeholder="password"
-                    password
-                    validator={testValidator}
-                />
-                <Button>Submit</Button>
-            </Form>
-        );
-
-        // when
-        userEvent.type(screen.getByPlaceholderText(/password/i), password);
-        userEvent.click(screen.getByText(/submit/i));
-
-        // then
-        expect(onSubmit).toBeCalledWith(expect.anything(), expect.objectContaining(expected));
-    });
-
     it('will not submit if group validator does not meet requirements', () => {
         // given
         const onFail: jest.Mock<any, any> = jest.fn();
         const onSubmit: jest.Mock<any, any> = jest.fn();
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
-                <Group
-                    label="label"
-                    name="somethings"
-                    type="checkbox"
-                    validator={checkboxValidator}
-                >
+                <Group label="label" name="somethings" validator={checkboxValidator}>
                     <Checkbox value="something-1">Something 1</Checkbox>
                     <Checkbox value="something-2">Something 2</Checkbox>
                 </Group>
@@ -252,12 +239,7 @@ describe('Form', () => {
         const onSubmit: jest.Mock<any, any> = jest.fn();
         render(
             <Form onSubmit={onSubmit} onFail={onFail}>
-                <Group
-                    label="label"
-                    name="somethings"
-                    type="checkbox"
-                    validator={checkboxValidator}
-                >
+                <Group label="label" name="somethings" validator={checkboxValidator}>
                     <Checkbox value="something-1">Something 1</Checkbox>
                     <Checkbox value="something-2">Something 2</Checkbox>
                 </Group>

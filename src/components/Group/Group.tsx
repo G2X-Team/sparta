@@ -1,5 +1,5 @@
-import type { HTMLAttributes, FC, CSSProperties } from 'react';
-import React, { ReactNode, useState, useEffect } from 'react';
+import type { HTMLAttributes, FC, CSSProperties, ChangeEvent } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Group.css';
 
@@ -13,24 +13,30 @@ export interface Props extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChan
     children: ReactNode;
     /** Identifies the group's selection */
     name?: string;
-    /** Type of inputs this group will focus on */
-    type: 'radio' | 'checkbox';
     /** Method that impacts onChange */
-    onChange?: (groupValue: string[] | string) => void;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     /** Determines whether inputs are disabled or not */
     disabled?: boolean;
     /** Validates group value and determines whether it is submission ready */
-    validator?: (value: string | string[]) => string | null;
+    validator?: (data: { radio?: string; checkbox?: string[] }) => string | null;
     /** Determines whether the group requires a selection */
     required?: boolean;
     /** Mandatory label to comply to WCAG 2.0 */
     label: string;
     /** Gives further description on what the input should have to be valid */
-    hint?: string;
+    hint?: string | JSX.Element;
     /** Determines whether component is invalid or not */
     invalid?: boolean;
     /** Message that displays when component is invalid */
     errorMessage?: string;
+    /** Determines whether checkboxes and radios are inline or blocks */
+    inline?: boolean;
+    /**
+     * Describes behavior of group, if the value is `input` it will register radios and checkboxes,
+     * otherwise, it will just serve the purpose of general organization, will replace label with
+     * header styling
+     */
+    type?: 'input' | 'organization';
 }
 
 /**
@@ -40,10 +46,11 @@ export interface Props extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChan
  * @return Group component
  */
 export const Group: FC<Props> = ({
+    type = 'input',
+    disabled = false,
+    inline = false,
     children,
     name,
-    type,
-    disabled = false,
     onChange,
     label,
     hint,
@@ -52,13 +59,6 @@ export const Group: FC<Props> = ({
     errorMessage,
     ...props
 }) => {
-    // define group value
-    const [radioValues, setRadioValue] = useState('');
-    const [checkboxValues, setCheckboxValue] = useState<string[]>([]);
-
-    // for checkboxes we want instant access to whether a checkbox is checked or not
-    const [isChecked, updateChecked] = useState<{ [key: string]: boolean }>({});
-
     // check if the user is using error message invalidly
     useEffect(() => {
         if (errorMessage?.length && !name?.length)
@@ -67,15 +67,6 @@ export const Group: FC<Props> = ({
                     ' to comply with WCAG 2.0'
             );
     });
-
-    // every time there is a state change, invoke the onChange method if it exists
-    useEffect(() => {
-        if (type === 'radio') {
-            onChange && onChange(radioValues);
-        } else {
-            onChange && onChange(checkboxValues);
-        }
-    }, [checkboxValues, radioValues]);
 
     /**
      * Renders all inputs determinant on the specific type
@@ -86,23 +77,16 @@ export const Group: FC<Props> = ({
     const renderAll = (childrenProp: ReactNode): ReactNode[] => {
         // create updated prop values
         const parentProps = {
-            parentDisabled: disabled,
+            onChange,
+            name,
             children: childrenProp,
             renderAll,
-            radioValues,
-            setRadioValue,
-            checkboxValues,
-            setCheckboxValue,
-            isChecked,
-            updateChecked,
+            disabled,
+            inline,
         };
 
-        // determine what component we are looking for
-        const Input: React.FC<any> = type === 'radio' ? Radio : Checkbox;
-        const inputName: string = type === 'radio' ? 'Radio' : 'Checkbox';
-
         // get all instances of the input
-        const formatted = new FormatChildren(parentProps, { [inputName]: Input, View });
+        const formatted = new FormatChildren(parentProps, { Radio, Checkbox, View });
 
         return formatted.getAll();
     };
@@ -116,7 +100,12 @@ export const Group: FC<Props> = ({
                 aria-invalid={invalid}
             >
                 <legend>
-                    <Text bold style={labelTextStyle}>
+                    <Text
+                        bold
+                        style={labelTextStyle}
+                        header={type === 'input' ? 0 : 1}
+                        margins={type === 'organization' && !Boolean(hint)}
+                    >
                         {label}{' '}
                         {required ? (
                             <Text color="red" inline>
@@ -124,7 +113,11 @@ export const Group: FC<Props> = ({
                             </Text>
                         ) : null}
                     </Text>
-                    {hint ? <Text style={hintTextStyle}>{hint}</Text> : null}
+                    {hint ? (
+                        <Text style={getHintTextStyle(type)} margins={type === 'organization'}>
+                            {hint}
+                        </Text>
+                    ) : null}
                 </legend>
                 <div
                     className={`
@@ -150,9 +143,18 @@ const labelTextStyle: CSSProperties = {
     paddingBottom: 5,
 };
 
-const hintTextStyle: CSSProperties = {
-    fontSize: '0.8rem',
-    paddingBottom: 5,
+/**
+ * gets the hint text style given the type
+ *
+ * @param type type that describes what kind of group is being used
+ * @return hint style object
+ */
+const getHintTextStyle = (type: string): CSSProperties => {
+    return {
+        fontSize: type === 'organization' ? '1rem' : '0.9rem',
+        paddingBottom: 5,
+        marginTop: 0,
+    };
 };
 
 const errorTextStyle: CSSProperties = {

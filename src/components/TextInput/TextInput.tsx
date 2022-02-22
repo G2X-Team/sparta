@@ -98,7 +98,7 @@ const labelTextStyle: CSSProperties = {
 };
 
 const hintTextStyle: CSSProperties = {
-    fontSize: '0.8rem',
+    fontSize: '0.9rem',
     paddingBottom: 5,
 };
 
