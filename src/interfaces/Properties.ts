@@ -9,5 +9,6 @@ export type ComponentPosition = 'static' | 'absolute' | 'fixed';
 export type CSFormSubmitErrorHandler = (data: { [key: string]: string }) => void;
 export type CSGroupValue = { radio?: string; checkbox?: string[] };
 export type CSTextValue = { text?: string };
-export type CSDataValue = { [key: string]: CSTextValue & CSGroupValue };
+export type CSBooleanInputValue = { checked?: boolean };
+export type CSDataValue = { [key: string]: CSTextValue & CSGroupValue & CSBooleanInputValue };
 export type CSFormSubmitHandler = (data: CSDataValue) => void;
