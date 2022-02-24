@@ -92,7 +92,7 @@ export const Table: FC<Props> = ({
     /** Function to sort ascending order */
     const ascOrder = (): void => {
         setsorted(
-            sorted.sort((a, b) => {
+            sorted.sort((a: any, b): any => {
                 return a > b ? 1 : -1;
             })
         );
@@ -101,7 +101,7 @@ export const Table: FC<Props> = ({
     /** Function to sort descending order */
     const descOrder = (): void => {
         setsorted(
-            sorted.sort((a, b) => {
+            sorted.sort((a: any, b: any) => {
                 return a < b ? 1 : -1;
             })
         );
