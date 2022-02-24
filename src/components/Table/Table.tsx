@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import type { HTMLAttributes, FC } from 'react';
 import React, { useState } from 'react';
 import * as CSS from 'csstype';
@@ -16,6 +17,20 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
     colNames?: [];
     /** Data in JSON to feed the table */
     data?: JSON[];
+    // Header Style Props//
+    /** Defines the color of the cell text */
+    cellTextColor?: CSS.Property.Color;
+    /** Defines the case of the cell text */
+    cellTextTransform?: CSS.Property.TextTransform;
+    /** Defines the weight of the cell text */
+    cellTextFontWeight?: CSS.Property.FontWeight;
+    // Header Style Props//
+    /** Defines the color of the header text */
+    headerTextColor?: CSS.Property.Color;
+    /** Defines the case of the header text */
+    headerTextTransform?: CSS.Property.TextTransform;
+    /** Defines the weight of the header text */
+    headerTextFontWeight?: CSS.Property.FontWeight;
 }
 const btnStyle = {
     backgroundColor: 'black',
@@ -30,32 +45,39 @@ const btnStyle = {
  */
 export const Table: FC<Props> = ({
     data = [
-        { id: 1, name: 'Name1', Age: 30 },
-        { id: 1, name: 'Name2', Age: 30 },
-        { id: 1, name: 'Name3', Age: 30 },
-        { id: 1, name: 'Name4', Age: 30 },
-        { id: 1, name: 'Name5', Age: 30 },
-        { id: 1, name: 'Name6', Age: 30 },
-        { id: 1, name: 'Name7', Age: 30 },
-        { id: 1, name: 'Name8', Age: 30 },
-        { id: 1, name: 'Name9', Age: 30 },
-        { id: 1, name: 'Name10', Age: 30 },
-        { id: 1, name: 'Name11', Age: 30 },
-        { id: 1, name: 'Name12', Age: 30 },
-        { id: 1, name: 'Name13', Age: 30 },
-        { id: 1, name: 'Name14', Age: 30 },
-        { id: 1, name: 'Name15', Age: 30 },
-        { id: 1, name: 'Name16', Age: 30 },
-        { id: 1, name: 'Name17', Age: 30 },
-        { id: 1, name: 'Name18', Age: 30 },
+        { id: 12, name: 'zebra', Age: 30 },
+        { id: 2, name: 'Name2', Age: 30 },
+        { id: 3, name: 'Name3', Age: 30 },
+        { id: 4, name: 'Name4', Age: 30 },
+        { id: 5, name: 'Name5', Age: 30 },
+        { id: 6, name: 'Name6', Age: 30 },
+        { id: 7, name: 'Name7', Age: 30 },
+        { id: 8, name: 'Name8', Age: 30 },
+        { id: 9, name: 'Name9', Age: 30 },
+        { id: 10, name: 'Name10', Age: 30 },
+        { id: 11, name: 'Name11', Age: 30 },
+        { id: 1, name: 'Ahmed', Age: 30 },
+        { id: 13, name: 'Name13', Age: 30 },
+        { id: 14, name: 'Name14', Age: 30 },
+        { id: 15, name: 'Name15', Age: 30 },
+        { id: 16, name: 'Name16', Age: 30 },
+        { id: 17, name: 'Name17', Age: 30 },
+        { id: 18, name: 'Name18', Age: 30 },
     ],
     colNames = ['id', 'name', 'Age'],
     pageNum = 0,
     pageSize = 15,
     width = '100%',
     height = '100%',
+    cellTextColor = 'black',
+    cellTextTransform = 'capitalize',
+    cellTextFontWeight = 'normal',
+    headerTextColor = 'white',
+    headerTextTransform = 'uppercase',
+    headerTextFontWeight = 'bolder',
 }) => {
     const [page, setPage] = useState(pageNum);
+    const [sorted, setsorted] = useState(data);
 
     /** Function to navigate back to the last page */
     const onBack = (): void => {
@@ -65,6 +87,24 @@ export const Table: FC<Props> = ({
     /** Function to navigate back to the next page */
     const onNext = (): void => {
         setPage(page + 1 < data.length / pageSize ? page + 1 : page);
+    };
+
+    /** Function to sort ascending order */
+    const ascOrder = (): void => {
+        setsorted(
+            sorted.sort((a, b) => {
+                return a > b ? 1 : -1;
+            })
+        );
+    };
+
+    /** Function to sort descending order */
+    const descOrder = (): void => {
+        setsorted(
+            sorted.sort((a, b) => {
+                return a < b ? 1 : -1;
+            })
+        );
     };
     return (
         <div className="apollo-component-library-table-component-container">
@@ -78,7 +118,19 @@ export const Table: FC<Props> = ({
                         <tr>
                             {colNames.map(
                                 (headerItem: string, index: React.Key | null | undefined) => (
-                                    <th key={index}>{headerItem.toUpperCase()}</th>
+                                    <th key={index}>
+                                        <span
+                                            style={{
+                                                color: headerTextColor,
+                                                textTransform: headerTextTransform,
+                                                fontWeight: headerTextFontWeight,
+                                            }}
+                                        >
+                                            {headerItem.toUpperCase()}
+                                        </span>
+                                        <button onClick={ascOrder}>↑</button>
+                                        <button onClick={descOrder}>↓</button>
+                                    </th>
                                 )
                             )}
                         </tr>
@@ -88,15 +140,24 @@ export const Table: FC<Props> = ({
                             (obj, index) => (
                                 <tr key={index}>
                                     {Object.values(obj).map((value, index2) => (
-                                        <td key={index2}> {value} </td>
+                                        <td
+                                            style={{
+                                                color: cellTextColor,
+                                                textTransform: cellTextTransform,
+                                                fontWeight: cellTextFontWeight,
+                                            }}
+                                            key={index2}
+                                        >
+                                            {' '}
+                                            {value}{' '}
+                                        </td>
                                     ))}
                                 </tr>
                             )
                         )}
                     </tbody>
-                    <tfoot>
-                        <td></td>
-                        <td className="apollo-component-library-table-component-footer">
+                    <tfoot className="apollo-component-library-table-component-footer">
+                        <div>
                             <button style={btnStyle} onClick={onBack}>
                                 Back
                             </button>
@@ -104,8 +165,7 @@ export const Table: FC<Props> = ({
                             <button style={btnStyle} onClick={onNext}>
                                 Next
                             </button>
-                        </td>
-                        <td></td>
+                        </div>
                     </tfoot>
                 </table>
             )}
