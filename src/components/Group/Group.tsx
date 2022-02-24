@@ -7,6 +7,7 @@ import { Text } from '../Text/Text';
 import Radio from './overload/Radio';
 import Checkbox from './overload/Checkbox';
 import View from './overload/View';
+import { FormGroupData, FormValidator } from '../../interfaces/Properties';
 
 export interface Props extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
     /** Group must contain element between tags */
@@ -18,7 +19,7 @@ export interface Props extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChan
     /** Determines whether inputs are disabled or not */
     disabled?: boolean;
     /** Validates group value and determines whether it is submission ready */
-    validator?: (data: { radio?: string; checkbox?: string[] }) => string | null;
+    validator?: FormValidator<FormGroupData>;
     /** Determines whether the group requires a selection */
     required?: boolean;
     /** Mandatory label to comply to WCAG 2.0 */

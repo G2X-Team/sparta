@@ -1,7 +1,7 @@
 import type { FC, FormEvent, FormEventHandler, HTMLAttributes, ReactNode } from 'react';
 import React from 'react';
 
-import type { CSFormSubmitErrorHandler, CSFormSubmitHandler } from '../../../interfaces/Properties';
+import type { FormErrorHandler, FormSubmitHandler } from '../../../interfaces/Properties';
 import FormatChildren from '../../../util/FormatChildren';
 import { useForm } from 'react-hook-form';
 
@@ -13,9 +13,9 @@ import Checkbox from '../overload/CSCheckbox';
 
 export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
-    onSubmit?: CSFormSubmitHandler;
+    onSubmit?: FormSubmitHandler;
     /** Handles errors from form submission with error object */
-    onError?: CSFormSubmitErrorHandler;
+    onError?: FormErrorHandler;
 }
 
 /**

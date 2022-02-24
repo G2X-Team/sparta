@@ -1,16 +1,22 @@
 import type { FC, HTMLAttributes } from 'react';
 import React from 'react';
 
-import type { CSFormSubmitErrorHandler, CSFormSubmitHandler } from '../../interfaces/Properties';
+import type {
+    FormActionData,
+    FormErrorHandler,
+    FormSubmitHandler,
+} from '../../interfaces/Properties';
 import CSForm from './components/CSForm';
 
 export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
-    onSubmit?: CSFormSubmitHandler;
+    onSubmit?: FormSubmitHandler;
     /** Handles errors from form submission with error object */
-    onError?: CSFormSubmitErrorHandler;
+    onError?: FormErrorHandler;
     /** Determines the type of form we want to render */
     type?: 'client' | 'remix';
+    /** When in remix mode, this will control all the form inputs */
+    actionData?: FormActionData;
 }
 /**
  * Apollo form component that allows for client side and server side validation

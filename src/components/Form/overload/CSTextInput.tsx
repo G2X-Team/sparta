@@ -1,7 +1,7 @@
 import type { ChangeEvent, FC } from 'react';
 import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
-import { CSTextValue } from '../../../interfaces/Properties';
+import { FormTextData } from '../../../interfaces/Properties';
 
 import { TextInput as CTextInput, Props as TextInputProps } from '../../TextInput/TextInput';
 
@@ -32,7 +32,7 @@ const TextInput: FC<Props> = ({
         register(name, {
             required: { value: required, message: `${label} is required.` },
             validate: {
-                validator: (d: CSTextValue): string | boolean => {
+                validator: (d: FormTextData): string | boolean => {
                     if (!validator) return true; // if there isn't a validator, automatically pass
 
                     // get the error and return if truthy else pass
@@ -58,7 +58,7 @@ const TextInput: FC<Props> = ({
         onChange && onChange(event);
 
         // update value on record
-        const textData: CSTextValue = { text: value };
+        const textData: FormTextData = { text: value };
         setValue(name, textData);
 
         // check for required errors and update on input

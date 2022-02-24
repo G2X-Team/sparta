@@ -2,7 +2,7 @@ import type { ChangeEvent, FC } from 'react';
 import React, { useEffect } from 'react';
 
 import Overload from '../../../interfaces/Overload';
-import { CSBooleanInputValue } from '../../../interfaces/Properties';
+import { FormToggleData } from '../../../interfaces/Properties';
 
 import { Switch as CSwitch, Props as SwitchProps } from '../../Switch/Switch';
 
@@ -35,7 +35,7 @@ const Switch: FC<Overload<SwitchProps>> = ({
             target: { checked },
         } = event;
 
-        const data: CSBooleanInputValue = { checked };
+        const data: FormToggleData = { checked };
         setValue(name, data);
     };
 

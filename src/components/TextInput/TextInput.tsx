@@ -1,7 +1,7 @@
 import type { HTMLAttributes, FC, CSSProperties } from 'react';
 import React, { useEffect } from 'react';
 
-import type { CSTextValue, StyleVariant } from '../../interfaces/Properties';
+import type { FormTextData, FormValidator, StyleVariant } from '../../interfaces/Properties';
 import './TextInput.css';
 
 import { Text } from '../Text/Text';
@@ -22,7 +22,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Determines whether the input is required for form submission */
     required?: boolean;
     /** Function that will determine whether input is valid for form submission */
-    validator?: (data: CSTextValue) => string | null;
+    validator?: FormValidator<FormTextData>;
     /** Determines whether input is valid or not */
     invalid?: boolean;
     /** Name of input */
