@@ -128,8 +128,12 @@ export const Table: FC<Props> = ({
                                         >
                                             {headerItem.toUpperCase()}
                                         </span>
-                                        <button onClick={ascOrder}>↑</button>
-                                        <button onClick={descOrder}>↓</button>
+                                        <button title={headerItem + 'ASC'} onClick={ascOrder}>
+                                            ↑
+                                        </button>
+                                        <button title={headerItem + 'DESC'} onClick={descOrder}>
+                                            ↓
+                                        </button>
                                     </th>
                                 )
                             )}
