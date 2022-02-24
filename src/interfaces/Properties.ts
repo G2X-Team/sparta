@@ -6,9 +6,49 @@ export type ComponentGeneralOrientation = 'horizontal' | 'vertical';
 export type ComponentSize = 'small' | 'medium' | 'large';
 export type ComponentAlignment = 'left' | 'center' | 'right';
 export type ComponentPosition = 'static' | 'absolute' | 'fixed';
-export type CSFormSubmitErrorHandler = (data: { [key: string]: string }) => void;
-export type CSGroupValue = { radio?: string; checkbox?: string[] };
-export type CSTextValue = { text?: string };
-export type CSBooleanInputValue = { checked?: boolean };
-export type CSDataValue = { [key: string]: CSTextValue & CSGroupValue & CSBooleanInputValue };
-export type CSFormSubmitHandler = (data: CSDataValue) => void;
+
+/* Form Types */
+
+// input data
+export type FormGroupData = { radio?: string; checkbox?: string[] };
+export type FormTextData = { text?: string };
+export type FormToggleData = { checked?: boolean };
+
+// global input type
+export type FormInputData = FormGroupData & FormTextData & FormTextData;
+
+// parameter data
+export type FormData = {
+    [fieldName: string]: FormInputData;
+};
+export type FormErrors = { [fieldName: string]: string };
+
+// submission handlers
+
+/**
+ * Method that allows user to view collected form data represented as an object when handling
+ * valid submissions
+ *
+ * @param data information collected from all form inputs
+ */
+export type FormSubmitHandler = (data: FormData) => void;
+
+/**
+ * Method that allows user to see all error messages when there is an invalid submission
+ *
+ * @param errors error messages collected from all inputs
+ */
+export type FormErrorHandler = (errors: FormErrors) => void;
+
+// validator
+export type FormValidator<T = FormInputData> = (inputData: T) => string | null;
+
+export type FormActionData = {
+    formError?: string;
+    fieldErrors?: {
+        [fieldName: string]: string | undefined;
+    };
+    fields?: {
+        [fieldName: string]: any;
+    };
+};

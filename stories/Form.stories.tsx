@@ -2,7 +2,8 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
 import { Form, Props } from '../src/components/Form/Form';
-import { TextInput, Text, Button, Group, Radio, Checkbox, Switch } from '../src';
+import { TextInput, Button, Group, Radio, Checkbox, Switch } from '../src';
+import { FormValidator } from '../src/interfaces/Properties';
 
 const meta: Meta = {
     title: 'Form/Client Side Form',
@@ -17,7 +18,8 @@ export default meta;
  * @param data value in the input
  * @return object describing validaty and errors
  */
-const passwordValidator = (data): string => data.text.length < 8 && 'Password must be 8 characters';
+const passwordValidator: FormValidator = (data) =>
+    data.text.length < 8 && 'Password must be 8 characters';
 
 /**
  * Form Template
@@ -28,10 +30,10 @@ const passwordValidator = (data): string => data.text.length < 8 && 'Password mu
 const TextInputFormTemplate: Story<Props> = (args) => {
     return (
         <Form
+            onError={(data) => console.log(data)}
             onSubmit={(data) =>
                 window.alert(`username: ${data.username.text}\npassword: ${data.password.text}`)
             }
-            onError={(data) => console.log(data)}
         >
             <TextInput required name="username" label="Username" placeholder="Enter Username" />
             <TextInput

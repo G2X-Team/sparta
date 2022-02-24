@@ -2,7 +2,7 @@ import type { ChangeEvent, FC } from 'react';
 import React, { useEffect } from 'react';
 
 import Overload from '../../../interfaces/Overload';
-import { CSBooleanInputValue } from '../../../interfaces/Properties';
+import { FormToggleData } from '../../../interfaces/Properties';
 
 import { Radio as CRadio, Props as RadioProps } from '../../Radio/Radio';
 
@@ -46,7 +46,7 @@ const Radio: FC<Props> = ({
         // clear errors if there are any
         if (errors[id]?.message) clearErrors(id);
 
-        const data: CSBooleanInputValue = { checked };
+        const data: FormToggleData = { checked };
         setValue(id, data);
     };
 
