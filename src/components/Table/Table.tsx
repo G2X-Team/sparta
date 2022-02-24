@@ -92,7 +92,7 @@ export const Table: FC<Props> = ({
     /** Function to sort ascending order */
     const ascOrder = (): void => {
         setsorted(
-            sorted.sort((a: any, b): any => {
+            sorted.sort((a: any, b: any) => {
                 return a > b ? 1 : -1;
             })
         );
