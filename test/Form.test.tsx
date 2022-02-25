@@ -534,5 +534,5 @@ describe('Server Side Form', () => {
         expect(screen.getByLabelText(/checkbox single/i)).toBeChecked();
         expect(screen.getByLabelText(/radio single/i)).toBeChecked();
         expect(screen.getByLabelText(/switch/i)).toBeChecked();
-    })
+    });
 });

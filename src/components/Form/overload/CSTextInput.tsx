@@ -41,7 +41,7 @@ const TextInput: FC<Props> = ({
                 },
             },
         });
-    });
+    }, []);
 
     /**
      * Method that will handle on change validation while also allowing user-fed onChange callback

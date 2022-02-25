@@ -7,6 +7,7 @@ import type {
     FormSubmitHandler,
 } from '../../interfaces/Properties';
 import CSForm from './components/CSForm';
+import SSForm from './components/SSForm';
 
 export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
@@ -31,6 +32,9 @@ export const Form: FC<Props> = ({ type = 'client', ...props }) => {
      */
     const renderForm = (): JSX.Element => {
         switch (type) {
+            case 'remix':
+                const { onSubmit, onError, ...rest } = props;
+                return <SSForm {...rest} />;
             default:
                 return <CSForm {...props} />;
         }
