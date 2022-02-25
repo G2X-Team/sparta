@@ -115,7 +115,7 @@ export const Table: FC<Props> = ({
                 >
                     <thead className="header">
                         <tr>
-                            {colNames.map((headerItem: any, index: any) => {
+                            {colNames.map((headerItem: any, index: any) => (
                                 <th key={index}>
                                     <span
                                         style={{
@@ -132,8 +132,8 @@ export const Table: FC<Props> = ({
                                     <button title={headerItem + 'DESC'} onClick={descOrder}>
                                         ↓
                                     </button>
-                                </th>;
-                            })}
+                                </th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
