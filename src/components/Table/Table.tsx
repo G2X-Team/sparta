@@ -115,7 +115,7 @@ export const Table: FC<Props> = ({
                 >
                     <thead className="header">
                         <tr>
-                            {colNames.map((headerItem, index) => (
+                            {(colNames as any[]).map((headerItem, index) => (
                                 <th key={index}>
                                     <span
                                         style={{
