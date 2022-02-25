@@ -115,30 +115,25 @@ export const Table: FC<Props> = ({
                 >
                     <thead className="header">
                         <tr>
-                            {colNames.map(
-                                (
-                                    headerItem: string,
-                                    index: React.Key | null | undefined
-                                ): JSX.Element => (
-                                    <th key={index}>
-                                        <span
-                                            style={{
-                                                color: headerTextColor,
-                                                textTransform: headerTextTransform,
-                                                fontWeight: headerTextFontWeight,
-                                            }}
-                                        >
-                                            {headerItem.toUpperCase()}
-                                        </span>
-                                        <button title={headerItem + 'ASC'} onClick={ascOrder}>
-                                            ↑
-                                        </button>
-                                        <button title={headerItem + 'DESC'} onClick={descOrder}>
-                                            ↓
-                                        </button>
-                                    </th>
-                                )
-                            )}
+                            {colNames.map((headerItem, index) => (
+                                <th key={index}>
+                                    <span
+                                        style={{
+                                            color: headerTextColor,
+                                            textTransform: headerTextTransform,
+                                            fontWeight: headerTextFontWeight,
+                                        }}
+                                    >
+                                        {headerItem.toUpperCase()}
+                                    </span>
+                                    <button title={headerItem + 'ASC'} onClick={ascOrder}>
+                                        ↑
+                                    </button>
+                                    <button title={headerItem + 'DESC'} onClick={descOrder}>
+                                        ↓
+                                    </button>
+                                </th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
