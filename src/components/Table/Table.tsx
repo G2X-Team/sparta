@@ -1,4 +1,3 @@
-/* eslint-disable require-jsdoc */
 import type { HTMLAttributes, FC } from 'react';
 import React, { useState } from 'react';
 import * as CSS from 'csstype';
@@ -117,7 +116,10 @@ export const Table: FC<Props> = ({
                     <thead className="header">
                         <tr>
                             {colNames.map(
-                                (headerItem: string, index: React.Key | null | undefined) => (
+                                (
+                                    headerItem: string,
+                                    index: React.Key | null | undefined
+                                ): JSX.Element => (
                                     <th key={index}>
                                         <span
                                             style={{
