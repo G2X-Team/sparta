@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Default as Table } from '../stories/Table.stories';
@@ -31,14 +31,14 @@ describe('Table', () => {
 
     it('triggers sorting on click callback', () => {
         // given
-        render(<Table />);
+        render(<Table pageSize={10} />);
         const sortbutton: HTMLElement = screen.getByTitle('idASC');
-        console.log(sortbutton);
 
         // when
         userEvent.click(sortbutton);
+        const rows = screen.getByRole('rows0');
 
         // then
-        expect(screen.queryByText('Ahmed')).toBeInTheDocument();
+        expect(within(rows).queryByText('Adam')).toBeInTheDocument();
     });
 });
