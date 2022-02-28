@@ -33,7 +33,9 @@ describe('DateTimePicker', () => {
 
         // when
         userEvent.click(dateTimePickerDiv);
-        const NewDateLabel: HTMLElement = screen.getByLabelText('Choose Friday, March 25th, 2022');
+        const NewDateLabel: HTMLElement = screen.getByLabelText(
+            'Choose Thursday, March 24th, 2022'
+        );
         userEvent.click(NewDateLabel);
 
         // then
