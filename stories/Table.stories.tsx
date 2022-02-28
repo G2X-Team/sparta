@@ -8,7 +8,7 @@ const meta: Meta = {
     component: Table,
     args: {
         data: [
-            { id: 12, name: 'zebra', Age: 30 },
+            { id: 12, name: 'Name12', Age: 30 },
             { id: 2, name: 'Name2', Age: 30 },
             { id: 3, name: 'Name3', Age: 30 },
             { id: 4, name: 'Name4', Age: 30 },
@@ -19,7 +19,7 @@ const meta: Meta = {
             { id: 9, name: 'Name9', Age: 30 },
             { id: 10, name: 'Name10', Age: 30 },
             { id: 11, name: 'Name11', Age: 30 },
-            { id: 1, name: 'Ahmed', Age: 30 },
+            { id: 1, name: 'Adam', Age: 30 },
             { id: 13, name: 'Name13', Age: 30 },
             { id: 14, name: 'Name14', Age: 30 },
             { id: 15, name: 'Name15', Age: 30 },

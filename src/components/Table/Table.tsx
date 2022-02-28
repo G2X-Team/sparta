@@ -15,7 +15,7 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
     /** Defines the name of colloumns in the header */
     colNames?: [];
     /** Data in JSON to feed the table */
-    data?: [];
+    data?: JSON[];
     // Header Style Props//
     /** Defines the color of the cell text */
     cellTextColor?: CSS.Property.Color;
@@ -61,14 +61,13 @@ export const Table: FC<Props> = ({
 
     /** Function to sort ascending order */
     const ascOrder = (): void => {
-        setsorted(sorted.sort((a: any, b: any) => a.id - b.id));
+        setsorted([].concat(sorted as any).sort((a: any, b: any) => a.id - b.id));
     };
 
     /** Function to sort descending order */
     const descOrder = (): void => {
-        setsorted(sorted.sort((a: any, b: any) => b.id - a.id));
+        setsorted([].concat(sorted as any).sort((a: any, b: any) => b.id - a.id));
     };
-
     /** Function to navigate back to the last page */
     const onBack = (): void => {
         setPage(page - 1 > -1 ? page - 1 : page);
@@ -80,7 +79,7 @@ export const Table: FC<Props> = ({
     };
     return (
         <div className="apollo-component-library-table-component-container">
-            {data.length > 0 && (
+            {sorted.length > 0 && (
                 <table
                     className="apollo-component-library-table-component"
                     cellSpacing="0"
@@ -99,10 +98,10 @@ export const Table: FC<Props> = ({
                                     >
                                         {headerItem.toUpperCase()}
                                     </span>
-                                    <button title={headerItem + 'ASC'} onClick={ascOrder}>
+                                    <button title={headerItem + 'ASC'} onClick={() => ascOrder()}>
                                         ↑
                                     </button>
-                                    <button title={headerItem + 'DESC'} onClick={descOrder}>
+                                    <button title={headerItem + 'DESC'} onClick={() => descOrder()}>
                                         ↓
                                     </button>
                                 </th>
@@ -110,25 +109,25 @@ export const Table: FC<Props> = ({
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.values(
-                            sorted.slice(pageSize * page, pageSize * page + pageSize)
-                        ).map((obj, index) => (
-                            <tr key={index}>
-                                {Object.values(obj).map((value, index2) => (
-                                    <td
-                                        style={{
-                                            color: cellTextColor,
-                                            textTransform: cellTextTransform,
-                                            fontWeight: cellTextFontWeight,
-                                        }}
-                                        key={index2}
-                                    >
-                                        {' '}
-                                        {value}{' '}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
+                        {Object.values(sorted)
+                            .slice(pageSize * page, pageSize * page + pageSize)
+                            .map((obj, index) => (
+                                <tr key={index}>
+                                    {Object.values(obj).map((value, index2) => (
+                                        <td
+                                            style={{
+                                                color: cellTextColor,
+                                                textTransform: cellTextTransform,
+                                                fontWeight: cellTextFontWeight,
+                                            }}
+                                            key={index2}
+                                        >
+                                            {' '}
+                                            {value}{' '}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
                     </tbody>
                     <tfoot className="apollo-component-library-table-component-footer">
                         <div>
