@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import * as CSS from 'csstype';
@@ -13,9 +14,9 @@ export interface Props {
     /** Defines number of page to start from */
     pageNum?: number;
     /** Defines the name of colloumns in the header */
-    colNames?: [];
+    colNames?: Array<string | number>;
     /** Data in JSON to feed the table */
-    data?: JSON[];
+    data?: Array<string | number>;
     // Header Style Props//
     /** Defines the color of the cell text */
     cellTextColor?: CSS.Property.Color;
@@ -43,7 +44,7 @@ const btnStyle = {
  * @return Table component
  */
 export const Table: FC<Props> = ({
-    data = [{}],
+    data = [],
     colNames = [],
     pageNum = 0,
     pageSize = 15,
@@ -61,12 +62,22 @@ export const Table: FC<Props> = ({
 
     /** Function to sort ascending order */
     const ascOrder = (): void => {
-        setsorted([].concat(sorted as any).sort((a: any, b: any) => a.id - b.id));
+        setsorted([].concat(sorted as any).sort((a: any, b: any) => a.name.localeCompare(b.name)));
+        console.log(
+            setsorted(
+                [].concat(sorted as any).sort((a: any, b: any) => a.name.localeCompare(b.name))
+            )
+        );
     };
 
     /** Function to sort descending order */
     const descOrder = (): void => {
-        setsorted([].concat(sorted as any).sort((a: any, b: any) => b.id - a.id));
+        setsorted([].concat(sorted as any).sort((a: any, b: any) => b.name.localeCompare(a.name)));
+        console.log(
+            setsorted(
+                [].concat(sorted as any).sort((a: any, b: any) => b.name.localeCompare(a.name))
+            )
+        );
     };
     /** Function to navigate back to the last page */
     const onBack = (): void => {
