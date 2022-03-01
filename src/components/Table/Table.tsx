@@ -1,9 +1,9 @@
-import type { HTMLAttributes, FC } from 'react';
+import type { FC } from 'react';
 import React, { useState } from 'react';
 import * as CSS from 'csstype';
 import './Table.css';
 
-export interface Props extends HTMLAttributes<HTMLHRElement> {
+export interface Props {
     /** width of desired table */
     width?: CSS.Property.Width;
     /** height of table in pixels */
@@ -43,27 +43,8 @@ const btnStyle = {
  * @return Table component
  */
 export const Table: FC<Props> = ({
-    data = [
-        { id: 12, name: 'Name12', Age: 30 },
-        { id: 2, name: 'Name2', Age: 30 },
-        { id: 3, name: 'Name3', Age: 30 },
-        { id: 4, name: 'Name4', Age: 30 },
-        { id: 5, name: 'Name5', Age: 30 },
-        { id: 6, name: 'Name6', Age: 30 },
-        { id: 7, name: 'Name7', Age: 30 },
-        { id: 8, name: 'Name8', Age: 30 },
-        { id: 9, name: 'Name9', Age: 30 },
-        { id: 10, name: 'Name10', Age: 30 },
-        { id: 11, name: 'Name11', Age: 30 },
-        { id: 1, name: 'Adam', Age: 30 },
-        { id: 13, name: 'Name13', Age: 30 },
-        { id: 14, name: 'Name14', Age: 30 },
-        { id: 15, name: 'Name15', Age: 30 },
-        { id: 16, name: 'Name16', Age: 30 },
-        { id: 17, name: 'Name17', Age: 30 },
-        { id: 18, name: 'Name18', Age: 30 },
-    ],
-    colNames = ['id', 'name', 'Age'],
+    data = [{}],
+    colNames = [],
     pageNum = 0,
     pageSize = 15,
     width = '100%',
