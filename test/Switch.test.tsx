@@ -10,22 +10,10 @@ describe('Switch', () => {
     it('complies with WCAG', async () => {
         // given
         const { container: validSwitch } = render(<Switch name="switch">hello</Switch>);
-        const { container: invalidSwitch } = render(
-            <Switch invalid name="switch">
-                hello
-            </Switch>
-        );
-        const { container: invalidWithMessage } = render(
-            <Switch invalid name="switch" errorMessage="failed">
-                hello
-            </Switch>
-        );
 
         // when
         const results = [];
         results[0] = await axe(validSwitch);
-        results[1] = await axe(invalidSwitch);
-        results[2] = await axe(invalidWithMessage);
 
         // then
         results.forEach((result: any) => expect(result).toHaveNoViolations());
@@ -77,17 +65,5 @@ describe('Switch', () => {
 
         // then
         expect(onChange).not.toHaveBeenCalled();
-    });
-
-    it('will render error message when conditions are met', () => {
-        // given
-        render(
-            <Switch name="something" invalid errorMessage="failed">
-                switch
-            </Switch>
-        );
-
-        // when then
-        expect(screen.getByText(/failed/i)).toBeInTheDocument();
     });
 });
