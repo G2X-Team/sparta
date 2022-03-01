@@ -262,6 +262,11 @@ describe('Table', () => {
                             name: 'Adam',
                             Age: 30,
                         },
+                        {
+                            id: 1,
+                            name: 'broda',
+                            Age: 30,
+                        },
                     ] as any
                 }
                 pageSize={10}
@@ -274,7 +279,7 @@ describe('Table', () => {
         const rows = screen.getByRole('rows0');
 
         // then
-        expect(within(rows).queryByText('2')).toBeInTheDocument();
+        expect(within(rows).queryByText('1')).toBeInTheDocument();
     });
 
     it('triggers sorting on click callback for string', () => {
@@ -292,6 +297,11 @@ describe('Table', () => {
                         {
                             id: 2,
                             name: 'Adam',
+                            Age: 30,
+                        },
+                        {
+                            id: 1,
+                            name: 'broda',
                             Age: 30,
                         },
                     ] as any

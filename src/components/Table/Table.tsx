@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import * as CSS from 'csstype';
@@ -13,9 +14,9 @@ export interface Props {
     /** Defines number of page to start from */
     pageNum?: number;
     /** Defines the name of colloumns in the header */
-    colNames?: [];
+    colNames?: string;
     /** Data in JSON to feed the table */
-    data?: JSON[];
+    data?: Array<object>;
     // Header Style Props//
     /** Defines the color of the cell text */
     cellTextColor?: CSS.Property.Color;
@@ -43,8 +44,8 @@ const btnStyle = {
  * @return Table component
  */
 export const Table: FC<Props> = ({
-    data = [{}],
-    colNames = [],
+    data = [],
+    colNames = Object.keys(data[0]),
     pageNum = 0,
     pageSize = 15,
     width = '100%',
@@ -57,16 +58,36 @@ export const Table: FC<Props> = ({
     headerTextFontWeight = 'bolder',
 }) => {
     const [page, setPage] = useState(pageNum);
-    const [sorted, setsorted] = useState(data);
+    const [sorteddata, setsorted] = useState(data);
 
     /** Function to sort ascending order */
-    const ascOrder = (): void => {
-        setsorted([].concat(sorted as any).sort((a: any, b: any) => a.id - b.id));
-    };
+    const [order, setOrder] = useState('asc');
 
-    /** Function to sort descending order */
-    const descOrder = (): void => {
-        setsorted([].concat(sorted as any).sort((a: any, b: any) => b.id - a.id));
+    // eslint-disable-next-line valid-jsdoc
+    /** Function to sort table data based on col */
+    const sorting = (col: any): void => {
+        if (order === 'asc') {
+            const sorted = [...(data as any)].sort((a, b) => {
+                if (typeof a[col] === 'string') {
+                    return a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1;
+                } else {
+                    return a[col] > b[col] ? 1 : -1;
+                }
+            });
+            setsorted(sorted);
+            setOrder('desc');
+        }
+        if (order === 'desc') {
+            const sorted = [...(data as any)].sort((a, b) => {
+                if (typeof a[col] === 'string') {
+                    return a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1;
+                } else {
+                    return a[col] < b[col] ? 1 : -1;
+                }
+            });
+            setsorted(sorted);
+            setOrder('asc');
+        }
     };
     /** Function to navigate back to the last page */
     const onBack = (): void => {
@@ -79,7 +100,7 @@ export const Table: FC<Props> = ({
     };
     return (
         <div className="apollo-component-library-table-component-container">
-            {sorted.length > 0 && (
+            {sorteddata.length > 0 && (
                 <table
                     className="apollo-component-library-table-component"
                     cellSpacing="0"
@@ -97,19 +118,25 @@ export const Table: FC<Props> = ({
                                         }}
                                     >
                                         {headerItem.toUpperCase()}
+                                        <button
+                                            title={headerItem + 'ASC'}
+                                            onClick={() => sorting(headerItem)}
+                                        >
+                                            ▲
+                                        </button>
+                                        <button
+                                            title={headerItem + 'DESC'}
+                                            onClick={() => sorting(headerItem)}
+                                        >
+                                            ▼
+                                        </button>
                                     </span>
-                                    <button title={headerItem + 'ASC'} onClick={() => ascOrder()}>
-                                        ↑
-                                    </button>
-                                    <button title={headerItem + 'DESC'} onClick={() => descOrder()}>
-                                        ↓
-                                    </button>
                                 </th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.values(sorted)
+                        {Object.values(sorteddata)
                             .slice(pageSize * page, pageSize * page + pageSize)
                             .map((obj, index) => (
                                 <tr role={'rows' + index} key={index}>
@@ -129,17 +156,19 @@ export const Table: FC<Props> = ({
                                 </tr>
                             ))}
                     </tbody>
-                    <tfoot className="apollo-component-library-table-component-footer">
-                        <div>
-                            <button style={btnStyle} onClick={onBack}>
-                                Back
-                            </button>
-                            <label style={{ padding: '0 1em' }}>{page + 1}</label>
-                            <button style={btnStyle} onClick={onNext}>
-                                Next
-                            </button>
-                        </div>
-                    </tfoot>
+                    {pageSize < data.length ? (
+                        <tfoot className="apollo-component-library-table-component-footer">
+                            <div>
+                                <button style={btnStyle} onClick={onBack}>
+                                    Back
+                                </button>
+                                <label style={{ padding: '0 1em' }}>{page + 1}</label>
+                                <button style={btnStyle} onClick={onNext}>
+                                    Next
+                                </button>
+                            </div>
+                        </tfoot>
+                    ) : null}
                 </table>
             )}
         </div>
