@@ -3,7 +3,7 @@ import React from 'react';
 import { Text } from '../Text/Text';
 import './Radio.css';
 
-export interface Props extends HTMLAttributes<HTMLInputElement> {
+export interface IRadio extends HTMLAttributes<HTMLInputElement> {
     /** String that identifies the radio */
     id?: string;
     /** You can define an element pertaining to radio */
@@ -32,7 +32,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Radio component
  */
-export const Radio: FC<Props> = ({
+export const Radio: FC<IRadio> = ({
     inline = false,
     children,
     className,
@@ -40,7 +40,7 @@ export const Radio: FC<Props> = ({
     required,
     errorMessage,
     id,
-    ...props
+    ...iRadio
 }) => {
     // check if the user can use error messages
     useEffect(() => {
@@ -59,7 +59,7 @@ export const Radio: FC<Props> = ({
                 `}
             >
                 <input
-                    {...props}
+                    {...iRadio}
                     aria-required={required}
                     aria-invalid={invalid}
                     aria-errormessage={id ? `${id}-error` : undefined}

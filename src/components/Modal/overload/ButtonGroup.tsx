@@ -4,20 +4,20 @@ import Overload from '../../../interfaces/Overload';
 import FormatChildren from '../../../util/FormatChildren';
 
 import Button from './Button';
-import { Props } from '../../ButtonGroup/ButtonGroup';
+import { IButtonGroup } from '../../ButtonGroup/ButtonGroup';
 
 /**
  * Overloads ButtonGroup to change style and pass through modal actions
  *
  * @return Formatted ButtonGroup
  */
-const ButtonGroup: FC<Overload<Props>> = ({
+const ButtonGroup: FC<Overload<IButtonGroup>> = ({
     parentProps: { children, ...parentProps },
     className = '',
-    ...props
-}: Overload<Props>) => {
-    // get all props
-    const allProps = { ...props, ...parentProps };
+    ...iButtonGroup
+}: Overload<IButtonGroup>) => {
+    // get all iButtonGroup
+    const allProps = { ...iButtonGroup, ...parentProps };
 
     // find the buttons in the button group
     const formattedButtonGroup = new FormatChildren(allProps, { Button });

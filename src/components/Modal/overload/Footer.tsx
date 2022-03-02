@@ -3,16 +3,16 @@ import React from 'react';
 import FormatChildren from '../../../util/FormatChildren';
 
 import ButtonGroup from './ButtonGroup';
-import { Props, Footer as CFooter } from '../../Footer/Footer';
+import { IFooter, Footer as CFooter } from '../../Footer/Footer';
 
 /**
  * Overloaded Footer that identifies button groups
  *
  * @return formatted footer
  */
-const Footer: FC<Props> = ({ parentProps: { children, ...parentProps }, ...props }: Props) => {
-    // gets all props
-    const allProps = { ...props, ...parentProps };
+const Footer: FC<IFooter> = ({ parentProps: { children, ...parentProps }, ...iFooter }: IFooter) => {
+    // gets all iFooter
+    const allProps = { ...iFooter, ...parentProps };
 
     // find button groups
     const formattedFooter = new FormatChildren(allProps, { ButtonGroup });
@@ -28,7 +28,7 @@ const Footer: FC<Props> = ({ parentProps: { children, ...parentProps }, ...props
     const [buttonGroup] = buttonGroups;
 
     return (
-        <CFooter {...props} parentProps={parentProps} style={footerStyle}>
+        <CFooter {...iFooter} parentProps={parentProps} style={footerStyle}>
             {formattedFooter.getOther()}
             {buttonGroup}
         </CFooter>

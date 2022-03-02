@@ -4,7 +4,7 @@ import { StyleVariant } from '../../interfaces/Properties';
 import { Text } from '../Text/Text';
 import './Switch.css';
 
-export interface Props extends HTMLAttributes<HTMLInputElement> {
+export interface ISwitch extends HTMLAttributes<HTMLInputElement> {
     /** Can assign text or element to switch */
     children: ReactNode;
     /** Determines whether the switch is disabled */
@@ -26,19 +26,19 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Switch component
  */
-export const Switch: FC<Props> = ({
+export const Switch: FC<ISwitch> = ({
     variant = 'default',
     className = '',
     children,
     required,
     name,
-    ...props
+    ...iSwitch
 }) => {
     return (
         <div className="apollo-component-library-switch-component-wrapper">
             <label className="apollo-component-library-switch-component-label">
                 <input
-                    {...props}
+                    {...iSwitch}
                     type="checkbox"
                     role="switch"
                     className="apollo-component-library-switch-component-input"

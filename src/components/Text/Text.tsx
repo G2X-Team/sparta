@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import * as CSS from 'csstype';
 import './Text.css';
 
-export interface Props extends HTMLAttributes<HTMLParagraphElement> {
+export interface IText extends HTMLAttributes<HTMLParagraphElement> {
     /** Text needs to exist between tags */
     children: ReactNode;
     /**
@@ -27,7 +27,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
     lower?: boolean;
     /** Determines whether the first letter of every word is capital or not */
     pascal?: boolean;
-    /** Decide the color of the text without accessing the style props */
+    /** Decide the color of the text without accessing the style iText */
     color?: CSS.Property.Color;
     /** Determines whether the text is disabled or not */
     disabled?: boolean;
@@ -38,7 +38,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Text component
  */
-export const Text: FC<Props> = ({
+export const Text: FC<IText> = ({
     children,
     className = '',
     header = 0,
@@ -53,7 +53,7 @@ export const Text: FC<Props> = ({
     disabled = false,
     color,
     style,
-    ...props
+    ...iText
 }) => {
     /**
      * Gets all the special conditions and translates it to a special className combination
@@ -121,7 +121,7 @@ export const Text: FC<Props> = ({
     };
 
     return (
-        <span {...props} style={getTextStyle(color, style)} className={getVariant()}>
+        <span {...iText} style={getTextStyle(color, style)} className={getVariant()}>
             {getCorrectCasing()}
         </span>
     );

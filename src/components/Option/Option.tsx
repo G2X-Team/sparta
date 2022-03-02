@@ -6,7 +6,7 @@ import Overload from '../../interfaces/Overload';
 
 import { Text } from '../Text/Text';
 
-export interface Props extends Overload<HTMLAttributes<HTMLElement>> {
+export interface IOption extends Overload<HTMLAttributes<HTMLElement>> {
     /** Needs to have a string value in between tags */
     children: string;
     /** Can have onClick callback method */
@@ -18,9 +18,9 @@ export interface Props extends Overload<HTMLAttributes<HTMLElement>> {
  *
  * @return Option component
  */
-export const Option: FC<Props> = ({ children, parentProps, className = '', ...props }) => {
+export const Option: FC<IOption> = ({ children, parentProps, className = '', ...iOption }) => {
     return (
-        <div {...props} className={`apollo-component-library-option-component ${className}`}>
+        <div {...iOption} className={`apollo-component-library-option-component ${className}`}>
             <Text margins={false}>{children}</Text>
         </div>
     );
