@@ -53,7 +53,7 @@ TextInputForm.args = {
  * @param args storybook arguments
  * @return storybook template
  */
- const RadioGroupFormTemplate: Story<Props> = (args) => {
+const RadioGroupFormTemplate: Story<Props> = (args) => {
     return (
         <Form {...args}>
             <Group required label="Please rate the class from 1-5" name="rating" inline>
@@ -79,7 +79,7 @@ RadioGroupForm.args = {
  * @param args storybook arguments
  * @return storybook template
  */
- const CheckboxGroupFormTemplate: Story<Props> = (args) => {
+const CheckboxGroupFormTemplate: Story<Props> = (args) => {
     return (
         <Form {...args}>
             <Group required label="Select options" name="options">
@@ -105,7 +105,7 @@ CheckboxGroupForm.args = {
  * @param args storybook arguments
  * @return storybook template
  */
- const IndividualInputFormTemplate: Story<Props> = (args) => {
+const IndividualInputFormTemplate: Story<Props> = (args) => {
     return (
         <Form {...args}>
             <Radio required id="radio" value="radio">

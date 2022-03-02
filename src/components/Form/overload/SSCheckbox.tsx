@@ -15,7 +15,11 @@ interface Props extends Overload<CheckboxProps> {
  * @return Formatted Checkbox compatible with form
  */
 const Checkbox: FC<Props> = ({
-    parentProps: { groupName, actionData: { fields, fieldErrors }, groupInline },
+    parentProps: {
+        groupName,
+        actionData: { fields, fieldErrors },
+        groupInline,
+    },
     onChange,
     required,
     value,
@@ -23,17 +27,13 @@ const Checkbox: FC<Props> = ({
     id,
     ...props
 }) => {
-    const isChecked: boolean = 
-        fields 
-            ? groupName?.length
-                ? fields[groupName]?.filter((field: string) => field === value).length
-                : fields[id]
-            : false
+    const isChecked: boolean = fields
+        ? groupName?.length
+            ? fields[groupName]?.filter((field: string) => field === value).length
+            : fields[id]
+        : false;
 
-    const errorMessage: string | undefined = 
-    fieldErrors
-        ? fieldErrors[id]
-        : undefined
+    const errorMessage: string | undefined = fieldErrors ? fieldErrors[id] : undefined;
 
     return (
         <CCheckbox

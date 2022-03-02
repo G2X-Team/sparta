@@ -29,9 +29,9 @@ const Group: FC<Props> = ({
 }) => {
     useEffect(() => {
         if (type === 'organization') return;
-        
+
         if (!name?.length) throw new Error('Must use Group `name` prop when using Form.');
-        
+
         register(name, {
             required: { value: required, message: `"${label}" is required.` },
             validate: {

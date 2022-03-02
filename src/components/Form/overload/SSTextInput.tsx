@@ -16,16 +16,10 @@ interface Props extends Overload<TextInputProps> {
  * @return formatted text input for remix validation
  */
 const SSTextInput: FC<Props> = ({ name, parentProps: { actionData }, ...props }) => {
-    const defaultValue = 
-        actionData?.fields 
-            ? actionData?.fields[name]
-            : undefined
+    const defaultValue = actionData?.fields ? actionData?.fields[name] : undefined;
 
-    const errorMessage = 
-        actionData?.fieldErrors 
-            ? actionData?.fieldErrors[name]
-            : undefined
-    
+    const errorMessage = actionData?.fieldErrors ? actionData?.fieldErrors[name] : undefined;
+
     return (
         <CTextInput
             {...props}

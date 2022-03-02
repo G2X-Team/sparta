@@ -34,9 +34,9 @@ const Group: FC<Props> = ({
 }) => {
     useEffect(() => {
         if (type === 'organization') return;
-        
+
         if (!name?.length) throw new Error('Must use Group `name` prop when using Form.');
-    })
+    });
 
     /**
      * Formats children components and passes the parent props through
@@ -52,53 +52,53 @@ const Group: FC<Props> = ({
     };
 
     const errorMessage = actionData?.fieldErrors ? actionData?.fieldErrors[name] : undefined;
-    const invalid: boolean = errorMessage?.length
+    const invalid: boolean = errorMessage?.length;
 
     return (
         <>
-        <fieldset
-            {...props}
-            className={`apollo-component-library-group ${invalid ? 'invalid' : ''}`}
-            aria-errormessage={name ? `${name}-error` : undefined}
-            aria-invalid={invalid}
-        >
-            <legend>
-                <Text
-                    bold
-                    style={labelTextStyle}
-                    header={type === 'input' ? 0 : 1}
-                    margins={type === 'organization' && !Boolean(hint)}
-                >
-                    {label}{' '}
-                    {required ? (
-                        <Text color="red" inline>
-                            *
+            <fieldset
+                {...props}
+                className={`apollo-component-library-group ${invalid ? 'invalid' : ''}`}
+                aria-errormessage={name ? `${name}-error` : undefined}
+                aria-invalid={invalid}
+            >
+                <legend>
+                    <Text
+                        bold
+                        style={labelTextStyle}
+                        header={type === 'input' ? 0 : 1}
+                        margins={type === 'organization' && !Boolean(hint)}
+                    >
+                        {label}{' '}
+                        {required ? (
+                            <Text color="red" inline>
+                                *
+                            </Text>
+                        ) : null}
+                    </Text>
+                    {hint ? (
+                        <Text style={getHintTextStyle(type)} margins={type === 'organization'}>
+                            {hint}
                         </Text>
                     ) : null}
-                </Text>
-                {hint ? (
-                    <Text style={getHintTextStyle(type)} margins={type === 'organization'}>
-                        {hint}
-                    </Text>
-                ) : null}
-            </legend>
-            <div
-                className={`
+                </legend>
+                <div
+                    className={`
                     apollo-component-library-group-wrapper 
                     ${invalid ? 'invalid' : ''}
                 `}
-            >
-                {renderAll()}
-            </div>
-            {invalid && errorMessage ? (
-                <div role="alert" id={name ? `${name}-error` : undefined}>
-                    <Text color="#c90000" style={errorTextStyle}>
-                        {errorMessage}
-                    </Text>
+                >
+                    {renderAll()}
                 </div>
-            ) : null}
-        </fieldset>
-    </>
+                {invalid && errorMessage ? (
+                    <div role="alert" id={name ? `${name}-error` : undefined}>
+                        <Text color="#c90000" style={errorTextStyle}>
+                            {errorMessage}
+                        </Text>
+                    </div>
+                ) : null}
+            </fieldset>
+        </>
     );
 };
 
@@ -107,11 +107,11 @@ const labelTextStyle: CSSProperties = {
 };
 
 /**
-* gets the hint text style given the type
-*
-* @param type type that describes what kind of group is being used
-* @return hint style object
-*/
+ * gets the hint text style given the type
+ *
+ * @param type type that describes what kind of group is being used
+ * @return hint style object
+ */
 const getHintTextStyle = (type: string): CSSProperties => {
     return {
         fontSize: type === 'organization' ? '1rem' : '0.9rem',

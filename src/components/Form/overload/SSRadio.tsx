@@ -15,7 +15,11 @@ interface Props extends Overload<RadioProps> {
  * @return Formatted Radio compatible with form
  */
 const Radio: FC<Props> = ({
-    parentProps: { groupName, actionData: { fields, fieldErrors }, groupInline },
+    parentProps: {
+        groupName,
+        actionData: { fields, fieldErrors },
+        groupInline,
+    },
     onChange,
     required,
     name,
@@ -24,17 +28,13 @@ const Radio: FC<Props> = ({
     id,
     ...props
 }) => {
-    const isChecked: boolean = 
-        fields 
-            ? groupName?.length
-                ? fields[groupName] === value
-                : fields[id]
-            : false
+    const isChecked: boolean = fields
+        ? groupName?.length
+            ? fields[groupName] === value
+            : fields[id]
+        : false;
 
-    const errorMessage: string | undefined = 
-        fieldErrors
-            ? fieldErrors[id]
-            : undefined
+    const errorMessage: string | undefined = fieldErrors ? fieldErrors[id] : undefined;
 
     return (
         <CRadio

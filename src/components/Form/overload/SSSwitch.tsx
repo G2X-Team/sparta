@@ -11,26 +11,19 @@ import { Switch as CSwitch, Props as SwitchProps } from '../../Switch/Switch';
  * @return Formatted Switch compatible with form
  */
 const Switch: FC<Overload<SwitchProps>> = ({
-    parentProps: { actionData: { fields } },
+    parentProps: {
+        actionData: { fields },
+    },
     onChange,
     required,
     name,
     id,
     ...props
 }) => {
-    const isChecked: boolean = 
-        fields 
-            ? fields[name]
-            : false
+    const isChecked: boolean = fields ? fields[name] : false;
 
     return (
-        <CSwitch
-            {...props}
-            id={id}
-            name={name}
-            required={required}
-            defaultChecked={isChecked}
-        />
+        <CSwitch {...props} id={id} name={name} required={required} defaultChecked={isChecked} />
     );
 };
 
