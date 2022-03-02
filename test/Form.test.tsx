@@ -7,6 +7,7 @@ expect.extend(toHaveNoViolations);
 import { act } from 'react-dom/test-utils';
 
 import { Form, TextInput, Switch, Radio, Checkbox, Group, Button } from '../src';
+import { FormActionData, FormValidator } from '../src/interfaces/Properties';
 
 // error message when test validator doesn't pass input
 const passwordError = 'Needs to be 5 characters in length at least';
@@ -18,7 +19,7 @@ const groupError = 'somethings is required, please select an option.';
  * @param data value of input
  * @return error message if there is one
  */
-const testValidator = (data: { text?: string }): string | null => {
+const testValidator: FormValidator = (data) => {
     return (data?.text?.length || 0) < 5 ? passwordError : null;
 };
 
@@ -28,7 +29,7 @@ const testValidator = (data: { text?: string }): string | null => {
  * @param data data of checkbox group
  * @return error message if there is one
  */
-const checkboxValidator = (data: { checkbox?: string[] }): string | null => {
+const checkboxValidator: FormValidator = (data) => {
     return (data?.checkbox?.length || 0) < 2 ? groupError : null;
 };
 
@@ -387,5 +388,150 @@ describe('Client Side Form', () => {
         // then
         expect(onError).toHaveBeenCalledWith(expect.objectContaining(expected), expect.anything());
         expect(onSubmit).not.toHaveBeenCalled();
+    });
+});
+
+const validActionData: FormActionData = {
+    fields: {
+        input: 'input',
+        radioGroup: 'option-1',
+        checkboxGroup: ['checkbox-1', 'checkbox-2'],
+        checkbox: true,
+        radio: true,
+        switch: true,
+    },
+};
+
+const invalidActionData: FormActionData = {
+    fieldErrors: {
+        input: 'failed',
+        radioGroup: 'failed',
+        checkboxGroup: 'failed',
+        checkbox: 'failed',
+        radio: 'failed',
+    },
+};
+
+describe('Server Side Form', () => {
+    it('complies with WCAG 2.0', async () => {
+        // given
+        const { container: validForm } = render(
+            <Form type="remix" actionData={validActionData}>
+                <Group name="group-1" label="options">
+                    <Radio value="option-1">Option 1</Radio>
+                    <Radio value="option-2">Option 2</Radio>
+                </Group>
+                <Group name="group-2" label="checkboxes">
+                    <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
+                    <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
+                </Group>
+                <Checkbox id="checkbox" value="checkbox">
+                    Checkbox
+                </Checkbox>
+                <Radio id="radio" value="option">
+                    Option
+                </Radio>
+                <TextInput label="input" name="input" />
+                <Switch name="switch" value="switch-1">
+                    Switch 1
+                </Switch>
+            </Form>
+        );
+
+        const { container: invalidForm } = render(
+            <Form type="remix" actionData={invalidActionData}>
+                <Group name="group-1" label="options">
+                    <Radio value="option-1">Option 1</Radio>
+                    <Radio value="option-2">Option 2</Radio>
+                </Group>
+                <Group name="group-2" label="checkboxes">
+                    <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
+                    <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
+                </Group>
+                <Checkbox id="checkbox" value="checkbox">
+                    Checkbox
+                </Checkbox>
+                <Radio id="radio" value="option">
+                    Option
+                </Radio>
+                <TextInput label="input" name="input" />
+                <Switch name="switch" value="switch-1">
+                    Switch 1
+                </Switch>
+            </Form>
+        );
+
+        // when
+        const results = [];
+        results[0] = await axe(validForm);
+        results[1] = await axe(invalidForm);
+
+        // then
+        results.forEach((result: any) => expect(result).toHaveNoViolations());
+    });
+
+    it('renders error messages when invalid', () => {
+        // given
+        render(
+            <Form type="remix" actionData={invalidActionData}>
+                <Group name="radioGroup" label="options">
+                    <Radio value="option-1">Option 1</Radio>
+                    <Radio value="option-2">Option 2</Radio>
+                </Group>
+                <Group name="checkboxGroup" label="checkboxes">
+                    <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
+                    <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
+                </Group>
+                <Checkbox id="checkbox" value="checkbox">
+                    Checkbox
+                </Checkbox>
+                <Radio id="radio" value="radio">
+                    Option
+                </Radio>
+                <TextInput label="input" name="input" />
+                <Switch name="switch" value="switch">
+                    Switch
+                </Switch>
+            </Form>
+        );
+
+        // when then
+        expect(screen.queryAllByText(/failed/i)).toHaveLength(5);
+    });
+
+    it('displays all default values correctly', () => {
+        // given
+        render(
+            <Form type="remix" actionData={validActionData}>
+                <Group name="radioGroup" label="options">
+                    <Radio value="option-1">Option 1</Radio>
+                    <Radio value="option-2">Option 2</Radio>
+                </Group>
+                <Group name="checkboxGroup" label="checkboxes">
+                    <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
+                    <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
+                </Group>
+                <Checkbox id="checkbox" value="checkbox">
+                    Checkbox single
+                </Checkbox>
+                <Radio id="radio" value="radio">
+                    Radio single
+                </Radio>
+                <TextInput label="input" name="input" />
+                <Switch name="switch" value="switch-1">
+                    Switch
+                </Switch>
+            </Form>
+        );
+
+        // when then
+        expect(screen.getByDisplayValue(/input/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/option 1/i)).toBeChecked();
+        expect(screen.getByLabelText(/option 2/i)).not.toBeChecked();
+        expect(screen.getByLabelText(/checkbox 1/i)).toBeChecked();
+        expect(screen.getByLabelText(/checkbox 2/i)).toBeChecked();
+        expect(screen.getByLabelText(/checkbox single/i)).toBeChecked();
+        expect(screen.getByLabelText(/radio single/i)).toBeChecked();
+        expect(screen.getByLabelText(/switch/i)).toBeChecked();
     });
 });
