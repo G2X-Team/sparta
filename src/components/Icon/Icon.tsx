@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import * as CSS from 'csstype';
 import './Icon.css';
 
-export interface Props extends HTMLAttributes<HTMLParagraphElement> {
+export interface IIcon extends HTMLAttributes<HTMLParagraphElement> {
     /** The icon name the user wants to render */
     name: string;
     /** Specification of an onClick method will convert icon into a button */
@@ -25,7 +25,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Icon component
  */
-export const Icon: FC<Props> = ({
+export const Icon: FC<IIcon> = ({
     name,
     onClick,
     clickable = onClick && true,
@@ -35,7 +35,7 @@ export const Icon: FC<Props> = ({
     className = '',
     disabled,
     style,
-    ...props
+    ...iIcon
 }) => {
     useEffect(() => {
         if (!onClick) return;
@@ -57,7 +57,7 @@ export const Icon: FC<Props> = ({
 
     return (
         <span
-            {...props}
+            {...iIcon}
             style={getIconStyle(disabled, color, style)}
             tabIndex={onClick ? 0 : undefined}
             className={`material-icons apollo-component-library-icon-component 

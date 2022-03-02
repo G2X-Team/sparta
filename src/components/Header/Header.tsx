@@ -3,7 +3,7 @@ import React from 'react';
 import Overload from '../../interfaces/Overload';
 import './Header.css';
 
-export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
+export interface IHeader extends Overload<HTMLAttributes<HTMLDivElement>> {
     /** Can have children of any kind */
     children?: ReactNode;
 }
@@ -13,9 +13,9 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return Header component
  */
-export const Header: FC<Props> = ({ children, className = '', parentProps, ...props }) => {
+export const Header: FC<IHeader> = ({ children, className = '', parentProps, ...iHeader }) => {
     return (
-        <div {...props} className={`apollo-component-library-header-component ${className}`}>
+        <div {...iHeader} className={`apollo-component-library-header-component ${className}`}>
             {children}
         </div>
     );

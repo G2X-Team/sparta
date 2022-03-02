@@ -2,7 +2,7 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 'react';
 import './LoadingState.css';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface ILoadingState extends HTMLAttributes<HTMLDivElement> {
     /**
      * Determines status of the progressbar where
      * progressFilled={0.1} => 10% filled progressbar
@@ -21,7 +21,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return LoadingState component
  */
-export const LoadingState: FC<Props> = ({
+export const LoadingState: FC<ILoadingState> = ({
     progress = 0,
     type = 'spinner',
     size = 'small',
@@ -29,7 +29,7 @@ export const LoadingState: FC<Props> = ({
     className,
     children = undefined,
     style,
-    ...props
+    ...iLoadingState
 }) => {
     // ref
     const progressRef = useRef<HTMLHeadingElement>(null);
@@ -67,13 +67,13 @@ export const LoadingState: FC<Props> = ({
 
         const loadingStyle: CSSProperties = {};
 
-        // give appropriate aria-props
+        // give appropriate aria-iLoadingState
         const ariaProps: { [key: string]: string } = {};
         if (type === 'progress') {
             // assign width
             loadingStyle.width = width * progress;
 
-            // assign aria props
+            // assign aria iLoadingState
             ariaProps.role = 'progressbar';
             ariaProps['aria-valuenow'] = `${progress * 100}`;
             ariaProps['aria-valuemax'] = '100';
@@ -86,7 +86,7 @@ export const LoadingState: FC<Props> = ({
         return (
             <div {...ariaProps} className={containerName} ref={progressRef}>
                 <div
-                    {...props}
+                    {...iLoadingState}
                     style={loadingStyle}
                     className={`
                         ${loadingType}
