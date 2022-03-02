@@ -44,7 +44,6 @@ const Group: FC<Props> = ({
      * @return formatted children
      */
     const renderAll = (): JSX.Element[] => {
-        console.log(inline);
         const newParentProps = { children, groupName: name, actionData, groupInline: inline };
         const formatted = new FormatChildren(newParentProps, { Radio, Checkbox });
 

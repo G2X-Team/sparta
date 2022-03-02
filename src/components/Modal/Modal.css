@@ -14,7 +14,7 @@
 }
 
 .apollo-component-library-modal-component {
-    position: absolute;
+    position: relative;
     min-width: 300px;
     min-height: 200px;
     background: white;
@@ -29,7 +29,6 @@
 }
 
 .apollo-component-library-modal-component-backdrop {
-    position: absolute;
     height: 100vh;
     width: 100vw;
     background: rgba(0, 0, 0, 0.5);
