@@ -1,13 +1,34 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe, toHaveNoViolations } from 'jest-axe';
+expect.extend(toHaveNoViolations);
 
 import { Modal, ButtonGroup, Button, Header, Footer } from '../src';
 
 describe('Modal', () => {
+    it('complies with WCAG 2.0', async () => {
+        // given
+        const { container: modal } = render(
+            <Modal open id="modal" label="something">
+                Hello World!
+            </Modal>
+        );
+
+        // when
+        const result = await axe(modal);
+
+        // then
+        expect(result).toHaveNoViolations();
+    });
+
     it('renders correctly', () => {
         // given
-        render(<Modal>Hello World!</Modal>);
+        render(
+            <Modal id="modal" label="something">
+                Hello World!
+            </Modal>
+        );
 
         // when then
         expect(screen.queryByText(/hello world!/i)).not.toBeInTheDocument();
@@ -15,7 +36,11 @@ describe('Modal', () => {
 
     it('shows the modal when open', () => {
         // given
-        render(<Modal open>Hello World!</Modal>);
+        render(
+            <Modal open id="modal" label="something">
+                Hello World!
+            </Modal>
+        );
 
         // when then
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
@@ -24,7 +49,7 @@ describe('Modal', () => {
     it('renders the Header', () => {
         // given
         render(
-            <Modal open>
+            <Modal open id="modal" label="something">
                 <Header>This is the header</Header>
                 Hello World!
             </Modal>
@@ -37,7 +62,7 @@ describe('Modal', () => {
     it('renders the Footer', () => {
         // given
         render(
-            <Modal open>
+            <Modal open id="modal" label="something">
                 Hello World!
                 <Footer>This is the footer</Footer>
             </Modal>
@@ -50,7 +75,7 @@ describe('Modal', () => {
     it('renders the button group in the footer', () => {
         // given
         render(
-            <Modal open>
+            <Modal open id="modal" label="something">
                 Hello World!
                 <Footer>
                     <ButtonGroup>
@@ -69,7 +94,7 @@ describe('Modal', () => {
         // given
         const onClick: jest.Mock<any, any> = jest.fn();
         render(
-            <Modal open>
+            <Modal open id="modal" label="something">
                 Hello World!
                 <Footer>
                     <ButtonGroup>
