@@ -3,7 +3,7 @@ import React from 'react';
 import { Text } from '../Text/Text';
 import './Checkbox.css';
 
-export interface Props extends HTMLAttributes<HTMLInputElement> {
+export interface ICheckbox extends HTMLAttributes<HTMLInputElement> {
     /** String that identifies the checkbox */
     id?: string;
     /**  Can have children between tags */
@@ -31,7 +31,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return Checkbox component
  */
-export const Checkbox: FC<Props> = ({
+export const Checkbox: FC<ICheckbox> = ({
     inline = false,
     disabled = false,
     children,
@@ -40,7 +40,7 @@ export const Checkbox: FC<Props> = ({
     invalid,
     required,
     errorMessage,
-    ...props
+    ...iCheckbox
 }) => {
     // check if the user can use error messages
     useEffect(() => {
@@ -59,7 +59,7 @@ export const Checkbox: FC<Props> = ({
                 `}
             >
                 <input
-                    {...props}
+                    {...iCheckbox}
                     aria-required={required}
                     aria-invalid={invalid}
                     aria-errormessage={id ? `${id}-error` : undefined}

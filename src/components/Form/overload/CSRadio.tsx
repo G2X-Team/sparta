@@ -4,9 +4,9 @@ import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { FormToggleData } from '../../../interfaces/Properties';
 
-import { Radio as CRadio, Props as RadioProps } from '../../Radio/Radio';
+import { Radio as CRadio, IRadio as RadioProps } from '../../Radio/Radio';
 
-interface Props extends Overload<RadioProps> {
+interface IRadio extends Overload<RadioProps> {
     id: string;
 }
 
@@ -15,12 +15,12 @@ interface Props extends Overload<RadioProps> {
  *
  * @return Formatted Radio compatible with form
  */
-const Radio: FC<Props> = ({
+const Radio: FC<IRadio> = ({
     parentProps: { register, setValue, clearErrors, errors },
     onChange,
     required,
     id,
-    ...props
+    ...iRadio
 }) => {
     // make sure that an id was provided
     useEffect(() => {
@@ -52,7 +52,7 @@ const Radio: FC<Props> = ({
 
     return (
         <CRadio
-            {...props}
+            {...iRadio}
             id={id}
             required={required}
             onChange={handleChange}

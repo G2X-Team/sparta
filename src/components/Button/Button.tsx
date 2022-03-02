@@ -3,7 +3,7 @@ import React from 'react';
 import type { StyleVariant } from '../../interfaces/Properties';
 import './Button.css';
 
-export interface Props extends HTMLAttributes<HTMLButtonElement> {
+export interface IButton extends HTMLAttributes<HTMLButtonElement> {
     /** Required ReactNode that needs to exist between component tags */
     children: ReactNode;
     /** defines the type of button to be rendered */
@@ -19,15 +19,15 @@ export interface Props extends HTMLAttributes<HTMLButtonElement> {
  *
  * @return Button component
  */
-export const Button: FC<Props> = ({
+export const Button: FC<IButton> = ({
     children,
     href,
     className = '',
     variant = 'default',
-    ...props
+    ...iButton
 }) => {
     const button: JSX.Element = (
-        <button {...props} className={`apollo-component-library-button ${variant} ${className}`}>
+        <button {...iButton} className={`apollo-component-library-button ${variant} ${className}`}>
             {children}
         </button>
     );

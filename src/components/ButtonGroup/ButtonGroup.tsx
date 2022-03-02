@@ -7,7 +7,7 @@ import type { StyleVariant, ComponentSize } from '../../interfaces/Properties';
 
 import Button from './overload/Button';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface IButtonGroup extends HTMLAttributes<HTMLDivElement> {
     /** Disables all buttons within button group */
     disabled?: boolean;
     /** toggle between different button group sizes */
@@ -23,13 +23,13 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return ButtonGroup component
  */
-export const ButtonGroup: FC<Props> = ({
+export const ButtonGroup: FC<IButtonGroup> = ({
     children = '',
     variant = 'default',
     disabled = false,
     size = 'medium',
     className,
-    ...props
+    ...iButtonGroup
 }) => {
     /**
      * Renders all button group buttons and caches chlidren
@@ -46,7 +46,7 @@ export const ButtonGroup: FC<Props> = ({
     };
 
     return (
-        <div {...props} className={`apollo-component-library-button-group-component ${className}`}>
+        <div {...iButtonGroup} className={`apollo-component-library-button-group-component ${className}`}>
             {renderButtons()}
         </div>
     );

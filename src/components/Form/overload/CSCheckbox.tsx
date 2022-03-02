@@ -4,9 +4,9 @@ import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { FormToggleData } from '../../../interfaces/Properties';
 
-import { Checkbox as CCheckbox, Props as CheckboxProps } from '../../Checkbox/Checkbox';
+import { Checkbox as CCheckbox, ICheckbox as CheckboxProps } from '../../Checkbox/Checkbox';
 
-interface Props extends Overload<CheckboxProps> {
+interface ICheckbox extends Overload<CheckboxProps> {
     id: string;
 }
 
@@ -15,12 +15,12 @@ interface Props extends Overload<CheckboxProps> {
  *
  * @return Formatted Checkbox compatible with form
  */
-const Checkbox: FC<Props> = ({
+const Checkbox: FC<ICheckbox> = ({
     parentProps: { register, setValue, clearErrors, errors },
     onChange,
     required,
     id,
-    ...props
+    ...iCheckbox
 }) => {
     // make sure that an id was provided
     useEffect(() => {
@@ -52,7 +52,7 @@ const Checkbox: FC<Props> = ({
 
     return (
         <CCheckbox
-            {...props}
+            {...iCheckbox}
             id={id}
             required={required}
             onChange={handleChange}

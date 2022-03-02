@@ -3,7 +3,7 @@ import React from 'react';
 import Overload from '../../interfaces/Overload';
 import './Footer.css';
 
-export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
+export interface IFooter extends Overload<HTMLAttributes<HTMLDivElement>> {
     /** Can have children of any kind */
     children?: ReactNode;
 }
@@ -13,9 +13,9 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return Footer component
  */
-export const Footer: FC<Props> = ({ children, className = '', parentProps, ...props }) => {
+export const Footer: FC<IFooter> = ({ children, className = '', parentProps, ...iFooter }) => {
     return (
-        <div {...props} className={`apollo-component-library-footer-component ${className}`}>
+        <div {...iFooter} className={`apollo-component-library-footer-component ${className}`}>
             {children}
         </div>
     );

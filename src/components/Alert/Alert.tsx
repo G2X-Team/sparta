@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Alert.css';
 
-export interface Props extends HTMLAttributes<HTMLParagraphElement> {
+export interface IALert extends HTMLAttributes<HTMLParagraphElement> {
     /** Alert needs to exist between tags */
     children: ReactNode;
     /**
@@ -18,11 +18,11 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Alert component
  */
-export const Alert: FC<Props> = ({
+export const Alert: FC<IALert> = ({
     children,
     type = 'danger',
 
-    ...props
+    ...iAlert
 }) => {
     /**
      * Gets all the special conditions and translates it to a special className combination
@@ -44,7 +44,7 @@ export const Alert: FC<Props> = ({
     };
 
     return (
-        <div {...props} className={getVariant()}>
+        <div {...iAlert} className={getVariant()}>
             {children}
         </div>
     );

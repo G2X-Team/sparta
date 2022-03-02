@@ -8,7 +8,7 @@ import { Footer } from '../Footer/Footer';
 import Option from './overload/Option';
 import { ComponentOrientation } from '../../interfaces/Properties';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface IDrawer extends HTMLAttributes<HTMLDivElement> {
     /**
      * Type of drawer that will be used. `absolute` assumes the drawer is in front of everything
      * and will use a backdrop. `persistent` will have a relative width and can push other
@@ -41,7 +41,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Drawer Component
  */
-export const Drawer: FC<Props> = ({
+export const Drawer: FC<IDrawer> = ({
     children,
     className = '',
     type = 'absolute',
@@ -52,7 +52,7 @@ export const Drawer: FC<Props> = ({
     onClose,
     toggleOpen,
     style,
-    ...props
+    ...iDrawer
 }) => {
     // ref
     const drawer = useRef<HTMLDivElement>(null);
@@ -129,7 +129,7 @@ export const Drawer: FC<Props> = ({
                     ${className} ${orientation} ${type}
                 `}
             >
-                <div {...props} ref={drawer} style={bodyStyle}>
+                <div {...iDrawer} ref={drawer} style={bodyStyle}>
                     {header}
                     <div className="apollo-component-library-drawer-component-body">
                         {formatted.getAll()}
@@ -180,7 +180,7 @@ const getBackdropStyle = (effect: boolean): React.CSSProperties => {
  * @param effect boolean that determines when to toggle dimension
  * @param dimension the scalar representing the size of the dimension
  * @param transition time in MS that it taks to close menu
- * @param style component css props
+ * @param style component css iDrawer
  * @return style object
  */
 const getDrawerContainerStyle = (
@@ -205,7 +205,7 @@ const getDrawerContainerStyle = (
  *
  * @param modifiedDimension string representing what dimension is being changed
  * @param dimension the scalar representing the size of the dimension
- * @param style component css props
+ * @param style component css iDrawer
  * @return style object
  */
 const getDrawerBodyStyle = (

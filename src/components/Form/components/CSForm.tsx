@@ -11,7 +11,7 @@ import Radio from '../overload/CSRadio';
 import Switch from '../overload/CSSwitch';
 import Checkbox from '../overload/CSCheckbox';
 
-export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
+export interface ICSForm extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
     onSubmit?: FormSubmitHandler;
     /** Handles errors from form submission with error object */
@@ -23,7 +23,7 @@ export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' 
  *
  * @return client side form
  */
-const CSForm: FC<Props> = ({ onSubmit, onError, children, ...props }) => {
+const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, ...iCSForm }) => {
     // use the use form hoook
     const {
         setError,
@@ -39,7 +39,7 @@ const CSForm: FC<Props> = ({ onSubmit, onError, children, ...props }) => {
      * Formats and renders all children component
      *
      * @param childrenProp children property to be passed by render all
-     * @param passthrough parent props to be passed through the original parents
+     * @param passthrough parent iCSForm to be passed through the original parents
      * @return formatted children
      */
     const renderAll = (
@@ -81,7 +81,7 @@ const CSForm: FC<Props> = ({ onSubmit, onError, children, ...props }) => {
     };
 
     return (
-        <form {...props} onSubmit={handleSubmission}>
+        <form {...iCSForm} onSubmit={handleSubmission}>
             {renderAll(children)}
         </form>
     );

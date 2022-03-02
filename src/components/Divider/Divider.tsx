@@ -3,7 +3,7 @@ import React from 'react';
 import * as CSS from 'csstype';
 import './Divider.css';
 
-export interface Props extends HTMLAttributes<HTMLHRElement> {
+export interface IDivider extends HTMLAttributes<HTMLHRElement> {
     /** color of desired divider */
     color?: CSS.Property.Color;
     /** height of divider in pixels */
@@ -15,11 +15,11 @@ export interface Props extends HTMLAttributes<HTMLHRElement> {
  *
  * @return Divider component
  */
-export const Divider: FC<Props> = ({ color, className = '', height, style, ...props }) => {
+export const Divider: FC<IDivider> = ({ color, className = '', height, style, ...iDivider }) => {
     return (
         <hr
             role="separator"
-            {...props}
+            {...iDivider}
             className={`apollo-component-library-divider-component ${className}`}
             style={getStyle(style, height, color)}
         />

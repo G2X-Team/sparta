@@ -10,7 +10,7 @@ import Radio from '../overload/SSRadio';
 import Switch from '../overload/SSSwitch';
 import Group from '../overload/SSGroup';
 
-interface Props extends HTMLAttributes<HTMLFormElement> {
+interface ISSForm extends HTMLAttributes<HTMLFormElement> {
     /** Object describing the behavior of the form */
     actionData?: FormActionData;
 }
@@ -20,7 +20,7 @@ interface Props extends HTMLAttributes<HTMLFormElement> {
  *
  * @return Formatted Form component
  */
-const SSForm: FC<Props> = ({ actionData, children, ...props }) => {
+const SSForm: FC<ISSForm> = ({ actionData, children, ...iSSForm }) => {
     /**
      * Renders all formatted children component
      *
@@ -44,7 +44,7 @@ const SSForm: FC<Props> = ({ actionData, children, ...props }) => {
         return formatted.getAll();
     };
 
-    return <form {...props}>{renderAll()}</form>;
+    return <form {...iSSForm}>{renderAll()}</form>;
 };
 
 export default SSForm;

@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import './DateTimePicker.css';
 
-export interface Props {
+export interface IDateTimePicker {
     /**
      * Determines format of date to be displayed
      * tag i.e. format=dd/MM/yyyy => 24/12/2020
@@ -26,7 +26,7 @@ export interface Props {
  *
  * @return DateTimePicker component
  */
-export const DateTimePicker: FC<Props> = ({
+export const DateTimePicker: FC<IDateTimePicker> = ({
     format = 'dd/MM/yyyy',
     mode = 'select',
     placeholder = 'Click to add a date',
