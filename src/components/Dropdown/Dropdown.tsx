@@ -46,7 +46,7 @@ export const Dropdown: FC<IDropdown> = ({
      * @return dropdown component
      */
     const renderDropdown = (): JSX.Element => {
-        // define structured iDropdown
+        // define structured props
         const structured = {
             dropdownRef: dropdown,
             children,

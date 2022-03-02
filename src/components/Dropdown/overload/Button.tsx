@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props } from '../../Button/Button';
+import { IButton } from '../../Button/Button';
 import Overload from '../../../interfaces/Overload';
 
 /**
@@ -7,13 +7,13 @@ import Overload from '../../../interfaces/Overload';
  *
  * @return overloaded dropdown button
  */
-const Button: React.FC<Overload<Props>> = ({
+const Button: React.FC<Overload<IButton>> = ({
     parentProps: { dropdownRef, toggleOpen, open },
     onClick,
     children,
     className = '',
     ...props
-}: Overload<Props>) => {
+}: Overload<IButton>) => {
     /**
      * Modifies the original button onClick so that it can also open and
      * close the menu
