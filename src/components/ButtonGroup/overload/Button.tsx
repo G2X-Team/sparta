@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props } from '../../Button/Button';
+import { IButton } from '../../Button/Button';
 import Overload from '../../../interfaces/Overload';
 
 /**
@@ -7,16 +7,16 @@ import Overload from '../../../interfaces/Overload';
  *
  * @return ButtonGroup component
  */
-const Button: React.FC<Overload<Props>> = ({
+const Button: React.FC<Overload<IButton>> = ({
     parentProps: { disabled, variant, size },
     children,
     className,
     href,
-    ...props
-}: Overload<Props>): JSX.Element => {
+    ...iButton
+}: Overload<IButton>): JSX.Element => {
     return (
         <button
-            {...props}
+            {...iButton}
             disabled={disabled}
             className={`apollo-component-library-button-group-button-component 
                 ${className} 
