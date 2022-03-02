@@ -14,9 +14,9 @@ export interface Props {
     /** Defines number of page to start from */
     pageNum?: number;
     /** Defines the name of colloumns in the header */
-    colNames?: Array<string | number>;
+    colNames?: string;
     /** Data in JSON to feed the table */
-    data?: Array<string | number>;
+    data?: Array<object>;
     // Header Style Props//
     /** Defines the color of the cell text */
     cellTextColor?: CSS.Property.Color;
@@ -45,7 +45,7 @@ const btnStyle = {
  */
 export const Table: FC<Props> = ({
     data = [],
-    colNames = [],
+    colNames = Object.keys(data[0]),
     pageNum = 0,
     pageSize = 15,
     width = '100%',
@@ -59,25 +59,36 @@ export const Table: FC<Props> = ({
 }) => {
     const [page, setPage] = useState(pageNum);
     const [sorted, setsorted] = useState(data);
+    const sortBy = Object.keys(data[0]);
 
     /** Function to sort ascending order */
     const ascOrder = (): void => {
-        setsorted([].concat(sorted as any).sort((a: any, b: any) => a.name.localeCompare(b.name)));
-        console.log(
+        if (typeof sortBy[0] === 'number') {
             setsorted(
-                [].concat(sorted as any).sort((a: any, b: any) => a.name.localeCompare(b.name))
-            )
-        );
+                [].concat(sorted as any).sort((a: any, b: any) => a[sortBy[0]] - b[sortBy[0]])
+            );
+        } else {
+            setsorted(
+                []
+                    .concat(sorted as any)
+                    .sort((a: any, b: any) => a[sortBy[1]].localeCompare(b[sortBy[1]]))
+            );
+        }
     };
 
     /** Function to sort descending order */
     const descOrder = (): void => {
-        setsorted([].concat(sorted as any).sort((a: any, b: any) => b.name.localeCompare(a.name)));
-        console.log(
+        if (typeof sortBy[0] === 'number') {
             setsorted(
-                [].concat(sorted as any).sort((a: any, b: any) => b.name.localeCompare(a.name))
-            )
-        );
+                [].concat(sorted as any).sort((a: any, b: any) => b[sortBy[0]] - a[sortBy[0]])
+            );
+        } else {
+            setsorted(
+                []
+                    .concat(sorted as any)
+                    .sort((a: any, b: any) => b[sortBy[1]].localeCompare(a[sortBy[1]]))
+            );
+        }
     };
     /** Function to navigate back to the last page */
     const onBack = (): void => {
