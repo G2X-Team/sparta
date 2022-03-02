@@ -46,7 +46,10 @@ export const ButtonGroup: FC<IButtonGroup> = ({
     };
 
     return (
-        <div {...iButtonGroup} className={`apollo-component-library-button-group-component ${className}`}>
+        <div
+            {...iButtonGroup}
+            className={`apollo-component-library-button-group-component ${className}`}
+        >
             {renderButtons()}
         </div>
     );
