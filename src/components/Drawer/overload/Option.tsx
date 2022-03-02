@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props, Option as COption } from '../../Option/Option';
+import { IOption, Option as COption } from '../../Option/Option';
 import Overload from '../../../interfaces/Overload';
 
 /**
@@ -7,9 +7,13 @@ import Overload from '../../../interfaces/Overload';
  *
  * @return Overloaded option
  */
-const Option: React.FC<Overload<Props>> = ({ style, children, ...props }: Overload<Props>) => {
+const Option: React.FC<Overload<IOption>> = ({
+    style,
+    children,
+    ...iOption
+}: Overload<IOption>) => {
     return (
-        <COption {...props} style={getOptionStyle(style)}>
+        <COption {...iOption} style={getOptionStyle(style)}>
             {children}
         </COption>
     );
