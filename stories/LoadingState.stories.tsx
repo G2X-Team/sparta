@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { LoadingState, Props } from '../src/components/LoadingState/LoadingState';
+import { LoadingState, ILoadingState } from '../src/components/LoadingState/LoadingState';
 import { Button, Text } from '../src';
 
 const meta: Meta = {
@@ -19,7 +19,7 @@ export default meta;
  * @param args storybook arguments
  * @return template LoadingState component
  */
-const Template: Story<Props> = (args) => {
+const Template: Story<ILoadingState> = (args) => {
     const [open, isLoading] = useState(false);
     const buttonText = `${args.type} loading shown here`;
 

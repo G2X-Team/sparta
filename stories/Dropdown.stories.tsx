@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Dropdown, Props } from '../src/components/Dropdown/Dropdown';
+import { Dropdown, IDropdown } from '../src/components/Dropdown/Dropdown';
 import { Option } from '../src/components/Option/Option';
 import { Button } from '../src/components/Button/Button';
 import { Text } from '../src/components/Text/Text';
@@ -23,7 +23,7 @@ export default meta;
  * @param args storybook arguments
  * @return template dropdown
  */
-export const Default: Story<Props> = (args) => (
+export const Default: Story<IDropdown> = (args) => (
     <Dropdown {...args}>
         <Button>
             <Text inline>This is a dropdown</Text>
@@ -39,7 +39,7 @@ export const Default: Story<Props> = (args) => (
  * @param args storybook arguments
  * @return template button dropdown
  */
-export const AnotherExample: Story<Props> = (args) => (
+export const AnotherExample: Story<IDropdown> = (args) => (
     <Dropdown {...args}>
         <Button>
             <Button>Whats good</Button>

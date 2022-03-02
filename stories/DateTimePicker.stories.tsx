@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { DateTimePicker, Props } from '../src/components/DateTimePicker/DateTimePicker';
+import { DateTimePicker, IDateTimePicker } from '../src/components/DateTimePicker/DateTimePicker';
 
 const meta: Meta = {
     title: 'Layout/DateTimePicker',
@@ -16,6 +16,6 @@ export default meta;
  * @param args storybook args
  * @return template datetimepicker
  */
-const Template: Story<Props> = (args) => <DateTimePicker {...args} />;
+const Template: Story<IDateTimePicker> = (args) => <DateTimePicker {...args} />;
 
 export const Default = Template.bind({});

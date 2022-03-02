@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Option, Props } from '../src/components/Option/Option';
+import { Option, IOption } from '../src/components/Option/Option';
 
 const meta: Meta = {
     title: 'Interfacing/Option',
@@ -19,6 +19,6 @@ export default meta;
  * @param args storybook arguments
  * @return Template Option
  */
-const Template: Story<Props> = (args) => <Option {...args} />;
+const Template: Story<IOption> = (args) => <Option {...args} />;
 
 export const Default = Template.bind({});

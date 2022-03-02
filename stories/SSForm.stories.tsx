@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story, Meta } from '@storybook/react';
 
-import type { Props } from '../src/components/Form/Form';
+import type { IForm } from '../src/components/Form/Form';
 import { Form, TextInput, Button, Group, Radio, Checkbox, Switch } from '../src';
 import { FormActionData } from '../src/interfaces/Properties';
 
@@ -34,7 +34,7 @@ const validActionData: FormActionData = {
  * @param args storybook arguments
  * @return text input form template
  */
-const TextInputFormTepmlate: Story<Props> = (args) => (
+const TextInputFormTepmlate: Story<IForm> = (args) => (
     <Form {...args}>
         <TextInput label="Username" name="username" />
         <TextInput label="Password" name="password" password />
@@ -53,7 +53,7 @@ TextInputForm.args = {
  * @param args storybook arguments
  * @return storybook template
  */
-const RadioGroupFormTemplate: Story<Props> = (args) => {
+const RadioGroupFormTemplate: Story<IForm> = (args) => {
     return (
         <Form {...args}>
             <Group required label="Please rate the class from 1-5" name="rating" inline>
@@ -79,7 +79,7 @@ RadioGroupForm.args = {
  * @param args storybook arguments
  * @return storybook template
  */
-const CheckboxGroupFormTemplate: Story<Props> = (args) => {
+const CheckboxGroupFormTemplate: Story<IForm> = (args) => {
     return (
         <Form {...args}>
             <Group required label="Select options" name="options">
@@ -105,7 +105,7 @@ CheckboxGroupForm.args = {
  * @param args storybook arguments
  * @return storybook template
  */
-const IndividualInputFormTemplate: Story<Props> = (args) => {
+const IndividualInputFormTemplate: Story<IForm> = (args) => {
     return (
         <Form {...args}>
             <Radio required id="radio" value="radio">
