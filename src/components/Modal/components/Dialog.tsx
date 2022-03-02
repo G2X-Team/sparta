@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import FormatChildren from '../../../util/FormatChildren';
 
-import type { IDialog } from '../Modal';
+import type { IModal } from '../Modal';
 import Footer from '../overload/Footer';
 import { Header } from '../../Header/Header';
 import { Text } from '../../Text/Text';
@@ -14,7 +14,7 @@ import { Icon } from '../../Icon/Icon';
  *
  * @return Modal dialog element
  */
-const Dialog: FC<IDialog> = ({
+const Dialog: FC<IModal> = ({
     className,
     manual,
     toggleModal,
@@ -24,7 +24,7 @@ const Dialog: FC<IDialog> = ({
     label,
     id,
     children,
-    ...iDialog
+    ...iModal
 }) => {
     const [formatted, setFormatted] = useState<FormatChildren | undefined>();
 
@@ -75,7 +75,7 @@ const Dialog: FC<IDialog> = ({
 
     return (
         <div
-            {...iDialog}
+            {...iModal}
             id={id}
             role={alert ? 'alertdialog' : 'dialog'}
             aria-modal="true"

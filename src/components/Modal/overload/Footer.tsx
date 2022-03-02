@@ -10,7 +10,10 @@ import { IFooter, Footer as CFooter } from '../../Footer/Footer';
  *
  * @return formatted footer
  */
-const Footer: FC<IFooter> = ({ parentProps: { children, ...parentProps }, ...iFooter }: IFooter) => {
+const Footer: FC<IFooter> = ({
+    parentProps: { children, ...parentProps },
+    ...iFooter
+}: IFooter) => {
     // gets all iFooter
     const allProps = { ...iFooter, ...parentProps };
 
