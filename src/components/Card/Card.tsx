@@ -6,7 +6,7 @@ import './Card.css';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface ICard extends HTMLAttributes<HTMLDivElement> {
     /** Accepts any kind of children */
     children?: ReactNode;
 }
@@ -17,7 +17,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Card component
  */
-export const Card: FC<Props> = ({ children, className, ...props }) => {
+export const Card: FC<ICard> = ({ children, className, ...props }) => {
     /**
      * Renderes all components
      *

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Props, Radio } from '../src/components/Radio/Radio';
+import { IRadio, Radio } from '../src/components/Radio/Radio';
 
 const meta: Meta = {
     title: 'Form/Radio',
@@ -20,6 +20,6 @@ export default meta;
  * @param args storybook arguments
  * @return template radio component
  */
-const Template: Story<Props> = (args) => <Radio {...args} />;
+const Template: Story<IRadio> = (args) => <Radio {...args} />;
 
 export const Default = Template.bind({});

@@ -9,7 +9,7 @@ import Checkbox from './overload/Checkbox';
 import View from './overload/View';
 import { FormGroupData, FormValidator } from '../../interfaces/Properties';
 
-export interface Props extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
+export interface IGroup extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
     /** Group must contain element between tags */
     children: ReactNode;
     /** Identifies the group's selection */
@@ -46,7 +46,7 @@ export interface Props extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChan
  *
  * @return Group component
  */
-export const Group: FC<Props> = ({
+export const Group: FC<IGroup> = ({
     type = 'input',
     disabled = false,
     inline = false,

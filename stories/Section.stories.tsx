@@ -1,5 +1,5 @@
 import React from 'react';
-import { Section, Props } from '../src/components/Section/Section';
+import { Section, ISection } from '../src/components/Section/Section';
 import { Meta, Story } from '@storybook/react';
 
 const meta: Meta = {
@@ -23,7 +23,7 @@ export default meta;
  * @param args arguments for section
  * @return template
  */
-const Template: Story<Props> = (args) => (
+const Template: Story<ISection> = (args) => (
     <div style={{ display: 'flex', height: 300, width: 500 }}>
         <Section {...args} style={{ background: 'red' }}>
             1

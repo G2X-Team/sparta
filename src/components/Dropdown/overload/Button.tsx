@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import React, { useEffect } from 'react';
-import { Props as ButtonProps } from '../../Button/Button';
+import { IButton as CIButton } from '../../Button/Button';
 import type Overload from '../../../interfaces/Overload';
 
-export interface Props extends Overload<ButtonProps> {
+export interface IButton extends Overload<CIButton> {
     /** Dropdown name */
     name: string;
 }
@@ -13,13 +13,13 @@ export interface Props extends Overload<ButtonProps> {
  *
  * @return overloaded dropdown button
  */
-const Button: FC<Overload<Props>> = ({
+const Button: FC<Overload<IButton>> = ({
     parentProps: { dropdownRef, toggleOpen, open, name },
     onClick,
     children,
     className = '',
     ...props
-}: Overload<Props>) => {
+}: Overload<IButton>) => {
     useEffect(() => {
         /**
          * Will execute the onClick method on enter

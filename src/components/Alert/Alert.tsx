@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Alert.css';
 
-export interface Props extends HTMLAttributes<HTMLParagraphElement> {
+export interface IAlert extends HTMLAttributes<HTMLParagraphElement> {
     /** Alert needs to exist between tags */
     children: ReactNode;
     /**
@@ -18,7 +18,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Alert component
  */
-export const Alert: FC<Props> = ({
+export const Alert: FC<IAlert> = ({
     children,
     type = 'danger',
 

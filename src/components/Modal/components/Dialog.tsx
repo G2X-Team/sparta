@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import FormatChildren from '../../../util/FormatChildren';
 
-import type { Props } from '../Modal';
+import type { IModal } from '../Modal';
 import Footer from '../overload/Footer';
 import { Header } from '../../Header/Header';
 import { Text } from '../../Text/Text';
@@ -14,7 +14,7 @@ import { Icon } from '../../Icon/Icon';
  *
  * @return Modal dialog element
  */
-const Dialog: FC<Props> = ({
+const Dialog: FC<IModal> = ({
     className,
     manual,
     toggleModal,

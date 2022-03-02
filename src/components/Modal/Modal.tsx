@@ -4,7 +4,7 @@ import './Modal.css';
 
 import Dialog from './components/Dialog';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface IModal extends HTMLAttributes<HTMLDivElement> {
     /** Required ID for WCAG 2.0 compliance purposes */
     id: string;
     /** Requires descriptive label for WCAG 2.0 compliance purposes */
@@ -29,7 +29,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Modal component
  */
-export const Modal: FC<Props> = ({
+export const Modal: FC<IModal> = ({
     className = '',
     manual = false,
     open = false,

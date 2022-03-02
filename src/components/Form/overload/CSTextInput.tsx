@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { FormTextData } from '../../../interfaces/Properties';
 
-import { TextInput as CTextInput, Props as TextInputProps } from '../../TextInput/TextInput';
+import { TextInput as CTextInput, ITextInput as TextInputProps } from '../../TextInput/TextInput';
 
-interface Props extends Overload<TextInputProps> {
+interface ITextInput extends Overload<TextInputProps> {
     /** Name is required for text inputs inside of form, having none will throw */
     name: string;
 }
@@ -15,7 +15,7 @@ interface Props extends Overload<TextInputProps> {
  *
  * @return formatted text input
  */
-const TextInput: FC<Props> = ({
+const TextInput: FC<ITextInput> = ({
     parentProps: { register, setValue, setError, clearErrors, errors },
     name,
     required,

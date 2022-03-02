@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Header, Props } from '../src/components/Header/Header';
+import { Header, IHeader } from '../src/components/Header/Header';
 
 const meta: Meta = {
     title: 'Interfacing/Header',
@@ -19,6 +19,6 @@ export default meta;
  * @param args storybook arguments
  * @return template header
  */
-const Template: Story<Props> = (args) => <Header {...args} />;
+const Template: Story<IHeader> = (args) => <Header {...args} />;
 
 export const Default = Template.bind({});

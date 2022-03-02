@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import * as CSS from 'csstype';
 import './Text.css';
 
-export interface Props extends HTMLAttributes<HTMLParagraphElement> {
+export interface IText extends HTMLAttributes<HTMLParagraphElement> {
     /** Text needs to exist between tags */
     children: ReactNode;
     /**
@@ -38,7 +38,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Text component
  */
-export const Text: FC<Props> = ({
+export const Text: FC<IText> = ({
     children,
     className = '',
     header = 0,

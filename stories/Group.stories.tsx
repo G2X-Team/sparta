@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 
-import { Props, Group } from '../src/components/Group/Group';
+import { IGroup, Group } from '../src/components/Group/Group';
 import { Radio, Checkbox, View, TextInput } from '../src';
 
 const meta: Meta = {
@@ -26,7 +26,7 @@ const onChange = (groupValue: string | string[]): void => {
  * @param args arguments
  * @return radio group
  */
-const RadioTemplate: Story<Props> = (args): JSX.Element => (
+const RadioTemplate: Story<IGroup> = (args): JSX.Element => (
     <Group {...args} name="something">
         <Radio value="something 1">Option 1</Radio>
         <Radio value="something 2">Option 2</Radio>
@@ -40,7 +40,7 @@ const RadioTemplate: Story<Props> = (args): JSX.Element => (
  * @param args arguments
  * @return radio group
  */
-const CheckboxTemplate: Story<Props> = (args): JSX.Element => (
+const CheckboxTemplate: Story<IGroup> = (args): JSX.Element => (
     <Group {...args} name="something">
         <Checkbox value="something 1">Option 1</Checkbox>
         <Checkbox value="something 2">Option 2</Checkbox>

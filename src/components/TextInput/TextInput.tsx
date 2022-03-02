@@ -6,7 +6,7 @@ import './TextInput.css';
 
 import { Text } from '../Text/Text';
 
-export interface Props extends HTMLAttributes<HTMLInputElement> {
+export interface ITextInput extends HTMLAttributes<HTMLInputElement> {
     /** To comply with WCAG 2.0, all inputs **must** have labels */
     label: string;
     /** Gives further description on what the input should have to be valid */
@@ -36,7 +36,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  *
  * @return TextInput component
  */
-export const TextInput: FC<Props> = ({
+export const TextInput: FC<ITextInput> = ({
     variant = 'default',
     className = '',
     password = false,

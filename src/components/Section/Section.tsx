@@ -3,7 +3,7 @@ import React, { CSSProperties } from 'react';
 import Overload from '../../interfaces/Overload';
 import * as CSS from 'csstype';
 
-export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
+export interface ISection extends Overload<HTMLAttributes<HTMLDivElement>> {
     /** value that determines the flex style prop of section */
     flex?: CSS.Property.Flex;
     /** value that determines the height of section */
@@ -28,7 +28,7 @@ export interface Props extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return section component
  */
-export const Section: FC<Props> = ({
+export const Section: FC<ISection> = ({
     parentProps,
     flex = 1,
     children,
