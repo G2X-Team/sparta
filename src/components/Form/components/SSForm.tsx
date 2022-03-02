@@ -1,10 +1,15 @@
-import type { FC, HTMLAttributes } from 'react';
+import type { FC, HTMLAttributes, ReactNode } from 'react';
 import React from 'react';
 
 import { FormActionData } from '../../../interfaces/Properties';
 import FormatChildren from '../../../util/FormatChildren';
 
 import TextInput from '../overload/SSTextInput';
+import Checkbox from '../overload/SSCheckbox';
+import Radio from '../overload/SSRadio';
+import Switch from '../overload/SSSwitch';
+import Group from '../overload/SSGroup';
+
 
 interface Props extends HTMLAttributes<HTMLFormElement> {
     /** Object describing the behavior of the form */
@@ -22,18 +27,19 @@ const SSForm: FC<Props> = ({ actionData, children, ...props }) => {
      *
      * @return formatted children
      */
-    const renderAll = (): JSX.Element[] => {
+    const renderAll = (childrenProp: ReactNode): JSX.Element[] => {
         const parentProps = {
-            children,
+            children: childrenProp,
             actionData,
+            renderAll,
         };
 
-        const formatted = new FormatChildren(parentProps, { TextInput });
+        const formatted = new FormatChildren(parentProps, { TextInput, Group, Switch, Radio, Checkbox });
 
         return formatted.getAll();
     };
 
-    return <form {...props}>{renderAll()}</form>;
+    return <form {...props}>{renderAll(children)}</form>;
 };
 
 export default SSForm;

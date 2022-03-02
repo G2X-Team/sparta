@@ -3,22 +3,21 @@ import React from 'react';
 
 import Overload from '../../../interfaces/Overload';
 
-import { Radio as CRadio, Props as RadioProps } from '../../Radio/Radio';
+import { Checkbox as CCheckbox, Props as CheckboxProps } from '../../Checkbox/Checkbox';
 
-interface Props extends Overload<RadioProps> {
+interface Props extends Overload<CheckboxProps> {
     id: string;
 }
 
 /**
- * Formats Radio to be compatible with form
+ * Formats Checkbox to be compatible with form
  *
- * @return Formatted Radio compatible with form
+ * @return Formatted Checkbox compatible with form
  */
-const Radio: FC<Props> = ({
+const Checkbox: FC<Props> = ({
     parentProps: { groupName, actionData: { fields, fieldErrors }, groupInline },
     onChange,
     required,
-    name,
     value,
     inline,
     id,
@@ -27,21 +26,21 @@ const Radio: FC<Props> = ({
     const isChecked: boolean = 
         fields 
             ? groupName?.length
-                ? fields[groupName] === value
+                ? fields[groupName]?.filter((field: string) => field === value).length
                 : fields[id]
             : false
 
     const errorMessage: string | undefined = 
-        fieldErrors
-            ? fieldErrors[id]
-            : undefined
+    fieldErrors
+        ? fieldErrors[id]
+        : undefined
 
     return (
-        <CRadio
+        <CCheckbox
             {...props}
             id={id}
-            value={value}
             inline={groupInline || inline}
+            value={value}
             name={groupName}
             required={required}
             defaultChecked={isChecked}
@@ -51,4 +50,4 @@ const Radio: FC<Props> = ({
     );
 };
 
-export default Radio;
+export default Checkbox;

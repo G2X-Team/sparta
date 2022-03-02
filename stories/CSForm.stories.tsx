@@ -139,7 +139,7 @@ export const IndividualInputForm = IndividualInputFormTemplate.bind({});
  */
 export const ExampleForm = (): JSX.Element => (
     <Form onSubmit={(data) => console.log(data)} onError={(errors) => console.log(errors)}>
-        <Group label="Survey" name="survey" type="organization">
+        <Group label="Survey" hint="This survey will help us gather info" type="organization">
             <TextInput label="Full Name" name="full-name" required placeholder="John Smith" />
             <TextInput
                 label="Survey Password"

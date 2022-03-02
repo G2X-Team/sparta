@@ -394,8 +394,8 @@ describe('Client Side Form', () => {
 const validActionData: FormActionData = {
     fields: {
         input: 'input',
-        group1: 'option-1',
-        group2: ['checkbox-1', 'checkbox-2'],
+        radioGroup: 'option-1',
+        checkboxGroup: ['checkbox-1', 'checkbox-2'],
         checkbox: true,
         radio: true,
         switch: true,
@@ -405,11 +405,10 @@ const validActionData: FormActionData = {
 const invalidActionData: FormActionData = {
     fieldErrors: {
         input: 'failed',
-        group1: 'failed',
-        group2: 'failed',
+        radioGroup: 'failed',
+        checkboxGroup: 'failed',
         checkbox: 'failed',
         radio: 'failed',
-        switch: 'failed',
     },
 };
 
@@ -417,7 +416,7 @@ describe('Server Side Form', () => {
     it('complies with WCAG 2.0', async () => {
         // given
         const { container: validForm } = render(
-            <Form actionData={validActionData}>
+            <Form type="remix" actionData={validActionData}>
                 <Group name="group-1" label="options">
                     <Radio value="option-1">Option 1</Radio>
                     <Radio value="option-2">Option 2</Radio>
@@ -432,7 +431,7 @@ describe('Server Side Form', () => {
                 <Radio id="radio" value="option">
                     Option
                 </Radio>
-                <TextInput label="input" name="some-input" />
+                <TextInput label="input" name="input" />
                 <Switch name="switch" value="switch-1">
                     Switch 1
                 </Switch>
@@ -440,7 +439,7 @@ describe('Server Side Form', () => {
         );
 
         const { container: invalidForm } = render(
-            <Form actionData={invalidActionData}>
+            <Form type="remix" actionData={invalidActionData}>
                 <Group name="group-1" label="options">
                     <Radio value="option-1">Option 1</Radio>
                     <Radio value="option-2">Option 2</Radio>
@@ -455,7 +454,7 @@ describe('Server Side Form', () => {
                 <Radio id="radio" value="option">
                     Option
                 </Radio>
-                <TextInput label="input" name="some-input" />
+                <TextInput label="input" name="input" />
                 <Switch name="switch" value="switch-1">
                     Switch 1
                 </Switch>
@@ -474,51 +473,51 @@ describe('Server Side Form', () => {
     it('renders error messages when invalid', () => {
         // given
         render(
-            <Form actionData={invalidActionData}>
-                <Group name="group-1" label="options">
+            <Form type="remix" actionData={invalidActionData}>
+                <Group name="radioGroup" label="options">
                     <Radio value="option-1">Option 1</Radio>
                     <Radio value="option-2">Option 2</Radio>
                 </Group>
-                <Group name="group-2" label="checkboxes">
+                <Group name="checkboxGroup" label="checkboxes">
                     <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
                     <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
                 </Group>
                 <Checkbox id="checkbox" value="checkbox">
                     Checkbox
                 </Checkbox>
-                <Radio id="radio" value="option">
+                <Radio id="radio" value="radio">
                     Option
                 </Radio>
-                <TextInput label="input" name="some-input" />
-                <Switch name="switch" value="switch-1">
-                    Switch 1
+                <TextInput label="input" name="input" />
+                <Switch name="switch" value="switch">
+                    Switch
                 </Switch>
             </Form>
         );
 
         // when then
-        expect(screen.queryAllByText(/failed/i)).toHaveLength(6);
+        expect(screen.queryAllByText(/failed/i)).toHaveLength(5);
     });
 
     it('displays all default values correctly', () => {
         // given
         render(
-            <Form actionData={validActionData}>
-                <Group name="group-1" label="options">
+            <Form type="remix" actionData={validActionData}>
+                <Group name="radioGroup" label="options">
                     <Radio value="option-1">Option 1</Radio>
                     <Radio value="option-2">Option 2</Radio>
                 </Group>
-                <Group name="group-2" label="checkboxes">
+                <Group name="checkboxGroup" label="checkboxes">
                     <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
                     <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
                 </Group>
                 <Checkbox id="checkbox" value="checkbox">
                     Checkbox single
                 </Checkbox>
-                <Radio id="radio" value="option">
-                    Option single
+                <Radio id="radio" value="radio">
+                    Radio single
                 </Radio>
-                <TextInput label="input" name="some-input" />
+                <TextInput label="input" name="input" />
                 <Switch name="switch" value="switch-1">
                     Switch
                 </Switch>
