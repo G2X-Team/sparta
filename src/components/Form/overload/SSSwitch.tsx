@@ -3,7 +3,7 @@ import React from 'react';
 
 import Overload from '../../../interfaces/Overload';
 
-import { Switch as CSwitch, Props as SwitchProps } from '../../Switch/Switch';
+import { Switch as CSwitch, ISwitch as SwitchProps } from '../../Switch/Switch';
 
 /**
  * Formats Switch to be compatible with form
@@ -18,12 +18,12 @@ const Switch: FC<Overload<SwitchProps>> = ({
     required,
     name,
     id,
-    ...props
+    ...iSwitch
 }) => {
     const isChecked: boolean = fields ? fields[name] : false;
 
     return (
-        <CSwitch {...props} id={id} name={name} required={required} defaultChecked={isChecked} />
+        <CSwitch {...iSwitch} id={id} name={name} required={required} defaultChecked={isChecked} />
     );
 };
 

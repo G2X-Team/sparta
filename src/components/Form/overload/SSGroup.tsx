@@ -4,22 +4,22 @@ import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import FormatChildren from '../../../util/FormatChildren';
 
-import type { Props as GroupProps } from '../../Group/Group';
+import type { IGroup as GroupProps } from '../../Group/Group';
 import { Text } from '../../Text/Text';
 
 import Radio from './SSRadio';
 import Checkbox from './SSCheckbox';
 
-interface Props extends Overload<GroupProps> {
+interface IGroup extends Overload<GroupProps> {
     name: string;
 }
 
 /**
- * Formatted Group, will serve as passthrough for parent props when in remix validation mode
+ * Formatted Group, will serve as passthrough for parent iGroup when in remix validation mode
  *
  * @return formatted group that complies with remix validation
  */
-const Group: FC<Props> = ({
+const Group: FC<IGroup> = ({
     parentProps: { actionData = { fields: {}, fieldErrors: {} } },
     type = 'input',
     disabled = false,
@@ -30,7 +30,7 @@ const Group: FC<Props> = ({
     label,
     hint,
     required,
-    ...props
+    ...iGroup
 }) => {
     useEffect(() => {
         if (type === 'organization') return;
@@ -39,7 +39,7 @@ const Group: FC<Props> = ({
     });
 
     /**
-     * Formats children components and passes the parent props through
+     * Formats children components and passes the parent iGroup through
      *
      * @return formatted children
      */
@@ -56,7 +56,7 @@ const Group: FC<Props> = ({
     return (
         <>
             <fieldset
-                {...props}
+                {...iGroup}
                 className={`apollo-component-library-group ${invalid ? 'invalid' : ''}`}
                 aria-errormessage={name ? `${name}-error` : undefined}
                 aria-invalid={invalid}

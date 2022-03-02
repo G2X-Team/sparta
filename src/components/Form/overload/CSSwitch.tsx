@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { FormToggleData } from '../../../interfaces/Properties';
 
-import { Switch as CSwitch, Props as SwitchProps } from '../../Switch/Switch';
+import { Switch as CSwitch, ISwitch as SwitchProps } from '../../Switch/Switch';
 
 /**
  * Switch component formatted to integrate with form component
@@ -14,7 +14,7 @@ import { Switch as CSwitch, Props as SwitchProps } from '../../Switch/Switch';
 const Switch: FC<Overload<SwitchProps>> = ({
     parentProps: { setValue, register },
     name,
-    ...props
+    ...iSwitch
 }) => {
     // make sure that an id was provided
     useEffect(() => {
@@ -39,7 +39,7 @@ const Switch: FC<Overload<SwitchProps>> = ({
         setValue(name, data);
     };
 
-    return <CSwitch {...props} name={name} onChange={handleChange} />;
+    return <CSwitch {...iSwitch} name={name} onChange={handleChange} />;
 };
 
 export default Switch;
