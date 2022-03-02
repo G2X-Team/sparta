@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Form, Props } from '../src/components/Form/Form';
+import { Form, IForm } from '../src/components/Form/Form';
 import { TextInput, Button, Group, Radio, Checkbox, Switch } from '../src';
 import { FormValidator } from '../src/interfaces/Properties';
 
@@ -27,7 +27,7 @@ const passwordValidator: FormValidator = (data) =>
  * @param args storybook arguments
  * @return storybook template
  */
-const TextInputFormTemplate: Story<Props> = (args) => {
+const TextInputFormTemplate: Story<IForm> = (args) => {
     return (
         <Form
             onError={(data) => console.log(data)}
@@ -58,7 +58,7 @@ export const TextInputForm = TextInputFormTemplate.bind({});
  * @param args storybook arguments
  * @return storybook template
  */
-const RadioGroupFormTemplate: Story<Props> = (args) => {
+const RadioGroupFormTemplate: Story<IForm> = (args) => {
     return (
         <Form
             onSubmit={(data) => window.alert(data.rating.radio)}
@@ -84,7 +84,7 @@ export const RadioGroupForm = RadioGroupFormTemplate.bind({});
  * @param args storybook arguments
  * @return storybook template
  */
-const CheckboxGroupFormTemplate: Story<Props> = (args) => {
+const CheckboxGroupFormTemplate: Story<IForm> = (args) => {
     return (
         <Form
             onSubmit={(data) => window.alert(data.rating.checkbox)}
@@ -110,7 +110,7 @@ export const CheckboxGroupForm = CheckboxGroupFormTemplate.bind({});
  * @param args storybook arguments
  * @return storybook template
  */
-const IndividualInputFormTemplate: Story<Props> = (args) => {
+const IndividualInputFormTemplate: Story<IForm> = (args) => {
     return (
         <Form
             onSubmit={(data) => window.alert(data.rating.checkbox)}

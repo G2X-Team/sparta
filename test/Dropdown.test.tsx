@@ -40,7 +40,6 @@ describe('Dropdown', () => {
         if (button?.parentElement?.parentElement)
             results[1] = await axe(button.parentElement.parentElement);
 
-        console.log(results.length);
         // then
         results.forEach((result: any) => expect(result).toHaveNoViolations());
     });

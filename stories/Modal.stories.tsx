@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Modal, Props } from '../src/components/Modal/Modal';
+import { Modal, IModal } from '../src/components/Modal/Modal';
 import { Button, Text, Header, Footer, ButtonGroup } from '../src';
 
 const meta: Meta = {
@@ -17,7 +17,7 @@ export default meta;
  * @param args storybook arguments
  * @return template modal component
  */
-const Template: Story<Props> = (args) => {
+const Template: Story<IModal> = (args) => {
     const [open, toggleModal] = useState(false);
 
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Switch, Props } from '../src/components/Switch/Switch';
+import { Switch, ISwitch } from '../src/components/Switch/Switch';
 
 const meta: Meta = {
     title: 'Form/Switch',
@@ -18,7 +18,7 @@ export default meta;
  * @param args storybook arguments
  * @return template switch
  */
-const Template: Story<Props> = (args) => <Switch {...args} />;
+const Template: Story<ISwitch> = (args) => <Switch {...args} />;
 
 export const Default = Template.bind({});
 

@@ -10,7 +10,7 @@ import * as CSS from 'csstype';
 import { Option } from '../Option/Option';
 import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface IDropdown extends HTMLAttributes<HTMLDivElement> {
     /** Determines where the menu will appear from */
     orientation?: ComponentOrientation;
     /** Determines menu alignment, when orientation is left or right */
@@ -28,7 +28,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Dropdown component
  */
-export const Dropdown: FC<Props> = ({
+export const Dropdown: FC<IDropdown> = ({
     children,
     className = '',
     orientation = 'bottom',

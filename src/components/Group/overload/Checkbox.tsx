@@ -1,6 +1,6 @@
 import type { ChangeEvent, FC } from 'react';
 import React from 'react';
-import { Props, Checkbox as CCheckbox } from '../../Checkbox/Checkbox';
+import { ICheckbox, Checkbox as CCheckbox } from '../../Checkbox/Checkbox';
 import Overload from '../../../interfaces/Overload';
 
 /**
@@ -8,14 +8,14 @@ import Overload from '../../../interfaces/Overload';
  *
  * @return Formatted Checkbox
  */
-const Checkbox: FC<Overload<Props>> = ({
+const Checkbox: FC<Overload<ICheckbox>> = ({
     parentProps: { name, onChange: groupOnChange, disabled: parentDisabled, inline: parentInline },
     onChange,
     disabled,
     value,
     inline,
     ...props
-}: Overload<Props>): JSX.Element => {
+}: Overload<ICheckbox>): JSX.Element => {
     /**
      * Updates value and fires original onChange method
      *

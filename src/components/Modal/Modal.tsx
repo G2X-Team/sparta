@@ -6,7 +6,15 @@ import './Modal.css';
 import { Header } from '../Header/Header';
 import Footer from './overload/Footer';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface IModal extends HTMLAttributes<HTMLDivElement> {
+    /** Required ID for WCAG 2.0 compliance purposes */
+    id: string;
+    /** Requires descriptive label for WCAG 2.0 compliance purposes */
+    label: string;
+    /** Recommended description of modal */
+    description?: string | JSX.Element;
+    /** Determines whether it is an alert modal or a standard modal */
+    alert?: boolean;
     /** Determines whether the modal is open or not */
     open?: boolean;
     /** Toggles the model between open and closed */
@@ -23,7 +31,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Modal component
  */
-export const Modal: FC<Props> = ({
+export const Modal: FC<IModal> = ({
     className = '',
     manual = false,
     children,

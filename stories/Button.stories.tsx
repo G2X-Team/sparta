@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Button, Props } from '../src/components/Button/Button';
+import { Button, IButton } from '../src/components/Button/Button';
 
 const meta: Meta = {
     title: 'Layout/Button',
@@ -21,7 +21,7 @@ export default meta;
  * @param args story args
  * @return template button
  */
-const Template: Story<Props> = (args) => <Button {...args} />;
+const Template: Story<IButton> = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});
 export const Secondary = Template.bind({});

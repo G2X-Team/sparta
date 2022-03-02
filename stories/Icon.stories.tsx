@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 
-import { Icon, Props } from '../src/components/Icon/Icon';
+import { Icon, IIcon } from '../src/components/Icon/Icon';
 
 const meta: Meta = {
     title: 'Layout/Icon',
@@ -20,6 +20,6 @@ export default meta;
  * @param args storybook arguments
  * @return template icon
  */
-const Template: Story<Props> = (args) => <Icon {...args} />;
+const Template: Story<IIcon> = (args) => <Icon {...args} />;
 
 export const Default = Template.bind({});

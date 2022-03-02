@@ -4,9 +4,9 @@ import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { FormGroupData } from '../../../interfaces/Properties';
 
-import { Group as CGroup, Props as GroupProps } from '../../Group/Group';
+import { Group as CGroup, IGroup as GroupProps } from '../../Group/Group';
 
-interface Props extends Overload<GroupProps> {
+interface IGroup extends Overload<GroupProps> {
     /** Name is required for text inputs inside of form, having none will throw */
     name: string;
 }
@@ -16,7 +16,7 @@ interface Props extends Overload<GroupProps> {
  *
  * @return formatted group component
  */
-const Group: FC<Props> = ({
+const Group: FC<IGroup> = ({
     parentProps: { register, setError, setValue, clearErrors, errors, getValues, renderAll },
     children,
     name,

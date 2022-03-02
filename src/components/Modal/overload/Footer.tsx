@@ -3,14 +3,14 @@ import React from 'react';
 import FormatChildren from '../../../util/FormatChildren';
 
 import ButtonGroup from './ButtonGroup';
-import { Props, Footer as CFooter } from '../../Footer/Footer';
+import { IFooter, Footer as CFooter } from '../../Footer/Footer';
 
 /**
  * Overloaded Footer that identifies button groups
  *
  * @return formatted footer
  */
-const Footer: FC<Props> = ({ parentProps: { children, ...parentProps }, ...props }: Props) => {
+const Footer: FC<IFooter> = ({ parentProps: { children, ...parentProps }, ...props }: IFooter) => {
     // gets all props
     const allProps = { ...props, ...parentProps };
 

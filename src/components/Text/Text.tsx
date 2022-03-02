@@ -1,8 +1,9 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
-import * as CSS from 'csstype';
+import type { HTMLAttributes, ReactNode, FC } from 'react';
+import React from 'react';
+import type * as CSS from 'csstype';
 import './Text.css';
 
-export interface Props extends HTMLAttributes<HTMLParagraphElement> {
+export interface IText extends HTMLAttributes<HTMLParagraphElement> {
     /** Text needs to exist between tags */
     children: ReactNode;
     /**
@@ -37,7 +38,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Text component
  */
-export const Text: React.FC<Props> = ({
+export const Text: FC<IText> = ({
     children,
     className = '',
     header = 0,
@@ -53,7 +54,7 @@ export const Text: React.FC<Props> = ({
     color,
     style,
     ...props
-}: Props): JSX.Element => {
+}) => {
     /**
      * Gets all the special conditions and translates it to a special className combination
      * granting all conditions

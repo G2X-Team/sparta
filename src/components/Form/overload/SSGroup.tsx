@@ -4,13 +4,13 @@ import React, { useEffect } from 'react';
 import Overload from '../../../interfaces/Overload';
 import FormatChildren from '../../../util/FormatChildren';
 
-import type { Props as GroupProps } from '../../Group/Group';
+import type { IGroup as GroupProps } from '../../Group/Group';
 import { Text } from '../../Text/Text';
 
 import Radio from './SSRadio';
 import Checkbox from './SSCheckbox';
 
-interface Props extends Overload<GroupProps> {
+interface IGroup extends Overload<GroupProps> {
     name: string;
 }
 
@@ -19,7 +19,7 @@ interface Props extends Overload<GroupProps> {
  *
  * @return formatted group that complies with remix validation
  */
-const Group: FC<Props> = ({
+const Group: FC<IGroup> = ({
     parentProps: { actionData = { fields: {}, fieldErrors: {} } },
     type = 'input',
     disabled = false,
@@ -44,7 +44,6 @@ const Group: FC<Props> = ({
      * @return formatted children
      */
     const renderAll = (): JSX.Element[] => {
-        console.log(inline);
         const newParentProps = { children, groupName: name, actionData, groupInline: inline };
         const formatted = new FormatChildren(newParentProps, { Radio, Checkbox });
 

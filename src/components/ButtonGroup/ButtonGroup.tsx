@@ -7,7 +7,7 @@ import type { StyleVariant, ComponentSize } from '../../interfaces/Properties';
 
 import Button from './overload/Button';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface IButtonGroup extends HTMLAttributes<HTMLDivElement> {
     /** Disables all buttons within button group */
     disabled?: boolean;
     /** toggle between different button group sizes */
@@ -23,7 +23,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return ButtonGroup component
  */
-export const ButtonGroup: FC<Props> = ({
+export const ButtonGroup: FC<IButtonGroup> = ({
     children = '',
     variant = 'default',
     disabled = false,
