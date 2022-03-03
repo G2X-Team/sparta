@@ -58,36 +58,35 @@ export const Table: FC<Props> = ({
     headerTextFontWeight = 'bolder',
 }) => {
     const [page, setPage] = useState(pageNum);
-    const [sorted, setsorted] = useState(data);
-    const sortBy = Object.keys(data[0]);
+    const [sorteddata, setsorted] = useState(data);
 
     /** Function to sort ascending order */
-    const ascOrder = (): void => {
-        if (typeof sortBy[0] === 'number') {
-            setsorted(
-                [].concat(sorted as any).sort((a: any, b: any) => a[sortBy[0]] - b[sortBy[0]])
-            );
-        } else {
-            setsorted(
-                []
-                    .concat(sorted as any)
-                    .sort((a: any, b: any) => a[sortBy[1]].localeCompare(b[sortBy[1]]))
-            );
-        }
-    };
+    const [order, setOrder] = useState('asc');
 
-    /** Function to sort descending order */
-    const descOrder = (): void => {
-        if (typeof sortBy[0] === 'number') {
-            setsorted(
-                [].concat(sorted as any).sort((a: any, b: any) => b[sortBy[0]] - a[sortBy[0]])
-            );
-        } else {
-            setsorted(
-                []
-                    .concat(sorted as any)
-                    .sort((a: any, b: any) => b[sortBy[1]].localeCompare(a[sortBy[1]]))
-            );
+    // eslint-disable-next-line valid-jsdoc
+    /** Function to sort table data based on col */
+    const sorting = (col: any): void => {
+        if (order === 'asc') {
+            const sorted = [...(data as any)].sort((a, b) => {
+                if (typeof a[col] === 'string') {
+                    return a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1;
+                } else {
+                    return a[col] > b[col] ? 1 : -1;
+                }
+            });
+            setsorted(sorted);
+            setOrder('desc');
+        }
+        if (order === 'desc') {
+            const sorted = [...(data as any)].sort((a, b) => {
+                if (typeof a[col] === 'string') {
+                    return a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1;
+                } else {
+                    return a[col] < b[col] ? 1 : -1;
+                }
+            });
+            setsorted(sorted);
+            setOrder('asc');
         }
     };
     /** Function to navigate back to the last page */
@@ -101,7 +100,7 @@ export const Table: FC<Props> = ({
     };
     return (
         <div className="apollo-component-library-table-component-container">
-            {sorted.length > 0 && (
+            {sorteddata.length > 0 && (
                 <table
                     className="apollo-component-library-table-component"
                     cellSpacing="0"
@@ -117,21 +116,17 @@ export const Table: FC<Props> = ({
                                             textTransform: headerTextTransform,
                                             fontWeight: headerTextFontWeight,
                                         }}
+                                        title={headerItem + 'ASC'}
+                                        onClick={() => sorting(headerItem)}
                                     >
                                         {headerItem.toUpperCase()}
                                     </span>
-                                    <button title={headerItem + 'ASC'} onClick={() => ascOrder()}>
-                                        ↑
-                                    </button>
-                                    <button title={headerItem + 'DESC'} onClick={() => descOrder()}>
-                                        ↓
-                                    </button>
                                 </th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.values(sorted)
+                        {Object.values(sorteddata)
                             .slice(pageSize * page, pageSize * page + pageSize)
                             .map((obj, index) => (
                                 <tr role={'rows' + index} key={index}>
