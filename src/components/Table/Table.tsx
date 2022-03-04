@@ -116,10 +116,20 @@ export const Table: FC<Props> = ({
                                             textTransform: headerTextTransform,
                                             fontWeight: headerTextFontWeight,
                                         }}
-                                        title={headerItem + 'ASC'}
-                                        onClick={() => sorting(headerItem)}
                                     >
                                         {headerItem.toUpperCase()}
+                                        <button
+                                            title={headerItem + 'ASC'}
+                                            onClick={() => sorting(headerItem)}
+                                        >
+                                            ▲
+                                        </button>
+                                        <button
+                                            title={headerItem + 'DESC'}
+                                            onClick={() => sorting(headerItem)}
+                                        >
+                                            ▼
+                                        </button>
                                     </span>
                                 </th>
                             ))}
