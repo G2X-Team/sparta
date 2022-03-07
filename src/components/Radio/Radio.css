@@ -5,3 +5,12 @@
 .apollo-component-library-radio-component.invalid {
     outline: 2px solid #c70000;
 }
+
+.apollo-component-library-radio-component-label {
+    display: block;
+    padding-bottom: 5px;
+}
+
+.apollo-component-library-radio-component-label.inline {
+    display: inline-block;
+}

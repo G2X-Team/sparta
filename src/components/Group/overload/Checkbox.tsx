@@ -1,5 +1,5 @@
-import type { FC } from 'react';
-import React, { FormEvent } from 'react';
+import type { ChangeEvent, FC } from 'react';
+import React from 'react';
 import { Props, Checkbox as CCheckbox } from '../../Checkbox/Checkbox';
 import Overload from '../../../interfaces/Overload';
 
@@ -9,10 +9,11 @@ import Overload from '../../../interfaces/Overload';
  * @return Formatted Checkbox
  */
 const Checkbox: FC<Overload<Props>> = ({
-    parentProps: { parentDisabled, checkboxValues, setCheckboxValue, isChecked, updateChecked },
+    parentProps: { name, onChange: groupOnChange, disabled: parentDisabled, inline: parentInline },
     onChange,
     disabled,
     value,
+    inline,
     ...props
 }: Overload<Props>): JSX.Element => {
     /**
@@ -20,18 +21,9 @@ const Checkbox: FC<Overload<Props>> = ({
      *
      * @param event input event
      */
-    const checkboxOnChange = (event: FormEvent<HTMLInputElement>): void => {
-        // add to values if it is checked, remove it if it isn't
-        if (isChecked[value]) {
-            isChecked[value] = false;
-            setCheckboxValue(checkboxValues.filter((cvalue: string) => cvalue !== value));
-        } else {
-            isChecked[value] = true;
-            setCheckboxValue([...checkboxValues, value]);
-        }
-
-        // update checked checkboxes
-        updateChecked({ ...checkboxValues, [value]: isChecked });
+    const checkboxOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        // execute group on change if any
+        groupOnChange && groupOnChange(event);
 
         // run the onChange method if it exists
         onChange && onChange(event);
@@ -41,9 +33,10 @@ const Checkbox: FC<Overload<Props>> = ({
         <CCheckbox
             {...props}
             value={value}
+            name={name}
+            inline={parentInline}
             disabled={parentDisabled || disabled}
             onChange={checkboxOnChange}
-            checked={checkboxValues[value]}
         />
     );
 };

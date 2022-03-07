@@ -1,7 +1,7 @@
 import type { HTMLAttributes, FC, CSSProperties } from 'react';
 import React, { useEffect } from 'react';
 
-import type { StyleVariant } from '../../interfaces/Properties';
+import type { FormTextData, FormValidator, StyleVariant } from '../../interfaces/Properties';
 import './TextInput.css';
 
 import { Text } from '../Text/Text';
@@ -22,7 +22,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     /** Determines whether the input is required for form submission */
     required?: boolean;
     /** Function that will determine whether input is valid for form submission */
-    validator?: (value: string) => string | null;
+    validator?: FormValidator<FormTextData>;
     /** Determines whether input is valid or not */
     invalid?: boolean;
     /** Name of input */
@@ -72,6 +72,7 @@ export const TextInput: FC<Props> = ({
                 {hint?.length ? <Text style={hintTextStyle}>{hint}</Text> : null}
                 <input
                     {...props}
+                    aria-required={required}
                     aria-invalid={invalid}
                     aria-errormessage={name ? `${name}-error` : undefined}
                     type={password ? 'password' : 'text'}
@@ -98,7 +99,7 @@ const labelTextStyle: CSSProperties = {
 };
 
 const hintTextStyle: CSSProperties = {
-    fontSize: '0.8rem',
+    fontSize: '0.9rem',
     paddingBottom: 5,
 };
 

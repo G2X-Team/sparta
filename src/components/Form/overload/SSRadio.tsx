@@ -1,0 +1,54 @@
+import type { FC } from 'react';
+import React from 'react';
+
+import Overload from '../../../interfaces/Overload';
+
+import { Radio as CRadio, Props as RadioProps } from '../../Radio/Radio';
+
+interface Props extends Overload<RadioProps> {
+    id: string;
+}
+
+/**
+ * Formats Radio to be compatible with form
+ *
+ * @return Formatted Radio compatible with form
+ */
+const Radio: FC<Props> = ({
+    parentProps: {
+        groupName,
+        actionData: { fields, fieldErrors },
+        groupInline,
+    },
+    onChange,
+    required,
+    name,
+    value,
+    inline,
+    id,
+    ...props
+}) => {
+    const isChecked: boolean = fields
+        ? groupName?.length
+            ? fields[groupName] === value
+            : fields[id]
+        : false;
+
+    const errorMessage: string | undefined = fieldErrors ? fieldErrors[id] : undefined;
+
+    return (
+        <CRadio
+            {...props}
+            id={id}
+            value={value}
+            inline={groupInline || inline}
+            name={groupName}
+            required={required}
+            defaultChecked={isChecked}
+            invalid={Boolean(errorMessage?.length)}
+            errorMessage={errorMessage}
+        />
+    );
+};
+
+export default Radio;

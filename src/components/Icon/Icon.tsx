@@ -1,5 +1,5 @@
 import type { HTMLAttributes, FC } from 'react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as CSS from 'csstype';
 import './Icon.css';
 
@@ -37,10 +37,29 @@ export const Icon: FC<Props> = ({
     style,
     ...props
 }) => {
+    useEffect(() => {
+        if (!onClick) return;
+
+        /**
+         * Will execute the onClick method on enter
+         *
+         * @param event keyobard event
+         */
+        const onEnter = (event: KeyboardEvent): void => {
+            if (event.key === 'Enter') {
+                onClick && onClick();
+            }
+        };
+
+        window.addEventListener('keydown', onEnter);
+        return () => window.removeEventListener('keydown', onEnter);
+    }, []);
+
     return (
         <span
             {...props}
             style={getIconStyle(disabled, color, style)}
+            tabIndex={onClick ? 0 : undefined}
             className={`material-icons apollo-component-library-icon-component 
                 ${clickable && variant} ${className}`}
             onClick={onClick}

@@ -1,9 +1,11 @@
-import type { HTMLAttributes, ReactNode, FC } from 'react';
+import { HTMLAttributes, ReactNode, FC, CSSProperties, useEffect } from 'react';
 import React from 'react';
 import { Text } from '../Text/Text';
 import './Checkbox.css';
 
 export interface Props extends HTMLAttributes<HTMLInputElement> {
+    /** String that identifies the checkbox */
+    id?: string;
     /**  Can have children between tags */
     children?: ReactNode;
     /** Value that the checkbox represents */
@@ -14,6 +16,14 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     checked?: boolean;
     /** Determines whether component is invalid */
     invalid?: boolean;
+    /** Determines what group it belongs to */
+    name?: string;
+    /** Determines whether checkbox is inline with other elements */
+    inline?: boolean;
+    /** Determines whether checkbox is required or not */
+    required?: boolean;
+    /** Describes checkbox error */
+    errorMessage?: string;
 }
 
 /**
@@ -22,26 +32,67 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
  * @return Checkbox component
  */
 export const Checkbox: FC<Props> = ({
+    inline = false,
+    disabled = false,
     children,
+    id,
     className,
     invalid,
-    disabled = false,
+    required,
+    errorMessage,
     ...props
 }) => {
+    // check if the user can use error messages
+    useEffect(() => {
+        if (errorMessage?.length && !id?.length)
+            throw new Error(
+                'To use error message in Checkbox, you must specify id to comply with WCAG 2.0'
+            );
+    });
+
     return (
-        <label>
-            <input
-                {...props}
-                aria-invalid={invalid}
-                type="checkbox"
-                disabled={disabled}
+        <>
+            <label
                 className={`
-                    apollo-component-library-checkbox-component 
-                    ${className}
-                    ${invalid ? 'invalid' : ''}
+                    apollo-component-library-checkbox-component-label 
+                    ${inline ? 'inline' : ''}
                 `}
-            />
-            <Text inline>{children}</Text>
-        </label>
+            >
+                <input
+                    {...props}
+                    aria-required={required}
+                    aria-invalid={invalid}
+                    aria-errormessage={id ? `${id}-error` : undefined}
+                    type="checkbox"
+                    disabled={disabled}
+                    className={`
+                        apollo-component-library-checkbox-component 
+                        ${invalid ? 'invalid' : ''}
+                        ${className || ''}
+                    `}
+                />
+                <Text inline>
+                    {children}
+                    {required ? (
+                        <Text color="red" inline>
+                            *
+                        </Text>
+                    ) : null}
+                </Text>
+            </label>
+            {invalid && errorMessage && inline ? <br /> : null}
+            {invalid && errorMessage ? (
+                <div role="alert" id={id ? `${id}-error` : undefined}>
+                    <Text color="#c90000" style={errorTextStyle}>
+                        {errorMessage}
+                    </Text>
+                </div>
+            ) : null}
+        </>
     );
+};
+
+const errorTextStyle: CSSProperties = {
+    paddingTop: 5,
+    paddingBottom: 10,
 };
