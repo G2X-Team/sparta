@@ -1,0 +1,30 @@
+.apollo-component-library-table-component-container {
+    box-shadow: '3px 6px 3px #ccc';
+}
+
+.apollo-component-library-table-component {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+.apollo-component-library-table-component .header {
+    text-align: left;
+    background-color: #04AA6D;
+    border: 1px solid #ddd;
+}
+
+.apollo-component-library-table-component td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.apollo-component-library-table-component tr:nth-child(even){background-color: #f2f2f2;}
+
+.apollo-component-library-table-component tr:hover {background-color: #ddd;}
+
+.apollo-component-library-table-component-footer {
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+}
