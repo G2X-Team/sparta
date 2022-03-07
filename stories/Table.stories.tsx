@@ -12,12 +12,6 @@ const meta: Meta = {
             { id: 2, name: 'Adam', Age: 30 },
             { id: 1, name: 'broda', Age: 30 },
         ],
-        cellTextColor: 'black',
-        cellTextTransform: 'capitalize',
-        cellTextFontWeight: 'normal',
-        headerTextColor: 'white',
-        headerTextTransform: 'uppercase',
-        headerTextFontWeight: 'bolder',
     },
 };
 

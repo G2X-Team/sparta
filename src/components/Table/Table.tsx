@@ -156,17 +156,19 @@ export const Table: FC<Props> = ({
                                 </tr>
                             ))}
                     </tbody>
-                    <tfoot className="apollo-component-library-table-component-footer">
-                        <div>
-                            <button style={btnStyle} onClick={onBack}>
-                                Back
-                            </button>
-                            <label style={{ padding: '0 1em' }}>{page + 1}</label>
-                            <button style={btnStyle} onClick={onNext}>
-                                Next
-                            </button>
-                        </div>
-                    </tfoot>
+                    {pageSize < data.length ? (
+                        <tfoot className="apollo-component-library-table-component-footer">
+                            <div>
+                                <button style={btnStyle} onClick={onBack}>
+                                    Back
+                                </button>
+                                <label style={{ padding: '0 1em' }}>{page + 1}</label>
+                                <button style={btnStyle} onClick={onNext}>
+                                    Next
+                                </button>
+                            </div>
+                        </tfoot>
+                    ) : null}
                 </table>
             )}
         </div>
