@@ -33,7 +33,7 @@ const Section: FC<Props> = ({
             }
 
             setSectionChildren(
-                <Dropdown>
+                <Dropdown name="header_nav">
                     <Button>
                         <Icon name="menu" clickable color={titleColor} />
                     </Button>
