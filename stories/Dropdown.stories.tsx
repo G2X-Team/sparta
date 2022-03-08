@@ -10,8 +10,8 @@ const meta: Meta = {
     title: 'Layout/Dropdown',
     component: Dropdown,
     args: {
-        menuHeight: '100',
-        menuWidth: '100',
+        menuWidth: '150px',
+        name: 'dropdown',
     },
 };
 
@@ -29,6 +29,27 @@ export const Default: Story<Props> = (args) => (
             <Text inline>This is a dropdown</Text>
         </Button>
         <Option>Hello</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
+        <Option>How you doing</Option>
         <Option>Goodbye</Option>
     </Dropdown>
 );

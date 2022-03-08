@@ -1,4 +1,4 @@
-import type { HTMLAttributes, FC } from 'react';
+import { HTMLAttributes, FC } from 'react';
 import React from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import { detectOutsideClick } from '../../util/detectOutsideClick';
@@ -19,6 +19,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
     menuHeight?: CSS.Property.MaxHeight;
     /** Determines the max width of the menu */
     menuWidth?: CSS.Property.MaxWidth;
+    /** Required string for WCAG 2.0 authentication purposes */
+    name: string;
 }
 
 /**
@@ -33,9 +35,12 @@ export const Dropdown: FC<Props> = ({
     alignment = 'left',
     menuHeight,
     menuWidth,
+    name,
 }) => {
     // ref containing dropdown button
     const dropdown = React.useRef<HTMLDivElement>(null);
+    const first = React.useRef<HTMLLIElement>(null);
+    const last = React.useRef<HTMLLIElement>(null);
 
     // state
     const [open, toggleOpen] = detectOutsideClick(dropdown, false);
@@ -51,6 +56,7 @@ export const Dropdown: FC<Props> = ({
             dropdownRef: dropdown,
             children,
             toggleOpen,
+            name,
             open,
         };
 
@@ -63,11 +69,46 @@ export const Dropdown: FC<Props> = ({
 
         // get button
         const [button] = buttons;
+        // get options
+        const options = formatted.get(Option);
+        const formattedOptions = options.map((option: JSX.Element, index: number) => {
+            const {
+                props: { onClick, ...optionProps },
+            } = option;
+
+            /** Handles click for options */
+            const handleClick = (): void => {
+                onClick && onClick();
+                toggleOpen(false);
+            };
+
+            if (index == 0) {
+                return (
+                    <Option {...optionProps} ref={first} key={0} onClick={handleClick}>
+                        {option.props.children}
+                    </Option>
+                );
+            }
+
+            if (index == options.length - 1) {
+                return (
+                    <Option {...optionProps} ref={last} key={options.length} onClick={handleClick}>
+                        {option.props.children}
+                    </Option>
+                );
+            }
+
+            return <Option {...optionProps} key={index} onClick={handleClick} />;
+        });
 
         // get the option menu
         const menu = open ? (
             <Menu
-                options={formatted.get(Option)}
+                options={formattedOptions}
+                toggleOpen={toggleOpen}
+                name={name}
+                firstChild={first}
+                lastChild={last}
                 orientation={orientation}
                 alignment={alignment}
                 menuHeight={menuHeight}

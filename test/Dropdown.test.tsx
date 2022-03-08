@@ -1,14 +1,54 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe, toHaveNoViolations } from 'jest-axe';
+expect.extend(toHaveNoViolations);
 
 import { Dropdown, Button, Text, Option } from '../src';
 
 describe('Dropdown', () => {
+    it('complies with WCAG 2.0 ', async () => {
+        // given
+        const { container: closedDropdown } = render(
+            <Dropdown name="dropdown">
+                <Button>
+                    <Text>Hello World</Text>
+                </Button>
+                <Option>Option 1</Option>
+                <Option>Option 2</Option>
+                <Option>Option 3</Option>
+            </Dropdown>
+        );
+
+        render(
+            <Dropdown name="dropdown-2" id="something">
+                <Button>
+                    <Text>Hello World 2</Text>
+                </Button>
+                <Option>Option 1</Option>
+                <Option>Option 2</Option>
+                <Option>Option 3</Option>
+            </Dropdown>
+        );
+
+        userEvent.click(screen.getByText(/hello world 2/i));
+        const button = screen.getByText(/Hello World 2/i);
+
+        // when
+        const results = [];
+        results[0] = await axe(closedDropdown);
+        if (button?.parentElement?.parentElement)
+            results[1] = await axe(button.parentElement.parentElement);
+
+        console.log(results.length);
+        // then
+        results.forEach((result: any) => expect(result).toHaveNoViolations());
+    });
+
     it('renders correctly', () => {
         // given
         render(
-            <Dropdown>
+            <Dropdown name="dropdown">
                 <Button>
                     <Text>Hello World</Text>
                 </Button>
@@ -25,7 +65,7 @@ describe('Dropdown', () => {
     it('does not render the items initially', () => {
         // given
         render(
-            <Dropdown>
+            <Dropdown name="dropdown">
                 <Button>
                     <Text>Hello World</Text>
                 </Button>
@@ -42,7 +82,7 @@ describe('Dropdown', () => {
     it('renders item when button is clicked', () => {
         // given
         render(
-            <Dropdown>
+            <Dropdown name="dropdown">
                 <Button>
                     <Text>Hello World</Text>
                 </Button>
@@ -62,7 +102,7 @@ describe('Dropdown', () => {
     it('will follow throuhg with the general flow', () => {
         // given
         render(
-            <Dropdown>
+            <Dropdown name="dropdown">
                 <Button>
                     <Text>Hello World</Text>
                 </Button>
@@ -90,7 +130,7 @@ describe('Dropdown', () => {
         // given
         render(
             <React.Fragment>
-                <Dropdown>
+                <Dropdown name="dropdown">
                     <Button>
                         <Text>Hello World</Text>
                     </Button>
@@ -122,7 +162,7 @@ describe('Dropdown', () => {
         const secondClick: jest.Mock<any, any> = jest.fn();
         const thridClick: jest.Mock<any, any> = jest.fn();
         render(
-            <Dropdown>
+            <Dropdown name="dropdown">
                 <Button>
                     <Text>Hello World</Text>
                 </Button>

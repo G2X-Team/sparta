@@ -8,6 +8,11 @@ export interface FoundChildren {
     other: JSX.Element[];
 }
 
+/** Takes into account components who use fowardRef  */
+type FunctionComponent = React.FC<any> & {
+    render?: any;
+};
+
 interface ComponentDictionary {
     /** Used to get all components given a specific display name */
     [displayName: string]: JSX.Element[];
@@ -37,7 +42,8 @@ class FormatChildren {
 
         // loop through all children
         Children.forEach(children, (child: JSX.Element, index: number) => {
-            const childName: string = child?.type?.displayName || child?.type?.name;
+            const childName: string =
+                child?.type?.displayName || child?.type?.name || child?.type?.render?.name;
 
             // hande whether sought out component is found
             if (componentMap[childName]) {
@@ -71,8 +77,8 @@ class FormatChildren {
      * @param child component wanting to retrieve
      * @return all instances of the specified child
      */
-    get = (child: React.FC<any>): JSX.Element[] => {
-        const childName: string = child?.displayName || child?.name;
+    get = (child: FunctionComponent): JSX.Element[] => {
+        const childName: string = child?.displayName || child?.name || child?.render?.name;
         return this.foundChildren[childName] ? this.foundChildren[childName] : [];
     };
 
@@ -103,7 +109,8 @@ class FormatChildren {
 
         // removes all instances of the child
         this.allChildren = this.allChildren.filter((child: JSX.Element) => {
-            const name: string = child?.type?.displayName || child?.type?.name;
+            const name: string =
+                child?.type?.displayName || child?.type?.name || child?.type?.render?.name;
 
             // determine whether display name is present in both maps
             if (componentMap[name] && this.foundChildren[name]) {

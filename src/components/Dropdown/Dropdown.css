@@ -7,8 +7,6 @@
     display: inline-block;
     margin: 0;
     background: none;
-    border: none;
-    outline: none;
     margin: none;
 }
 
@@ -21,6 +19,8 @@
     max-width: 150px;
     background: white;
     min-width: 100px;
+    margin: 5px 0;
+    overflow: auto;
 }
 
 .apollo-component-library-dropdown-menu-component.o-top {
