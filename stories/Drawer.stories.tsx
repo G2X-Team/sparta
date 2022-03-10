@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { Drawer, Props } from '../src/components/Drawer/Drawer';
+import { Drawer, IDrawer } from '../src/components/Drawer/Drawer';
 import { Header, Footer, Option, Text, Divider, Button } from '../src';
 
 const meta: Meta = {
@@ -21,7 +21,7 @@ export default meta;
  * @param args storybook arguments
  * @return template drawer
  */
-const Template: Story<Props> = (args) => {
+const Template: Story<IDrawer> = (args) => {
     const [open, toggleOpen] = useState(false);
 
     return (
@@ -53,7 +53,7 @@ const Template: Story<Props> = (args) => {
  * @param args storybook arguments
  * @return template persistent drawer
  */
-const PersistentTemplate: Story<Props> = (args) => {
+const PersistentTemplate: Story<IDrawer> = (args) => {
     const [open, toggleOpen] = useState(false);
 
     return (
@@ -269,7 +269,7 @@ const PersistentTemplate: Story<Props> = (args) => {
  * @param args storybook arguments
  * @return template pernmanent drawer
  */
-const PermanentTemplate: Story<Props> = (args) => {
+const PermanentTemplate: Story<IDrawer> = (args) => {
     const [open, toggleOpen] = useState(false);
 
     return (

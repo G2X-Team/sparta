@@ -9,7 +9,7 @@ import type {
 import CSForm from './components/CSForm';
 import SSForm from './components/SSForm';
 
-export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
+export interface IForm extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
     onSubmit?: FormSubmitHandler;
     /** Handles errors from form submission with error object */
@@ -24,7 +24,7 @@ export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' 
  *
  * @return form Component based on type
  */
-export const Form: FC<Props> = ({ type = 'client', ...props }) => {
+export const Form: FC<IForm> = ({ type = 'client', ...props }) => {
     /**
      * Based on the type, this method will choose what form to render
      *

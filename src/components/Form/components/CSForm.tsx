@@ -11,7 +11,7 @@ import Radio from '../overload/CSRadio';
 import Switch from '../overload/CSSwitch';
 import Checkbox from '../overload/CSCheckbox';
 
-export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
+export interface ICSForm extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
     onSubmit?: FormSubmitHandler;
     /** Handles errors from form submission with error object */
@@ -23,7 +23,7 @@ export interface Props extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' 
  *
  * @return client side form
  */
-const CSForm: FC<Props> = ({ onSubmit, onError, children, ...props }) => {
+const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, ...props }) => {
     // use the use form hoook
     const {
         setError,

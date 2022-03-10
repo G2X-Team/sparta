@@ -3,9 +3,9 @@ import React from 'react';
 
 import Overload from '../../../interfaces/Overload';
 
-import { Radio as CRadio, Props as RadioProps } from '../../Radio/Radio';
+import { Radio as CRadio, IRadio as RadioProps } from '../../Radio/Radio';
 
-interface Props extends Overload<RadioProps> {
+interface IRadio extends Overload<RadioProps> {
     id: string;
 }
 
@@ -14,7 +14,7 @@ interface Props extends Overload<RadioProps> {
  *
  * @return Formatted Radio compatible with form
  */
-const Radio: FC<Props> = ({
+const Radio: FC<IRadio> = ({
     parentProps: {
         groupName,
         actionData: { fields, fieldErrors },

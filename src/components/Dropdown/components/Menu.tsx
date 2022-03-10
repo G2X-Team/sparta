@@ -1,8 +1,8 @@
 import type { HTMLAttributes, FC, RefObject, Dispatch, SetStateAction } from 'react';
 import React, { useEffect } from 'react';
-import { Props as DropdownProps } from '../Dropdown';
+import { IDropdown } from '../Dropdown';
 
-interface Props extends HTMLAttributes<HTMLDivElement>, DropdownProps {
+interface IMenu extends HTMLAttributes<HTMLDivElement>, IDropdown {
     /** All options belonging to the menu */
     options: JSX.Element[];
     /** Reference of first child */
@@ -18,7 +18,7 @@ interface Props extends HTMLAttributes<HTMLDivElement>, DropdownProps {
  *
  * @return Menu with all options
  */
-const Menu: FC<Props> = ({
+const Menu: FC<IMenu> = ({
     orientation,
     alignment,
     firstChild,

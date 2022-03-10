@@ -1,6 +1,6 @@
 import type { ChangeEvent, FC } from 'react';
 import React from 'react';
-import { Props, Radio as CRadio } from '../../Radio/Radio';
+import { IRadio, Radio as CRadio } from '../../Radio/Radio';
 import Overload from '../../../interfaces/Overload';
 
 /**
@@ -8,14 +8,14 @@ import Overload from '../../../interfaces/Overload';
  *
  * @return Formatted Radio
  */
-const Radio: FC<Overload<Props>> = ({
+const Radio: FC<Overload<IRadio>> = ({
     parentProps: { disabled: parentDisabled, onChange: groupOnChange, name, inline: parentInline },
     onChange,
     disabled,
     value,
     inline,
     ...props
-}: Overload<Props>): JSX.Element => {
+}: Overload<IRadio>): JSX.Element => {
     /**
      * Updates value and fires original onChange method
      *

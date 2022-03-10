@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 
-import { Card, Props } from '../src/components/Card/Card';
+import { Card, ICard } from '../src/components/Card/Card';
 import { Header, Footer, Text } from '../src';
 
 const meta: Meta = {
@@ -20,7 +20,7 @@ export default meta;
  * @param args storybook arguments
  * @return template card
  */
-const Template: Story<Props> = (args) => <Card {...args} />;
+const Template: Story<ICard> = (args) => <Card {...args} />;
 
 export const Default = Template.bind({});
 

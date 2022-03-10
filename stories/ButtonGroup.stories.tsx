@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { ButtonGroup, Props } from '../src/components/ButtonGroup/ButtonGroup';
+import { ButtonGroup, IButtonGroup } from '../src/components/ButtonGroup/ButtonGroup';
 import { Button, Switch } from '../src';
 
 const meta: Meta = {
@@ -17,7 +17,7 @@ export default meta;
  * @param args storybook arguments
  * @return template component
  */
-const Template: Story<Props> = (args) => {
+const Template: Story<IButtonGroup> = (args) => {
     const [checked, setChecked] = useState(false);
     return (
         <>

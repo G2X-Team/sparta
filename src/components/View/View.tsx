@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface IView extends HTMLAttributes<HTMLDivElement> {
     /** May have children */
     children?: ReactNode;
 }
@@ -11,6 +11,6 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return View component
  */
-export const View: FC<Props> = ({ children, ...props }) => {
+export const View: FC<IView> = ({ children, ...props }) => {
     return <div {...props}>{children}</div>;
 };

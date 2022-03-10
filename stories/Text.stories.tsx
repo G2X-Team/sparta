@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Text, Props } from '../src/components/Text/Text';
+import { Text, IText } from '../src/components/Text/Text';
 
 const meta: Meta = {
     title: 'Layout/Text',
@@ -18,7 +18,7 @@ export default meta;
  * @param args storybook arguments
  * @return template text
  */
-const Template: Story<Props> = (args) => <Text {...args} />;
+const Template: Story<IText> = (args) => <Text {...args} />;
 
 export const Default = Template.bind({});
 

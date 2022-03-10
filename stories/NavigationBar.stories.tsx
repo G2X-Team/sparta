@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationBar, Props } from '../src/components/NavigationBar/NavigationBar';
+import { NavigationBar, INavigationBar } from '../src/components/NavigationBar/NavigationBar';
 import { Story, Meta } from '@storybook/react';
 import { Section, Text, Dropdown, Button, Icon, Option } from '../src';
 
@@ -16,7 +16,7 @@ export default meta;
  * @param args arguments for navigation bar
  * @return template of Navigation bar
  */
-const Template: Story<Props> = (args) => (
+const Template: Story<INavigationBar> = (args) => (
     <div
         style={{
             position: 'relative',
@@ -83,7 +83,7 @@ const printMessage = (): JSX.Element[] => {
  * @param args arguments for navigation bar
  * @return template of Navigation bar
  */
-const FixedTemplate: Story<Props> = (args) => (
+const FixedTemplate: Story<INavigationBar> = (args) => (
     <div
         style={{
             position: 'relative',

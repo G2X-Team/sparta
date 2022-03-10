@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import * as CSS from 'csstype';
 import './Table.css';
 
-export interface Props {
+export interface ITable {
     /** width of desired table */
     width?: CSS.Property.Width;
     /** height of table in pixels */
@@ -43,7 +43,7 @@ const btnStyle = {
  *
  * @return Table component
  */
-export const Table: FC<Props> = ({
+export const Table: FC<ITable> = ({
     data = [],
     colNames = Object.keys(data[0]),
     pageNum = 0,

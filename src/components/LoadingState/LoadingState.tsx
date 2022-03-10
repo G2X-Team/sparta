@@ -2,7 +2,7 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 'react';
 import './LoadingState.css';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface ILoadingState extends HTMLAttributes<HTMLDivElement> {
     /**
      * Determines status of the progressbar where
      * progressFilled={0.1} => 10% filled progressbar
@@ -21,7 +21,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return LoadingState component
  */
-export const LoadingState: FC<Props> = ({
+export const LoadingState: FC<ILoadingState> = ({
     progress = 0,
     type = 'spinner',
     size = 'small',

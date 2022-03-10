@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import * as CSS from 'csstype';
 import './Icon.css';
 
-export interface Props extends HTMLAttributes<HTMLParagraphElement> {
+export interface IIcon extends HTMLAttributes<HTMLParagraphElement> {
     /** The icon name the user wants to render */
     name: string;
     /** Specification of an onClick method will convert icon into a button */
@@ -25,7 +25,7 @@ export interface Props extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Icon component
  */
-export const Icon: FC<Props> = ({
+export const Icon: FC<IIcon> = ({
     name,
     onClick,
     clickable = onClick && true,

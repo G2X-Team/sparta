@@ -10,7 +10,7 @@ import './NavigationBar.css';
 import { Text } from '../Text/Text';
 import Section from './overload/Section';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface INavigationBar extends HTMLAttributes<HTMLDivElement> {
     /** If the component is not static, it will determine the orientation of the component */
     orientation?: ComponentVerticalOrientation;
     /** Determines the position of the component */
@@ -30,7 +30,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Navigation Bar component
  */
-export const NavigationBar: FC<Props> = ({
+export const NavigationBar: FC<INavigationBar> = ({
     size = 'medium',
     position = 'static',
     orientation = 'top',
@@ -39,7 +39,7 @@ export const NavigationBar: FC<Props> = ({
     onTitleClick,
     style,
     ...props
-}: Props) => {
+}: INavigationBar) => {
     // refs
     const navigationBar = useRef<HTMLDivElement>(null);
     // state

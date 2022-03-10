@@ -6,7 +6,7 @@ import Overload from '../../interfaces/Overload';
 
 import { Text } from '../Text/Text';
 
-export interface Props extends Overload<HTMLAttributes<HTMLElement>> {
+export interface IOption extends Overload<HTMLAttributes<HTMLElement>> {
     /** Needs to have a string value in between tags */
     children: string;
     /** Can have onClick callback method */
@@ -21,8 +21,8 @@ export interface Props extends Overload<HTMLAttributes<HTMLElement>> {
  * @return Option component
  */
 // eslint-disable-next-line react/display-name
-export const Option: FC<Props> = forwardRef(function Option(
-    { children, parentProps, className, onClick, ...props }: Props,
+export const Option: FC<IOption> = forwardRef(function Option(
+    { children, parentProps, className, onClick, ...props }: IOption,
     ref
 ) {
     useEffect(() => {

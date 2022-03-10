@@ -3,7 +3,7 @@ import React from 'react';
 
 import Overload from '../../../interfaces/Overload';
 
-import { Switch as CSwitch, Props as SwitchProps } from '../../Switch/Switch';
+import { Switch as CSwitch, ISwitch as SwitchProps } from '../../Switch/Switch';
 
 /**
  * Formats Switch to be compatible with form
