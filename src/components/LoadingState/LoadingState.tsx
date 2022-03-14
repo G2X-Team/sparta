@@ -2,6 +2,8 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 'react';
 import './LoadingState.css';
 
+import { Text } from '../Text/Text';
+
 export interface ILoadingState extends HTMLAttributes<HTMLDivElement> {
     /**
      * Determines status of the progressbar where
@@ -14,6 +16,8 @@ export interface ILoadingState extends HTMLAttributes<HTMLDivElement> {
     type?: 'spinner' | 'progress';
     /** Determines whether the LoadingState is open or not */
     loading?: boolean;
+    /** Required aia-label for WCAG 2.0 authentication purposes */
+    label: string;
 }
 
 /**
@@ -29,6 +33,7 @@ export const LoadingState: FC<ILoadingState> = ({
     className,
     children = undefined,
     style,
+    label,
     ...props
 }) => {
     // ref
@@ -79,12 +84,21 @@ export const LoadingState: FC<ILoadingState> = ({
             ariaProps['aria-valuemax'] = '100';
             ariaProps['aria-valuemin'] = '0';
             ariaProps['aria-valuetext'] = 'Loading Process';
+
+            // assign names & labels
+            label && (ariaProps['aria-labelledby'] = label);
         } else {
             ariaProps['aria-busy'] = loading ? 'true' : 'false';
+            ariaProps['aria-labelledby'] = 'apollo-loading-state-description-text';
         }
 
         return (
-            <div {...ariaProps} className={containerName} ref={progressRef}>
+            <div {...ariaProps} className={containerName} aria-label={label} ref={progressRef}>
+                {type === 'spinner' ? (
+                    <Text inline id="apollo-loading-state-description-text">
+                        {label}
+                    </Text>
+                ) : null}
                 <div
                     {...props}
                     style={loadingStyle}
@@ -100,7 +114,10 @@ export const LoadingState: FC<ILoadingState> = ({
     return (
         <>
             {loading ? (
-                <div className="apollo-component-library-loadingstate-component-container">
+                <div
+                    className="apollo-component-library-loadingstate-component-container"
+                    tabIndex={0}
+                >
                     {renderLoadingState()}
                 </div>
             ) : null}
