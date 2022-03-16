@@ -1,18 +1,23 @@
-import { HTMLAttributes, FC, forwardRef, ForwardedRef } from 'react';
+import { HTMLAttributes, FC, forwardRef, ForwardedRef, MouseEvent } from 'react';
 import React, { useEffect } from 'react';
 import './Option.css';
 
 import Overload from '../../interfaces/Overload';
+import type { ComponentWrap } from '../../interfaces/Properties';
 
 import { Text } from '../Text/Text';
 
-export interface IOption extends Overload<HTMLAttributes<HTMLElement>> {
+export interface IOption extends Overload<Omit<HTMLAttributes<HTMLElement>, 'onClick'>> {
     /** Needs to have a string value in between tags */
     children: string;
     /** Can have onClick callback method */
-    onClick?: () => void;
+    onClick?: (event?: MouseEvent<HTMLLIElement>) => void;
     /** Allows for forward ref */
     ref?: ForwardedRef<HTMLLIElement>;
+    /** Adds the ability to redirect to other places */
+    href?: string;
+    /** Method that wraps option within another element while keeping same interface name */
+    wrap?: ComponentWrap;
 }
 
 /**
@@ -22,11 +27,11 @@ export interface IOption extends Overload<HTMLAttributes<HTMLElement>> {
  */
 // eslint-disable-next-line react/display-name
 export const Option: FC<IOption> = forwardRef(function Option(
-    { children, parentProps, className, onClick, ...props }: IOption,
+    { children, parentProps, className, onClick, wrap, href, ...props }: IOption,
     ref
 ) {
     useEffect(() => {
-        if (!onClick) return;
+        if (!onClick || wrap) return;
 
         /**
          * Will execute the onClick method on enter
@@ -35,7 +40,7 @@ export const Option: FC<IOption> = forwardRef(function Option(
          */
         const onEnter = (event: KeyboardEvent): void => {
             if (event.key === 'Enter') {
-                onClick && onClick();
+                handleClick();
             }
         };
 
@@ -43,16 +48,24 @@ export const Option: FC<IOption> = forwardRef(function Option(
         return () => window.removeEventListener('keydown', onEnter);
     }, []);
 
-    return (
+    /** Handles click for option */
+    const handleClick = (): void => {
+        if (onClick) onClick();
+        if (href) window.location.replace(href);
+    };
+
+    const option = (
         <li
             {...props}
             tabIndex={0}
             ref={ref}
-            onClick={onClick}
+            onClick={handleClick}
             role="option"
-            className={`apollo-component-library-option-component ${className}`}
+            className={`apollo-component-library-option-component ${className || ''}`}
         >
             <Text margins={false}>{children}</Text>
         </li>
     );
+
+    return <>{wrap ? wrap(option) : option}</>;
 });

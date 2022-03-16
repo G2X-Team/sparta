@@ -42,8 +42,10 @@ class FormatChildren {
 
         // loop through all children
         Children.forEach(children, (child: JSX.Element, index: number) => {
-            const childName: string =
+            let childName =
                 child?.type?.displayName || child?.type?.name || child?.type?.render?.name;
+
+            if (childName === 'MDXCreateElement') childName = child.props?.mdxType;
 
             // hande whether sought out component is found
             if (componentMap[childName]) {
@@ -54,12 +56,39 @@ class FormatChildren {
 
                 // get required props
                 const {
-                    props: { parentProps: childParentProps, key: childKey, ...childProps },
+                    props: {
+                        parentProps: childParentProps,
+                        key: childKey,
+                        originalType,
+                        mdxType,
+                        ...childProps
+                    },
                 } = child;
 
                 // assign props and finalize component format
+                /**
+                 * Gets child type size
+                 *
+                 * @return size of child category
+                 */
+                const getChildTypeSize = (): number => this.foundChildren[childName].length;
+
+                /**
+                 * Gets size of all children
+                 *
+                 * @return size of all children
+                 */
+                const getChildrenSize = (): number => this.allChildren.length;
                 const formattedComponent: JSX.Element = <Component {...childProps} key={index} />;
-                const cloned: JSX.Element = React.cloneElement(formattedComponent, { parentProps });
+                const cloned: JSX.Element = React.cloneElement(formattedComponent, {
+                    parentProps: {
+                        childIndex: index,
+                        childTypeIndex: getChildTypeSize(),
+                        getChildrenSize,
+                        getChildTypeSize,
+                        ...parentProps,
+                    },
+                });
 
                 // push to storage
                 this.foundChildren[childName].push(cloned);

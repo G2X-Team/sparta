@@ -23,10 +23,10 @@ const Checkbox: FC<Overload<ICheckbox>> = ({
      */
     const checkboxOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
         // execute group on change if any
-        groupOnChange && groupOnChange(event);
+        if (groupOnChange) groupOnChange(event);
 
         // run the onChange method if it exists
-        onChange && onChange(event);
+        if (onChange) onChange(event);
     };
 
     return (

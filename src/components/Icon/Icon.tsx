@@ -1,5 +1,5 @@
 import type { HTMLAttributes, FC } from 'react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as CSS from 'csstype';
 import './Icon.css';
 
@@ -37,6 +37,24 @@ export const Icon: FC<IIcon> = ({
     style,
     ...props
 }) => {
+    useEffect(() => {
+        if (!onClick) return;
+
+        /**
+         * Will execute the onClick method on enter
+         *
+         * @param event keyobard event
+         */
+        const onEnter = (event: KeyboardEvent): void => {
+            if (event.key === 'Enter') {
+                if (onClick) onClick();
+            }
+        };
+
+        window.addEventListener('keydown', onEnter);
+        return () => window.removeEventListener('keydown', onEnter);
+    }, []);
+
     return (
         <span
             {...props}
