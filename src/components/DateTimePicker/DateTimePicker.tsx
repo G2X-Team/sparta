@@ -36,7 +36,7 @@ export const DateTimePicker: FC<IDateTimePicker> = ({
     const [startDate, setStartDate] = useState<Date | null>(selectedDate);
     // eslint-disable-next-line require-jsdoc
     const newOnChange = (selectedDate: React.SetStateAction<Date | null>) => {
-        onChange && onChange(startDate);
+        if (onChange) onChange(startDate);
         setStartDate(selectedDate);
     };
     return (

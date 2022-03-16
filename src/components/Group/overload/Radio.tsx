@@ -23,10 +23,10 @@ const Radio: FC<Overload<IRadio>> = ({
      */
     const radioOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
         // execute group on change method if any
-        groupOnChange && groupOnChange(event);
+        if (groupOnChange) groupOnChange(event);
 
         // execute standalone on change if any
-        onChange && onChange(event);
+        if (onChange) onChange(event);
     };
 
     return (

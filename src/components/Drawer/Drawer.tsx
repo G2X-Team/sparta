@@ -79,7 +79,7 @@ export const Drawer: FC<IDrawer> = ({
                 // not open, it nee
                 toggleEffect(false);
                 setTimeout(() => toggleDisplay(false), transition + 100);
-                onClose && onClose();
+                if (onClose) onClose();
             } else {
                 toggleDisplay(true);
                 setTimeout(() => toggleEffect(true), 100);

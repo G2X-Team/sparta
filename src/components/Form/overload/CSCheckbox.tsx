@@ -41,7 +41,7 @@ const Checkbox: FC<ICheckbox> = ({
         } = event;
 
         // execute on change if any
-        onChange && onChange(event);
+        if (onChange) onChange(event);
 
         // clear errors if there are any
         if (errors[id]?.message) clearErrors(id);

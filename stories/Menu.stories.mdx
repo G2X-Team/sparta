@@ -1,0 +1,126 @@
+import {
+    Meta,
+    ColorPalette,
+    ColorItem,
+    Typeset,
+    Props,
+    Story,
+    Canvas,
+} from '@storybook/addon-docs';
+import { IMenu, Menu } from '../src/components/Menu/Menu';
+import { Option, Text, Divider, Button, Header, Footer } from '../src';
+
+<Meta title="Interfacing/Menu" component={Menu} />
+
+# Menu Component
+
+This component will be used for all components who need some kind of menu interface. Among them we
+have use cases such as `Dropdown` and `Drawer`.
+
+## Functionality
+
+At first glance, it might not look like much, but this component holds secrets to streamlining
+accessibility and improving the workflow with components that have menus. By default this component
+supports several behaviors:
+
+-   **`listbox`:** when there are immediate `Option` components as children
+-   **`application`:** when there are no immediate `Option` components as children
+
+There is also a prop enabled behavior:
+
+-   **`navigation`:** when the content redirects to a different page within the domain
+
+### `listbox` Menus
+
+A `listbox` is a design pattern enforced by WCAG 2.0 as a means of communicating when there is a
+list of items (typically belonging to set). What this means is that for our screen reader users,
+they will hear indeces of these `Option` components and know how many elements there are just by
+tabbing through the options.
+
+This is a huge plus for accessibility, and all you had to do was add the `Option` component as
+a child to the `Menu`, the rest was handled by us magically 😉
+
+<Canvas>
+    <Story name="Listbox Menu" args={{ label: 'Menu Component' }}>
+        {(args) => (
+            <Menu {...args}>
+                <Option>First Option</Option>
+                <Option>Second Option</Option>
+                <Option>Third Option</Option>
+            </Menu>
+        )}
+    </Story>
+</Canvas>
+
+### `application` Menus
+
+An application menu typically refers to the use of menus beyond just listing out data. This is going
+to be most useful when you need extra functionality than what a typical `listbox` provides. For this
+specific functionality you are going to have to provide a `description` to let our hearing users
+know what's going on. Additionally, you can add `Header` and `Footer` components to further create
+layout as needed.
+
+> **Fair warning:** this component will throw given several requirements aren't met:
+>
+> -   Multiple `Header`/`Footer` components: This component recognizes these components and will
+>     format them accordingly. However, it won't like it if you add multiple headers as the immediate
+>     children. Easy enough right?
+> -   Don't add a `description`: When in application mode, there isn't a lot of detail being given
+>     to our screen-reader users. By us throwing, we ensure that you don't forget to make whatever
+>     you're building accessible to all.
+
+<Canvas>
+    <Story
+        name="Application Menu"
+        args={{
+            label: 'Menu Component',
+            description: 'This is a special menu that you can interact with',
+            height: 200,
+            width: 400,
+            padding: 10,
+        }}
+    >
+        {(args) => (
+            <Menu {...args}>
+                <Header>
+                    <Text header={3} bold>
+                        New Kind of Menu
+                    </Text>
+                </Header>
+                <Text>
+                    This menu is completely different than the previous one. It's entire purpose is
+                    to be flexible and provide the user with options when defining what a "menu"
+                    really is.
+                </Text>
+                <Footer>
+                    <Button>Clicking me doesn't do anything!</Button>
+                </Footer>
+            </Menu>
+        )}
+    </Story>
+</Canvas>
+
+### `navigation` Menus
+
+These are the kind of menus that link to other pages. This is specifically designed for when you are
+using this menu to collapse navigation options. This is useful to let your users know that the options
+will redirect you elsewhere
+
+<Canvas>
+    <Story name="Navigation Menu" args={{ label: 'Menu Component', navigation: true }}>
+        {(args) => (
+            <Menu {...args}>
+                <Option>First Option</Option>
+                <Option>Second Option</Option>
+                <Option>Third Option</Option>
+            </Menu>
+        )}
+    </Story>
+</Canvas>
+
+## Other Props and Functionalities
+
+For reference, we have a complete list of the properties and everything else down here. I would ignore
+`parentProps` unless you are a dev contributing to the `Menu` component.
+
+<Props of={Menu} />
