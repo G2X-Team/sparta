@@ -42,7 +42,7 @@ const Button: FC<Overload<IButton>> = ({
      */
     const buttonOnClick = (): void => {
         toggleOpen(!open);
-        onClick && onClick();
+        if (onClick) onClick();
     };
 
     return (

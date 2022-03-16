@@ -64,7 +64,7 @@ const Group: FC<IGroup> = ({
         } = event;
 
         // execute original group on change
-        onChange && onChange(event);
+        if (onChange) onChange(event);
 
         // if it is an organiation, don't do anything else
         if (type === 'organization') return;

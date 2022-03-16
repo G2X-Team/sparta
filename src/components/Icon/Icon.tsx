@@ -47,7 +47,7 @@ export const Icon: FC<IIcon> = ({
          */
         const onEnter = (event: KeyboardEvent): void => {
             if (event.key === 'Enter') {
-                onClick && onClick();
+                if (onClick) onClick();
             }
         };
 

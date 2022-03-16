@@ -55,7 +55,7 @@ const TextInput: FC<ITextInput> = ({
         } = event;
 
         // handle onChange
-        onChange && onChange(event);
+        if (onChange) onChange(event);
 
         // update value on record
         const textData: FormTextData = { text: value };
