@@ -1,13 +1,10 @@
 import {
     Meta,
-    ColorPalette,
-    ColorItem,
-    Typeset,
     Props,
     Story,
     Canvas,
 } from '@storybook/addon-docs';
-import { IMenu, Menu } from '../src/components/Menu/Menu';
+import { Menu } from '../src/components/Menu/Menu';
 import { Option, Text, Divider, Button, Header, Footer } from '../src';
 
 <Meta title="Interfacing/Menu" component={Menu} />
@@ -29,6 +26,9 @@ supports several behaviors:
 There is also a prop enabled behavior:
 
 -   **`navigation`:** when the content redirects to a different page within the domain
+
+Additionally, you can add `Header` and `Footer` components to further create layout as needed for
+all types of menus.
 
 ### `listbox` Menus
 
@@ -57,8 +57,7 @@ a child to the `Menu`, the rest was handled by us magically 😉
 An application menu typically refers to the use of menus beyond just listing out data. This is going
 to be most useful when you need extra functionality than what a typical `listbox` provides. For this
 specific functionality you are going to have to provide a `description` to let our hearing users
-know what's going on. Additionally, you can add `Header` and `Footer` components to further create
-layout as needed.
+know what's going on. 
 
 > **Fair warning:** this component will throw given several requirements aren't met:
 >

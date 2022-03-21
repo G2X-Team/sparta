@@ -45,6 +45,7 @@ class FormatChildren {
             let childName =
                 child?.type?.displayName || child?.type?.name || child?.type?.render?.name;
 
+            // support for mdx
             if (childName === 'MDXCreateElement') childName = child.props?.mdxType;
 
             // hande whether sought out component is found

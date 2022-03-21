@@ -1,12 +1,16 @@
-import type { HTMLAttributes, ReactNode, FC } from 'react';
+import type { HTMLAttributes, FC } from 'react';
 import React, { useEffect, useState, useRef } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Drawer.css';
 
-import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
-import Option from './overload/Option';
-import { ComponentOrientation } from '../../interfaces/Properties';
+import type { ComponentOrientation, ComponentRenderAll } from '../../interfaces/Properties';
+
+import { View } from '../View/View';
+
+import Menu from './overload/Menu';
+import Button from './overload/Button';
+import { IButton } from '../Button/Button';
+import Overload from '../../interfaces/Overload';
 
 export interface IDrawer extends HTMLAttributes<HTMLDivElement> {
     /**
@@ -41,7 +45,7 @@ export interface IDrawer extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Drawer Component
  */
-export const Drawer: FC<IDrawer> = ({
+export const Drawer: FC<IDrawer> & { Button: FC<Overload<IButton>> } = ({
     children,
     className = '',
     type = 'absolute',
@@ -53,13 +57,13 @@ export const Drawer: FC<IDrawer> = ({
     toggleOpen,
     style,
     ...props
-}) => {
-    // ref
-    const drawer = useRef<HTMLDivElement>(null);
+}: IDrawer) => {
+    const button = useRef<HTMLButtonElement | null>(null);
 
     // state variables
-    const [display, toggleDisplay] = useState(type === 'permanent' || open);
-    const [effect, toggleEffect] = useState(type === 'permanent' || open);
+    const [display, toggleDisplay] = useState(type === 'permanent' || open); // shows element in DOM
+    const [effect, toggleEffect] = useState(type === 'permanent' || open); // toggles effect
+    const [instant, toggleInstant] = useState(type === 'permanent' || open); // is the instant state
     const [modifiedDimension, setModifiedDimension] = useState('width');
 
     // make a useEffect to determine what transition will be used, acts as on init
@@ -76,11 +80,15 @@ export const Drawer: FC<IDrawer> = ({
         // check whenever display and open are out of sync
         if (open !== display) {
             if (display) {
-                // not open, it nee
+                toggleInstant(false);
                 toggleEffect(false);
                 setTimeout(() => toggleDisplay(false), transition + 100);
-                if (onClose) onClose();
+                if (button) button.current?.focus();
+                if (onClose) {
+                    onClose();
+                }
             } else {
+                toggleInstant(true);
                 toggleDisplay(true);
                 setTimeout(() => toggleEffect(true), 100);
             }
@@ -88,133 +96,66 @@ export const Drawer: FC<IDrawer> = ({
     }, [open]);
 
     /**
+     * Toggles the drawer open and closed
+     */
+    const toggleDrawer = (): void => {
+        if (toggleOpen) toggleOpen();
+
+        if (display) {
+            toggleInstant(false);
+            toggleEffect(false);
+            setTimeout(() => toggleDisplay(false), transition + 100);
+            if (button) button.current?.focus();
+            if (onClose) {
+                onClose();
+            }
+        } else {
+            toggleInstant(true);
+            toggleDisplay(true);
+            setTimeout(() => toggleEffect(true), 100);
+        }
+    };
+
+    /**
      * Finds all target components and renders them in final drawer component
      *
+     * @param childrenProp children property of the component needing formatting
      * @return render ready drawer component
      */
-    const renderDrawer = (): ReactNode => {
-        // gets all found children
-        const formatted = new FormatChildren({ children }, { Header, Footer, Option });
-
-        // format header and footer
-        const { Header: headers, Footer: footers } = formatted.extract({ Header, Footer });
-
-        // check that there is only one header and footer max
-        if (headers?.length > 1) throw new Error('Drawer can only have one Header component');
-        if (footers?.length > 1) throw new Error('Drawer can only have one Footer component');
-
-        // get the header/footer if it exists and assign it into a variable
-        const [header] = headers || [];
-        const [footer] = footers || [];
-
-        // define the conatiner style
-        const containerStyle = getDrawerContainerStyle(
+    const renderAll: ComponentRenderAll = (childrenProp) => {
+        // define parent props
+        const parentProps = {
+            children: childrenProp,
             orientation,
-            modifiedDimension,
             type,
+            modifiedDimension,
             effect,
             dimension,
             transition,
-            style
-        );
+            instant,
+            display,
+            toggleDrawer,
+            toggleOpen,
+            renderAll,
+            buttonRef: button,
+        };
 
-        // define drawer style
-        const bodyStyle = getDrawerBodyStyle(modifiedDimension, dimension, style);
+        // gets all found children
+        const formatted = new FormatChildren(parentProps, {
+            ['Drawer.Button']: Button,
+            Menu,
+            View,
+        });
 
-        return (
-            <div
-                style={containerStyle}
-                className={`
-                    apollo-component-library-drawer-component 
-                    ${className} ${orientation} ${type}
-                `}
-            >
-                <div {...props} ref={drawer} style={bodyStyle}>
-                    {header}
-                    <div className="apollo-component-library-drawer-component-body">
-                        {formatted.getAll()}
-                    </div>
-                    {footer}
-                </div>
-            </div>
-        );
+        // format header and footer
+        const [, ...otherMenus] = formatted.get(Menu);
+
+        if (otherMenus.length) throw new Error('Dropdown can only have one immediate Menu');
+
+        return formatted.getAll();
     };
 
-    return (
-        <>
-            {type === 'permanent' || display ? (
-                <div className={`apollo-component-library-drawer-component-container ${type}`}>
-                    <div>
-                        {renderDrawer()}
-                        {type === 'absolute' ? (
-                            <div
-                                onClick={toggleOpen}
-                                className={`apollo-component-library-drawer-component-backdrop 
-                                    ${type}`}
-                                style={getBackdropStyle(effect)}
-                            />
-                        ) : null}
-                    </div>
-                </div>
-            ) : null}
-        </>
-    );
+    return <div {...props}>{renderAll(children)}</div>;
 };
 
-/**
- * Gets the style for the drawer backdrop
- *
- * @param effect boolean determining when to change the opacity
- * @return style object
- */
-const getBackdropStyle = (effect: boolean): React.CSSProperties => {
-    return { opacity: effect ? 1 : 0 };
-};
-
-/**
- * Gets the drawer container style
- *
- * @param orientation string that determines the orientation of container
- * @param modifiedDimension string representing what dimension is being changed
- * @param type string that determines type of container
- * @param effect boolean that determines when to toggle dimension
- * @param dimension the scalar representing the size of the dimension
- * @param transition time in MS that it taks to close menu
- * @param style component css props
- * @return style object
- */
-const getDrawerContainerStyle = (
-    orientation: string,
-    modifiedDimension: string,
-    type: string,
-    effect: boolean,
-    dimension: number | string,
-    transition: number,
-    style: React.CSSProperties | undefined
-): React.CSSProperties => {
-    return {
-        [orientation]: 0,
-        [modifiedDimension]: type === 'permanent' || effect ? dimension : 0,
-        transition: `${modifiedDimension} ${transition}ms`,
-        ...style,
-    };
-};
-
-/**
- * Gets body drawer style
- *
- * @param modifiedDimension string representing what dimension is being changed
- * @param dimension the scalar representing the size of the dimension
- * @param style component css props
- * @return style object
- */
-const getDrawerBodyStyle = (
-    modifiedDimension: string,
-    dimension: number | string,
-    style: React.CSSProperties | undefined
-): React.CSSProperties => {
-    return {
-        [modifiedDimension]: dimension,
-        ...style,
-    };
-};
+Drawer.Button = Button;

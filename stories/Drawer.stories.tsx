@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { Drawer, IDrawer } from '../src/components/Drawer/Drawer';
-import { Header, Footer, Option, Text, Divider, Button } from '../src';
+import { Header, Menu, Footer, Option, Text, Divider, Button } from '../src';
 
 const meta: Meta = {
     title: 'Layout/Drawer',
@@ -25,9 +25,9 @@ const Template: Story<IDrawer> = (args) => {
     const [open, toggleOpen] = useState(false);
 
     return (
-        <React.Fragment>
-            <Button onClick={() => toggleOpen(true)}>Click me</Button>
-            <Drawer open={open} toggleOpen={() => toggleOpen(!open)} {...args}>
+        <Drawer open={open} toggleOpen={() => toggleOpen(!open)} {...args}>
+            <Drawer.Button>Click Me</Drawer.Button>
+            <Menu label="Drawer">
                 <Header>
                     <Text header={1} bold>
                         Drawer
@@ -42,8 +42,8 @@ const Template: Story<IDrawer> = (args) => {
                         This is an important text
                     </Text>
                 </Footer>
-            </Drawer>
-        </React.Fragment>
+            </Menu>
+        </Drawer>
     );
 };
 
