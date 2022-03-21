@@ -1,5 +1,5 @@
-import type { HTMLAttributes, ReactNode, FC } from 'react';
-import React from 'react';
+import type { HTMLAttributes, ReactNode, FC, ForwardedRef } from 'react';
+import React, { forwardRef } from 'react';
 import type { StyleVariant } from '../../interfaces/Properties';
 import './Button.css';
 
@@ -12,6 +12,8 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement> {
     onClick?: () => void;
     /** will allow for http redirect */
     href?: string;
+    /** Allows use of references */
+    ref?: ForwardedRef<HTMLButtonElement>;
 }
 
 /**
@@ -19,15 +21,16 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement> {
  *
  * @return Button component
  */
-export const Button: FC<IButton> = ({
-    children,
-    href,
-    className = '',
-    variant = 'default',
-    ...props
-}) => {
+export const Button: FC<IButton> = forwardRef(function Button(
+    { children, href, className = '', variant = 'default', ...props }: IButton,
+    ref: ForwardedRef<HTMLButtonElement>
+) {
     const button: JSX.Element = (
-        <button {...props} className={`apollo-component-library-button ${variant} ${className}`}>
+        <button
+            {...props}
+            className={`apollo-component-library-button ${variant} ${className}`}
+            ref={ref}
+        >
             {children}
         </button>
     );
@@ -40,4 +43,4 @@ export const Button: FC<IButton> = ({
     ) : (
         button
     );
-};
+});

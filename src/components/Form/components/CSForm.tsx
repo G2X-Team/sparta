@@ -65,6 +65,7 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, ...props }) => {
             Radio,
             Checkbox,
         });
+
         return formatted.getAll();
     };
 

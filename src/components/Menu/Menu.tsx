@@ -25,6 +25,8 @@ export interface IMenu extends Overload<HTMLAttributes<HTMLDivElement>> {
     handleOptionClick?: MouseEventHandler<HTMLOListElement>;
     /** Lets you change how much padding in the menu while not affecting other sides */
     padding?: CSS.Property.Padding;
+    /** For handling actions on escape */
+    onEscape?: () => void;
 }
 
 /**
@@ -39,6 +41,7 @@ export const Menu: FC<IMenu> = ({
     handleOptionClick,
     children,
     className,
+    onEscape,
     label,
     ...props
 }) => {
@@ -60,6 +63,7 @@ export const Menu: FC<IMenu> = ({
          * @param event event that occurs on keypress
          */
         const handleKeypresses = (event: KeyboardEvent): void => {
+            if (onEscape && event.key === 'Escape') onEscape();
             if (event.key === 'Home') first.current?.focus();
             if (event.key === 'End') last.current?.focus();
         };
@@ -85,21 +89,30 @@ export const Menu: FC<IMenu> = ({
             // check if there is a description
             if (!formatted.get(Option).length && !description?.length)
                 throw new Error('Menu with no Option components requires description prop');
+        }
 
-            // if it is extract the headers and footers
-            const [header, ...otherHeaders] = formatted.get(Header);
-            const [footer, ...otherFooters] = formatted.get(Footer);
+        // if it is extract the headers and footers
+        const extracted = formatted.extract({ Header, Footer });
+        if (extracted.Header) {
+            const {
+                Header: [header, ...otherHeaders],
+            } = extracted;
 
-            if (otherHeaders.length)
+            if (otherHeaders?.length)
                 throw new Error('Only one Header component can exist in the Menu');
 
-            if (otherFooters.length)
+            if (header && !headerComponent) setHeader(header);
+        }
+
+        if (extracted.Footer) {
+            const {
+                Footer: [footer, ...otherFooters],
+            } = extracted;
+
+            if (otherFooters?.length)
                 throw new Error('Only one Footer component can exist in the Menu');
 
-            if (header && !headerComponent) setHeader(header);
             if (footer && !footerComponent) setFooter(footer);
-
-            return formatted.getOther();
         }
 
         return formatted.getAll();
@@ -140,7 +153,7 @@ const getMenuStyle = ({ height, width, style, padding }: Omit<IMenu, 'label'>): 
     return {
         height,
         padding,
-        maxWidth: width,
+        width,
         ...style,
     };
 };

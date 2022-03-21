@@ -1,0 +1,228 @@
+import { useState } from 'react';
+
+import { Meta, Props, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Drawer, Menu, Option, Text, Header, Footer, View, Button } from '../src';
+
+<Meta title="Drawer" component={Drawer} />
+
+# Drawer Component
+
+This component is made with the intention of collapsing content that would otherwise cluttler the
+main view. You might want to use this as a fallback for navigation when your header needs to fit in
+mobile, or perhaps to show an expanded version of some module.
+
+## Setup
+
+The way we set up this component is much like a provider. A drawer needs to have an established area
+where it will slide out from, so a good idea is that everything you want the drawer to impact should
+be wrapped by it. This also gives us flexibility to handle some accessibility issues that drawers
+typically face on top of that.
+
+After we've given that information, all we do is add a `Menu` as a child, which we will automatically
+associate with the `Drawer`, and boom! We have our first `Drawer`... kind of.
+
+<Canvas>
+    <Story name="Bare-Minimum Drawer" args={{ label: 'Drawer', type: 'permanent' }}>
+        {(args) => (
+            <Drawer {...args}>
+                <Menu>
+                    <Header>
+                        <Text header={2} bold>
+                            Drawer
+                        </Text>
+                    </Header>
+                    <Option>First Option</Option>
+                    <Option>Second Option</Option>
+                    <Option>Third Option</Option>
+                </Menu>
+            </Drawer>
+        )}
+    </Story>
+</Canvas>
+
+You might have noticed that the Drawer isn't sliding out of anywhere (also we sneakily added a type to
+the `Drawer` so that it could appear just like that). That's because we haven't added the logic you
+would need to otherwise open the drawer.
+
+I know what you're thinking. _Ugh, now I need to make state for this and have to worry about a bunch of
+semantics right?_ Nope. If you just want a drawer that opens via a single button, you just have to use
+the `Drawer.Button` component. If you were wondering why we didn't just use a regular `Button` and
+pulled our magic that way, it's because the `Drawer` itself is a provider that probably wraps around
+all kinds of front end, buttons included. To separate concern, we wanted to make it easy to identify
+the button in charge of opening and closing the `Drawer`.
+
+Finally, choose where you want the drawer to pop out from by changing the `orientation` prop, by default,
+we have it set to `"left"`, but you can change it to `"right"`, `"top"`, and `"bottom"`.
+
+Once you have done that, pat yourself on the back because you have just implemented a fully functional
+`Drawer`.
+
+<Canvas>
+    <Story name="Standard Drawer" args={{ label: 'Drawer' }} height="300px">
+        {(args) => (
+            <Drawer {...args}>
+                <Drawer.Button>Click Me</Drawer.Button>
+                <Menu>
+                    <Header>
+                        <Text header={2} bold>
+                            Drawer
+                        </Text>
+                    </Header>
+                    <Option>First Option</Option>
+                    <Option>Second Option</Option>
+                    <Option>Third Option</Option>
+                </Menu>
+            </Drawer>
+        )}
+    </Story>
+</Canvas>
+
+## Functionality
+
+The `Drawer` implements the [Menu Component](?path=/docs/interfacing-menu--listbox-menu) to work,
+this enables it to have accessibility features that come with it. That means you can do type
+`home` to go to the first option, `end` to go to the last, and `esc` to collapse the `Drawer`
+entirely. That isn't all, you can use the drawer in multiple ways:
+
+-   **`absolute`:** implemented above, it will scale to 100% of whatever
+    relative container it finds itself in
+-   **`persistant`:** will shift whatever content is next to it to the side when
+    open
+-   **`permanent`:** will keep the menu open all the time, no button or toggle needed
+
+### `absolute`
+
+That is the type of drawer we implemented in the beginning. This is the most common drawer that you
+would typically see in the wild. Here all you have to do is add your `Dropdown.Button` and your
+`Menu`, wherever you want, and you're good to go. The `Menu` will take up 100% of the dimensions of
+the first `relative` positioned ancestor.
+
+<Canvas>
+    <Story name="Absolute Drawer" args={{ label: 'Drawer' }} height="300px">
+        {(args) => (
+            <Drawer {...args}>
+                <Drawer.Button>Open Absolute</Drawer.Button>
+                <Menu>
+                    <Header>
+                        <Text header={2} bold>
+                            Drawer
+                        </Text>
+                    </Header>
+                    <Option>First Option</Option>
+                    <Option>Second Option</Option>
+                    <Option>Third Option</Option>
+                </Menu>
+                <Text style={{ paddingTop: 20 }}>
+                    <Text bold header={2} style={{ paddingBottom: 10 }}>
+                        Hello World
+                    </Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                    id est laborum.
+                </Text>
+            </Drawer>
+        )}
+    </Story>
+</Canvas>
+
+### `persistant`
+
+This type of drawer will push the content blocking its way. For this example, we wanted the
+component to nicely push the text to the left. To do this, we took advantage of the built in
+integration of the `View` component. This lets us put our component specific children such as
+the `Menu` and the `Dropdown.Button` into containers without losing its functionality.
+
+A little bit of CSS to organize how everything will be displayed and boom, we have a smooth
+transitioning, persistent, drawer.
+
+<Canvas>
+    <Story name="Persistent Drawer" args={{ label: 'Drawer', type: 'persistent' }} height="300px">
+        {(args) => (
+            <Drawer {...args}>
+                <Drawer.Button>Open Persistent</Drawer.Button>
+                <View display="flex" style={{ paddingTop: 20 }}>
+                    <Menu>
+                        <Header>
+                            <Text header={2} bold>
+                                Drawer
+                            </Text>
+                        </Header>
+                        <Option>First Option</Option>
+                        <Option>Second Option</Option>
+                        <Option>Third Option</Option>
+                    </Menu>
+                    <Text style={{ padding: 10 }}>
+                        <Text bold header={2} style={{ paddingBottom: 10 }}>
+                            Hello World
+                        </Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                        qui officia deserunt mollit anim id est laborum.
+                    </Text>
+                </View>
+            </Drawer>
+        )}
+    </Story>
+</Canvas>
+
+> As you may have noticed, this element only _really_ expands in two directions, vertically and
+> horizontally. To distinguish left, right, bottom, and top, we added a divider on the orientation
+> that will separate the content when expanded.
+
+### `permanent`
+
+This last version of the drawer, will just render the menu without having to to toggle it. It's just
+there if you wanted to keep some of the functionalities of the drawer. Although, this alternative
+doesn't really provide much more functionality than your standard `Menu` component with extra styling.
+We have it just in case you wanted it though.
+
+<Canvas>
+    <Story name="Permanent Drawer" args={{ label: 'Drawer', type: 'permanent' }} height="200px">
+        {(args) => (
+            <Drawer {...args}>
+                <View display="flex">
+                    <Menu>
+                        <Header>
+                            <Text header={2} bold>
+                                Drawer
+                            </Text>
+                        </Header>
+                        <Option>First Option</Option>
+                        <Option>Second Option</Option>
+                        <Option>Third Option</Option>
+                    </Menu>
+                    <Text style={{ padding: 10 }}>
+                        <Text bold header={2} style={{ paddingBottom: 10 }}>
+                            Hello World
+                        </Text>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                        qui officia deserunt mollit anim id est laborum.
+                    </Text>
+                </View>
+            </Drawer>
+        )}
+    </Story>
+</Canvas>
+
+### Manual Controls
+
+Sometimes we want more control on when a drawer opens or even how many drawers there are. For the
+developers that need this kind of control for performance and other reasons, you can also add your
+own opening/closing logic. There is an `open` that can override any built-in logic, as well as a
+`toggleOpen` to input your state changing method of `open`. This gives you all the built in
+functionality while retaining your control.
+
+## Other Props and Functionalities
+
+<ArgsTable of={Drawer} />

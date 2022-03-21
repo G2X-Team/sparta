@@ -2,28 +2,101 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Drawer, Header, Footer, Divider, Option } from '../src';
+import { Drawer, Header, Menu, Footer, Divider, Option } from '../src';
+import { axe, toHaveNoViolations } from 'jest-axe';
+expect.extend(toHaveNoViolations);
 
 describe('Drawer', () => {
+    it('complies to WCAG 2.0', async () => {
+        // given
+        const { container: absoluteDrawer } = render(
+            <Drawer open={true} type="absolute">
+                <Menu label="drawer-1" description="this is a drawer">
+                    Hello World
+                </Menu>
+            </Drawer>
+        );
+
+        const { container: persistentDrawer } = render(
+            <Drawer open={true} type="persistent">
+                <Menu label="drawer-2" description="this is a drawer">
+                    Hello World
+                </Menu>
+            </Drawer>
+        );
+
+        const { container: permanentDrawer } = render(
+            <Drawer open={true} type="permanent">
+                <Menu label="drawer-3" description="this is a drawer">
+                    Hello World
+                </Menu>
+            </Drawer>
+        );
+
+        // when
+        const results = [];
+        results[0] = await axe(absoluteDrawer);
+        results[1] = await axe(persistentDrawer);
+        results[2] = await axe(permanentDrawer);
+
+        // then
+        results.forEach((result: any) => expect(result).toHaveNoViolations());
+    });
+
     it('it renders correctly', () => {
         // given
-        render(<Drawer type="permanent">Hello World</Drawer>);
+        render(
+            <Drawer type="permanent">
+                <Menu label="drawer" description="this is a drawer">
+                    Hello World
+                </Menu>
+            </Drawer>
+        );
 
         // when then
         expect(screen.getByText(/hello world/i)).toBeInTheDocument();
+    });
+
+    it('will open the menu when the Drawer.Button is clicked', () => {
+        // given
+        render(
+            <Drawer>
+                <Drawer.Button>Click me</Drawer.Button>
+                <Menu label="drawer" description="this is a drawer">
+                    Hello World
+                </Menu>
+            </Drawer>
+        );
+
+        // we should expect the menu to be closed at first
+        expect(screen.queryByText(/hello world/i)).not.toBeInTheDocument();
+
+        // when
+        userEvent.click(screen.getByRole('button'));
+
+        // then
+        expect(screen.queryByText(/hello world/i)).toBeInTheDocument();
     });
 
     it('is not visible when collapsed in all types except "permanent"', () => {
         // given
         render(
             <React.Fragment>
-                <Drawer type="absolute">Hello World absolute</Drawer>
-                <Drawer type="persistent">Hello World persistent</Drawer>
+                <Drawer type="absolute">
+                    <Menu label="drawer-1" description="this is a drawer">
+                        Hello World absolute
+                    </Menu>
+                </Drawer>
+                <Drawer type="persistent">
+                    <Menu label="drawer-2" description="this is a drawer">
+                        Hello World persistent
+                    </Menu>
+                </Drawer>
             </React.Fragment>
         );
 
         // when then
-        expect(screen.queryAllByText(/hello world absolute/i)).toHaveLength(0);
+        expect(screen.queryAllByText(/hello world /i)).toHaveLength(0);
     });
 
     it('will be visible when not collapsed in all types', () => {
@@ -31,13 +104,19 @@ describe('Drawer', () => {
         render(
             <React.Fragment>
                 <Drawer open={true} type="absolute">
-                    Hello World
+                    <Menu label="drawer-1" description="this is a drawer">
+                        Hello World
+                    </Menu>
                 </Drawer>
                 <Drawer open={true} type="persistent">
-                    Hello World
+                    <Menu label="drawer-2" description="this is a drawer">
+                        Hello World
+                    </Menu>
                 </Drawer>
                 <Drawer open={true} type="permanent">
-                    Hello World
+                    <Menu label="drawer-3" description="this is a drawer">
+                        Hello World
+                    </Menu>
                 </Drawer>
             </React.Fragment>
         );
@@ -50,8 +129,10 @@ describe('Drawer', () => {
         // given
         render(
             <Drawer type="permanent">
-                <Header>Header</Header>
-                Hello World
+                <Menu label="drawer" description="this is a drawer">
+                    <Header>Header</Header>
+                    Hello World
+                </Menu>
             </Drawer>
         );
 
@@ -63,8 +144,10 @@ describe('Drawer', () => {
         // given
         render(
             <Drawer type="permanent">
-                Hello World
-                <Footer>Footer</Footer>
+                <Menu label="drawer" description="this is a drawer">
+                    Hello World
+                    <Footer>Footer</Footer>
+                </Menu>
             </Drawer>
         );
 
@@ -76,8 +159,10 @@ describe('Drawer', () => {
         // given
         render(
             <Drawer type="permanent">
-                Hello World
-                <Divider />
+                <Menu label="drawer" description="this is a drawer">
+                    Hello World
+                    <Divider />
+                </Menu>
             </Drawer>
         );
 
@@ -89,7 +174,9 @@ describe('Drawer', () => {
         // given
         render(
             <Drawer type="permanent">
-                <Option>This is an option</Option>
+                <Menu label="drawer" description="this is a drawer">
+                    <Option>This is an option</Option>
+                </Menu>
             </Drawer>
         );
 
@@ -102,7 +189,9 @@ describe('Drawer', () => {
         const onClick: jest.Mock<any, any> = jest.fn();
         render(
             <Drawer type="permanent">
-                <Option onClick={onClick}>This is an option</Option>
+                <Menu label="drawer">
+                    <Option onClick={onClick}>This is an option</Option>
+                </Menu>
             </Drawer>
         );
 
