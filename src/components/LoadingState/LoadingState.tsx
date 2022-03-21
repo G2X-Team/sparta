@@ -86,7 +86,7 @@ export const LoadingState: FC<ILoadingState> = ({
             ariaProps['aria-valuetext'] = 'Loading Process';
 
             // assign names & labels
-            label && (ariaProps['aria-labelledby'] = label);
+            if (label) ariaProps['aria-labelledby'] = label;
         } else {
             ariaProps['aria-busy'] = loading ? 'true' : 'false';
             ariaProps['aria-labelledby'] = 'apollo-loading-state-description-text';
