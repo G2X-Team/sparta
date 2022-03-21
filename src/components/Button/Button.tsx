@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import type { HTMLAttributes, ReactNode, FC, ForwardedRef } from 'react';
 import React, { forwardRef } from 'react';
 import type { StyleVariant } from '../../interfaces/Properties';
@@ -22,25 +23,25 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement> {
  * @return Button component
  */
 export const Button: FC<IButton> = forwardRef(function Button(
-    { children, href, className = '', variant = 'default', ...props }: IButton,
+    { children, onClick, href, className = '', variant = 'default', ...props }: IButton,
     ref: ForwardedRef<HTMLButtonElement>
 ) {
-    const button: JSX.Element = (
+    /** Handles click open link if href > 0 */
+    const handleClick = (): void => {
+        if (onClick) onClick();
+        if (href && href.length > 0) {
+            window.open(href, '_blank');
+        }
+    };
+
+    return (
         <button
             {...props}
+            onClick={handleClick}
             className={`apollo-component-library-button ${variant} ${className}`}
             ref={ref}
         >
             {children}
         </button>
-    );
-
-    // if the href element exists, render it with link capabilities, else just render button
-    return href ? (
-        <a href={href} target="_blank" rel="noreferrer">
-            {button}
-        </a>
-    ) : (
-        button
     );
 });
