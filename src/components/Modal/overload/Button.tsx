@@ -20,8 +20,8 @@ const Button: FC<Overload<IButton>> = ({
      * if manual prop is set to false
      */
     const buttonOnClick = (): void => {
-        onClick && onClick();
-        !manual && toggleModal && toggleModal(!open);
+        if (onClick) onClick();
+        if (!manual && toggleModal) toggleModal(!open);
     };
 
     return (

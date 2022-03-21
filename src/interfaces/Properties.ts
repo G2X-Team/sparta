@@ -1,3 +1,6 @@
+import type { ReactNode } from 'react';
+
+/** Component Property types */
 export type StyleVariant = 'default' | 'secondary';
 export type ComponentVerticalOrientation = 'top' | 'bottom';
 export type ComponentHorizontalOrientation = 'left' | 'right';
@@ -6,6 +9,13 @@ export type ComponentGeneralOrientation = 'horizontal' | 'vertical';
 export type ComponentSize = 'small' | 'medium' | 'large';
 export type ComponentAlignment = 'left' | 'center' | 'right';
 export type ComponentPosition = 'static' | 'absolute' | 'fixed';
+export type ComponentWrap = (component: ReactNode) => ReactNode;
+
+/**
+ * Function used to format children. When in `parentProps`, this method will perpatuate the
+ * original RenderAll component
+ */
+export type ComponentRenderAll = (children?: ReactNode) => JSX.Element[];
 
 /* Form Types */
 

@@ -26,7 +26,7 @@ export const detectOutsideClick = (
             if (element.current !== null && !element.current.contains(event.target)) {
                 // toggle if it is active
                 toggleOpen(!open);
-                outsideMethod && outsideMethod(open);
+                if (outsideMethod) outsideMethod(open);
             }
         };
 

@@ -78,7 +78,7 @@ export const Dropdown: FC<IDropdown> = ({
 
             /** Handles click for options */
             const handleClick = (): void => {
-                onClick && onClick();
+                if (onClick) onClick();
                 toggleOpen(false);
             };
 
