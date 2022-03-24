@@ -13,7 +13,7 @@ describe('Button', () => {
         expect(screen.getByText(/hello world!/i)).toBeInTheDocument();
     });
 
-    it('can be clicked', () => {
+    it('will call onClick call back', () => {
         // given
         const onClick: jest.Mock<any, any> = jest.fn();
         render(<Button onClick={onClick}>Trying my best</Button>);
@@ -25,14 +25,15 @@ describe('Button', () => {
         expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('will render anchor element when provided an href', () => {
+    it('can open a link', () => {
         // given
+        global.open = jest.fn();
         render(<Button href="https://google.com">Click me</Button>);
 
-        // when then
-        expect(screen.getByText(/click me/i).closest('a')).toHaveAttribute(
-            'href',
-            'https://google.com'
-        );
+        // when
+        userEvent.click(screen.getByRole('button', { name: /click me/i }));
+
+        // then
+        expect(global.open).toBeCalled();
     });
 });
