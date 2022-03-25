@@ -41,14 +41,18 @@ describe('ButtonGroup', () => {
     it('allows for links and redirects', () => {
         // given
         const link = 'https://google.com';
+        global.open = jest.fn();
         render(
             <ButtonGroup>
                 <Button href={link}>First Button</Button>
             </ButtonGroup>
         );
+    
+        // when
+        userEvent.click(screen.getByText(/first button/i));
 
-        // when then
-        expect(screen.getByText(/first button/i).closest('a')).toHaveAttribute('href', link);
+        // then
+        expect(global.open).toBeCalled();
     });
 
     it('will disable all buttons when the button group is disabled', () => {
