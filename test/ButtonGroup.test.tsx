@@ -47,7 +47,7 @@ describe('ButtonGroup', () => {
                 <Button href={link}>First Button</Button>
             </ButtonGroup>
         );
-    
+
         // when
         userEvent.click(screen.getByText(/first button/i));
 
