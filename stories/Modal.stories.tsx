@@ -23,13 +23,13 @@ const Template: Story<IModal> = (args) => {
     return (
         <React.Fragment>
             <Button onClick={() => toggleModal(!open)}>Open Modal</Button>
-            <Modal open={open} toggleModal={() => toggleModal(!open)}>
-                <Header>
-                    <Text header={2} bold>
-                        This is a Modal
-                    </Text>
-                </Header>
-                <Text>This is a modal that shows dialogue.</Text>
+            <Modal
+                id="modal"
+                label="This is a Modal"
+                description="This is a modal that shows dialogue."
+                open={open}
+                toggleModal={() => toggleModal(!open)}
+            >
                 <Footer>
                     <ButtonGroup>
                         <Button variant="secondary">Accept</Button>

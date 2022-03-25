@@ -59,6 +59,7 @@ export const Icon: FC<IIcon> = ({
         <span
             {...props}
             style={getIconStyle(disabled, color, style)}
+            tabIndex={onClick ? 0 : undefined}
             className={`material-icons apollo-component-library-icon-component 
                 ${clickable && variant} ${className}`}
             onClick={onClick}

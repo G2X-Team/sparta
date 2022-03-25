@@ -33,7 +33,7 @@ const Template: Story<INavigationBar> = (args) => (
                 <Option>Trading</Option>
             </Section>
             <Section justifyContent="end" alignItems="center">
-                <Dropdown alignment="right">
+                <Dropdown name="section-dropdown" alignment="right">
                     <Button>
                         <Icon name="account_circle" style={{ fontSize: '2rem' }} clickable />
                     </Button>
@@ -101,7 +101,7 @@ const FixedTemplate: Story<INavigationBar> = (args) => (
                 <Option>Trading</Option>
             </Section>
             <Section justifyContent="end" alignItems="center">
-                <Dropdown alignment="right">
+                <Dropdown name="section-dropdown" alignment="right">
                     <Button>
                         <Icon name="account_circle" style={{ fontSize: '2rem' }} clickable />
                     </Button>

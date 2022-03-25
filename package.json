@@ -66,6 +66,7 @@
         "@testing-library/react": "^12.1.2",
         "@testing-library/user-event": "^13.5.0",
         "@types/jest-axe": "^3.5.3",
+        "@types/lodash": "^4.14.178",
         "@types/react": "^17.0.30",
         "@types/react-datepicker": "^4.3.4",
         "@types/react-dom": "^17.0.9",

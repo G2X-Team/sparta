@@ -1,10 +1,8 @@
 import type { HTMLAttributes, FC } from 'react';
-import React, { useState, useEffect, ReactNode } from 'react';
-import FormatChildren from '../../util/FormatChildren';
+import React, { useState, useEffect } from 'react';
 import './Modal.css';
 
-import { Header } from '../Header/Header';
-import Footer from './overload/Footer';
+import Dialog from './components/Dialog';
 
 export interface IModal extends HTMLAttributes<HTMLDivElement> {
     /** Required ID for WCAG 2.0 compliance purposes */
@@ -34,9 +32,8 @@ export interface IModal extends HTMLAttributes<HTMLDivElement> {
 export const Modal: FC<IModal> = ({
     className = '',
     manual = false,
-    children,
-    style,
     open = false,
+    style,
     toggleModal,
     ...props
 }) => {
@@ -57,43 +54,6 @@ export const Modal: FC<IModal> = ({
         }
     }, [open]);
 
-    /**
-     * Renders the modal and all of its children formatted as intended
-     *
-     * @return formatted modal component
-     */
-    const renderModal = (): ReactNode => {
-        const parentProps = { children, manual, toggleModal, open };
-
-        // find all specified components
-        const formatted = new FormatChildren(parentProps, {
-            Header,
-            Footer,
-        });
-
-        // extract header and footer components
-        const headers = formatted.get(Header);
-        const footers = formatted.get(Footer);
-
-        // check that the appropriate amount of headers is found
-        if (headers.length > 1) throw new Error('Modal can only have 1 Header component');
-        if (footers.length > 1) throw new Error('Modal can only have 1 Footer component');
-
-        // get the header and footer
-        const [header] = headers;
-        const [footer] = footers;
-
-        return (
-            <div {...props} className={`apollo-component-library-modal-component ${className}`}>
-                {header}
-                <div className="apollo-component-library-modal-component-body">
-                    {formatted.getOther()}
-                </div>
-                {footer}
-            </div>
-        );
-    };
-
     return (
         <>
             {display ? (
@@ -101,12 +61,16 @@ export const Modal: FC<IModal> = ({
                     style={getModalStyle(effect)}
                     className="apollo-component-library-modal-component-container"
                 >
-                    <div>
-                        {renderModal()}
-                        <div
-                            onClick={toggleModal}
-                            className="apollo-component-library-modal-component-backdrop"
-                        />
+                    <div className="apollo-component-library-modal-component-backdrop">
+                        {
+                            <Dialog
+                                {...props}
+                                className={className}
+                                open={open}
+                                manual={manual}
+                                toggleModal={toggleModal}
+                            />
+                        }
                     </div>
                 </div>
             ) : null}
