@@ -11,7 +11,6 @@ const Button: React.FC<Overload<IButton>> = ({
     parentProps: { disabled, variant, size },
     children,
     className,
-    href,
     ...props
 }: Overload<IButton>): JSX.Element => {
     return (
@@ -23,7 +22,7 @@ const Button: React.FC<Overload<IButton>> = ({
                 ${variant} 
                 ${size}`}
         >
-            {href ? <a href={href}>{children}</a> : children}
+            {children}
         </button>
     );
 };
