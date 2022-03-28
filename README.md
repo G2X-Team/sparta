@@ -1,6 +1,6 @@
 # Apollo Component Library (WIP)
 
-## What is it?
+## What is itt?
 Apollo is a component library primarily developed by MileMarker10 to facilitate the creation of Frontend UI components whilst reducing the amount of code that needs to be written.
 
 ## Starting it
