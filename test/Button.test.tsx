@@ -24,16 +24,4 @@ describe('Button', () => {
         // then
         expect(onClick).toHaveBeenCalledTimes(1);
     });
-
-    it('can open a link', () => {
-        // given
-        global.open = jest.fn();
-        render(<Button href="https://google.com">Click me</Button>);
-
-        // when
-        userEvent.click(screen.getByRole('button', { name: /click me/i }));
-
-        // then
-        expect(global.open).toBeCalled();
-    });
 });

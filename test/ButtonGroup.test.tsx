@@ -38,19 +38,6 @@ describe('ButtonGroup', () => {
         expect(onClick).toHaveBeenCalledTimes(3);
     });
 
-    it('allows for links and redirects', () => {
-        // given
-        const link = 'https://google.com';
-        render(
-            <ButtonGroup>
-                <Button href={link}>First Button</Button>
-            </ButtonGroup>
-        );
-
-        // when then
-        expect(screen.getByText(/first button/i).closest('a')).toHaveAttribute('href', link);
-    });
-
     it('will disable all buttons when the button group is disabled', () => {
         // given
         const onClick: jest.Mock<any, any> = jest.fn();
