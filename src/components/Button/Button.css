@@ -24,3 +24,7 @@
 .apollo-component-library-button.secondary {
     background: #57aeff;
 }
+
+.apollo-component-library-button.area {
+    background: none;
+}

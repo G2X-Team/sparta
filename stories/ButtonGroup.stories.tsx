@@ -22,7 +22,7 @@ const Template: Story<IButtonGroup> = (args) => {
     return (
         <>
             <ButtonGroup {...args}>
-                <Button href="https://google.com">First Button</Button>
+                <Button>First Button</Button>
                 <Button>Second Button</Button>
                 <Button>Third Button Button</Button>
             </ButtonGroup>
