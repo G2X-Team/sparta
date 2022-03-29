@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Default as Button } from '../stories/Button.stories';
+import { Button } from '../src';
 
 describe('Button', () => {
     it('renders correctly', () => {
