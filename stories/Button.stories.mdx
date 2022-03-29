@@ -1,0 +1,68 @@
+import { useRef } from 'react';
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Button } from '../src'; // components you used in the story
+
+<Meta title="Layout/Button" component={Button} />
+
+# Button
+
+The Button component is probably one of the biggest forms of input that Apollo has to offer.
+Something as simple as the button can make or break the experience for the user, and our aim
+was to make it as familiar as possible.
+
+## Functionality
+
+Functionally these buttons would work as you would expect them to. You hover or tab over it and
+click or `space`/`enter` it, you will execute the `onClick` callback. Pretty simple stuff. We only
+added very few additional features to it so it isn't too much of a pain to learn how to use.
+
+<Canvas>
+    <Story name="Standard Button" args={{ children: "Click Me" }}>
+        {(args) => <Button {...args} />}
+    </Story>
+</Canvas>
+
+### Variants
+
+The Button component for the moment only has 2 visual states that can be switched using the
+`variant` prop. These are the `"default"` and `"secondary"` variants. These variants can just
+be thought of two different style versions of the same element with no actual functional
+difference.
+
+<Canvas>
+    <Story name="Button Variants">
+        {(args) => (
+            <>
+                <Button>Default</Button>
+                <span style={{ paddingRight: 10 }} />
+                <Button variant="secondary">Secondary</Button>
+            </>
+        )}
+    </Story>
+</Canvas>
+
+### References
+
+Since you can put references in a regular `button` element, we wanted to retain that functionality
+in Apollo. So if you find the need, don't shy away from using references, we support them :)
+
+<Canvas>
+    <Story name="Button Refs">
+        {(args) => {
+            const ref = useRef(null);
+            return (
+                <Button ref={ref} onClick={() => window.alert(`button ref: ${ref.current}`)}>
+                    Click me
+                </Button>
+            );
+        }}
+    </Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+For a full breakdown of all the additional props, refer to the table below. Also take into
+consideration that this is a normal HTML `button`, and has all of the properties of one as well.
+
+<ArgsTable of={Button} />
