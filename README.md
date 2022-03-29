@@ -25,6 +25,8 @@ The file structure is laid out as follows:
 - **`stories`:** contains all `storybook` files for each component.
 - **`test`:** contains all unit testing done through Jest and `@testing-library`.
 
+### Breakdown
+
 ```Markdown
 apollo-component-library
 ├───example
@@ -47,4 +49,3 @@ apollo-component-library
 └───test
     └───Jest testing files
 ```
-> For reference of file structure refer to the diagram above.
