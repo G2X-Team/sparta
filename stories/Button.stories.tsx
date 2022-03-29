@@ -34,5 +34,5 @@ Secondary.args = {
 
 Area.args = {
     variant: 'area',
-    children: 'I am an area',
+    children: 'I am an area variant',
 };
