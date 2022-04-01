@@ -25,13 +25,21 @@ export type FormTextData = { text?: string };
 export type FormToggleData = { checked?: boolean };
 
 // global input type
-export type FormInputData = FormGroupData & FormTextData & FormTextData;
+export type FormInputData = FormGroupData & FormToggleData & FormTextData;
 
 // parameter data
 export type FormData = {
     [fieldName: string]: FormInputData;
 };
-export type FormErrors = { [fieldName: string]: string };
+
+// form error data
+export type FormErrors = {
+    [fieldName: string]: {
+        message?: string;
+        ref?: any;
+        type?: string;
+    };
+};
 
 // submission handlers
 
