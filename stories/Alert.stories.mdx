@@ -1,0 +1,79 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Alert, Text } from '../src'; // components you used in the story
+
+<Meta title="Layout/Alert" component={Alert} />
+
+# Alert
+
+Basic Alert component that allows for extensive customization via prop changes
+
+The Alert component is a Basic component that inform the user about a situation.
+It can be used to notify the user of a form successfull submission, or to notify the user of an error.
+It allows for extensive customization via prop changes.
+
+## Table of Contents
+
+In this documentation we talk about the Aleart component, it's functionality, types and props.
+
+- [Functionality](#functionality)
+- [Types](#types)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+Functionally these components would work as a notice to the user to convey 
+important information through the use of contextual types and colors.
+These default types come in 4 variations: `"success"`, `"info"`, `"warning"`, and `"error"`.
+
+<Canvas>
+    <Story name="Standard Alert" args={{ children: "This is an Alert Element" }}>
+        {(args) => <Alert {...args}>
+            <Text bold>{args.children}</Text>
+        </Alert>}
+    </Story>
+</Canvas>
+
+### Types
+
+The Alert component for the moment has 4 visual states that can be switched using the
+`variant` prop. These are the `"success"`, `"info"`, `"warning"`, and `"error"`. types.
+
+<Canvas>
+    <Story name="Alert Types">
+        {(args) => (
+            <>
+                <Alert type="danger">
+                    <Text bold>
+                        This is a Danger Alert
+                    </Text>
+                </Alert>
+                <span style={{ paddingRight: 10 }} />
+                <Alert type="warning">
+                    <Text bold>
+                        This is an Warning Alert
+                    </Text>
+                </Alert>
+                <span style={{ paddingRight: 10 }} />
+                <Alert type="info">
+                    <Text bold>
+                        This is an Info Alert
+                    </Text>
+                </Alert>
+                <span style={{ paddingRight: 10 }} />
+                <Alert type="success">
+                    <Text bold>
+                        This is an success Alert
+                    </Text>
+                </Alert>
+            </>
+        )}
+    </Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+For a full breakdown of all the additional props, refer to the table below. Also take into
+consideration that this component has access to all the props and functionaliy of the `Text` component as well.
+
+<ArgsTable of={Alert} />
