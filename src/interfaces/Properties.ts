@@ -34,7 +34,7 @@ export type FormToggleData = { checked?: boolean };
  * A generalized object representing all values, is used as the default data representation for
  * validators
  */
-export type FormInputData = FormGroupData & FormTextData & FormTextData;
+export type FormInputData = FormGroupData & FormToggleData & FormTextData;
 
 /** Object containing all input data by `name` */
 export type FormData = {
@@ -42,7 +42,13 @@ export type FormData = {
 };
 
 /** Data containing all input errors by name */
-export type FormErrors = { [fieldName: string]: string };
+export type FormErrors = {
+    [fieldName: string]: {
+        message?: string;
+        ref?: any;
+        type?: string;
+    };
+};
 
 // submission handlers
 
