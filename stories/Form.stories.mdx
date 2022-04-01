@@ -1,0 +1,352 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Form, TextInput, Button, Group, Radio, Checkbox, Switch } from '../src';
+
+<Meta title="Form Component" component={Form} />
+
+# Form
+
+The Form component is in charge of all form validation needs in the Apollo compoent library. It is
+a pretty major component in functionally setting up performant forms with your choice of validation.
+Our client side validation is brought to you by `remix-hook-form`.
+
+## Table of Contents
+- [Setup](#setup)
+    - [Client Form Setup](#client-form)
+    - [Remix Form Setup](#remix-form)
+- [Functionality](#functionality)
+    - [Client Form Functionality](#client-form-1)
+        - [Submission & Failure](#submission--failure)
+        - [onSubmit](#onsubmit)
+        - [onError](#onerror)
+        - [Validation](#validation)
+    - [Remix Form Functionality](#remix-form-1)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Setup
+
+To begin to understand the Form, we must understand the types it has:
+
+-   `"client"`: the default type of the form that gives live, client-side form validation
+-   `"remix"`: form that handles validation via the Remix `ActionData`
+
+### `client` Form
+
+The client-side form is probably the most familiar type of form in its implementation if you have
+previous experience dealing with validation in React. At this point you're probably thinking: "ugh,
+these guys probably added extra steps to creating a form by making me use their wrapper, right?"
+**Wrong!** We took the time to abstract the user from any painful state declarations and arbitrary
+form setup by handling that logic ourselves under the hood.
+
+If you want to create a form and keep track of the values. All you got to do is add an input of your
+choice inside our `Form` and boom! working form. To access the values inside, add your `onSubmit`
+function with the param: `data`, a button to submit, and you're done. See the basic example below:
+
+#### Basic `onSubmit`
+
+```typescript
+/**
+ * Will toggle your on submit
+ *
+ * @param data: object containing all form data by name
+ */
+const onSubmit: FormSubmitHandler = (data) => {
+    // to access the input data, just add the input's name
+    window.alert(
+        `Plain old Text Input: "${data['text-input']?.text || ''}"\n` +
+            `Plain old Radios:  "${data['radios']?.radio || ''}"\n` +
+            `Plain old Checkboxes:  [${data['checkboxes']?.checkbox || ''}]\n` +
+            `Plain old Radio:  "${data['radio']?.checked || ''}"\n` +
+            `Plain old Checkbox:  "${data['checkbox']?.checked || ''}"\n` +
+            `Plain old Switch:  "${data['switch']?.checked || ''}"\n`
+    );
+};
+```
+
+#### Basic Implementation
+
+Just put the input you want from Apollo, and we'll track the changes magically without you worrying
+about the rest. Here we'll show you all the inputs in one form and when you submit, you should see
+all the submit data in the alert when you submit.
+
+> **Fair warning:** This component will throw if you try to use inputs that don't give them names,
+> it's kind of important that you do so that we can register them in our Form :)
+
+<Canvas>
+    <Story name="Basic Form">
+        {(args) => {
+            return (
+                <Form
+                    onSubmit={(data) => {
+                        // to access the input data, just add the input's name
+                        window.alert(
+                            `Plain old Text Input: "${data['text-input']?.text || ''}"\n` +
+                                `Plain old Radios:  "${data['radios']?.radio || ''}"\n` +
+                                `Plain old Checkboxes:  [${data['checkboxes']?.checkbox || ''}]\n` +
+                                `Plain old Radio:  "${data['radio']?.checked || ''}"\n` +
+                                `Plain old Checkbox:  "${data['checkbox']?.checked || ''}"\n` +
+                                `Plain old Switch:  "${data['switch']?.checked || ''}"\n`
+                        );
+                    }}
+                >
+                    <Group
+                        type="organization"
+                        label="Basic Form"
+                        hint="Just showcasing our inputs for you :)"
+                    >
+                        <TextInput
+                            label="Plain old Text Input"
+                            name="text-input"
+                            placeholder="Type stuff in me :)"
+                        />
+                        <Group label="Plain old Radios" name="radios">
+                            <Radio value="radio 1">Radio 1</Radio>
+                            <Radio value="radio 2">Radio 2</Radio>
+                        </Group>
+                        <Group label="Plain old Checkboxes" name="checkboxes">
+                            <Checkbox value="checkbox 1">Checkbox 1</Checkbox>
+                            <Checkbox value="checkbox 2">Checkbox 2</Checkbox>
+                        </Group>
+                        <Radio id="radio" value="lone radio">
+                            Plain old Radio
+                        </Radio>
+                        <Checkbox id="checkbox" name="checkbox" value="lone checkbox">
+                            Plain old Checkbox
+                        </Checkbox>
+                        <Switch name="switch" value="lone switch">
+                            Plain old Switch
+                        </Switch>
+                    </Group>
+                    <Button>Submit</Button>
+                </Form>
+            );
+        }}
+    </Story>
+</Canvas>
+
+### `remix` Form
+
+This form doesn't really have much set up, just add your `ActionData` object and we'll take care of
+the rest. For more information on how to use this form, go [here](/docs/remix-form).
+
+## Functionality
+
+Here we'll go more in depth of how you can use Apollo's Form component to the form you need.
+
+### `client` Form
+
+Like we mentioned before, the `client` form's purpose is to provide live, client-side form
+validation while abstracting away the complexity that forms usually have. We already showed you
+how to use the `Form` to build a simple submission form, but we'll go into more detail on how to
+use it alongside it's built-in validation functionality.
+
+#### Submission & Failure
+
+Before we go into the validation, we'll explain the different functions that the form will call
+when you attempt to submit a form.
+
+-   `onSubmit` will be called when you submit a valid form
+-   `onError` will be called when you submit an invalid form
+
+#### `onSubmit`
+
+For the `onSubmit` the `data` object is your gateway to all values in the form. As you can tell
+from the function, we use `.text` to get the text input's data. Here is a reference for what
+each extension will extract:
+
+```typescript
+// input data
+export type FormGroupData = { radio?: string; checkbox?: string[] };
+export type FormTextData = { text?: string };
+export type FormToggleData = { checked?: boolean };
+
+// global input type
+export type FormInputData = FormGroupData & FormToggleData & FormTextData;
+
+// parameter data
+export type FormData = {
+    [fieldName: string]: FormInputData;
+};
+```
+
+Or you can just import the `FormSubmitHandler` from Apollo and use auto-complete to help you out :)
+
+```typescript
+/**
+ * Method that allows user to view collected form data represented as an object when handling
+ * valid submissions
+ *
+ * @param data information collected from all form inputs
+ */
+export type FormSubmitHandler = (data: FormData) => void;
+```
+
+#### `onError`
+
+The `onError` function is called when the form is invalid. It's called with the error message
+structured as on object with the key being the name of the input field, and the value being the
+message itself.
+
+```typescript
+// parameter data
+export type FormErrors = {
+    [fieldName: string]: {
+        message?: string;
+        ref?: any;
+        type?: string;
+    };
+};
+```
+
+Or, again you can just import the `FormSubmitHandler` from Apollo and use auto-complete to help you
+out :)
+
+```typescript
+/**
+ * Method that allows user to see all error messages when there is an invalid submission
+ *
+ * @param errors error messages collected from all inputs
+ */
+export type FormErrorHandler = (errors: FormErrors) => void;
+```
+
+#### Validation
+
+That's cool and all, but how do you add validation? It's pretty easy, just add a `validator` function!
+A `validator` function is a function that takes in the data and returns a string or null value. If
+the string is not null, it will be displayed in the form in the shape of an error message. Else,
+the form will be considered valid. When the form is valid and submitted, the `onSubmit` function
+will be called. Else, the form will not be submitted and the `onError` function will be called.
+If you want some nicer auto-complete though you should import the `FormValidator` and use it in the
+validator function.
+
+> **Note:** If you want to be more specific with the `FormValidator` you can even add an input
+> type that can be imported from Apollo.
+>
+> -   example: `const validate: FormValidator<FormTextData> = (input) => ...`
+
+```typescript
+/**
+ * Validates the form
+ *
+ * @param input: object containing all form input data
+ * @returns string or null
+ */
+const validate: FormValidator = (input) =>
+    input?.text.length < 5 && 'Text input must be at least 5 characters long';
+```
+
+Almost all input components in Apollo support `validator` functions, all you have to do is put in
+the function in the `validator` prop of the component you want to validate, and you're good to go.
+
+> **Note:** The exception to this rule is the `Switch` component, which does not support a
+> `validator` function due to accessibility concerns.
+
+<Canvas>
+    <Story name="Validated Form">
+        {(args) => {
+            return (
+                <Form
+                    onSubmit={(data) => window.alert(`password: ${data?.password?.text}`)}
+                    onError={(errors) => window.alert(`password: ${errors?.password?.message}`)}
+                >
+                    <TextInput
+                        validator={(input) =>
+                            input?.text.length < 5 &&
+                            'Text input must be at least 5 characters long'
+                        }
+                        name="password"
+                        label="Password"
+                        hint="must be at least 5 characters"
+                        password
+                    />
+                    <Button>Submit</Button>
+                </Form>
+            );
+        }}
+    </Story>
+</Canvas>
+
+### `remix` Form
+
+The `remix` form is pretty much your standard form with a few extra features. It's built on top of
+the `ActionData` object you would provide for your typical `remix` validation route. The nice thing
+about this form is that it will automatically display any errors or default values for you as shown
+in the example below.
+
+Given we have this `ActionData` object:
+
+```typescript
+const actionData: ActionData = {
+    fields: {
+        username: 'john-cena',
+        password: 'youcantseeme',
+        rating: '1',
+        options: ['1', '2'],
+        radio: true,
+        checkbox: true,
+        switch: true,
+    },
+};
+```
+
+We can use the `remix` form like this:
+
+<Canvas>
+    <Story
+        name="Remix Form"
+        args={{
+            type: 'remix',
+            actionData: {
+                fields: {
+                    username: 'john-cena',
+                    password: 'youcantseeme',
+                    rating: '1',
+                    options: ['1', '2'],
+                    radio: true,
+                    checkbox: true,
+                    switch: true,
+                },
+            },
+        }}
+    >
+        {(args) => {
+            return (
+                <Form {...args}>
+                    <TextInput label="Username" name="username" />
+                    <TextInput label="Password" name="password" password />
+                    <Group name="rating" label="Rating" inline>
+                        <Radio value="1">1</Radio>
+                        <Radio value="2">2</Radio>
+                        <Radio value="3">3</Radio>
+                    </Group>
+                    <Group name="options" label="Options" inline>
+                        <Checkbox value="1">1</Checkbox>
+                        <Checkbox value="2">2</Checkbox>
+                        <Checkbox value="3">3</Checkbox>
+                    </Group>
+                    <Radio id="radio" name="radio">
+                        Radio
+                    </Radio>
+                    <Checkbox id="checkbox" name="checkbox">
+                        Checkbox
+                    </Checkbox>
+                    <Switch id="switch" name="switch">
+                        Switch
+                    </Switch>
+                </Form>
+            );
+        }}
+    </Story>
+</Canvas>
+
+As you can see, all the data from the `ActionData` object is automatically displayed in the form.
+All with very little code to write. This `type` of form will be most useful if you want to handle
+all validation server-side instead of client-side.
+
+## Other Props & Functionalities
+
+We pretty much covered all the functionality of the `Form` component in the above examples. But
+for a quick reference view the arguments table below.
+
+<ArgsTable of={Form} />
