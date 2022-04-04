@@ -7,7 +7,7 @@ export type ComponentHorizontalOrientation = 'left' | 'right';
 export type ComponentOrientation = ComponentVerticalOrientation | ComponentHorizontalOrientation;
 export type ComponentGeneralOrientation = 'horizontal' | 'vertical';
 export type ComponentSize = 'small' | 'medium' | 'large';
-export type ComponentAlignment = 'left' | 'center' | 'right';
+export type ComponentAlignment = 'start' | 'center' | 'end';
 export type ComponentPosition = 'static' | 'absolute' | 'fixed';
 export type ComponentWrap = (component: ReactNode) => ReactNode;
 

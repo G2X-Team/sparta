@@ -1,26 +1,19 @@
-import { HTMLAttributes, FC } from 'react';
-import React from 'react';
+import type { HTMLAttributes, FC } from 'react';
+import React, { useState, useRef } from 'react';
 import FormatChildren from '../../util/FormatChildren';
-import { detectOutsideClick } from '../../util/detectOutsideClick';
 import './Dropdown.css';
 
-import Button from './overload/Button';
-import Menu from './components/Menu';
-import * as CSS from 'csstype';
-import { Option } from '../Option/Option';
 import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
+
+import Button from './overload/Button';
+import Icon from './overload/Icon';
+import Menu from './overload/Menu';
 
 export interface IDropdown extends HTMLAttributes<HTMLDivElement> {
     /** Determines where the menu will appear from */
-    orientation?: ComponentOrientation;
+    anchor?: ComponentOrientation;
     /** Determines menu alignment, when orientation is left or right */
     alignment?: ComponentAlignment;
-    /** Determines the max height of the menu */
-    menuHeight?: CSS.Property.MaxHeight;
-    /** Determines the max width of the menu */
-    menuWidth?: CSS.Property.MaxWidth;
-    /** Required string for WCAG 2.0 authentication purposes */
-    name: string;
 }
 
 /**
@@ -31,19 +24,15 @@ export interface IDropdown extends HTMLAttributes<HTMLDivElement> {
 export const Dropdown: FC<IDropdown> = ({
     children,
     className = '',
-    orientation = 'bottom',
-    alignment = 'left',
-    menuHeight,
-    menuWidth,
-    name,
+    anchor = 'bottom',
+    alignment = 'start',
 }) => {
-    // ref containing dropdown button
-    const dropdown = React.useRef<HTMLDivElement>(null);
-    const first = React.useRef<HTMLLIElement>(null);
-    const last = React.useRef<HTMLLIElement>(null);
+    // reference to buttons
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const iconRef = useRef<HTMLSpanElement>(null);
 
     // state
-    const [open, toggleOpen] = detectOutsideClick(dropdown, false);
+    const [open, toggleOpen] = useState(false);
 
     /**
      * Returns render-ready dropdown component
@@ -51,81 +40,48 @@ export const Dropdown: FC<IDropdown> = ({
      * @return dropdown component
      */
     const renderDropdown = (): JSX.Element => {
-        // define structured props
-        const structured = {
-            dropdownRef: dropdown,
+        // define parentProps props
+        const parentProps = {
+            button: buttonRef || iconRef,
             children,
-            toggleOpen,
-            name,
             open,
+            anchor,
+            alignment,
+            toggleOpen,
         };
 
         // find all targeted components
-        const formatted = new FormatChildren(structured, { Button, Option });
-
-        // get buttons
-        const buttons: JSX.Element[] = formatted.get(Button);
-        if (!buttons.length) throw new Error('Dropdown component needs button');
+        const formatted = new FormatChildren(parentProps, { Button, Menu, Icon });
 
         // get button
-        const [button] = buttons;
-        // get options
-        const options = formatted.get(Option);
-        const formattedOptions = options.map((option: JSX.Element, index: number) => {
-            const {
-                props: { onClick, ...optionProps },
-            } = option;
+        const [icon, ...otherIcons]: JSX.Element[] = formatted.get(Icon);
+        const [button, ...otherButtons]: JSX.Element[] = formatted.get(Button);
 
-            /** Handles click for options */
-            const handleClick = (): void => {
-                if (onClick) onClick();
-                toggleOpen(false);
-            };
+        // handles multiple button and icon components cases
+        if (icon) {
+            if (button) throw new Error('Dropdown cannot have both an icon and a button');
+            if (otherIcons.length > 0) throw new Error('Dropdown cannot have more than one icon');
+        } else if (button) {
+            if (icon) throw new Error('Dropdown cannot have both an icon and a button');
+            if (otherButtons.length > 0)
+                throw new Error('Dropdown cannot have more than one button');
+        } else {
+            throw new Error('Dropdown must have either an icon or a button');
+        }
 
-            if (index == 0) {
-                return (
-                    <Option {...optionProps} ref={first} key={0} onClick={handleClick}>
-                        {option.props.children}
-                    </Option>
-                );
-            }
-
-            if (index == options.length - 1) {
-                return (
-                    <Option {...optionProps} ref={last} key={options.length} onClick={handleClick}>
-                        {option.props.children}
-                    </Option>
-                );
-            }
-
-            return <Option {...optionProps} key={index} onClick={handleClick} />;
-        });
-
-        // get the option menu
-        const menu = open ? (
-            <Menu
-                options={formattedOptions}
-                toggleOpen={toggleOpen}
-                name={name}
-                firstChild={first}
-                lastChild={last}
-                orientation={orientation}
-                alignment={alignment}
-                menuHeight={menuHeight}
-                menuWidth={menuWidth}
-            />
-        ) : null;
+        // get menu
+        const [menu, ...otherMenus]: JSX.Element[] = formatted.get(Menu);
+        if (!menu) throw new Error('Dropdown component needs menu');
+        if (otherMenus.length) throw new Error('Dropdown component can only have one menu');
 
         return (
-            <>
-                {orientation === 'top' || orientation === 'left' ? menu : null}
-                {button}
-                {orientation === 'bottom' || orientation === 'right' ? menu : null}
-            </>
+            <div className={`apollo-component-library-dropdown ${className}`}>
+                {(anchor === 'top' || anchor === 'left') && open ? menu : null}
+                {button || icon}
+                {(anchor === 'bottom' || anchor === 'right') && open ? menu : null}
+            </div>
         );
     };
 
-    return (
-        <span className={`apollo-component-library-dropdown ${className}`}>{renderDropdown()}</span>
-    );
+    return renderDropdown();
 };
