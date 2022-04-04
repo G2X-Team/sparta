@@ -42,3 +42,40 @@ export const detectOutsideClick = (
 
     return [open, toggleOpen];
 };
+
+/**
+ * Will give a state that takes into consideration outside clicks
+ *
+ * @param element reference of component
+ * @param method that is triggered when a click occurs outside specified element
+ * @param executeMethod determine whether the method will be executed or not
+ */
+export const handleOutsideClick = (
+    element: MutableRefObject<any>,
+    method: () => void,
+    executeMethod = true
+): void => {
+    useEffect(() => {
+        /**
+         * Method that will change the state of an open
+         *
+         * @param event Click event
+         */
+        const onClick = (event: MouseEvent): void => {
+            // checks to see if the event was clicked outside of the target element
+            if (element.current !== null && !element.current.contains(event.target)) {
+                // toggle if it is active
+                method();
+            }
+        };
+
+        // check if the item is open to open a listener
+        if (executeMethod) {
+            window.addEventListener('click', onClick);
+        }
+
+        return () => {
+            window.removeEventListener('click', onClick);
+        };
+    }, [executeMethod, element]);
+};

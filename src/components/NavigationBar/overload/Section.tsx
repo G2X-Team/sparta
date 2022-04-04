@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ISection, Section as CSection } from '../../Section/Section';
 
 import FormatChildren from '../../../util/FormatChildren';
-import { Dropdown, Option, Button, Icon } from '../../..';
+import { Dropdown, Option, Menu, Icon } from '../../..';
 
 /**
  * Formats section so that when it is in navigation mode, it will shrink to a hamburger
@@ -33,11 +33,9 @@ const Section: FC<ISection> = ({
             }
 
             setSectionChildren(
-                <Dropdown name="header_nav">
-                    <Button>
-                        <Icon name="menu" clickable color={titleColor} />
-                    </Button>
-                    {formatted.get(Option)}
+                <Dropdown>
+                    <Icon name="menu" clickable color={titleColor} />
+                    <Menu label="header_nav_menu">{formatted.get(Option)}</Menu>
                 </Dropdown>
             );
         }
