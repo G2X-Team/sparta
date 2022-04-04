@@ -1,5 +1,5 @@
 import type { CSSProperties, FC, HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Menu.css';
 
 import Overload from '../../interfaces/Overload';
@@ -9,14 +9,19 @@ import FormatChildren from '../../util/FormatChildren';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import Option from './overload/Option';
+import { handleOutsideClick } from '../../util/detectOutsideClick';
 
 export interface IMenu extends Overload<HTMLAttributes<HTMLDivElement>> {
     /** Determines whether the menu is meant for navigation */
     navigation?: boolean;
     /** Determines the max height of the menu */
-    height?: CSS.Property.MaxHeight;
+    height?: CSS.Property.MaxHeight | number;
     /** Determines the max width of the menu */
-    width?: CSS.Property.MaxWidth;
+    width?: CSS.Property.MaxWidth | number;
+    /** Determine what do when you click outside the menu */
+    onOutsideClick?: () => void;
+    /** Determeine whether to use outside click or not */
+    useOutsideClick?: boolean;
     /** Mandatory label that describes the menu */
     label: string;
     /** Mandatory descriptive text when menu is in `application` mode */
@@ -41,18 +46,24 @@ export const Menu: FC<IMenu> = ({
     handleOptionClick,
     children,
     className,
+    onOutsideClick,
+    useOutsideClick,
     onEscape,
     label,
     ...props
 }) => {
     // refs
-    const first = React.useRef<HTMLLIElement>(null);
-    const last = React.useRef<HTMLLIElement>(null);
+    const menu = useRef<HTMLDivElement>(null);
+    const first = useRef<HTMLLIElement>(null);
+    const last = useRef<HTMLLIElement>(null);
 
     // state
     const [hasOptions, toggleHasOptions] = useState(false);
     const [headerComponent, setHeader] = useState<JSX.Element | null>(null);
     const [footerComponent, setFooter] = useState<JSX.Element | null>(null);
+
+    if (useOutsideClick && onOutsideClick)
+        handleOutsideClick(menu, onOutsideClick, useOutsideClick);
 
     useEffect(() => {
         if (!hasOptions) return;
@@ -78,7 +89,7 @@ export const Menu: FC<IMenu> = ({
      * @return Formatted children
      */
     const renderAll = (): JSX.Element[] => {
-        const parentProps = { children, first, last };
+        const parentProps = { children, first, last, handleOptionClick };
 
         // get formatted children
         const formatted = new FormatChildren(parentProps, { Option, Header, Footer });
@@ -130,6 +141,7 @@ export const Menu: FC<IMenu> = ({
     return (
         <div
             {...props}
+            ref={menu}
             className={`apollo-component-libary-menu-component ${className || ''}`}
             style={getMenuStyle(props)}
             role={!hasOptions ? 'application' : undefined}
@@ -151,7 +163,7 @@ export const Menu: FC<IMenu> = ({
  */
 const getMenuStyle = ({ height, width, style, padding }: Omit<IMenu, 'label'>): CSSProperties => {
     return {
-        height,
+        maxHeight: height,
         padding,
         width,
         ...style,

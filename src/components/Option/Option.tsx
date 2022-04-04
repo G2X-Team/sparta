@@ -1,5 +1,5 @@
-import { HTMLAttributes, FC, forwardRef, ForwardedRef, MouseEvent } from 'react';
-import React, { useEffect } from 'react';
+import { HTMLAttributes, FC, forwardRef, ForwardedRef, MouseEvent, RefObject } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Option.css';
 
 import Overload from '../../interfaces/Overload';
@@ -30,7 +30,11 @@ export const Option: FC<IOption> = forwardRef(function Option(
     { children, parentProps, className, onClick, wrap, href, ...props }: IOption,
     ref
 ) {
+    // define a fallback ref
+    const optionRef = useRef<HTMLLIElement>(null);
+
     useEffect(() => {
+        const activeRef = (ref as RefObject<HTMLLIElement>) || optionRef;
         if (!onClick || wrap) return;
 
         /**
@@ -39,7 +43,7 @@ export const Option: FC<IOption> = forwardRef(function Option(
          * @param event keyobard event
          */
         const onEnter = (event: KeyboardEvent): void => {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter' && document.activeElement === activeRef.current) {
                 handleClick();
             }
         };
@@ -58,12 +62,12 @@ export const Option: FC<IOption> = forwardRef(function Option(
         <li
             {...props}
             tabIndex={0}
-            ref={ref}
+            ref={ref || optionRef}
             onClick={handleClick}
             role="option"
             className={`apollo-component-library-option-component ${className || ''}`}
         >
-            <Text margins={false}>{children}</Text>
+            <Text>{children}</Text>
         </li>
     );
 

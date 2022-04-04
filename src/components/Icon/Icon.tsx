@@ -1,5 +1,5 @@
-import type { HTMLAttributes, FC } from 'react';
-import React, { useEffect } from 'react';
+import type { HTMLAttributes, FC, ForwardedRef, RefObject } from 'react';
+import React, { useEffect, forwardRef, useRef } from 'react';
 import * as CSS from 'csstype';
 import './Icon.css';
 
@@ -18,6 +18,8 @@ export interface IIcon extends HTMLAttributes<HTMLParagraphElement> {
     children?: undefined;
     /** Determines whether component is clickable or not */
     clickable?: boolean;
+    /** Allows use of references */
+    ref?: ForwardedRef<HTMLSpanElement>;
 }
 
 /**
@@ -25,19 +27,26 @@ export interface IIcon extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Icon component
  */
-export const Icon: FC<IIcon> = ({
-    name,
-    onClick,
-    clickable = onClick && true,
-    children,
-    variant = 'default',
-    color = 'black',
-    className = '',
-    disabled,
-    style,
-    ...props
-}) => {
+export const Icon: FC<IIcon> = forwardRef(function Icon(
+    {
+        name,
+        onClick,
+        clickable = onClick && true,
+        children,
+        variant = 'default',
+        color = 'black',
+        className = '',
+        disabled,
+        style,
+        ...props
+    }: IIcon,
+    ref: ForwardedRef<HTMLSpanElement>
+) {
+    // define a fallback ref
+    const iconRef = useRef<HTMLSpanElement>(null);
+
     useEffect(() => {
+        const activeRef = (ref as RefObject<HTMLSpanElement>) || iconRef;
         if (!onClick) return;
 
         /**
@@ -46,18 +55,23 @@ export const Icon: FC<IIcon> = ({
          * @param event keyobard event
          */
         const onEnter = (event: KeyboardEvent): void => {
-            if (event.key === 'Enter') {
+            if (
+                (event.key === 'Enter' || event.key === ' ') &&
+                document.activeElement === activeRef.current
+            ) {
                 if (onClick) onClick();
             }
         };
 
         window.addEventListener('keydown', onEnter);
         return () => window.removeEventListener('keydown', onEnter);
-    }, []);
+    }, [ref, iconRef]);
 
     return (
         <span
             {...props}
+            role={clickable ? 'button' : undefined}
+            ref={ref || iconRef}
             style={getIconStyle(disabled, color, style)}
             tabIndex={onClick ? 0 : undefined}
             className={`material-icons apollo-component-library-icon-component 
@@ -67,7 +81,7 @@ export const Icon: FC<IIcon> = ({
             {name}
         </span>
     );
-};
+});
 
 /**
  * Gets Icon style object
