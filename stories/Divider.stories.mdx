@@ -1,0 +1,55 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Divider } from '../src'; // components you used in the story
+import {
+    StandardDivider,
+    DividerStyling,
+} from './examples/Divider';
+
+<Meta title="Layout/Divider" component={Divider} />
+
+# Divider
+
+Divider component serves as an hr for ease of templating. A very simple component 
+but can add a lot in the experience of the user. It can be used to seperate between sections.
+
+## Table of Contents
+
+In this documentation we talk about the Divider component in depth about its usage and its props.
+
+- [Functionality](#functionality)
+	- [Styling](#styling)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+Functionally this component will render a divider with the given `color` and `height`.
+This will work as a separator between content for the user.
+
+<Canvas>
+	<Story name="Standard Divider" args={{ color: 'lightgray', height: '1' }}>
+		{StandardDivider.bind({})}
+	</Story>
+</Canvas>
+
+### Styling
+
+Divider comes with two props `'color'` & `'height'`. You can use these props to customize
+the Divider based on where you want to use it. You just need to add the color you want the Divider to be and add a height as number.
+> `'height'` prop takes a `px` value but you don't have to add the `px` just put the number and it will work fine.
+
+Let's use these props to create a cool `red` Divider with a height of `5px`
+
+<Canvas>
+	<Story name="Divider Styling" args={{ color: 'red', height: '5' }}>
+		{DividerStyling.bind({})}
+	</Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+Here take a look at the table below, it shows the two addtional props you can use with the Divider component.
+The `'color'` prop will let you change the color of the Divider, while the `'height'` prop will let you increase or decrease
+the height of the Divider.
+
+<ArgsTable of={Divider} />
