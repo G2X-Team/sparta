@@ -8,7 +8,7 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement> {
     /** Required ReactNode that needs to exist between component tags */
     children: ReactNode;
     /** defines the type of button to be rendered */
-    variant?: StyleVariant;
+    variant?: StyleVariant | 'area';
     /** callback function to be called when there is a method click */
     onClick?: () => void;
     /** Allows use of references */
