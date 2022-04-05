@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { Default as Divider } from '../stories/Divider.stories';
+import { Divider } from '../src';
 
 describe('Divider', () => {
     it('renders correctly', () => {

@@ -1,16 +1,13 @@
 import type { HTMLAttributes, FC } from 'react';
 import React from 'react';
+import * as CSS from 'csstype';
 import './Divider.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
-import type * as CSS from 'csstype';
-import { gaurdApolloName } from '../../util/ErrorHandling';
-
-export interface IDivider extends HTMLAttributes<HTMLHRElement>, Apollo<'Divider'> {
+export interface IDivider extends HTMLAttributes<HTMLHRElement> {
     /** color of desired divider */
     color?: CSS.Property.Color;
     /** height of divider in pixels */
-    height?: CSS.Property.Height;
+    height?: number;
 }
 
 /**
@@ -18,9 +15,13 @@ export interface IDivider extends HTMLAttributes<HTMLHRElement>, Apollo<'Divider
  *
  * @return Divider component
  */
-export const Divider: FC<IDivider> = ({ color, className = '', height, style, ...props }) => {
-    gaurdApolloName(props, 'Divider');
-
+export const Divider: FC<IDivider> = ({
+    color = 'lightgray',
+    className = '',
+    height = 1,
+    style,
+    ...props
+}) => {
     return (
         <hr
             role="separator"
@@ -30,8 +31,6 @@ export const Divider: FC<IDivider> = ({ color, className = '', height, style, ..
         />
     );
 };
-
-Divider.defaultProps = { 'data-apollo': 'Divider' };
 
 /**
  * Gets the style object for the divider
@@ -43,7 +42,7 @@ Divider.defaultProps = { 'data-apollo': 'Divider' };
  */
 const getStyle = (
     style: React.CSSProperties | undefined,
-    height: CSS.Property.Height | undefined,
+    height: number | undefined,
     color: CSS.Property.Color | undefined
 ): React.CSSProperties => {
     return {
