@@ -46,10 +46,10 @@ describe('Client Side Form', () => {
                     <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
                     <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
                 </Group>
-                <Checkbox id="checkbox" value="checkbox">
+                <Checkbox id="checkbox 1" value="checkbox">
                     Checkbox
                 </Checkbox>
-                <Radio id="radio" value="option">
+                <Radio id="radio 1" value="option">
                     Option
                 </Radio>
                 <TextInput label="input" name="some-input" />
@@ -69,10 +69,10 @@ describe('Client Side Form', () => {
                     <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
                     <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
                 </Group>
-                <Checkbox value="checkbox" id="checkbox" invalid errorMessage="failed">
+                <Checkbox value="checkbox" id="checkbox 2" invalid errorMessage="failed">
                     Checkbox
                 </Checkbox>
-                <Radio value="option" id="radio" invalid errorMessage="failed">
+                <Radio value="option" id="radio 2" invalid errorMessage="failed">
                     Option
                 </Radio>
                 <TextInput label="input" name="input" invalid errorMessage="failed" />
@@ -425,10 +425,10 @@ describe('Server Side Form', () => {
                     <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
                     <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
                 </Group>
-                <Checkbox id="checkbox" value="checkbox">
+                <Checkbox id="checkbox 1" value="checkbox">
                     Checkbox
                 </Checkbox>
-                <Radio id="radio" value="option">
+                <Radio id="radio 1" value="option">
                     Option
                 </Radio>
                 <TextInput label="input" name="input" />
@@ -448,10 +448,10 @@ describe('Server Side Form', () => {
                     <Checkbox value="checkbox-1">Checkbox 1</Checkbox>
                     <Checkbox value="checkbox-2">Checkbox 2</Checkbox>
                 </Group>
-                <Checkbox id="checkbox" value="checkbox">
+                <Checkbox id="checkbox 2" value="checkbox">
                     Checkbox
                 </Checkbox>
-                <Radio id="radio" value="option">
+                <Radio id="radio 2" value="option">
                     Option
                 </Radio>
                 <TextInput label="input" name="input" />

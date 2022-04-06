@@ -60,6 +60,7 @@ export const Radio: FC<IRadio> = ({
             >
                 <input
                     {...props}
+                    id={id}
                     aria-required={required}
                     aria-invalid={invalid}
                     aria-errormessage={id ? `${id}-error` : undefined}

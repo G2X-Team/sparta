@@ -18,6 +18,8 @@ export interface IForm extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' 
     type?: 'client' | 'remix';
     /** When in remix mode, this will control all the form inputs */
     actionData?: FormActionData;
+    /** Submission method, this doesn't do anything for client-side forms */
+    method?: 'GET' | 'POST';
 }
 /**
  * Apollo form component that allows for client side and server side validation

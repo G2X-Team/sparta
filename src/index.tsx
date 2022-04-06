@@ -24,3 +24,14 @@ export { NavigationBar } from './components/NavigationBar/NavigationBar';
 export { Section } from './components/Section/Section';
 export { Table } from './components/Table/Table';
 export { Menu } from './components/Menu/Menu';
+
+export type {
+    FormValidator,
+    FormErrorHandler,
+    FormActionData,
+    FormSubmitHandler,
+    FormGroupData,
+    FormTextData,
+    FormToggleData,
+    FormInputData,
+} from './interfaces/Properties';
