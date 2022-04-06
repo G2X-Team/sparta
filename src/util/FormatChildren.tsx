@@ -48,6 +48,12 @@ class FormatChildren {
             // support for mdx
             if (childName === 'MDXCreateElement') childName = child.props?.mdxType;
 
+            // support for remix weirdly
+            const nameParseOne = childName?.slice(0, -1);
+            const nameParseTwo = childName?.slice(0, -2);
+            if (nameParseOne && componentMap[nameParseOne]) childName = nameParseOne;
+            if (nameParseTwo && componentMap[nameParseTwo]) childName = nameParseTwo;
+
             // hande whether sought out component is found
             if (componentMap[childName]) {
                 if (!this.foundChildren[childName]) this.foundChildren[childName] = [];

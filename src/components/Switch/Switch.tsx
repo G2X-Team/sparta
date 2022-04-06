@@ -31,7 +31,6 @@ export const Switch: FC<ISwitch> = ({
     className = '',
     children,
     required,
-    name,
     ...props
 }) => {
     return (

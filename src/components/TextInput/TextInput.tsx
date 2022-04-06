@@ -72,6 +72,7 @@ export const TextInput: FC<ITextInput> = ({
                 {hint?.length ? <Text style={hintTextStyle}>{hint}</Text> : null}
                 <input
                     {...props}
+                    name={name}
                     aria-required={required}
                     aria-invalid={invalid}
                     aria-errormessage={name ? `${name}-error` : undefined}

@@ -20,17 +20,28 @@ export type ComponentRenderAll = (children?: ReactNode) => JSX.Element[];
 /* Form Types */
 
 // input data
+/** Form data that you can expect from client-side toggle inputs within a group */
 export type FormGroupData = { radio?: string; checkbox?: string[] };
+/** Form data that you can expect from client-side text inputs */
 export type FormTextData = { text?: string };
+/**
+ * Form data that you can expect from client-side standalone toggle inputs (radio, checkbox,
+ * siwtch)
+ */
 export type FormToggleData = { checked?: boolean };
 
-// global input type
+/**
+ * A generalized object representing all values, is used as the default data representation for
+ * validators
+ */
 export type FormInputData = FormGroupData & FormTextData & FormTextData;
 
-// parameter data
+/** Object containing all input data by `name` */
 export type FormData = {
     [fieldName: string]: FormInputData;
 };
+
+/** Data containing all input errors by name */
 export type FormErrors = { [fieldName: string]: string };
 
 // submission handlers
@@ -50,9 +61,10 @@ export type FormSubmitHandler = (data: FormData) => void;
  */
 export type FormErrorHandler = (errors: FormErrors) => void;
 
-// validator
+/** Function to be used for Apollo input validation purposes */
 export type FormValidator<T = FormInputData> = (inputData: T) => string | null;
 
+/** Preferred structure for Action Data given by Remix */
 export type FormActionData = {
     formError?: string;
     fieldErrors?: {

@@ -1,5 +1,5 @@
 {
-    "version": "0.0.1",
+    "version": "0.0.6",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -126,4 +126,3 @@
         "react-hook-form": "^7.27.0"
     }
 }
-
