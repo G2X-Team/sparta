@@ -75,6 +75,8 @@ const Menu: FC<IMenu> = ({
                                 style={bodyStyle}
                                 onEscape={handleEscape}
                                 label={label}
+                                useOutsideClick={type !== 'permanent' && display}
+                                onOutsideClick={toggleDrawer}
                                 className="apollo-component-library-drawer-component-body"
                             >
                                 {type === 'absolute' ? (
@@ -89,7 +91,6 @@ const Menu: FC<IMenu> = ({
                         </div>
                         {type === 'absolute' ? (
                             <div
-                                onClick={toggleDrawer}
                                 className={`apollo-component-library-drawer-component-backdrop 
                                     ${type}`}
                                 style={getBackdropStyle(effect)}
