@@ -1,0 +1,98 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Card, Header, Footer, Text } from '../src'; // components you used in the story
+
+import {
+    CompleteCard,
+    CustomCard,
+    StandardCard,
+    CardWithHeader,
+    CardWithFooter,
+} from './examples/Card';
+
+<Meta title="Layout/Card" component={Card} />
+
+# Card
+
+The card will be used as a general interface to provide general structure to a UI component.
+It comes with very basic styling, but has a ton of customization. It includes options for headers and footers.
+The card component is made in such a way that it can be used as a container for other components.
+
+## Table of Contents
+
+In this documentation we talk in depth about `Card` component, it's functionality, usag and props.
+
+- [Functionality](#functionality)
+	- [Card With Header](#card-with-header)
+	- [Card With Footer](#card-with-footer)
+- [Setup](#setup)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+Cards can be used as a container for other components. Think of it as a
+blank canvas with posibilities to add almost anything you like. So the way to use a card is to wrap
+it around any component that you want to display inside the card. You can choose to have a card with a `Header`
+then a body and then a `Footer`.
+
+Here is a simple example of how to use a card.
+
+<Canvas>
+	<Story name="Complete Card">
+        {CompleteCard.bind({})}
+	</Story>
+</Canvas>
+
+That's it we have a card with a `Header` and a `Footer` and it look great :)
+But what if you want to customize the card?
+No issues at all, you can customize the card and the components inside it as you wish.
+
+Let's customize this card to make  it look more elegent.
+
+<Canvas>
+	<Story name="Custom Card">
+        {CustomCard.bind({})}
+	</Story>
+</Canvas>
+
+## Setup
+
+To Setup these cards are very simple, these cards are very similar to the HTML `<div>` element. 
+The main purpose of a card is to provide information about a single piece of information.
+
+<Canvas>
+	<Story name="Standard Card" args={{ children: "This is card component" }}>
+		{StandardCard.bind({})}
+	</Story>
+</Canvas>
+
+### `Card` with `Header`
+
+Since the card component works as a container for other components, 
+you add a `Header` component to it which will work as a title for your content in the body.
+If you are going with a `Header` component, it's worth mentioning
+that `Header` will always be on top of the rest of the children component.
+
+<Canvas>
+	<Story name="Card With Header">
+        {CardWithHeader.bind({})}
+	</Story>
+</Canvas>
+
+### `Card` with `Footer`
+
+What if you want to add a foot note or a link to the main content? well you can do that
+by adding a `Footer` component to the card. A cool thing to remember is that `Footer` will always be on the bottom of the card.
+
+<Canvas>
+	<Story name="Card With Footer">
+        {CardWithFooter.bind({})}
+	</Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+For a full breakdown of all the additional props, refer to the table below. Also take into
+consideration that this card component works like a normal HTML `div`, and can be customized like one.
+
+<ArgsTable of={Card} />
