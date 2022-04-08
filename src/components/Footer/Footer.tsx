@@ -15,8 +15,8 @@ export interface IFooter extends Overload<HTMLAttributes<HTMLDivElement>> {
  */
 export const Footer: FC<IFooter> = ({ children, className = '', parentProps, ...props }) => {
     return (
-        <div {...props} className={`apollo-component-library-footer-component ${className}`}>
-            {children}
-        </div>
+        <footer {...props} className={`apollo-component-library-footer-component ${className}`}>
+            {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
+        </footer>
     );
 };
