@@ -1,0 +1,61 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Header } from '../src';
+
+import { StandaloneHeader, HeaderInCard } from './examples/Header';
+
+<Meta title="Interfacing/Header" component={Header} />
+
+# Header
+
+The `Header` is an interfacing component whose functionality only truly shows within other
+components in Apollo. It's intended use is to signify when a webpage has some kind of titular
+content.
+
+## Table of Contents
+
+- [Functionality](#functionality)
+    - [Use in supported container](#use-in-supported-container)
+        - [Example using Card](#example-using-card)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+This section we'll be going over the functionality of the `Header` component along with its
+use cases.
+
+### Standalone
+
+Standalone, you can see that there is nothing really special about the `Header` component. That's
+because it really isn't, it's just a `<header />` tag.
+
+<Canvas>
+    <Story name="Standalone Header" args={{ children: 'This is a Header' }}>
+        {StandaloneHeader.bind({})}
+    </Story>
+</Canvas>
+
+### Use in supported Apollo Containers
+
+Inside other containers, the `Header` component actually behaves much live a `View` component in
+the sense that it can be used to further layout special Apollo components without them losing their
+functionality. However, what makes it different, is that the `Header` component is will always be on
+the top of whatever supported Apollo container it is used in.
+
+#### Example using `Card`
+
+We won't be going over every container it's used in, but the `Card` will give you a good idea of
+how it works.
+
+<Canvas withSource="open">
+    <Story name="Header in Card" args={{ children: "WRONG!" }}>
+        {HeaderInCard.bind({})}
+    </Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+That's pretty much it! It's a very simple component and doesn't really have any special props 
+or functionality. Just in case though, we'll show you the very small prop table it comes with :)
+
+<ArgsTable of={Header} />

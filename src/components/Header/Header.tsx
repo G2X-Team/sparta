@@ -13,10 +13,10 @@ export interface IHeader extends Overload<HTMLAttributes<HTMLDivElement>> {
  *
  * @return Header component
  */
-export const Header: FC<IHeader> = ({ children, className = '', parentProps, ...props }) => {
+export const Header: FC<IHeader> = ({ parentProps, children, className = '', ...props }) => {
     return (
-        <div {...props} className={`apollo-component-library-header-component ${className}`}>
-            {children}
-        </div>
+        <header {...props} className={`apollo-component-library-header-component ${className}`}>
+            {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
+        </header>
     );
 };
