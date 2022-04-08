@@ -1,0 +1,7 @@
+{
+    "rules": {
+        "require-jsdoc": ["error", { 
+            "require": {"ArrowFunctionExpression": false}
+        }]
+    }
+}
