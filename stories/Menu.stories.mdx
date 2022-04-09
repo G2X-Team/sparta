@@ -1,11 +1,7 @@
-import {
-    Meta,
-    Props,
-    Story,
-    Canvas,
-} from '@storybook/addon-docs';
-import { Menu } from '../src/components/Menu/Menu';
-import { Option, Text, Divider, Button, Header, Footer } from '../src';
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { Menu } from '../src/';
+
+import { ListboxMenu, ApplicationMenu, NavigationMenu } from './examples/Menu';
 
 <Meta title="Interfacing/Menu" component={Menu} />
 
@@ -13,6 +9,18 @@ import { Option, Text, Divider, Button, Header, Footer } from '../src';
 
 This component will be used for all components who need some kind of menu interface. Among them we
 have use cases such as `Dropdown` and `Drawer`.
+
+## References
+
+-   [Option](?path=/docs/interfacing-option--default)
+
+## Table of Contents
+
+-   [Funcionality](#funcionality)
+    -   [Listbox Menus](#listbox-menus)
+    -   [Application Menu](#application-menus)
+    -   [Navigation Menu](#navigation-menus)
+-   [Other Props & Functionalities](#other-props--functionalities)
 
 ## Functionality
 
@@ -42,13 +50,7 @@ a child to the `Menu`, the rest was handled by us magically 😉
 
 <Canvas>
     <Story name="Listbox Menu" args={{ label: 'Menu Component' }}>
-        {(args) => (
-            <Menu {...args}>
-                <Option>First Option</Option>
-                <Option>Second Option</Option>
-                <Option>Third Option</Option>
-            </Menu>
-        )}
+        {ListboxMenu.bind({})}
     </Story>
 </Canvas>
 
@@ -57,7 +59,7 @@ a child to the `Menu`, the rest was handled by us magically 😉
 An application menu typically refers to the use of menus beyond just listing out data. This is going
 to be most useful when you need extra functionality than what a typical `listbox` provides. For this
 specific functionality you are going to have to provide a `description` to let our hearing users
-know what's going on. 
+know what's going on.
 
 > **Fair warning:** this component will throw given several requirements aren't met:
 >
@@ -79,23 +81,7 @@ know what's going on.
             padding: 10,
         }}
     >
-        {(args) => (
-            <Menu {...args}>
-                <Header>
-                    <Text header={3} bold>
-                        New Kind of Menu
-                    </Text>
-                </Header>
-                <Text>
-                    This menu is completely different than the previous one. It's entire purpose is
-                    to be flexible and provide the user with options when defining what a "menu"
-                    really is.
-                </Text>
-                <Footer>
-                    <Button>Clicking me doesn't do anything!</Button>
-                </Footer>
-            </Menu>
-        )}
+        {ApplicationMenu.bind({})}
     </Story>
 </Canvas>
 
@@ -107,17 +93,11 @@ will redirect you elsewhere
 
 <Canvas>
     <Story name="Navigation Menu" args={{ label: 'Menu Component', navigation: true }}>
-        {(args) => (
-            <Menu {...args}>
-                <Option>First Option</Option>
-                <Option>Second Option</Option>
-                <Option>Third Option</Option>
-            </Menu>
-        )}
+        {NavigationMenu.bind({})}
     </Story>
 </Canvas>
 
-## Other Props and Functionalities
+## Other Props & Functionalities
 
 For reference, we have a complete list of the properties and everything else down here. I would ignore
 `parentProps` unless you are a dev contributing to the `Menu` component.

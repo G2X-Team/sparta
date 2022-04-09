@@ -1,6 +1,13 @@
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
 import { linkTo } from '@storybook/addon-links';
-import { Dropdown, Menu, Button, Option, Icon, Text } from '../src';
+import { Dropdown } from '../src';
+
+import {
+    BasicDropdown,
+    IconDropdown,
+    AreaDropdown,
+    AnchoringTheDropdown,
+} from './examples/Dropdown';
 
 <Meta title="Layout/Dropdown" component={Dropdown} />
 
@@ -20,45 +27,43 @@ at them:
 -   [Button](?path=/docs/layout-button--standard-button)
 -   [Icon](?path=/docs/layout-icon--default)
 
-## Setup
+## Table of Contents
+
+-   [Functionality](#functionality)
+    -   [Different Button Variations?](#different-button-variations)
+        -   [Standard Button](#standard-button)
+        -   [Icon Button](#icon-button)
+        -   [More Button Options?](#more-button-options)
+    -   [Anchoring & Alignment](#anchoring--alignment)
+-   [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
 
 The Dropdown component is another example of a provider that implements the `Menu` component. Since
 we can typically attribute a dropdown menu to a single button, we don't want to accept any further
 layout outside of what we've provided. This means that the only supported children of the `Dropdown`
 is a `Button` or `Icon` and a `Menu`.
 
-This makes the `Dropdown` component pretty simple to implement. All you got to do is wrap your
-`Button` or `Icon` with the `Dropdown` component and pass in the `Menu` component as a child and
-you're good to go. No need to worry about the rest, because wo do it under the hood.
+### Different Button Variations?
+
+The cool thing that we set out to do with Apollo's dropdown is that we wanted the user to have a
+lot of flexibility in how they wanted to implement the dropdown button, other than using our own
+`Button` component.
+
+#### Standard Button
+
+For the regular button all you got to do is wrap your `Button` or `Icon` with the `Dropdown`
+component and pass in the `Menu` component as a child and you're good to go. No need to worry
+about the rest, because wo do it under the hood.
 
 > **Fair warning:** Trying to add more than one `Menu` to a `Dropdown` will result in an error.
 > The same applies to `Button` components and `Icon` components.
 
 <Canvas>
     <Story name="Basic Dropdown" height="150px">
-        {(args) => (
-            <Dropdown {...args}>
-                <Button>Click Me</Button>
-                <Menu label="Button Dropdown">
-                    <Option>Option 1</Option>
-                    <Option>Option 2</Option>
-                    <Option>Option 3</Option>
-                </Menu>
-            </Dropdown>
-        )}
+        {BasicDropdown.bind({})}
     </Story>
 </Canvas>
-
-## Functionality
-
-Our goal with the `Dropdown` component was for it to be convenient and easy to use. To not overbear
-our users, we just added the essentials functionality wise.
-
-### Different Button Variations?
-
-The cool thing that we set out to do with Apollo's dropdown is that we wanted the user to have a
-lot of flexibility in how they wanted to implement the dropdown button, other than using our own
-`Button` component.
 
 #### Icon Buttons
 
@@ -68,16 +73,7 @@ as a child. Apollo will identify the `Icon` as the dropdown button and you are d
 
 <Canvas>
     <Story name="Icon Dropdown" height="150px">
-        {(args) => (
-            <Dropdown {...args}>
-                <Icon name="menu" />
-                <Menu label="Button Dropdown">
-                    <Option>Option 1</Option>
-                    <Option>Option 2</Option>
-                    <Option>Option 3</Option>
-                </Menu>
-            </Dropdown>
-        )}
+        {IconDropdown.bind({})}
     </Story>
 </Canvas>
 
@@ -95,24 +91,11 @@ boom! You have a dropdown button completely styled to your liking.
 
 <Canvas>
     <Story name="Area Dropdown" height="150px">
-        {(args) => (
-            <Dropdown {...args}>
-                <Button variant="area">
-                    <Text disabled underline bold>
-                        Click Me
-                    </Text>
-                </Button>
-                <Menu label="Button Dropdown">
-                    <Option>Option 1</Option>
-                    <Option>Option 2</Option>
-                    <Option>Option 3</Option>
-                </Menu>
-            </Dropdown>
-        )}
+        {AreaDropdown.bind({})}
     </Story>
 </Canvas>
 
-## Anchoring and Alignment
+## Anchoring & Alignment
 
 For this one, we'll just let you play around with it. Changing the `anchor` prop will change the
 point at which the dropdown menu will be anchored to the button. The `alignment` prop will change
@@ -123,28 +106,7 @@ the alignment of the dropdown menu in relation to the button.
 
 <Canvas>
     <Story name="Anchoring the Dropdown" height="400px">
-        {(args) => (
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: 400,
-                    width: '100%',
-                }}
-            >
-                <Dropdown {...args}>
-                    <Button>This is a dropdown</Button>
-                    <Menu label="Dropdown" width={150}>
-                        <Option>Hello</Option>
-                        <Option>How you doing</Option>
-                        <Option>How you doing</Option>
-                        <Option>How you doing</Option>
-                        <Option>Goodbye</Option>
-                    </Menu>
-                </Dropdown>
-            </div>
-        )}
+        {AnchoringTheDropdown.bind({})}
     </Story>
 </Canvas>
 

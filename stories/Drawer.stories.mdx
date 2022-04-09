@@ -2,7 +2,15 @@ import { useState } from 'react';
 
 import { Meta, Props, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 import { linkTo } from '@storybook/addon-links';
-import { Drawer, Menu, Option, Text, Header, Footer, View, Button } from '../src';
+import { Drawer } from '../src';
+
+import {
+    BareMinimumDrawer,
+    StandardDrawer,
+    AbsoluteDrawer,
+    PersistentDrawer,
+    PermanentDrawer,
+} from './examples/Drawer';
 
 <Meta title="Layout/Drawer" component={Drawer} />
 
@@ -12,7 +20,24 @@ This component is made with the intention of collapsing content that would other
 main view. You might want to use this as a fallback for navigation when your header needs to fit in
 mobile, or perhaps to show an expanded version of some module.
 
-## Setup
+## References
+
+-   [Menu](?path=/docs/interfacing-menu--listbox-menu)
+-   [Option](?path=/docs/interfacing-option--default)
+
+## Table of Contents
+
+-   [Functionality](#functionality)
+    -   [Standard Implementation](#standard-implementation)
+    -   [Orientation](#orientation)
+    -   [Types](#types)
+        -   [Absolute](#absolute)
+        -   [Persistent](#persistent)
+        -   [Permanent](#permanent)
+    -   [Manual Controls](#manual-controls)
+-   [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
 
 The way we set up this component is much like a provider. A drawer needs to have an established area
 where it will slide out from, so a good idea is that everything you want the drawer to impact should
@@ -24,26 +49,15 @@ associate with the `Drawer`, and boom! We have our first `Drawer`... kind of.
 
 <Canvas>
     <Story name="Bare-Minimum Drawer" args={{ label: 'Drawer', type: 'permanent' }}>
-        {(args) => (
-            <Drawer {...args}>
-                <Menu>
-                    <Header>
-                        <Text header={2} bold>
-                            Drawer
-                        </Text>
-                    </Header>
-                    <Option>First Option</Option>
-                    <Option>Second Option</Option>
-                    <Option>Third Option</Option>
-                </Menu>
-            </Drawer>
-        )}
+        {BareMinimumDrawer.bind({})}
     </Story>
 </Canvas>
 
-You might have noticed that the Drawer isn't sliding out of anywhere (also we sneakily added a type to
-the `Drawer` so that it could appear just like that). That's because we haven't added the logic you
-would need to otherwise open the drawer.
+### Standard Implementation
+
+You might have noticed that the previous Drawer isn't sliding out of anywhere (also we sneakily
+added a type to the `Drawer` so that it could appear just like that). That's because we haven't
+added the logic you would need to otherwise open the drawer.
 
 I know what you're thinking. _Ugh, now I need to make state for this and have to worry about a bunch of
 semantics right?_ Nope. If you just want a drawer that opens via a single button, you just have to use
@@ -52,33 +66,27 @@ pulled our magic that way, it's because the `Drawer` itself is a provider that p
 all kinds of front end, buttons included. To separate concern, we wanted to make it easy to identify
 the button in charge of opening and closing the `Drawer`.
 
-Finally, choose where you want the drawer to pop out from by changing the `orientation` prop, by default,
-we have it set to `"left"`, but you can change it to `"right"`, `"top"`, and `"bottom"`.
-
 Once you have done that, pat yourself on the back because you have just implemented a fully functional
 `Drawer`.
 
 <Canvas>
-    <Story name="Standard Drawer" args={{ label: 'Drawer' }} height="300px">
-        {(args) => (
-            <Drawer {...args}>
-                <Drawer.Button>Click Me</Drawer.Button>
-                <Menu>
-                    <Header>
-                        <Text header={2} bold>
-                            Drawer
-                        </Text>
-                    </Header>
-                    <Option>First Option</Option>
-                    <Option>Second Option</Option>
-                    <Option>Third Option</Option>
-                </Menu>
-            </Drawer>
-        )}
+    <Story name="Standard Drawer" args={{}} height="300px">
+        {StandardDrawer.bind({})}
     </Story>
 </Canvas>
 
-## Functionality
+### Orientation
+
+You can choose where you want the drawer to pop out from by changing the `orientation` prop, by
+default, we have it set to `"left"`, but you can change it to `"right"`, `"top"`, and `"bottom"`.
+
+<Canvas>
+    <Story name="Orienting the Drawer" args={{ orientation: 'right' }} height="300px">
+        {StandardDrawer.bind({})}
+    </Story>
+</Canvas>
+
+### Types
 
 The `Drawer` implements the [Menu Component](?path=/docs/interfacing-menu--listbox-menu) to work,
 this enables it to have accessibility features that come with it. That means you can do type
@@ -91,7 +99,7 @@ entirely. That isn't all, you can use the drawer in multiple ways:
     open
 -   **`permanent`:** will keep the menu open all the time, no button or toggle needed
 
-### `absolute`
+#### `absolute`
 
 That is the type of drawer we implemented in the beginning. This is the most common drawer that you
 would typically see in the wild. Here all you have to do is add your `Dropdown.Button` and your
@@ -100,36 +108,11 @@ the first `relative` positioned ancestor.
 
 <Canvas>
     <Story name="Absolute Drawer" args={{ label: 'Drawer' }} height="300px">
-        {(args) => (
-            <Drawer {...args}>
-                <Drawer.Button>Open Absolute</Drawer.Button>
-                <Menu>
-                    <Header>
-                        <Text header={2} bold>
-                            Drawer
-                        </Text>
-                    </Header>
-                    <Option>First Option</Option>
-                    <Option>Second Option</Option>
-                    <Option>Third Option</Option>
-                </Menu>
-                <Text style={{ paddingTop: 20 }}>
-                    <Text bold header={2} style={{ paddingBottom: 10 }}>
-                        Hello World
-                    </Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                    id est laborum.
-                </Text>
-            </Drawer>
-        )}
+        {AbsoluteDrawer.bind({})}
     </Story>
 </Canvas>
 
-### `persistant`
+#### `persistant`
 
 This type of drawer will push the content blocking its way. For this example, we wanted the
 component to nicely push the text to the left. To do this, we took advantage of the built in
@@ -141,34 +124,7 @@ transitioning, persistent, drawer.
 
 <Canvas>
     <Story name="Persistent Drawer" args={{ label: 'Drawer', type: 'persistent' }} height="300px">
-        {(args) => (
-            <Drawer {...args}>
-                <Drawer.Button>Open Persistent</Drawer.Button>
-                <View display="flex" style={{ paddingTop: 20 }}>
-                    <Menu>
-                        <Header>
-                            <Text header={2} bold>
-                                Drawer
-                            </Text>
-                        </Header>
-                        <Option>First Option</Option>
-                        <Option>Second Option</Option>
-                        <Option>Third Option</Option>
-                    </Menu>
-                    <Text style={{ padding: 10 }}>
-                        <Text bold header={2} style={{ paddingBottom: 10 }}>
-                            Hello World
-                        </Text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                        qui officia deserunt mollit anim id est laborum.
-                    </Text>
-                </View>
-            </Drawer>
-        )}
+        {PersistentDrawer.bind({})}
     </Story>
 </Canvas>
 
@@ -176,7 +132,7 @@ transitioning, persistent, drawer.
 > horizontally. To distinguish left, right, bottom, and top, we added a divider on the orientation
 > that will separate the content when expanded.
 
-### `permanent`
+#### `permanent`
 
 This last version of the drawer, will just render the menu without having to to toggle it. It's just
 there if you wanted to keep some of the functionalities of the drawer. Although, this alternative
@@ -185,33 +141,7 @@ We have it just in case you wanted it though.
 
 <Canvas>
     <Story name="Permanent Drawer" args={{ label: 'Drawer', type: 'permanent' }} height="200px">
-        {(args) => (
-            <Drawer {...args}>
-                <View display="flex">
-                    <Menu>
-                        <Header>
-                            <Text header={2} bold>
-                                Drawer
-                            </Text>
-                        </Header>
-                        <Option>First Option</Option>
-                        <Option>Second Option</Option>
-                        <Option>Third Option</Option>
-                    </Menu>
-                    <Text style={{ padding: 10 }}>
-                        <Text bold header={2} style={{ paddingBottom: 10 }}>
-                            Hello World
-                        </Text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                        qui officia deserunt mollit anim id est laborum.
-                    </Text>
-                </View>
-            </Drawer>
-        )}
+        {PermanentDrawer.bind({})}
     </Story>
 </Canvas>
 

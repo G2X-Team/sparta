@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 
-import { Default as Footer } from '../stories/Footer.stories';
+import { Footer } from '../src';
 
 describe('Footer', () => {
     it('renders correctly', () => {

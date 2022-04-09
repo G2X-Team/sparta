@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 
-import { Default as Header } from '../stories/Header.stories';
+import { Header } from '../src';
 
 describe('Header', () => {
     it('renders correctly', () => {
