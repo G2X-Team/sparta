@@ -1,6 +1,8 @@
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
 import { linkTo } from '@storybook/addon-links';
-import { Group, Radio, Checkbox, Form, Button } from '../src';
+import { Group } from '../src';
+
+import { RadioGroup, CheckboxGroup, GroupInClientForm, GroupInRemixForm } from './examples/Group';
 
 <Meta title="Form/Group" component={Group} />
 
@@ -8,6 +10,14 @@ import { Group, Radio, Checkbox, Form, Button } from '../src';
 
 The Group component is responsible for handling inputs that are logically grouped together. Such as
 radios and checkboxes.
+
+## References
+
+This component uniquely implements the `Radio` and `Checkbox` to give them some extra functionality.
+You might benefit from checking out the documentation for those components:
+
+-   [Radio](?path=/docs/form-radio--default)
+-   [Checkbox](?path=/docs/form-checkbox--default)
 
 ## Table of Contents
 
@@ -20,16 +30,7 @@ radios and checkboxes.
     -   [Its use in the Form](#its-use-in-the-form)
         -   [Client Form](#client-form)
         -   [Remix Form](#remix-form)
--   [Setup](#setup)
 -   [Other Props & Functionalities](#other-props--functionalities)
-
-## References
-
-This component uniquely implements the `Radio` and `Checkbox` to give them some extra functionality.
-You might benefit from checking out the documentation for those components:
-
--   [Radio](?path=/docs/form-radio--default)
--   [Checkbox](?path=/docs/form-checkbox--default)
 
 ## Functionality
 
@@ -50,23 +51,8 @@ a `hint` prop to provide more information to the user. This can be especially he
 requirements for the functionality of the `Group`.
 
 <Canvas>
-    <Story name="Group labels" args={{ label: 'Radios', hint: 'Select any radio that you want' }}>
-        {(args) => (
-            <Group
-                {...args}
-                onChange={(data) => window.alert(`Radio ${data?.target.value}: checked`)}
-            >
-                <Radio name="radio" value="1">
-                    Option 1
-                </Radio>
-                <Radio name="radio" value="2">
-                    Option 2
-                </Radio>
-                <Radio name="radio" value="3">
-                    Option 3
-                </Radio>
-            </Group>
-        )}
+    <Story name="Group Labels" args={{ label: 'Radios', hint: 'Select any radio that you want' }}>
+        {RadioGroup.bind({})}
     </Story>
 </Canvas>
 
@@ -85,22 +71,7 @@ the inputs or just to be pinged whenever an input changes.
 
 <Canvas>
     <Story name="Group change callback" args={{ label: 'Radios' }}>
-        {(args) => (
-            <Group
-                {...args}
-                onChange={(data) => window.alert(`Radio ${data?.target.value}: checked`)}
-            >
-                <Radio name="radio" value="1">
-                    Option 1
-                </Radio>
-                <Radio name="radio" value="2">
-                    Option 2
-                </Radio>
-                <Radio name="radio" value="3">
-                    Option 3
-                </Radio>
-            </Group>
-        )}
+        {RadioGroup.bind({})}
     </Story>
 </Canvas>
 
@@ -111,22 +82,7 @@ by side? Just add the `inline` prop and you can accomplish that effect!
 
 <Canvas>
     <Story name="Inline Groups" args={{ label: 'Radios', inline: true }}>
-        {(args) => (
-            <Group
-                {...args}
-                onChange={(data) => window.alert(`Radio ${data?.target.value}: checked`)}
-            >
-                <Radio name="radio" value="1">
-                    Option 1
-                </Radio>
-                <Radio name="radio" value="2">
-                    Option 2
-                </Radio>
-                <Radio name="radio" value="3">
-                    Option 3
-                </Radio>
-            </Group>
-        )}
+        {RadioGroup.bind({})}
     </Story>
 </Canvas>
 
@@ -142,22 +98,7 @@ For now, we have provided the following props:
 
 <Canvas>
     <Story name="Group disabling" args={{ disabled: true, label: 'Checkboxes' }}>
-        {(args) => (
-            <Group
-                {...args}
-                onChange={(data) => window.alert(`Radio ${data?.target.value}: checked`)}
-            >
-                <Checkbox name="Checkbox" value="1">
-                    Option 1
-                </Checkbox>
-                <Checkbox name="Checkbox" value="2">
-                    Option 2
-                </Checkbox>
-                <Checkbox name="Checkbox" value="3">
-                    Option 3
-                </Checkbox>
-            </Group>
-        )}
+        {CheckboxGroup.bind({})}
     </Story>
 </Canvas>
 
@@ -197,28 +138,7 @@ see how its behaviors differ by looking at the example below in contrast to prev
 
 <Canvas>
     <Story name="Group in Client Form">
-        {(args) => (
-            <Form
-                onSubmit={(data) =>
-                    window.alert(
-                        `Radios value: ${data.radios.radio}\n` +
-                            `Checkboxes values: [${data.checkboxes.checkbox || ''}]`
-                    )
-                }
-            >
-                <Group label="Radios" name="radios" hint="Choose any option you like">
-                    <Radio value="1">Option 1</Radio>
-                    <Radio value="2">Option 2</Radio>
-                    <Radio value="3">Option 3</Radio>
-                </Group>
-                <Group label="Checkboxes" name="checkboxes" hint="Choose any option you like">
-                    <Checkbox value="1">Option 1</Checkbox>
-                    <Checkbox value="2">Option 2</Checkbox>
-                    <Checkbox value="3">Option 3</Checkbox>
-                </Group>
-                <Button>Submit</Button>
-            </Form>
-        )}
+        {GroupInClientForm.bind({})}
     </Story>
 </Canvas>
 
@@ -251,29 +171,7 @@ Again, implementation is super easy. You don't have to do any configuration othe
 
 <Canvas>
     <Story name="Group in Remix Form">
-        {(args) => (
-            <Form
-                type="remix"
-                actionData={{
-                    fields: { radios: '1', checkboxes: ['1', '2'] },
-                    fieldErrors: {
-                        checkboxes: 'All three checkboxes should be checked',
-                    },
-                }}
-            >
-                <Group label="Radios" name="radios" hint="Choose any option you like">
-                    <Radio value="1">Option 1</Radio>
-                    <Radio value="2">Option 2</Radio>
-                    <Radio value="3">Option 3</Radio>
-                </Group>
-                <Group label="Checkboxes" name="checkboxes" hint="Choose any option you like">
-                    <Checkbox value="1">Option 1</Checkbox>
-                    <Checkbox value="2">Option 2</Checkbox>
-                    <Checkbox value="3">Option 3</Checkbox>
-                </Group>
-                <Button>Submit</Button>
-            </Form>
-        )}
+        {GroupInRemixForm.bind({})}
     </Story>
 </Canvas>
 
