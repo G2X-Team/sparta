@@ -3,11 +3,13 @@ import React from 'react';
 import './ButtonGroup.css';
 
 import FormatChildren from '../../util/FormatChildren';
+import type { Apollo } from '../../interfaces/Apollo';
 import type { StyleVariant, ComponentSize } from '../../interfaces/Properties';
+import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import Button from './overload/Button';
 
-export interface IButtonGroup extends HTMLAttributes<HTMLDivElement> {
+export interface IButtonGroup extends HTMLAttributes<HTMLDivElement>, Apollo<'ButtonGroup'> {
     /** Disables all buttons within button group */
     disabled?: boolean;
     /** toggle between different button group sizes */
@@ -31,6 +33,7 @@ export const ButtonGroup: FC<IButtonGroup> = ({
     className,
     ...props
 }) => {
+    gaurdApolloName(props, 'ButtonGroup');
     /**
      * Renders all button group buttons and caches chlidren
      *
@@ -51,3 +54,5 @@ export const ButtonGroup: FC<IButtonGroup> = ({
         </div>
     );
 };
+
+ButtonGroup.defaultProps = { 'data-apollo': 'ButtonGroup' };

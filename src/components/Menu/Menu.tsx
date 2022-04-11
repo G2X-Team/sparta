@@ -2,16 +2,18 @@ import type { CSSProperties, FC, HTMLAttributes, MouseEventHandler, ReactNode } 
 import React, { useEffect, useState, useRef } from 'react';
 import './Menu.css';
 
-import Overload from '../../interfaces/Overload';
+import type { Apollo } from '../../interfaces/Apollo';
+import type Overload from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
 import FormatChildren from '../../util/FormatChildren';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+import { handleOutsideClick } from '../../util/detectOutsideClick';
 
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import Option from './overload/Option';
-import { handleOutsideClick } from '../../util/detectOutsideClick';
 
-export interface IMenu extends Overload<HTMLAttributes<HTMLDivElement>> {
+export interface IMenu extends Overload<HTMLAttributes<HTMLDivElement>>, Apollo<'Menu'> {
     /** Determines whether the menu is meant for navigation */
     navigation?: boolean;
     /** Determines the max height of the menu */
@@ -52,6 +54,8 @@ export const Menu: FC<IMenu> = ({
     label,
     ...props
 }) => {
+    gaurdApolloName(props, 'Menu');
+
     // refs
     const menu = useRef<HTMLDivElement>(null);
     const first = useRef<HTMLLIElement>(null);
@@ -93,17 +97,17 @@ export const Menu: FC<IMenu> = ({
 
         // get formatted children
         const formatted = new FormatChildren(parentProps, { Option, Header, Footer });
-        if (!hasOptions && formatted.get(Option).length) toggleHasOptions(true);
+        if (!hasOptions && formatted.get('Option').length) toggleHasOptions(true);
 
         // check if in application mode
         if (!hasOptions) {
             // check if there is a description
-            if (!formatted.get(Option).length && !description?.length)
+            if (!formatted.get('Option').length && !description?.length)
                 throw new Error('Menu with no Option components requires description prop');
         }
 
         // if it is extract the headers and footers
-        const extracted = formatted.extract({ Header, Footer });
+        const extracted = formatted.extract(['Header', 'Footer']);
         if (extracted.Header) {
             const {
                 Header: [header, ...otherHeaders],
@@ -155,6 +159,8 @@ export const Menu: FC<IMenu> = ({
         </div>
     );
 };
+
+Menu.defaultProps = { 'data-apollo': 'Menu' };
 
 /**
  * Gets menu style

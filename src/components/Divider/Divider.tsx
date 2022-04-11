@@ -1,9 +1,12 @@
 import type { HTMLAttributes, FC } from 'react';
 import React from 'react';
-import * as CSS from 'csstype';
 import './Divider.css';
 
-export interface IDivider extends HTMLAttributes<HTMLHRElement> {
+import type { Apollo } from '../../interfaces/Apollo';
+import type * as CSS from 'csstype';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+export interface IDivider extends HTMLAttributes<HTMLHRElement>, Apollo<'Divider'> {
     /** color of desired divider */
     color?: CSS.Property.Color;
     /** height of divider in pixels */
@@ -16,6 +19,8 @@ export interface IDivider extends HTMLAttributes<HTMLHRElement> {
  * @return Divider component
  */
 export const Divider: FC<IDivider> = ({ color, className = '', height, style, ...props }) => {
+    gaurdApolloName(props, 'Divider');
+
     return (
         <hr
             role="separator"
@@ -25,6 +30,8 @@ export const Divider: FC<IDivider> = ({ color, className = '', height, style, ..
         />
     );
 };
+
+Divider.defaultProps = { 'data-apollo': 'Divider' };
 
 /**
  * Gets the style object for the divider

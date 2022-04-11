@@ -63,8 +63,8 @@ const Dialog: FC<IModal> = ({
         });
 
         // extract header and footer components
-        const headers = formatted.get(Header);
-        const footers = formatted.get(Footer);
+        const headers = formatted.get('Header');
+        const footers = formatted.get('Footer');
 
         // check that the appropriate amount of headers is found
         if (headers.length > 1) throw new Error('Modal can only have 1 Header component');
@@ -88,11 +88,11 @@ const Dialog: FC<IModal> = ({
                 <Icon name="close" onClick={toggleModal} style={iconStyle} />
             </Text>
             {description ? <Text id={`${id}-desc`}>{description}</Text> : null}
-            {formatted?.get(Header)[0]}
+            {formatted?.get('Header')[0]}
             <div className="apollo-component-library-modal-component-body">
                 {formatted?.getOther()}
             </div>
-            {formatted?.get(Footer)[0]}
+            {formatted?.get('Footer')[0]}
         </div>
     );
 };

@@ -1,12 +1,14 @@
 import type { HTMLAttributes, FC, CSSProperties } from 'react';
 import React, { useEffect } from 'react';
-
-import type { FormTextData, FormValidator, StyleVariant } from '../../interfaces/Properties';
 import './TextInput.css';
+
+import type { Apollo } from '../../interfaces/Apollo';
+import type { FormTextData, FormValidator, StyleVariant } from '../../interfaces/Properties';
+import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 
-export interface ITextInput extends HTMLAttributes<HTMLInputElement> {
+export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'TextInput'> {
     /** To comply with WCAG 2.0, all inputs **must** have labels */
     label: string;
     /** Gives further description on what the input should have to be valid */
@@ -49,6 +51,8 @@ export const TextInput: FC<ITextInput> = ({
     label,
     ...props
 }) => {
+    gaurdApolloName(props, 'TextInput');
+
     // will throw if you try to add an error message without a name
     useEffect(() => {
         if (errorMessage?.length && !name?.length)
@@ -94,6 +98,8 @@ export const TextInput: FC<ITextInput> = ({
         </div>
     );
 };
+
+TextInput.defaultProps = { 'data-apollo': 'TextInput' };
 
 const labelTextStyle: CSSProperties = {
     paddingBottom: 5,

@@ -1,9 +1,12 @@
 import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
-import type * as CSS from 'csstype';
 import './Text.css';
 
-export interface IText extends HTMLAttributes<HTMLParagraphElement> {
+import type { Apollo } from '../../interfaces/Apollo';
+import type * as CSS from 'csstype';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+export interface IText extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Text'> {
     /** Text needs to exist between tags */
     children: ReactNode;
     /**
@@ -55,6 +58,8 @@ export const Text: FC<IText> = ({
     style,
     ...props
 }) => {
+    gaurdApolloName(props, 'Text');
+
     /**
      * Gets all the special conditions and translates it to a special className combination
      * granting all conditions
@@ -126,6 +131,8 @@ export const Text: FC<IText> = ({
         </span>
     );
 };
+
+Text.defaultProps = { 'data-apollo': 'Text' };
 
 /**
  * Gets text style object

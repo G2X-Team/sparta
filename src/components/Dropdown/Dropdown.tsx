@@ -1,15 +1,17 @@
 import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useRef } from 'react';
-import FormatChildren from '../../util/FormatChildren';
 import './Dropdown.css';
 
+import type { Apollo } from '../../interfaces/Apollo';
 import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+import FormatChildren from '../../util/FormatChildren';
 
 import Button from './overload/Button';
 import Icon from './overload/Icon';
 import Menu from './overload/Menu';
 
-export interface IDropdown extends HTMLAttributes<HTMLDivElement> {
+export interface IDropdown extends HTMLAttributes<HTMLDivElement>, Apollo<'Dropdown'> {
     /** Determines where the menu will appear from */
     anchor?: ComponentOrientation;
     /** Determines menu alignment, when orientation is left or right */
@@ -26,7 +28,10 @@ export const Dropdown: FC<IDropdown> = ({
     className = '',
     anchor = 'bottom',
     alignment = 'start',
+    ...props
 }) => {
+    gaurdApolloName(props, 'Dropdown');
+
     // reference to buttons
     const buttonRef = useRef<HTMLButtonElement>(null);
     const iconRef = useRef<HTMLSpanElement>(null);
@@ -54,8 +59,8 @@ export const Dropdown: FC<IDropdown> = ({
         const formatted = new FormatChildren(parentProps, { Button, Menu, Icon });
 
         // get button
-        const [icon, ...otherIcons]: JSX.Element[] = formatted.get(Icon);
-        const [button, ...otherButtons]: JSX.Element[] = formatted.get(Button);
+        const [icon, ...otherIcons]: JSX.Element[] = formatted.get('Icon');
+        const [button, ...otherButtons]: JSX.Element[] = formatted.get('Button');
 
         // handles multiple button and icon components cases
         if (icon) {
@@ -70,7 +75,7 @@ export const Dropdown: FC<IDropdown> = ({
         }
 
         // get menu
-        const [menu, ...otherMenus]: JSX.Element[] = formatted.get(Menu);
+        const [menu, ...otherMenus]: JSX.Element[] = formatted.get('Menu');
         if (!menu) throw new Error('Dropdown component needs menu');
         if (otherMenus.length) throw new Error('Dropdown component can only have one menu');
 
@@ -85,3 +90,5 @@ export const Dropdown: FC<IDropdown> = ({
 
     return renderDropdown();
 };
+
+Dropdown.defaultProps = { 'data-apollo': 'Dropdown' };

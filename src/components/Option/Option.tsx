@@ -2,12 +2,16 @@ import { HTMLAttributes, FC, forwardRef, ForwardedRef, MouseEvent, RefObject } f
 import React, { useEffect, useRef } from 'react';
 import './Option.css';
 
-import Overload from '../../interfaces/Overload';
+import type { Apollo } from '../../interfaces/Apollo';
+import type Overload from '../../interfaces/Overload';
 import type { ComponentWrap } from '../../interfaces/Properties';
+import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 
-export interface IOption extends Overload<Omit<HTMLAttributes<HTMLElement>, 'onClick'>> {
+export interface IOption
+    extends Overload<Omit<HTMLAttributes<HTMLElement>, 'onClick'>>,
+        Apollo<'Option'> {
     /** Needs to have a string value in between tags */
     children: string;
     /** Can have onClick callback method */
@@ -30,6 +34,8 @@ export const Option: FC<IOption> = forwardRef(function Option(
     { children, parentProps, className, onClick, wrap, href, ...props }: IOption,
     ref
 ) {
+    gaurdApolloName(props, 'Option');
+
     // define a fallback ref
     const optionRef = useRef<HTMLLIElement>(null);
 
@@ -73,3 +79,5 @@ export const Option: FC<IOption> = forwardRef(function Option(
 
     return <>{wrap ? wrap(option) : option}</>;
 });
+
+Option.defaultProps = { 'data-apollo': 'Option' };

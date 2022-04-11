@@ -35,7 +35,7 @@ const Section: FC<ISection> = ({
             setSectionChildren(
                 <Dropdown>
                     <Icon name="menu" clickable color={titleColor} />
-                    <Menu label="header_nav_menu">{formatted.get(Option)}</Menu>
+                    <Menu label="header_nav_menu">{formatted.get('Option')}</Menu>
                 </Dropdown>
             );
         }

@@ -3,16 +3,16 @@ import React, { useEffect, useState, useRef } from 'react';
 import FormatChildren from '../../util/FormatChildren';
 import './Drawer.css';
 
+import type { Apollo } from '../../interfaces/Apollo';
 import type { ComponentOrientation, ComponentRenderAll } from '../../interfaces/Properties';
+import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { View } from '../View/View';
-
 import Menu from './overload/Menu';
+import type { IDrawerButton } from './overload/Button';
 import Button from './overload/Button';
-import { IButton } from '../Button/Button';
-import Overload from '../../interfaces/Overload';
 
-export interface IDrawer extends HTMLAttributes<HTMLDivElement> {
+export interface IDrawer extends HTMLAttributes<HTMLDivElement>, Apollo<'Drawer'> {
     /**
      * Type of drawer that will be used. `absolute` assumes the drawer is in front of everything
      * and will use a backdrop. `persistent` will have a relative width and can push other
@@ -45,7 +45,7 @@ export interface IDrawer extends HTMLAttributes<HTMLDivElement> {
  *
  * @return Drawer Component
  */
-export const Drawer: FC<IDrawer> & { Button: FC<Overload<IButton>> } = ({
+export const Drawer: FC<IDrawer> & { Button: FC<IDrawerButton> } = ({
     children,
     className = '',
     type = 'absolute',
@@ -58,6 +58,8 @@ export const Drawer: FC<IDrawer> & { Button: FC<Overload<IButton>> } = ({
     style,
     ...props
 }: IDrawer) => {
+    gaurdApolloName(props, 'Drawer');
+
     const button = useRef<HTMLButtonElement | null>(null);
 
     // state variables
@@ -148,7 +150,7 @@ export const Drawer: FC<IDrawer> & { Button: FC<Overload<IButton>> } = ({
         });
 
         // format header and footer
-        const [, ...otherMenus] = formatted.get(Menu);
+        const [, ...otherMenus] = formatted.get('Menu');
 
         if (otherMenus.length) throw new Error('Dropdown can only have one immediate Menu');
 
@@ -158,4 +160,5 @@ export const Drawer: FC<IDrawer> & { Button: FC<Overload<IButton>> } = ({
     return <div {...props}>{renderAll(children)}</div>;
 };
 
+Drawer.defaultProps = { 'data-apollo': 'Drawer' };
 Drawer.Button = Button;

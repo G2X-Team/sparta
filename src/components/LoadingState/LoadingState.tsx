@@ -2,9 +2,12 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 'react';
 import './LoadingState.css';
 
+import type { Apollo } from '../../interfaces/Apollo';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
 import { Text } from '../Text/Text';
 
-export interface ILoadingState extends HTMLAttributes<HTMLDivElement> {
+export interface ILoadingState extends HTMLAttributes<HTMLDivElement>, Apollo<'LoadingState'> {
     /**
      * Determines status of the progressbar where
      * progressFilled={0.1} => 10% filled progressbar
@@ -36,6 +39,8 @@ export const LoadingState: FC<ILoadingState> = ({
     label,
     ...props
 }) => {
+    gaurdApolloName(props, 'LoadingState');
+
     // ref
     const progressRef = useRef<HTMLHeadingElement>(null);
 
@@ -124,3 +129,5 @@ export const LoadingState: FC<ILoadingState> = ({
         </>
     );
 };
+
+LoadingState.defaultProps = { 'data-apollo': 'LoadingState' };
