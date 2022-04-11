@@ -1,16 +1,21 @@
 import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React, { CSSProperties, useState, useEffect, useRef } from 'react';
-import { ComponentSize } from '../../interfaces/Properties';
-import type { ComponentPosition, ComponentVerticalOrientation } from '../../interfaces/Properties';
-import * as CSS from 'csstype';
-
-import FormatChildren from '../../util/FormatChildren';
 import './NavigationBar.css';
+
+import type { Apollo } from '../../interfaces/Apollo';
+import type {
+    ComponentPosition,
+    ComponentVerticalOrientation,
+    ComponentSize,
+} from '../../interfaces/Properties';
+import type * as CSS from 'csstype';
+import FormatChildren from '../../util/FormatChildren';
+import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import Section from './overload/Section';
 
-export interface INavigationBar extends HTMLAttributes<HTMLDivElement> {
+export interface INavigationBar extends HTMLAttributes<HTMLDivElement>, Apollo<'NavigationBar'> {
     /** If the component is not static, it will determine the orientation of the component */
     orientation?: ComponentVerticalOrientation;
     /** Determines the position of the component */
@@ -40,6 +45,8 @@ export const NavigationBar: FC<INavigationBar> = ({
     style,
     ...props
 }: INavigationBar) => {
+    gaurdApolloName(props, 'NavigationBar');
+
     // refs
     const navigationBar = useRef<HTMLDivElement>(null);
     // state
@@ -88,6 +95,8 @@ export const NavigationBar: FC<INavigationBar> = ({
         </div>
     );
 };
+
+NavigationBar.defaultProps = { 'data-apollo': 'NavigationBar' };
 
 /**
  * Gets the navigation style object

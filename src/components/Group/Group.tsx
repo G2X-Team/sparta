@@ -1,15 +1,20 @@
 import type { HTMLAttributes, FC, CSSProperties, ChangeEvent } from 'react';
 import React, { ReactNode, useEffect } from 'react';
-import FormatChildren from '../../util/FormatChildren';
 import './Group.css';
+
+import type { Apollo } from '../../interfaces/Apollo';
+import type { FormGroupData, FormValidator } from '../../interfaces/Properties';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+import FormatChildren from '../../util/FormatChildren';
 
 import { Text } from '../Text/Text';
 import Radio from './overload/Radio';
 import Checkbox from './overload/Checkbox';
 import View from './overload/View';
-import { FormGroupData, FormValidator } from '../../interfaces/Properties';
 
-export interface IGroup extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
+export interface IGroup
+    extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChange'>,
+        Apollo<'Group'> {
     /** Group must contain element between tags */
     children: ReactNode;
     /** Identifies the group's selection */
@@ -60,6 +65,8 @@ export const Group: FC<IGroup> = ({
     errorMessage,
     ...props
 }) => {
+    gaurdApolloName(props, 'Group');
+
     // check if the user is using error message invalidly
     useEffect(() => {
         if (errorMessage?.length && !name?.length)
@@ -139,6 +146,8 @@ export const Group: FC<IGroup> = ({
         </>
     );
 };
+
+Group.defaultProps = { 'data-apollo': 'Group' };
 
 const labelTextStyle: CSSProperties = {
     paddingBottom: 5,

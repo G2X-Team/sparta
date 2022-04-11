@@ -18,7 +18,7 @@ const Footer: FC<IFooter> = ({ parentProps: { children, ...parentProps }, ...pro
     const formattedFooter = new FormatChildren(allProps, { ButtonGroup });
 
     // format and extract button groups
-    const buttonGroups = formattedFooter.get(ButtonGroup);
+    const buttonGroups = formattedFooter.get('ButtonGroup');
 
     // check that there is no more than one button group
     if (buttonGroups.length > 1)

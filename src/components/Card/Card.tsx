@@ -1,12 +1,15 @@
 import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
-import FormatChildren from '../../util/FormatChildren';
 import './Card.css';
+
+import type { Apollo } from '../../interfaces/Apollo';
+import FormatChildren from '../../util/FormatChildren';
+import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 
-export interface ICard extends HTMLAttributes<HTMLDivElement> {
+export interface ICard extends HTMLAttributes<HTMLDivElement>, Apollo<'Card'> {
     /** Accepts any kind of children */
     children?: ReactNode;
 }
@@ -18,6 +21,8 @@ export interface ICard extends HTMLAttributes<HTMLDivElement> {
  * @return Card component
  */
 export const Card: FC<ICard> = ({ children, className, ...props }) => {
+    gaurdApolloName(props, 'Card');
+
     /**
      * Renderes all components
      *
@@ -28,8 +33,8 @@ export const Card: FC<ICard> = ({ children, className, ...props }) => {
         const formatted = new FormatChildren({ children }, { Header, Footer });
 
         // extract header and footer
-        const headers = formatted.get(Header);
-        const footers = formatted.get(Footer);
+        const headers = formatted.get('Header');
+        const footers = formatted.get('Footer');
 
         // check to see that we have one footer and one header MAX
         if (headers.length > 1) throw new Error('Card cannot have more than one header.');
@@ -57,3 +62,5 @@ export const Card: FC<ICard> = ({ children, className, ...props }) => {
         </div>
     );
 };
+
+Card.defaultProps = { 'data-apollo': 'Card' };
