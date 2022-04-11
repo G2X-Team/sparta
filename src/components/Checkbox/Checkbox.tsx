@@ -1,9 +1,13 @@
 import { HTMLAttributes, ReactNode, FC, CSSProperties, useEffect } from 'react';
 import React from 'react';
-import { Text } from '../Text/Text';
 import './Checkbox.css';
 
-export interface ICheckbox extends HTMLAttributes<HTMLInputElement> {
+import type { Apollo } from '../../interfaces/Apollo';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+import { Text } from '../Text/Text';
+
+export interface ICheckbox extends HTMLAttributes<HTMLInputElement>, Apollo<'Checkbox'> {
     /** String that identifies the checkbox */
     id?: string;
     /**  Can have children between tags */
@@ -42,6 +46,8 @@ export const Checkbox: FC<ICheckbox> = ({
     errorMessage,
     ...props
 }) => {
+    gaurdApolloName(props, 'Checkbox');
+
     // check if the user can use error messages
     useEffect(() => {
         if (errorMessage?.length && !id?.length)
@@ -92,6 +98,8 @@ export const Checkbox: FC<ICheckbox> = ({
         </>
     );
 };
+
+Checkbox.defaultProps = { 'data-apollo': 'Checkbox' };
 
 const errorTextStyle: CSSProperties = {
     paddingTop: 5,

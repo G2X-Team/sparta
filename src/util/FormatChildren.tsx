@@ -8,11 +8,6 @@ export interface FoundChildren {
     other: JSX.Element[];
 }
 
-/** Takes into account components who use fowardRef  */
-type FunctionComponent = React.FC<any> & {
-    render?: any;
-};
-
 interface ComponentDictionary {
     /** Used to get all components given a specific display name */
     [displayName: string]: JSX.Element[];
@@ -42,17 +37,10 @@ class FormatChildren {
 
         // loop through all children
         Children.forEach(children, (child: JSX.Element, index: number) => {
-            let childName =
-                child?.type?.displayName || child?.type?.name || child?.type?.render?.name;
-
-            // support for mdx
-            if (childName === 'MDXCreateElement') childName = child.props?.mdxType;
-
-            // support for remix weirdly
-            const nameParseOne = childName?.slice(0, -1);
-            const nameParseTwo = childName?.slice(0, -2);
-            if (nameParseOne && componentMap[nameParseOne]) childName = nameParseOne;
-            if (nameParseTwo && componentMap[nameParseTwo]) childName = nameParseTwo;
+            const childName =
+                child && child.props && child?.props['data-apollo']
+                    ? child.props['data-apollo']
+                    : 'not-found';
 
             // hande whether sought out component is found
             if (componentMap[childName]) {
@@ -113,9 +101,8 @@ class FormatChildren {
      * @param child component wanting to retrieve
      * @return all instances of the specified child
      */
-    get = (child: FunctionComponent): JSX.Element[] => {
-        const childName: string = child?.displayName || child?.name || child?.render?.name;
-        return this.foundChildren[childName] ? this.foundChildren[childName] : [];
+    get = (child: string): JSX.Element[] => {
+        return this.foundChildren[child] ? this.foundChildren[child] : [];
     };
 
     /**
@@ -136,20 +123,25 @@ class FormatChildren {
      * Will remove all instances of a given child in the component map from the stored
      * formatted children at the cost of an extra iteration of all of them.
      *
-     * @param componentMap child wanting to remove from formatted children
+     * @param components children wanting to remove from formatted children
      * @return all instances of child
      */
-    extract = (componentMap: ComponentMap): ComponentDictionary => {
+    extract = (components: Array<string>): ComponentDictionary => {
+        // get set from component array
+        const componentSet = new Set(components);
+
         // define an object to keep track of all extracted components
         const extracted: ComponentDictionary = {};
 
         // removes all instances of the child
         this.allChildren = this.allChildren.filter((child: JSX.Element) => {
             const name: string =
-                child?.type?.displayName || child?.type?.name || child?.type?.render?.name;
+                child && child.props && child.props['data-apollo']
+                    ? child.props['data-apollo']
+                    : 'not-found';
 
             // determine whether display name is present in both maps
-            if (componentMap[name] && this.foundChildren[name]) {
+            if (componentSet.has(name) && this.foundChildren[name]) {
                 // if found get the extracted components and move them to the extracted dictionary
                 const {
                     foundChildren: { [name]: extractedComponents },
@@ -161,7 +153,7 @@ class FormatChildren {
             }
 
             // only add component to list if it not in the given component map
-            return !componentMap[name];
+            return !componentSet.has(name);
         });
 
         return extracted;

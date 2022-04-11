@@ -2,7 +2,10 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Alert.css';
 
-export interface IAlert extends HTMLAttributes<HTMLParagraphElement> {
+import type { Apollo } from '../../interfaces/Apollo';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+export interface IAlert extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Alert'> {
     /** Alert needs to exist between tags */
     children: ReactNode;
     /**
@@ -10,7 +13,6 @@ export interface IAlert extends HTMLAttributes<HTMLParagraphElement> {
      * tag i.e. type=warning => warning
      */
     type?: 'danger' | 'warning' | 'info' | 'success';
-    /** Determines whether the element has margins or not */
 }
 
 /**
@@ -18,12 +20,9 @@ export interface IAlert extends HTMLAttributes<HTMLParagraphElement> {
  *
  * @return Alert component
  */
-export const Alert: FC<IAlert> = ({
-    children,
-    type = 'danger',
+export const Alert: FC<IAlert> = ({ children, type = 'danger', ...props }) => {
+    gaurdApolloName(props, 'Alert');
 
-    ...props
-}) => {
     /**
      * Gets all the special conditions and translates it to a special className combination
      * granting all conditions
@@ -49,3 +48,5 @@ export const Alert: FC<IAlert> = ({
         </div>
     );
 };
+
+Alert.defaultProps = { 'data-apollo': 'Alert' };

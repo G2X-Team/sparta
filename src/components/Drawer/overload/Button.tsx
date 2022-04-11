@@ -4,19 +4,25 @@ import Overload from '../../../interfaces/Overload';
 
 import type { IButton as CIButton } from '../../Button/Button';
 import { Button as CButton } from '../../Button/Button';
+import { Apollo } from '../../../interfaces/Apollo';
+
+export interface IDrawerButton
+    extends Overload<Omit<CIButton, 'data-apollo'>>,
+        Apollo<'Drawer.Button'> {}
 
 /**
  * Formats button to be sub component of Dropdown
  *
  * @return Formatted Button Component
  */
-const Button: FC<Overload<CIButton>> = forwardRef(function Button(
+const Button: FC<Overload<IDrawerButton>> = forwardRef(function Button(
     {
         parentProps: { toggleDrawer, buttonRef, instant },
+        ['data-apollo']: apolloName,
         onClick,
         children,
         ...props
-    }: Overload<CIButton>,
+    }: Overload<IDrawerButton>,
     ref: ForwardedRef<HTMLButtonElement>
 ) {
     /**
@@ -28,12 +34,19 @@ const Button: FC<Overload<CIButton>> = forwardRef(function Button(
     };
 
     return (
-        <CButton {...props} ref={buttonRef || ref} onClick={handleClick} aria-expanded={instant}>
-            {children}
-        </CButton>
+        <span>
+            <CButton
+                {...props}
+                ref={buttonRef || ref}
+                onClick={handleClick}
+                aria-expanded={instant}
+            >
+                {children}
+            </CButton>
+        </span>
     );
 });
 
-Button.displayName = 'Drawer.Button';
+Button.defaultProps = { 'data-apollo': 'Drawer.Button' };
 
 export default Button;

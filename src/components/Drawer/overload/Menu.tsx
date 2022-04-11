@@ -8,7 +8,7 @@ import { IMenu as CIMenu } from '../../Menu/Menu';
 import { Menu as CMenu } from '../../Menu/Menu';
 import { IDrawer } from '../Drawer';
 
-interface IMenu extends Overload<CIMenu>, IDrawer {}
+interface IMenu extends Overload<CIMenu>, Omit<IDrawer, 'data-apollo'> {}
 
 /**
  * Formats menu component to be styled like drawer menu

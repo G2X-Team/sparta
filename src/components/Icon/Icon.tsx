@@ -1,9 +1,12 @@
 import type { HTMLAttributes, FC, ForwardedRef, RefObject } from 'react';
 import React, { useEffect, forwardRef, useRef } from 'react';
-import * as CSS from 'csstype';
 import './Icon.css';
 
-export interface IIcon extends HTMLAttributes<HTMLParagraphElement> {
+import type { Apollo } from '../../interfaces/Apollo';
+import type * as CSS from 'csstype';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+export interface IIcon extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Icon'> {
     /** The icon name the user wants to render */
     name: string;
     /** Specification of an onClick method will convert icon into a button */
@@ -42,6 +45,8 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
     }: IIcon,
     ref: ForwardedRef<HTMLSpanElement>
 ) {
+    gaurdApolloName(props, 'Icon');
+
     // define a fallback ref
     const iconRef = useRef<HTMLSpanElement>(null);
 
@@ -82,6 +87,8 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
         </span>
     );
 });
+
+Icon.defaultProps = { 'data-apollo': 'Icon' };
 
 /**
  * Gets Icon style object

@@ -1,9 +1,12 @@
 import type { HTMLAttributes, FC } from 'react';
 import React, { CSSProperties } from 'react';
-import Overload from '../../interfaces/Overload';
-import * as CSS from 'csstype';
 
-export interface ISection extends Overload<HTMLAttributes<HTMLDivElement>> {
+import type { Apollo } from '../../interfaces/Apollo';
+import type Overload from '../../interfaces/Overload';
+import type * as CSS from 'csstype';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+export interface ISection extends Overload<HTMLAttributes<HTMLDivElement>>, Apollo<'Section'> {
     /** value that determines the flex style prop of section */
     flex?: CSS.Property.Flex;
     /** value that determines the height of section */
@@ -40,6 +43,8 @@ export const Section: FC<ISection> = ({
     alignItems,
     ...props
 }) => {
+    gaurdApolloName(props, 'Section');
+
     return (
         <div
             {...props}
@@ -50,6 +55,8 @@ export const Section: FC<ISection> = ({
         </div>
     );
 };
+
+Section.defaultProps = { 'data-apollo': 'Section' };
 
 /**
  * Gets section style objects from properties

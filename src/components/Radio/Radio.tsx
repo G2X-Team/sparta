@@ -1,9 +1,13 @@
 import { HTMLAttributes, ReactNode, FC, useEffect, CSSProperties } from 'react';
 import React from 'react';
-import { Text } from '../Text/Text';
 import './Radio.css';
 
-export interface IRadio extends HTMLAttributes<HTMLInputElement> {
+import type { Apollo } from '../../interfaces/Apollo';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+import { Text } from '../Text/Text';
+
+export interface IRadio extends HTMLAttributes<HTMLInputElement>, Apollo<'Radio'> {
     /** String that identifies the radio */
     id?: string;
     /** You can define an element pertaining to radio */
@@ -42,6 +46,8 @@ export const Radio: FC<IRadio> = ({
     id,
     ...props
 }) => {
+    gaurdApolloName(props, 'Radio');
+
     // check if the user can use error messages
     useEffect(() => {
         if (errorMessage?.length && !id?.length)
@@ -91,6 +97,8 @@ export const Radio: FC<IRadio> = ({
         </>
     );
 };
+
+Radio.defaultProps = { 'data-apollo': 'Radio' };
 
 const errorTextStyle: CSSProperties = {
     paddingTop: 5,

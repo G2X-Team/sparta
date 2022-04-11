@@ -1,10 +1,14 @@
 import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
-import { StyleVariant } from '../../interfaces/Properties';
-import { Text } from '../Text/Text';
 import './Switch.css';
 
-export interface ISwitch extends HTMLAttributes<HTMLInputElement> {
+import type { Apollo } from '../../interfaces/Apollo';
+import type { StyleVariant } from '../../interfaces/Properties';
+
+import { Text } from '../Text/Text';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+export interface ISwitch extends HTMLAttributes<HTMLInputElement>, Apollo<'Switch'> {
     /** Can assign text or element to switch */
     children: ReactNode;
     /** Determines whether the switch is disabled */
@@ -33,6 +37,8 @@ export const Switch: FC<ISwitch> = ({
     required,
     ...props
 }) => {
+    gaurdApolloName(props, 'Switch');
+
     return (
         <div className="apollo-component-library-switch-component-wrapper">
             <label className="apollo-component-library-switch-component-label">
@@ -54,3 +60,5 @@ export const Switch: FC<ISwitch> = ({
         </div>
     );
 };
+
+Switch.defaultProps = { 'data-apollo': 'Switch' };

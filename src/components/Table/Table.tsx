@@ -1,10 +1,13 @@
 /* eslint-disable camelcase */
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import * as CSS from 'csstype';
 import './Table.css';
 
-export interface ITable {
+import type { Apollo } from '../../interfaces/Apollo';
+import type * as CSS from 'csstype';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+
+export interface ITable extends Apollo<'Table'> {
     /** width of desired table */
     width?: CSS.Property.Width;
     /** height of table in pixels */
@@ -32,12 +35,7 @@ export interface ITable {
     /** Defines the weight of the header text */
     headerTextFontWeight?: CSS.Property.FontWeight;
 }
-const btnStyle = {
-    backgroundColor: 'black',
-    color: 'white',
-    border: 'none',
-    padding: '5px 10px',
-};
+
 /**
  * Component that serves as an table for ease of templating
  *
@@ -56,7 +54,11 @@ export const Table: FC<ITable> = ({
     headerTextColor = 'white',
     headerTextTransform = 'uppercase',
     headerTextFontWeight = 'bolder',
+    ...props
 }) => {
+    gaurdApolloName(props, 'Table');
+
+    // state
     const [page, setPage] = useState(pageNum);
     const [sorteddata, setsorted] = useState(data);
 
@@ -159,11 +161,11 @@ export const Table: FC<ITable> = ({
                     {pageSize < data.length ? (
                         <tfoot className="apollo-component-library-table-component-footer">
                             <div>
-                                <button style={btnStyle} onClick={onBack}>
+                                <button style={buttonStyle} onClick={onBack}>
                                     Back
                                 </button>
                                 <label style={{ padding: '0 1em' }}>{page + 1}</label>
-                                <button style={btnStyle} onClick={onNext}>
+                                <button style={buttonStyle} onClick={onNext}>
                                     Next
                                 </button>
                             </div>
@@ -173,4 +175,14 @@ export const Table: FC<ITable> = ({
             )}
         </div>
     );
+};
+
+Table.defaultProps = { 'data-apollo': 'Table' };
+
+// style for button component
+const buttonStyle = {
+    backgroundColor: 'black',
+    color: 'white',
+    border: 'none',
+    padding: '5px 10px',
 };
