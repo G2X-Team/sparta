@@ -10,19 +10,19 @@ describe('Group', () => {
     it('complies with WCAG', async () => {
         // given
         const { container: validGroup } = render(
-            <Group label="something">
+            <Group name="something" label="something">
                 <Radio value="something">something</Radio>
             </Group>
         );
 
         const { container: validGroupWithHint } = render(
-            <Group label="something" hint="hint">
+            <Group name="something" label="something" hint="hint">
                 <Radio value="something">something</Radio>
             </Group>
         );
 
         const { container: invalidGroup } = render(
-            <Group label="something" invalid>
+            <Group name="something" label="something" invalid>
                 <Radio value="something">something</Radio>
             </Group>
         );
@@ -254,5 +254,29 @@ describe('Group', () => {
 
         // then
         expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('will render default values of radios and checkboxes', () => {
+        // given
+        const groupValue: string[] = ['value 1', 'value 2'];
+        const groupValue2 = 'value 3';
+        render(
+            <>
+                <Group label="label" name="group" defaultValue={groupValue}>
+                    <Checkbox value="value 1">Option 1</Checkbox>
+                    <Checkbox value="value 2">Option 2</Checkbox>
+                </Group>
+                <Group label="label" name="group" defaultValue={groupValue2}>
+                    <Radio value="value 3">Option 3</Radio>
+                    <Radio value="value 4">Option 4</Radio>
+                </Group>
+            </>
+        );
+
+        // when then
+        expect(screen.getByLabelText(/option 1/i)).toBeChecked();
+        expect(screen.getByLabelText(/option 2/i)).toBeChecked();
+        expect(screen.getByLabelText(/option 3/i)).toBeChecked();
+        expect(screen.getByLabelText(/option 4/i)).not.toBeChecked();
     });
 });

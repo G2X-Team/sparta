@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { BaseSyntheticEvent, ReactNode } from 'react';
 
 /** Component Property types */
 export type StyleVariant = 'default' | 'secondary';
@@ -58,14 +58,14 @@ export type FormErrors = {
  *
  * @param data information collected from all form inputs
  */
-export type FormSubmitHandler = (data: FormData) => void;
+export type FormSubmitHandler = (data?: FormData, event?: BaseSyntheticEvent) => void;
 
 /**
  * Method that allows user to see all error messages when there is an invalid submission
  *
  * @param errors error messages collected from all inputs
  */
-export type FormErrorHandler = (errors: FormErrors) => void;
+export type FormErrorHandler = (errors?: FormErrors) => void;
 
 /** Function to be used for Apollo input validation purposes */
 export type FormValidator<T = FormInputData> = (inputData: T) => string | null;

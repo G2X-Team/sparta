@@ -32,6 +32,10 @@ export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'Te
     name?: string;
     /** Message displayed when input is invalid */
     errorMessage?: string;
+    /** choose an input that the string value must match */
+    match?: string;
+    /** Choose error message for when input doesn't match */
+    matchMessage?: string;
 }
 
 /**
@@ -44,9 +48,11 @@ export const TextInput: FC<ITextInput> = ({
     className = '',
     password = false,
     invalid = false,
-    name,
     errorMessage,
+    matchMessage,
+    match,
     required,
+    name,
     id,
     hint,
     label,

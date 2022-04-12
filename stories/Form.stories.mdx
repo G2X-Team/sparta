@@ -1,8 +1,14 @@
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
 import { linkTo } from '@storybook/addon-links';
-import { Form, TextInput, Button, Group, Radio, Checkbox, Switch } from '../src';
+import { Form } from '../src';
 
-import { BasicForm, ValidatedForm, RemixForm } from './examples/Form';
+import {
+    BasicForm,
+    ValidatedForm,
+    RemixForm,
+    ClientSideRemixForm,
+    clientActionData,
+} from './examples/Form';
 
 <Meta title="Form/Form" component={Form} />
 
@@ -22,6 +28,9 @@ Here is a list of components you should check out to get started with the form:
 -   [Switch](?path=/docs/form-switch--default)
 -   [TextInput](?path=/docs/form-text-input--default)
 
+Also, we want to shout out `react-hook-form` for helping us make this component. Check them out
+[here](https://react-hook-form.com/).
+
 ## Table of Contents
 
 -   [Functionality](#functionality)
@@ -31,6 +40,7 @@ Here is a list of components you should check out to get started with the form:
         -   [onError](#onerror)
         -   [Basic Implementation](#basic-implementation)
         -   [Validation](#validation)
+        -   [Adding actionData](#adding-actiondata)
     -   [Remix Form Functionality](#remix-form-1)
 -   [Other Props & Functionalities](#other-props--functionalities)
 
@@ -41,10 +51,12 @@ Here we'll go more in depth of how you can use Apollo's Form component to the fo
 ### `client` Form
 
 The client-side form is probably the most familiar type of form in its implementation if you have
-previous experience dealing with validation in React. At this point you're probably thinking: "ugh,
-these guys probably added extra steps to creating a form by making me use their wrapper, right?"
+previous experience dealing with validation in React. At this point you're probably thinking: *ugh,
+these guys probably added extra steps to creating a form by making me use their wrapper, right?*
 **Wrong!** We took the time to abstract the user from any painful state declarations and arbitrary
-form setup by handling that logic ourselves under the hood.
+form setup by handling that logic ourselves under the hood. On top of that, this form is also wicked
+performant. Only ever re-renders when there is an error or a submission. Cool right? We have
+`react-hook-form` to thank for that.
 
 #### Submission & Failure
 
@@ -118,17 +130,15 @@ export type FormErrorHandler = (errors: FormErrors) => void;
 
 #### Basic Implementation
 
-If you want to create a form and keep see the values, just put the inputs you want from Apollo, 
-and we'll track the changes magically without you worrying about the rest. Here we'll show you all 
+If you want to create a form and keep see the values, just put the inputs you want from Apollo,
+and we'll track the changes magically without you worrying about the rest. Here we'll show you all
 the inputs in one form and when you submit, you should see all the submit data.
 
 > **Fair warning:** This component will throw if you try to use inputs that don't give them names,
 > it's kind of important that you do so that we can register them in our Form :)
 
 <Canvas>
-    <Story name="Basic Form">
-        {BasicForm.bind({})}
-    </Story>
+    <Story name="Basic Form">{BasicForm.bind({})}</Story>
 </Canvas>
 
 #### Validation
@@ -164,35 +174,46 @@ the function in the `validator` prop of the component you want to validate, and 
 > `validator` function due to accessibility concerns.
 
 <Canvas>
-    <Story name="Validated Form">
-        {ValidatedForm.bind({})}
+    <Story name="Validated Form">{ValidatedForm.bind({})}</Story>
+</Canvas>
+
+#### Adding `actionData`
+
+_That's great and all, but what if I need client-side validation for my Remix app?_ - you might be
+asking. We got you covered! All you have to do is add the `actionData` to the `actionData` prop on
+the form and that's it. Nothing much else to it.
+
+This will:
+
+-   disable `preventDefault()` and other `react-hook-form` submission functionality
+-   populate any `field` data on the spot
+-   validate any error pertaining to a specific field using the `fieldErrors` section of the
+    `actionData`
+-   refresh errors on input
+
+In the example below, we are using the following validator to show this example:
+
+```typescript
+const userNameValidator: FormValidator = (data) => {
+    if (data.text === 'john-cena') return 'You cannot just leave this blank (get it?)';
+    return null;
+};
+```
+
+<Canvas>
+    <Story name="Client Side Remix Form" args={{ actionData: clientActionData }}>
+        {ClientSideRemixForm.bind({})}
     </Story>
 </Canvas>
 
 ### `remix` Form
 
-The `remix` form is pretty much your standard form with a few extra features. It's built on top of
-the `ActionData` object you would provide for your typical `remix` validation route. The nice thing
-about this form is that it will automatically display any errors or default values for you as shown
-in the example below.
-
-Given we have this `ActionData` object:
-
-```typescript
-const actionData: ActionData = {
-    fields: {
-        username: 'john-cena',
-        password: 'youcantseeme',
-        rating: '1',
-        options: ['1', '2'],
-        radio: true,
-        checkbox: true,
-        switch: true,
-    },
-};
-```
-
-We can use the `remix` form like this:
+You might be asking right now - *Why is there a remix form if I can just use the client-side form?*
+It's because of overhead. The client-side form, while it has a ton of functionality, there is still
+some overhead created by just mounting the `react-hook-form`, plus you have to consider that there
+is a form re-render everytime an error occurs in one of the inputs. If you don't want any
+re-rendering, ever, and just need the server-side validation, the `remix` form is for you. Just
+put the `actionData` where it belongs, and you're good to go.
 
 <Canvas>
     <Story
