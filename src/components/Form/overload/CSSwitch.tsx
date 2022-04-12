@@ -12,7 +12,8 @@ import { Switch as CSwitch, ISwitch as SwitchProps } from '../../Switch/Switch';
  * @return formatted switch component
  */
 const Switch: FC<Overload<SwitchProps>> = ({
-    parentProps: { setValue, register },
+    parentProps: { setValue, register, actionData },
+    defaultChecked,
     name,
     ...props
 }) => {
@@ -39,7 +40,14 @@ const Switch: FC<Overload<SwitchProps>> = ({
         setValue(name, data);
     };
 
-    return <CSwitch {...props} name={name} onChange={handleChange} />;
+    return (
+        <CSwitch
+            {...props}
+            name={name}
+            onChange={handleChange}
+            defaultChecked={actionData?.fields?.[name] || defaultChecked}
+        />
+    );
 };
 
 export default Switch;

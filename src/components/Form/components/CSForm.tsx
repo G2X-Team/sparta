@@ -1,7 +1,11 @@
-import type { FC, FormEvent, FormEventHandler, HTMLAttributes, ReactNode } from 'react';
+import type { FC, FormEvent, FormEventHandler, HTMLProps, ReactNode } from 'react';
 import React from 'react';
 
-import type { FormErrorHandler, FormSubmitHandler } from '../../../interfaces/Properties';
+import type {
+    FormErrorHandler,
+    FormSubmitHandler,
+    FormActionData,
+} from '../../../interfaces/Properties';
 import FormatChildren from '../../../util/FormatChildren';
 import { useForm } from 'react-hook-form';
 
@@ -11,11 +15,13 @@ import Radio from '../overload/CSRadio';
 import Switch from '../overload/CSSwitch';
 import Checkbox from '../overload/CSCheckbox';
 
-export interface ICSForm extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
+export interface ICSForm extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
     onSubmit?: FormSubmitHandler;
     /** Handles errors from form submission with error object */
     onError?: FormErrorHandler;
+    /** Determines the type of form we want to render */
+    actionData?: FormActionData;
 }
 
 /**
@@ -23,8 +29,8 @@ export interface ICSForm extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit
  *
  * @return client side form
  */
-const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, ...props }) => {
-    // use the use form hoook
+const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, ...props }) => {
+    // use the use form hook
     const {
         setError,
         clearErrors,
@@ -32,6 +38,7 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, ...props }) => {
         register,
         handleSubmit,
         getValues,
+        trigger,
         formState: { errors },
     } = useForm();
 
@@ -52,9 +59,11 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, ...props }) => {
             clearErrors,
             setValue,
             register,
+            trigger,
             errors,
             getValues,
             renderAll,
+            actionData,
             ...passthrough,
         };
 
@@ -77,8 +86,21 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, ...props }) => {
     const handleSubmission: FormEventHandler<HTMLFormElement> = (
         event: FormEvent<HTMLFormElement>
     ): void => {
-        if (!onSubmit) return;
-        handleSubmit(onSubmit, onError)(event);
+        // check if there is an onSubmit function
+        if (!actionData && onSubmit) {
+            handleSubmit(onSubmit, onError)(event);
+            return;
+        }
+
+        // don't submit form if there are errors
+        if (errors.length) {
+            event.preventDefault();
+            if (onError) onError(errors);
+            return;
+        }
+
+        // if there is a submit handler, submit the function
+        if (onSubmit) onSubmit(undefined, event);
     };
 
     return (

@@ -1,8 +1,9 @@
 import type { ChangeEvent, FC, ReactNode } from 'react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Overload from '../../../interfaces/Overload';
 import { FormGroupData } from '../../../interfaces/Properties';
+import { getFormError } from '../../../util/Form';
 
 import { Group as CGroup, IGroup as GroupProps } from '../../Group/Group';
 
@@ -17,16 +18,30 @@ interface IGroup extends Overload<GroupProps> {
  * @return formatted group component
  */
 const Group: FC<IGroup> = ({
-    parentProps: { register, setError, setValue, clearErrors, errors, getValues, renderAll },
+    parentProps: {
+        register,
+        setError,
+        setValue,
+        clearErrors,
+        errors,
+        getValues,
+        renderAll,
+        actionData,
+    },
     children,
     name,
     required,
     validator,
     label,
     onChange,
+    defaultValue,
     type,
     ...props
 }) => {
+    const [ignoreFieldError, setIgnoreFieldError] = useState(
+        Boolean(!actionData?.fieldErrors?.[name])
+    );
+
     useEffect(() => {
         if (type === 'organization') return;
 
@@ -58,6 +73,8 @@ const Group: FC<IGroup> = ({
      * @param event form event containing value
      */
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        if (!ignoreFieldError) setIgnoreFieldError(true);
+
         // extract value
         const {
             target: { value, type, checked },
@@ -122,6 +139,8 @@ const Group: FC<IGroup> = ({
         return renderAll(children);
     };
 
+    const error = getFormError(name, errors, actionData, ignoreFieldError);
+
     return (
         <CGroup
             {...props}
@@ -130,8 +149,9 @@ const Group: FC<IGroup> = ({
             label={label}
             onChange={handleChange}
             name={name}
-            invalid={Boolean(errors[name])}
-            errorMessage={errors[name] ? errors[name]?.message : undefined}
+            defaultValue={actionData?.fields?.[name] || defaultValue}
+            invalid={Boolean(error.length)}
+            errorMessage={error}
         >
             {renderGroup()}
         </CGroup>

@@ -1,7 +1,8 @@
 import type { ChangeEvent, FC } from 'react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Overload from '../../../interfaces/Overload';
 import { FormTextData } from '../../../interfaces/Properties';
+import { getFormError } from '../../../util/Form';
 
 import { TextInput as CTextInput, ITextInput as TextInputProps } from '../../TextInput/TextInput';
 
@@ -16,14 +17,30 @@ interface ITextInput extends Overload<TextInputProps> {
  * @return formatted text input
  */
 const TextInput: FC<ITextInput> = ({
-    parentProps: { register, setValue, setError, clearErrors, errors },
+    parentProps: {
+        register,
+        setValue,
+        setError,
+        clearErrors,
+        errors,
+        actionData,
+        trigger,
+        getValues,
+    },
     name,
     required,
     label,
     validator,
+    defaultValue,
     onChange,
+    match,
+    matchMessage = 'Text must match.',
     ...props
 }) => {
+    const [ignoreFieldError, setIgnoreFieldError] = useState(
+        Boolean(!actionData?.fieldErrors?.[name])
+    );
+
     // when using the client side form, we want to enforce names
     useEffect(() => {
         if (!name?.length) throw new Error('Must use TextInput `name` prop when using Form.');
@@ -33,6 +50,8 @@ const TextInput: FC<ITextInput> = ({
             required: { value: required, message: `${label} is required.` },
             validate: {
                 validator: (d: FormTextData): string | boolean => {
+                    if (match?.length && d?.text !== getValues(match)?.text) return matchMessage;
+                    if (required && d?.text?.length === 0) return `${label} is required.`;
                     if (!validator) return true; // if there isn't a validator, automatically pass
 
                     // get the error and return if truthy else pass
@@ -41,6 +60,12 @@ const TextInput: FC<ITextInput> = ({
                 },
             },
         });
+
+        // will trigger validation when there is a default value and is required on mount
+        if (required && (actionData?.fields?.[name]?.length || defaultValue)) {
+            setValue(name, { text: actionData?.fields?.[name] || defaultValue });
+            trigger(name);
+        }
     }, []);
 
     /**
@@ -49,6 +74,7 @@ const TextInput: FC<ITextInput> = ({
      * @param event form event containing value
      */
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        if (!ignoreFieldError) setIgnoreFieldError(true);
         // extract value
         const {
             target: { value },
@@ -61,8 +87,20 @@ const TextInput: FC<ITextInput> = ({
         const textData: FormTextData = { text: value };
         setValue(name, textData);
 
-        // check for required errors and update on input
+        // handle requirements
         if (errors[name]?.type === 'required' && value.length) {
+            clearErrors(name);
+        } else if (!value.length && required) {
+            setError(name, { type: 'required', message: `${label} is required.` });
+        }
+
+        // check for password matching
+        if (match?.length && getValues(match).text !== value) {
+            setError(name, {
+                type: 'match',
+                message: matchMessage,
+            });
+        } else if (match?.length && getValues(match).text === value) {
             clearErrors(name);
         }
 
@@ -71,7 +109,7 @@ const TextInput: FC<ITextInput> = ({
 
         // check if there is an error
         const error = validator(textData);
-        if (!error?.length) {
+        if (!error?.length && errors[name]?.type === 'validator') {
             // see if there was previously an error registered under this component
             if (errors[name]?.message?.length) clearErrors(name);
             return;
@@ -81,15 +119,18 @@ const TextInput: FC<ITextInput> = ({
         if (!errors[name]?.message?.length) setError(name, { type: 'text-input', message: error });
     };
 
+    const error = getFormError(name, errors, actionData, ignoreFieldError);
+
     return (
         <CTextInput
             {...props}
             required={required}
             name={name}
             label={label}
+            defaultValue={actionData?.fields?.[name] || defaultValue}
             onChange={handleChange}
-            invalid={Boolean(errors[name])}
-            errorMessage={String(errors[name]?.message)}
+            invalid={Boolean(error.length)}
+            errorMessage={error}
         />
     );
 };

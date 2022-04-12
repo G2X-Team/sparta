@@ -1,8 +1,9 @@
 import type { ChangeEvent, FC } from 'react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Overload from '../../../interfaces/Overload';
 import { FormToggleData } from '../../../interfaces/Properties';
+import { getFormError } from '../../../util/Form';
 
 import { Radio as CRadio, IRadio as RadioProps } from '../../Radio/Radio';
 
@@ -16,12 +17,17 @@ interface IRadio extends Overload<RadioProps> {
  * @return Formatted Radio compatible with form
  */
 const Radio: FC<IRadio> = ({
-    parentProps: { register, setValue, clearErrors, errors },
+    parentProps: { register, setValue, clearErrors, errors, actionData },
     onChange,
     required,
+    defaultChecked,
     id,
     ...props
 }) => {
+    const [ignoreFieldError, setIgnoreFieldError] = useState(
+        Boolean(!actionData?.fieldErrors?.[id])
+    );
+
     // make sure that an id was provided
     useEffect(() => {
         if (!id) throw new Error('Must use Radio `id` prop when use in Form without Group');
@@ -36,6 +42,7 @@ const Radio: FC<IRadio> = ({
      * @param event input event on change
      */
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        if (!ignoreFieldError) setIgnoreFieldError(true);
         const {
             target: { checked },
         } = event;
@@ -50,14 +57,18 @@ const Radio: FC<IRadio> = ({
         setValue(id, data);
     };
 
+    // get error if any
+    const error = getFormError(id, errors, actionData, ignoreFieldError);
+
     return (
         <CRadio
             {...props}
             id={id}
             required={required}
+            defaultChecked={actionData?.fields?.[id] || defaultChecked}
             onChange={handleChange}
-            invalid={Boolean(errors[id])}
-            errorMessage={errors[id]?.message}
+            invalid={Boolean(error?.length)}
+            errorMessage={error}
         />
     );
 };

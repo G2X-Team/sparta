@@ -27,13 +27,8 @@ const Checkbox: FC<ICheckbox> = ({
     id,
     ...props
 }) => {
-    const isChecked: boolean = fields
-        ? groupName?.length
-            ? fields[groupName]?.filter((field: string) => field === value).length
-            : fields[id]
-        : false;
-
-    const errorMessage: string | undefined = fieldErrors ? fieldErrors[id] : undefined;
+    const isChecked: boolean = fields?.[id];
+    const errorMessage: string | undefined = fieldErrors?.[id] || '';
 
     return (
         <CCheckbox

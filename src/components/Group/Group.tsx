@@ -19,7 +19,7 @@ export interface IGroup
     /** Group must contain element between tags */
     children: ReactNode;
     /** Identifies the group's selection */
-    name?: string;
+    name: string;
     /** Method that impacts onChange */
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     /** Determines whether inputs are disabled or not */
@@ -64,6 +64,7 @@ export const Group: FC<IGroup> = ({
     required,
     invalid,
     errorMessage,
+    defaultValue,
     ...props
 }) => {
     gaurdApolloName(props, 'Group');
@@ -92,6 +93,7 @@ export const Group: FC<IGroup> = ({
             renderAll,
             disabled,
             inline,
+            defaultValue,
         };
 
         // get all instances of the input
