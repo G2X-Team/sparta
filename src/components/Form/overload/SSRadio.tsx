@@ -16,25 +16,19 @@ interface IRadio extends Overload<RadioProps> {
  */
 const Radio: FC<IRadio> = ({
     parentProps: {
-        groupName,
         actionData: { fields, fieldErrors },
         groupInline,
     },
+    defaultChecked,
     onChange,
     required,
-    name,
     value,
     inline,
     id,
     ...props
 }) => {
-    const isChecked: boolean = fields
-        ? groupName?.length
-            ? fields[groupName] === value
-            : fields[id]
-        : false;
-
-    const errorMessage: string | undefined = fieldErrors ? fieldErrors[id] : undefined;
+    const isChecked: boolean = fields?.[id];
+    const errorMessage: string | undefined = fieldErrors?.[id] || '';
 
     return (
         <CRadio
@@ -42,9 +36,8 @@ const Radio: FC<IRadio> = ({
             id={id}
             value={value}
             inline={groupInline || inline}
-            name={groupName}
             required={required}
-            defaultChecked={isChecked}
+            defaultChecked={isChecked || defaultChecked}
             invalid={Boolean(errorMessage?.length)}
             errorMessage={errorMessage}
         />

@@ -9,7 +9,14 @@ import Overload from '../../../interfaces/Overload';
  * @return Formatted Radio
  */
 const Radio: FC<Overload<IRadio>> = ({
-    parentProps: { disabled: parentDisabled, onChange: groupOnChange, name, inline: parentInline },
+    parentProps: {
+        disabled: parentDisabled,
+        onChange: groupOnChange,
+        name,
+        inline: parentInline,
+        defaultValue: groupDefaultValue,
+    },
+    defaultChecked,
     onChange,
     disabled,
     value,
@@ -29,12 +36,24 @@ const Radio: FC<Overload<IRadio>> = ({
         if (onChange) onChange(event);
     };
 
+    /**
+     * Gets the default value of the component
+     *
+     * @return boolean default value
+     */
+    const getDefaultValue = (): boolean => {
+        if (typeof groupDefaultValue !== 'string') return false;
+
+        return groupDefaultValue === value;
+    };
+
     return (
         <CRadio
             {...props}
             name={name}
             value={value}
             inline={parentInline}
+            defaultChecked={getDefaultValue() || defaultChecked}
             disabled={parentDisabled || disabled}
             onChange={radioOnChange}
         />

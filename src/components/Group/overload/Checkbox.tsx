@@ -9,7 +9,14 @@ import Overload from '../../../interfaces/Overload';
  * @return Formatted Checkbox
  */
 const Checkbox: FC<Overload<ICheckbox>> = ({
-    parentProps: { name, onChange: groupOnChange, disabled: parentDisabled, inline: parentInline },
+    parentProps: {
+        name,
+        onChange: groupOnChange,
+        disabled: parentDisabled,
+        inline: parentInline,
+        defaultValue: groupDefaultValue,
+    },
+    defaultChecked,
     onChange,
     disabled,
     value,
@@ -29,10 +36,27 @@ const Checkbox: FC<Overload<ICheckbox>> = ({
         if (onChange) onChange(event);
     };
 
+    /**
+     * Gets the default value of the checkbox
+     *
+     * @return default checkbox value
+     */
+    const getDefaultValue = (): boolean => {
+        if (
+            !groupDefaultValue ||
+            typeof groupDefaultValue !== 'object' ||
+            !Array.isArray(groupDefaultValue)
+        )
+            return false;
+
+        return Boolean(groupDefaultValue.filter((v: string) => v === value).length);
+    };
+
     return (
         <CCheckbox
             {...props}
             value={value}
+            defaultChecked={getDefaultValue() || defaultChecked}
             name={name}
             inline={parentInline}
             disabled={parentDisabled || disabled}

@@ -1,4 +1,4 @@
-import type { FC, HTMLAttributes } from 'react';
+import type { FC, HTMLProps } from 'react';
 import React from 'react';
 
 import type {
@@ -9,7 +9,7 @@ import type {
 import CSForm from './components/CSForm';
 import SSForm from './components/SSForm';
 
-export interface IForm extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError'> {
+export interface IForm extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
     onSubmit?: FormSubmitHandler;
     /** Handles errors from form submission with error object */
@@ -18,9 +18,8 @@ export interface IForm extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit' 
     type?: 'client' | 'remix';
     /** When in remix mode, this will control all the form inputs */
     actionData?: FormActionData;
-    /** Submission method, this doesn't do anything for client-side forms */
-    method?: 'GET' | 'POST';
 }
+
 /**
  * Apollo form component that allows for client side and server side validation
  *

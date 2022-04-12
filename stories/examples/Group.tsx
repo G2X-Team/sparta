@@ -3,16 +3,14 @@ import type { SampleStory } from './util';
 import { Group, Radio, Checkbox, Form, Button, FormActionData } from '../../src';
 
 export const RadioGroup: SampleStory = (args) => (
-    <Group {...args} onChange={(data) => window.alert(`Radio ${data?.target.value}: checked`)}>
-        <Radio name="radio" value="1">
-            Option 1
-        </Radio>
-        <Radio name="radio" value="2">
-            Option 2
-        </Radio>
-        <Radio name="radio" value="3">
-            Option 3
-        </Radio>
+    <Group
+        {...args}
+        name="radio"
+        onChange={(data) => window.alert(`Radio ${data?.target.value}: checked`)}
+    >
+        <Radio value="1">Option 1</Radio>
+        <Radio value="2">Option 2</Radio>
+        <Radio value="3">Option 3</Radio>
     </Group>
 );
 

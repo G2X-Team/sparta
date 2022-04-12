@@ -25,6 +25,7 @@ You might benefit from checking out the documentation for those components:
     -   [Describing the Group](#describing-the-group)
     -   [Radios & Checkboxes](#radios--checkboxes)
         -   [Basic Layout](#basic-layout)
+        -   [Default Values](#default-values)
     -   [onChange](#onchange)
     -   [Props Applicable to All](#props-applicable-to-all)
     -   [Its use in the Form](#its-use-in-the-form)
@@ -82,6 +83,20 @@ by side? Just add the `inline` prop and you can accomplish that effect!
 
 <Canvas>
     <Story name="Inline Groups" args={{ label: 'Radios', inline: true }}>
+        {RadioGroup.bind({})}
+    </Story>
+</Canvas>
+
+#### Default Values
+
+We wanted the `Group` to be especially easy to use with default values, so we added the `defaultValue`
+prop. This prop can either be a string or an array of strings. If you register a string as the default
+value, the component will automatically select the corresponding `Radio`. If you register an array of
+strings, the component will automatically select the corresponding `Checkbox` components. Simple right?
+Here's an example:
+
+<Canvas>
+    <Story name="Default Values" args={{ label: 'Radios', defaultValue: '1' }}>
         {RadioGroup.bind({})}
     </Story>
 </Canvas>
