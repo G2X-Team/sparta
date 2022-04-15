@@ -1,0 +1,83 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Modal, Button, Text, Header, Footer, ButtonGroup  } from '../src'; // components you used in the story
+
+import {
+    StandardModal,
+    AlertModal,
+    ButtonsGroup,
+} from './examples/Modal';
+
+<Meta title="Layout/Modal" component={Modal} />
+
+# Modal
+
+The Modal component is one of the most important components in the UI. It is used to creating dialogs,
+popovers, lightboxes. It comes with a header, content, and footer.
+
+## References
+
+-   [Button](?path=/docs/layout-button--standard-button)
+-   [Text](?path=/docs/layout-text--default)
+-   [Header](?path=/docs/interfacing-header--standalone-header)
+-   [Footer](?path=/docs/interfacing-footer--standalone-footer)
+-   [ButtonGroup](?path=/docs/layout-button-group--default)
+
+## Table of Contents
+
+- [Functionality](#functionality)
+    - [Standard Modal](#standard-modal)
+    - [Alert Modal](#alert-modal)
+    - [Buttons Group](#buttons-group)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+The Modal component comes with a ton of features and functionality. We have listed a few of the most important features below to get you started.
+Please have look:
+
+- The Modal component renders its children inside of a backdrop component.
+- This captures the user's attention and prevents the user from interacting with the rest of the page until the Modal is closed.
+- The Modal can be closed by clicking the cross icon on top of the `header` or pressing the escape key.
+- The Modal component comes with two types `Standard Modal` and `Alert Modal`.
+- You can use multiple Modals at a time to create a stack of modals.
+
+### `Standard Modal`
+
+A standard simple Modal works like a wrapper inside a backdrop component with `header`, `footer` and `text` as its
+children elements. It comes with an `toggleModal` method to open the modal. Here in the example below we are using a
+button component with an onclick event to fire the `toggleModal` method.
+
+<Canvas>
+    <Story name="Standard Modal" args={{  }}>
+        {StandardModal.bind({})}
+    </Story>
+</Canvas>
+
+### `Alert Modal`
+
+In the below example we are using the `alert` prop to set the Modal to an `Alert Modal`.
+`Alert Modal` is a special type of Modal that can't be closed using `Escape` key.
+
+<Canvas>
+    <Story name="Alert Modal" args={{ alert:true }}>
+        {AlertModal.bind({})}
+    </Story>
+</Canvas>
+
+### `Buttons Group`
+
+Models can have multiple buttons in the footer. You can use the `ButtonGroup` component to group buttons together. These buttons can be used to close the modal.
+
+<Canvas>
+    <Story name="Buttons Group" args={{}}>
+        {ButtonsGroup.bind({})}
+    </Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+For a full breakdown of all the additional props, refer to the Table below. There are many
+amazing props that you can use to customize the Modal.
+
+<ArgsTable of={Modal} />
