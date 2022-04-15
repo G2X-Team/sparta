@@ -37,6 +37,7 @@ export const Modal: FC<IModal> = ({
     manual = false,
     open = false,
     style,
+    alert,
     toggleModal,
     ...props
 }) => {
@@ -74,6 +75,7 @@ export const Modal: FC<IModal> = ({
                                 open={open}
                                 manual={manual}
                                 toggleModal={toggleModal}
+                                alert={alert}
                             />
                         }
                     </div>

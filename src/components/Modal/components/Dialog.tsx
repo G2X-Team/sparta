@@ -20,7 +20,7 @@ const Dialog: FC<IModal> = ({
     toggleModal,
     description,
     open,
-    alert,
+    alert = false,
     label,
     id,
     children,
@@ -40,7 +40,9 @@ const Dialog: FC<IModal> = ({
          */
         const close = (event: KeyboardEvent): void => {
             if (event.key === 'Escape') {
-                if (toggleModal) toggleModal();
+                if (alert == false) {
+                    if (toggleModal) toggleModal();
+                }
             }
         };
 
