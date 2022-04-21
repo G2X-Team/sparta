@@ -8,6 +8,7 @@ import { gaurdApolloName } from '../../util/ErrorHandling';
 import FormatChildren from '../../util/FormatChildren';
 
 import { Text } from '../Text/Text';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import Radio from './overload/Radio';
 import Checkbox from './overload/Checkbox';
 import View from './overload/View';
@@ -135,13 +136,9 @@ export const Group: FC<IGroup> = ({
                 >
                     {renderAll(children)}
                 </div>
-                {invalid && errorMessage ? (
-                    <div role="alert" id={name ? `${name}-error` : undefined}>
-                        <Text color="#c90000" style={errorTextStyle}>
-                            {errorMessage}
-                        </Text>
-                    </div>
-                ) : null}
+                <ErrorMessage id={`${name}-error`} active={Boolean(invalid && errorMessage)}>
+                    {errorMessage}
+                </ErrorMessage>
             </fieldset>
         </>
     );
@@ -165,8 +162,4 @@ const getHintTextStyle = (type: string): CSSProperties => {
         paddingBottom: 5,
         marginTop: 0,
     };
-};
-
-const errorTextStyle: CSSProperties = {
-    paddingTop: 5,
 };

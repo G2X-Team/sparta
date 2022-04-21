@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode, FC, useEffect, CSSProperties } from 'react';
+import { HTMLAttributes, ReactNode, FC, useEffect } from 'react';
 import React from 'react';
 import './Radio.css';
 
@@ -6,6 +6,7 @@ import type { Apollo } from '../../interfaces/Apollo';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 export interface IRadio extends HTMLAttributes<HTMLInputElement>, Apollo<'Radio'> {
     /** String that identifies the radio */
@@ -41,6 +42,7 @@ export const Radio: FC<IRadio> = ({
     children,
     className,
     invalid,
+    value,
     required,
     errorMessage,
     id,
@@ -67,9 +69,10 @@ export const Radio: FC<IRadio> = ({
                 <input
                     {...props}
                     id={id}
+                    value={value}
                     aria-required={required}
                     aria-invalid={invalid}
-                    aria-errormessage={id ? `${id}-error` : undefined}
+                    aria-errormessage={id ? `${id}-error` : `${value}-error`}
                     type="radio"
                     className={`
                         apollo-component-library-radio-component 
@@ -87,20 +90,14 @@ export const Radio: FC<IRadio> = ({
                 </Text>
             </label>
             {invalid && errorMessage && inline ? <br /> : null}
-            {invalid && errorMessage ? (
-                <div role="alert" id={id ? `${id}-error` : undefined}>
-                    <Text color="#c90000" style={errorTextStyle}>
-                        {errorMessage}
-                    </Text>
-                </div>
-            ) : null}
+            <ErrorMessage
+                id={id ? `${id}-error` : `${value}-error`}
+                active={Boolean(invalid && errorMessage)}
+            >
+                {errorMessage}
+            </ErrorMessage>
         </>
     );
 };
 
 Radio.defaultProps = { 'data-apollo': 'Radio' };
-
-const errorTextStyle: CSSProperties = {
-    paddingTop: 5,
-    paddingBottom: 10,
-};
