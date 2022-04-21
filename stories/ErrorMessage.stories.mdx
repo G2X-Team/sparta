@@ -1,0 +1,56 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+
+import { ErrorMessage } from '../src';
+
+import { StandaloneError, ProperUseOfErrorMessage } from './examples/ErrorMessage';
+
+<Meta title="Layout/Error Message" component={ErrorMessage} />
+
+# Error Message
+
+This component's sole purpose in Apollo is to display error messages to the user.
+
+## Table of Contents
+
+-   [Functionality](#functionality)
+-   [Setup](#setup)
+-   [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+The `ErrorMessage` is a very simple component to use. It's only intended to be used as a means of
+displaying errors in an accessible, and uniform way in compliance to Apollo standards. To use it
+you simply pass the message through the component's tags and set the `active` prop to `true` and
+you will be able to see it.
+
+<Canvas>
+    <Story
+        name="Standalone Error"
+        args={{ id: 'error-message', active: true, children: 'I am an error' }}
+    >
+        {StandaloneError.bind({})}
+    </Story>
+</Canvas>
+
+## Setup
+
+In the case you want to use the `ErrorMessage`, make sure that the element the error is being 
+displayed for has its `aria-errorMessage` prop set to the `id` of this component. This will tell
+the user where the error came from.
+
+<Canvas>
+    <Story
+        name="Proper use of Error Messages"
+        args={{ id: 'error-message', active: true, children: 'I a loading error' }}
+    >
+        {ProperUseOfErrorMessage.bind({})}
+    </Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+All properties were covered during the explanation of this property, but for a full list of props
+you can see the props table below:
+
+<ArgsTable of={ErrorMessage} />

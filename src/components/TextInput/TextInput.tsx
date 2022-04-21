@@ -7,6 +7,7 @@ import type { FormTextData, FormValidator, StyleVariant } from '../../interfaces
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'TextInput'> {
     /** To comply with WCAG 2.0, all inputs **must** have labels */
@@ -79,7 +80,7 @@ export const TextInput: FC<ITextInput> = ({
                     name={name}
                     aria-required={required}
                     aria-invalid={invalid}
-                    aria-errormessage={name ? `${name}-error` : undefined}
+                    aria-errormessage={name ? `${name}-error` : `${label}-error`}
                     type={password ? 'password' : 'text'}
                     className={`apollo-component-library-text-input 
                         ${variant} 
@@ -88,13 +89,12 @@ export const TextInput: FC<ITextInput> = ({
                     `}
                 />
             </label>
-            {invalid && errorMessage ? (
-                <div role="alert" id={name ? `${name}-error` : undefined}>
-                    <Text color="#c90000" style={errorTextStyle}>
-                        {errorMessage}
-                    </Text>
-                </div>
-            ) : null}
+            <ErrorMessage
+                id={name ? `${name}-error` : `${label}-error`}
+                active={Boolean(invalid && errorMessage)}
+            >
+                {errorMessage}
+            </ErrorMessage>
         </div>
     );
 };
@@ -108,8 +108,4 @@ const labelTextStyle: CSSProperties = {
 const hintTextStyle: CSSProperties = {
     fontSize: '0.9rem',
     paddingBottom: 5,
-};
-
-const errorTextStyle: CSSProperties = {
-    paddingTop: 5,
 };
