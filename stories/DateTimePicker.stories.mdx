@@ -1,0 +1,74 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { DateTimePicker  } from '../src'; // components you used in the story
+
+import {
+    StandardDatePicker,
+    ScrollDatePicker,
+    DateFormats,
+} from './examples/DateTimePicker';
+
+<Meta title="Layout/DateTimePicker" component={DateTimePicker} />
+
+# DatePicker
+
+The DatePicker component is a wrapper around the `react-datepicker` library. It works to provide a simple date picker.
+With The DatePicker allows users to enter a date either through text input, or by choosing a date from the calendar.
+With our custom props you can customize a lot of the look and feel of the DatePicker as well as functionality.
+
+## Table of Contents
+
+- [Functionality](#functionality)
+    - [Standard DatePicker](#standard-datepicker)
+    - [Scroll DatePicker](#alert-datepicker)
+    - [Date Formats](#date-formats)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+The DatePicker component looks like a simple input field clicking on which opens a calendar.
+You can choose any date from the calender and that date will be reflected in he input field.
+With the use of props you can change the format of the date and also the way user attracts to the calender itself.
+Please have look:
+
+- The DatePicker component comes with four date formats that you can choose from.
+- The component has two modes `select` & `scroll`.
+- The DatePicker comes with a `placeholder` prop that can be used to add a default placeholder t the input field.
+
+### `Standard DatePicker`
+
+Here we are rendering a standard DatePicker component. It loads with current date as a `placeholder`.
+The Standard DatePicker component has `dd/MM/yyyy` as the `format` and it loads in `select` mode.
+
+<Canvas>
+    <Story name="Standard DatePicker" args={{  }}>
+        {StandardDatePicker.bind({})}
+    </Story>
+</Canvas>
+
+### `Scroll DatePicker`
+
+With the `scroll` mode you can make the `Month` and `Year` dropdown as smooth scroll instead of a select field.
+
+<Canvas>
+    <Story name="Scroll DatePicker" args={{ mode: 'scroll' }}>
+        {ScrollDatePicker.bind({})}
+    </Story>
+</Canvas>
+
+### `Date Formats`
+
+The DatePicker component comes with four date formats to reflect your selected date.
+Below we are rendering the DatePicker component with different date formats.
+
+<Canvas>
+    <Story name="Date Formats">
+        {DateFormats.bind({})}
+    </Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+For a full breakdown of all the additional props of the DateTimePicker, refer to the Table below.
+
+<ArgsTable of={DateTimePicker} />

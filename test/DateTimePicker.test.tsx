@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 
-import { Default as DateTimePicker } from '../stories/DateTimePicker.stories';
+import { DateTimePicker } from '../src';
 import userEvent from '@testing-library/user-event';
 
 describe('DateTimePicker', () => {
