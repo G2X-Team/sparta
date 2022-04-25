@@ -1,0 +1,68 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { Icon } from '../src'; // components you used in the story
+import {
+    StandardIcon,
+    IconStyling,
+    FunctionalIcon
+} from './examples/Icon';
+
+<Meta title="Layout/Icon" component={Icon} />
+
+# Icon
+
+The Icon component helps you add material design icons anywhere you want. Using the Icon component is very simple,
+just pass the name of the icon you want to use as the `name` prop and you're good to go. Icons are a great way to
+communicate with your users without having to use a lot of text.
+
+## Table of Contents
+
+In this documentation we talk about the Icon component in depth about its usage and its props.
+
+- [Functionality](#functionality)
+	- [Styling](#styling)
+    - [Functional Icon](#functional-icon)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+Functionally this component will render a Icon with the name that you pass as the `name` prop.
+You can use the `color` prop to change the color of the icon. You can make extend the functionality
+of the Icon component by passing the `onClick` prop using it as a button.
+
+<Canvas>
+	<Story name="Standard Icon" args={{ name: 'navigate_next', onClick: undefined }}>
+		{StandardIcon.bind({})}
+	</Story>
+</Canvas>
+
+### Styling
+
+Let's see how you can change the color of the icon by passing the `color` prop. It's pretty simple and fun
+just pass the color you want to use as the `color` prop, weather it's a hex code or a color name like `red`.
+And that's all you need to do neat huh?
+
+<Canvas>
+	<Story name="Icon Styling" args={{  name: 'navigate_next', onClick: undefined, color: 'red' }}>
+		{IconStyling.bind({})}
+	</Story>
+</Canvas>
+
+### Functional Icon
+
+The Icon in the example below is a functional icon. That means it has a `onClick` prop and clicking on it will trigger the `onClick` callback.
+For this perticular example we are using the it to show us an alert.
+
+<Canvas>
+	<Story name="Functional Icon" args={{  name: 'home', onClick: ()=>{ alert('Hello i am an Alert!'); }, color: 'blue' }}>
+		{IconStyling.bind({})}
+	</Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+Here take a look at the table below, it shows all the props that the Icon component has.
+You can use the `disabled` prop to disable the icon or a `clickable` to determine if the icon is clickable.
+There are various other props and feature that you can use to customize the Icon component as you like.
+
+<ArgsTable of={Icon} />
