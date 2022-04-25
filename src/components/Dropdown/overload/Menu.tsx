@@ -1,5 +1,6 @@
 import type { CSSProperties, FC } from 'react';
 import React from 'react';
+import { Overload } from '../../../interfaces/Overload';
 
 import type { IMenu as CIMenu } from '../../Menu/Menu';
 import { Menu as CMenu } from '../../Menu/Menu';
@@ -9,7 +10,7 @@ import { Menu as CMenu } from '../../Menu/Menu';
  *
  * @return Dropdown Menu component
  */
-const Menu: FC<CIMenu> = ({
+const Menu: FC<Overload<CIMenu>> = ({
     parentProps: { toggleOpen, open, alignment, anchor, button },
     width = 300,
     useOutsideClick,
@@ -46,7 +47,9 @@ const Menu: FC<CIMenu> = ({
  *
  * @return gets the style
  */
-const getPortalStyle = ({ parentProps: { anchor } }: Omit<CIMenu, 'label'>): CSSProperties => {
+const getPortalStyle = ({
+    parentProps: { anchor },
+}: Omit<Overload<CIMenu>, 'label'>): CSSProperties => {
     const portalStyle: CSSProperties = { display: 'flex', position: 'relative' };
 
     if (anchor == 'top' || anchor == 'bottom') portalStyle.justifyContent = 'space-around';
@@ -64,7 +67,7 @@ const getStyle = ({
     style,
     width,
     parentProps: { alignment, anchor, button },
-}: Omit<CIMenu, 'label'>): CSSProperties => {
+}: Omit<Overload<CIMenu>, 'label'>): CSSProperties => {
     const menuStyle: CSSProperties = { position: 'absolute', ...style };
     const {
         current: { clientHeight: buttonHeight },

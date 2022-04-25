@@ -1,4 +1,5 @@
 import React, { Children } from 'react';
+import { ParentProps } from '../interfaces/Overload';
 
 /** Object categorizing all found components by name */
 export interface FoundChildren {
@@ -19,22 +20,22 @@ export interface ComponentMap {
 }
 
 class FormatChildren {
+    /** an object containing all subsets of children organized by apollo name */
     foundChildren: FoundChildren = { other: [] };
+    /** all cihldren */
     allChildren: JSX.Element[] = [];
 
     /**
      * Given the props pertaining to the parent component and the sought out children, this
      * constructor will identify and format them.
      *
-     * @param parentProps props pertaining to the parent component
+     * @param children Children property
      * @param componentMap these are formatted components with the same name as the sought out
      * components. When found by this constructor, the sought out will be replaced by the
      * formatted.
+     * @param parentProps props pertaining to the parent component
      */
-    constructor(parentProps: any, componentMap: ComponentMap = {}) {
-        // destructure children from parent props
-        const { children } = parentProps;
-
+    constructor(children: any, componentMap: ComponentMap = {}, parentProps: ParentProps = {}) {
         // loop through all children
         Children.forEach(children, (child: JSX.Element, index: number) => {
             const childName =
@@ -51,13 +52,7 @@ class FormatChildren {
 
                 // get required props
                 const {
-                    props: {
-                        parentProps: childParentProps,
-                        key: childKey,
-                        originalType,
-                        mdxType,
-                        ...childProps
-                    },
+                    props: { parentProps: childParentProps, key: childKey, ...childProps },
                 } = child;
 
                 // assign props and finalize component format

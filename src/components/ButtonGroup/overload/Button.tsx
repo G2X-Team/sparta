@@ -1,6 +1,6 @@
 import React from 'react';
 import { IButton } from '../../Button/Button';
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 /**
  * Component that formats buttons in a way that groups them together

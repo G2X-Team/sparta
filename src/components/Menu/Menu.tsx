@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Menu.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import type Overload from '../../interfaces/Overload';
+import type { RenderAll, Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
 import FormatChildren from '../../util/FormatChildren';
 import { gaurdApolloName } from '../../util/ErrorHandling';
@@ -13,7 +13,7 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import Option from './overload/Option';
 
-export interface IMenu extends Overload<HTMLAttributes<HTMLDivElement>>, Apollo<'Menu'> {
+export interface IMenu extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Menu'> {
     /** Determines whether the menu is meant for navigation */
     navigation?: boolean;
     /** Determines the max height of the menu */
@@ -92,11 +92,12 @@ export const Menu: FC<IMenu> = ({
      *
      * @return Formatted children
      */
-    const renderAll = (): JSX.Element[] => {
+    const renderAll: RenderAll = () => {
+        // parent props
         const parentProps = { children, first, last, handleOptionClick };
 
         // get formatted children
-        const formatted = new FormatChildren(parentProps, { Option, Header, Footer });
+        const formatted = new FormatChildren(children, { Option, Header, Footer }, parentProps);
         if (!hasOptions && formatted.get('Option').length) toggleHasOptions(true);
 
         // check if in application mode

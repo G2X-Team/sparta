@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 import { Radio as CRadio, IRadio as RadioProps } from '../../Radio/Radio';
 

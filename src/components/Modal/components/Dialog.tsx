@@ -54,13 +54,14 @@ const Dialog: FC<IModal> = ({
      * @return formatted
      */
     const getFormatted = (): FormatChildren => {
+        // overloaded
+        const overloaded = { Header, Footer };
+
+        // parent props
         const parentProps = { children, manual, toggleModal, open };
 
         // find all specified components
-        const formatted = new FormatChildren(parentProps, {
-            Header,
-            Footer,
-        });
+        const formatted = new FormatChildren(children, overloaded, parentProps);
 
         // extract header and footer components
         const headers = formatted.get('Header');

@@ -1,7 +1,7 @@
 import type { ChangeEvent, FC } from 'react';
 import React, { useEffect } from 'react';
 
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 import { FormToggleData } from '../../../interfaces/Properties';
 
 import { Switch as CSwitch, ISwitch as SwitchProps } from '../../Switch/Switch';

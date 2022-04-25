@@ -14,7 +14,7 @@ export const ProperUseOfErrorMessage: SampleStory = (args) => {
             <Divider />
             <Text>Click it</Text>
             <br />
-            <Button onClick={() => setActive(!active)} aria-errorMessage="click-error">
+            <Button onClick={() => setActive(!active)} aria-errormessage="click-error">
                 Click me :)
             </Button>
             <ErrorMessage {...args} id="click-error" active={args.active || active}>

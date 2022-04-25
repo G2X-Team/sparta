@@ -2,11 +2,11 @@ import type { HTMLAttributes, ReactNode, FC, CSSProperties } from 'react';
 import React from 'react';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import type Overload from '../../interfaces/Overload';
+import type { Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IView extends Overload<HTMLAttributes<HTMLDivElement>>, Apollo<'View'> {
+export interface IView extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'View'> {
     /** May have children */
     children?: ReactNode;
     /** Change the display style of View */

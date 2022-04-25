@@ -3,10 +3,10 @@ import React from 'react';
 import './Header.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import type Overload from '../../interfaces/Overload';
+import type { Interface } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IHeader extends Overload<HTMLAttributes<HTMLDivElement>>, Apollo<'Header'> {
+export interface IHeader extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Header'> {
     /** Can have children of any kind */
     children?: ReactNode;
 }

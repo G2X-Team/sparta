@@ -1,7 +1,7 @@
 import type { ChangeEvent, FC } from 'react';
 import React, { useEffect, useState } from 'react';
 
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 import { FormToggleData } from '../../../interfaces/Properties';
 import { getFormError } from '../../../util/Form';
 

@@ -1,4 +1,4 @@
-import type { FC, FormEvent, FormEventHandler, HTMLProps, ReactNode } from 'react';
+import type { FC, FormEvent, FormEventHandler, HTMLProps } from 'react';
 import React from 'react';
 
 import type {
@@ -6,6 +6,7 @@ import type {
     FormSubmitHandler,
     FormActionData,
 } from '../../../interfaces/Properties';
+import type { RenderAll } from '../../../interfaces/Overload';
 import FormatChildren from '../../../util/FormatChildren';
 import { useForm } from 'react-hook-form';
 
@@ -49,12 +50,12 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, 
      * @param passthrough parent props to be passed through the original parents
      * @return formatted children
      */
-    const renderAll = (
-        childrenProp: ReactNode,
-        passthrough: { [key: string]: boolean | number | string } = {}
-    ): JSX.Element[] => {
+    const renderAll: RenderAll = (childrenProp, passthrough): JSX.Element[] => {
+        // overloaded components
+        const overloaded = { TextInput, Group, Switch, Radio, Checkbox };
+
+        // parent props
         const parentProps = {
-            children: childrenProp,
             setError,
             clearErrors,
             setValue,
@@ -67,13 +68,7 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, 
             ...passthrough,
         };
 
-        const formatted = new FormatChildren(parentProps, {
-            TextInput,
-            Group,
-            Switch,
-            Radio,
-            Checkbox,
-        });
+        const formatted = new FormatChildren(childrenProp, overloaded, parentProps);
 
         return formatted.getAll();
     };

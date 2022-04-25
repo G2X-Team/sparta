@@ -4,6 +4,7 @@ import './Group.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
 import type { FormGroupData, FormValidator } from '../../interfaces/Properties';
+import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 import FormatChildren from '../../util/FormatChildren';
 
@@ -84,12 +85,11 @@ export const Group: FC<IGroup> = ({
      * @param childrenProp implements children view when available
      * @return rendered components
      */
-    const renderAll = (childrenProp: ReactNode): ReactNode[] => {
-        // create updated prop values
+    const renderAll: RenderAll = (childrenProp) => {
+        // parent props
         const parentProps = {
             onChange,
             name,
-            children: childrenProp,
             renderAll,
             disabled,
             inline,
@@ -97,7 +97,7 @@ export const Group: FC<IGroup> = ({
         };
 
         // get all instances of the input
-        const formatted = new FormatChildren(parentProps, { Radio, Checkbox, View });
+        const formatted = new FormatChildren(childrenProp, { Radio, Checkbox, View }, parentProps);
 
         return formatted.getAll();
     };

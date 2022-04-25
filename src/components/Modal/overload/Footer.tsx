@@ -10,12 +10,12 @@ import { IFooter, Footer as CFooter } from '../../Footer/Footer';
  *
  * @return formatted footer
  */
-const Footer: FC<IFooter> = ({ parentProps: { children, ...parentProps }, ...props }: IFooter) => {
+const Footer: FC<IFooter> = ({ parentProps, children, ...props }: IFooter) => {
     // gets all props
     const allProps = { ...props, ...parentProps };
 
     // find button groups
-    const formattedFooter = new FormatChildren(allProps, { ButtonGroup });
+    const formattedFooter = new FormatChildren(children, { ButtonGroup }, allProps);
 
     // format and extract button groups
     const buttonGroups = formattedFooter.get('ButtonGroup');

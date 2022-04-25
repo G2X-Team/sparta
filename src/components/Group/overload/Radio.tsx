@@ -1,7 +1,7 @@
 import type { ChangeEvent, FC } from 'react';
 import React from 'react';
 import { IRadio, Radio as CRadio } from '../../Radio/Radio';
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 /**
  * Overloaded Radio formatted to update group value on change
