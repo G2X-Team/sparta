@@ -1,13 +1,13 @@
 import { FC, ForwardedRef, forwardRef } from 'react';
 import React from 'react';
-import Overload from '../../../interfaces/Overload';
+import type { Interface } from '../../../interfaces/Overload';
 
 import type { IButton as CIButton } from '../../Button/Button';
 import { Button as CButton } from '../../Button/Button';
 import { Apollo } from '../../../interfaces/Apollo';
 
 export interface IDrawerButton
-    extends Overload<Omit<CIButton, 'data-apollo'>>,
+    extends Interface<Omit<CIButton, 'data-apollo'>>,
         Apollo<'Drawer.Button'> {}
 
 /**
@@ -15,14 +15,14 @@ export interface IDrawerButton
  *
  * @return Formatted Button Component
  */
-const Button: FC<Overload<IDrawerButton>> = forwardRef(function Button(
+const Button: FC<IDrawerButton> = forwardRef(function Button(
     {
-        parentProps: { toggleDrawer, buttonRef, instant },
+        parentProps,
         ['data-apollo']: apolloName,
         onClick,
         children,
         ...props
-    }: Overload<IDrawerButton>,
+    }: Interface<IDrawerButton>,
     ref: ForwardedRef<HTMLButtonElement>
 ) {
     /**
@@ -30,16 +30,16 @@ const Button: FC<Overload<IDrawerButton>> = forwardRef(function Button(
      */
     const handleClick = (): void => {
         if (onClick) onClick();
-        toggleDrawer();
+        parentProps?.toggleDrawer();
     };
 
     return (
         <span>
             <CButton
                 {...props}
-                ref={buttonRef || ref}
+                ref={parentProps?.buttonRef || ref}
                 onClick={handleClick}
-                aria-expanded={instant}
+                aria-expanded={parentProps?.instant}
             >
                 {children}
             </CButton>

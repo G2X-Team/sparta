@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 import type { IIcon as CIIcon } from '../../Icon/Icon';
 import { Icon as CIcon } from '../../Icon/Icon';

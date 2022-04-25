@@ -3,10 +3,10 @@ import React from 'react';
 import './Footer.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import type Overload from '../../interfaces/Overload';
+import type { Interface } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IFooter extends Overload<HTMLAttributes<HTMLDivElement>>, Apollo<'Footer'> {
+export interface IFooter extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Footer'> {
     /** Can have children of any kind */
     children?: ReactNode;
 }

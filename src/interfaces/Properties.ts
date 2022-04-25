@@ -11,12 +11,6 @@ export type ComponentAlignment = 'start' | 'center' | 'end';
 export type ComponentPosition = 'static' | 'absolute' | 'fixed';
 export type ComponentWrap = (component: ReactNode) => ReactNode;
 
-/**
- * Function used to format children. When in `parentProps`, this method will perpatuate the
- * original RenderAll component
- */
-export type ComponentRenderAll = (children?: ReactNode) => JSX.Element[];
-
 /* Form Types */
 
 // input data

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useEffect } from 'react';
 
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 import type { IGroup as CIGroup } from '../../Group/Group';
 import { Group as CGroup } from '../../Group/Group';

@@ -1,7 +1,7 @@
 import type { ChangeEvent, FC, ReactNode } from 'react';
 import React, { useEffect, useState } from 'react';
 
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 import { FormGroupData } from '../../../interfaces/Properties';
 import { getFormError } from '../../../util/Form';
 
@@ -134,7 +134,7 @@ const Group: FC<IGroup> = ({
      * @return Appropriate group format
      */
     const renderGroup = (): JSX.Element[] | ReactNode => {
-        if (type === 'input') return children;
+        if (type === 'input' || !renderAll) return children;
 
         return renderAll(children);
     };

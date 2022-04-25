@@ -3,14 +3,14 @@ import React, { useEffect, useRef } from 'react';
 import './Option.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import type Overload from '../../interfaces/Overload';
+import type { Interface } from '../../interfaces/Overload';
 import type { ComponentWrap } from '../../interfaces/Properties';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 
 export interface IOption
-    extends Overload<Omit<HTMLAttributes<HTMLElement>, 'onClick'>>,
+    extends Interface<Omit<HTMLAttributes<HTMLElement>, 'onClick'>>,
         Apollo<'Option'> {
     /** Needs to have a string value in between tags */
     children: string;

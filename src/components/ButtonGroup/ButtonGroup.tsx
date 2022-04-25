@@ -5,6 +5,7 @@ import './ButtonGroup.css';
 import FormatChildren from '../../util/FormatChildren';
 import type { Apollo } from '../../interfaces/Apollo';
 import type { StyleVariant, ComponentSize } from '../../interfaces/Properties';
+import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import Button from './overload/Button';
@@ -39,9 +40,9 @@ export const ButtonGroup: FC<IButtonGroup> = ({
      *
      * @return formatted buttons
      */
-    const renderButtons = (): JSX.Element[] => {
+    const renderAll: RenderAll = () => {
         // get new formatted children
-        const formatted = new FormatChildren({ children, disabled, size, variant }, { Button });
+        const formatted = new FormatChildren(children, { Button }, { disabled, size, variant });
         if (formatted.getOther().length)
             throw new Error('ButtonGroup can only accept Buttons as children');
 
@@ -50,7 +51,7 @@ export const ButtonGroup: FC<IButtonGroup> = ({
 
     return (
         <div {...props} className={`apollo-component-library-button-group-component ${className}`}>
-            {renderButtons()}
+            {renderAll()}
         </div>
     );
 };

@@ -5,6 +5,7 @@ import './Card.css';
 import type { Apollo } from '../../interfaces/Apollo';
 import FormatChildren from '../../util/FormatChildren';
 import { gaurdApolloName } from '../../util/ErrorHandling';
+import type { RenderAll } from '../../interfaces/Overload';
 
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
@@ -28,21 +29,17 @@ export const Card: FC<ICard> = ({ children, className, ...props }) => {
      *
      * @return html elements
      */
-    const renderAll = (): JSX.Element => {
+    const renderAll: RenderAll = () => {
         // get all the children from the components
-        const formatted = new FormatChildren({ children }, { Header, Footer });
+        const formatted = new FormatChildren(children, { Header, Footer });
 
         // extract header and footer
-        const headers = formatted.get('Header');
-        const footers = formatted.get('Footer');
+        const [header, ...otherHeaders] = formatted.get('Header');
+        const [footer, ...otherFooters] = formatted.get('Footer');
 
         // check to see that we have one footer and one header MAX
-        if (headers.length > 1) throw new Error('Card cannot have more than one header.');
-        if (footers.length > 1) throw new Error('Card cannot have more than one footer.');
-
-        // get the header and footer
-        const [header] = headers;
-        const [footer] = footers;
+        if (otherHeaders.length > 1) throw new Error('Card cannot have more than one header.');
+        if (otherFooters.length > 1) throw new Error('Card cannot have more than one footer.');
 
         // return the structured content
         return (

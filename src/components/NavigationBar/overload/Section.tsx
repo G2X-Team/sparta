@@ -4,6 +4,7 @@ import { ISection, Section as CSection } from '../../Section/Section';
 
 import FormatChildren from '../../../util/FormatChildren';
 import { Dropdown, Option, Menu, Icon } from '../../..';
+import { Overload } from '../../../interfaces/Overload';
 
 /**
  * Formats section so that when it is in navigation mode, it will shrink to a hamburger
@@ -11,7 +12,7 @@ import { Dropdown, Option, Menu, Icon } from '../../..';
  *
  * @return Formatted section component
  */
-const Section: FC<ISection> = ({
+const Section: FC<Overload<ISection>> = ({
     parentProps: { mobile, titleColor },
     children,
     navigation,
@@ -22,8 +23,7 @@ const Section: FC<ISection> = ({
 
     useEffect(() => {
         if (mobile && navigation) {
-            const parentProps = { children };
-            const formatted = new FormatChildren(parentProps, { Option });
+            const formatted = new FormatChildren(children, { Option });
 
             // check if there are other types other than options
             if (formatted.getOther().length !== 0) {

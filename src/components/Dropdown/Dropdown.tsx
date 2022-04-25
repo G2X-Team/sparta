@@ -4,6 +4,7 @@ import './Dropdown.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
 import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
+import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 import FormatChildren from '../../util/FormatChildren';
 
@@ -44,11 +45,10 @@ export const Dropdown: FC<IDropdown> = ({
      *
      * @return dropdown component
      */
-    const renderDropdown = (): JSX.Element => {
+    const renderDropdown: RenderAll = () => {
         // define parentProps props
         const parentProps = {
             button: buttonRef || iconRef,
-            children,
             open,
             anchor,
             alignment,
@@ -56,7 +56,7 @@ export const Dropdown: FC<IDropdown> = ({
         };
 
         // find all targeted components
-        const formatted = new FormatChildren(parentProps, { Button, Menu, Icon });
+        const formatted = new FormatChildren(children, { Button, Menu, Icon }, parentProps);
 
         // get button
         const [icon, ...otherIcons]: JSX.Element[] = formatted.get('Icon');
@@ -80,15 +80,17 @@ export const Dropdown: FC<IDropdown> = ({
         if (otherMenus.length) throw new Error('Dropdown component can only have one menu');
 
         return (
-            <div className={`apollo-component-library-dropdown ${className}`}>
+            <>
                 {(anchor === 'top' || anchor === 'left') && open ? menu : null}
                 {button || icon}
                 {(anchor === 'bottom' || anchor === 'right') && open ? menu : null}
-            </div>
+            </>
         );
     };
 
-    return renderDropdown();
+    return (
+        <div className={`apollo-component-library-dropdown ${className}`}>{renderDropdown()}</div>
+    );
 };
 
 Dropdown.defaultProps = { 'data-apollo': 'Dropdown' };

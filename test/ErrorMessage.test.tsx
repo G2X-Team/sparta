@@ -22,7 +22,7 @@ describe('ErrorMessage', () => {
                 <Divider />
                 <Text>Click it</Text>
                 <br />
-                <Button aria-errorMessage="click-error">Click me :)</Button>
+                <Button aria-errormessage="click-error">Click me :)</Button>
                 <ErrorMessage id="click-error">Nothing Happened :/</ErrorMessage>
             </Card>
         );
@@ -32,7 +32,7 @@ describe('ErrorMessage', () => {
                 <Divider />
                 <Text>Click it</Text>
                 <br />
-                <Button aria-errorMessage="click-error">Click me :)</Button>
+                <Button aria-errormessage="click-error">Click me :)</Button>
                 <ErrorMessage id="click-error" active>
                     Nothing Happened :/
                 </ErrorMessage>

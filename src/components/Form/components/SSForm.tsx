@@ -1,8 +1,9 @@
 import type { FC, HTMLAttributes } from 'react';
 import React from 'react';
 
-import { FormActionData } from '../../../interfaces/Properties';
 import FormatChildren from '../../../util/FormatChildren';
+import type { FormActionData } from '../../../interfaces/Properties';
+import type { RenderAll } from '../../../interfaces/Overload';
 
 import TextInput from '../overload/SSTextInput';
 import Checkbox from '../overload/SSCheckbox';
@@ -27,19 +28,11 @@ const SSForm: FC<ISSForm> = ({ actionData, children, ...props }) => {
      *
      * @return formatted children
      */
-    const renderAll = (): JSX.Element[] => {
-        const parentProps = {
-            children,
-            actionData,
-        };
+    const renderAll: RenderAll = () => {
+        // overloaded components
+        const overloaded = { TextInput, Checkbox, Radio, Switch, Group };
 
-        const formatted = new FormatChildren(parentProps, {
-            TextInput,
-            Group,
-            Switch,
-            Radio,
-            Checkbox,
-        });
+        const formatted = new FormatChildren(children, overloaded, { actionData });
 
         return formatted.getAll();
     };
