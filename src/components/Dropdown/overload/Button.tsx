@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React from 'react';
-import type Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 import type { IButton as CIButton } from '../../Button/Button';
 import { Button as CButton } from '../../Button/Button';

@@ -1,5 +1,6 @@
 import type { FC, MouseEvent, RefObject } from 'react';
 import React from 'react';
+import { Overload } from '../../../interfaces/Overload';
 
 import type { IOption } from '../../Option/Option';
 import { Option as COption } from '../../Option/Option';
@@ -9,7 +10,7 @@ import { Option as COption } from '../../Option/Option';
  *
  * @return Formatted option
  */
-const Option: FC<IOption> = ({
+const Option: FC<Overload<IOption>> = ({
     parentProps: { childTypeIndex, getChildTypeSize, first, last, handleOptionClick },
     onClick,
     children,

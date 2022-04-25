@@ -1,6 +1,6 @@
 import React from 'react';
 import { IOption, Option as COption } from '../../Option/Option';
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 /**
  * Component that formats options pertaining to the Drawer

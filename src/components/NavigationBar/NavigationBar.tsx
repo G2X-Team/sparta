@@ -14,6 +14,7 @@ import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import Section from './overload/Section';
+import { RenderAll } from '../../interfaces/Overload';
 
 export interface INavigationBar extends HTMLAttributes<HTMLDivElement>, Apollo<'NavigationBar'> {
     /** If the component is not static, it will determine the orientation of the component */
@@ -65,9 +66,9 @@ export const NavigationBar: FC<INavigationBar> = ({
      *
      * @return formatted components
      */
-    const renderAll = (): JSX.Element[] => {
+    const renderAll: RenderAll = () => {
         const parentProps = { children, mobile };
-        const formatted = new FormatChildren(parentProps, { Section });
+        const formatted = new FormatChildren(children, { Section }, parentProps);
 
         return formatted.getAll();
     };

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React from 'react';
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 import FormatChildren from '../../../util/FormatChildren';
 
 import Button from './Button';
@@ -12,15 +12,16 @@ import { IButtonGroup } from '../../ButtonGroup/ButtonGroup';
  * @return Formatted ButtonGroup
  */
 const ButtonGroup: FC<Overload<IButtonGroup>> = ({
-    parentProps: { children, ...parentProps },
+    parentProps: { ...parentProps },
     className = '',
+    children,
     ...props
 }: Overload<IButtonGroup>) => {
     // get all props
     const allProps = { ...props, ...parentProps };
 
     // find the buttons in the button group
-    const formattedButtonGroup = new FormatChildren(allProps, { Button });
+    const formattedButtonGroup = new FormatChildren(children, { Button }, allProps);
 
     // check that there are only buttons in the button group
     if (formattedButtonGroup.getOther().length > 0)

@@ -1,7 +1,7 @@
 import type { ChangeEvent, FC } from 'react';
 import React from 'react';
 import { ICheckbox, Checkbox as CCheckbox } from '../../Checkbox/Checkbox';
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 /**
  * Overloaded Checkbox formatted to update group value on change

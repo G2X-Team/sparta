@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react';
 import React from 'react';
 
-import Overload from '../../../interfaces/Overload';
+import type { Overload } from '../../../interfaces/Overload';
 
 import { Icon } from '../../Icon/Icon';
 import { IMenu as CIMenu } from '../../Menu/Menu';

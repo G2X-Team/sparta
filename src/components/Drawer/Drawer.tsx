@@ -4,7 +4,8 @@ import FormatChildren from '../../util/FormatChildren';
 import './Drawer.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import type { ComponentOrientation, ComponentRenderAll } from '../../interfaces/Properties';
+import type { ComponentOrientation } from '../../interfaces/Properties';
+import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { View } from '../View/View';
@@ -124,10 +125,12 @@ export const Drawer: FC<IDrawer> & { Button: FC<IDrawerButton> } = ({
      * @param childrenProp children property of the component needing formatting
      * @return render ready drawer component
      */
-    const renderAll: ComponentRenderAll = (childrenProp) => {
+    const renderAll: RenderAll = (childrenProp) => {
+        // overloaded components
+        const overloaded = { ['Drawer.Button']: Button, Menu, View };
+
         // define parent props
         const parentProps = {
-            children: childrenProp,
             orientation,
             type,
             modifiedDimension,
@@ -143,11 +146,7 @@ export const Drawer: FC<IDrawer> & { Button: FC<IDrawerButton> } = ({
         };
 
         // gets all found children
-        const formatted = new FormatChildren(parentProps, {
-            ['Drawer.Button']: Button,
-            Menu,
-            View,
-        });
+        const formatted = new FormatChildren(childrenProp, overloaded, parentProps);
 
         // format header and footer
         const [, ...otherMenus] = formatted.get('Menu');
