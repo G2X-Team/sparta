@@ -1,4 +1,13 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+echo "** Running pre-commit hook **"
+
+if ! git branch | grep -E "^\* (feature|bugfix|release|hotfix|main|dev)$"* > /dev/null; then
+  echo "Rebase branch or unsopported branch detected, ignoring..."
+    exit 0
+fi
+
+echo "- Linting changes..."
 yarn eslint src test stories
+echo

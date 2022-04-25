@@ -1,27 +1,41 @@
-# Apollo Component Library (WIP)
+<h1 style="font-family: serif" align="center">AΠOΛΛΩΝ</h1>
 
-## What is it?
-Apollo is a component library primarily developed by MileMarker10 to facilitate the creation of Frontend UI components whilst reducing the amount of code that needs to be written.
+<p align="center">
+    <img src="https://i.pinimg.com/564x/ad/fb/0f/adfb0fd0aa639a744d71f462538e68f1.jpg" width="400px">
+</p>
 
-## Starting it
-When developing components, we always want two things constantly running. The rollup environment and Storybook. In order to have that available to us we will want to
+Apollo is a React UI/UX component library primarily developed by G2X with an emphasis on productivity and ease of use. This package uses [TSDX](https://www.npmjs.com/package/tsdx) for development, and extends the use of packages like [React Hook Form](https://react-hook-form.com/), and others for the purpose of providing a complete development experience.
+
+# 🚀 Getting Started
+
+Here is a quick setup of what you need to do to start contributing in Apollo.
 
 ```bash
-# To start rollup and compile TypeScript
-$ yarn start
-# or
-$ npm start
+# Install Node.js
+sudo apt-get install -y nodejs
 
-# To start Storybook
-$ yarn storybook
-# or
-$ npm run storybook
+# Clone repo
+git clone https://github.com/MileMarker10/apollo-component-library apollo
+
+# Run the setup script (One time command to install deps and husky)
+yarn setup
+
+# (Optional) run Storybook
+yarn storybook
+
+# (Optional) run Rollup TypeScript compiler
+yarn start
 ```
 
 ## File Structure
-The file structure is laid out as follows:
+
+To help guide your way around the repo, here is a quick breakdown of the file structure.
+
 - **`example`:** contains a test application for integration testing components post-distribution processing.
 - **`src`:** contains all source code including components and utilities.
+    - **`components`:** contains all component folders
+    - **`interfaces`:** contains all types & interfaces
+    - **`util`:** contains all utility functions and classes
 - **`stories`:** contains all `storybook` files for each component.
 - **`test`:** contains all unit testing done through Jest and `@testing-library`.
 
@@ -33,8 +47,10 @@ apollo-component-library
 │   └───Testing environment for component implementation
 │
 ├───src
-│   ├───components
+│   ├───*components*
 │   │   └───Component folders
+│   │       ├───*components* contains abstracted components
+│   │       ├───*overload* contains overloaded components
 │   │       └───Component Files
 │   │
 │   │───*interfaces*
@@ -49,3 +65,9 @@ apollo-component-library
 └───test
     └───Jest testing files
 ```
+# 🤔 Have suggestions?
+
+Feel free to use the [Issues](https://github.com/MileMarker10/apollo-component-library/issues) tab on the repo to voice any questions or concerns about the codebase.
+
+# Documentation
+Coming soon

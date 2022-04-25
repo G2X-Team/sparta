@@ -1,0 +1,30 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+
+echo "** Running post-commit hook **"
+if ! git branch | grep -E "^\* (feature|bugfix|release|hotfix|main|dev)$"* > /dev/null; then
+  echo "Rebase branch or unsopported branch detected, ignoring..."
+    exit 0
+fi
+
+echo "- Checking if upstream exists..."
+if ! git remote | grep upstream > /dev/null; then
+  echo "Upstream repo does not exist. Please add it and redo commit"
+    exit 1
+fi
+
+echo "- Fetching upstream..."
+git fetch upstream
+
+echo "- Identifying current branch..."
+if ! git branch | grep -E "^\* (feature|bugfix|release)$"* > /dev/null; then
+  echo "  * Hotfix detected. Rebasing with upstream/main..."
+    git rebase upstream/main
+    exit 0
+elif ! git branch | grep -E "^\* (hotfix)$"* > /dev/null; then
+  echo "  * Feature, Bugfix, or Release detected. Rebasing with upstream/dev..."
+    git rebase upstream/dev
+    exit 0
+fi
+
