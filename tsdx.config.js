@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const postcss = require('rollup-plugin-postcss');
 const autoprefixer = require('autoprefixer');
 
@@ -7,7 +8,7 @@ module.exports = {
             postcss({
                 plugins: [autoprefixer()],
                 inject: true,
-                extract: !!options.writeMeta,
+                extract: 'css/main.css',
                 // modules: true,
                 // autoModules: true,
             })

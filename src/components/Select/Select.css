@@ -1,0 +1,46 @@
+.apollo[data-apollo="Select"] {
+    position: relative;
+    display: inline-block;
+}
+
+.apollo[data-apollo="Select"] > span[data-apollo-id="select-button"] {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid #E7EBEC;
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    transition: box-shadow 300ms;
+}
+
+.apollo[data-apollo="Select"] > span > span {
+    padding: 0;
+    transition: transform 300ms;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.apollo[data-apollo="Select"] input {
+    background: none;
+    border: none;
+    padding: 10px 14px;
+    outline: none;
+    font-size: 16px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-family: 'Sora', sans-serif;
+    width: 100%;
+}
+
+.apollo[data-apollo="Select"] > span[data-apollo-id="select-button"]:focus-within {
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #CAF2E1;
+    border: 1.5px solid #25E685;
+}
+
+.apollo[data-apollo="Select"].invalid > span[data-apollo-id="select-button"] {
+    border: 1.5px solid #FDA29B;
+}
+
+.apollo[data-apollo="Select"].invalid > span[data-apollo-id="select-button"]:focus {
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05); 
+}

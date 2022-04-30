@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 expect.extend(toHaveNoViolations);
@@ -98,7 +98,7 @@ describe('Dropdown', () => {
         expect(screen.queryAllByText(/option /i)).toHaveLength(3);
     });
 
-    it('will follow throuhg with the general flow', () => {
+    it('will follow throuhg with the general flow', async () => {
         // given
         render(
             <Dropdown>
@@ -117,12 +117,18 @@ describe('Dropdown', () => {
         expect(screen.queryAllByText(/option /i)).toHaveLength(0);
 
         // should open the menu on click
-        userEvent.click(dropdownButton);
+        await act(async () => {
+            userEvent.click(dropdownButton);
+        });
         expect(screen.queryAllByText(/option /i)).toHaveLength(3);
 
         // should close the menu on second click
-        userEvent.click(dropdownButton);
-        expect(screen.queryAllByText(/option /i)).toHaveLength(0);
+        await act(async () => {
+            userEvent.click(dropdownButton);
+        });
+        setTimeout(() => {
+            expect(screen.queryAllByText(/option /i)).toHaveLength(0);
+        }, 500);
     });
 
     it('will close when clicked outside', () => {
@@ -152,7 +158,9 @@ describe('Dropdown', () => {
         userEvent.click(otherElement);
 
         // then
-        expect(screen.queryAllByText(/option /i)).toHaveLength(0);
+        setTimeout(() => {
+            expect(screen.queryAllByText(/option /i)).toHaveLength(0);
+        }, 300);
     });
 
     it('allows on click callback to execute for all options', () => {
@@ -203,8 +211,10 @@ describe('Dropdown', () => {
         userEvent.keyboard('{esc}');
 
         // then
-        expect(screen.queryAllByText(/option /i)).toHaveLength(0);
-        expect(document.activeElement).toEqual(dropdownButton);
+        setTimeout(() => {
+            expect(screen.queryAllByText(/option /i)).toHaveLength(0);
+            expect(document.activeElement).toEqual(dropdownButton);
+        }, 300);
     });
 
     it('will close when option is clicked', () => {
@@ -227,6 +237,8 @@ describe('Dropdown', () => {
         userEvent.click(screen.getByText(/option 1/i));
 
         // then
-        expect(screen.queryAllByText(/option /i)).toHaveLength(0);
+        setTimeout(() => {
+            expect(screen.queryAllByText(/option /i)).toHaveLength(0);
+        }, 300);
     });
 });

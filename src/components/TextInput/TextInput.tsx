@@ -72,7 +72,7 @@ export const TextInput: FC<ITextInput> = ({
     return (
         <div className="apollo-component-library-text-input-label">
             <label>
-                <Text bold style={labelTextStyle}>
+                <Text style={labelTextStyle} color="#10333F">
                     {label}{' '}
                     {required ? (
                         <Text inline color="red">
@@ -80,7 +80,6 @@ export const TextInput: FC<ITextInput> = ({
                         </Text>
                     ) : null}
                 </Text>
-                {hint?.length ? <Text style={hintTextStyle}>{hint}</Text> : null}
                 <input
                     {...props}
                     name={name}
@@ -94,6 +93,9 @@ export const TextInput: FC<ITextInput> = ({
                         ${className}
                     `}
                 />
+                {hint?.length && !(invalid && errorMessage) ? (
+                    <Text style={hintTextStyle}>{hint}</Text>
+                ) : null}
             </label>
             <ErrorMessage
                 id={name ? `${name}-error` : `${label}-error`}
@@ -109,9 +111,12 @@ TextInput.defaultProps = { 'data-apollo': 'TextInput' };
 
 const labelTextStyle: CSSProperties = {
     paddingBottom: 5,
+    fontSize: 14,
 };
 
 const hintTextStyle: CSSProperties = {
-    fontSize: '0.9rem',
     paddingBottom: 5,
+    color: '#6C8189',
+    fontSize: 14,
+    paddingTop: 6,
 };

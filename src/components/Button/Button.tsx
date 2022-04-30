@@ -7,6 +7,8 @@ import type { Apollo } from '../../interfaces/Apollo';
 import type { StyleVariant } from '../../interfaces/Properties';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
+import { Text } from '../Text/Text';
+
 export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Button'> {
     /** Required ReactNode that needs to exist between component tags */
     children: ReactNode;
@@ -14,6 +16,8 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Butt
     variant?: StyleVariant | 'area';
     /** callback function to be called when there is a method click */
     onClick?: () => void;
+    /** disables button */
+    disabled?: boolean;
     /** Allows use of references */
     ref?: ForwardedRef<HTMLButtonElement>;
 }
@@ -24,7 +28,7 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Butt
  * @return Button component
  */
 export const Button: FC<IButton> = forwardRef(function Button(
-    { children, className = '', variant = 'default', ...props }: IButton,
+    { children, className = '', disabled, variant = 'default', ...props }: IButton,
     ref: ForwardedRef<HTMLButtonElement>
 ) {
     gaurdApolloName(props, 'Button');
@@ -32,10 +36,11 @@ export const Button: FC<IButton> = forwardRef(function Button(
     return (
         <button
             {...props}
-            className={`apollo-component-library-button ${variant} ${className}`}
+            disabled={disabled}
+            className={`apollo ${variant} ${className}`}
             ref={ref}
         >
-            {children}
+            <Text>{children}</Text>
         </button>
     );
 });

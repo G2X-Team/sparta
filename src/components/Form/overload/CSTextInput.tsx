@@ -95,13 +95,15 @@ const TextInput: FC<ITextInput> = ({
         }
 
         // check for password matching
-        if (match?.length && getValues(match).text !== value) {
-            setError(name, {
-                type: 'match',
-                message: matchMessage,
-            });
-        } else if (match?.length && getValues(match).text === value) {
-            clearErrors(name);
+        if (match?.length) {
+            if (getValues(match).text !== value) {
+                setError(name, {
+                    type: 'match',
+                    message: matchMessage,
+                });
+            } else if (getValues(match).text === value) {
+                clearErrors(name);
+            }
         }
 
         // check if there is defined validator
@@ -109,7 +111,10 @@ const TextInput: FC<ITextInput> = ({
 
         // check if there is an error
         const error = validator(textData);
-        if (!error?.length && errors[name]?.type === 'validator') {
+        if (
+            !error?.length &&
+            (errors[name]?.type === 'validator' || errors[name]?.type === 'text-input')
+        ) {
             // see if there was previously an error registered under this component
             if (errors[name]?.message?.length) clearErrors(name);
             return;

@@ -1,5 +1,5 @@
-import { HTMLAttributes, FC, forwardRef, ForwardedRef, MouseEvent, RefObject } from 'react';
-import React, { useEffect, useRef } from 'react';
+import { HTMLAttributes, FC, forwardRef, ForwardedRef, MouseEvent } from 'react';
+import React from 'react';
 import './Option.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
@@ -36,28 +36,6 @@ export const Option: FC<IOption> = forwardRef(function Option(
 ) {
     gaurdApolloName(props, 'Option');
 
-    // define a fallback ref
-    const optionRef = useRef<HTMLLIElement>(null);
-
-    useEffect(() => {
-        const activeRef = (ref as RefObject<HTMLLIElement>) || optionRef;
-        if (!onClick || wrap) return;
-
-        /**
-         * Will execute the onClick method on enter
-         *
-         * @param event keyobard event
-         */
-        const onEnter = (event: KeyboardEvent): void => {
-            if (event.key === 'Enter' && document.activeElement === activeRef.current) {
-                handleClick();
-            }
-        };
-
-        window.addEventListener('keydown', onEnter);
-        return () => window.removeEventListener('keydown', onEnter);
-    }, []);
-
     /** Handles click for option */
     const handleClick = (): void => {
         if (onClick) onClick();
@@ -68,8 +46,9 @@ export const Option: FC<IOption> = forwardRef(function Option(
         <li
             {...props}
             tabIndex={0}
-            ref={ref || optionRef}
+            ref={ref}
             onClick={handleClick}
+            onKeyDown={(event) => event.key === 'Enter' && handleClick()}
             role="option"
             className={`apollo-component-library-option-component ${className || ''}`}
         >
