@@ -89,9 +89,12 @@ export const ValidatedForm: SampleStory = (args) => {
     return (
         <Form onSubmit={onSubmit} onError={onError}>
             <TextInput
-                validator={(input) =>
-                    input?.text.length < 5 && 'Text input must be at least 5 characters long'
-                }
+                validator={(input) => {
+                    console.log(input?.text);
+                    return (
+                        input?.text.length < 5 && 'Text input must be at least 5 characters long'
+                    );
+                }}
                 required
                 name="password"
                 label="Password"

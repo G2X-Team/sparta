@@ -1,4 +1,14 @@
-.apollo-component-library-dropdown {
+.apollo[data-apollo="Dropdown"] {
     position: relative;
     display: inline-block;
+}
+
+.apollo[data-apollo="Dropdown"] button > span {
+    display: flex;
+    align-items: center;
+}
+
+.apollo[data-apollo="Dropdown"] button > span > span {
+    padding: 0;
+    transition: transform 400ms;
 }

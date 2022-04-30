@@ -1,47 +1,74 @@
-.apollo-component-library-navigation-bar-component {
+.apollo[data-apollo="NavigationBar"] {
     display: flex;
     background-color: white; 
     width: 100%;
     align-items: center;
     box-sizing: border-box;
-    box-shadow: 0px 0 2px 3px rgba(0, 0, 0, 0.1);
     z-index: 10;
     position: relative;
 }
 
-.apollo-component-library-navigation-bar-component.absolute {
+.apollo[data-apollo="NavigationBar"] > div {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.apollo[data-apollo="NavigationBar"] > div > ul {
+    list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex: 1;
+    padding-left: 10px;
+}
+
+.apollo[data-apollo="NavigationBar"] .apollo[data-apollo="Dropdown"] > button {
+    padding: 8px 14px;
+}
+
+.apollo[data-apollo="NavigationBar"] .apollo[data-apollo="Dropdown"] > button:hover {
+    background-color: #A1EFC9;
+}
+
+.apollo[data-apollo="NavigationBar"].absolute {
     position: absolute;
 }
 
-.apollo-component-library-navigation-bar-component.fixed {
+.apollo[data-apollo="NavigationBar"].fixed {
     position: fixed;
 }
 
-.apollo-component-library-navigation-bar-component.absolute {
+.apollo[data-apollo="NavigationBar"].absolute {
     position: absolute;
 }
 
-.apollo-component-library-navigation-bar-component.top {
+.apollo[data-apollo="NavigationBar"].top {
     top: 0;
     left: 0;
 }
 
-.apollo-component-library-navigation-bar-component.bottom {
+.apollo[data-apollo="NavigationBar"].bottom {
     bottom: 0;
     left: 0;
 }
 
-.apollo-component-library-navigation-bar-component-title {
+.apollo[data-apollo="NavigationBar"]-title {
     padding-right: 10px;
     cursor: default;
     user-select: none;
 }
 
-.apollo-component-library-navigation-bar-component-title.clickable {
+.apollo[data-apollo="NavigationBar"]-title.clickable {
     cursor: pointer;
 }
 
-.apollo-component-library-navigation-bar-component-title.mobile {
+.apollo[data-apollo="NavigationBar"]-title.mobile {
     position: absolute;
     left: 50%;
     transform: translate(-50%)

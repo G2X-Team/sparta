@@ -1,5 +1,5 @@
 import type { HTMLAttributes, FC } from 'react';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Dropdown.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
@@ -39,6 +39,21 @@ export const Dropdown: FC<IDropdown> = ({
 
     // state
     const [open, toggleOpen] = useState(false);
+    const [display, toggleDisplay] = useState(false);
+    const [effect, toggleEffect] = useState(false);
+
+    // effect hook that keeps track of open
+    useEffect(() => {
+        if (open !== display) {
+            if (display) {
+                toggleEffect(false);
+                setTimeout(() => toggleDisplay(false), 300);
+            } else {
+                toggleDisplay(true);
+                setTimeout(() => toggleEffect(true), 100);
+            }
+        }
+    }, [open]);
 
     /**
      * Returns render-ready dropdown component
@@ -50,6 +65,8 @@ export const Dropdown: FC<IDropdown> = ({
         const parentProps = {
             button: buttonRef || iconRef,
             open,
+            display,
+            effect,
             anchor,
             alignment,
             toggleOpen,
@@ -81,15 +98,17 @@ export const Dropdown: FC<IDropdown> = ({
 
         return (
             <>
-                {(anchor === 'top' || anchor === 'left') && open ? menu : null}
+                {(anchor === 'top' || anchor === 'left') && display ? menu : null}
                 {button || icon}
-                {(anchor === 'bottom' || anchor === 'right') && open ? menu : null}
+                {(anchor === 'bottom' || anchor === 'right') && display ? menu : null}
             </>
         );
     };
 
     return (
-        <div className={`apollo-component-library-dropdown ${className}`}>{renderDropdown()}</div>
+        <div {...props} className={`apollo ${className}`}>
+            {renderDropdown()}
+        </div>
     );
 };
 

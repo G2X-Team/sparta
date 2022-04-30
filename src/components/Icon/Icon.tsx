@@ -1,5 +1,5 @@
-import type { HTMLAttributes, FC, ForwardedRef, RefObject } from 'react';
-import React, { useEffect, forwardRef, useRef } from 'react';
+import type { HTMLAttributes, FC, ForwardedRef } from 'react';
+import React, { forwardRef } from 'react';
 import './Icon.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
@@ -47,38 +47,16 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
 ) {
     gaurdApolloName(props, 'Icon');
 
-    // define a fallback ref
-    const iconRef = useRef<HTMLSpanElement>(null);
-
-    useEffect(() => {
-        const activeRef = (ref as RefObject<HTMLSpanElement>) || iconRef;
-        if (!onClick) return;
-
-        /**
-         * Will execute the onClick method on enter
-         *
-         * @param event keyobard event
-         */
-        const onEnter = (event: KeyboardEvent): void => {
-            if (
-                (event.key === 'Enter' || event.key === ' ') &&
-                document.activeElement === activeRef.current
-            ) {
-                if (onClick) onClick();
-            }
-        };
-
-        window.addEventListener('keydown', onEnter);
-        return () => window.removeEventListener('keydown', onEnter);
-    }, [ref, iconRef]);
-
     return (
         <span
             {...props}
             role={clickable ? 'button' : undefined}
-            ref={ref || iconRef}
+            ref={ref}
             style={getIconStyle(disabled, color, style)}
             tabIndex={onClick ? 0 : undefined}
+            onKeyDown={(event) =>
+                (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
+            }
             className={`material-icons apollo-component-library-icon-component 
                 ${clickable && variant} ${className}`}
             onClick={onClick}

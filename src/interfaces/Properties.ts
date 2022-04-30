@@ -1,7 +1,7 @@
 import type { BaseSyntheticEvent, ReactNode } from 'react';
 
 /** Component Property types */
-export type StyleVariant = 'default' | 'secondary';
+export type StyleVariant = 'default' | 'secondary' | 'tertiary' | 'important';
 export type ComponentVerticalOrientation = 'top' | 'bottom';
 export type ComponentHorizontalOrientation = 'left' | 'right';
 export type ComponentOrientation = ComponentVerticalOrientation | ComponentHorizontalOrientation;

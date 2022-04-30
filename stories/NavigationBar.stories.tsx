@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationBar, INavigationBar } from '../src/components/NavigationBar/NavigationBar';
 import { Story, Meta } from '@storybook/react';
-import { Section, Text, Dropdown, Button, Icon, Option } from '../src';
+import { Section, Text, Dropdown, Button, Icon, Option, Menu } from '../src';
 
 const meta: Meta = {
     title: 'Layout/Navigation Bar',
@@ -31,16 +31,23 @@ const Template: Story<INavigationBar> = (args) => (
             <Section navigation>
                 <Option>Pages</Option>
                 <Option>Trading</Option>
+                <Dropdown>
+                    <Button variant="area">Stuff</Button>
+                    <Menu label="stuff menu" navigation>
+                        <Option>More</Option>
+                        <Option>More than more</Option>
+                    </Menu>
+                </Dropdown>
             </Section>
             <Section justifyContent="end" alignItems="center">
-                <Dropdown name="section-dropdown" alignment="right">
-                    <Button>
-                        <Icon name="account_circle" style={{ fontSize: '2rem' }} clickable />
-                    </Button>
-                    <Option>Option 1</Option>
-                    <Option>Option 2</Option>
-                    <Option>Option 3</Option>
-                    <Option>Option 4</Option>
+                <Dropdown alignment="end">
+                    <Icon name="account_circle" style={{ fontSize: '2rem' }} clickable />
+                    <Menu label="section-dropdown" width={100}>
+                        <Option>Option 1</Option>
+                        <Option>Option 2</Option>
+                        <Option>Option 3</Option>
+                        <Option>Option 4</Option>
+                    </Menu>
                 </Dropdown>
             </Section>
         </NavigationBar>

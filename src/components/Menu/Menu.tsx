@@ -147,7 +147,7 @@ export const Menu: FC<IMenu> = ({
         <div
             {...props}
             ref={menu}
-            className={`apollo-component-libary-menu-component ${className || ''}`}
+            className={`apollo ${className || ''}`}
             style={getMenuStyle(props)}
             role={!hasOptions ? 'application' : undefined}
             aria-roledescription={description}

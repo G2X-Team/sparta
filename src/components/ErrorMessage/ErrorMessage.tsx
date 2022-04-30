@@ -31,13 +31,10 @@ export const ErrorMessage: FC<IErrorMessage> = ({
     gaurdApolloName({ 'data-apollo': dataApollo }, 'ErrorMessage');
 
     return active ? (
-        <div
-            {...props}
-            role="alert"
-            data-apollo={dataApollo}
-            className={`apollo-component-library-error-message-component ${className}`}
-        >
-            <Text color="#c90000">{children}</Text>
+        <div {...props} role="alert" data-apollo={dataApollo} className={`apollo ${className}`}>
+            <Text color="#F04438" style={{ fontSize: 14 }}>
+                {children}
+            </Text>
         </div>
     ) : null;
 };

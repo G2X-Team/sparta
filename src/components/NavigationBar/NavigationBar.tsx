@@ -29,6 +29,8 @@ export interface INavigationBar extends HTMLAttributes<HTMLDivElement>, Apollo<'
     onTitleClick?: () => void;
     /** Title color, also determines the color of the hamburger menu if applicable */
     titleColor?: CSS.Property.Color;
+    /** inner div styling */
+    innerStyle?: CSSProperties;
 }
 
 /**
@@ -40,9 +42,11 @@ export const NavigationBar: FC<INavigationBar> = ({
     size = 'medium',
     position = 'static',
     orientation = 'top',
+    className = '',
     children,
     titleElement,
     onTitleClick,
+    innerStyle,
     style,
     ...props
 }: INavigationBar) => {
@@ -74,26 +78,28 @@ export const NavigationBar: FC<INavigationBar> = ({
     };
 
     return (
-        <div
+        <nav
             {...props}
-            className={`apollo-component-library-navigation-bar-component 
-                ${position} ${orientation}
+            className={`apollo
+                ${position} ${orientation} ${className}
             `}
             style={getNavigationStyle(size, style)}
             ref={navigationBar}
         >
-            <Text
-                header={3}
-                bold
-                onClick={onTitleClick}
-                className={`apollo-component-library-navigation-bar-component-title 
-                    ${mobile && 'mobile'} ${onTitleClick && 'clickable'}
-                `}
-            >
-                {titleElement}
-            </Text>
-            {renderAll()}
-        </div>
+            <div style={innerStyle}>
+                <Text
+                    header={3}
+                    bold
+                    onClick={onTitleClick}
+                    className={`apollo-component-library-navigation-bar-component-title 
+                        ${mobile && 'mobile'} ${onTitleClick && 'clickable'}
+                    `}
+                >
+                    {titleElement}
+                </Text>
+                <ul>{renderAll()}</ul>
+            </div>
+        </nav>
     );
 };
 

@@ -1,12 +1,19 @@
 .apollo-component-library-option-component {
     padding: 5px 10px;
     background: white;
-    transition: background 300ms;
+    transition: background 300ms, filter 300ms;
     cursor: pointer;
     border-radius: 10px;
     list-style-type: none;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
 }
 
 .apollo-component-library-option-component:hover {
-    background: lightcoral;
+    background: #A1EFC9;
+}
+
+.apollo-component-library-option-component:active {
+    filter: brightness(90%);
 }
