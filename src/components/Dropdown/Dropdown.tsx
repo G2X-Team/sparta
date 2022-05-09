@@ -8,6 +8,7 @@ import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 import FormatChildren from '../../util/FormatChildren';
 
+import Avatar from './overload/Avatar';
 import Button from './overload/Button';
 import Icon from './overload/Icon';
 import Menu from './overload/Menu';
@@ -36,6 +37,7 @@ export const Dropdown: FC<IDropdown> = ({
     // reference to buttons
     const buttonRef = useRef<HTMLButtonElement>(null);
     const iconRef = useRef<HTMLSpanElement>(null);
+    const avatarRef = useRef<HTMLDivElement>(null);
 
     // state
     const [open, toggleOpen] = useState(false);
@@ -63,7 +65,7 @@ export const Dropdown: FC<IDropdown> = ({
     const renderDropdown: RenderAll = () => {
         // define parentProps props
         const parentProps = {
-            button: buttonRef || iconRef,
+            button: buttonRef || iconRef || avatarRef,
             open,
             display,
             effect,
@@ -73,22 +75,27 @@ export const Dropdown: FC<IDropdown> = ({
         };
 
         // find all targeted components
-        const formatted = new FormatChildren(children, { Button, Menu, Icon }, parentProps);
+        const formatted = new FormatChildren(children, { Button, Menu, Icon, Avatar }, parentProps);
 
         // get button
         const [icon, ...otherIcons]: JSX.Element[] = formatted.get('Icon');
         const [button, ...otherButtons]: JSX.Element[] = formatted.get('Button');
+        const [avatar, ...otherAvatars]: JSX.Element[] = formatted.get('Avatar');
 
         // handles multiple button and icon components cases
         if (icon) {
-            if (button) throw new Error('Dropdown cannot have both an icon and a button');
+            if (button || avatar) throw new Error('Dropdown can only have one type of button');
             if (otherIcons.length > 0) throw new Error('Dropdown cannot have more than one icon');
         } else if (button) {
-            if (icon) throw new Error('Dropdown cannot have both an icon and a button');
+            if (icon || avatar) throw new Error('Dropdown can only have one type of button');
             if (otherButtons.length > 0)
                 throw new Error('Dropdown cannot have more than one button');
+        } else if (avatar) {
+            if (icon || button) throw new Error('Dropdown can only have one type of button');
+            if (otherAvatars.length > 0)
+                throw new Error('Dropdown cannot have more than one avatar');
         } else {
-            throw new Error('Dropdown must have either an icon or a button');
+            throw new Error('Dropdown must have either an icon, button, or avatar');
         }
 
         // get menu
@@ -99,7 +106,7 @@ export const Dropdown: FC<IDropdown> = ({
         return (
             <>
                 {(anchor === 'top' || anchor === 'left') && display ? menu : null}
-                {button || icon}
+                {button || icon || avatar}
                 {(anchor === 'bottom' || anchor === 'right') && display ? menu : null}
             </>
         );

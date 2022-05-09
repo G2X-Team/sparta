@@ -7,6 +7,7 @@ import {
     IconDropdown,
     AreaDropdown,
     AnchoringTheDropdown,
+    AvatarDropdown,
 } from './examples/Dropdown';
 
 <Meta title="Layout/Dropdown" component={Dropdown} />
@@ -74,6 +75,16 @@ as a child. Apollo will identify the `Icon` as the dropdown button and you are d
 <Canvas>
     <Story name="Icon Dropdown" height="150px">
         {IconDropdown.bind({})}
+    </Story>
+</Canvas>
+
+### Avatar Button
+
+We can also use an `Avatar` as a dropdown button, this is especially useful for creating user menus.
+
+<Canvas>
+    <Story name="Avatar Dropdown" height="150px">
+        {AvatarDropdown.bind({})}
     </Story>
 </Canvas>
 

@@ -1,0 +1,41 @@
+.apollo[data-apollo='Avatar'],
+.apollo[data-apollo='Avatar'] img {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    position: relative;
+}
+
+.apollo[data-apollo='Avatar'] > span {
+    position: absolute;
+}
+
+.apollo[data-apollo='Avatar'].clickable {
+    transition: box-shadow 300ms, filter 300ms;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 0px transparent;
+    cursor: pointer;
+}
+
+.apollo[data-apollo='Avatar'].clickable:focus {
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #caf2e1;
+}
+
+.apollo[data-apollo='Avatar'].clickable:active {
+    filter: brightness(90%);
+}
+
+.apollo[data-apollo='Avatar'].small,
+.apollo[data-apollo='Avatar'].small img {
+    height: 32px;
+    width: 32px;
+}
+
+.apollo[data-apollo='Avatar'].large,
+.apollo[data-apollo='Avatar'].large img {
+    height: 64px;
+    width: 64px;
+}
