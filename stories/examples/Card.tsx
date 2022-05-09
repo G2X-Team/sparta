@@ -15,7 +15,7 @@ export const CompleteCard: SampleStory = (args) => {
 export const CustomCard: SampleStory = (args) => {
     return (
         <>
-            <Card style={{ height: 200, width: 300 }} {...args}>
+            <Card style={{ height: 220, width: 300 }} {...args}>
                 <Header>
                     <Text header={2} bold>
                         Custom Card
