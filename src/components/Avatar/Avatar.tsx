@@ -1,0 +1,128 @@
+import { HTMLAttributes, FC, CSSProperties, forwardRef, ForwardedRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import './Avatar.css';
+
+import type * as CSS from 'csstype';
+import type { Apollo } from '../../interfaces/Apollo';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+import { determineForeground, generateRandomColor } from '../../util/colorTheory';
+
+import { Text } from '../Text/Text';
+import { ComponentSize } from '../../interfaces/Properties';
+
+export interface IAvatar extends HTMLAttributes<HTMLDivElement>, Apollo<'Avatar'> {
+    /** Used to create a string in case there is no image */
+    fallback: string;
+    /** Color of the fallback */
+    color?: CSS.Property.Color;
+    /** Background color of fallback */
+    backgroundColor?: CSS.Property.BackgroundColor;
+    /** Picture to be used by the Avatar */
+    picture?: string;
+    /** impacts style for clickability */
+    clickable?: boolean;
+    /** callback to be executed on click */
+    onClick?: () => void;
+    /** Size of component */
+    size?: ComponentSize;
+    /** reference */
+    ref?: ForwardedRef<HTMLDivElement>;
+}
+
+/**
+ * The Avatar component is a simple component that displays an image or a fallback
+ * image if the image is not available.
+ *
+ * @return Avatar component
+ */
+export const Avatar: FC<IAvatar> = forwardRef(function Icon(
+    {
+        clickable = false,
+        size = 'medium',
+        className = '',
+        onClick,
+        style,
+        color,
+        picture,
+        fallback,
+        ...props
+    }: IAvatar,
+    ref
+) {
+    gaurdApolloName(props, 'Avatar');
+
+    // state
+    const [loaded, setLoaded] = useState(false);
+    const [avatarStyle, setAvatarStyle] = useState<CSSProperties>(
+        getAvatarStyle(loaded, style, color)
+    );
+
+    // determines whether the avatar is clickable or not
+    const isClickable = onClick || clickable ? 'clickable' : '';
+
+    // effect
+    useEffect(() => {
+        setAvatarStyle(getAvatarStyle(loaded, style, color));
+    }, [loaded]);
+
+    return (
+        <div
+            {...props}
+            ref={ref}
+            className={`apollo ${className} ${isClickable} ${size}`}
+            aria-label={`${fallback} avatar`}
+            style={avatarStyle}
+            role={onClick || clickable ? 'button' : undefined}
+            tabIndex={onClick ? 0 : undefined}
+            onClick={onClick}
+            onKeyDown={(event) =>
+                (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
+            }
+        >
+            {picture ? <img src={picture} alt={fallback} onLoad={() => setLoaded(true)} /> : null}
+            {!loaded ? <Text upper>{getFallbackInitials(fallback)}</Text> : null}
+        </div>
+    );
+});
+
+Avatar.defaultProps = { 'data-apollo': 'Avatar' };
+
+/**
+ * The default fallback for the Avatar component
+ *
+ * @param name name of the user
+ * @return initials of the user
+ */
+const getFallbackInitials = (name: string): string => {
+    const nameSplit: string[] = name.split(' ');
+    const [firstName] = nameSplit;
+    const lastName = nameSplit.pop();
+
+    return `${firstName[0]}${nameSplit.length > 0 && lastName ? lastName[0] : ''}`;
+};
+
+/**
+ * Gets the style and color of the Avatar component
+ *
+ * @param loaded boolean determining whether the avatar is loaded or not
+ * @param style avatar style
+ * @param color color of the avatar
+ * @return style and color of the avatar
+ */
+const getAvatarStyle = (
+    loaded: boolean,
+    style?: CSSProperties,
+    color?: CSS.Property.Color
+): CSSProperties => {
+    if (loaded) return { ...style };
+
+    // generate colors
+    const backgroundColor = color || generateRandomColor();
+    const foregroundColor = determineForeground(backgroundColor);
+
+    return {
+        ...style,
+        backgroundColor,
+        color: foregroundColor,
+    };
+};

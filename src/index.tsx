@@ -26,6 +26,7 @@ export { Table } from './components/Table/Table';
 export { Menu } from './components/Menu/Menu';
 export { ErrorMessage } from './components/ErrorMessage/ErrorMessage';
 export { Select } from './components/Select/Select';
+export { Avatar } from './components/Avatar/Avatar';
 
 export type {
     FormValidator,

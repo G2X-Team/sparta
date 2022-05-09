@@ -1,6 +1,6 @@
 import React from 'react';
 import type { SampleStory } from './util';
-import { Dropdown, Menu, Option, Button, Icon, Text } from '../../src';
+import { Dropdown, Menu, Option, Button, Icon, Text, Avatar } from '../../src';
 
 // the name of this function should be the name of the story in the docs
 export const BasicDropdown: SampleStory = (args) => (
@@ -32,6 +32,17 @@ export const AreaDropdown: SampleStory = (args) => (
                 Click Me
             </Text>
         </Button>
+        <Menu label="Button Dropdown">
+            <Option>Option 1</Option>
+            <Option>Option 2</Option>
+            <Option>Option 3</Option>
+        </Menu>
+    </Dropdown>
+);
+
+export const AvatarDropdown: SampleStory = (args) => (
+    <Dropdown {...args}>
+        <Avatar fallback="John Doe" />
         <Menu label="Button Dropdown">
             <Option>Option 1</Option>
             <Option>Option 2</Option>
