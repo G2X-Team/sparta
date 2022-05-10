@@ -9,12 +9,18 @@ import { gaurdApolloName } from '../../util/ErrorHandling';
 export interface ISection extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Section'> {
     /** value that determines the flex style prop of section */
     flex?: CSS.Property.Flex;
+    /** Makes flex direction equal to column */
+    column?: boolean;
     /** value that determines the height of section */
     height?: CSS.Property.Height;
     /** value that determines the width of section */
     width?: CSS.Property.Width;
     /** value that determines the min width of the section */
     minWidth?: CSS.Property.MinWidth;
+    /** value that determines the min height of the section */
+    minHeight?: CSS.Property.MinHeight;
+    /** Determines whether there is flex wrap */
+    flexWrap?: boolean;
     /** justify content value */
     justifyContent?: CSS.Property.JustifyContent;
     /** align items value */
@@ -24,6 +30,12 @@ export interface ISection extends Interface<HTMLAttributes<HTMLDivElement>>, Apo
      * its min-width
      */
     navigation?: boolean;
+    /** Centers section content vertically */
+    centerVertical?: boolean;
+    /** Centers section content horizontally */
+    centerHorizontal?: boolean;
+    /** Centers section content both vertically and horizontally */
+    center?: boolean;
 }
 
 /**
@@ -34,6 +46,9 @@ export interface ISection extends Interface<HTMLAttributes<HTMLDivElement>>, Apo
 export const Section: FC<ISection> = ({
     parentProps,
     flex = 1,
+    flexWrap = false,
+    minWidth,
+    minHeight,
     children,
     className,
     height,
@@ -41,6 +56,10 @@ export const Section: FC<ISection> = ({
     style,
     justifyContent,
     alignItems,
+    column,
+    center,
+    centerVertical,
+    centerHorizontal,
     ...props
 }) => {
     gaurdApolloName(props, 'Section');
@@ -49,7 +68,21 @@ export const Section: FC<ISection> = ({
         <div
             {...props}
             className={className}
-            style={getSectionStyle(flex, height, width, alignItems, justifyContent, style)}
+            style={getSectionStyle({
+                flex,
+                height,
+                width,
+                minWidth,
+                minHeight,
+                column,
+                center,
+                flexWrap,
+                centerVertical,
+                centerHorizontal,
+                alignItems,
+                justifyContent,
+                style,
+            })}
         >
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
         </div>
@@ -61,29 +94,61 @@ Section.defaultProps = { 'data-apollo': 'Section' };
 /**
  * Gets section style objects from properties
  *
- * @param flex value that determines the flex style prop
- * @param height value that determines height
- * @param width value that determines width
- * @param alignItems value that determines alignItems style prop
- * @param justifyContent value that determines justifyContent style prop
- * @param style object containing style attributes from original prop
  * @return section style object
  */
-const getSectionStyle = (
-    flex: CSS.Property.Flex | undefined,
-    height: CSS.Property.Height | undefined,
-    width: CSS.Property.Width | undefined,
-    alignItems: CSS.Property.AlignItems | undefined,
-    justifyContent: CSS.Property.JustifyContent | undefined,
-    style: CSSProperties | undefined
-): CSSProperties => {
+const getSectionStyle = ({
+    flex,
+    height,
+    width,
+    minWidth,
+    minHeight,
+    alignItems,
+    justifyContent,
+    style,
+    column,
+    center,
+    centerVertical,
+    centerHorizontal,
+    flexWrap,
+}: ISection): CSSProperties => {
+    // get flex direction
+    const flexDirection = column ? 'column' : 'row';
+    const wrap = flexWrap ? 'wrap' : 'nowrap';
+
+    // get settings to center elements
+    const centeredSettings: CSSProperties = {};
+    if (center) {
+        centeredSettings.alignItems = 'center';
+        centeredSettings.justifyContent = 'center';
+    } else {
+        if (centerVertical) {
+            if (!column) {
+                if (flexWrap) centeredSettings.alignContent = 'center';
+                else centeredSettings.alignItems = 'center';
+            } else centeredSettings.justifyContent = 'center';
+        }
+
+        if (centerHorizontal) {
+            if (!column) centeredSettings.justifyContent = 'center';
+            else {
+                if (flexWrap) centeredSettings.alignContent = 'center';
+                else centeredSettings.alignItems = 'center';
+            }
+        }
+    }
+
     return {
         display: 'flex',
+        flexWrap: wrap,
+        flexDirection,
         flex,
         height,
         width,
+        minWidth,
+        minHeight,
         alignItems,
         justifyContent,
+        ...centeredSettings,
         ...style,
     };
 };

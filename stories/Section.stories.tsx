@@ -10,8 +10,6 @@ const meta: Meta = {
         height: '100',
         width: '100',
         minWidth: '1',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 };
 
@@ -28,7 +26,7 @@ const Template: Story<ISection> = (args) => (
         <Section {...args} style={{ background: 'red' }}>
             1
         </Section>
-        <Section style={{ background: 'blue' }} alignItems="center" justifyContent="space-around">
+        <Section {...args} style={{ background: 'lightblue' }}>
             2
         </Section>
     </div>
