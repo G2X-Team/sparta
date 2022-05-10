@@ -20,11 +20,23 @@ export interface IView extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo
  *
  * @return View component
  */
-export const View: FC<IView> = ({ parentProps, children, display, position, style, ...props }) => {
+export const View: FC<IView> = ({
+    parentProps,
+    className = '',
+    children,
+    display,
+    position,
+    style,
+    ...props
+}) => {
     gaurdApolloName(props, 'View');
 
     return (
-        <div {...props} style={getViewStyle({ display, position, style })}>
+        <div
+            {...props}
+            className={`apollo ${className}`}
+            style={getViewStyle({ display, position, style })}
+        >
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
         </div>
     );

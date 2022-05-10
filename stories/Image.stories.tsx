@@ -23,6 +23,10 @@ export default meta;
  * @param args arguments for image
  * @return template
  */
-const Template: Story<IImage> = (args) => <Image {...args} />;
+const Template: Story<IImage> = (args) => (
+    <Image {...args}>
+        <div style={{ height: 300, width: 300, background: 'lightblue' }}></div>
+    </Image>
+);
 
 export const Default = Template.bind({});

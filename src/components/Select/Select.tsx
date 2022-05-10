@@ -142,7 +142,6 @@ export const Select: FC<ISelect> = ({
                         {...props}
                         value={value}
                         ref={inputRef}
-                        defaultValue={defaultValue}
                         type="text"
                         onClick={() => toggleOpen(true)}
                         onChange={handleChange}
