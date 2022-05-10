@@ -8,6 +8,8 @@ import { gaurdApolloName } from '../../util/ErrorHandling';
 import { ComponentSize } from '../../interfaces/Properties';
 import { useProgressiveImage } from '../../util/imageProcessing';
 
+import { View } from '../View/View';
+
 export interface IImage extends HTMLAttributes<HTMLDivElement>, Apollo<'Image'> {
     /** source of image */
     src: string;
@@ -42,6 +44,7 @@ export const Image: FC<IImage> = ({
     width,
     sizing,
     center,
+    children,
     ...props
 }) => {
     gaurdApolloName(props, 'Image');
@@ -68,15 +71,16 @@ export const Image: FC<IImage> = ({
                 borderRadius,
             }}
         >
-            <div
+            <View>{children}</View>
+            <View
                 aria-hidden={loaded === 'loading'}
                 aria-label={`loading ${alt} image`}
                 style={{ opacity: loaded === 'loading' ? 1 : 0 }}
             >
-                <div>
-                    <div />
-                </div>
-            </div>
+                <View>
+                    <View />
+                </View>
+            </View>
         </div>
     );
 };
