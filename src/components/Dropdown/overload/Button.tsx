@@ -45,6 +45,7 @@ const getIconStyle = ({
 }: Omit<Overload<CIButton>, 'children'>): CSSProperties => {
     return {
         transform: `translate(5px) ${open ? 'rotate(180deg)' : 'rotate(0deg)'}`,
+        color: 'inerit',
     };
 };
 

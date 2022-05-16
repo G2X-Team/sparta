@@ -1,4 +1,4 @@
-import type { HTMLAttributes, FC, ForwardedRef } from 'react';
+import type { HTMLAttributes, FC, ForwardedRef, CSSProperties } from 'react';
 import React, { forwardRef } from 'react';
 import './Icon.css';
 
@@ -37,7 +37,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
         clickable = onClick && true,
         children,
         variant = 'default',
-        color = 'black',
+        color,
         className = '',
         disabled,
         style,
@@ -78,8 +78,14 @@ Icon.defaultProps = { 'data-apollo': 'Icon' };
  */
 const getIconStyle = (
     disabled: boolean | undefined,
-    color: string,
-    style: React.CSSProperties | undefined
-): React.CSSProperties => {
-    return { color: disabled ? 'gray' : color, ...style };
+    color: string | undefined,
+    style: CSSProperties | undefined
+): CSSProperties => {
+    const newStyle: CSSProperties = style ?? {};
+    console.log(color);
+
+    if (disabled) newStyle.color = 'gray';
+    else if (color) newStyle.color = color;
+
+    return newStyle;
 };
