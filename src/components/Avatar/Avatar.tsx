@@ -9,6 +9,7 @@ import { determineForeground, generateRandomColor } from '../../util/colorTheory
 
 import { Text } from '../Text/Text';
 import { ComponentSize } from '../../interfaces/Properties';
+import { useProgressiveImage } from '../../util/imageProcessing';
 
 export interface IAvatar extends HTMLAttributes<HTMLDivElement>, Apollo<'Avatar'> {
     /** Used to create a string in case there is no image */
@@ -52,9 +53,9 @@ export const Avatar: FC<IAvatar> = forwardRef(function Icon(
     gaurdApolloName(props, 'Avatar');
 
     // state
-    const [loaded, setLoaded] = useState(false);
+    const loaded = useProgressiveImage(picture ?? '');
     const [avatarStyle, setAvatarStyle] = useState<CSSProperties>(
-        getAvatarStyle(loaded, style, color)
+        getAvatarStyle(Boolean(loaded), style, color)
     );
 
     // determines whether the avatar is clickable or not
@@ -62,7 +63,7 @@ export const Avatar: FC<IAvatar> = forwardRef(function Icon(
 
     // effect
     useEffect(() => {
-        setAvatarStyle(getAvatarStyle(loaded, style, color));
+        setAvatarStyle(getAvatarStyle(Boolean(loaded), style, color));
     }, [loaded]);
 
     return (
@@ -79,8 +80,8 @@ export const Avatar: FC<IAvatar> = forwardRef(function Icon(
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
         >
-            {picture ? <img src={picture} alt={fallback} onLoad={() => setLoaded(true)} /> : null}
-            {!loaded ? <Text upper>{getFallbackInitials(fallback)}</Text> : null}
+            {picture ? <img src={picture} alt={fallback} /> : null}
+            {loaded === 'loading' ? <Text upper>{getFallbackInitials(fallback)}</Text> : null}
         </div>
     );
 });

@@ -82,7 +82,6 @@ const getIconStyle = (
     style: CSSProperties | undefined
 ): CSSProperties => {
     const newStyle: CSSProperties = style ?? {};
-    console.log(color);
 
     if (disabled) newStyle.color = 'gray';
     else if (color) newStyle.color = color;
