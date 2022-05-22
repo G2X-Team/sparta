@@ -2,6 +2,7 @@ import { FC, HTMLAttributes, ChangeEventHandler, useRef, CSSProperties } from 'r
 import React, { useState, useEffect } from 'react';
 import './Select.css';
 
+import type * as CSS from 'csstype';
 import type { Apollo } from '../../interfaces/Apollo';
 import type { RenderAll } from '../../interfaces/Overload';
 import type { ComponentOrientation, ComponentAlignment } from '../../interfaces/Properties';
@@ -36,6 +37,10 @@ export interface ISelect
     placeholder?: string;
     /** Triggers when there is a value change */
     onChange?: (value: string) => void;
+    /** Determines max width of the menu */
+    maxWidth?: CSS.Property.MaxWidth;
+    /** Determines max height of the menu */
+    maxHeight?: CSS.Property.MaxHeight;
 }
 
 /**
@@ -52,6 +57,8 @@ export const Select: FC<ISelect> = ({
     label,
     valid,
     onChange,
+    maxHeight,
+    maxWidth,
     required,
     options,
     ...props
@@ -121,6 +128,8 @@ export const Select: FC<ISelect> = ({
                 effect={effect}
                 inputRef={inputRef}
                 label={`${label}${required ? ' *' : ''}`}
+                height={maxHeight}
+                width={maxWidth}
             >
                 {filtered.length ? (
                     filtered.map((option, index) => (
