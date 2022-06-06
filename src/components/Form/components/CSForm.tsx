@@ -82,13 +82,14 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, 
         event: FormEvent<HTMLFormElement>
     ): void => {
         // check if there is an onSubmit function
-        if (!actionData && onSubmit) {
+        if (!method?.length && onSubmit) {
             handleSubmit(onSubmit, onError)(event);
             return;
         }
 
         // don't submit form if there are errors
-        if (errors.length) {
+        if (Object.keys(errors).length) {
+            console.log('errors', errors);
             event.preventDefault();
             if (onError) onError(errors);
             return;
@@ -99,7 +100,7 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, 
     };
 
     return (
-        <form {...props} onSubmit={handleSubmission}>
+        <form {...props} method={method} onSubmit={handleSubmission}>
             {renderAll(children)}
         </form>
     );
