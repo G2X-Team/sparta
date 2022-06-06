@@ -121,7 +121,8 @@ const TextInput: FC<ITextInput> = ({
         }
 
         // check if we need to update errors
-        if (!errors[name]?.message?.length) setError(name, { type: 'text-input', message: error });
+        if (error !== null && !errors[name]?.message?.length)
+            setError(name, { type: 'text-input', message: error });
     };
 
     const error = getFormError(name, errors, actionData, ignoreFieldError);
