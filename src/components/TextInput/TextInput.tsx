@@ -36,6 +36,8 @@ export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'Te
     match?: string;
     /** Choose error message for when input doesn't match */
     matchMessage?: string;
+    /** Determine whether the input is readonly */
+    readonly?: boolean;
 }
 
 /**
