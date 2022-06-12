@@ -25,6 +25,8 @@ export interface IModal extends HTMLAttributes<HTMLDivElement>, Apollo<'Modal'> 
      * By adding this prop, the default behavior is nullified
      */
     manual?: boolean;
+    /** Determines whether the label is visible */
+    labelInvisible?: boolean;
 }
 
 /**
@@ -34,6 +36,7 @@ export interface IModal extends HTMLAttributes<HTMLDivElement>, Apollo<'Modal'> 
  */
 export const Modal: FC<IModal> = ({
     className = '',
+    labelInvisible = false,
     manual = false,
     open = false,
     style,
@@ -71,6 +74,7 @@ export const Modal: FC<IModal> = ({
                         {
                             <Dialog
                                 {...props}
+                                labelInvisible={labelInvisible}
                                 className={className}
                                 open={open}
                                 manual={manual}
