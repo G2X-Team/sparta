@@ -20,6 +20,7 @@ const Dialog: FC<IModal> = ({
     toggleModal,
     description,
     open,
+    labelInvisible,
     alert = false,
     label,
     id,
@@ -87,7 +88,7 @@ const Dialog: FC<IModal> = ({
             aria-describedby={description ? `${id}-desc` : undefined}
         >
             <Text header={2} bold id={`${id}-label`} style={labelStyle}>
-                {label}
+                {!labelInvisible ? label : null}
                 <Icon name="close" onClick={toggleModal} style={iconStyle} />
             </Text>
             {description ? <Text id={`${id}-desc`}>{description}</Text> : null}
