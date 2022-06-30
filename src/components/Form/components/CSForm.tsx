@@ -15,6 +15,8 @@ import Group from '../overload/CSGroup';
 import Radio from '../overload/CSRadio';
 import Switch from '../overload/CSSwitch';
 import Checkbox from '../overload/CSCheckbox';
+import { Grid } from '../../Grid/Grid';
+import { Section } from '../../Section/Section';
 
 export interface ICSForm extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
@@ -52,7 +54,7 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, 
      */
     const renderAll: RenderAll = (childrenProp, passthrough): JSX.Element[] => {
         // overloaded components
-        const overloaded = { TextInput, Group, Switch, Radio, Checkbox };
+        const overloaded = { TextInput, Group, Switch, Radio, Checkbox, Grid, Section };
 
         // parent props
         const parentProps = {
