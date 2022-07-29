@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-.apollo-component-library-icon-component {
+.apollo[data-apollo="Icon"] {
     user-select: none;
     margin: 0;
-    padding-top: 4px;
 }
 
-.apollo-component-library-icon-component:active {
+.apollo[data-apollo="Icon"]:active {
     filter: brightness(90%);
 }
 
-.apollo-component-library-icon-component.default {
+.apollo[data-apollo="Icon"].default {
     background: transparent;
-    transition: background 300ms, filter 300ms  ;
+    transition: background 300ms, filter 300ms, color 300ms;
     border-radius: 25px;
     padding: 5px;
 }
 
-.apollo-component-library-icon-component.default:hover {
+.apollo[data-apollo="Icon"].default:hover {
     cursor: pointer;
-    background: #A1EFC9;
+    background: #1b75bc;
+    color: white;
 }

@@ -72,7 +72,7 @@ export const TextInput: FC<ITextInput> = ({
     }, []);
 
     return (
-        <div className="apollo-component-library-text-input-label">
+        <div className="apollo" data-apollo-id="TextInput-Label">
             <label>
                 <Text style={labelTextStyle} color="#10333F">
                     {label}{' '}
@@ -89,7 +89,8 @@ export const TextInput: FC<ITextInput> = ({
                     aria-invalid={invalid}
                     aria-errormessage={name ? `${name}-error` : `${label}-error`}
                     type={password ? 'password' : 'text'}
-                    className={`apollo-component-library-text-input 
+                    className={`
+                        apollo
                         ${variant} 
                         ${!invalid ? 'valid' : 'invalid'}
                         ${className}

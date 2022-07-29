@@ -57,8 +57,8 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
             onKeyDown={(event) =>
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
-            className={`material-icons apollo-component-library-icon-component 
-                ${clickable && variant} ${className}`}
+            className={`material-icons apollo
+                ${clickable ? variant : ''} ${className}`}
             onClick={onClick}
         >
             {name}

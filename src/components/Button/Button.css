@@ -29,30 +29,27 @@
 
 /* Default variant */
 .apollo[data-apollo="Button"].default {
-    background: #25E685;
-}
-
-.apollo[data-apollo="Button"].default:hover {
-    background: #A1EFC9;
+    background: #1B75BC;
+    color: white;
 }
 
 .apollo[data-apollo="Button"].default:focus {
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #CAF2E1;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #a4c8e4;
 }
 
 .apollo[data-apollo="Button"].default:disabled {
-    background: #CAF2E1;
-    color: #98A7AD;
+    background: #edeff1;
+    color: #98a7ad;
 }
 
 /* Secondary Variant */
 .apollo[data-apollo="Button"].secondary {
     background: white;
-    border: 1.5px solid #10333F;
+    border: 1.5px solid #1B75BC;
 }
  
 .apollo[data-apollo="Button"].secondary:hover {
-    background: #10333F;
+    background: #1B75BC;
     color: white;
 }
 
@@ -88,25 +85,10 @@
     background: transparent;
 }
 
-.apollo-component-library-button:hover {
-    filter: brightness(90%);
+.apollo[data-apollo="Button"]:hover {
+    filter: brightness(120%);
 }
 
-.apollo-component-library-button:active {
-    filter: brightness(75%);
-}
-
-/* variants should be defined as followed */
-.apollo-component-library-button.default {
-    background: #ff5757;
-}
-
-.apollo-component-library-button.secondary {
-    background: #57aeff;
-}
-
-.apollo-component-library-button.area {
-    background: none;
-    border: none;
-    padding: 0px;
+.apollo[data-apollo="Button"]:active {
+    filter: brightness(100%);
 }
