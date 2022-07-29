@@ -19,13 +19,14 @@
     min-height: 200px;
     background: white;
     z-index: 1;
-    border-radius: 15px;
+    border-radius: 12px;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 24px;
     align-self: center;
     justify-self: center;
     display: flex;
     flex-direction: column;
+    
 }
 
 .apollo-component-library-modal-component-backdrop {
