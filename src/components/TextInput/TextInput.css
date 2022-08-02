@@ -1,4 +1,4 @@
-.apollo-component-library-text-input {
+.apollo[data-apollo="TextInput"] {
     font-size: 1rem;
     border: none;
     outline: none;
@@ -10,37 +10,37 @@
     transition: box-shadow 300ms, border 300ms;
 }
 
-.apollo-component-library-text-input-label {
+.apollo[data-apollo-id="TextInput-Label"] {
     padding-bottom: 15px;
 }
 
-.apollo-component-library-text-input.default {
+.apollo[data-apollo="TextInput"].default {
     box-shadow: 0px 0px 0px 0px #CAF2E1;
 }
 
-.apollo-component-library-text-input.default:focus {
-    border: 1.5px solid #25E685;
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #CAF2E1;
+.apollo[data-apollo="TextInput"].default:focus {
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #a4c8e4;
+    border: 1.5px solid #0e214b;
 }
 
-.apollo-component-library-text-input.secondary {
+.apollo[data-apollo="TextInput"].secondary {
     box-shadow: 0px 0px 0px 0px lightblue;
 }
 
-.apollo-component-library-text-input.secondary:focus {
+.apollo[data-apollo="TextInput"].secondary:focus {
     box-shadow: 0px 2px 0px 0px lightblue;
 }
 
-.apollo-component-library-text-input.invalid {
+.apollo[data-apollo="TextInput"].invalid {
     border: 1.5px solid #FDA29B;
 }
 
-.apollo-component-library-text-input.invalid:focus {
+.apollo[data-apollo="TextInput"].invalid:focus {
     border: 1.5px solid #FDA29B;
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #FEE4E2;
 }
 
-.apollo-component-library-text-input-label input[data-apollo="TextInput"] {
+.apollo[data-apollo-id="TextInput-Label"] .apollo[data-apollo="TextInput"] {
     width: 100%;
     box-sizing: border-box;
 }
