@@ -8,6 +8,8 @@ import type { StyleVariant } from '../../interfaces/Properties';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
+import { Spinner } from '../Spinner/Spinner';
+import { Section } from '../Section/Section';
 
 export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Button'> {
     /** Required ReactNode that needs to exist between component tags */
@@ -20,6 +22,10 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Butt
     disabled?: boolean;
     /** Allows use of references */
     ref?: ForwardedRef<HTMLButtonElement>;
+    /** Determines the type of button */
+    type?: 'button' | 'submit' | 'reset';
+    /** Determines whether the button is loading or not */
+    loading?: boolean;
 }
 
 /**
@@ -28,7 +34,7 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Butt
  * @return Button component
  */
 export const Button: FC<IButton> = forwardRef(function Button(
-    { children, className = '', disabled, variant = 'default', ...props }: IButton,
+    { children, className = '', loading, disabled, variant = 'default', ...props }: IButton,
     ref: ForwardedRef<HTMLButtonElement>
 ) {
     gaurdApolloName(props, 'Button');
@@ -36,11 +42,18 @@ export const Button: FC<IButton> = forwardRef(function Button(
     return (
         <button
             {...props}
-            disabled={disabled}
+            aria-busy={loading}
+            disabled={disabled || loading}
             className={`apollo ${variant} ${className}`}
             ref={ref}
         >
-            <Text>{children}</Text>
+            {!loading ? (
+                <Text>{children}</Text>
+            ) : (
+                <Section center>
+                    <Spinner size="1rem" loading innerColor="#edeff1" />
+                </Section>
+            )}
         </button>
     );
 });

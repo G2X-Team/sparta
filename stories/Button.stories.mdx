@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
 import { linkTo } from '@storybook/addon-links';
-import { Button } from '../src'; // components you used in the story
+import { Button } from '../src'
+import { StandardButton, ButtonVariants, ButtonRefs, LoadingButton } from './examples/Button'
 
 <Meta title="Layout/Button" component={Button} />
 
@@ -11,6 +12,14 @@ The Button component is probably one of the biggest forms of input that Apollo h
 Something as simple as the button can make or break the experience for the user, and our aim
 was to make it as familiar as possible.
 
+## Table of Contents
+
+- [Functionality](#functionality)
+    - [Variants](#variants)
+    - [References](#references)
+    - [Loading state](#loading-state)
+- [Other Props & Functionalities](#other-props--functionalities)
+
 ## Functionality
 
 Functionally these buttons would work as you would expect them to. You hover or tab over it and
@@ -19,11 +28,15 @@ added very few additional features to it so it isn't too much of a pain to learn
 
 <Canvas>
     <Story name="Standard Button" args={{ children: "Click Me" }}>
-        {(args) => <Button {...args} />}
+        {StandardButton.bind({})}
     </Story>
 </Canvas>
 
-### Variants
+### Customization
+
+The buttons can recieve customization both in aesthetics and functionality.
+
+#### Variants
 
 The Button component for the moment only has 2 visual states that can be switched using the
 `variant` prop. These are the `"default"` and `"secondary"` variants. These variants can just
@@ -48,21 +61,29 @@ difference.
     </Story>
 </Canvas>
 
-### References
+#### References
 
 Since you can put references in a regular `button` element, we wanted to retain that functionality
 in Apollo. So if you find the need, don't shy away from using references, we support them :)
 
 <Canvas>
     <Story name="Button Refs">
-        {(args) => {
-            const ref = useRef(null);
-            return (
-                <Button ref={ref} onClick={() => window.alert(`button ref: ${ref.current}`)}>
-                    Click me
-                </Button>
-            );
-        }}
+        {ButtonRefs.bind({})}
+    </Story>
+</Canvas>
+
+### Loading state
+
+The button actually comes with a built in loading state that when enabled, will disabled the button
+and render a spinner within it. This is useful for instances where you need to wait for a response in
+a given form. To activate it all you have to do is toggle its `loading` prop to `true` as seen below.
+
+> **Note:** This component will also have an `aria-busy` attribute set to `true` when loading so that
+> screen readers will know that the button is loading.
+
+<Canvas>
+    <Story name="Loading Button">
+        {LoadingButton.bind({})}
     </Story>
 </Canvas>
 

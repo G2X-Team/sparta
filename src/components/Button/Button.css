@@ -92,3 +92,7 @@
 .apollo[data-apollo="Button"]:active {
     filter: brightness(100%);
 }
+
+.apollo[data-apollo="Button"]:disabled:hover {
+    filter: none;
+}
