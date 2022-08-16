@@ -1,0 +1,78 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+
+import { Spinner } from '../src';
+
+import {
+    DefaultState,
+    DifferentColorSpinners,
+    DifferentSizeSpinners,
+    DifferentVariantSpinners,
+} from './examples/Spinner';
+
+<Meta title="Layout/Spinner" component={Spinner} />
+
+# Spinner
+
+The spinner is the busy loading state in Apollo. It's purpose is to let the user
+know that a process is currently running in the background.
+
+## Table of Contents
+
+-   [Functionality](#functionality)
+    -   [Customization](#default-state)
+        -   [Colors](#colors)
+        -   [Sizes](#sizes)
+        -   [Variants](#variants)
+-   [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+The functionality of the loading spinner is pretty simple. All you have to do is toggle
+the `loading` prop to true, and you will be able to see this spinner in action. You can
+play around with this feature below.
+
+<Canvas>
+    <Story name="Default State">{DefaultState.bind({})}</Story>
+</Canvas>
+
+### Customization
+
+The spinner is also highly customizable to fit the needs and wants of your application.
+
+#### Colors
+
+The spinner supports two types of color changes. The prop `color` refers to the color of the
+spinner itself, while the `innerColor` prop refers to the color of the spinner's inner circle
+(This is likely to change in the near future).
+
+<Canvas>
+    <Story name="Different Color Spinners">{DifferentColorSpinners.bind({})}</Story>
+</Canvas>
+
+#### Sizes
+
+The spinner can also have different sizes, meaning that it will always be able to fit the
+dimensions that you need it to, making it highly versatile for your usecase.
+
+<Canvas>
+    <Story name="Different Size Spinners">{DifferentSizeSpinners.bind({})}</Story>
+</Canvas>
+
+#### Variants
+
+You can also customize your spinner using the `variant` prop. These variants are theme based
+meaning that if you want quick access to designated colors to your theme, you can do so by
+using the variant props.
+
+<Canvas>
+    <Story name="Different Variant Spinners">{DifferentVariantSpinners.bind({})}</Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+For the full list of props that spinners have, please refer to the table below. Also keep
+in mind that this component extends the `div` element, so it can recieve any properties
+compatible with it.
+
+<ArgsTable of={Spinner} />
