@@ -1,4 +1,4 @@
-import type { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, forwardRef } from 'react';
 import React, { useEffect, useState } from 'react';
 import type { Overload } from '../../../interfaces/Overload';
 import { FormTextData } from '../../../interfaces/Properties';
@@ -16,27 +16,30 @@ interface ITextInput extends Overload<TextInputProps> {
  *
  * @return formatted text input
  */
-const TextInput: FC<ITextInput> = ({
-    parentProps: {
-        register,
-        setValue,
-        setError,
-        clearErrors,
-        errors,
-        actionData,
-        trigger,
-        getValues,
-    },
-    name,
-    required,
-    label,
-    validator,
-    defaultValue,
-    onChange,
-    match,
-    matchMessage = 'Text must match.',
-    ...props
-}) => {
+const TextInput: FC<ITextInput> = forwardRef(function TextInput(
+    {
+        parentProps: {
+            register,
+            setValue,
+            setError,
+            clearErrors,
+            errors,
+            actionData,
+            trigger,
+            getValues,
+        },
+        name,
+        required,
+        label,
+        validator,
+        defaultValue,
+        onChange,
+        match,
+        matchMessage = 'Text must match.',
+        ...props
+    }: ITextInput,
+    ref
+) {
     const [ignoreFieldError, setIgnoreFieldError] = useState(
         Boolean(!actionData?.fieldErrors?.[name])
     );
@@ -130,6 +133,7 @@ const TextInput: FC<ITextInput> = ({
     return (
         <CTextInput
             {...props}
+            ref={ref}
             required={required}
             name={name}
             label={label}
@@ -139,6 +143,6 @@ const TextInput: FC<ITextInput> = ({
             errorMessage={error}
         />
     );
-};
+});
 
 export default TextInput;

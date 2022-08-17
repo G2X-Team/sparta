@@ -4,7 +4,7 @@ import { ISelect } from '../src/components/Select/Select';
 import { Select, Option } from '../src';
 
 const meta: Meta = {
-    title: 'Select',
+    title: 'Form/Select',
     component: Select,
     args: {
         options: ['Option 1', 'Option 2', 'Option 3'],

@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 expect.extend(toHaveNoViolations);
 
-import { TextInput } from '../src';
+import { Form, TextInput } from '../src';
 
 describe('TextInput', () => {
     it('complies with WCAG 2.0', async () => {
@@ -17,11 +17,11 @@ describe('TextInput', () => {
         );
 
         // when
-        const results = [];
-        results[0] = await axe(validInput);
-        results[1] = await axe(validInputWithHint);
-        results[2] = await axe(invalidInput);
-        results[3] = await axe(invalidInputWithMessage);
+        const results: any[] = [];
+        results.push(await axe(validInput));
+        results.push(await axe(validInputWithHint));
+        results.push(await axe(invalidInput));
+        results.push(await axe(invalidInputWithMessage));
 
         // then
         results.forEach((result: any) => expect(result).toHaveNoViolations());
@@ -105,5 +105,34 @@ describe('TextInput', () => {
 
         // when then
         expect(screen.getByText(/failed/i)).toBeInTheDocument();
+    });
+
+    it('will accept a reference', () => {
+        // given
+        const inputRef = React.createRef<HTMLInputElement>();
+        render(<TextInput label="label" ref={inputRef} />);
+
+        // when then
+        expect(inputRef.current).not.toBeNull();
+    });
+
+    it('will accept a reference in both kinds of forms', () => {
+        // given
+        const csFormRef = React.createRef<HTMLInputElement>();
+        const ssFormRef = React.createRef<HTMLInputElement>();
+        render(
+            <>
+                <Form>
+                    <TextInput name="value" label="something" ref={csFormRef} />
+                </Form>
+                <Form type="remix">
+                    <TextInput name="value" label="something" ref={ssFormRef} />
+                </Form>
+            </>
+        );
+
+        // when then
+        expect(csFormRef.current).not.toBeNull();
+        expect(ssFormRef.current).not.toBeNull();
     });
 });

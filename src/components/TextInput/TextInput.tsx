@@ -1,4 +1,4 @@
-import type { HTMLAttributes, FC, CSSProperties } from 'react';
+import { HTMLAttributes, FC, CSSProperties, ForwardedRef, forwardRef } from 'react';
 import React, { useEffect } from 'react';
 import './TextInput.css';
 
@@ -37,7 +37,9 @@ export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'Te
     /** Choose error message for when input doesn't match */
     matchMessage?: string;
     /** Determine whether the input is readonly */
-    readonly?: boolean;
+    readOnly?: boolean;
+    /** Reference for component */
+    ref?: ForwardedRef<HTMLInputElement>;
 }
 
 /**
@@ -45,21 +47,24 @@ export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'Te
  *
  * @return TextInput component
  */
-export const TextInput: FC<ITextInput> = ({
-    variant = 'default',
-    className = '',
-    password = false,
-    invalid = false,
-    errorMessage,
-    matchMessage,
-    match,
-    required,
-    name,
-    id,
-    hint,
-    label,
-    ...props
-}) => {
+export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
+    {
+        variant = 'default',
+        className = '',
+        password = false,
+        invalid = false,
+        errorMessage,
+        matchMessage,
+        match,
+        required,
+        name,
+        id,
+        hint,
+        label,
+        ...props
+    }: ITextInput,
+    ref
+) {
     gaurdApolloName(props, 'TextInput');
 
     // will throw if you try to add an error message without a name
@@ -84,7 +89,9 @@ export const TextInput: FC<ITextInput> = ({
                 </Text>
                 <input
                     {...props}
+                    required={required}
                     name={name}
+                    ref={ref}
                     aria-required={required}
                     aria-invalid={invalid}
                     aria-errormessage={name ? `${name}-error` : `${label}-error`}
@@ -108,7 +115,7 @@ export const TextInput: FC<ITextInput> = ({
             </ErrorMessage>
         </div>
     );
-};
+});
 
 TextInput.defaultProps = { 'data-apollo': 'TextInput' };
 

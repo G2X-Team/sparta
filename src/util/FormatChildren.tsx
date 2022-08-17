@@ -52,8 +52,9 @@ class FormatChildren {
 
                 // get required props
                 const {
+                    ref,
                     props: { parentProps: childParentProps, key: childKey, ...childProps },
-                } = child;
+                } = child as any;
 
                 // assign props and finalize component format
                 /**
@@ -69,7 +70,9 @@ class FormatChildren {
                  * @return size of all children
                  */
                 const getChildrenSize = (): number => this.allChildren.length;
-                const formattedComponent: JSX.Element = <Component {...childProps} key={index} />;
+                const formattedComponent: JSX.Element = (
+                    <Component {...childProps} ref={ref} key={index} />
+                );
                 const cloned: JSX.Element = React.cloneElement(formattedComponent, {
                     parentProps: {
                         childIndex: index,

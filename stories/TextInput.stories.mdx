@@ -1,0 +1,231 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+
+import { TextInput } from '../src';
+
+import { StandardTextInput, InputWithRef } from './examples/TextInput';
+
+<Meta title="Form/Text Input" component={TextInput} />
+
+# Text Input
+
+The `TextInput` component is one of the most foundational components for recieving user input.
+Alone this component acts as you would expect, a regular `input` element with some requirements
+for accessibility. But it's power is really unleashed in the `Form` component. For more
+information, go to the [Form Documentation](/docs/form-form--basic-form).
+
+## Table of Contents
+
+-   [Functionality](#functionality)
+
+    -   [Input States](#input-states)
+        -   [Validation & other powerful feautures](#validation--other-powerful-features)
+        -   [Disabled](#disabled)
+        -   [Invalid](#invalid)
+        -   [Required](#required)
+        -   [Read Only](#read-only)
+    -   [Customization](#customization)
+        -   [Password Input](#password-input)
+        -   [Hints](#hints)
+        -   [Adding Refs](#adding-refs)
+
+-   [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+Like mentioned above, `TextInput` component is a simple `input` element with some requirements for
+accessibility. You now have the `label` as a required prop to describe the input. However, from
+that point on, it is your run of the mill text input with some flare.
+
+<Canvas>
+    <Story
+        name="Standard Text Input"
+        args={{ label: 'Standard Input', placeholder: 'Type something' }}
+    >
+        {StandardTextInput.bind({})}
+    </Story>
+</Canvas>
+
+### Validation & other powerful features
+
+You probably noticed that there is a lot going on in terms of props and functionality in the
+`TextInput` component. This is because the `TextInput` component alone is just an `input` element.
+Using a `Form`, you won't really worry about toggling the `invalid` and `errorMessage` props, and 
+you will have powerful functionalities built in to the `TextInput` component.
+
+For more information on these features, please visit the 
+[Form documentation](/docs/form-form--basic-form). There you can truly unleash the potentional of 
+our `TextInput` component.
+
+### Input States
+
+The `TextInput`, like any other input has different states of being, these states usually denote
+the usability of the input, whether it is valid or not, whether you can write in it or not, etc.
+
+#### Disabled
+
+For a disabled input you can use the `disabled` prop, and it will not allow the user to input
+anything.
+
+<Canvas>
+    <Story
+        name="Disabled Text Input"
+        args={{ label: 'Disabled Input', placeholder: 'Type something', disabled: true }}
+    >
+        {StandardTextInput.bind({})}
+    </Story>
+</Canvas>
+
+#### Invalid
+
+For an invalid input you can use the `invalid` prop, this will highlight the input with a red
+border to denote that the input is invalid.
+
+<Canvas>
+    <Story
+        name="Invalid Text Input"
+        args={{ label: 'Invalid Input', placeholder: 'Type something', invalid: true }}
+    >
+        {StandardTextInput.bind({})}
+    </Story>
+</Canvas>
+
+That isn't the only thing an invalid input can do, if you add an `errorMessage` prop, it will
+display the error message underneath the input, when `invalid` is set to `true`.
+
+> **Note:** Due to accessibility concerns, if you want to use the `errorMessage` prop, you must
+> also give the input a `name` prop.
+
+<Canvas>
+    <Story
+        name="Invalid Input With Message"
+        args={{
+            label: 'Invalid Input',
+            placeholder: 'Type something',
+            invalid: true,
+            errorMessage: 'This is an error message',
+            name: 'invalid-input',
+        }}
+    >
+        {StandardTextInput.bind({})}
+    </Story>
+</Canvas>
+
+#### Required
+
+For a required input you can use the `required` prop, this will add a red asterisk to the input's
+label. This will also make form submissions impossible when the input is empty and required.
+
+<Canvas>
+    <Story
+        name="Required Text Input"
+        args={{ label: 'Required Input', placeholder: 'Type something', required: true }}
+    >
+        {StandardTextInput.bind({})}
+    </Story>
+</Canvas>
+
+#### Read Only
+
+For a read only input you can use the `readonly` prop, this will make the input uneditable. This
+may be useful for displaying a value that cannot be changed strictly for the purpose of being
+copy and pasted.
+
+> **Note:** Adding the `readOnly` prop will remove any console errors that may occur if you
+> instantiate the `value` prop of the input. It will also make it known to users that they cannot
+> edit the input.
+
+<Canvas>
+    <Story
+        name="Read Only Text Input"
+        args={{
+            label: 'Read Only Input',
+            placeholder: 'Type something',
+            readOnly: true,
+            value: 'Copy me',
+        }}
+    >
+        {StandardTextInput.bind({})}
+    </Story>
+</Canvas>
+
+### Customization
+
+You can further customize your text input to look and act the way you want it to given distinct
+situations.
+
+#### Password Input
+
+If you want your `TextInput` to act like a password input, blocking all characters on type, all you
+have to do is toggle the `password` prop. This property will let the input behave like a password.
+That's all, nothing else to it.
+
+<Canvas>
+    <Story
+        name="Password Input"
+        args={{ label: 'Password Input', placeholder: 'Type something', password: true }}
+    >
+        {StandardTextInput.bind({})}
+    </Story>
+</Canvas>
+
+#### Hints
+
+If you want to give the user a hint about what they should type in, you can use the `hint` prop. This
+will display the inputted description underneath the input. To help users know what they should type.
+
+> **Note:** When the `hint` prop is used, but the input is invalid and has an `errorMessage`, the
+> `errorMessage` will be displayed, replacing the `hint`. This is to make directions more clear to
+> the user.
+
+<Canvas>
+    <Story
+        name="Hint Text Input"
+        args={{
+            label: 'Hint Input',
+            placeholder: 'Type something',
+            hint: 'You should type something :)',
+        }}
+    >
+        {StandardTextInput.bind({})}
+    </Story>
+</Canvas>
+
+#### Adding Refs
+
+The `TextInput` component has a `ref` prop, this is a reference to the input element. You can use
+this to access the input element via a variable. For example, if you want to focus the input, you
+can do something like this:
+
+```jsx
+const ComponentDef = (props) => {
+    const inputRef = useRef(null); // Create a ref to the input element
+
+    useEffect(() => {
+        inputRef.current.focus(); // Focus the input element on mount
+    }),
+        [inputRef];
+
+    return <TextInput label="Input" placeholder="Type something" ref={inputRef} />;
+};
+```
+
+Below we have an example of a `TextInput` with a `ref` prop. When you click the "Focus Input"
+button, the input will be focused, demonstrating the functionality we discussed above.
+
+<Canvas>
+    <Story name="Input With Ref" args={{ label: 'Input With Ref', placeholder: 'Type something' }}>
+        {InputWithRef.bind({})}
+    </Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+For a complete breakdown of the props and functionality of the `TextInput` component, please
+refer to the table below.
+
+> **Note:** The `TextInput` has some properties that are only available when in the context of a
+> `Form`, such as `match`, `matchMessage`, and `validator`. For more information on these props
+> please refer to the [Form documentation](/docs/form-form--basic-form).
+
+<ArgsTable of={TextInput} />
