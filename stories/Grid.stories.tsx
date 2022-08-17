@@ -6,7 +6,7 @@ import type { IGrid } from '../src/components/Grid/Grid';
 import { Grid } from '../src';
 
 const meta: Meta = {
-    title: 'Grid',
+    title: 'Layout/Grid',
     component: Grid,
 };
 

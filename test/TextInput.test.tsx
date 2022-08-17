@@ -106,4 +106,13 @@ describe('TextInput', () => {
         // when then
         expect(screen.getByText(/failed/i)).toBeInTheDocument();
     });
+
+    it('will accept a reference', () => {
+        // given
+        const inputRef = React.createRef<HTMLInputElement>();
+        render(<TextInput label="label" ref={inputRef} />);
+
+        // when then
+        expect(inputRef.current).not.toBeNull();
+    });
 });

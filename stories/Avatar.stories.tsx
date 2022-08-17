@@ -4,7 +4,7 @@ import type { IAvatar } from '../src/components/Avatar/Avatar';
 import { Avatar } from '../src';
 
 const meta: Meta = {
-    title: 'Avatar',
+    title: 'Layout/Avatar',
     component: Avatar,
     args: {
         onClick: () => console.log('hello'),

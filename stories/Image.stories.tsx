@@ -5,7 +5,7 @@ import type { IImage } from '../src/components/Image/Image';
 import { Image } from '../src';
 
 const meta: Meta = {
-    title: 'Image',
+    title: 'Layout/Image',
     component: Image,
     args: {
         height: 300,
