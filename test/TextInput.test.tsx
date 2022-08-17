@@ -17,11 +17,11 @@ describe('TextInput', () => {
         );
 
         // when
-        const results = [];
-        results[0] = await axe(validInput);
-        results[1] = await axe(validInputWithHint);
-        results[2] = await axe(invalidInput);
-        results[3] = await axe(invalidInputWithMessage);
+        const results: any[] = [];
+        results.push(await axe(validInput));
+        results.push(await axe(validInputWithHint));
+        results.push(await axe(invalidInput));
+        results.push(await axe(invalidInputWithMessage));
 
         // then
         results.forEach((result: any) => expect(result).toHaveNoViolations());
