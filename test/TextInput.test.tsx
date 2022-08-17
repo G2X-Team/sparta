@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 expect.extend(toHaveNoViolations);
 
-import { TextInput } from '../src';
+import { Form, TextInput } from '../src';
 
 describe('TextInput', () => {
     it('complies with WCAG 2.0', async () => {
@@ -114,5 +114,25 @@ describe('TextInput', () => {
 
         // when then
         expect(inputRef.current).not.toBeNull();
+    });
+
+    it('will accept a reference in both kinds of forms', () => {
+        // given
+        const csFormRef = React.createRef<HTMLInputElement>();
+        const ssFormRef = React.createRef<HTMLInputElement>();
+        render(
+            <>
+                <Form>
+                    <TextInput name="value" label="something" ref={csFormRef} />
+                </Form>
+                <Form type="remix">
+                    <TextInput name="value" label="something" ref={ssFormRef} />
+                </Form>
+            </>
+        );
+
+        // when then
+        expect(csFormRef.current).not.toBeNull();
+        expect(ssFormRef.current).not.toBeNull();
     });
 });

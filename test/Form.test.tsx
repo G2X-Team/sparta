@@ -101,9 +101,9 @@ describe('Client Side Form', () => {
         );
 
         // when
-        const results = [];
-        results[0] = await axe(validForm);
-        results[1] = await axe(invalidForm);
+        const results: any[] = [];
+        results.push(await axe(validForm));
+        results.push(await axe(invalidForm));
 
         // then
         results.forEach((result: any) => expect(result).toHaveNoViolations());
@@ -791,9 +791,9 @@ describe('Server Side Form', () => {
         );
 
         // when
-        const results = [];
-        results[0] = await axe(validForm);
-        results[1] = await axe(invalidForm);
+        const results: any[] = [];
+        results.push(await axe(validForm));
+        results.push(await axe(invalidForm));
 
         // then
         results.forEach((result: any) => expect(result).toHaveNoViolations());
