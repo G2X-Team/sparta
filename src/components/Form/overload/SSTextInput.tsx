@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import type { Overload } from '../../../interfaces/Overload';
 
@@ -15,7 +15,10 @@ interface ITextInput extends Overload<TextInputProps> {
  *
  * @return formatted text input for remix validation
  */
-const SSTextInput: FC<ITextInput> = ({ name, parentProps: { actionData }, ...props }) => {
+const SSTextInput: FC<ITextInput> = forwardRef(function TextInput(
+    { name, parentProps: { actionData }, ...props }: ITextInput,
+    ref
+) {
     const defaultValue = actionData?.fields ? actionData?.fields[name] : undefined;
 
     const errorMessage = actionData?.fieldErrors ? actionData?.fieldErrors[name] : undefined;
@@ -23,12 +26,13 @@ const SSTextInput: FC<ITextInput> = ({ name, parentProps: { actionData }, ...pro
     return (
         <CTextInput
             {...props}
+            ref={ref}
             name={name}
             defaultValue={defaultValue}
             invalid={Boolean(errorMessage?.length)}
             errorMessage={errorMessage}
         />
     );
-};
+});
 
 export default SSTextInput;
