@@ -11,6 +11,11 @@ export type ComponentAlignment = 'start' | 'center' | 'end';
 export type ComponentPosition = 'static' | 'absolute' | 'fixed';
 export type ComponentWrap = (component: ReactNode) => ReactNode;
 
+/** Table Data */
+export type TableData = ReactNode[][] | { [key: string]: ReactNode }[];
+export type DataRenderer<T = ReactNode> = (data: T) => ReactNode;
+export type RowHandler<T = any> = (data: T) => ReactNode;
+
 /* Form Types */
 
 // input data

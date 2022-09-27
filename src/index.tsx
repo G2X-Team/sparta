@@ -40,4 +40,7 @@ export type {
     FormTextData,
     FormToggleData,
     FormInputData,
+    RowHandler,
+    TableData,
+    DataRenderer,
 } from './interfaces/Properties';

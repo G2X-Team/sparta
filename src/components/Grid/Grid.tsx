@@ -18,6 +18,8 @@ export interface IGrid extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo
     height?: CSS.Property.Height;
     /** Width of grid */
     width?: CSS.Property.Width;
+    /** Alignment of cell within grid */
+    alignItems?: CSS.Property.AlignItems;
 }
 
 /**
@@ -33,13 +35,17 @@ export const Grid: FC<IGrid> = ({
     height,
     width,
     style,
+    alignItems,
     children,
     ...props
 }) => {
     gaurdApolloName(props, 'Grid');
 
     return (
-        <div {...props} style={getGridStyle({ rows, columns, gap, height, width, style })}>
+        <div
+            {...props}
+            style={getGridStyle({ rows, columns, gap, height, width, style, alignItems })}
+        >
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
         </div>
     );
@@ -50,7 +56,15 @@ export const Grid: FC<IGrid> = ({
  *
  * @return grid styling
  */
-const getGridStyle = ({ rows, columns, gap, height, width, style }: IGrid): CSSProperties => {
+const getGridStyle = ({
+    rows,
+    columns,
+    gap,
+    height,
+    width,
+    style,
+    alignItems,
+}: IGrid): CSSProperties => {
     return {
         ...style,
         gridTemplateRows: rows,
@@ -59,6 +73,7 @@ const getGridStyle = ({ rows, columns, gap, height, width, style }: IGrid): CSSP
         height: height,
         width: width,
         display: 'grid',
+        alignItems,
     };
 };
 
