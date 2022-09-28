@@ -1,0 +1,211 @@
+import { Meta, Canvas, Story, ArgsTable, Source } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+
+import { Table } from '../src';
+
+import {
+    ElaborateExample,
+    RenderingDataWithColumns,
+    CustomHeaders,
+    CustomCells,
+    SortColumn,
+    ControllingRows,
+    ControllingAlignment,
+    ControllingColumnSpacing,
+} from './examples/Table';
+
+<Meta title="Layout/Table" component={Table} />
+
+# Table
+
+If you hate making tables from scratch, this component is for you. The Apollo table
+component is the answer for any basic table, complete with built in sorting,
+customization, easy composition, and more.
+
+## Table of Contents
+
+-   [Functionality](#functionality)
+	- [Creating a table](#creating-a-table)
+		- [What kind of data does the table accept?](#what-kind-of-data-does-the-table-accept)
+		- [How do we determine what data to render?](#how-do-we-determine-what-data-to-render)
+	- [Doing more](#doing-more)
+		- [Customizing Header](#customizing-header)
+		- [Customizing Contents](#customizing-contents)
+		- [Sorting data](#sorting-data)
+		- [Controlling rows](#controlling-rows)
+		- [Pagination](#pagination)
+		- [Alignment](#alignment)
+		- [Formatting with Grid](#formatting-with-grid)
+-   [Other Props & Functionalities](#other-props--functionalities)
+	- [Table Props](#table-props)
+	- [Table.Column Props](#tablecolumn-props)
+
+## Functionality
+
+The table component is a component that supports a suite of features geared towards
+making tables the quickest possible, with everything you could possibly want.
+
+### Creating a table
+
+To create a table, it's quite simple as long as you understand two concepts:
+
+1. What kind of data we accept
+2. How we determine what columns you want rendered.
+
+#### What kind of data does the table accept?
+
+When creating the table, we wanted to keep in mind that different people, manage their
+data differently. In the search for flexibile and low-code solutions, we opted to support
+2 data types:
+
+-   A 2-D Array of data: `ReactNode[][]` (Each nested array must have the same length)
+-   An array of objects: `{ [key: string]: ReactNode }[]`
+
+> `ReactNode` is any renderable data in React, think of it like the React-friendly `any` type.
+
+Meaning, if you're data looks like either of the exapmles below, you should be fine.
+
+```typescript
+// exapmle of 2D array
+const twoD = [
+    ['hello there', 2, 4, 3],
+    ["what's up", 5, 1, 3],
+    /* ... */
+];
+
+// example of an array of objects
+const objArr = [
+    { message: 'hello there', code: 2, friends: 4, family: 3 },
+    { message: "what's up", code: 5, friends: 1, family: 3 },
+    /* ... */
+];
+```
+
+#### How do we determine what data to render?
+
+For the table, we wanted it to be super easy to manipulate the content, to
+be able to accomplish this task. Furthermore, we needed the data to be structured the way
+we mentioned above so we could create the `Table.Column`.
+
+To simplify the concept, if you think about your data as a table, the enclosing
+array are the rows, and the object inside is responsible for keeping track of the columns.
+Likewise, the `Table.Column` will attempt to relate to the content within the enclosing
+array using whatever indexing the inner object uses. To visualize this look at the example
+below:
+
+<Canvas>
+    <Story name="Rendering Data with Columns">{RenderingDataWithColumns.bind({})}</Story>
+</Canvas>
+
+### Doing more
+
+While having a component that renders tables nicely is cool and all that, we also need
+to consider functionality, customization, etc.
+
+#### Customizing Header
+
+While in the previous example we should the column header to be a string, this property
+can contain any data type. Including custom elements. You don't have to worry about
+compatibility either. If it can be contained in one element, it should be compatible to
+all the functionalities we have for it. Just add your custom column header in the
+`header` prop, and call it a day.
+
+<Canvas>
+    <Story name="Custom Column Header">{CustomHeaders.bind({})}</Story>
+</Canvas>
+
+#### Customizing Contents
+
+Sometimes there is data that we would like to format further, like a date. Or maybe
+other times you just want full control of what goes on in a specific column of data.
+For those times, we have a `dataRenderer` property, which has the type of `DataRenderer`.
+This function works as follows:
+
+> Below are just some examples of use, but you could return any return type that is
+> react renderable.
+
+```typescript
+// if you just want the default behavior
+const renderDate: DataRenderer = (date) => {
+    const newDate = new Date(date as string).getTime();
+    return newDate;
+};
+```
+
+<Canvas>
+    <Story name="Customizing Contents">{CustomCells.bind({})}</Story>
+</Canvas>
+
+#### Sorting data
+
+Another neat thing you can do with the `Table.Column` is specify whether you want to
+be able to sort by the content of a given column. Currently we support 3 different
+types of content sort:
+
+-   `string`
+-   `date`
+-   `number`
+
+By inputting your desired sorting type in the `sort` prop, you can sort the entire
+visible dataset by that column.
+
+<Canvas>
+    <Story name="Sort Column">{SortColumn.bind({})}</Story>
+</Canvas>
+
+#### Controlling rows
+
+Sometimes there comes a time where a column might want to use the data of the entire
+row, or you want some functionality the depends on the row rather than a single data
+point. For that, you can use the `rowHandler` function which is of `RowHandler` type.
+
+Similar to controlling the cell content, you can pass a method that takes in the data
+(which now will be row data instead of cell data), and return a component to render.
+
+<Canvas>
+    <Story name="Control Row">{ControllingRows.bind({})}</Story>
+</Canvas>
+
+#### Pagination
+
+Another great feature we have is pagination. Don't worry about implementing it yourself,
+because we have it! All you have to do is add the max amount of content you want on the
+page in the `pagination` prop, and we handle the rest!
+
+<Canvas>
+    <Story name="Pagination Example">{ElaborateExample.bind({})}</Story>
+</Canvas>
+
+#### Alignment
+
+What table is complete without alignment? That is why we added it too. Currently, you
+can align the content of both header and data cells by just passing the type of alignment
+between `"center"`, `"left"`, and `"right"`.
+
+<Canvas>
+    <Story name="Alignment Sample">{ControllingAlignment.bind({})}</Story>
+</Canvas>
+
+#### Formatting with Grid
+
+We understand that another annoying part of creating tables is ensuring the optimal spacing,
+that's why we decided that if you wanted to, you can do it easily with the `columns` prop.
+Much like the [Grid](/docs/layout-grid--default), by adding the appropriate `grid-template-column`
+formatting, you can determine how the column spacing behaves!
+
+<Canvas>
+    <Story name="Column Spacing with Grid" args={{ columns: 'auto 1fr' }}>
+        {ControllingColumnSpacing.bind({})}
+    </Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+For a quick reference of properties, you can also refer to the prop tables below:
+
+### `Table` Props
+
+<ArgsTable of={Table} />
+
+### `Table.Column` Props
+<ArgsTable of={Table.Column} />

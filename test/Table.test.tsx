@@ -1,321 +1,187 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Table } from '../src';
 
 describe('Table', () => {
     it('renders correctly', () => {
+        const data1 = [['1', 'name']];
+
         // given
         render(
-            <Table
-                colNames={['id', 'name', 'Age'] as any}
-                data={
-                    [
-                        {
-                            id: 12,
-                            name: 'Name12',
-                            Age: 30,
-                        },
-                        {
-                            id: 2,
-                            name: 'Name2',
-                            Age: 30,
-                        },
-                    ] as any
-                }
-            />
+            <Table label="Table" data={data1}>
+                <Table.Column datakey="guid" header="header" />
+            </Table>
         );
 
         // when then
-        expect(screen.getByText('NAME')).toBeInTheDocument();
+        expect(screen.queryAllByRole('table')).toHaveLength(1);
     });
 
-    it('does not loads data from outside the page size', () => {
+    it('accepts two types of data correctly', () => {
         // given
-        render(
-            <Table
-                colNames={['id', 'name', 'Age'] as any}
-                data={
-                    [
-                        {
-                            Age: 30,
-                            id: 12,
-                            name: 'Name12',
-                        },
-                        {
-                            Age: 30,
-                            id: 2,
-                            name: 'Name2',
-                        },
-                        {
-                            Age: 30,
-                            id: 3,
-                            name: 'Name3',
-                        },
-                        {
-                            Age: 30,
-                            id: 4,
-                            name: 'Name4',
-                        },
-                        {
-                            Age: 30,
-                            id: 5,
-                            name: 'Name5',
-                        },
-                        {
-                            Age: 30,
-                            id: 6,
-                            name: 'Name6',
-                        },
-                        {
-                            Age: 30,
-                            id: 7,
-                            name: 'Name7',
-                        },
-                        {
-                            Age: 30,
-                            id: 8,
-                            name: 'Name8',
-                        },
-                        {
-                            Age: 30,
-                            id: 9,
-                            name: 'Name9',
-                        },
-                        {
-                            Age: 30,
-                            id: 10,
-                            name: 'Name10',
-                        },
-                        {
-                            Age: 30,
-                            id: 11,
-                            name: 'Name11',
-                        },
-                        {
-                            Age: 30,
-                            id: 1,
-                            name: 'Adam',
-                        },
-                        {
-                            Age: 30,
-                            id: 13,
-                            name: 'Name13',
-                        },
-                        {
-                            Age: 30,
-                            id: 14,
-                            name: 'Name14',
-                        },
-                        {
-                            Age: 30,
-                            id: 15,
-                            name: 'Name15',
-                        },
-                        {
-                            Age: 30,
-                            id: 16,
-                            name: 'Name16',
-                        },
-                        {
-                            Age: 30,
-                            id: 17,
-                            name: 'Name17',
-                        },
-                        {
-                            Age: 30,
-                            id: 18,
-                            name: 'Name18',
-                        },
-                    ] as any
-                }
-                pageSize={15}
-            />
-        );
-
-        // when then
-        expect(screen.queryByText('16')).not.toBeInTheDocument();
-    });
-
-    it('loads data only mentioned in the pagesize', () => {
-        // given
-        render(
-            <Table
-                colNames={['id', 'name', 'Age'] as any}
-                data={
-                    [
-                        {
-                            Age: 30,
-                            id: 12,
-                            name: 'Name12',
-                        },
-                        {
-                            Age: 30,
-                            id: 2,
-                            name: 'Name2',
-                        },
-                        {
-                            Age: 30,
-                            id: 3,
-                            name: 'Name3',
-                        },
-                        {
-                            Age: 30,
-                            id: 4,
-                            name: 'Name4',
-                        },
-                        {
-                            Age: 30,
-                            id: 5,
-                            name: 'Name5',
-                        },
-                        {
-                            Age: 30,
-                            id: 6,
-                            name: 'Name6',
-                        },
-                        {
-                            Age: 30,
-                            id: 7,
-                            name: 'Name7',
-                        },
-                        {
-                            Age: 30,
-                            id: 8,
-                            name: 'Name8',
-                        },
-                        {
-                            Age: 30,
-                            id: 9,
-                            name: 'Name9',
-                        },
-                        {
-                            Age: 30,
-                            id: 10,
-                            name: 'Name10',
-                        },
-                        {
-                            Age: 30,
-                            id: 11,
-                            name: 'Name11',
-                        },
-                        {
-                            Age: 30,
-                            id: 1,
-                            name: 'Adam',
-                        },
-                        {
-                            Age: 30,
-                            id: 13,
-                            name: 'Name13',
-                        },
-                        {
-                            Age: 30,
-                            id: 14,
-                            name: 'Name14',
-                        },
-                        {
-                            Age: 30,
-                            id: 15,
-                            name: 'Name15',
-                        },
-                        {
-                            Age: 30,
-                            id: 16,
-                            name: 'Name16',
-                        },
-                        {
-                            Age: 30,
-                            id: 17,
-                            name: 'Name17',
-                        },
-                        {
-                            Age: 30,
-                            id: 18,
-                            name: 'Name18',
-                        },
-                    ] as any
-                }
-                pageSize={15}
-            />
-        );
-
-        // when then
-        expect(screen.getByText('14')).toBeInTheDocument();
-    });
-
-    it('triggers sorting on click callback', () => {
-        // given
-        render(
-            <Table
-                colNames={['id', 'name', 'Age'] as any}
-                data={
-                    [
-                        {
-                            id: 12,
-                            name: 'Name12',
-                            Age: 30,
-                        },
-                        {
-                            id: 2,
-                            name: 'Adam',
-                            Age: 30,
-                        },
-                        {
-                            id: 1,
-                            name: 'broda',
-                            Age: 30,
-                        },
-                    ] as any
-                }
-                pageSize={10}
-            />
-        );
-        const sortbutton: HTMLElement = screen.getByTitle('idASC');
+        const data1 = [['1', 'name']];
+        const data2 = [
+            {
+                guid: '1',
+                name: 'name',
+            },
+        ];
 
         // when
-        userEvent.click(sortbutton);
-        const rows = screen.getByRole('rows0');
+        render(
+            <Table label="Table" data={data1}>
+                <Table.Column datakey="guid" header="header" />
+            </Table>
+        );
+        render(
+            <Table label="Table" data={data2}>
+                <Table.Column datakey="guid" header="header" />
+            </Table>
+        );
 
         // then
-        expect(within(rows).queryByText('1')).toBeInTheDocument();
+        expect(screen.queryAllByRole('table')).toHaveLength(2);
     });
 
-    it('triggers sorting on click callback for string', () => {
+    it('will only show columns displayed', () => {
         // given
-        render(
-            <Table
-                colNames={['id', 'name', 'Age'] as any}
-                data={
-                    [
-                        {
-                            id: 12,
-                            name: 'Name12',
-                            Age: 30,
-                        },
-                        {
-                            id: 2,
-                            name: 'Adam',
-                            Age: 30,
-                        },
-                        {
-                            id: 1,
-                            name: 'broda',
-                            Age: 30,
-                        },
-                    ] as any
-                }
-                pageSize={10}
-            />
-        );
-        const sortbutton: HTMLElement = screen.getByTitle('nameASC');
+        const data = [
+            {
+                guid: '1',
+                name: 'name',
+            },
+        ];
 
         // when
-        userEvent.click(sortbutton);
-        const rows = screen.getByRole('rows0');
+        render(
+            <Table label="Table" data={data}>
+                <Table.Column datakey="guid" header="header" />
+            </Table>
+        );
 
         // then
-        expect(within(rows).queryByText('Adam')).toBeInTheDocument();
+        expect(screen.queryAllByRole('columnheader')).toHaveLength(1);
+    });
+
+    it('will maintain the order of columns', () => {
+        // given
+        const data = [
+            {
+                guid: '1',
+                name: 'name',
+            },
+        ];
+
+        // when
+        render(
+            <Table label="Table" data={data}>
+                <Table.Column datakey="name" header="header 1" />
+                <Table.Column datakey="guid" header="header 2" />
+            </Table>
+        );
+
+        // then
+        const cells = screen.getAllByRole('columnheader');
+        expect(cells[0]).toHaveTextContent('header 1');
+        expect(cells[1]).toHaveTextContent('header 2');
+    });
+
+    it('will sort data correctly', () => {
+        // given
+        const data = [
+            {
+                guid: 2,
+                name: 'name',
+            },
+            {
+                guid: 1,
+                name: 'name 2',
+            },
+        ];
+
+        render(
+            <Table label="Table" data={data}>
+                <Table.Column datakey="name" header="header 1" />
+                <Table.Column datakey="guid" header="header 2" sort="number" />
+            </Table>
+        );
+
+        // when
+        userEvent.click(screen.getByRole('button'));
+
+        // then
+        let cells = screen.getAllByRole('cell');
+        expect(cells[1]).toHaveTextContent('2');
+        expect(cells[3]).toHaveTextContent('1');
+
+        // when
+        userEvent.click(screen.getByRole('button'));
+
+        // then
+        cells = screen.getAllByRole('cell');
+        expect(cells[1]).toHaveTextContent('1');
+        expect(cells[3]).toHaveTextContent('2');
+    });
+
+    it('will effectively paginate', () => {
+        // given
+        const data = [
+            {
+                guid: 1,
+                name: 'name',
+            },
+            {
+                guid: 2,
+                name: 'name 2',
+            },
+            {
+                guid: 3,
+                name: 'name 3',
+            },
+            {
+                guid: 4,
+                name: 'name 4',
+            },
+        ];
+
+        // when
+        render(
+            <Table label="Table" data={data} paginate={2}>
+                <Table.Column datakey="name" header="header 1" />
+                <Table.Column datakey="guid" header="header 2" sort="number" />
+            </Table>
+        );
+
+        // then
+        let cells = screen.getAllByRole('cell');
+        expect(cells).toHaveLength(4);
+        expect(cells[0]).toHaveTextContent('name');
+        expect(cells[1]).toHaveTextContent('1');
+        expect(cells[2]).toHaveTextContent('name 2');
+        expect(cells[3]).toHaveTextContent('2');
+
+        // when
+        userEvent.click(screen.getByRole('button', { name: 'Next' }));
+
+        // then
+        cells = screen.getAllByRole('cell');
+        expect(cells).toHaveLength(4);
+        expect(cells[0]).toHaveTextContent('name 3');
+        expect(cells[1]).toHaveTextContent('3');
+        expect(cells[2]).toHaveTextContent('name 4');
+        expect(cells[3]).toHaveTextContent('4');
+
+        // when
+        userEvent.click(screen.getByRole('button', { name: 'Previous' }));
+
+        // then
+        cells = screen.getAllByRole('cell');
+        expect(cells).toHaveLength(4);
+        expect(cells[0]).toHaveTextContent('name');
+        expect(cells[1]).toHaveTextContent('1');
+        expect(cells[2]).toHaveTextContent('name 2');
+        expect(cells[3]).toHaveTextContent('2');
     });
 });

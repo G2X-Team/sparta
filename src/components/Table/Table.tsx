@@ -1,188 +1,177 @@
-/* eslint-disable camelcase */
-import type { FC } from 'react';
-import React, { useState } from 'react';
-import './Table.css';
-
+import { HTMLAttributes, FC, ReactNode, CSSProperties } from 'react';
 import type { Apollo } from '../../interfaces/Apollo';
 import type * as CSS from 'csstype';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import type { TableData } from '../../interfaces/Properties';
 
-export interface ITable extends Apollo<'Table'> {
-    /** width of desired table */
+import React, { useState } from 'react';
+import { gaurdApolloName } from '../../util/ErrorHandling';
+import { Column, IColumn } from './overload/Column';
+
+import ChildrenMeta from '../../util/ChildrenMeta';
+import TableHead from './components/TableHead';
+import TableBody from './components/TableBody';
+import './Table.css';
+import { Grid } from '../Grid/Grid';
+import { TableNav } from './components/TableNav';
+
+export interface ITable
+    extends Omit<HTMLAttributes<HTMLTableElement>, 'onSelect'>,
+        Apollo<'Table'> {
+    /** Data to be displayed in table */
+    data: TableData;
+    /** Label describing the table (required for ID purposes) */
+    label: string;
+    /** Paginate is the number that will determine how many rows are displayed per page in table */
+    paginate?: number;
+    /** Impacts the  */
     width?: CSS.Property.Width;
-    /** height of table in pixels */
     height?: CSS.Property.Height;
-    /** Defines how many rows to show per page */
-    pageSize?: number;
-    /** Defines number of page to start from */
-    pageNum?: number;
-    /** Defines the name of colloumns in the header */
-    colNames?: string;
-    /** Data in JSON to feed the table */
-    data?: Array<object>;
-    // Header Style Props//
-    /** Defines the color of the cell text */
-    cellTextColor?: CSS.Property.Color;
-    /** Defines the case of the cell text */
-    cellTextTransform?: CSS.Property.TextTransform;
-    /** Defines the weight of the cell text */
-    cellTextFontWeight?: CSS.Property.FontWeight;
-    // Header Style Props//
-    /** Defines the color of the header text */
-    headerTextColor?: CSS.Property.Color;
-    /** Defines the case of the header text */
-    headerTextTransform?: CSS.Property.TextTransform;
-    /** Defines the weight of the header text */
-    headerTextFontWeight?: CSS.Property.FontWeight;
+    /**
+     * For more control over formatting, you can use template grid columns to space your table
+     * effectively
+     */
+    columns?: CSS.Property.GridTemplateColumns;
+    /** Determines the outline between cells */
+    grid?: 'horizontal' | 'vertical' | 'both' | 'none';
 }
 
+export interface TableMeta {
+    /** Is an array with the keys sorted in the desired column orientation */
+    columnOrder: Array<string | number>;
+    /** Map that stores all render methods by key */
+    dataRenderMap: { [key: string]: ((data: ReactNode) => ReactNode) | undefined };
+    /** Map that stores all row handling methods by key */
+    rowHandlerMap: { [key: string]: IColumn['rowHandler'] };
+    /** Map that stores desired render format */
+    headerRenderMap: { [key: string]: ReactNode };
+    /** Map that stores all storable keys */
+    canSort: { [key: string]: 'string' | 'number' | 'date' | undefined };
+    /** Map that stores all alignment preferences by key */
+    alignmentMap: { [key: string]: 'center' | 'left' | 'right' | undefined };
+}
+
+/** Object that keeps track of last sort */
+export type LastSort = {
+    [key: string]: 'up' | 'down';
+} | null;
+
 /**
- * Component that serves as an table for ease of templating
+ * Apollo table component
  *
- * @return Table component
+ * @return Table Component
  */
-export const Table: FC<ITable> = ({
-    data = [],
-    colNames = Object.keys(data[0]),
-    pageNum = 0,
-    pageSize = 15,
-    width = '100%',
-    height = '100%',
-    cellTextColor = 'black',
-    cellTextTransform = 'capitalize',
-    cellTextFontWeight = 'normal',
-    headerTextColor = 'white',
-    headerTextTransform = 'uppercase',
-    headerTextFontWeight = 'bolder',
+export const Table: FC<ITable> & { Column: FC<IColumn> } = ({
+    data: d,
+    className = '',
+    grid = 'horizontal',
+    children,
+    paginate,
+    label,
+    width,
+    height,
+    style,
+    columns,
     ...props
-}) => {
+}: ITable) => {
     gaurdApolloName(props, 'Table');
 
-    // state
-    const [page, setPage] = useState(pageNum);
-    const [sorteddata, setsorted] = useState(data);
+    const [data, setData] = useState(d);
+    const [lastSort, setLastSort] = useState<LastSort>(null);
+    const [start, setStart] = useState(0);
 
-    /** Function to sort ascending order */
-    const [order, setOrder] = useState('asc');
+    /**
+     * Will render all table components based on given meta
+     *
+     * @return Table rows
+     */
+    const renderTable = (): JSX.Element => {
+        // define desired table meta object
+        const tableMeta: TableMeta = {
+            columnOrder: [],
+            dataRenderMap: {},
+            headerRenderMap: {},
+            rowHandlerMap: {},
+            alignmentMap: {},
+            canSort: {},
+        };
 
-    // eslint-disable-next-line valid-jsdoc
-    /** Function to sort table data based on col */
-    const sorting = (col: any): void => {
-        if (order === 'asc') {
-            const sorted = [...(data as any)].sort((a, b) => {
-                if (typeof a[col] === 'string') {
-                    return a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1;
-                } else {
-                    return a[col] > b[col] ? 1 : -1;
-                }
-            });
-            setsorted(sorted);
-            setOrder('desc');
-        }
-        if (order === 'desc') {
-            const sorted = [...(data as any)].sort((a, b) => {
-                if (typeof a[col] === 'string') {
-                    return a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1;
-                } else {
-                    return a[col] < b[col] ? 1 : -1;
-                }
-            });
-            setsorted(sorted);
-            setOrder('asc');
-        }
-    };
-    /** Function to navigate back to the last page */
-    const onBack = (): void => {
-        setPage(page - 1 > -1 ? page - 1 : page);
+        // extract meta from children
+        const meta = new ChildrenMeta(children, { ['Table.Column']: Column });
+
+        // determine other components
+        if (meta.hasOther()) throw new Error('Only table columns allowed as children');
+
+        // extract data from columns
+        const columns = meta.get<IColumn>('Table.Column');
+        columns?.forEach((column, index) => {
+            // get all relevant props
+            const { datakey, dataRenderer } = column.props;
+
+            // start assigning values
+            tableMeta.columnOrder[index] = datakey;
+            tableMeta.dataRenderMap[datakey] = dataRenderer;
+            tableMeta.rowHandlerMap[datakey] = column.props?.rowHandler;
+            tableMeta.headerRenderMap[datakey] = column.props?.header;
+            tableMeta.canSort[datakey] = column.props?.sort;
+            tableMeta.alignmentMap[datakey] = column.props?.align;
+        });
+
+        return (
+            <>
+                <TableHead
+                    data={data}
+                    setData={setData}
+                    lastSort={lastSort}
+                    setLastSort={setLastSort}
+                    tableMeta={tableMeta}
+                    label={label}
+                />
+                <TableBody
+                    tableMeta={tableMeta}
+                    label={label}
+                    data={data}
+                    start={start}
+                    paginate={paginate}
+                />
+            </>
+        );
     };
 
-    /** Function to navigate back to the next page */
-    const onNext = (): void => {
-        setPage(page + 1 < data.length / pageSize ? page + 1 : page);
-    };
+    // class name after all modifications
+    const moddedClassName = `apollo ${className} ${columns ? 'has-columns' : ''} grid-${grid}`;
+
     return (
-        <div className="apollo-component-library-table-component-container">
-            {sorteddata.length > 0 && (
-                <table
-                    className="apollo-component-library-table-component"
-                    cellSpacing="0"
-                    style={{ width: width, height: height }}
-                >
-                    <thead className="header">
-                        <tr>
-                            {(colNames as any[]).map((headerItem, index) => (
-                                <th key={index}>
-                                    <span
-                                        style={{
-                                            color: headerTextColor,
-                                            textTransform: headerTextTransform,
-                                            fontWeight: headerTextFontWeight,
-                                        }}
-                                    >
-                                        {headerItem.toUpperCase()}
-                                        <button
-                                            title={headerItem + 'ASC'}
-                                            onClick={() => sorting(headerItem)}
-                                        >
-                                            ▲
-                                        </button>
-                                        <button
-                                            title={headerItem + 'DESC'}
-                                            onClick={() => sorting(headerItem)}
-                                        >
-                                            ▼
-                                        </button>
-                                    </span>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Object.values(sorteddata)
-                            .slice(pageSize * page, pageSize * page + pageSize)
-                            .map((obj, index) => (
-                                <tr role={'rows' + index} key={index}>
-                                    {Object.values(obj).map((value, index2) => (
-                                        <td
-                                            style={{
-                                                color: cellTextColor,
-                                                textTransform: cellTextTransform,
-                                                fontWeight: cellTextFontWeight,
-                                            }}
-                                            key={index2}
-                                        >
-                                            {' '}
-                                            {value}{' '}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                    </tbody>
-                    {pageSize < data.length ? (
-                        <tfoot className="apollo-component-library-table-component-footer">
-                            <div>
-                                <button style={buttonStyle} onClick={onBack}>
-                                    Back
-                                </button>
-                                <label style={{ padding: '0 1em' }}>{page + 1}</label>
-                                <button style={buttonStyle} onClick={onNext}>
-                                    Next
-                                </button>
-                            </div>
-                        </tfoot>
-                    ) : null}
-                </table>
-            )}
-        </div>
+        <Grid
+            style={{ maxWidth: width, minHeight: height }}
+            data-apollo-id="TableWrapper"
+            className={moddedClassName}
+            rows={paginate ? 'auto auto' : undefined}
+        >
+            <table {...props} style={getStyle({ style, columns, data, width, height })}>
+                {renderTable()}
+            </table>
+            <TableNav
+                paginate={paginate}
+                dataLength={data.length}
+                start={start}
+                setStart={setStart}
+            />
+        </Grid>
     );
 };
 
-Table.defaultProps = { 'data-apollo': 'Table' };
+Table.defaultProps = {
+    'data-apollo': 'Table',
+};
+Table.Column = Column;
 
-// style for button component
-const buttonStyle = {
-    backgroundColor: 'black',
-    color: 'white',
-    border: 'none',
-    padding: '5px 10px',
+/**
+ * Gets table style
+ * @return table style
+ */
+const getStyle = ({ columns, style }: Omit<ITable, 'label'>): CSSProperties => {
+    return {
+        gridTemplateColumns: columns ?? '',
+        ...style,
+    };
 };
