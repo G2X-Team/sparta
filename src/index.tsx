@@ -30,6 +30,7 @@ export { Avatar } from './components/Avatar/Avatar';
 export { Grid } from './components/Grid/Grid';
 export { Image } from './components/Image/Image';
 export { Spinner } from './components/Spinner/Spinner';
+export { ThemeProvider } from './components/ThemeProvider/ThemeProvider';
 
 export type {
     FormValidator,

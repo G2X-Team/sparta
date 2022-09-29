@@ -1,69 +1,15 @@
-/* default props describe the general design of component */
-.apollo-component-library-button {
-    border: none;
-    font-size: 1rem;
-    padding: 10px 15px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: filter 300ms;
-}
-
 /* Default Styling */
 .apollo[data-apollo="Button"] {
     padding: 10px 18px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    outline: none;
-    color: #434343;
-    transition: background 300ms ease-out, filter 300ms ease-out, box-shadow 300ms ease-out;
-}
-
-.apollo[data-apollo="Button"]:disabled {
-    cursor: not-allowed;
+    outline: 0px solid #a4c8e4;
+    transition: background 200ms ease-out, filter 200ms ease-out, outline 75ms;
 }
 
 .apollo[data-apollo="Button"]:active {
     filter: brightness(90%);
-}
-
-/* Default variant */
-.apollo[data-apollo="Button"].default {
-    background: #1B75BC;
-    color: white;
-}
-
-.apollo[data-apollo="Button"].default:focus {
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #a4c8e4;
-}
-
-/* Secondary Variant */
-.apollo[data-apollo="Button"].secondary {
-    background: white;
-    border: 1.5px solid #1B75BC;
-}
- 
-.apollo[data-apollo="Button"].secondary:hover {
-    background: #1B75BC;
-    color: white;
-}
-
-.apollo[data-apollo="Button"].secondary:focus {
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #C6CED3;
-}
-
-/* Tertiary Variant */
-.apollo[data-apollo="Button"].tertiary {
-    background: #E7EBEC;
-    border: 1.5px solid #E7EBEC;
-}
-
-.apollo[data-apollo="Button"].tertiary:focus {
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #F1F3F5;
-}
-
-.apollo[data-apollo="Button"].area {
-    background: transparent;
 }
 
 .apollo[data-apollo="Button"]:hover {
@@ -78,7 +24,38 @@
     filter: brightness(100%);
 }
 
+.apollo[data-apollo="Button"].outline {
+    background: transparent;
+}
+
+.apollo[data-apollo="Button"].outline:hover {
+    filter: brightness(100%);
+}
+
 .apollo[data-apollo="Button"]:disabled {
     background: #edeff1;
     color: #98a7ad;
+    cursor: not-allowed;
+}
+
+.apollo[data-apollo="Button"].outline:disabled {
+    background: transparent;
+    border-color: #edeff1;
+    border-width: 2px;
+    border-style: solid;
+    color: #98a7ad;
+    cursor: not-allowed;
+}
+
+.apollo[data-apollo="Button"].none {
+    padding: 0;
+    border-radius: none;
+    cursor: default;
+    background: none;
+    outline: none;
+    transition: none;
+}
+
+.apollo[data-apollo="Button"].none:hover {
+    filter: brightness(100%);
 }
