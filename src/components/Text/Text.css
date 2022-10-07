@@ -31,26 +31,6 @@
     margin-right: 0;
 }
 
-.apollo[data-apollo="Text"].no-margins {
-    margin: 0;
-}
-
-.apollo[data-apollo="Text"].inline {
-    display: inline-block;
-}
-
-.apollo[data-apollo="Text"].bold {
-    font-weight: bold;
-}
-
-.apollo[data-apollo="Text"].italic {
-    font-style: italic;
-}
-
-.apollo[data-apollo="Text"].underline {
-    text-decoration: underline;
-}
-
 .apollo[data-apollo="Text"].disabled {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */

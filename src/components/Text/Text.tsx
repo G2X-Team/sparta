@@ -78,11 +78,6 @@ export const Text: FC<IText> = ({
         if (header) customVariant += `h${header} `;
 
         // check if any of the special cases are met
-        if (!margins) customVariant += 'no-margins ';
-        if (inline) customVariant += 'inline ';
-        if (italic) customVariant += 'italic ';
-        if (bold) customVariant += 'bold ';
-        if (underline) customVariant += 'underline ';
         if (disabled) customVariant += 'disabled ';
 
         // add className
@@ -130,7 +125,15 @@ export const Text: FC<IText> = ({
     return (
         <span
             {...props}
-            style={style}
+            style={{
+                color,
+                fontWeight: bold ? 'bold' : 'normal',
+                fontStyle: italic ? 'italic' : 'normal',
+                textDecoration: underline ? 'underline' : 'none',
+                margin: margins ? undefined : 0,
+                display: inline ? 'inline' : undefined,
+                ...style,
+            }}
             className={getVariant()}
             role={header ? 'heading' : undefined}
             aria-level={header === 0 || !header ? undefined : header}
