@@ -196,7 +196,7 @@ const DefaultTheme: ApolloTheme = {
  * @return completed theme
  */
 const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
-    const newTheme: ApolloTheme = {};
+    const newTheme: ApolloTheme = theme;
     newTheme.text = { ...DefaultTheme.text, ...theme.text };
     newTheme.primary = { ...DefaultTheme.primary, ...theme.primary };
     newTheme.secondary = { ...DefaultTheme.secondary, ...theme.secondary };
@@ -231,7 +231,6 @@ const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
  */
 const getButtonStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
     const Button = (theme[themeName] as any)?.Button ?? {};
-    console.log(themeName, Button);
     const ButtonOutline = (theme[themeName] as any)?.ButtonOutline ?? {};
     const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
 
@@ -266,6 +265,7 @@ const getButtonStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
 
     if (!solidButton?.disabled) {
         solidButton.disabled = {
+            filter: 'brightness(100%)',
             background: '#edeff1',
             color: '#98a7ad',
             cursor: 'not-allowed',
@@ -315,6 +315,7 @@ const getButtonStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
             borderWidth: '1.5px',
             borderStyle: 'solid',
             color: '#98a7ad',
+            filter: 'brightness(100%)',
             cursor: 'not-allowed',
         };
     }
