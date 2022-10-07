@@ -127,9 +127,9 @@ export const Text: FC<IText> = ({
             {...props}
             style={{
                 color,
-                fontWeight: bold ? 'bold' : 'normal',
-                fontStyle: italic ? 'italic' : 'normal',
-                textDecoration: underline ? 'underline' : 'none',
+                fontWeight: bold ? 'bold' : undefined,
+                fontStyle: italic ? 'italic' : undefined,
+                textDecoration: underline ? 'underline' : undefined,
                 margin: margins ? undefined : 0,
                 display: inline ? 'inline' : undefined,
                 ...style,
