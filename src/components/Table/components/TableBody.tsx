@@ -3,7 +3,6 @@ import type { TableData } from '../../../interfaces/Properties';
 import type { TableMeta } from '../Table';
 
 import React from 'react';
-import { isArray } from 'lodash';
 import { Text } from '../../Text/Text';
 
 interface ITableBody extends HTMLAttributes<HTMLTableSectionElement> {
@@ -51,7 +50,7 @@ const TableBody: FC<ITableBody> = ({ data, tableMeta, label, start, paginate }) 
 
                 // extract data point whether it be an array or an object
                 let datum: ReactNode;
-                if (isArray(data?.[row])) {
+                if (Array.isArray(data?.[row])) {
                     const col: number = key as number;
                     datum = (data[row] as ReactNode[])[col];
                 } else {

@@ -6,6 +6,7 @@ const meta: Meta = {
     title: 'Layout/Text',
     component: Text,
     args: {
+        theme: 'primary',
         children: 'This is a text component',
     },
 };

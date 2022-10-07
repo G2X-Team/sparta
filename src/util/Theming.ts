@@ -186,7 +186,7 @@ const DefaultTheme: ApolloTheme = {
     invalid: { color: '#FDA29B' },
     text: {
         fontFamily: "'Roboto', sans-serif",
-        color: 'black',
+        color: 'inherit',
     },
 };
 
@@ -614,10 +614,7 @@ export class ApolloCSS {
         });
 
         this.css = css;
-        this.addImports(
-            '@g2x/apollo/dist/css/main.css',
-            'https://fonts.googleapis.com/icon?family=Material+Icons'
-        );
+        this.addImports('https://fonts.googleapis.com/icon?family=Material+Icons');
     }
 
     /**
