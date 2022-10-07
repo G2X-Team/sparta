@@ -173,7 +173,15 @@ export const createApolloCSS = (document: Document, theme: ApolloTheme): void =>
 const DefaultTheme: ApolloTheme = {
     primary: { color: '#1B75BC' },
     secondary: { color: '#0E214B' },
-    tertiary: { color: '#F5F5F5' },
+    tertiary: {
+        color: '#f0f0f0',
+        Button: {
+            outlineColor: changeOpacity('#d1d1d1', 0.5),
+        },
+        ButtonOutline: {
+            outlineColor: changeOpacity('#d1d1d1', 0.5),
+        },
+    },
     neutral: { color: '#E7EBEC' },
     invalid: { color: '#FDA29B' },
     text: {
@@ -223,6 +231,7 @@ const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
  */
 const getButtonStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
     const Button = (theme[themeName] as any)?.Button ?? {};
+    console.log(themeName, Button);
     const ButtonOutline = (theme[themeName] as any)?.ButtonOutline ?? {};
     const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
 
@@ -604,6 +613,10 @@ export class ApolloCSS {
         });
 
         this.css = css;
+        this.addImports(
+            '@g2x/apollo/dist/css/main.css',
+            'https://fonts.googleapis.com/icon?family=Material+Icons'
+        );
     }
 
     /**
@@ -614,7 +627,7 @@ export class ApolloCSS {
      */
     addImports(...hrefs: string[]): void {
         hrefs.forEach((href) => {
-            const importStr = `@import url(${href});`;
+            const importStr = `@import url('${href}');`;
             this.css = `${importStr} ${this.css}`;
         });
     }
