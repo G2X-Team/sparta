@@ -4,7 +4,6 @@ import type { LastSort, TableMeta } from '../Table';
 
 import { Text } from '../../Text/Text';
 import { TableData } from '../../../interfaces/Properties';
-import { isArray } from 'lodash';
 import { Icon } from '../../Icon/Icon';
 
 interface ITableHead extends HTMLAttributes<HTMLTableSectionElement> {
@@ -148,7 +147,7 @@ const getDatum = (
     row: ReactNode[] | { [key: string]: ReactNode },
     key: string | number
 ): ReactNode => {
-    if (isArray(row)) {
+    if (Array.isArray(row)) {
         const col: number = key as number;
         return (row as ReactNode[])[col];
     } else {
