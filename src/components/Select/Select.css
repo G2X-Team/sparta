@@ -1,15 +1,16 @@
 .apollo[data-apollo="Select"] {
     position: relative;
-    display: inline-block;
 }
 
-.apollo[data-apollo="Select"] > span[data-apollo-id="select-button"] {
-    display: inline-flex;
+.apollo[data-apollo="Select"] > span.input {
+    display: flex;
     align-items: center;
     border: 1.5px solid #E7EBEC;
     border-radius: 8px;
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-    transition: box-shadow 300ms;
+    outline-width: 0px;
+    outline-style: solid;
+    transition: border 300ms, outline 75ms;
 }
 
 .apollo[data-apollo="Select"] > span > span {
@@ -24,23 +25,24 @@
     border: none;
     padding: 10px 14px;
     outline: none;
-    font-size: 16px;
-    display: inline-block;
+    font-size: 1rem;
     box-sizing: border-box;
     border-radius: 8px;
-    font-family: 'Sora', sans-serif;
     width: 100%;
 }
 
-.apollo[data-apollo="Select"] > span[data-apollo-id="select-button"]:focus-within { 
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #a4c8e4;
-    border: 1.5px solid #1F477B;
+.apollo[data-apollo="Select"] input:disabled {
+    cursor: not-allowed;
 }
 
-.apollo[data-apollo="Select"].invalid > span[data-apollo-id="select-button"] {
+.apollo[data-apollo="Select"] > span.input:focus-within { 
+    outline-width: 4px;
+}
+
+.apollo[data-apollo="Select"].invalid > span.input {
     border: 1.5px solid #FDA29B;
 }
 
-.apollo[data-apollo="Select"].invalid > span[data-apollo-id="select-button"]:focus {
+.apollo[data-apollo="Select"].invalid > span.input:focus {
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #a4c8e4;
 }

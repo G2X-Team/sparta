@@ -4,12 +4,13 @@
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    outline: 0px solid #a4c8e4;
+    outline-width: 0px;
+    outline-style: solid;
     transition: background 200ms ease-out, filter 200ms ease-out, outline 75ms;
 }
 
-.apollo[data-apollo="Button"]:active {
-    filter: brightness(90%);
+.apollo[data-apollo="Button"]:focus {
+    outline-width: 4px;
 }
 
 .apollo[data-apollo="Button"]:hover {
@@ -26,10 +27,8 @@
 
 .apollo[data-apollo="Button"].outline {
     background: transparent;
-}
-
-.apollo[data-apollo="Button"].outline:hover {
-    filter: brightness(100%);
+    border: solid;
+    border-width: 1.5px;
 }
 
 .apollo[data-apollo="Button"]:disabled {

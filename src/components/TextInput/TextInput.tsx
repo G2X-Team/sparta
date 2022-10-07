@@ -1,9 +1,9 @@
-import { HTMLAttributes, FC, CSSProperties, ForwardedRef, forwardRef } from 'react';
+import { HTMLAttributes, FC, ForwardedRef, forwardRef } from 'react';
 import React, { useEffect } from 'react';
 import './TextInput.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import type { FormTextData, FormValidator, StyleVariant } from '../../interfaces/Properties';
+import type { FormTextData, FormValidator } from '../../interfaces/Properties';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
@@ -20,8 +20,6 @@ export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'Te
     disabled?: boolean;
     /** Determines whether the text input is a password */
     password?: boolean;
-    /** Determines what type of text input will be shown */
-    variant?: StyleVariant;
     /** Determines whether the input is required for form submission */
     required?: boolean;
     /** Function that will determine whether input is valid for form submission */
@@ -40,6 +38,11 @@ export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'Te
     readOnly?: boolean;
     /** Reference for component */
     ref?: ForwardedRef<HTMLInputElement>;
+    /**
+     * Hides the label from users. **Note:** Try to avoid this unless the placeholder is
+     * descriptive enough
+     */
+    hideLabel?: boolean;
 }
 
 /**
@@ -49,12 +52,16 @@ export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'Te
  */
 export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
     {
-        variant = 'default',
         className = '',
         password = false,
         invalid = false,
+        hideLabel,
         errorMessage,
+        theme = 'primary',
         matchMessage,
+        onFocus,
+        onBlur,
+        disabled,
         match,
         required,
         name,
@@ -77,19 +84,22 @@ export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
     }, []);
 
     return (
-        <div className="apollo" data-apollo-id="TextInput-Label">
+        <div className={`apollo ${theme}`} data-apollo="TextInputLabel">
             <label>
-                <Text style={labelTextStyle} color="#10333F">
-                    {label}{' '}
-                    {required ? (
-                        <Text inline color="red">
-                            *
-                        </Text>
-                    ) : null}
-                </Text>
+                {!hideLabel ? (
+                    <div className="label">
+                        {label}{' '}
+                        {required ? (
+                            <Text inline color="red">
+                                *
+                            </Text>
+                        ) : null}
+                    </div>
+                ) : null}
                 <input
                     {...props}
                     required={required}
+                    disabled={disabled}
                     name={name}
                     ref={ref}
                     aria-required={required}
@@ -98,16 +108,17 @@ export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
                     type={password ? 'password' : 'text'}
                     className={`
                         apollo
-                        ${variant} 
                         ${!invalid ? 'valid' : 'invalid'}
                         ${className}
+                        ${theme}
                     `}
                 />
                 {hint?.length && !(invalid && errorMessage) ? (
-                    <Text style={hintTextStyle}>{hint}</Text>
+                    <div className="hint">{hint}</div>
                 ) : null}
             </label>
             <ErrorMessage
+                className="invalid"
                 id={name ? `${name}-error` : `${label}-error`}
                 active={Boolean(invalid && errorMessage)}
             >
@@ -118,15 +129,3 @@ export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
 });
 
 TextInput.defaultProps = { 'data-apollo': 'TextInput' };
-
-const labelTextStyle: CSSProperties = {
-    paddingBottom: 5,
-    fontSize: 14,
-};
-
-const hintTextStyle: CSSProperties = {
-    paddingBottom: 5,
-    color: '#6C8189',
-    fontSize: 14,
-    paddingTop: 6,
-};

@@ -8,7 +8,7 @@ interface TextStyle {
     fontWeight?: string;
 }
 
-type TextTheme = TextStyle & {
+export type TextTheme = TextStyle & {
     h1?: TextStyle;
     h2?: TextStyle;
     h3?: TextStyle;
@@ -27,4 +27,26 @@ export type Theme = {
     neutral?: CSS.Property.Color;
     /** Theme to apply to all text */
     text?: TextTheme;
+};
+
+/** Styling of an individual component */
+export type ComponentCSS = CSSProperties & {
+    hover?: CSSProperties;
+    active?: CSSProperties;
+    focus?: CSSProperties;
+    disabled?: CSSProperties;
+    focusWithin?: CSSProperties;
+    disabledWithin?: CSSProperties;
+};
+
+export type ApolloTheme = {
+    /**
+     * CSS Theme Pattern to apply to components
+     */
+    [specificTheme: string]:
+        | CSSProperties
+        | {
+              /** Apollo component to which the theme pattern applies to */
+              [apolloName: string]: ComponentCSS;
+          };
 };
