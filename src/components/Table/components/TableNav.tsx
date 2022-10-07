@@ -20,14 +20,14 @@ interface ITableNav {
 export const TableNav: FC<ITableNav> = ({ paginate, start, setStart, dataLength }) => {
     return paginate ? (
         <Section alignItems="center" justifyContent="space-between">
-            <Button disabled={!start} variant="tertiary" onClick={() => setStart(start - paginate)}>
+            <Button disabled={!start} theme="tertiary" onClick={() => setStart(start - paginate)}>
                 Previous
             </Button>
             <Text>
                 Page {start / paginate + 1} of {Math.ceil(dataLength / paginate)}
             </Text>
             <Button
-                variant="tertiary"
+                theme="tertiary"
                 disabled={start + paginate >= dataLength}
                 onClick={() => setStart(start + paginate)}
             >

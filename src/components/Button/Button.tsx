@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
-import type { HTMLAttributes, ReactNode, FC, ForwardedRef } from 'react';
+import { HTMLAttributes, ReactNode, FC, ForwardedRef } from 'react';
 import React, { forwardRef } from 'react';
 import './Button.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import type { StyleVariant } from '../../interfaces/Properties';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
@@ -15,7 +14,7 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Butt
     /** Required ReactNode that needs to exist between component tags */
     children: ReactNode;
     /** defines the type of button to be rendered */
-    variant?: StyleVariant | 'area';
+    variant?: 'solid' | 'outline' | 'none';
     /** callback function to be called when there is a method click */
     onClick?: () => void;
     /** disables button */
@@ -34,7 +33,17 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Butt
  * @return Button component
  */
 export const Button: FC<IButton> = forwardRef(function Button(
-    { children, className = '', loading, disabled, variant = 'default', ...props }: IButton,
+    {
+        children,
+        className = '',
+        theme = 'primary',
+        variant = 'solid',
+        loading,
+        disabled,
+        onMouseEnter,
+        onMouseLeave,
+        ...props
+    }: IButton,
     ref: ForwardedRef<HTMLButtonElement>
 ) {
     gaurdApolloName(props, 'Button');
@@ -44,11 +53,11 @@ export const Button: FC<IButton> = forwardRef(function Button(
             {...props}
             aria-busy={loading}
             disabled={disabled || loading}
-            className={`apollo ${variant} ${className}`}
+            className={`apollo ${variant} ${theme} ${className}`}
             ref={ref}
         >
             {!loading ? (
-                <Text>{children}</Text>
+                <Text ignoreTheme>{children}</Text>
             ) : (
                 <Section center>
                     <Spinner size="1rem" loading innerColor="#edeff1" />

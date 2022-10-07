@@ -150,9 +150,40 @@ const colorNameToHex: { [color: string]: string } = {
  * @param color background color
  * @return corresponding foreground color
  */
-export const determineForeground = (color: CSS.Property.Color | undefined): string | undefined => {
-    if (!color) return undefined;
-    if (typeof color !== 'string') return;
+export const determineForeground = (color: CSS.Property.Color): string | undefined => {
+    const rgb = getRGB(color);
+    if (!rgb) return;
+
+    const [r, g, b] = rgb;
+
+    // quick maths to get foreground color
+    const maths = (r * 299 + g * 587 + b * 114) / 1000 >= 128;
+    return maths ? 'black' : 'white';
+};
+
+/**
+ * Will return the RGB values of a color whose opacity is altered
+ *
+ * @param color color to convert
+ * @param opacity number between 0 and 1
+ * @return color with opacity
+ */
+export const changeOpacity = (color: CSS.Property.Color, opacity: number): string | undefined => {
+    const rgb = getRGB(color);
+    if (!rgb) return;
+
+    const [r, g, b] = rgb;
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
+
+/**
+ * Given a color in any format, this function will get it's rgb value
+ *
+ * @param color color in any format
+ * @return rgb value of color
+ */
+export const getRGB = (color: CSS.Property.Color): [number, number, number] | null => {
+    if (typeof color !== 'string') return null;
 
     // gets rgb values
     let r: number;
@@ -228,9 +259,7 @@ export const determineForeground = (color: CSS.Property.Color | undefined): stri
         [r, g, b] = params.map((colorVal: string) => parseInt(colorVal));
     }
 
-    // quick maths to get foreground color
-    const maths = (r * 299 + g * 587 + b * 114) / 1000 >= 128;
-    return maths ? 'black' : 'white';
+    return [r, g, b];
 };
 
 /**

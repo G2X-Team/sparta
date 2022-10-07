@@ -91,7 +91,6 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, 
 
         // don't submit form if there are errors
         if (Object.keys(errors).length) {
-            console.log('errors', errors);
             event.preventDefault();
             if (onError) onError(errors);
             return;

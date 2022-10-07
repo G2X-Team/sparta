@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, ChangeEventHandler, useRef, CSSProperties } from 'react';
+import { FC, HTMLAttributes, ChangeEventHandler, useRef, FocusEventHandler } from 'react';
 import React, { useState, useEffect } from 'react';
 import './Select.css';
 
@@ -11,7 +11,6 @@ import { Icon } from '../Icon/Icon';
 import { Option } from '../Option/Option';
 import Menu from './components/Menu';
 import { gaurdApolloName } from '../../util/ErrorHandling';
-import { Text } from '../Text/Text';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 export interface ISelect
@@ -28,7 +27,7 @@ export interface ISelect
     /** determines whether input is required */
     required?: boolean;
     /** determines whether the input needs to be valid */
-    valid?: boolean;
+    invalid?: boolean;
     /** Determines where the menu will appear from */
     anchor?: ComponentOrientation;
     /** Determines menu alignment, when orientation is left or right */
@@ -41,6 +40,8 @@ export interface ISelect
     maxWidth?: CSS.Property.MaxWidth;
     /** Determines max height of the menu */
     maxHeight?: CSS.Property.MaxHeight;
+    /** Determines whether input is disabled or not */
+    disabled?: boolean;
 }
 
 /**
@@ -55,9 +56,13 @@ export const Select: FC<ISelect> = ({
     anchor = 'bottom',
     alignment = 'start',
     label,
-    valid,
+    invalid,
     onChange,
+    disabled,
+    theme = 'primary',
+    style,
     maxHeight,
+    onFocus,
     maxWidth,
     required,
     options,
@@ -100,12 +105,22 @@ export const Select: FC<ISelect> = ({
      *
      * @param event input event
      */
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (event): void => {
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         if (!open) toggleOpen(true); // ensure menu is open
         // ensure change is cleared
         if (change?.length || change?.length === 0) setChange(undefined);
 
         setValue(event.target.value);
+    };
+
+    /**
+     * Handles focus events
+     *
+     * @param event focus event
+     */
+    const handleFocus: FocusEventHandler<HTMLInputElement> = (event) => {
+        event.target.select();
+        if (onFocus) onFocus(event);
     };
 
     /**
@@ -116,7 +131,7 @@ export const Select: FC<ISelect> = ({
     const renderSelect: RenderAll = () => {
         // get filtered results
         const filtered = options.filter((option: string) =>
-            option.toLowerCase().includes(value.toLocaleLowerCase())
+            option.toLowerCase().includes(change !== value ? value.toLocaleLowerCase() : '')
         );
 
         const menu: JSX.Element = (
@@ -146,11 +161,13 @@ export const Select: FC<ISelect> = ({
         return (
             <>
                 {(anchor === 'top' || anchor === 'left') && display ? menu : null}
-                <span data-apollo-id="select-button">
+                <span className={`input ${disabled ? 'disabledinput' : ''}`}>
                     <input
                         {...props}
+                        disabled={disabled}
                         value={value}
                         ref={inputRef}
+                        onFocus={handleFocus}
                         type="text"
                         onClick={() => toggleOpen(true)}
                         onChange={handleChange}
@@ -167,18 +184,15 @@ export const Select: FC<ISelect> = ({
     };
 
     return (
-        <label className={`apollo ${className}`} data-apollo={dataApollo}>
-            <Text style={labelStyle}>{label}</Text>
+        <label
+            className={`apollo ${className} ${theme} ${invalid ? 'invalid' : ''}`}
+            data-apollo={dataApollo}
+        >
+            <div className="label">{label}</div>
             {renderSelect()}
             <ErrorMessage id={`${label}-error`} active={required && change === undefined}>
                 Please select a valid option
             </ErrorMessage>
         </label>
     );
-};
-
-const labelStyle: CSSProperties = {
-    color: '#10333F',
-    fontSize: 14,
-    paddingBottom: 6,
 };

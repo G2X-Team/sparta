@@ -15,8 +15,6 @@ export interface IIcon extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Ico
     color?: CSS.Property.Color;
     /** determines whether icon has disabled styling or not */
     disabled?: boolean;
-    /** Determines preset style of icon */
-    variant?: string;
     /** This component must not have children */
     children?: undefined;
     /** Determines whether component is clickable or not */
@@ -36,7 +34,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
         onClick,
         clickable = onClick && true,
         children,
-        variant = 'default',
+        theme = 'primary',
         color,
         className = '',
         disabled,
@@ -58,7 +56,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
             className={`material-icons apollo
-                ${clickable ? variant : ''} ${className}`}
+                ${clickable ? 'clickable' : ''} ${className} ${theme}`}
             onClick={onClick}
         >
             {name}

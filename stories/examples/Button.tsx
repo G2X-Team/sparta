@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import type { SampleStory } from './util';
+import type { SampleStory } from './utils/util';
 import { Button } from '../../src';
 
 export const StandardButton: SampleStory = (args) => <Button {...args} />;

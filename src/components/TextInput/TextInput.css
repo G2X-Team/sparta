@@ -1,52 +1,25 @@
 .apollo[data-apollo="TextInput"] {
     font-size: 1rem;
-    border: none;
-    outline: none;
     padding: 10px 14px;
     border-radius: 8px;
     border: 1.5px solid #E7EBEC;
-    font-family: 'Sora', sans-serif;
+    border-width: 1.5px;
+    border-style: solid;
+    outline-width: 0px;
+    outline-style: solid;
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-    transition: box-shadow 300ms, border 300ms;
+    transition: outline 75ms, border 300ms;
 }
 
-.apollo[data-apollo="TextInput"]:disabled {
-    background: #E7EBEC;
-    cursor: not-allowed;
-}
-
-.apollo[data-apollo-id="TextInput-Label"] {
+.apollo[data-apollo="TextInputLabel"] {
     padding-bottom: 15px;
 }
 
-.apollo[data-apollo="TextInput"].default {
-    box-shadow: 0px 0px 0px 0px #CAF2E1;
+.apollo[data-apollo="TextInput"]:focus {
+    outline-width: 4px;
 }
 
-.apollo[data-apollo="TextInput"].default:focus {
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #a4c8e4;
-    border: 1.5px solid #0e214b;
-    outline: none;
-}
-
-.apollo[data-apollo="TextInput"].secondary {
-    box-shadow: 0px 0px 0px 0px lightblue;
-}
-
-.apollo[data-apollo="TextInput"].secondary:focus {
-    box-shadow: 0px 2px 0px 0px lightblue;
-}
-
-.apollo[data-apollo="TextInput"].invalid {
-    border: 1.5px solid #FDA29B;
-}
-
-.apollo[data-apollo="TextInput"].invalid:focus {
-    border: 1.5px solid #FDA29B;
-    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #FEE4E2;
-}
-
-.apollo[data-apollo-id="TextInput-Label"] .apollo[data-apollo="TextInput"] {
+.apollo[data-apollo="TextInputLabel"] .apollo[data-apollo="TextInput"] {
     width: 100%;
     box-sizing: border-box;
 }

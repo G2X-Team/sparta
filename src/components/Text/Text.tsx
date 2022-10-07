@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode, FC } from 'react';
+import { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Text.css';
 
@@ -34,6 +34,8 @@ export interface IText extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Tex
     color?: CSS.Property.Color;
     /** Determines whether the text is disabled or not */
     disabled?: boolean;
+    /** If you want text to be untouched by theming */
+    ignoreTheme?: boolean;
 }
 
 /**
@@ -44,7 +46,7 @@ export interface IText extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Tex
 export const Text: FC<IText> = ({
     children,
     className = '',
-    header = 0,
+    header,
     margins = false,
     inline = false,
     bold = false,
@@ -54,6 +56,8 @@ export const Text: FC<IText> = ({
     lower = false,
     pascal = false,
     disabled = false,
+    theme = 'primary',
+    ignoreTheme = false,
     color,
     style,
     ...props
@@ -68,12 +72,10 @@ export const Text: FC<IText> = ({
      */
     const getVariant = (): string => {
         // determine custom variant
-        let customVariant = 'apollo-component-library-typography-component ';
+        let customVariant = 'apollo ' + theme + ' ';
 
         // check if its a header or not
-        if (header == 1) customVariant += 'first-header ';
-        if (header == 2) customVariant += 'second-header ';
-        if (header == 3) customVariant += 'third-header ';
+        if (header) customVariant += `h${header} `;
 
         // check if any of the special cases are met
         if (!margins) customVariant += 'no-margins ';
@@ -126,24 +128,16 @@ export const Text: FC<IText> = ({
     };
 
     return (
-        <span {...props} style={getTextStyle(color, style)} className={getVariant()}>
+        <span
+            {...props}
+            style={style}
+            className={getVariant()}
+            role={header ? 'heading' : undefined}
+            aria-level={header === 0 || !header ? undefined : header}
+        >
             {getCorrectCasing()}
         </span>
     );
 };
 
 Text.defaultProps = { 'data-apollo': 'Text' };
-
-/**
- * Gets text style object
- *
- * @param color string determing alternative color
- * @param style text style property
- * @return text style object
- */
-const getTextStyle = (
-    color: string | undefined,
-    style: React.CSSProperties | undefined
-): React.CSSProperties => {
-    return { color, ...style };
-};

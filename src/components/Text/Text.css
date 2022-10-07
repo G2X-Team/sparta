@@ -1,14 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap');
 
-.apollo-component-library-typography-component {
-    font-family: 'Sora', sans-serif;
+.apollo[data-apollo="Text"] {
     font-size: 1rem;
     margin-top: 1em;
     margin-bottom: 1em;
     display: block;
 }
 
-.apollo-component-library-typography-component.first-header {
+.apollo[data-apollo="Text"].h1 {
     font-size: 2em;
     margin-top: 0.67em;
     margin-bottom: 0.67em;
@@ -16,7 +15,7 @@
     margin-right: 0;
 }
 
-.apollo-component-library-typography-component.second-header {
+.apollo[data-apollo="Text"].h2 {
     font-size: 1.5em;
     margin-top: 0.83em;
     margin-bottom: 0.83em;
@@ -24,7 +23,7 @@
     margin-right: 0;
 }
 
-.apollo-component-library-typography-component.third-header {
+.apollo[data-apollo="Text"].h3 {
     font-size: 1.17em;
     margin-top: 1em;
     margin-bottom: 1em;
@@ -32,27 +31,27 @@
     margin-right: 0;
 }
 
-.apollo-component-library-typography-component.no-margins {
+.apollo[data-apollo="Text"].no-margins {
     margin: 0;
 }
 
-.apollo-component-library-typography-component.inline {
+.apollo[data-apollo="Text"].inline {
     display: inline-block;
 }
 
-.apollo-component-library-typography-component.bold {
+.apollo[data-apollo="Text"].bold {
     font-weight: bold;
 }
 
-.apollo-component-library-typography-component.italic {
+.apollo[data-apollo="Text"].italic {
     font-style: italic;
 }
 
-.apollo-component-library-typography-component.underline {
+.apollo[data-apollo="Text"].underline {
     text-decoration: underline;
 }
 
-.apollo-component-library-typography-component.disabled {
+.apollo[data-apollo="Text"].disabled {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
        -khtml-user-select: none; /* Konqueror HTML */

@@ -5,11 +5,11 @@ import './Avatar.css';
 import type * as CSS from 'csstype';
 import type { Apollo } from '../../interfaces/Apollo';
 import { gaurdApolloName } from '../../util/ErrorHandling';
-import { determineForeground, generateRandomColor } from '../../util/colorTheory';
 
 import { Text } from '../Text/Text';
 import { ComponentSize } from '../../interfaces/Properties';
 import { useProgressiveImage } from '../../util/imageProcessing';
+import { determineForeground } from '../../util/colorTheory';
 
 export interface IAvatar extends HTMLAttributes<HTMLDivElement>, Apollo<'Avatar'> {
     /** Used to create a string in case there is no image */
@@ -40,6 +40,7 @@ export const Avatar: FC<IAvatar> = forwardRef(function Icon(
     {
         clickable = false,
         size = 'medium',
+        theme = 'primary',
         className = '',
         onClick,
         style,
@@ -51,37 +52,40 @@ export const Avatar: FC<IAvatar> = forwardRef(function Icon(
     ref
 ) {
     gaurdApolloName(props, 'Avatar');
+    const loaded = useProgressiveImage(picture ?? '');
+    const newStyle = getAvatarStyle(!!picture && !!loaded, style, color);
 
     // state
-    const loaded = useProgressiveImage(picture ?? '');
-    const [avatarStyle, setAvatarStyle] = useState<CSSProperties>(
-        getAvatarStyle(Boolean(loaded), style, color)
-    );
+    const [avatarStyle, setAvatarStyle] = useState<CSSProperties>(newStyle);
 
     // determines whether the avatar is clickable or not
     const isClickable = onClick || clickable ? 'clickable' : '';
 
     // effect
     useEffect(() => {
-        setAvatarStyle(getAvatarStyle(Boolean(loaded), style, color));
+        setAvatarStyle(newStyle);
     }, [loaded]);
 
     return (
         <div
             {...props}
             ref={ref}
-            className={`apollo ${className} ${isClickable} ${size}`}
+            className={`apollo ${className} ${isClickable} ${size} ${theme}`}
             aria-label={`${fallback} avatar`}
             style={avatarStyle}
             role={onClick || clickable ? 'button' : undefined}
-            tabIndex={onClick ? 0 : undefined}
+            tabIndex={onClick || clickable ? 0 : undefined}
             onClick={onClick}
             onKeyDown={(event) =>
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
         >
             {picture ? <img src={picture} alt={fallback} /> : null}
-            {loaded === 'loading' ? <Text upper>{getFallbackInitials(fallback)}</Text> : null}
+            {loaded === 'loading' ? (
+                <Text upper ignoreTheme>
+                    {getFallbackInitials(fallback)}
+                </Text>
+            ) : null}
         </div>
     );
 });
@@ -115,10 +119,10 @@ const getAvatarStyle = (
     style?: CSSProperties,
     color?: CSS.Property.Color
 ): CSSProperties => {
-    if (loaded) return { ...style };
+    if (loaded) return style ?? {};
 
     // generate colors
-    const backgroundColor = color || generateRandomColor();
+    const backgroundColor = color ?? style?.backgroundColor ?? '#EDEFF1';
     const foregroundColor = determineForeground(backgroundColor);
 
     return {

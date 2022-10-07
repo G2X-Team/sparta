@@ -1,23 +1,16 @@
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-
 .apollo[data-apollo="Icon"] {
     user-select: none;
     margin: 0;
 }
 
 .apollo[data-apollo="Icon"]:active {
-    filter: brightness(90%);
+    filter: brightness(80%);
 }
 
-.apollo[data-apollo="Icon"].default {
+.apollo[data-apollo="Icon"].clickable {
     background: transparent;
     transition: background 300ms, filter 300ms, color 300ms;
     border-radius: 25px;
     padding: 5px;
-}
-
-.apollo[data-apollo="Icon"].default:hover {
     cursor: pointer;
-    background: #1b75bc;
-    color: white;
 }
