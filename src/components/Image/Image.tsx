@@ -9,6 +9,7 @@ import { ComponentSize } from '../../interfaces/Properties';
 import { useProgressiveImage } from '../../util/imageProcessing';
 
 import { View } from '../View/View';
+import { Spinner } from '../Spinner/Spinner';
 
 export interface IImage extends HTMLAttributes<HTMLDivElement>, Apollo<'Image'> {
     /** source of image */
@@ -74,12 +75,9 @@ export const Image: FC<IImage> = ({
             <View>{children}</View>
             <View
                 aria-hidden={loaded === 'loading'}
-                aria-label={`loading ${alt} image`}
                 style={{ opacity: loaded === 'loading' ? 1 : 0 }}
             >
-                <View>
-                    <View />
-                </View>
+                <Spinner loading innerColor="#eef1f2" label={`loading ${alt} image`} />
             </View>
         </div>
     );

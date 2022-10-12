@@ -20,6 +20,8 @@ interface ISpinner extends HTMLAttributes<HTMLDivElement>, Apollo<'Spinner'> {
     variant?: StyleVariant;
     /** Displays spinner */
     loading?: boolean;
+    /** Change the label of the string (only noticeable in screen-readers) */
+    label?: string;
 }
 
 /**
@@ -34,6 +36,7 @@ export const Spinner: FC<ISpinner> = ({
     variant,
     loading,
     style,
+    label,
     ...props
 }) => {
     gaurdApolloName(props, 'Spinner');
@@ -44,7 +47,7 @@ export const Spinner: FC<ISpinner> = ({
             style={getSpinnerStyle({ color, size, style, variant })}
             className="apollo"
             role="status"
-            aria-label="Loading..."
+            aria-label={label ?? 'Loading...'}
         >
             <div style={{ backgroundColor: innerColor }} />
         </div>
