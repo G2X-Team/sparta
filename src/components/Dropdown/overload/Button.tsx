@@ -12,7 +12,7 @@ import { Icon } from '../../Icon/Icon';
  * @return overloaded dropdown button
  */
 const Button: FC<Overload<CIButton>> = ({
-    parentProps: { toggleOpen, open, button },
+    parentProps: { toggleOpen, open, button, hideArrow },
     className = '',
     onClick,
     children,
@@ -30,7 +30,9 @@ const Button: FC<Overload<CIButton>> = ({
     return (
         <CButton {...props} ref={button} onClick={handleClick} aria-expanded={open}>
             {children}
-            <Icon name="keyboard_arrow_down" style={getIconStyle({ parentProps: { open } })} />
+            {!hideArrow ? (
+                <Icon name="keyboard_arrow_down" style={getIconStyle({ parentProps: { open } })} />
+            ) : null}
         </CButton>
     );
 };
