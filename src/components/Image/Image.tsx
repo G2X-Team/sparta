@@ -77,7 +77,11 @@ export const Image: FC<IImage> = ({
                 aria-hidden={loaded === 'loading'}
                 style={{ opacity: loaded === 'loading' ? 1 : 0 }}
             >
-                <Spinner loading innerColor="#eef1f2" label={`loading ${alt} image`} />
+                <Spinner
+                    loading={loaded === 'loading'}
+                    innerColor="#eef1f2"
+                    label={`loading ${alt} image`}
+                />
             </View>
         </div>
     );
