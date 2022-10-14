@@ -18,6 +18,8 @@ export interface IDropdown extends HTMLAttributes<HTMLDivElement>, Apollo<'Dropd
     anchor?: ComponentOrientation;
     /** Determines menu alignment, when orientation is left or right */
     alignment?: ComponentAlignment;
+    /** Hide dropdown arrow */
+    hideArrow?: boolean;
 }
 
 /**
@@ -30,6 +32,7 @@ export const Dropdown: FC<IDropdown> = ({
     className = '',
     anchor = 'bottom',
     alignment = 'start',
+    hideArrow = false,
     ...props
 }) => {
     gaurdApolloName(props, 'Dropdown');
@@ -68,6 +71,7 @@ export const Dropdown: FC<IDropdown> = ({
             button: buttonRef || iconRef || avatarRef,
             open,
             display,
+            hideArrow,
             effect,
             anchor,
             alignment,
