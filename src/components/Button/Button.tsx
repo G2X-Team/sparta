@@ -40,8 +40,6 @@ export const Button: FC<IButton> = forwardRef(function Button(
         variant = 'solid',
         loading,
         disabled,
-        onMouseEnter,
-        onMouseLeave,
         ...props
     }: IButton,
     ref: ForwardedRef<HTMLButtonElement>
