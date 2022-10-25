@@ -53,7 +53,7 @@ class FormatChildren {
                 // get required props
                 const {
                     ref,
-                    props: { parentProps: childParentProps, key: childKey, ...childProps },
+                    props: { parentProps: childParentProps, ...childProps },
                 } = child as any;
 
                 // assign props and finalize component format
