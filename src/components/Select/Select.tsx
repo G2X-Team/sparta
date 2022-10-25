@@ -82,7 +82,8 @@ export const Select: FC<ISelect> = ({
 
     // effect hook that keeps track of open
     useEffect(() => {
-        if (open !== display) {
+        let isMounted = true;
+        if (isMounted && open !== display) {
             if (display) {
                 toggleEffect(false);
                 setTimeout(() => toggleDisplay(false), 300);
@@ -91,6 +92,10 @@ export const Select: FC<ISelect> = ({
                 setTimeout(() => toggleEffect(true), 100);
             }
         }
+
+        return () => {
+            isMounted = false;
+        };
     }, [open]);
 
     useEffect(() => {
@@ -142,7 +147,7 @@ export const Select: FC<ISelect> = ({
                 anchor={anchor}
                 effect={effect}
                 inputRef={inputRef}
-                label={`${label}${required ? ' *' : ''}`}
+                label={`${label} Menu${required ? ' *' : ''}`}
                 height={maxHeight}
                 width={maxWidth}
             >
