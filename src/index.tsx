@@ -47,4 +47,5 @@ export type {
 } from './interfaces/Properties';
 export type { ApolloTheme } from './interfaces/Theme';
 
-export { default as HandleOverloads } from './util/HandleOverloads';
+export type { Overloader } from './util/DeepFormat/types';
+export { OverloadHandler } from './util/DeepFormat/OverloadHandler';

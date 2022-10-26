@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { screen, render } from '@testing-library/react';
 
-import DeepFormat from '../src/util/DeepFormat';
-import HandleOverloads from '../src/util/HandleOverloads';
+import DeepFormat from '../src/util/DeepFormat/index';
+import { OverloadHandler, Overloader } from '../src';
 import { Overload, RenderAll } from '../src/interfaces/Overload';
 import { Button, IButton } from '../src/components/Button/Button';
 
@@ -56,7 +56,7 @@ export const TestComponent: FC<ITestComponent> = ({ children, test }) => {
     return <div>{renderAll()}</div>;
 };
 
-interface IWrappedTarget {
+interface IWrappedTarget extends Overloader {
     children: ReactNode;
 }
 
@@ -65,14 +65,14 @@ interface IWrappedTarget {
  *
  * @return wrapped target to be replaced
  */
-export const WrappedTarget: FC<IWrappedTarget> = ({ children, ...props }) => {
+export const WrappedTarget: FC<IWrappedTarget> = ({ children, apolloRef }) => {
     return (
-        <HandleOverloads props={props}>
+        <OverloadHandler apolloRef={apolloRef}>
             <div>
                 {children}
                 <Button>Something else</Button>
             </div>
-        </HandleOverloads>
+        </OverloadHandler>
     );
 };
 
@@ -176,7 +176,7 @@ describe('DeepFormat', () => {
         // given
         render(
             <TestComponent test="test">
-                <WrappedTarget apollo-overloads={{ Button }}>
+                <WrappedTarget apollo-overload>
                     <p>This is pretty cool</p>
                 </WrappedTarget>
             </TestComponent>
@@ -191,7 +191,7 @@ describe('DeepFormat', () => {
         // given
         render(
             <TestComponent test="test">
-                <WrappedTarget apollo-overloads={{ Button }}>
+                <WrappedTarget apollo-overload>
                     <p>This is pretty cool</p>
                 </WrappedTarget>
                 <Button>This is cool</Button>
