@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 import type { Overload } from '../../../interfaces/Overload';
-import FormatChildren from '../../../util/FormatChildren';
+import FormatChildren from '../../../util/formatting/FormatChildren';
 
 import Button from './Button';
 import { IButtonGroup } from '../../ButtonGroup/ButtonGroup';

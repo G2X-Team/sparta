@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes } from 'react';
 import React from 'react';
 
-import FormatChildren from '../../../util/FormatChildren';
+import FormatChildren from '../../../util/formatting/FormatChildren';
 import type { FormActionData } from '../../../interfaces/Properties';
 import type { RenderAll } from '../../../interfaces/Overload';
 

@@ -1,27 +1,10 @@
-import React, { Children } from 'react';
-import { ParentProps } from '../interfaces/Overload';
-
-/** Object categorizing all found components by name */
-export interface FoundChildren {
-    /** All found children categorized under a specific component name */
-    [name: string]: JSX.Element[];
-    /** All other children that don't match a specific component name */
-    other: JSX.Element[];
-}
-
-interface ComponentDictionary {
-    /** Used to get all components given a specific display name */
-    [displayName: string]: JSX.Element[];
-}
-
-export interface ComponentMap {
-    /** All different sought out components */
-    [displayName: string]: React.FC<any>;
-}
+import React, { Children, cloneElement, Fragment } from 'react';
+import type { ParentProps } from '../../interfaces/Overload';
+import type { ElementDictionary, ComponentRecord, FoundChildren } from './types';
 
 class FormatChildren {
     /** an object containing all subsets of children organized by apollo name */
-    foundChildren: FoundChildren = { other: [] };
+    foundChildren: FoundChildren = { other: [], user: [] };
     /** all cihldren */
     allChildren: JSX.Element[] = [];
 
@@ -35,7 +18,7 @@ class FormatChildren {
      * formatted.
      * @param parentProps props pertaining to the parent component
      */
-    constructor(children: any, componentMap: ComponentMap = {}, parentProps: ParentProps = {}) {
+    constructor(children: any, componentMap: ComponentRecord = {}, parentProps: ParentProps = {}) {
         // loop through all children
         Children.forEach(children, (child: JSX.Element, index: number) => {
             const childName =
@@ -44,11 +27,8 @@ class FormatChildren {
                     : 'not-found';
 
             // hande whether sought out component is found
-            if (componentMap[childName]) {
+            if (componentMap[childName] || child?.props?.['apollo-overload']) {
                 if (!this.foundChildren[childName]) this.foundChildren[childName] = [];
-
-                // get component format
-                const { [childName]: Component } = componentMap;
 
                 // get required props
                 const {
@@ -70,6 +50,27 @@ class FormatChildren {
                  * @return size of all children
                  */
                 const getChildrenSize = (): number => this.allChildren.length;
+
+                if (child?.props?.['apollo-overload']) {
+                    const cloned = cloneElement(child, {
+                        apolloRef: {
+                            componentMap: componentMap,
+                            parentProps: {
+                                childIndex: index,
+                                childTypeIndex: getChildTypeSize(),
+                                getChildrenSize,
+                                getChildTypeSize,
+                                ...parentProps,
+                            },
+                        },
+                    });
+                    this.foundChildren.user.push(<Fragment key={index}>P{cloned}</Fragment>);
+                    this.allChildren.push(cloned);
+                    return;
+                }
+
+                // get component format
+                const { [childName]: Component } = componentMap;
                 const formattedComponent: JSX.Element = (
                     <Component {...childProps} ref={ref} key={index} />
                 );
@@ -124,12 +125,12 @@ class FormatChildren {
      * @param components children wanting to remove from formatted children
      * @return all instances of child
      */
-    extract = (components: Array<string>): ComponentDictionary => {
+    extract = (components: Array<string>): ElementDictionary => {
         // get set from component array
         const componentSet = new Set(components);
 
         // define an object to keep track of all extracted components
-        const extracted: ComponentDictionary = {};
+        const extracted: ElementDictionary = {};
 
         // removes all instances of the child
         this.allChildren = this.allChildren.filter((child: JSX.Element) => {

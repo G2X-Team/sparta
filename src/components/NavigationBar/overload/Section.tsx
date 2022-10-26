@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { ISection, Section as CSection } from '../../Section/Section';
 
-import FormatChildren from '../../../util/FormatChildren';
+import FormatChildren from '../../../util/formatting/FormatChildren';
 import { Dropdown, Option, Menu, Icon } from '../../..';
 import { Overload } from '../../../interfaces/Overload';
 

@@ -7,7 +7,7 @@ import type {
     FormActionData,
 } from '../../../interfaces/Properties';
 import type { RenderAll } from '../../../interfaces/Overload';
-import FormatChildren from '../../../util/FormatChildren';
+import FormatChildren from '../../../util/formatting/FormatChildren';
 import { useForm } from 'react-hook-form';
 
 import TextInput from '../overload/CSTextInput';
@@ -17,6 +17,7 @@ import Switch from '../overload/CSSwitch';
 import Checkbox from '../overload/CSCheckbox';
 import { Grid } from '../../Grid/Grid';
 import { Section } from '../../Section/Section';
+import { View } from '../../View/View';
 
 export interface ICSForm extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit' | 'onError'> {
     /** Handles form submission with object derived from form */
@@ -25,6 +26,8 @@ export interface ICSForm extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit' | '
     onError?: FormErrorHandler;
     /** Determines the type of form we want to render */
     actionData?: FormActionData;
+    /** Determines whether user wants to use `DeepFormat` to find children */
+    deep?: boolean;
 }
 
 /**
@@ -32,7 +35,15 @@ export interface ICSForm extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit' | '
  *
  * @return client side form
  */
-const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, ...props }) => {
+const CSForm: FC<ICSForm> = ({
+    onSubmit,
+    onError,
+    deep,
+    children,
+    actionData,
+    method,
+    ...props
+}) => {
     // use the use form hook
     const {
         setError,
@@ -54,7 +65,7 @@ const CSForm: FC<ICSForm> = ({ onSubmit, onError, children, actionData, method, 
      */
     const renderAll: RenderAll = (childrenProp, passthrough): JSX.Element[] => {
         // overloaded components
-        const overloaded = { TextInput, Group, Switch, Radio, Checkbox, Grid, Section };
+        const overloaded = { TextInput, Group, Switch, Radio, Checkbox, Grid, Section, View };
 
         // parent props
         const parentProps = {
