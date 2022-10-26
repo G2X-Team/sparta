@@ -1,6 +1,6 @@
 import type { HTMLAttributes, FC } from 'react';
 import React, { useEffect, useState, useRef } from 'react';
-import FormatChildren from '../../util/FormatChildren';
+import FormatChildren from '../../util/formatting/FormatChildren';
 import './Drawer.css';
 
 import type { Apollo } from '../../interfaces/Apollo';

@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from 'react';
 import React, { useEffect, useState } from 'react';
 
-import FormatChildren from '../../../util/FormatChildren';
+import FormatChildren from '../../../util/formatting/FormatChildren';
 
 import type { IModal } from '../Modal';
 import Footer from '../overload/Footer';

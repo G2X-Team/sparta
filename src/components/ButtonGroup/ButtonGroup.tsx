@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './ButtonGroup.css';
 
-import FormatChildren from '../../util/FormatChildren';
+import FormatChildren from '../../util/formatting/FormatChildren';
 import type { Apollo } from '../../interfaces/Apollo';
 import type { StyleVariant, ComponentSize } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
