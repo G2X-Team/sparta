@@ -3,7 +3,7 @@ import React from 'react';
 import './Card.css';
 
 import type { Apollo } from '../../interfaces/Apollo';
-import FormatChildren from '../../util/FormatChildren';
+import FormatChildren from '../../util/formatting/FormatChildren';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 import type { RenderAll } from '../../interfaces/Overload';
 

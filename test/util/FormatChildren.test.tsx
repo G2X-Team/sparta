@@ -1,10 +1,10 @@
 import React, { FC, ReactNode } from 'react';
 import { screen, render } from '@testing-library/react';
 
-import DeepFormat from '../src/util/DeepFormat/index';
-import { OverloadHandler, Overloader } from '../src';
-import { Overload, RenderAll } from '../src/interfaces/Overload';
-import { Button, IButton } from '../src/components/Button/Button';
+import FormatChildren from '../../src/util/formatting/FormatChildren';
+import { OverloadHandler, Overloader, View } from '../../src';
+import { Overload, RenderAll } from '../../src/interfaces/Overload';
+import { Button, IButton } from '../../src/components/Button/Button';
 
 /**
  * Interface for test overload component
@@ -39,21 +39,22 @@ export const TestComponent: FC<ITestComponent> = ({ children, test }) => {
     /**
      * Function that simulates standard renderAll function
      *
+     * @param children children to be formatted
      * @return formatted children
      */
-    const renderAll: RenderAll = () => {
+    const renderAll: RenderAll = (children) => {
         // define all necessary params
-        const parentProps = { test };
-        const componentMap = { Button: TestOverload };
+        const parentProps = { test, renderAll };
+        const componentMap = { Button: TestOverload, View };
 
         // get deep format
-        const deepFormat = new DeepFormat(children, componentMap, parentProps);
+        const deepFormat = new FormatChildren(children, componentMap, parentProps);
 
         // return formatted children
         return deepFormat.getAll();
     };
 
-    return <div>{renderAll()}</div>;
+    return <div>{renderAll(children)}</div>;
 };
 
 interface IWrappedTarget extends Overloader {
@@ -65,13 +66,11 @@ interface IWrappedTarget extends Overloader {
  *
  * @return wrapped target to be replaced
  */
-export const WrappedTarget: FC<IWrappedTarget> = ({ children, apolloRef }) => {
+const WrappedTarget: FC<IWrappedTarget> = ({ children, apolloRef }) => {
     return (
         <OverloadHandler apolloRef={apolloRef}>
-            <div>
-                {children}
-                <Button>Something else</Button>
-            </div>
+            {children}
+            <Button>Something else</Button>
         </OverloadHandler>
     );
 };
@@ -110,17 +109,17 @@ describe('DeepFormat', () => {
         expect(screen.queryByText('Hello')).not.toBeInTheDocument();
     });
 
-    it('should replace apollo components that are deeply nested', () => {
+    it('should replace apollo components that are deeply nested in Views', () => {
         // given
         render(
             <TestComponent test="test">
-                <div>
-                    <div>
-                        <div>
+                <View>
+                    <View>
+                        <View>
                             <Button>Hello</Button>
-                        </div>
-                    </div>
-                </div>
+                        </View>
+                    </View>
+                </View>
             </TestComponent>
         );
 
@@ -133,14 +132,14 @@ describe('DeepFormat', () => {
         // given
         render(
             <TestComponent test="test">
-                <div>
-                    <div>
-                        <div>
+                <View>
+                    <View>
+                        <View>
                             <Button>Hello</Button>
-                            <div>World</div>
-                        </div>
-                    </div>
-                </div>
+                            <View>World</View>
+                        </View>
+                    </View>
+                </View>
             </TestComponent>
         );
 
@@ -155,14 +154,14 @@ describe('DeepFormat', () => {
         render(
             <TestComponent test="test">
                 <Button>Button 1</Button>
-                <div>
-                    <div>Hello</div>
+                <View>
+                    <View>Hello</View>
                     <Button>Button 2</Button>
-                    <div>
-                        <div>World</div>
+                    <View>
+                        <View>World</View>
                         <Button>Button 3</Button>
-                    </div>
-                </div>
+                    </View>
+                </View>
             </TestComponent>
         );
 
@@ -200,6 +199,25 @@ describe('DeepFormat', () => {
 
         // when then
         expect(screen.queryAllByText('test')).toHaveLength(2);
+        expect(screen.getByText('This is pretty cool')).toBeInTheDocument();
+    });
+
+    it('should replace wrapped components regardless of level', () => {
+        // given
+        render(
+            <TestComponent test="test">
+                <WrappedTarget apollo-overload>
+                    <WrappedTarget apollo-overload>
+                        <WrappedTarget apollo-overload>
+                            <p>This is pretty cool</p>
+                        </WrappedTarget>
+                    </WrappedTarget>
+                </WrappedTarget>
+            </TestComponent>
+        );
+
+        // when then
+        expect(screen.queryAllByText('test')).toHaveLength(3);
         expect(screen.getByText('This is pretty cool')).toBeInTheDocument();
     });
 });

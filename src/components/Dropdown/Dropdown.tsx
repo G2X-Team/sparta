@@ -6,7 +6,7 @@ import type { Apollo } from '../../interfaces/Apollo';
 import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
-import FormatChildren from '../../util/FormatChildren';
+import FormatChildren from '../../util/formatting/FormatChildren';
 
 import Avatar from './overload/Avatar';
 import Button from './overload/Button';

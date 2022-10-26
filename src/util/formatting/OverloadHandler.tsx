@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { RenderAll } from '../../interfaces/Overload';
-import DeepFormat from './index';
+import FormatChildren from './FormatChildren';
 import { ApolloRef } from './types';
 
 interface IOverloadHandler {
@@ -29,7 +29,7 @@ export const OverloadHandler: FC<IOverloadHandler> = ({ apolloRef, children }) =
         const { parentProps, componentMap } = apolloRef;
 
         // deep format children relayed by component map
-        const deepFormat = new DeepFormat(children, componentMap, parentProps);
+        const deepFormat = new FormatChildren(children, componentMap, parentProps);
 
         // return formatted children
         return deepFormat.getAll();

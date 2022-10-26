@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React from 'react';
-import FormatChildren from '../../../util/FormatChildren';
+import FormatChildren from '../../../util/formatting/FormatChildren';
 
 import ButtonGroup from './ButtonGroup';
 import { IFooter, Footer as CFooter } from '../../Footer/Footer';

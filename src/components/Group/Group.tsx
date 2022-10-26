@@ -6,7 +6,7 @@ import type { Apollo } from '../../interfaces/Apollo';
 import type { FormGroupData, FormValidator } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
-import FormatChildren from '../../util/FormatChildren';
+import FormatChildren from '../../util/formatting/FormatChildren';
 
 import { Text } from '../Text/Text';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
