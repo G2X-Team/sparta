@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
     node: circleci/node@4.7
+    npm-publisher: uraway/npm-publisher@0.2.0
 
 workflows:
     Test-Lint-Build-All-Versions:
@@ -28,3 +29,11 @@ workflows:
                           version: ['16.10', '14.17', '12.22']
                   pkg-manager: yarn
                   yarn-run: build
+    Publish:
+        jobs:
+            - npm-publisher/publish-from-package-version:
+                push-git-tag: true 
+                filters: 
+                    branches:
+                        only:
+                            - main
