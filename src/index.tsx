@@ -46,3 +46,6 @@ export type {
     DataRenderer,
 } from './interfaces/Properties';
 export type { ApolloTheme } from './interfaces/Theme';
+
+export type { Overloader } from './util/formatting/types';
+export { OverloadHandler } from './util/formatting/OverloadHandler';

@@ -9,7 +9,7 @@ import type {
     ComponentSize,
 } from '../../interfaces/Properties';
 import type * as CSS from 'csstype';
-import FormatChildren from '../../util/FormatChildren';
+import FormatChildren from '../../util/formatting/FormatChildren';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';

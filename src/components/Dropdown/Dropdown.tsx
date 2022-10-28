@@ -6,7 +6,7 @@ import type { Apollo } from '../../interfaces/Apollo';
 import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
-import FormatChildren from '../../util/FormatChildren';
+import FormatChildren from '../../util/formatting/FormatChildren';
 
 import Avatar from './overload/Avatar';
 import Button from './overload/Button';
@@ -18,6 +18,8 @@ export interface IDropdown extends HTMLAttributes<HTMLDivElement>, Apollo<'Dropd
     anchor?: ComponentOrientation;
     /** Determines menu alignment, when orientation is left or right */
     alignment?: ComponentAlignment;
+    /** Hide dropdown arrow */
+    hideArrow?: boolean;
 }
 
 /**
@@ -30,6 +32,7 @@ export const Dropdown: FC<IDropdown> = ({
     className = '',
     anchor = 'bottom',
     alignment = 'start',
+    hideArrow = false,
     ...props
 }) => {
     gaurdApolloName(props, 'Dropdown');
@@ -68,6 +71,7 @@ export const Dropdown: FC<IDropdown> = ({
             button: buttonRef || iconRef || avatarRef,
             open,
             display,
+            hideArrow,
             effect,
             anchor,
             alignment,

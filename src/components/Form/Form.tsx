@@ -18,6 +18,16 @@ export interface IForm extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit' | 'on
     type?: 'client' | 'remix';
     /** When in remix mode, this will control all the form inputs */
     actionData?: FormActionData;
+    /**
+     * By setting this property to `true` the `Form` component will search through the entire
+     * DOM tree for any compatible input components. This is useful to use when you have
+     * a form with deeply nested inputs that require live validation, or there are inputs that
+     * are not direct children of the form.
+     *
+     * > **Note:** Using this kind of form will have a slight performance impact on the initial
+     * > render.
+     */
+    deep?: boolean;
 }
 
 /**
@@ -34,7 +44,7 @@ export const Form: FC<IForm> = ({ type = 'client', ...props }) => {
     const renderForm = (): JSX.Element => {
         switch (type) {
             case 'remix':
-                const { onSubmit, onError, ...rest } = props;
+                const { onSubmit, onError, deep, ...rest } = props;
                 return <SSForm {...rest} />;
             default:
                 return <CSForm {...props} />;

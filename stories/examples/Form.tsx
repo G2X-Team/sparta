@@ -1,5 +1,5 @@
 import React from 'react';
-import type { SampleStory } from './util';
+import type { SampleStory } from './utils/util';
 import {
     Form,
     Group,
@@ -11,6 +11,8 @@ import {
     FormActionData,
     Text,
     FormValidator,
+    Overloader,
+    OverloadHandler,
 } from '../../src';
 
 export const clientActionData: FormActionData = {
@@ -32,6 +34,7 @@ export const clientActionData: FormActionData = {
 
 const userNameValidator: FormValidator = (data) => {
     if (data.text === 'john-cena') return 'You cannot just leave this blank (get it?)';
+    if ((data.text ?? []).length > 9) return 'This is another error';
     return null;
 };
 
@@ -91,9 +94,9 @@ export const ValidatedForm: SampleStory = (args) => {
             <TextInput
                 validator={(input) => {
                     console.log(input?.text);
-                    return (
-                        input?.text.length < 5 && 'Text input must be at least 5 characters long'
-                    );
+                    return (input.text ?? []).length < 5
+                        ? 'Text input must be at least 5 characters long'
+                        : null;
                 }}
                 required
                 name="password"
@@ -131,6 +134,28 @@ export const ClientSideRemixForm: SampleStory = (args) => {
                 Switch
             </Switch>
             <Button>Submit</Button>
+        </Form>
+    );
+};
+
+interface IMyComponent extends Overloader {
+    label: string;
+    name: string;
+}
+
+const MyComponent = ({ apolloRef, name, label }: IMyComponent): JSX.Element => {
+    return (
+        <OverloadHandler apolloRef={apolloRef}>
+            <TextInput name={name} label={label} required validator={userNameValidator} />
+        </OverloadHandler>
+    );
+};
+
+export const RelayingComponentOverload: SampleStory = (args) => {
+    return (
+        <Form {...args}>
+            <MyComponent label="Text Input" name="text-input" apollo-overload />
+            <TextInput name="sup" label="labelF" required validator={userNameValidator} />
         </Form>
     );
 };
