@@ -32,8 +32,18 @@ workflows:
     Publish:
         jobs:
             - npm-publisher/publish-from-package-version:
-                push-git-tag: true 
+                push-git-tag: true
+                pre-publish-steps:
+                    - run:
+                        name: Install dependencies
+                        command: npm i
+                    - run:
+                        name: Build
+                        command: npm run build
                 filters: 
+                    tags:
+                        only: /^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?$/
+
                     branches:
                         only:
                             - main
