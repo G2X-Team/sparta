@@ -32,23 +32,8 @@ workflows:
     Publish:
         jobs:
             - npm-publisher/publish-from-package-version:
-                push-git-tag: false
-                pre-publish-steps:
-                    - run:
-                        name: Install yarn
-                        command: npm install yarn
-                    - run:
-                        name: Delete Package Lock
-                        command: rm package-lock.json
-                    - run:
-                        name: Install dependencies
-                        command: yarn
-                    - run:
-                        name: Build
-                        command: yarn build
+                push-git-tag: true 
                 filters: 
-                    tags:
-                        only: /^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?$/
                     branches:
                         only:
                             - main
