@@ -32,8 +32,15 @@ workflows:
     Publish:
         jobs:
             - npm-publisher/publish-from-package-version:
-                push-git-tag: true 
+                pre-publish-steps:
+                    - run: npm install
+                    - run: npm run build
+                post-publish-steps:
+                    - run: rm ./package-lock.json
                 filters: 
                     branches:
                         only:
                             - main
+                    tags:
+                        only: 
+                            - /^v.*/
