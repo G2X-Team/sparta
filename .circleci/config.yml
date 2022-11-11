@@ -32,6 +32,7 @@ workflows:
     Publish:
         jobs:
             - npm-publisher/publish-from-package-version:
+                push-git-tag: false
                 pre-publish-steps:
                     - run:
                         name: Install yarn
