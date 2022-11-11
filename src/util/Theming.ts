@@ -197,6 +197,8 @@ const DefaultTheme: ApolloTheme = {
  */
 const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
     const newTheme: ApolloTheme = theme;
+
+    // define default presets
     newTheme.text = { ...DefaultTheme.text, ...theme.text };
     newTheme.primary = { ...DefaultTheme.primary, ...theme.primary };
     newTheme.secondary = { ...DefaultTheme.secondary, ...theme.secondary };
@@ -210,6 +212,10 @@ const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
 
         // loop through every apollo name
         newTheme[themeName] = {
+            // make sure to retain existing theme
+            ...(newTheme[themeName] ?? {}),
+
+            // apply default styles per applicable component
             ...getButtonStyle(newTheme, themeName),
             ...getAvatarStyle(newTheme, themeName),
             ...getTextInputStyle(newTheme, themeName),

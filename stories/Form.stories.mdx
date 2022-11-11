@@ -7,6 +7,7 @@ import {
     ValidatedForm,
     RemixForm,
     ClientSideRemixForm,
+    RelayingComponentOverload,
     clientActionData,
 } from './examples/Form';
 
@@ -41,6 +42,7 @@ Also, we want to shout out `react-hook-form` for helping us make this component.
         -   [Basic Implementation](#basic-implementation)
         -   [Validation](#validation)
         -   [Adding actionData](#adding-actiondata)
+    -   [Caveats](#caveats)
     -   [Remix Form Functionality](#remix-form-1)
 -   [Other Props & Functionalities](#other-props--functionalities)
 
@@ -203,6 +205,81 @@ const userNameValidator: FormValidator = (data) => {
 <Canvas>
     <Story name="Client Side Remix Form" args={{ actionData: clientActionData, method: 'post' }}>
         {ClientSideRemixForm.bind({})}
+    </Story>
+</Canvas>
+
+### Caveats
+
+You probably have noticed that unless you use an Apollo wrapper such as a `View` or a `Grid` or
+something similar, that it will not be possible to recieve live validation. This is because of how
+our Apollo processing works, we only take the first children of the DOM tree and run our background
+functionality enhancements on that.
+
+This is to maintain peek performance and to keep the API as simple as possible. If you do find
+yourself needing more coverage, say you define your own component with its own render method that
+uses an input you want to validate the Apollo way, you can do so by using the `OverloadHandler`
+utility.
+
+#### Relaying Component Overloading
+
+Say you have a component `MyComponent` that has an Apollo `TextInput` that you want to validate.
+You can do so by using the `OverloadHandler` utility and the `Overloader` interface. Here is an
+example of how you would do so:
+
+```typescript
+import type { Overloader } from '@g2x/apollo'; // type will help with auto-complete
+import { OverloadHandler } from '@g2x/apollo';
+
+interface IMyComponent extends Overloader {
+    /* your defined props here */
+}
+
+function MyComponent({ apolloRef, ...props }: IMyComponent) {
+    return (
+        // wrap your children in the OverloadHandler
+        <OverloadHandler apolloRef={apolloRef}>
+            <TextInput name="my-input" label="Type in me please" />
+        </OverloadHander>
+    );
+}
+
+export default function Login() {
+    return (
+        <Form>
+            // by adding this prop to your component, it can be validated
+            <MyComponent apollo-override />
+        </Form>
+    )
+}
+```
+
+To briefly explain what's going on, we are using the `OverloadHandler` to wrap the `TextInput`
+component so that it can be validated. However, the `OverloadHandler` needs additional information,
+and it gets it through the `apolloRef` prop. This prop is automatically added to your component
+when you add the `apollo-override` prop to your component and it's in the `Form`. There is a lot
+of magic going on here, but if you use the type and auto-complete, this will be straightforward.
+
+Here is a working example of this in action:
+
+<Canvas>
+    <Story
+        name="Relaying Component Overloading"
+        args={{
+            deep: true,
+            actionData: {
+                fields: {
+                    username: 'john-cena',
+                    password: 'youcantseeme',
+                    rating: '1',
+                    options: ['1', '2'],
+                    radio: true,
+                    checkbox: true,
+                    switch: true,
+                },
+            },
+        }}
+    >
+        {RelayingComponentOverload.bind({})}
     </Story>
 </Canvas>
 

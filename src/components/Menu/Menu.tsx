@@ -5,7 +5,7 @@ import './Menu.css';
 import type { Apollo } from '../../interfaces/Apollo';
 import type { RenderAll, Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
-import FormatChildren from '../../util/FormatChildren';
+import FormatChildren from '../../util/formatting/FormatChildren';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 import { handleOutsideClick } from '../../util/detectOutsideClick';
 
