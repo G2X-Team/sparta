@@ -1,0 +1,83 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+
+import { Calendar } from '../src';
+
+import { StandardCalendar } from './examples/Calendar';
+
+<Meta title="Calendar" component={Calendar} />
+
+# Calendar
+
+The `Calendar` component is the solution for all your date picking and calendar needs
+
+## Table of Contents
+
+Add a table of contents so that users can quickly look over the documentation with
+convenient hyperlinks. Also link to headers that you place throughout to elaborate
+on the sections. This will be useful for the user when they have to scroll over
+everything.
+
+- [Functionality](#functionality)
+  - [Starting Date](#starting-date)
+  - [Valid Date Ranges](#valid-date-ranges)
+  - [Adding Marks to Signfiy Events](#adding-marks-to-signfiy-events)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+The `Calendar` at it's most basic level, is just a visual controller for selecting dates.
+It can be used to select a date by clicking on a date, or by using the keyboard to navigate
+to a date and pressing enter.
+
+<Canvas>
+	<Story name="Standard Calendar">
+		{StandardCalendar.bind({})}
+	</Story>
+</Canvas>
+
+### Starting Date
+
+By default the calendar will always start on the current month. However, you can set the
+`startingDate` prop to a date object to start the calendar on a different month.
+
+<Canvas>
+	<Story name="Different Starting Day" args={{ startDate: '2020-04-20' }}>
+		{StandardCalendar.bind({})}
+	</Story>
+</Canvas>
+
+### Valid Date Ranges
+
+The `Calendar` can be used to select a date within a range of dates. This is done by
+setting the `dateRange` prop to an array of date strings. If the `dateRange` has only
+one date, then all dates from that point on will be valid. If the `dateRange` has two
+dates, then all dates between those two dates will be valid.
+
+<Canvas>
+	<Story name="Valid Date Range" args={{ startDate: '2020-04-20', dateRange: ['2020-04-03', '2020-04-24'] }}>
+		{StandardCalendar.bind({})}
+	</Story>
+</Canvas>
+
+### Adding Marks to Signfiy Events
+
+The `Calendar` can be used to mark dates that have events. This is done by setting the
+`marks` prop to an array of date strings. The dates in the array will be marked with a
+dot to signify that there is an event on that date.
+
+<Canvas>
+	<Story name="Marked Dates" args={{ startDate: '2020-04-20', marks: ['2020-04-03', '2020-04-24', '2020-04-20'] }}>
+		{StandardCalendar.bind({})}
+	</Story>
+</Canvas>
+
+> Call out any important details the user might miss with the `>` escape character.
+
+## Other Props & Functionalities
+
+Transition focus to other functionalities. Maybe introduce some of them or talk about 
+other props briefly. That way the user isn't abruptly introduce to the ArgsTable 
+below.
+
+<ArgsTable of={Calendar} />

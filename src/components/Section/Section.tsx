@@ -25,6 +25,10 @@ export interface ISection extends Interface<HTMLAttributes<HTMLDivElement>>, Apo
     justifyContent?: CSS.Property.JustifyContent;
     /** align items value */
     alignItems?: CSS.Property.AlignItems;
+    /** if section is inline, it will not take up the full width of its parent */
+    inline?: boolean;
+    /** gap value */
+    gap?: CSS.Property.Gap;
     /**
      * if section is a navigation bar, it will compress to a hamburger given it shrinks past
      * its min-width
@@ -50,12 +54,14 @@ export const Section: FC<ISection> = ({
     minWidth,
     minHeight,
     children,
+    gap,
     className,
     height,
     width,
     style,
     justifyContent,
     alignItems,
+    inline,
     column,
     center,
     centerVertical,
@@ -69,8 +75,10 @@ export const Section: FC<ISection> = ({
             {...props}
             className={className}
             style={getSectionStyle({
+                gap,
                 flex,
                 height,
+                inline,
                 width,
                 minWidth,
                 minHeight,
@@ -108,6 +116,7 @@ const getSectionStyle = ({
     column,
     center,
     centerVertical,
+    inline,
     centerHorizontal,
     flexWrap,
 }: ISection): CSSProperties => {
@@ -138,7 +147,7 @@ const getSectionStyle = ({
     }
 
     return {
-        display: 'flex',
+        display: inline ? 'inline-flex' : 'flex',
         flexWrap: wrap,
         flexDirection,
         flex,

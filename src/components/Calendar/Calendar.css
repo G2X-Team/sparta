@@ -1,0 +1,42 @@
+.apollodate {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    transition: background 300ms;
+    cursor: pointer;
+}
+
+#apollodate-day {
+    display: flex;
+    flex: 1;
+}
+
+#apollodate-day > * {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.apollodate:focus, .apollodate:hover {
+    background: #EDEFF1;
+    outline: none;
+}
+
+.apollodate.not-current {
+    color: gray;
+}
+
+.apollodate.active {
+    background: #101828;
+    color: white;
+}
+
+.apollodate:disabled {
+    background-color: transparent;
+    color: rgba(16, 16, 16, 0.3);
+    cursor: not-allowed;
+}
