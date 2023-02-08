@@ -222,10 +222,99 @@ const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
             ...getSelectStyle(newTheme, themeName),
             ...getTextStyle(newTheme, themeName),
             ...getIconStyle(newTheme, themeName),
+            ...getCalenderStyle(newTheme, themeName),
         };
     });
 
     return newTheme;
+};
+
+/**
+ * Will assign values to theme object if they don't already exist
+ *
+ * @param themeObject theme object to assign to
+ * @param values values wanting to assign
+ * @return theme object with values assigned
+ */
+const assignCSS = (themeObject: any, values?: CSSProperties): any => {
+    if (!values) return themeObject;
+
+    Object.keys(values).forEach((key) => {
+        if (themeObject?.[key]) return;
+        themeObject[key] = values[key as keyof CSSProperties];
+    });
+
+    return themeObject;
+};
+
+/**
+ * Calendar default theme
+ *
+ * @param theme theme that the Calendar is in;
+ * @param themeName name of theme
+ * @return Calendar theme
+ */
+const getCalenderStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+    const currentTheme: any = theme[themeName];
+    const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
+
+    const CalendarCell = currentTheme?.CalendarCell ?? {};
+    const CalendarDate = currentTheme?.CalendarItem ?? {};
+    const CalendarDay = currentTheme?.CalendarDay ?? {};
+    const CalendarSelected = currentTheme?.CalendarSelected ?? {};
+    const CalendarMark = currentTheme?.CalendarMark ?? {};
+    const CalendarMarkSelected = currentTheme?.CalendarMarkSelected ?? {};
+
+    // set default theme for cell
+    assignCSS(CalendarCell, {
+        width: '40px',
+        height: '40px',
+        borderRadius: '100px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        transition: 'background-color 200ms ease',
+    });
+
+    // set default theme for date
+    assignCSS(CalendarDate, {
+        transition: 'color 200ms',
+    });
+
+    // set default theme for day
+    assignCSS(CalendarDay, {
+        color: themeColor,
+        fontWeight: 'bold',
+    });
+
+    // set default theme for selected
+    assignCSS(CalendarSelected, {
+        backgroundColor: themeColor,
+        color: determineForeground(themeColor),
+        borderRadius: '10px',
+    });
+
+    // set default theme for marks
+    assignCSS(CalendarMark, {
+        backgroundColor: themeColor,
+        borderRadius: '100px',
+        width: '8px',
+        height: '8px',
+        margin: '2px auto',
+    });
+
+    // set default theme for selected marks
+    assignCSS(CalendarMarkSelected, {
+        backgroundColor: determineForeground(themeColor),
+    });
+
+    return {
+        'CalendarDay-cell': CalendarCell,
+        CalendarDay,
+        'CalendarDate-selected': CalendarSelected,
+        CalendarMark,
+        'CalendarMark-selected': CalendarMarkSelected,
+    };
 };
 
 /**
