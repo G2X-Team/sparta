@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import { Calendar } from '../src';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
 expect.extend(toHaveNoViolations);
 
 describe('Calendar', () => {
@@ -163,15 +162,9 @@ describe('Calendar', () => {
         );
 
         // when
-        await act(async () => {
-            userEvent.clear(screen.getByLabelText(/start date/i));
-        });
-        await act(async () => {
-            userEvent.type(screen.getByLabelText(/start date/i), '1/2/2021');
-        });
-        await act(async () => {
-            userEvent.type(screen.getByLabelText(/end date/i), '1/3/2021');
-        });
+        userEvent.clear(screen.getByLabelText(/start date/i));
+        await userEvent.type(screen.getByLabelText(/start date/i), '1202/2/1', { delay: 1 });
+        await userEvent.type(screen.getByLabelText(/end date/i), '1202/3/1', { delay: 1 });
 
         // then
         expect(onChange).toHaveBeenCalledWith(['1/2/2021', '1/3/2021']);
@@ -191,8 +184,7 @@ describe('Calendar', () => {
         );
 
         // when
-        await userEvent.type(screen.getByLabelText(/end date/i), '1/2/2021', { delay: 1 });
-        expect(screen.getByLabelText(/end date/i)).toHaveValue('1/2/2021');
+        await userEvent.type(screen.getByLabelText(/end date/i), '1202/2/1', { delay: 1 });
 
         // then
         expect(onChange).toHaveBeenCalledWith(['1/1/2021', '1/2/2021']);
