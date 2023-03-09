@@ -31,6 +31,7 @@ export { Grid } from './components/Grid/Grid';
 export { Image } from './components/Image/Image';
 export { Spinner } from './components/Spinner/Spinner';
 export { ApolloCSS } from './util/Theming';
+export { Calendar } from './components/Calendar/Calendar';
 
 export type {
     FormValidator,
