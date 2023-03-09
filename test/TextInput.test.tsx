@@ -135,4 +135,13 @@ describe('TextInput', () => {
         expect(csFormRef.current).not.toBeNull();
         expect(ssFormRef.current).not.toBeNull();
     });
+
+    it('should still have a label even if `hideLabel` is true', () => {
+        // given
+        render(<TextInput label="label" hideLabel />);
+        const label = screen.getByLabelText(/label/i);
+
+        // when then
+        expect(label).toBeInTheDocument();
+    });
 });

@@ -18,7 +18,7 @@ export interface ICalendar extends Apollo<'Calendar'> {
      * - If `type="single"` then the date param will be `"YYYY/MM/DD"`.
      * - If type="range"` then the date param will be `"YYYY/MM/DD-YYYY/MM/DD"`
      */
-    onChange?: (date: string, payload?: any) => void;
+    onChange?: (date: string[]) => void;
     /**
      * This is an object that will let the calendar know if it needs to mark any specific date
      * with a dot signfiying importance.
@@ -37,6 +37,8 @@ export interface ICalendar extends Apollo<'Calendar'> {
     height?: CSS.Property.Height;
     /** Determines the font size of the calendar */
     fontSize?: CSS.Property.FontSize;
+    /** Required identification of calendar */
+    id: string;
 }
 
 /**
@@ -45,14 +47,14 @@ export interface ICalendar extends Apollo<'Calendar'> {
  * @return Calendar component
  */
 export const Calendar: FC<ICalendar> = ({
+    type = 'single',
     startDate,
     dateRange,
     marks,
     theme = 'primary',
     onChange,
-    width = '300px',
-    height = '300px',
     fontSize = '1rem',
+    id,
 }) => {
     const [calendarData, date, setDate] = useCalendarData(
         startDate ?? new Date().toLocaleDateString()
@@ -68,22 +70,14 @@ export const Calendar: FC<ICalendar> = ({
     // marks standardized to set of "YYYY/MM/DD"
     const setOfMarks = new Set(marks?.map((mark) => getTimezoneDate(mark).toLocaleDateString()));
     return (
-        <Section
-            column
-            center
-            inline
-            width={width}
-            height={height}
-            aria-label="calendar"
-            role="application"
-            tabIndex={0}
-        >
+        <Section column center inline aria-label="calendar" role="application" tabIndex={0}>
             <Section
                 style={{
                     padding: '0 10px',
                     boxSizing: 'border-box',
                     paddingBottom: 5,
                     maxHeight: 50,
+                    marginBottom: type === 'range' ? 10 : 0,
                 }}
                 width="100%"
                 justifyContent="space-between"
@@ -95,17 +89,21 @@ export const Calendar: FC<ICalendar> = ({
                     aria-label="previous month"
                     onClick={() => setDate('prev')}
                     name="keyboard_arrow_left"
+                    color="#5D6871"
                 />
-                <Text bold tabIndex={0} style={{ outline: 'none' }}>
+                <Text tabIndex={0} style={{ outline: 'none' }}>
                     {date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </Text>
                 <Icon
                     aria-label="next month"
                     onClick={() => setDate('next')}
                     name="keyboard_arrow_right"
+                    color="#5D6871"
                 />
             </Section>
             <CalendarGrid
+                type={type}
+                id={id}
                 fontSize={fontSize}
                 onChange={onChange}
                 theme={theme}
@@ -113,6 +111,7 @@ export const Calendar: FC<ICalendar> = ({
                 dateRange={dateRange}
                 marks={setOfMarks}
                 startDate={startDate}
+                setDate={setDate}
             />
         </Section>
     );
@@ -130,8 +129,13 @@ const useCalendarData = (startDate: string): [string[][], Date, (incomingDate: s
 
     useEffect(() => {
         // check if this needs to execute
-        if (calendarData?.length && new Date(calendarData[1][0]).getMonth() == date.getMonth()) {
-            return;
+        if (calendarData?.length) {
+            const calendarDataDate = new Date(calendarData[1][0]);
+            if (
+                calendarDataDate.getMonth() == date.getMonth() &&
+                calendarDataDate.getFullYear() == date.getFullYear()
+            )
+                return;
         }
 
         // get month and year
@@ -149,7 +153,7 @@ const useCalendarData = (startDate: string): [string[][], Date, (incomingDate: s
         const weeks: string[][] = [];
         let day = 1;
         while (day < lastDay.getDate()) {
-            const week: string[] = [];
+            let week: string[] = [];
 
             // populate first week
             if (day == 1) {
@@ -172,7 +176,11 @@ const useCalendarData = (startDate: string): [string[][], Date, (incomingDate: s
             if (day == lastDay.getDate()) {
                 daysToFill = 6 - lastDay.getDay() + 1;
 
-                const lastWeek = daysToFill === 7 ? [] : week;
+                // account for months that end in sunday
+                if (daysToFill === 7) {
+                    weeks.push(week);
+                    week = [];
+                }
 
                 const totalLastDays = daysToFill;
                 // fill in days until there are no days to fill
@@ -182,7 +190,7 @@ const useCalendarData = (startDate: string): [string[][], Date, (incomingDate: s
                         date.getMonth() + 1,
                         totalLastDays - daysToFill
                     );
-                    lastWeek.push(fill.toLocaleDateString());
+                    week.push(fill.toLocaleDateString());
                     daysToFill--;
                 }
             }
@@ -208,7 +216,11 @@ const useCalendarData = (startDate: string): [string[][], Date, (incomingDate: s
                     break;
                 default:
                     const incomingDate = new Date(incoming);
-                    if (incomingDate.getMonth() === date.getMonth()) break;
+                    if (
+                        incomingDate.getMonth() === date.getMonth() &&
+                        incomingDate.getFullYear() === date.getFullYear()
+                    )
+                        break;
                     setDate(incomingDate);
             }
         },

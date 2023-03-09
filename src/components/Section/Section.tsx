@@ -119,6 +119,7 @@ const getSectionStyle = ({
     inline,
     centerHorizontal,
     flexWrap,
+    gap,
 }: ISection): CSSProperties => {
     // get flex direction
     const flexDirection = column ? 'column' : 'row';
@@ -156,6 +157,7 @@ const getSectionStyle = ({
         minWidth,
         minHeight,
         alignItems,
+        gap,
         justifyContent,
         ...centeredSettings,
         ...style,
