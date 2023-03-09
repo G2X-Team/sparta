@@ -264,6 +264,7 @@ const getCalenderStyle = (theme: ApolloTheme, themeName: string): ApolloTheme =>
     const CalendarSelected = currentTheme?.CalendarSelected ?? {};
     const CalendarMark = currentTheme?.CalendarMark ?? {};
     const CalendarMarkSelected = currentTheme?.CalendarMarkSelected ?? {};
+    const CalendarCover = currentTheme?.CalendarCover ?? {};
 
     // set default theme for cell
     assignCSS(CalendarCell, {
@@ -274,33 +275,39 @@ const getCalenderStyle = (theme: ApolloTheme, themeName: string): ApolloTheme =>
         justifyContent: 'center',
         alignItems: 'center',
         transition: 'background-color 200ms ease',
+        position: 'relative',
     });
 
     // set default theme for date
     assignCSS(CalendarDate, {
         transition: 'color 200ms',
+        position: 'relative',
     });
 
     // set default theme for day
-    assignCSS(CalendarDay, {
-        color: themeColor,
-        fontWeight: 'bold',
-    });
+    assignCSS(CalendarDay, {});
 
     // set default theme for selected
     assignCSS(CalendarSelected, {
         backgroundColor: themeColor,
         color: determineForeground(themeColor),
-        borderRadius: '10px',
+        borderRadius: '100%',
     });
 
     // set default theme for marks
     assignCSS(CalendarMark, {
         backgroundColor: themeColor,
         borderRadius: '100px',
-        width: '8px',
-        height: '8px',
+        width: '5px',
+        height: '5px',
         margin: '2px auto',
+        position: 'absolute',
+        bottom: '2px',
+    });
+
+    // set default theme for cover
+    assignCSS(CalendarCover, {
+        backgroundColor: '#EDEFF1',
     });
 
     // set default theme for selected marks
@@ -314,6 +321,7 @@ const getCalenderStyle = (theme: ApolloTheme, themeName: string): ApolloTheme =>
         'CalendarDate-selected': CalendarSelected,
         CalendarMark,
         'CalendarMark-selected': CalendarMarkSelected,
+        'CalendarDate-covered': CalendarCover,
     };
 };
 

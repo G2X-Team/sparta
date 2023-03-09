@@ -3,15 +3,20 @@ import type * as CSS from 'csstype';
 import { Section } from '../../Section/Section';
 import { Text } from '../../Text/Text';
 import { getTimezoneDate } from '../util';
+import { CalendarCell } from './CalendarCell';
+import { CalendarRange } from './CalendarRange';
 
 interface ICalendarGrid {
+    type: 'range' | 'single';
     theme?: string;
     calendarData: string[][];
     startDate?: string;
     marks?: Set<string>;
     dateRange?: string[];
-    onChange?: (date: string) => void;
+    onChange?: (date: string[]) => void;
     fontSize?: CSS.Property.FontSize;
+    id: string;
+    setDate: (date: string) => void;
 }
 
 /**
@@ -26,180 +31,110 @@ export const CalendarGrid: FC<ICalendarGrid> = ({
     dateRange,
     fontSize = '1rem',
     startDate = new Date().toLocaleDateString(),
+    type,
+    id,
+    setDate,
     onChange,
 }) => {
-    useArrowNavigation();
-
     // handles current calendar selection
-    const [selected, updateSelected] = useState(getTimezoneDate(startDate).toLocaleDateString());
+    const [selected, updateSelected] = useSelection(type, startDate);
     useOnChange(selected, onChange);
 
     // get current month
     const [currentMonth] = calendarData?.[1]?.[0]?.split('/') ?? [];
 
     return (
-        <Section
-            column
-            id={`apollodateBounds-${calendarData.length}`}
-            aria-label="select a calendar date"
-            tabIndex={0}
-            height="100%"
-            width="100%"
-        >
-            <div id="apollodate-day" className={`apollo ${theme}`} data-apollo="CalendarDay">
-                <Text style={{ fontSize }}>Su</Text>
-                <Text style={{ fontSize }}>Mo</Text>
-                <Text style={{ fontSize }}>Tu</Text>
-                <Text style={{ fontSize }}>We</Text>
-                <Text style={{ fontSize }}>Th</Text>
-                <Text style={{ fontSize }}>Fr</Text>
-                <Text style={{ fontSize }}>Sa</Text>
-            </div>
-            {calendarData.map((week, weekIndex) => (
-                <Section key={`week-${week[0]}`}>
-                    {week.map((day, dayIndex) => {
-                        const [dateMonth] = day.split('/');
-                        const active = selected === day;
-                        const marked = marks.has(day);
-                        const date = new Date(day);
-
-                        // check if date is within range
-                        let isValid = true;
-                        if (dateRange) {
-                            const [start, end] = dateRange;
-                            const currentDate = date.getTime();
-
-                            const startDate = new Date(start).getTime();
-                            isValid = startDate <= currentDate;
-
-                            if (end) {
-                                const endDate = new Date(end).getTime();
-                                isValid = isValid && endDate >= currentDate;
-                            }
-                        }
-
-                        return (
-                            <button
-                                data-apollo="CalendarDate"
+        <>
+            <CalendarRange
+                type={type}
+                selected={selected}
+                setDate={setDate}
+                updateSelected={updateSelected}
+            />
+            <Section
+                column
+                id={`apollodateBounds${id}-${calendarData.length}`}
+                aria-label="select a calendar date"
+                tabIndex={0}
+                height="100%"
+                width="100%"
+            >
+                <div id="apollodate-day" className={`apollo ${theme}`} data-apollo="CalendarDay">
+                    <Text style={{ fontSize }}>Su</Text>
+                    <Text style={{ fontSize }}>Mo</Text>
+                    <Text style={{ fontSize }}>Tu</Text>
+                    <Text style={{ fontSize }}>We</Text>
+                    <Text style={{ fontSize }}>Th</Text>
+                    <Text style={{ fontSize }}>Fr</Text>
+                    <Text style={{ fontSize }}>Sa</Text>
+                </div>
+                {calendarData.map((week, weekIndex) => (
+                    <Section key={`week-${week[0]}`}>
+                        {week.map((day, dayIndex) => (
+                            <CalendarCell
                                 key={`day-${day}`}
-                                disabled={!isValid}
-                                style={{ fontSize }}
-                                aria-label={`${active ? 'selected, ' : ''}${date.toLocaleString(
-                                    'en-US',
-                                    {
-                                        weekday: 'long',
-                                        month: 'long',
-                                        day: 'numeric',
-                                    }
-                                )}${marked ? ', marked' : ''}`}
-                                className={`
-                                    apollo
-                                    ${theme}
-                                    apollodate 
-                                    ${currentMonth !== dateMonth ? 'not-current' : ''}
-                                    ${active ? 'selected' : ''}
-                                `}
-                                id={getDateId(weekIndex, dayIndex)}
-                                onClick={() => updateSelected(day)}
-                            >
-                                <Text>{date.getDate()}</Text>
-                                <div
-                                    className={`apollo ${theme}  ${active ? 'selected' : ''}`}
-                                    data-apollo="CalendarMark"
-                                    style={{ opacity: marked ? 1 : 0 }}
-                                />
-                            </button>
-                        );
-                    })}
-                </Section>
-            ))}
-        </Section>
+                                day={day}
+                                selected={selected}
+                                marks={marks}
+                                dateRange={dateRange}
+                                fontSize={fontSize}
+                                id={id}
+                                theme={theme}
+                                currentMonth={currentMonth}
+                                weekIndex={weekIndex}
+                                dayIndex={dayIndex}
+                                updateSelected={updateSelected}
+                            />
+                        ))}
+                    </Section>
+                ))}
+            </Section>
+        </>
     );
 };
 
 /**
- * Hook that handles navigation on calendar element
- * @param setDate function that sets the date
- */
-const useArrowNavigation = (): void => {
-    // Add event listeners
-    useEffect(() => {
-        window.addEventListener('keydown', (event) => handleNavigation(event));
-
-        // Remove event listeners on cleanup
-        return () => {
-            window.removeEventListener('keydown', (event) => handleNavigation(event));
-        };
-    }, []);
-};
-
-/**
- * Function that handles keypresses
+ * Handles selection of dates
  *
- * @param event keyboard event
- * @param setDate function that sets the date
+ * @param type type of selection
+ * @param startDate currently selected dates
+ * @return hooks that handle selection
  */
-const handleNavigation = (event: KeyboardEvent): void => {
-    // check if there is an active element within scope of our calendar
-    const apolloDate = document?.activeElement?.id;
-    if (!apolloDate?.includes('apollodate-')) return;
+const useSelection = (
+    type: string,
+    startDate: string
+): [string[], (date: string | [string] | [string, string]) => void] => {
+    const [selected, updateSelected] = useState([getTimezoneDate(startDate).toLocaleDateString()]);
 
-    // prevent default behavior for arrow keys
-    if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(event.code) > -1) {
-        event.preventDefault();
-    }
+    return [
+        selected,
+        (date: string | [string] | [string, string]) => {
+            // handle full range selection
+            if (Array.isArray(date)) return updateSelected(date);
 
-    // extract relevant information from id
-    const [, weekIndexStr, dayIndexStr] = apolloDate.split('-');
-    const weekIndex = parseInt(weekIndexStr);
-    const dayIndex = parseInt(dayIndexStr);
+            // handle single selection inputs
+            if (type === 'single') return updateSelected([date]);
 
-    // get date bounds
-    const [, boundsStr] = document.querySelector('[id^="apollodateBounds-"]')?.id?.split('-') ?? [];
-    const bounds = parseInt(boundsStr);
+            // convert strings to dates
+            const input = new Date(date);
+            const selectedDates = selected.map((date) => new Date(date));
 
-    // switch based on key
-    switch (event?.key) {
-        case 'Left':
-        case 'ArrowLeft':
-            if (dayIndex > 0) {
-                document?.getElementById(getDateId(weekIndex, dayIndex - 1))?.focus();
-            } else if (weekIndex > 0) {
-                document?.getElementById(getDateId(weekIndex - 1, 6))?.focus();
+            // get start and end dates
+            const [start, end] = selectedDates;
+
+            // handle selection of less than one date
+            if (!end) {
+                // handle single selection behind start date
+                if (input.getTime() <= start.getTime()) updateSelected([date]);
+                // handle single selection after start date
+                else updateSelected([...selected, date]);
+            } else {
+                // handle selection of more than one date
+                updateSelected([date]);
             }
-            break;
-        case 'Right':
-        case 'ArrowRight':
-            if (dayIndex < 6) {
-                document?.getElementById(getDateId(weekIndex, dayIndex + 1))?.focus();
-            } else if (weekIndex < bounds) {
-                document?.getElementById(getDateId(weekIndex + 1, 0))?.focus();
-            }
-            break;
-        case 'Down':
-        case 'ArrowDown':
-            if (weekIndex < bounds) {
-                document?.getElementById(getDateId(weekIndex + 1, dayIndex))?.focus();
-            }
-            break;
-        case 'Up':
-        case 'ArrowUp':
-            if (weekIndex > 0) {
-                document?.getElementById(getDateId(weekIndex - 1, dayIndex))?.focus();
-            }
-            break;
-    }
+        },
+    ];
 };
-
-/**
- * Creates an id given a date that will let us track focus in the DOM
- *
- * @param weekIndex index keeping track of week
- * @param dayIndex index keeping track of day
- * @return date id
- */
-const getDateId = (weekIndex: number, dayIndex: number): string =>
-    `apollodate-${weekIndex}-${dayIndex}`;
 
 /**
  * Will call onChange function when selected date changes
@@ -207,9 +142,10 @@ const getDateId = (weekIndex: number, dayIndex: number): string =>
  * @param selected currently selected date
  * @param onChange function that handles date change
  */
-const useOnChange = (selected: string, onChange?: (date: string) => void): void => {
+const useOnChange = (selected: string[], onChange?: (date: string[]) => void): void => {
     useEffect(() => {
         if (!onChange) return;
-        onChange(selected);
+        const [start, end] = selected;
+        onChange(end ? [start, end] : [start]);
     }, [selected]);
 };

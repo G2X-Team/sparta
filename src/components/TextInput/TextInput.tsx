@@ -43,6 +43,8 @@ export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'Te
      * descriptive enough
      */
     hideLabel?: boolean;
+    /** Value of the input */
+    value?: string;
 }
 
 /**
@@ -102,6 +104,7 @@ export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
                     disabled={disabled}
                     name={name}
                     ref={ref}
+                    aria-label={hideLabel ? label : undefined}
                     aria-required={required}
                     aria-invalid={invalid}
                     aria-errormessage={name ? `${name}-error` : `${label}-error`}
