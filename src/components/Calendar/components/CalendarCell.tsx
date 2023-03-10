@@ -58,7 +58,7 @@ export const CalendarCell: FC<ICalendarCell> = ({
         const startDate = new Date(start).getTime();
         isValid = startDate <= currentDate;
 
-        if (end) {
+        if (end?.length && end !== 'Invalid Date') {
             const endDate = new Date(end).getTime();
             isValid = isValid && endDate >= currentDate;
         }

@@ -17,6 +17,7 @@ interface ICalendarGrid {
     fontSize?: CSS.Property.FontSize;
     id: string;
     setDate: (date: string) => void;
+    value?: [string] | [string, string];
 }
 
 /**
@@ -33,11 +34,12 @@ export const CalendarGrid: FC<ICalendarGrid> = ({
     startDate = new Date().toLocaleDateString(),
     type,
     id,
+    value,
     setDate,
     onChange,
 }) => {
     // handles current calendar selection
-    const [selected, updateSelected] = useSelection(type, startDate);
+    const [selected, updateSelected] = useSelection(type, startDate, value);
     useOnChange(selected, onChange);
 
     // get current month
@@ -46,6 +48,7 @@ export const CalendarGrid: FC<ICalendarGrid> = ({
     return (
         <>
             <CalendarRange
+                id={id}
                 type={type}
                 selected={selected}
                 setDate={setDate}
@@ -98,13 +101,26 @@ export const CalendarGrid: FC<ICalendarGrid> = ({
  *
  * @param type type of selection
  * @param startDate currently selected dates
+ * @param value override of current value
  * @return hooks that handle selection
  */
 const useSelection = (
     type: string,
-    startDate: string
+    startDate: string,
+    value?: [string] | [string, string]
 ): [string[], (date: string | [string] | [string, string]) => void] => {
     const [selected, updateSelected] = useState([getTimezoneDate(startDate).toLocaleDateString()]);
+
+    useEffect(() => {
+        if (!value?.length) return;
+        if (value === selected) return;
+        if (type === 'single' && value.length > 1) return;
+        if (value.length > 2) return;
+
+        // format the current value
+        const formattedValue = value.map((date) => getTimezoneDate(date).toLocaleDateString());
+        updateSelected(formattedValue);
+    }, [value]);
 
     return [
         selected,
