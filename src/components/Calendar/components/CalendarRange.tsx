@@ -11,6 +11,7 @@ interface ICalendar {
     updateSelected: (date: string | [string] | [string, string]) => void;
     /**  */
     setDate: (date: string) => void;
+    id: string;
 }
 
 /**
@@ -18,7 +19,7 @@ interface ICalendar {
  *
  * @return Calendar Range input
  */
-export const CalendarRange: FC<ICalendar> = ({ type, selected, updateSelected, setDate }) => {
+export const CalendarRange: FC<ICalendar> = ({ type, id, selected, updateSelected, setDate }) => {
     const [range, setRange] = useRangeInput(selected, updateSelected, setDate);
 
     return type === 'range' ? (
@@ -31,7 +32,7 @@ export const CalendarRange: FC<ICalendar> = ({ type, selected, updateSelected, s
             <TextInput
                 placeholder="mm/dd/yyyy"
                 style={{ width: 120 }}
-                name="start"
+                name={`${id}-start`}
                 label="Start Date"
                 onChange={(e) => setRange('start', e)}
                 value={range.start}
@@ -40,7 +41,7 @@ export const CalendarRange: FC<ICalendar> = ({ type, selected, updateSelected, s
             <div className="apollo-range-divider" />
             <TextInput
                 style={{ width: 120 }}
-                name="end"
+                name={`${id}-end`}
                 label="End Date"
                 placeholder="mm/dd/yyyy"
                 onChange={(e) => setRange('end', e)}
