@@ -24,6 +24,11 @@ export interface ICalendar extends Apollo<'Calendar'> {
      * with a dot signfiying importance.
      */
     marks?: Array<string>;
+    /**
+     * Date tuple that will override the current value. This should be a tuple of dates where
+     * the first date is the start date and the second date is the end date.
+     */
+    value?: [string] | [string, string];
     /** Determines what date the calendar starts on, by default it's the current date */
     startDate?: string;
     /**
@@ -50,6 +55,7 @@ export const Calendar: FC<ICalendar> = ({
     type = 'single',
     startDate,
     dateRange,
+    value,
     marks,
     theme = 'primary',
     onChange,
@@ -62,9 +68,11 @@ export const Calendar: FC<ICalendar> = ({
 
     // date range standardized to "YYYY/MM/DD-YYYY/MM/DD"
     if (dateRange) {
-        const start = getTimezoneDate(dateRange[0]).toLocaleDateString();
-        const end = getTimezoneDate(dateRange[1]).toLocaleDateString();
-        dateRange = [start, end];
+        const [start, end] = dateRange;
+        dateRange = [
+            getTimezoneDate(start).toLocaleDateString(),
+            getTimezoneDate(end).toLocaleDateString(),
+        ];
     }
 
     // marks standardized to set of "YYYY/MM/DD"
@@ -86,22 +94,25 @@ export const Calendar: FC<ICalendar> = ({
                 aria-label="calendar month controls"
             >
                 <Icon
+                    className="apollodate-controls"
+                    theme={theme}
                     aria-label="previous month"
                     onClick={() => setDate('prev')}
                     name="keyboard_arrow_left"
-                    color="#5D6871"
                 />
                 <Text tabIndex={0} style={{ outline: 'none' }}>
                     {date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </Text>
                 <Icon
+                    className="apollodate-controls"
+                    theme={theme}
                     aria-label="next month"
                     onClick={() => setDate('next')}
                     name="keyboard_arrow_right"
-                    color="#5D6871"
                 />
             </Section>
             <CalendarGrid
+                value={value}
                 type={type}
                 id={id}
                 fontSize={fontSize}

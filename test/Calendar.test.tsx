@@ -189,4 +189,68 @@ describe('Calendar', () => {
         // then
         expect(onChange).toHaveBeenCalledWith(['1/1/2021', '1/2/2021']);
     });
+
+    it('should override current default if there is a value present', () => {
+        // given
+        const onChange = jest.fn();
+        render(
+            <Calendar
+                id="testRange"
+                startDate="2021-01-01"
+                onChange={onChange}
+                type="range"
+                value={['2021-01-04', '2021-01-05']}
+            />
+        );
+        const start = screen.getByLabelText(/start date/i);
+        const end = screen.getByLabelText(/end date/i);
+
+        // whe then
+        expect(start).toHaveValue('1/4/2021');
+        expect(end).toHaveValue('1/5/2021');
+    });
+
+    it('should override value if user types in a date', async () => {
+        // given
+        const onChange = jest.fn();
+        render(
+            <Calendar
+                id="testRange"
+                startDate="2021-01-01"
+                onChange={onChange}
+                type="range"
+                value={['2021-01-04', '2021-01-05']}
+            />
+        );
+
+        // when
+        userEvent.clear(screen.getByLabelText(/start date/i));
+        await userEvent.type(screen.getByLabelText(/start date/i), '1202/2/1', { delay: 1 });
+        userEvent.clear(screen.getByLabelText(/end date/i));
+        await userEvent.type(screen.getByLabelText(/end date/i), '1202/3/1', { delay: 1 });
+
+        // then
+        expect(onChange).toHaveBeenCalledWith(['1/2/2021', '1/3/2021']);
+    });
+
+    it('should override value if user clicks on a date', async () => {
+        // given
+        const onChange = jest.fn();
+        render(
+            <Calendar
+                id="testRange"
+                startDate="2021-01-01"
+                onChange={onChange}
+                type="range"
+                value={['2021-01-04', '2021-01-05']}
+            />
+        );
+
+        // when
+        userEvent.click(screen.getByLabelText('Saturday, January 2'));
+        userEvent.click(screen.getByLabelText('Sunday, January 3'));
+
+        // then
+        expect(onChange).toHaveBeenCalledWith(['1/2/2021', '1/3/2021']);
+    });
 });

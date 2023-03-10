@@ -96,14 +96,14 @@ const CSForm: FC<ICSForm> = ({
     ): void => {
         // check if there is an onSubmit function
         if (!method?.length && onSubmit) {
-            handleSubmit(onSubmit, onError)(event);
+            handleSubmit(onSubmit, onError as any)(event);
             return;
         }
 
         // don't submit form if there are errors
         if (Object.keys(errors).length) {
             event.preventDefault();
-            if (onError) onError(errors);
+            if (onError) onError(errors as any);
             return;
         }
 
