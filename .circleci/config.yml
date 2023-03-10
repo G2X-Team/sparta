@@ -11,14 +11,14 @@ workflows:
             - node/test:
                   matrix:
                       parameters:
-                          version: ['16.10', '14.17', '12.22']
+                          version: ['16.10', '14.17']
                   pkg-manager: yarn
 
             # Linting code
             - node/run:
                   matrix:
                       parameters:
-                          version: ['16.10', '14.17', '12.22']
+                          version: ['16.10', '14.17']
                   pkg-manager: yarn
                   yarn-run: lint
 
@@ -26,7 +26,7 @@ workflows:
             - node/run:
                   matrix:
                       parameters:
-                          version: ['16.10', '14.17', '12.22']
+                          version: ['16.10', '14.17']
                   pkg-manager: yarn
                   yarn-run: build
     Publish:
