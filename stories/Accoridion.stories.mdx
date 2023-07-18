@@ -1,0 +1,201 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+
+import { Accordion } from '../src';
+
+import { BasicAccordion, AccordionMenu, ControlledAccordionMenu } from './examples/Accordion';
+
+<Meta title="Layout/Accordion" component={Accordion} />
+
+# Accordion
+
+The `Accordion` component is a collapsible container that can be used to hide and show
+content. By default, the `Accordion` handles all opening and closing logic under the
+hood. However, if you want to control the state of the `Accordion` yourself, you can
+do that as well!
+
+It's major reason for existing is to declutter informative or functional content that
+isn't necessary to see at all times. It's also a great way to hide content that may
+be overwhelming to the user at first glance.
+
+## Table of Contents
+
+-   [Functionality](#functionality)
+    -   [Basic Accordion](#basic-accordion)
+        -   [Custom Headers](#custom-headers)
+        -   [Controlled Accordion](#controlled-accordion)
+        -   [Open by default](#open-by-default)
+        -   [Controlling the max height of the panel](#controlling-the-max-height-of-the-panel)
+    -   [Accordion Menu](#accordion-menu)
+        -   [Controlled Accordion Menu](#controlled-accordion-menu)
+-   [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+The basic functionality of the accordion is quite simple, it opens and it closes. However,
+there are a few different ways to use the `Accordion` component, and that is what we'll
+be going over here.
+
+### Basic Accordion
+
+When we refer to an `Accordion` in Apollo, we really mean a single dropdown that can be
+opened and closed. This is the most basic use case of the `Accordion` component.
+
+At the most basic level, this component has two required props: `id` and `header`. The
+`id` prop is used to identify the `Accordion` component, and the `header` prop is used
+to display the header of the `Accordion`.
+
+Everything that would go inside of the `Accordion` component should be placed as children.
+
+It's as simple as that!
+
+<Canvas>
+    <Story name="Basic Accordion" args={{ id: 'open-me', header: 'Open Me' }}>
+        {BasicAccordion.bind({})}
+    </Story>
+</Canvas>
+
+#### Custom Headers
+
+If you don't like the default font or style of the header, that's okay! You can pass
+in a custom component through the `header` prop to render your own.
+
+<Canvas>
+    <Story
+        name="Custom Accordion"
+        args={{
+            id: 'open-me',
+            header: <h1 style={{ color: 'red', background: 'blue', margin: 0 }}>Open Me</h1>,
+        }}
+    >
+        {BasicAccordion.bind({})}
+    </Story>
+</Canvas>
+
+```jsx
+export default function UI() {
+    return (
+        <Accordion
+            id="open-me"
+            header={<h1 style={{ color: 'red', background: 'blue' }}>Open Me</h1>}
+        >
+            Some content
+        </Accordion>
+    );
+}
+```
+
+#### Controlled Accordion
+
+We can decide whether we want to let Apollo deal with the opening and closing logic,
+or whether we want to control it ourselves. This can be done through the `override` and `onClick`
+properties which are a `boolean` and a `MouseEventHandler` respectively
+
+```jsx
+export default function UI() {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <Accordion id="open-me" header="Open Me" override={open} onClick={() => setOpen(!open)}>
+            Some content
+        </Accordion>
+    );
+}
+```
+
+#### Open by default
+
+If you want to determine whether an `Accordion` is open or closed by default without having to
+completely control it, you can use the `defaultOpen` prop. This prop is a `boolean` that will
+determine whether the `Accordion` is open or closed on render
+
+```jsx
+export default function UI() {
+    return (
+        <Accordion id="open-me" header="Open Me" defaultOpen>
+            Some content
+        </Accordion>
+    );
+}
+```
+
+#### Controlling the max height of the panel
+
+When talking about `Accordion` components, we often refer to the panel as the content that
+is hidden and shown. The `Accordion` component has a `panelHeight` prop that can be used to
+control the maximum height of the panel.
+
+```jsx
+export default function UI() {
+    return (
+        <Accordion id="open-me" header="Open Me" panelHeight="100px">
+            Some content
+        </Accordion>
+    );
+}
+```
+
+### Accordion Menu
+
+To create an accordion menu, we can just spam a bunch of `Accordion` components together.
+Due to the simple nature of the `Accordion` component, it will just push and pull the
+content below it as it opens and closes.
+
+<Canvas>
+    <Story name="Accordion Menu">{AccordionMenu.bind({})}</Story>
+</Canvas>
+
+#### Controlled Accordion Menu
+
+If you really want to get fancy with it, you can also allow for one-at-a-time opening
+and closing of the `Accordion` components. This can be done by controlling the `override`
+prop of each `Accordion` component. This would look something like this:
+
+```jsx
+export default function UI() {
+    const [open, setOpen] = (React.useState < string) | (null > null);
+
+    return (
+        <>
+            <Accordion
+                id="option-1"
+                header="Option 1"
+                override={open === 'option-1'}
+                onClick={() => setOpen('option-1')}
+            >
+                Content of option 1
+            </Accordion>
+            <Accordion
+                id="option-2"
+                header="Option 2"
+                override={open === 'option-2'}
+                onClick={() => setOpen('option-2')}
+            >
+                Content of option 2
+            </Accordion>
+            <Accordion
+                id="option-3"
+                header="Option 3"
+                override={open === 'option-3'}
+                onClick={() => setOpen('option-3')}
+            >
+                Content of option 3
+            </Accordion>
+        </>
+    );
+}
+```
+
+And act something like this:
+
+<Canvas>
+    <Story name="Controlled Accordion Menu">{ControlledAccordionMenu.bind({})}</Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+Transition focus to other functionalities. Maybe introduce some of them or talk about
+other props briefly. That way the user isn't abruptly introduce to the ArgsTable
+below.
+
+<ArgsTable of={Accordion} />
