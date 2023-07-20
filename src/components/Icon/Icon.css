@@ -1,6 +1,7 @@
 .apollo[data-apollo="Icon"] {
     user-select: none;
     margin: 0;
+    border: 0;
 }
 
 .apollo[data-apollo="Icon"]:active {
