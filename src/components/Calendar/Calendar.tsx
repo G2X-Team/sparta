@@ -63,7 +63,8 @@ export const Calendar: FC<ICalendar> = ({
     id,
 }) => {
     const [calendarData, date, setDate] = useCalendarData(
-        startDate ?? new Date().toLocaleDateString()
+        startDate ?? new Date().toLocaleDateString(),
+        value?.length === 1 ? value[0] : undefined
     );
 
     // date range standardized to "YYYY/MM/DD-YYYY/MM/DD"
@@ -132,13 +133,20 @@ export const Calendar: FC<ICalendar> = ({
  * This hook will keep track of the data to render on the calendar grid
  *
  * @param startDate the current date
+ * @param controlledValue the current date
  * @return tuple containing calendar data and date update
  */
-const useCalendarData = (startDate: string): [string[][], Date, (incomingDate: string) => void] => {
-    const [date, setDate] = useState(getTimezoneDate(startDate));
+const useCalendarData = (
+    startDate: string,
+    controlledValue?: string
+): [string[][], Date, (incomingDate: string) => void] => {
+    const [date, setDate] = useState(getTimezoneDate(controlledValue ?? startDate));
     const [calendarData, updateCalendarData] = useState<string[][]>([]);
 
     useEffect(() => {
+        const controlledDate = controlledValue ? getTimezoneDate(controlledValue) : undefined;
+        if (controlledDate && controlledDate !== date) setDate(controlledDate);
+
         // check if this needs to execute
         if (calendarData?.length) {
             const calendarDataDate = new Date(calendarData[1][0]);
@@ -210,7 +218,7 @@ const useCalendarData = (startDate: string): [string[][], Date, (incomingDate: s
         }
 
         updateCalendarData([...weeks]);
-    }, [date]);
+    }, [date, controlledValue]);
 
     return [
         calendarData,

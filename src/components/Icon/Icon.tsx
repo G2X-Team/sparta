@@ -6,7 +6,7 @@ import type { Apollo } from '../../interfaces/Apollo';
 import type * as CSS from 'csstype';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IIcon extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Icon'> {
+export interface IIcon extends HTMLAttributes<HTMLSpanElement>, Apollo<'Icon'> {
     /** The icon name the user wants to render */
     name: string;
     /** Specification of an onClick method will convert icon into a button */
@@ -41,23 +41,36 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
         style,
         ...props
     }: IIcon,
-    ref: ForwardedRef<HTMLSpanElement>
+    ref: ForwardedRef<HTMLSpanElement | HTMLButtonElement>
 ) {
     gaurdApolloName(props, 'Icon');
 
-    return (
-        <span
+    return clickable ? (
+        <button
             {...props}
             role={clickable ? 'button' : undefined}
-            ref={ref}
+            ref={ref as ForwardedRef<HTMLButtonElement>}
             style={getIconStyle(disabled, color, style)}
-            tabIndex={onClick ? 0 : undefined}
             onKeyDown={(event) =>
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
             className={`material-icons apollo
                 ${clickable ? 'clickable' : ''} ${className} ${theme}`}
             onClick={onClick}
+        >
+            {name}
+        </button>
+    ) : (
+        <span
+            {...props}
+            role={clickable ? 'button' : undefined}
+            ref={ref}
+            style={getIconStyle(disabled, color, style)}
+            onKeyDown={(event) =>
+                (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
+            }
+            className={`material-icons apollo
+                ${clickable ? 'clickable' : ''} ${className} ${theme}`}
         >
             {name}
         </span>
