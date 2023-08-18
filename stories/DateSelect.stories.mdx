@@ -1,0 +1,40 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+
+import { DateSelect } from '../src';
+
+import { BasicDateSelect } from './examples/DateSelect';
+
+<Meta title="Form/Date Select" component={DateSelect} />
+
+# Date Select
+
+The Date Select is a simple component that allows the user to select a date. It is
+a wrapper around the `Calendar` component and uses the `TextInput` component to
+display the date. 
+
+## Table of Contents
+
+- [Functionality](#functionality)
+- [Setup](#setup)
+- [Other Props & Functionalities](#other-props--functionalities)
+
+## Functionality
+
+The functionality for the Date Select component is fairly simple, all you need
+to do is pass the props that you would want for the component and that's it.
+
+This component particularly plays nice with the `Form` and is able to register it's
+inputs when needed.
+
+<Canvas>
+	<Story name="Basic Date Select" args={{ placeholder: "Pick a date" }}>
+		{BasicDateSelect.bind({})}
+	</Story>
+</Canvas>
+
+## Other Props & Functionalities
+
+Here are some other props to explore regarding the Date Select component.
+
+<ArgsTable of={DateSelect} />

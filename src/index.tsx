@@ -32,6 +32,8 @@ export { Image } from './components/Image/Image';
 export { Spinner } from './components/Spinner/Spinner';
 export { ApolloCSS } from './util/Theming';
 export { Calendar } from './components/Calendar/Calendar';
+export { Accordion } from './components/Accordion/Accordion';
+export { DateSelect } from './components/DateSelect/DateSelect';
 
 export type {
     FormValidator,

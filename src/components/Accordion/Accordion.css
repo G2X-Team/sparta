@@ -1,0 +1,32 @@
+.apollo[data-apollo='Accordion'] > button {
+    background: white;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    padding: 10px 0;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    transition: filter 300ms;
+}
+
+.apollo[data-apollo='Accordion'] > button:hover {
+    filter: brightness(0.95);
+}
+
+.apollo[data-apollo='Accordion'] span {
+    transition: transform 300ms ease;
+}
+
+.apollo[data-apollo='Accordion'] .open {
+    transform: rotate(90deg);
+}
+
+.apollo[data-apollo='Accordion'] section {
+    border-bottom: 1.5px solid #E7EBEC;
+    transition: height 300ms;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}

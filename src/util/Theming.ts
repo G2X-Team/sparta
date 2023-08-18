@@ -223,6 +223,7 @@ const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
             ...getTextStyle(newTheme, themeName),
             ...getIconStyle(newTheme, themeName),
             ...getCalenderStyle(newTheme, themeName),
+            ...getDateSelectStyle(newTheme, themeName),
         };
     });
 
@@ -594,6 +595,71 @@ const getSelectStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
         'Select/> span.input': Select,
         'Select/> span.input.disabledinput': DisabledInput,
         'Select/> div.label': SelectLabel,
+    };
+};
+
+/**
+ * Select default theme
+ *
+ * @param theme theme to use
+ * @param themeName theme name
+ * @return something
+ */
+const getDateSelectStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+    const DateSelect = (theme[themeName] as any)?.DateSelect ?? {};
+    const DateSelectLabel = (theme[themeName] as any)?.DateSelectLabel ?? {};
+    const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
+
+    // DateSelect menu
+    if (!DateSelect?.outlineColor) {
+        DateSelect.outlineColor = changeOpacity(themeColor as CSS.Property.Color, 0.3);
+    }
+    if (!DateSelect?.border) {
+        DateSelect.border = `1.5px solid ${themeName === 'invalid' ? themeColor : '#E7EBEC'}`;
+    }
+    if (!DateSelect.fontFamily) {
+        DateSelect.fontFamily = theme?.text?.fontFamily;
+    }
+    if (!DateSelect?.color) {
+        DateSelect.color = theme?.text?.color;
+    }
+
+    // focus
+    if (!DateSelect?.focusWithin) {
+        DateSelect.focusWithin = {
+            border: `1.5px solid ${themeColor}`,
+        };
+    }
+
+    // DateSelect label
+    if (!DateSelectLabel?.color) {
+        DateSelectLabel.color = theme?.text?.color;
+    }
+    if (!DateSelectLabel?.fontSize) {
+        DateSelectLabel.fontSize = '0.9rem';
+    }
+    if (!DateSelectLabel?.paddingBottom) {
+        DateSelectLabel.paddingBottom = '5px';
+    }
+    if (!DateSelectLabel.fontFamily) {
+        DateSelectLabel.fontFamily = theme?.text?.fontFamily;
+    }
+
+    // disabled
+    let DisabledInput: ComponentCSS = {};
+    if (!DateSelect?.disabled) {
+        DisabledInput = {
+            background: '#E7EBEC',
+            cursor: 'not-allowed',
+        };
+    } else {
+        DisabledInput.disabled = DateSelect.disabled;
+    }
+
+    return {
+        'DateSelect/> span.input': DateSelect,
+        'DateSelect/> span.input.disabledinput': DisabledInput,
+        'DateSelect/> div.label': DateSelectLabel,
     };
 };
 

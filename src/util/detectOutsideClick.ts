@@ -63,7 +63,9 @@ export const handleOutsideClick = (
          */
         const onClick = (event: MouseEvent): void => {
             // checks to see if the event was clicked outside of the target element
+            console.log(event.target);
             if (element.current !== null && !element.current.contains(event.target)) {
+                console.log(element.current.contains(event.target), event.target);
                 // toggle if it is active
                 method();
             }
