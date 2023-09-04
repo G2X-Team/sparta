@@ -1,4 +1,4 @@
-<h1 style="font-family: serif" align="center">AΠOΛΛΩΝ</h1>
+<h1 style="font-family: serif" align="center">ΣΠΑΡΤΗ</h1>
 
 <p align="center">
     <img src="https://i.pinimg.com/564x/ad/fb/0f/adfb0fd0aa639a744d71f462538e68f1.jpg" width="400px">
