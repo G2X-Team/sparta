@@ -117,10 +117,10 @@ export const Dropdown: FC<IDropdown> = ({
     };
 
     return (
-        <div {...props} className={`apollo ${className}`}>
+        <div {...props} className={`sparta ${className}`}>
             {renderDropdown()}
         </div>
     );
 };
 
-Dropdown.defaultProps = { 'data-apollo': 'Dropdown' };
+Dropdown.defaultProps = { 'data-sparta': 'Dropdown' };

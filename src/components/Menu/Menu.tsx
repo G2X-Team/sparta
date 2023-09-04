@@ -147,13 +147,13 @@ export const Menu: FC<IMenu> = ({
         <div
             {...props}
             ref={menu}
-            className={`apollo ${className || ''}`}
+            className={`sparta ${className || ''}`}
             style={getMenuStyle(props)}
             role={!hasOptions ? 'application' : undefined}
             aria-roledescription={description}
         >
             {headerComponent}
-            <div className="apollo-component-library-menu-component-inner">
+            <div className="sparta-component-library-menu-component-inner">
                 {navigation ? <nav>{formattedChildren}</nav> : formattedChildren}
             </div>
             {footerComponent}
@@ -161,7 +161,7 @@ export const Menu: FC<IMenu> = ({
     );
 };
 
-Menu.defaultProps = { 'data-apollo': 'Menu' };
+Menu.defaultProps = { 'data-sparta': 'Menu' };
 
 /**
  * Gets menu style

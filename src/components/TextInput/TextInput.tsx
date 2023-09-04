@@ -86,7 +86,7 @@ export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
     }, []);
 
     return (
-        <div className={`apollo ${theme}`} data-apollo="TextInputLabel">
+        <div className={`sparta ${theme}`} data-sparta="TextInputLabel">
             <label>
                 {!hideLabel ? (
                     <div className="label">
@@ -110,7 +110,7 @@ export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
                     aria-errormessage={name ? `${name}-error` : `${label}-error`}
                     type={password ? 'password' : 'text'}
                     className={`
-                        apollo
+                        sparta
                         ${!invalid ? 'valid' : 'invalid'}
                         ${className}
                         ${theme}
@@ -131,4 +131,4 @@ export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
     );
 });
 
-TextInput.defaultProps = { 'data-apollo': 'TextInput' };
+TextInput.defaultProps = { 'data-sparta': 'TextInput' };

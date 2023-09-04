@@ -54,7 +54,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
             onKeyDown={(event) =>
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
-            className={`material-icons apollo
+            className={`material-icons sparta
                 ${clickable ? 'clickable' : ''} ${className} ${theme}`}
             onClick={onClick}
         >
@@ -69,7 +69,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
             onKeyDown={(event) =>
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
-            className={`material-icons apollo
+            className={`material-icons sparta
                 ${clickable ? 'clickable' : ''} ${className} ${theme}`}
         >
             {name}
@@ -77,7 +77,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
     );
 });
 
-Icon.defaultProps = { 'data-apollo': 'Icon' };
+Icon.defaultProps = { 'data-sparta': 'Icon' };
 
 /**
  * Gets Icon style object

@@ -45,7 +45,7 @@ export const Card: FC<ICard> = ({ children, className, ...props }) => {
         return (
             <>
                 {header}
-                <div className="apollo-component-library-card-component-body">
+                <div className="sparta-component-library-card-component-body">
                     {formatted.getOther()}
                 </div>
                 {footer}
@@ -54,10 +54,10 @@ export const Card: FC<ICard> = ({ children, className, ...props }) => {
     };
 
     return (
-        <div {...props} className={`apollo-component-library-card-component ${className}`}>
+        <div {...props} className={`sparta-component-library-card-component ${className}`}>
             {renderAll()}
         </div>
     );
 };
 
-Card.defaultProps = { 'data-apollo': 'Card' };
+Card.defaultProps = { 'data-sparta': 'Card' };

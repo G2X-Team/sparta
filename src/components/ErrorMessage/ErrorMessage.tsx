@@ -22,16 +22,16 @@ export interface IErrorMessage extends HTMLAttributes<HTMLDivElement>, Sparta<'E
  * @return error message components
  */
 export const ErrorMessage: FC<IErrorMessage> = ({
-    'data-apollo': dataApollo = 'ErrorMessage',
+    'data-sparta': dataApollo = 'ErrorMessage',
     active = false,
     className = '',
     children,
     ...props
 }) => {
-    gaurdApolloName({ 'data-apollo': dataApollo }, 'ErrorMessage');
+    gaurdApolloName({ 'data-sparta': dataApollo }, 'ErrorMessage');
 
     return active ? (
-        <div {...props} role="alert" data-apollo={dataApollo} className={`apollo ${className}`}>
+        <div {...props} role="alert" data-sparta={dataApollo} className={`sparta ${className}`}>
             <Text color="#F04438" style={{ fontSize: 14 }}>
                 {children}
             </Text>

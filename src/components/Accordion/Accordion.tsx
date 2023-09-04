@@ -40,7 +40,7 @@ export const Accordion: FC<IAccordion> = ({
     const accordion = useAccordion(defaultOpen, panelHeight, override, onClick);
 
     return (
-        <div {...props} className="apollo">
+        <div {...props} className="sparta">
             <button
                 id={`${id}-header`}
                 type="button"
@@ -123,5 +123,5 @@ const useAccordion = (
 };
 
 Accordion.defaultProps = {
-    'data-apollo': 'Accordion',
+    'data-sparta': 'Accordion',
 };

@@ -40,17 +40,17 @@ export const Switch: FC<ISwitch> = ({
     gaurdApolloName(props, 'Switch');
 
     return (
-        <div className="apollo-component-library-switch-component-wrapper">
-            <label className="apollo-component-library-switch-component-label">
+        <div className="sparta-component-library-switch-component-wrapper">
+            <label className="sparta-component-library-switch-component-label">
                 <input
                     {...props}
                     type="checkbox"
                     role="switch"
-                    className="apollo-component-library-switch-component-input"
+                    className="sparta-component-library-switch-component-input"
                 />
                 <span
                     className={`
-                        apollo-component-library-switch-component 
+                        sparta-component-library-switch-component 
                         ${variant} 
                         ${className} 
                     `}
@@ -61,4 +61,4 @@ export const Switch: FC<ISwitch> = ({
     );
 };
 
-Switch.defaultProps = { 'data-apollo': 'Switch' };
+Switch.defaultProps = { 'data-sparta': 'Switch' };

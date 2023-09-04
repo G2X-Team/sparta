@@ -66,7 +66,7 @@ export const CalendarCell: FC<ICalendarCell> = ({
 
     return (
         <button
-            data-apollo="CalendarDate"
+            data-sparta="CalendarDate"
             key={`day-${day}`}
             disabled={!isValid}
             style={{ fontSize }}
@@ -77,7 +77,7 @@ export const CalendarCell: FC<ICalendarCell> = ({
                 day: 'numeric',
             })}${marked ? ', marked' : ''}`}
             className={`
-                apollo
+                sparta
                 ${covered ? 'covered' : ''}
                 ${theme}
                 apollodate 
@@ -89,8 +89,8 @@ export const CalendarCell: FC<ICalendarCell> = ({
         >
             <Text>{date.getDate()}</Text>
             <div
-                className={`apollo ${theme}  ${active ? 'selected' : ''}`}
-                data-apollo="CalendarMark"
+                className={`sparta ${theme}  ${active ? 'selected' : ''}`}
+                data-sparta="CalendarMark"
                 style={{ opacity: marked ? 1 : 0 }}
             />
         </button>

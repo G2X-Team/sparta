@@ -46,7 +46,7 @@ export const DateTimePicker: FC<IDateTimePicker> = ({
     };
     return (
         <DatePicker
-            className="apollo-component-library-date-picker-component"
+            className="sparta-component-library-date-picker-component"
             placeholderText={placeholder}
             dateFormat={format}
             selected={startDate}
@@ -59,4 +59,4 @@ export const DateTimePicker: FC<IDateTimePicker> = ({
     );
 };
 
-DateTimePicker.defaultProps = { 'data-apollo': 'DateTimePicker' };
+DateTimePicker.defaultProps = { 'data-sparta': 'DateTimePicker' };

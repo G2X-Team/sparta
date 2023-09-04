@@ -45,7 +45,7 @@ export const Spinner: FC<ISpinner> = ({
         <div
             {...props}
             style={getSpinnerStyle({ color, size, style, variant })}
-            className="apollo"
+            className="sparta"
             role="status"
             aria-label={label ?? 'Loading...'}
         >
@@ -84,4 +84,4 @@ const getSpinnerStyle = ({ color, size, style, variant }: ISpinner): CSSProperti
     };
 };
 
-Spinner.defaultProps = { 'data-apollo': 'Spinner' };
+Spinner.defaultProps = { 'data-sparta': 'Spinner' };

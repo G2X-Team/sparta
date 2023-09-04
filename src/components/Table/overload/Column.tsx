@@ -47,5 +47,5 @@ export const Column: FC<IColumn> = ({ datakey, dataRenderer, header, ...props })
 };
 
 Column.defaultProps = {
-    'data-apollo': 'Table.Column',
+    'data-sparta': 'Table.Column',
 };

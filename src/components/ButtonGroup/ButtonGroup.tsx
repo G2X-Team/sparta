@@ -50,10 +50,10 @@ export const ButtonGroup: FC<IButtonGroup> = ({
     };
 
     return (
-        <div {...props} className={`apollo-component-library-button-group-component ${className}`}>
+        <div {...props} className={`sparta-component-library-button-group-component ${className}`}>
             {renderAll()}
         </div>
     );
 };
 
-ButtonGroup.defaultProps = { 'data-apollo': 'ButtonGroup' };
+ButtonGroup.defaultProps = { 'data-sparta': 'ButtonGroup' };

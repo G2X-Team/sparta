@@ -77,4 +77,4 @@ const getGridStyle = ({
     };
 };
 
-Grid.defaultProps = { 'data-apollo': 'Grid' };
+Grid.defaultProps = { 'data-sparta': 'Grid' };

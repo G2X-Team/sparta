@@ -68,9 +68,9 @@ export const Modal: FC<IModal> = ({
             {display ? (
                 <div
                     style={getModalStyle(effect)}
-                    className="apollo-component-library-modal-component-container"
+                    className="sparta-component-library-modal-component-container"
                 >
-                    <div className="apollo-component-library-modal-component-backdrop">
+                    <div className="sparta-component-library-modal-component-backdrop">
                         {
                             <Dialog
                                 {...props}
@@ -89,7 +89,7 @@ export const Modal: FC<IModal> = ({
     );
 };
 
-Modal.defaultProps = { 'data-apollo': 'Modal' };
+Modal.defaultProps = { 'data-sparta': 'Modal' };
 
 /**
  * Gets modal style object

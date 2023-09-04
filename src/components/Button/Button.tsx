@@ -51,7 +51,7 @@ export const Button: FC<IButton> = forwardRef(function Button(
             {...props}
             aria-busy={loading}
             disabled={disabled || loading}
-            className={`apollo ${variant} ${theme} ${className}`}
+            className={`sparta ${variant} ${theme} ${className}`}
             ref={ref}
         >
             {!loading ? (
@@ -65,4 +65,4 @@ export const Button: FC<IButton> = forwardRef(function Button(
     );
 });
 
-Button.defaultProps = { 'data-apollo': 'Button' };
+Button.defaultProps = { 'data-sparta': 'Button' };

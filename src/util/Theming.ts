@@ -127,25 +127,25 @@ const getCSSString = (css: CSSProperties): string => {
  */
 export const createApolloCSS = (document: Document, theme: ApolloTheme): void => {
     // check if css already exists
-    if (document.getElementById('apollo-css')) return;
+    if (document.getElementById('sparta-css')) return;
 
     // create style tag
     const styleTag = document.createElement('style');
-    styleTag.id = 'apollo-css';
+    styleTag.id = 'sparta-css';
 
     // create css string
     let cssString = '';
 
     // loop through every theme
     Object.keys(theme).forEach((themeName) => {
-        // loop through every apollo name
+        // loop through every sparta name
         Object.keys(theme[themeName]).forEach((apolloName) => {
             // define component
             const component = (theme[themeName] as any)[apolloName];
 
             // check if component has a variant
             const [componentName, variant] = apolloName.split('-');
-            let classname = `.apollo[data-apollo="${componentName}"]`;
+            let classname = `.sparta[data-sparta="${componentName}"]`;
             if (variant) classname += `.${variant}`;
 
             // add css to string
@@ -210,7 +210,7 @@ const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
     Object.keys(newTheme).forEach((themeName) => {
         if (themeName === 'text') return;
 
-        // loop through every apollo name
+        // loop through every sparta name
         newTheme[themeName] = {
             // make sure to retain existing theme
             ...(newTheme[themeName] ?? {}),
@@ -737,7 +737,7 @@ export class ApolloCSS {
 
     constructor(t?: ApolloTheme, document?: Document, noOverride?: true) {
         if (noOverride) {
-            if (document?.getElementById('apollo-css')) {
+            if (document?.getElementById('sparta-css')) {
                 this.css = '';
                 return;
             }
@@ -752,7 +752,7 @@ export class ApolloCSS {
         // loop through every theme
         Object.keys(theme).forEach((themeName) => {
             if (themeName === 'text') return;
-            // loop through every apollo name
+            // loop through every sparta name
             Object.keys(theme[themeName]).forEach((apolloName) => {
                 // define component
                 const component = (theme[themeName] as any)[apolloName];
@@ -760,7 +760,7 @@ export class ApolloCSS {
                 // check if component has a variant or target
                 const [cM, variant] = apolloName.split('-');
                 const [componentName, target] = cM.split('/');
-                let classname = `.apollo[data-apollo="${componentName}"].${themeName}${
+                let classname = `.sparta[data-sparta="${componentName}"].${themeName}${
                     target ? ' ' + target : ''
                 }`;
                 if (variant) classname += `.${variant}`;
@@ -809,16 +809,16 @@ export class ApolloCSS {
      */
     applyCSS(document: Document, noOverride?: boolean): void {
         if (noOverride) {
-            if (document?.getElementById('apollo-css')) return;
+            if (document?.getElementById('sparta-css')) return;
         } else {
-            if (document?.getElementById('apollo-css')) {
-                document.getElementById('apollo-css')?.remove();
+            if (document?.getElementById('sparta-css')) {
+                document.getElementById('sparta-css')?.remove();
             }
         }
 
         // create tag
         const styleTag = document.createElement('style');
-        styleTag.id = 'apollo-css';
+        styleTag.id = 'sparta-css';
         styleTag.innerText = this.css;
 
         // append tag to body
@@ -834,7 +834,7 @@ export class ApolloCSS {
      */
     getCSS(): { id: string; children: string } {
         return {
-            id: 'apollo-css',
+            id: 'sparta-css',
             children: this.css,
         };
     }

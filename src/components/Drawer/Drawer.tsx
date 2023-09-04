@@ -159,5 +159,5 @@ export const Drawer: FC<IDrawer> & { Button: FC<IDrawerButton> } = ({
     return <div {...props}>{renderAll(children)}</div>;
 };
 
-Drawer.defaultProps = { 'data-apollo': 'Drawer' };
+Drawer.defaultProps = { 'data-sparta': 'Drawer' };
 Drawer.Button = Button;

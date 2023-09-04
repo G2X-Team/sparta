@@ -34,7 +34,7 @@ export const View: FC<IView> = ({
     return (
         <div
             {...props}
-            className={`apollo ${className}`}
+            className={`sparta ${className}`}
             style={getViewStyle({ display, position, style })}
         >
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
@@ -42,7 +42,7 @@ export const View: FC<IView> = ({
     );
 };
 
-View.defaultProps = { 'data-apollo': 'View' };
+View.defaultProps = { 'data-sparta': 'View' };
 
 /**
  * Gets the style object for the View given props

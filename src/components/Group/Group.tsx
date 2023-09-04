@@ -106,7 +106,7 @@ export const Group: FC<IGroup> = ({
         <>
             <fieldset
                 {...props}
-                className={`apollo-component-library-group ${invalid ? 'invalid' : ''}`}
+                className={`sparta-component-library-group ${invalid ? 'invalid' : ''}`}
                 aria-errormessage={name ? `${name}-error` : undefined}
                 aria-invalid={invalid}
             >
@@ -132,7 +132,7 @@ export const Group: FC<IGroup> = ({
                 </legend>
                 <div
                     className={`
-                        apollo-component-library-group-wrapper 
+                        sparta-component-library-group-wrapper 
                         ${invalid ? 'invalid' : ''}
                     `}
                 >
@@ -146,7 +146,7 @@ export const Group: FC<IGroup> = ({
     );
 };
 
-Group.defaultProps = { 'data-apollo': 'Group' };
+Group.defaultProps = { 'data-sparta': 'Group' };
 
 const labelTextStyle: CSSProperties = {
     paddingBottom: 5,

@@ -31,7 +31,7 @@ export const Alert: FC<IAlert> = ({ children, type = 'danger', ...props }) => {
      */
     const getVariant = (): string => {
         // determine custom variant
-        let customVariant = 'apollo-component-library-alert-component ';
+        let customVariant = 'sparta-component-library-alert-component ';
 
         // check if its a type or not
         if (type == 'danger') customVariant += 'danger';
@@ -49,4 +49,4 @@ export const Alert: FC<IAlert> = ({ children, type = 'danger', ...props }) => {
     );
 };
 
-Alert.defaultProps = { 'data-apollo': 'Alert' };
+Alert.defaultProps = { 'data-sparta': 'Alert' };

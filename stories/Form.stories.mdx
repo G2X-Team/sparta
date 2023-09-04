@@ -227,8 +227,8 @@ You can do so by using the `OverloadHandler` utility and the `Overloader` interf
 example of how you would do so:
 
 ```typescript
-import type { Overloader } from '@g2x/apollo'; // type will help with auto-complete
-import { OverloadHandler } from '@g2x/apollo';
+import type { Overloader } from '@g2x/sparta'; // type will help with auto-complete
+import { OverloadHandler } from '@g2x/sparta';
 
 interface IMyComponent extends Overloader {
     /* your defined props here */
@@ -247,7 +247,7 @@ export default function Login() {
     return (
         <Form>
             // by adding this prop to your component, it can be validated
-            <MyComponent apollo-override />
+            <MyComponent sparta-override />
         </Form>
     )
 }
@@ -256,7 +256,7 @@ export default function Login() {
 To briefly explain what's going on, we are using the `OverloadHandler` to wrap the `TextInput`
 component so that it can be validated. However, the `OverloadHandler` needs additional information,
 and it gets it through the `apolloRef` prop. This prop is automatically added to your component
-when you add the `apollo-override` prop to your component and it's in the `Form`. There is a lot
+when you add the `sparta-override` prop to your component and it's in the `Form`. There is a lot
 of magic going on here, but if you use the type and auto-complete, this will be straightforward.
 
 Here is a working example of this in action:

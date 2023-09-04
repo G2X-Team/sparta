@@ -22,7 +22,7 @@ export interface ApolloRef {
 
 export interface Overloader {
     /** Required property that allows us to find user-wrapped Sparta components */
-    'apollo-overload': true;
+    'sparta-overload': true;
     /**
      * This is a reference that is automatically passed by Sparta processing, only used to
      * pass to the `OverloadHandler`

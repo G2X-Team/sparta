@@ -97,7 +97,7 @@ export const Section: FC<ISection> = ({
     );
 };
 
-Section.defaultProps = { 'data-apollo': 'Section' };
+Section.defaultProps = { 'data-sparta': 'Section' };
 
 /**
  * Gets section style objects from properties

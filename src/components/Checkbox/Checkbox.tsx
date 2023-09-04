@@ -62,7 +62,7 @@ export const Checkbox: FC<ICheckbox> = ({
         <>
             <label
                 className={`
-                    apollo-component-library-checkbox-component-label 
+                    sparta-component-library-checkbox-component-label 
                     ${inline ? 'inline' : ''}
                 `}
             >
@@ -76,7 +76,7 @@ export const Checkbox: FC<ICheckbox> = ({
                     type="checkbox"
                     disabled={disabled}
                     className={`
-                        apollo-component-library-checkbox-component 
+                        sparta-component-library-checkbox-component 
                         ${invalid ? 'invalid' : ''}
                         ${className || ''}
                     `}
@@ -101,4 +101,4 @@ export const Checkbox: FC<ICheckbox> = ({
     );
 };
 
-Checkbox.defaultProps = { 'data-apollo': 'Checkbox' };
+Checkbox.defaultProps = { 'data-sparta': 'Checkbox' };

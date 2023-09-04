@@ -1,16 +1,16 @@
-.apollo-component-library-radio-component {
+.sparta-component-library-radio-component {
     margin-right: 5px;
 }
 
-.apollo-component-library-radio-component.invalid {
+.sparta-component-library-radio-component.invalid {
     outline: 2px solid #c70000;
 }
 
-.apollo-component-library-radio-component-label {
+.sparta-component-library-radio-component-label {
     display: block;
     padding-bottom: 5px;
 }
 
-.apollo-component-library-radio-component-label.inline {
+.sparta-component-library-radio-component-label.inline {
     display: inline-block;
 }

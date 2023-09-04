@@ -50,7 +50,7 @@ export const Option: FC<IOption> = forwardRef(function Option(
             onClick={handleClick}
             onKeyDown={(event) => event.key === 'Enter' && handleClick()}
             role="option"
-            className={`apollo-component-library-option-component ${className || ''}`}
+            className={`sparta-component-library-option-component ${className || ''}`}
         >
             <Text>{children}</Text>
         </li>
@@ -59,4 +59,4 @@ export const Option: FC<IOption> = forwardRef(function Option(
     return <>{wrap ? wrap(option) : option}</>;
 });
 
-Option.defaultProps = { 'data-apollo': 'Option' };
+Option.defaultProps = { 'data-sparta': 'Option' };

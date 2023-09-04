@@ -56,7 +56,7 @@ export const Image: FC<IImage> = ({
     return (
         <div
             {...props}
-            className={`apollo ${className} ${
+            className={`sparta ${className} ${
                 loaded === 'loading' ? 'loading' : ''
             } ${spinnerSize}`}
             role="img"
@@ -87,4 +87,4 @@ export const Image: FC<IImage> = ({
     );
 };
 
-Image.defaultProps = { 'data-apollo': 'Image' };
+Image.defaultProps = { 'data-sparta': 'Image' };

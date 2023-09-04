@@ -72,7 +72,7 @@ export const Text: FC<IText> = ({
      */
     const getVariant = (): string => {
         // determine custom variant
-        let customVariant = 'apollo ' + theme + ' ';
+        let customVariant = 'sparta ' + theme + ' ';
 
         // check if its a header or not
         if (header) customVariant += `h${header} `;
@@ -143,4 +143,4 @@ export const Text: FC<IText> = ({
     );
 };
 
-Text.defaultProps = { 'data-apollo': 'Text' };
+Text.defaultProps = { 'data-sparta': 'Text' };

@@ -138,12 +138,12 @@ export const Table: FC<ITable> & { Column: FC<IColumn> } = ({
     };
 
     // class name after all modifications
-    const moddedClassName = `apollo ${className} ${columns ? 'has-columns' : ''} grid-${grid}`;
+    const moddedClassName = `sparta ${className} ${columns ? 'has-columns' : ''} grid-${grid}`;
 
     return (
         <Grid
             style={{ maxWidth: width, minHeight: height }}
-            data-apollo-id="TableWrapper"
+            data-sparta-id="TableWrapper"
             className={moddedClassName}
             rows={paginate ? 'auto auto' : undefined}
         >
@@ -161,7 +161,7 @@ export const Table: FC<ITable> & { Column: FC<IColumn> } = ({
 };
 
 Table.defaultProps = {
-    'data-apollo': 'Table',
+    'data-sparta': 'Table',
 };
 Table.Column = Column;
 

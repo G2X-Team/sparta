@@ -70,7 +70,7 @@ export const Avatar: FC<IAvatar> = forwardRef(function Icon(
         <div
             {...props}
             ref={ref}
-            className={`apollo ${className} ${isClickable} ${size} ${theme}`}
+            className={`sparta ${className} ${isClickable} ${size} ${theme}`}
             aria-label={`${fallback} avatar`}
             style={avatarStyle}
             role={onClick || clickable ? 'button' : undefined}
@@ -90,7 +90,7 @@ export const Avatar: FC<IAvatar> = forwardRef(function Icon(
     );
 });
 
-Avatar.defaultProps = { 'data-apollo': 'Avatar' };
+Avatar.defaultProps = { 'data-sparta': 'Avatar' };
 
 /**
  * The default fallback for the Avatar component

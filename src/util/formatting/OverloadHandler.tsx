@@ -11,9 +11,9 @@ interface IOverloadHandler {
 }
 
 /**
- * This component will perpetuate apollo processing to all children
+ * This component will perpetuate sparta processing to all children
  *
- * @return apollo processed children
+ * @return sparta processed children
  */
 export const OverloadHandler: FC<IOverloadHandler> = ({ apolloRef, children }) => {
     /**

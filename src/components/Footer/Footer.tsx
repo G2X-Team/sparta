@@ -20,10 +20,10 @@ export const Footer: FC<IFooter> = ({ children, className = '', parentProps, ...
     gaurdApolloName(props, 'Footer');
 
     return (
-        <footer {...props} className={`apollo-component-library-footer-component ${className}`}>
+        <footer {...props} className={`sparta-component-library-footer-component ${className}`}>
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
         </footer>
     );
 };
 
-Footer.defaultProps = { 'data-apollo': 'Footer' };
+Footer.defaultProps = { 'data-sparta': 'Footer' };

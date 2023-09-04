@@ -1,8 +1,8 @@
-.apollo[data-apollo="DateSelect"] {
+.sparta[data-sparta="DateSelect"] {
     position: relative;
 }
 
-.apollo[data-apollo="DateSelect"] > span.input {
+.sparta[data-sparta="DateSelect"] > span.input {
     display: flex;
     align-items: center;
     border: 1.5px solid #E7EBEC;
@@ -13,14 +13,14 @@
     transition: border 300ms, outline 75ms;
 }
 
-.apollo[data-apollo="DateSelect"] > span > span {
+.sparta[data-sparta="DateSelect"] > span > span {
     padding: 0;
     transition: transform 300ms;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.apollo[data-apollo="DateSelect"] input {
+.sparta[data-sparta="DateSelect"] input {
     background: none;
     border: none;
     padding: 10px 14px;
@@ -31,18 +31,18 @@
     width: 100%;
 }
 
-.apollo[data-apollo="DateSelect"] input:disabled {
+.sparta[data-sparta="DateSelect"] input:disabled {
     cursor: not-allowed;
 }
 
-.apollo[data-apollo="DateSelect"] > span.input:focus-within { 
+.sparta[data-sparta="DateSelect"] > span.input:focus-within { 
     outline-width: 4px;
 }
 
-.apollo[data-apollo="DateSelect"].invalid > span.input {
+.sparta[data-sparta="DateSelect"].invalid > span.input {
     border: 1.5px solid #FDA29B;
 }
 
-.apollo[data-apollo="DateSelect"].invalid > span.input:focus {
+.sparta[data-sparta="DateSelect"].invalid > span.input:focus {
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #a4c8e4;
 }

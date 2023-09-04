@@ -7,7 +7,7 @@ import { Button as CButton } from '../../Button/Button';
 import { Sparta } from '../../../interfaces/Sparta';
 
 export interface IDrawerButton
-    extends Interface<Omit<CIButton, 'data-apollo'>>,
+    extends Interface<Omit<CIButton, 'data-sparta'>>,
         Sparta<'Drawer.Button'> {}
 
 /**
@@ -18,7 +18,7 @@ export interface IDrawerButton
 const Button: FC<IDrawerButton> = forwardRef(function Button(
     {
         parentProps,
-        ['data-apollo']: apolloName,
+        ['data-sparta']: apolloName,
         onClick,
         children,
         ...props
@@ -47,6 +47,6 @@ const Button: FC<IDrawerButton> = forwardRef(function Button(
     );
 });
 
-Button.defaultProps = { 'data-apollo': 'Drawer.Button' };
+Button.defaultProps = { 'data-sparta': 'Drawer.Button' };
 
 export default Button;

@@ -62,7 +62,7 @@ export const Radio: FC<IRadio> = ({
         <>
             <label
                 className={`
-                    apollo-component-library-radio-component-label 
+                    sparta-component-library-radio-component-label 
                     ${inline ? 'inline' : ''}
                 `}
             >
@@ -75,7 +75,7 @@ export const Radio: FC<IRadio> = ({
                     aria-errormessage={id ? `${id}-error` : `${value}-error`}
                     type="radio"
                     className={`
-                        apollo-component-library-radio-component 
+                        sparta-component-library-radio-component 
                         ${className}
                         ${invalid ? 'invalid' : ''}
                     `}
@@ -100,4 +100,4 @@ export const Radio: FC<IRadio> = ({
     );
 };
 
-Radio.defaultProps = { 'data-apollo': 'Radio' };
+Radio.defaultProps = { 'data-sparta': 'Radio' };

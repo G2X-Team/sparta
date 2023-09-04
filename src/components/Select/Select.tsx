@@ -50,7 +50,7 @@ export interface ISelect
  * @return Select Input
  */
 export const Select: FC<ISelect> = ({
-    'data-apollo': dataApollo = 'Select',
+    'data-sparta': dataApollo = 'Select',
     className = '',
     defaultValue,
     anchor = 'bottom',
@@ -68,7 +68,7 @@ export const Select: FC<ISelect> = ({
     options,
     ...props
 }) => {
-    gaurdApolloName({ 'data-apollo': dataApollo }, 'Select');
+    gaurdApolloName({ 'data-sparta': dataApollo }, 'Select');
 
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
@@ -190,8 +190,8 @@ export const Select: FC<ISelect> = ({
 
     return (
         <label
-            className={`apollo ${className} ${theme} ${invalid ? 'invalid' : ''}`}
-            data-apollo={dataApollo}
+            className={`sparta ${className} ${theme} ${invalid ? 'invalid' : ''}`}
+            data-sparta={dataApollo}
         >
             <div className="label">{label}</div>
             {renderSelect()}

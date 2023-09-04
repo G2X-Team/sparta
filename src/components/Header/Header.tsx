@@ -20,10 +20,10 @@ export const Header: FC<IHeader> = ({ parentProps, children, className = '', ...
     gaurdApolloName(props, 'Header');
 
     return (
-        <header {...props} className={`apollo-component-library-header-component ${className}`}>
+        <header {...props} className={`sparta-component-library-header-component ${className}`}>
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
         </header>
     );
 };
 
-Header.defaultProps = { 'data-apollo': 'Header' };
+Header.defaultProps = { 'data-sparta': 'Header' };
