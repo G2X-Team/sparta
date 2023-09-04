@@ -2,12 +2,12 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect } from 'react';
 import './Modal.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import Dialog from './components/Dialog';
 
-export interface IModal extends HTMLAttributes<HTMLDivElement>, Apollo<'Modal'> {
+export interface IModal extends HTMLAttributes<HTMLDivElement>, Sparta<'Modal'> {
     /** Required ID for WCAG 2.0 compliance purposes */
     id: string;
     /** Requires descriptive label for WCAG 2.0 compliance purposes */

@@ -4,10 +4,10 @@ import './Grid.css';
 
 import type * as CSS from 'csstype';
 import type { Interface } from '../../interfaces/Overload';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IGrid extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Grid'> {
+export interface IGrid extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Grid'> {
     /** Grid template rows */
     rows?: CSS.Property.GridTemplateRows;
     /** Grid template columns */

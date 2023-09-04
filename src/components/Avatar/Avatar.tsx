@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './Avatar.css';
 
 import type * as CSS from 'csstype';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
@@ -11,7 +11,7 @@ import { ComponentSize } from '../../interfaces/Properties';
 import { useProgressiveImage } from '../../util/imageProcessing';
 import { determineForeground } from '../../util/colorTheory';
 
-export interface IAvatar extends HTMLAttributes<HTMLDivElement>, Apollo<'Avatar'> {
+export interface IAvatar extends HTMLAttributes<HTMLDivElement>, Sparta<'Avatar'> {
     /** Used to create a string in case there is no image */
     fallback: string;
     /** Color of the fallback */

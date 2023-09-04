@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import FormatChildren from '../../util/formatting/FormatChildren';
 import './Drawer.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { ComponentOrientation } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
@@ -13,7 +13,7 @@ import Menu from './overload/Menu';
 import type { IDrawerButton } from './overload/Button';
 import Button from './overload/Button';
 
-export interface IDrawer extends HTMLAttributes<HTMLDivElement>, Apollo<'Drawer'> {
+export interface IDrawer extends HTMLAttributes<HTMLDivElement>, Sparta<'Drawer'> {
     /**
      * Type of drawer that will be used. `absolute` assumes the drawer is in front of everything
      * and will use a backdrop. `persistent` will have a relative width and can push other

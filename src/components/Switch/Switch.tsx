@@ -2,13 +2,13 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Switch.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { StyleVariant } from '../../interfaces/Properties';
 
 import { Text } from '../Text/Text';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface ISwitch extends HTMLAttributes<HTMLInputElement>, Apollo<'Switch'> {
+export interface ISwitch extends HTMLAttributes<HTMLInputElement>, Sparta<'Switch'> {
     /** Can assign text or element to switch */
     children: ReactNode;
     /** Determines whether the switch is disabled */

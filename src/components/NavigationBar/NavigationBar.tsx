@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React, { CSSProperties, useState, useEffect, useRef } from 'react';
 import './NavigationBar.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type {
     ComponentPosition,
     ComponentVerticalOrientation,
@@ -16,7 +16,7 @@ import { Text } from '../Text/Text';
 import Section from './overload/Section';
 import { RenderAll } from '../../interfaces/Overload';
 
-export interface INavigationBar extends HTMLAttributes<HTMLDivElement>, Apollo<'NavigationBar'> {
+export interface INavigationBar extends HTMLAttributes<HTMLDivElement>, Sparta<'NavigationBar'> {
     /** If the component is not static, it will determine the orientation of the component */
     orientation?: ComponentVerticalOrientation;
     /** Determines the position of the component */

@@ -21,10 +21,10 @@ export interface ApolloRef {
 }
 
 export interface Overloader {
-    /** Required property that allows us to find user-wrapped Apollo components */
+    /** Required property that allows us to find user-wrapped Sparta components */
     'apollo-overload': true;
     /**
-     * This is a reference that is automatically passed by Apollo processing, only used to
+     * This is a reference that is automatically passed by Sparta processing, only used to
      * pass to the `OverloadHandler`
      */
     apolloRef?: ApolloRef;

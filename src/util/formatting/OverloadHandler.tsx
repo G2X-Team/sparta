@@ -4,7 +4,7 @@ import FormatChildren from './FormatChildren';
 import { ApolloRef } from './types';
 
 interface IOverloadHandler {
-    /** Children that will need Apollo Processing */
+    /** Children that will need Sparta Processing */
     children: any;
     /** component properties */
     apolloRef?: ApolloRef;

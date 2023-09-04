@@ -2,11 +2,11 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Header.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IHeader extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Header'> {
+export interface IHeader extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Header'> {
     /** Can have children of any kind */
     children?: ReactNode;
 }

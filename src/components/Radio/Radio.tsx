@@ -2,13 +2,13 @@ import { HTMLAttributes, ReactNode, FC, useEffect } from 'react';
 import React from 'react';
 import './Radio.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
-export interface IRadio extends HTMLAttributes<HTMLInputElement>, Apollo<'Radio'> {
+export interface IRadio extends HTMLAttributes<HTMLInputElement>, Sparta<'Radio'> {
     /** String that identifies the radio */
     id?: string;
     /** You can define an element pertaining to radio */

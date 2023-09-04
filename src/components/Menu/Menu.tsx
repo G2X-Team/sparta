@@ -2,7 +2,7 @@ import type { CSSProperties, FC, HTMLAttributes, MouseEventHandler, ReactNode } 
 import React, { useEffect, useState, useRef } from 'react';
 import './Menu.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { RenderAll, Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
 import FormatChildren from '../../util/formatting/FormatChildren';
@@ -13,7 +13,7 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import Option from './overload/Option';
 
-export interface IMenu extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Menu'> {
+export interface IMenu extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Menu'> {
     /** Determines whether the menu is meant for navigation */
     navigation?: boolean;
     /** Determines the max height of the menu */
@@ -37,7 +37,7 @@ export interface IMenu extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo
 }
 
 /**
- * Apollo's interfacing Menu, this is mean to be used by all components that require a menu for its
+ * Sparta's interfacing Menu, this is mean to be used by all components that require a menu for its
  * functionality
  *
  * @return Menu component

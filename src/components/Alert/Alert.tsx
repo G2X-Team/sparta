@@ -2,10 +2,10 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Alert.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IAlert extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Alert'> {
+export interface IAlert extends HTMLAttributes<HTMLParagraphElement>, Sparta<'Alert'> {
     /** Alert needs to exist between tags */
     children: ReactNode;
     /**

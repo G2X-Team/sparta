@@ -1,5 +1,5 @@
 import { HTMLAttributes, FC, ReactNode, CSSProperties } from 'react';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type * as CSS from 'csstype';
 import type { TableData } from '../../interfaces/Properties';
 
@@ -16,7 +16,7 @@ import { TableNav } from './components/TableNav';
 
 export interface ITable
     extends Omit<HTMLAttributes<HTMLTableElement>, 'onSelect'>,
-        Apollo<'Table'> {
+        Sparta<'Table'> {
     /** Data to be displayed in table */
     data: TableData;
     /** Label describing the table (required for ID purposes) */
@@ -56,7 +56,7 @@ export type LastSort = {
 } | null;
 
 /**
- * Apollo table component
+ * Sparta table component
  *
  * @return Table Component
  */

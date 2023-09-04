@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Card.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import FormatChildren from '../../util/formatting/FormatChildren';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 import type { RenderAll } from '../../interfaces/Overload';
@@ -10,7 +10,7 @@ import type { RenderAll } from '../../interfaces/Overload';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 
-export interface ICard extends HTMLAttributes<HTMLDivElement>, Apollo<'Card'> {
+export interface ICard extends HTMLAttributes<HTMLDivElement>, Sparta<'Card'> {
     /** Accepts any kind of children */
     children?: ReactNode;
 }

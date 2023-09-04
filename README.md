@@ -4,11 +4,11 @@
     <img src="https://i.pinimg.com/564x/ad/fb/0f/adfb0fd0aa639a744d71f462538e68f1.jpg" width="400px">
 </p>
 
-Apollo is a React UI/UX component library primarily developed by G2X with an emphasis on productivity and ease of use. This package uses [TSDX](https://www.npmjs.com/package/tsdx) for development, and extends the use of packages like [React Hook Form](https://react-hook-form.com/), and others for the purpose of providing a complete development experience.
+Sparta is a React UI/UX component library primarily developed by G2X with an emphasis on productivity and ease of use. This package uses [TSDX](https://www.npmjs.com/package/tsdx) for development, and extends the use of packages like [React Hook Form](https://react-hook-form.com/), and others for the purpose of providing a complete development experience.
 
 # 🚀 Getting Started
 
-Here is a quick setup of what you need to do to start contributing in Apollo.
+Here is a quick setup of what you need to do to start contributing in Sparta.
 
 ```bash
 # Install Node.js

@@ -4,11 +4,11 @@ import type { Interface } from '../../../interfaces/Overload';
 
 import type { IButton as CIButton } from '../../Button/Button';
 import { Button as CButton } from '../../Button/Button';
-import { Apollo } from '../../../interfaces/Apollo';
+import { Sparta } from '../../../interfaces/Sparta';
 
 export interface IDrawerButton
     extends Interface<Omit<CIButton, 'data-apollo'>>,
-        Apollo<'Drawer.Button'> {}
+        Sparta<'Drawer.Button'> {}
 
 /**
  * Formats button to be sub component of Dropdown

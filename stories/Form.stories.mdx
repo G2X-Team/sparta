@@ -15,7 +15,7 @@ import {
 
 # Form
 
-The Form component is in charge of all form validation needs in the Apollo compoent library. It is
+The Form component is in charge of all form validation needs in the Sparta compoent library. It is
 a pretty major component in functionally setting up performant forms with your choice of validation.
 Our client side validation is brought to you by `remix-hook-form`.
 
@@ -48,7 +48,7 @@ Also, we want to shout out `react-hook-form` for helping us make this component.
 
 ## Functionality
 
-Here we'll go more in depth of how you can use Apollo's Form component to the form you need.
+Here we'll go more in depth of how you can use Sparta's Form component to the form you need.
 
 ### `client` Form
 
@@ -89,7 +89,7 @@ export type FormData = {
 };
 ```
 
-Or you can just import the `FormSubmitHandler` from Apollo and use auto-complete to help you out :)
+Or you can just import the `FormSubmitHandler` from Sparta and use auto-complete to help you out :)
 
 ```typescript
 /**
@@ -118,7 +118,7 @@ export type FormErrors = {
 };
 ```
 
-Or, again you can just import the `FormSubmitHandler` from Apollo and use auto-complete to help you
+Or, again you can just import the `FormSubmitHandler` from Sparta and use auto-complete to help you
 out :)
 
 ```typescript
@@ -132,7 +132,7 @@ export type FormErrorHandler = (errors: FormErrors) => void;
 
 #### Basic Implementation
 
-If you want to create a form and keep see the values, just put the inputs you want from Apollo,
+If you want to create a form and keep see the values, just put the inputs you want from Sparta,
 and we'll track the changes magically without you worrying about the rest. Here we'll show you all
 the inputs in one form and when you submit, you should see all the submit data.
 
@@ -154,7 +154,7 @@ If you want some nicer auto-complete though you should import the `FormValidator
 validator function.
 
 > **Note:** If you want to be more specific with the `FormValidator` you can even add an input
-> type that can be imported from Apollo.
+> type that can be imported from Sparta.
 >
 > -   example: `const validate: FormValidator<FormTextData> = (input) => ...`
 
@@ -169,7 +169,7 @@ const validate: FormValidator = (input) =>
     input?.text.length < 5 && 'Text input must be at least 5 characters long';
 ```
 
-Almost all input components in Apollo support `validator` functions, all you have to do is put in
+Almost all input components in Sparta support `validator` functions, all you have to do is put in
 the function in the `validator` prop of the component you want to validate, and you're good to go.
 
 > **Note:** The exception to this rule is the `Switch` component, which does not support a
@@ -210,19 +210,19 @@ const userNameValidator: FormValidator = (data) => {
 
 ### Caveats
 
-You probably have noticed that unless you use an Apollo wrapper such as a `View` or a `Grid` or
+You probably have noticed that unless you use an Sparta wrapper such as a `View` or a `Grid` or
 something similar, that it will not be possible to recieve live validation. This is because of how
-our Apollo processing works, we only take the first children of the DOM tree and run our background
+our Sparta processing works, we only take the first children of the DOM tree and run our background
 functionality enhancements on that.
 
 This is to maintain peek performance and to keep the API as simple as possible. If you do find
 yourself needing more coverage, say you define your own component with its own render method that
-uses an input you want to validate the Apollo way, you can do so by using the `OverloadHandler`
+uses an input you want to validate the Sparta way, you can do so by using the `OverloadHandler`
 utility.
 
 #### Relaying Component Overloading
 
-Say you have a component `MyComponent` that has an Apollo `TextInput` that you want to validate.
+Say you have a component `MyComponent` that has an Sparta `TextInput` that you want to validate.
 You can do so by using the `OverloadHandler` utility and the `Overloader` interface. Here is an
 example of how you would do so:
 

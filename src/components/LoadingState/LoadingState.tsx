@@ -2,12 +2,12 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 'react';
 import './LoadingState.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 
-export interface ILoadingState extends HTMLAttributes<HTMLDivElement>, Apollo<'LoadingState'> {
+export interface ILoadingState extends HTMLAttributes<HTMLDivElement>, Sparta<'LoadingState'> {
     /**
      * Determines status of the progressbar where
      * progressFilled={0.1} => 10% filled progressbar

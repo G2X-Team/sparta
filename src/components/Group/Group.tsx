@@ -2,7 +2,7 @@ import type { HTMLAttributes, FC, CSSProperties, ChangeEvent } from 'react';
 import React, { ReactNode, useEffect } from 'react';
 import './Group.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { FormGroupData, FormValidator } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
@@ -16,7 +16,7 @@ import View from './overload/View';
 
 export interface IGroup
     extends Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChange'>,
-        Apollo<'Group'> {
+        Sparta<'Group'> {
     /** Group must contain element between tags */
     children: ReactNode;
     /** Identifies the group's selection */

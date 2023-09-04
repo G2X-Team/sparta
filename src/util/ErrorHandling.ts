@@ -6,6 +6,6 @@
  */
 export const gaurdApolloName = (props: any, name: string): void => {
     if (props['data-apollo'] !== name) {
-        throw new Error(`Apollo component name must be ${name}`);
+        throw new Error(`Sparta component name must be ${name}`);
     }
 };

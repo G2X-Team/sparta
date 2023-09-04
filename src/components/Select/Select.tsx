@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './Select.css';
 
 import type * as CSS from 'csstype';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { RenderAll } from '../../interfaces/Overload';
 import type { ComponentOrientation, ComponentAlignment } from '../../interfaces/Properties';
 
@@ -15,7 +15,7 @@ import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 export interface ISelect
     extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>,
-        Apollo<'Select'> {
+        Sparta<'Select'> {
     /** Label, required for accessibility purposes */
     label: string;
     /** List of options */

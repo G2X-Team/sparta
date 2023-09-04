@@ -1,12 +1,12 @@
 import type { HTMLAttributes, ReactNode, FC, CSSProperties } from 'react';
 import React from 'react';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IView extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'View'> {
+export interface IView extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'View'> {
     /** May have children */
     children?: ReactNode;
     /** Change the display style of View */

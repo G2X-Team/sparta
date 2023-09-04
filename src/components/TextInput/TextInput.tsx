@@ -2,14 +2,14 @@ import { HTMLAttributes, FC, ForwardedRef, forwardRef } from 'react';
 import React, { useEffect } from 'react';
 import './TextInput.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { FormTextData, FormValidator } from '../../interfaces/Properties';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
-export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Apollo<'TextInput'> {
+export interface ITextInput extends HTMLAttributes<HTMLInputElement>, Sparta<'TextInput'> {
     /** To comply with WCAG 2.0, all inputs **must** have labels */
     label: string;
     /** Gives further description on what the input should have to be valid */

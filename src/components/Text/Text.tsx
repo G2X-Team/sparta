@@ -2,11 +2,11 @@ import { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Text.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type * as CSS from 'csstype';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IText extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Text'> {
+export interface IText extends HTMLAttributes<HTMLParagraphElement>, Sparta<'Text'> {
     /** Text needs to exist between tags */
     children: ReactNode;
     /**

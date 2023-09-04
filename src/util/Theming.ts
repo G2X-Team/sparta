@@ -119,11 +119,11 @@ const getCSSString = (css: CSSProperties): string => {
 };
 
 /**
- * Given valid Apollo CSS, the function will create a style tag with the CSS and append it to the
+ * Given valid Sparta CSS, the function will create a style tag with the CSS and append it to the
  * document's body
  *
  * @param document document to append to
- * @param theme theme to apply Apollo CSS to
+ * @param theme theme to apply Sparta CSS to
  */
 export const createApolloCSS = (document: Document, theme: ApolloTheme): void => {
     // check if css already exists
@@ -788,7 +788,7 @@ export class ApolloCSS {
 
     /**
      * This method will add imports to the css body for given fonts
-     * or other assets to be used in the Apollo CSS
+     * or other assets to be used in the Sparta CSS
      *
      * @param hrefs import links to load in css
      */

@@ -3,7 +3,7 @@ import React from 'react';
 import './Image.css';
 
 import type * as CSS from 'csstype';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 import { ComponentSize } from '../../interfaces/Properties';
 import { useProgressiveImage } from '../../util/imageProcessing';
@@ -11,7 +11,7 @@ import { useProgressiveImage } from '../../util/imageProcessing';
 import { View } from '../View/View';
 import { Spinner } from '../Spinner/Spinner';
 
-export interface IImage extends HTMLAttributes<HTMLDivElement>, Apollo<'Image'> {
+export interface IImage extends HTMLAttributes<HTMLDivElement>, Sparta<'Image'> {
     /** source of image */
     src: string;
     /** alt text of image */
