@@ -1,5 +1,5 @@
 import { HTMLAttributes, FC, ReactNode, CSSProperties } from 'react';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type * as CSS from 'csstype';
 import type { TableData } from '../../interfaces/Properties';
 
@@ -16,7 +16,7 @@ import { TableNav } from './components/TableNav';
 
 export interface ITable
     extends Omit<HTMLAttributes<HTMLTableElement>, 'onSelect'>,
-        Apollo<'Table'> {
+        Sparta<'Table'> {
     /** Data to be displayed in table */
     data: TableData;
     /** Label describing the table (required for ID purposes) */
@@ -56,7 +56,7 @@ export type LastSort = {
 } | null;
 
 /**
- * Apollo table component
+ * Sparta table component
  *
  * @return Table Component
  */
@@ -138,12 +138,12 @@ export const Table: FC<ITable> & { Column: FC<IColumn> } = ({
     };
 
     // class name after all modifications
-    const moddedClassName = `apollo ${className} ${columns ? 'has-columns' : ''} grid-${grid}`;
+    const moddedClassName = `sparta ${className} ${columns ? 'has-columns' : ''} grid-${grid}`;
 
     return (
         <Grid
             style={{ maxWidth: width, minHeight: height }}
-            data-apollo-id="TableWrapper"
+            data-sparta-id="TableWrapper"
             className={moddedClassName}
             rows={paginate ? 'auto auto' : undefined}
         >
@@ -161,7 +161,7 @@ export const Table: FC<ITable> & { Column: FC<IColumn> } = ({
 };
 
 Table.defaultProps = {
-    'data-apollo': 'Table',
+    'data-sparta': 'Table',
 };
 Table.Column = Column;
 

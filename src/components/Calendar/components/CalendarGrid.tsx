@@ -62,7 +62,7 @@ export const CalendarGrid: FC<ICalendarGrid> = ({
                 height="100%"
                 width="100%"
             >
-                <div id="apollodate-day" className={`apollo ${theme}`} data-apollo="CalendarDay">
+                <div id="apollodate-day" className={`sparta ${theme}`} data-sparta="CalendarDay">
                     <Text style={{ fontSize }}>Su</Text>
                     <Text style={{ fontSize }}>Mo</Text>
                     <Text style={{ fontSize }}>Tu</Text>

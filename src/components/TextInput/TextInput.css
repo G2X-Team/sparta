@@ -1,4 +1,4 @@
-.apollo[data-apollo="TextInput"] {
+.sparta[data-sparta="TextInput"] {
     font-size: 1rem;
     padding: 10px 14px;
     border-radius: 8px;
@@ -11,15 +11,15 @@
     transition: outline 75ms, border 300ms;
 }
 
-.apollo[data-apollo="TextInputLabel"] {
+.sparta[data-sparta="TextInputLabel"] {
     padding-bottom: 15px;
 }
 
-.apollo[data-apollo="TextInput"]:focus {
+.sparta[data-sparta="TextInput"]:focus {
     outline-width: 4px;
 }
 
-.apollo[data-apollo="TextInputLabel"] .apollo[data-apollo="TextInput"] {
+.sparta[data-sparta="TextInputLabel"] .sparta[data-sparta="TextInput"] {
     width: 100%;
     box-sizing: border-box;
 }

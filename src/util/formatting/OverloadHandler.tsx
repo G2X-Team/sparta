@@ -4,16 +4,16 @@ import FormatChildren from './FormatChildren';
 import { ApolloRef } from './types';
 
 interface IOverloadHandler {
-    /** Children that will need Apollo Processing */
+    /** Children that will need Sparta Processing */
     children: any;
     /** component properties */
     apolloRef?: ApolloRef;
 }
 
 /**
- * This component will perpetuate apollo processing to all children
+ * This component will perpetuate sparta processing to all children
  *
- * @return apollo processed children
+ * @return sparta processed children
  */
 export const OverloadHandler: FC<IOverloadHandler> = ({ apolloRef, children }) => {
     /**

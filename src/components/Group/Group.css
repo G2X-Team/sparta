@@ -1,14 +1,14 @@
-.apollo-component-library-group {
+.sparta-component-library-group {
     border: none;
     padding: 0;
     margin: 0;
     padding-bottom: 15px;
 }
 
-.apollo-component-library-group-wrapper.invalid {
+.sparta-component-library-group-wrapper.invalid {
     outline: 2px solid #c70000;
 }
 
-.apollo-component-library-group > legend {
+.sparta-component-library-group > legend {
     padding-inline-start: 0;
 }

@@ -2,11 +2,11 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Footer.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IFooter extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Footer'> {
+export interface IFooter extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Footer'> {
     /** Can have children of any kind */
     children?: ReactNode;
 }
@@ -20,10 +20,10 @@ export const Footer: FC<IFooter> = ({ children, className = '', parentProps, ...
     gaurdApolloName(props, 'Footer');
 
     return (
-        <footer {...props} className={`apollo-component-library-footer-component ${className}`}>
+        <footer {...props} className={`sparta-component-library-footer-component ${className}`}>
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
         </footer>
     );
 };
 
-Footer.defaultProps = { 'data-apollo': 'Footer' };
+Footer.defaultProps = { 'data-sparta': 'Footer' };

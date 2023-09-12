@@ -83,7 +83,7 @@ const Dialog: FC<IModal> = ({
             id={id}
             role={alert ? 'alertdialog' : 'dialog'}
             aria-modal="true"
-            className={`apollo-component-library-modal-component ${className}`}
+            className={`sparta-component-library-modal-component ${className}`}
             aria-labelledby={`${id}-label`}
             aria-describedby={description ? `${id}-desc` : undefined}
         >
@@ -93,7 +93,7 @@ const Dialog: FC<IModal> = ({
             </Text>
             {description ? <Text id={`${id}-desc`}>{description}</Text> : null}
             {formatted?.get('Header')[0]}
-            <div className="apollo-component-library-modal-component-body">
+            <div className="sparta-component-library-modal-component-body">
                 {formatted?.getOther()}
             </div>
             {formatted?.get('Footer')[0]}

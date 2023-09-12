@@ -1,4 +1,4 @@
-.apollo-component-library-modal-component-container {
+.sparta-component-library-modal-component-container {
     position: absolute;
     z-index: 5;
     transition: opacity 300ms;
@@ -6,14 +6,14 @@
     left: 0;
 }
 
-.apollo-component-library-modal-component-container > div {
+.sparta-component-library-modal-component-container > div {
     position: relative;
     display: grid;
     height: 100vh;
     width: 100vw;
 }
 
-.apollo-component-library-modal-component {
+.sparta-component-library-modal-component {
     position: relative;
     min-width: 300px;
     min-height: 200px;
@@ -29,24 +29,24 @@
     
 }
 
-.apollo-component-library-modal-component-backdrop {
+.sparta-component-library-modal-component-backdrop {
     height: 100vh;
     width: 100vw;
     background: rgba(0, 0, 0, 0.5);
 }
 
-.apollo-component-library-modal-component-body {
+.sparta-component-library-modal-component-body {
     flex: 1;
 }
 
-.apollo-component-library-modal-component-button-group {
+.sparta-component-library-modal-component-button-group {
     transform: translate(-15px, 15px);
     height: 45px;
     width: calc(100% + 30px);
     display: flex;
 }
 
-.apollo-component-library-modal-component-button-group-button {
+.sparta-component-library-modal-component-button-group-button {
     width: 100%;
     background: none;
     border: none;
@@ -57,19 +57,19 @@
     cursor: pointer;
 }
 
-.apollo-component-library-modal-component-button-group-button:hover {
+.sparta-component-library-modal-component-button-group-button:hover {
     background: lightcoral;
 }
 
-.apollo-component-library-modal-component-button-group-button.secondary:hover {
+.sparta-component-library-modal-component-button-group-button.secondary:hover {
     background: lightblue;
 }
 
-.apollo-component-library-modal-component-button-group-button:last-child {
+.sparta-component-library-modal-component-button-group-button:last-child {
     border-right: none;
     border-radius: 0 0 14px 0;
 }
 
-.apollo-component-library-modal-component-button-group-button:first-child {
+.sparta-component-library-modal-component-button-group-button:first-child {
     border-radius: 0 0 0 14px;
 }

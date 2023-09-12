@@ -5,7 +5,7 @@ describe('ApolloCSS', () => {
         // given
         const apolloTheme = new ApolloCSS();
         const expected = {
-            id: 'apollo-css',
+            id: 'sparta-css',
             children: expect.anything(),
         };
 
@@ -76,23 +76,23 @@ describe('ApolloCSS', () => {
         // then
         expect(css.children).toContain(
             // default behavior
-            '.apollo[data-apollo="Spinner"].primary {background: yellow;}'
+            '.sparta[data-sparta="Spinner"].primary {background: yellow;}'
         );
         expect(css.children).toContain(
             // hover behavior
-            '.apollo[data-apollo="Spinner"].primary:hover {background: red;}'
+            '.sparta[data-sparta="Spinner"].primary:hover {background: red;}'
         );
         expect(css.children).toContain(
             // focus behavior
-            '.apollo[data-apollo="Spinner"].primary:focus {background: blue;}'
+            '.sparta[data-sparta="Spinner"].primary:focus {background: blue;}'
         );
         expect(css.children).toContain(
             // active behavior
-            '.apollo[data-apollo="Spinner"].primary:active {background: green;}'
+            '.sparta[data-sparta="Spinner"].primary:active {background: green;}'
         );
         expect(css.children).toContain(
             // disabled behavior
-            '.apollo[data-apollo="Spinner"].primary:disabled {background: purple;}'
+            '.sparta[data-sparta="Spinner"].primary:disabled {background: purple;}'
         );
     });
 
@@ -106,6 +106,6 @@ describe('ApolloCSS', () => {
 
         // then
         expect(document.head).toMatchSnapshot();
-        expect(css).toBe(document.getElementById('apollo-css')?.innerText);
+        expect(css).toBe(document.getElementById('sparta-css')?.innerText);
     });
 });

@@ -1,4 +1,4 @@
-.apollo[data-apollo="NavigationBar"] {
+.sparta[data-sparta="NavigationBar"] {
     display: flex;
     background-color: white; 
     width: 100%;
@@ -8,13 +8,13 @@
     position: relative;
 }
 
-.apollo[data-apollo="NavigationBar"] > div {
+.sparta[data-sparta="NavigationBar"] > div {
     display: flex;
     align-items: center;
     flex: 1;
 }
 
-.apollo[data-apollo="NavigationBar"] > div > ul {
+.sparta[data-sparta="NavigationBar"] > div > ul {
     list-style-type: none;
     margin-block-start: 0;
     margin-block-end: 0;
@@ -28,47 +28,47 @@
     padding-left: 10px;
 }
 
-.apollo[data-apollo="NavigationBar"] .apollo[data-apollo="Dropdown"] > button {
+.sparta[data-sparta="NavigationBar"] .sparta[data-sparta="Dropdown"] > button {
     padding: 8px 14px;
 }
 
-.apollo[data-apollo="NavigationBar"] .apollo[data-apollo="Dropdown"] > button:hover {
+.sparta[data-sparta="NavigationBar"] .sparta[data-sparta="Dropdown"] > button:hover {
     background-color: #A1EFC9;
 }
 
-.apollo[data-apollo="NavigationBar"].absolute {
+.sparta[data-sparta="NavigationBar"].absolute {
     position: absolute;
 }
 
-.apollo[data-apollo="NavigationBar"].fixed {
+.sparta[data-sparta="NavigationBar"].fixed {
     position: fixed;
 }
 
-.apollo[data-apollo="NavigationBar"].absolute {
+.sparta[data-sparta="NavigationBar"].absolute {
     position: absolute;
 }
 
-.apollo[data-apollo="NavigationBar"].top {
+.sparta[data-sparta="NavigationBar"].top {
     top: 0;
     left: 0;
 }
 
-.apollo[data-apollo="NavigationBar"].bottom {
+.sparta[data-sparta="NavigationBar"].bottom {
     bottom: 0;
     left: 0;
 }
 
-.apollo[data-apollo="NavigationBar"]-title {
+.sparta[data-sparta="NavigationBar"]-title {
     padding-right: 10px;
     cursor: default;
     user-select: none;
 }
 
-.apollo[data-apollo="NavigationBar"]-title.clickable {
+.sparta[data-sparta="NavigationBar"]-title.clickable {
     cursor: pointer;
 }
 
-.apollo[data-apollo="NavigationBar"]-title.mobile {
+.sparta[data-sparta="NavigationBar"]-title.mobile {
     position: absolute;
     left: 50%;
     transform: translate(-50%)

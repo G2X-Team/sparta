@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap');
 
-.apollo[data-apollo="Text"] {
+.sparta[data-sparta="Text"] {
     font-size: 1rem;
     margin-top: 1em;
     margin-bottom: 1em;
     display: block;
 }
 
-.apollo[data-apollo="Text"].h1 {
+.sparta[data-sparta="Text"].h1 {
     font-size: 2em;
     margin-top: 0.67em;
     margin-bottom: 0.67em;
@@ -15,7 +15,7 @@
     margin-right: 0;
 }
 
-.apollo[data-apollo="Text"].h2 {
+.sparta[data-sparta="Text"].h2 {
     font-size: 1.5em;
     margin-top: 0.83em;
     margin-bottom: 0.83em;
@@ -23,7 +23,7 @@
     margin-right: 0;
 }
 
-.apollo[data-apollo="Text"].h3 {
+.sparta[data-sparta="Text"].h3 {
     font-size: 1.17em;
     margin-top: 1em;
     margin-bottom: 1em;
@@ -31,7 +31,7 @@
     margin-right: 0;
 }
 
-.apollo[data-apollo="Text"].disabled {
+.sparta[data-sparta="Text"].disabled {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
        -khtml-user-select: none; /* Konqueror HTML */

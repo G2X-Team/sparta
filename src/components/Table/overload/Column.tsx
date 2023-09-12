@@ -1,4 +1,4 @@
-import type { Apollo } from '../../../interfaces/Apollo';
+import type { Sparta } from '../../../interfaces/Sparta';
 import { FC, HTMLAttributes, ReactNode } from 'react';
 
 import React from 'react';
@@ -6,7 +6,7 @@ import { Interface } from '../../../interfaces/Overload';
 import { DataRenderer, RowHandler } from '../../../interfaces/Properties';
 
 export interface IColumn
-    extends Apollo<'Table.Column'>,
+    extends Sparta<'Table.Column'>,
         Interface<HTMLAttributes<HTMLSpanElement>> {
     /**
      * Enables content sort for 3 data types by column. Only sort if the type of the data in this
@@ -38,7 +38,7 @@ export interface IColumn
 }
 
 /**
- * Apollo component that represents a Header's data in the table
+ * Sparta component that represents a Header's data in the table
  *
  * @return Header
  */
@@ -47,5 +47,5 @@ export const Column: FC<IColumn> = ({ datakey, dataRenderer, header, ...props })
 };
 
 Column.defaultProps = {
-    'data-apollo': 'Table.Column',
+    'data-sparta': 'Table.Column',
 };

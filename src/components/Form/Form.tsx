@@ -31,7 +31,7 @@ export interface IForm extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit' | 'on
 }
 
 /**
- * Apollo form component that allows for client side and server side validation
+ * Sparta form component that allows for client side and server side validation
  *
  * @return form Component based on type
  */
