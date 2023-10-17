@@ -28,6 +28,8 @@ export interface IImage extends HTMLAttributes<HTMLDivElement>, Apollo<'Image'> 
     borderRadius?: CSS.Property.BorderRadius;
     /** determines size of loading spinner */
     spinnerSize?: ComponentSize;
+    /** determines the loading behavior of the image */
+    loading?: 'eager' | 'lazy';
 }
 
 /**
