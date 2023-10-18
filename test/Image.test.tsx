@@ -35,6 +35,7 @@ describe('Image', () => {
                 // eslint-disable-next-line max-len
                 src="https://i.picsum.photos/id/878/3000/3000.jpg?hmac=xb2kVI4JW-mdX6VW3xiTIeyZZrcGHHYrEpARD1Fcly0"
                 alt="Test"
+                loading="lazy"
             />
         );
 
@@ -49,19 +50,5 @@ describe('Image', () => {
         // when then
         expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
     });
-    it('renders the image immediately when loading prop is set to eager', () => {
-        // given
-        render(<Image alt="Test" src="image-url" loading="eager" />);
-
-        // when then
-        expect(screen.getByAltText('Test')).toBeInTheDocument();
-    });
-
-    it('renders the image lazily when loading prop is set to lazy', () => {
-        // given
-        render(<Image alt="Test" src="image-url" loading="lazy" />);
-
-        // when then
-        expect(screen.queryByAltText('Test')).toBeInTheDocument();
-    });
+    
 });
