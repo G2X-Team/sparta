@@ -49,4 +49,19 @@ describe('Image', () => {
         // when then
         expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
     });
+    it('renders the image immediately when loading prop is set to eager', () => {
+        // given
+        render(<Image alt="Test" src="image-url" loading="eager" />);
+
+        // when then
+        expect(screen.getByAltText('Test')).toBeInTheDocument();
+    });
+
+    it('renders the image lazily when loading prop is set to lazy', () => {
+        // given
+        render(<Image alt="Test" src="image-url" loading="lazy" />);
+
+        // when then
+        expect(screen.queryByAltText('Test')).toBeInTheDocument();
+    });
 });
