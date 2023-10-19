@@ -50,5 +50,4 @@ describe('Image', () => {
         // when then
         expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
     });
-    
 });
