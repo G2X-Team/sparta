@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -123,6 +123,7 @@
         }
     },
     "dependencies": {
+        "lint": "^0.8.19",
         "react-datepicker": "^4.6.0",
         "react-hook-form": "^7.27.0"
     }
