@@ -2,11 +2,11 @@ import { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Text.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type * as CSS from 'csstype';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
-export interface IText extends HTMLAttributes<HTMLParagraphElement>, Apollo<'Text'> {
+export interface IText extends HTMLAttributes<HTMLParagraphElement>, Sparta<'Text'> {
     /** Text needs to exist between tags */
     children: ReactNode;
     /**
@@ -62,7 +62,7 @@ export const Text: FC<IText> = ({
     style,
     ...props
 }) => {
-    gaurdApolloName(props, 'Text');
+    guardSpartaName(props, 'Text');
 
     /**
      * Gets all the special conditions and translates it to a special className combination
@@ -72,7 +72,7 @@ export const Text: FC<IText> = ({
      */
     const getVariant = (): string => {
         // determine custom variant
-        let customVariant = 'apollo ' + theme + ' ';
+        let customVariant = 'sparta ' + theme + ' ';
 
         // check if its a header or not
         if (header) customVariant += `h${header} `;
@@ -143,4 +143,4 @@ export const Text: FC<IText> = ({
     );
 };
 
-Text.defaultProps = { 'data-apollo': 'Text' };
+Text.defaultProps = { 'data-sparta': 'Text' };

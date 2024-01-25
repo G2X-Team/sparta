@@ -1,5 +1,5 @@
-.apollo[data-apollo='Avatar'],
-.apollo[data-apollo='Avatar'] img {
+.sparta[data-sparta='Avatar'],
+.sparta[data-sparta='Avatar'] img {
     height: 48px;
     width: 48px;
     border-radius: 50%;
@@ -11,31 +11,31 @@
     outline-style: solid;
 }
 
-.apollo[data-apollo='Avatar'] > span {
+.sparta[data-sparta='Avatar'] > span {
     position: absolute;
 }
 
-.apollo[data-apollo='Avatar'].clickable {
+.sparta[data-sparta='Avatar'].clickable {
     transition: outline-width 75ms, filter 300ms;
     cursor: pointer;
 }
 
-.apollo[data-apollo='Avatar'].clickable:focus {
+.sparta[data-sparta='Avatar'].clickable:focus {
     outline-width: 4px;
 }
 
-.apollo[data-apollo='Avatar'].clickable:active {
+.sparta[data-sparta='Avatar'].clickable:active {
     filter: brightness(90%);
 }
 
-.apollo[data-apollo='Avatar'].small,
-.apollo[data-apollo='Avatar'].small img {
+.sparta[data-sparta='Avatar'].small,
+.sparta[data-sparta='Avatar'].small img {
     height: 32px;
     width: 32px;
 }
 
-.apollo[data-apollo='Avatar'].large,
-.apollo[data-apollo='Avatar'].large img {
+.sparta[data-sparta='Avatar'].large,
+.sparta[data-sparta='Avatar'].large img {
     height: 64px;
     width: 64px;
 }

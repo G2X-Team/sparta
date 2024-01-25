@@ -99,7 +99,7 @@ describe('Accordion', () => {
         expect(onClick).toHaveBeenCalled();
     });
 
-    it('should render header with Apollo Text element if string provided for header', () => {
+    it('should render header with Sparta Text element if string provided for header', () => {
         // given
         render(
             <Accordion id="test" header="Header">
@@ -124,7 +124,7 @@ describe('Accordion', () => {
         expect(screen.getByText(/header/i).tagName).toBe('SECTION');
     });
 
-    it('should render Apollo Text element in panel if string provided for children', () => {
+    it('should render Sparta Text element in panel if string provided for children', () => {
         // given
         render(
             <Accordion id="test" header="header">

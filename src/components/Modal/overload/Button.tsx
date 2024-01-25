@@ -28,7 +28,7 @@ const Button: FC<Overload<IButton>> = ({
         <button
             {...props}
             onClick={buttonOnClick}
-            className={`apollo-component-library-modal-component-button-group-button 
+            className={`sparta-component-library-modal-component-button-group-button 
                 ${className} ${variant}`}
         />
     );

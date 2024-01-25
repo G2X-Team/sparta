@@ -1,12 +1,12 @@
 import React, { useState, useRef, MouseEventHandler, useEffect, ReactNode } from 'react';
 import type { FC } from 'react';
-import { Apollo } from '../../interfaces/Apollo';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { Sparta } from '../../interfaces/Sparta';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import { Text } from '../Text/Text';
 import './Accordion.css';
 import { Icon } from '../Icon/Icon';
 
-interface IAccordion extends Apollo<'Accordion'> {
+interface IAccordion extends Sparta<'Accordion'> {
     /** The id of the accordion */
     id: string;
     /** The default open state of the accordion */
@@ -22,7 +22,7 @@ interface IAccordion extends Apollo<'Accordion'> {
 }
 
 /**
- * Apollo Accordion Component
+ * Sparta Accordion Component
  *
  * @return Accordion component
  */
@@ -36,11 +36,11 @@ export const Accordion: FC<IAccordion> = ({
     onClick,
     ...props
 }) => {
-    gaurdApolloName(props, 'Accordion');
+    guardSpartaName(props, 'Accordion');
     const accordion = useAccordion(defaultOpen, panelHeight, override, onClick);
 
     return (
-        <div {...props} className="apollo">
+        <div {...props} className="sparta">
             <button
                 id={`${id}-header`}
                 type="button"
@@ -123,5 +123,5 @@ const useAccordion = (
 };
 
 Accordion.defaultProps = {
-    'data-apollo': 'Accordion',
+    'data-sparta': 'Accordion',
 };

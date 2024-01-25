@@ -143,9 +143,9 @@ interface IMyComponent extends Overloader {
     name: string;
 }
 
-const MyComponent = ({ apolloRef, name, label }: IMyComponent): JSX.Element => {
+const MyComponent = ({ spartaRef, name, label }: IMyComponent): JSX.Element => {
     return (
-        <OverloadHandler apolloRef={apolloRef}>
+        <OverloadHandler spartaRef={spartaRef}>
             <TextInput name={name} label={label} required validator={userNameValidator} />
         </OverloadHandler>
     );
@@ -154,7 +154,7 @@ const MyComponent = ({ apolloRef, name, label }: IMyComponent): JSX.Element => {
 export const RelayingComponentOverload: SampleStory = (args) => {
     return (
         <Form {...args}>
-            <MyComponent label="Text Input" name="text-input" apollo-overload />
+            <MyComponent label="Text Input" name="text-input" sparta-overload />
             <TextInput name="sup" label="labelF" required validator={userNameValidator} />
         </Form>
     );

@@ -2,16 +2,16 @@ import { HTMLAttributes, FC, forwardRef, ForwardedRef, MouseEvent } from 'react'
 import React from 'react';
 import './Option.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import type { ComponentWrap } from '../../interfaces/Properties';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 
 export interface IOption
     extends Interface<Omit<HTMLAttributes<HTMLElement>, 'onClick'>>,
-        Apollo<'Option'> {
+        Sparta<'Option'> {
     /** Needs to have a string value in between tags */
     children: string;
     /** Can have onClick callback method */
@@ -34,7 +34,7 @@ export const Option: FC<IOption> = forwardRef(function Option(
     { children, parentProps, className, onClick, wrap, href, ...props }: IOption,
     ref
 ) {
-    gaurdApolloName(props, 'Option');
+    guardSpartaName(props, 'Option');
 
     /** Handles click for option */
     const handleClick = (): void => {
@@ -50,7 +50,7 @@ export const Option: FC<IOption> = forwardRef(function Option(
             onClick={handleClick}
             onKeyDown={(event) => event.key === 'Enter' && handleClick()}
             role="option"
-            className={`apollo-component-library-option-component ${className || ''}`}
+            className={`sparta-component-library-option-component ${className || ''}`}
         >
             <Text>{children}</Text>
         </li>
@@ -59,4 +59,4 @@ export const Option: FC<IOption> = forwardRef(function Option(
     return <>{wrap ? wrap(option) : option}</>;
 });
 
-Option.defaultProps = { 'data-apollo': 'Option' };
+Option.defaultProps = { 'data-sparta': 'Option' };

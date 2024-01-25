@@ -14,7 +14,7 @@ interface ITableBody extends HTMLAttributes<HTMLTableSectionElement> {
 }
 
 /**
- * Apollo table body containing all content
+ * Sparta table body containing all content
  *
  * @return table body
  */

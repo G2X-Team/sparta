@@ -1,5 +1,5 @@
 /* LoadingState Container */
-.apollo-component-library-loadingstate-component-container {
+.sparta-component-library-loadingstate-component-container {
     position: absolute;
     z-index: 5;
     transition: opacity 300ms;
@@ -12,7 +12,7 @@
 
 
 /* LoadingState begins */
-.apollo-component-library-loadingstate-component {
+.sparta-component-library-loadingstate-component {
     border: 16px solid #f3f3f3;
     z-index: 9999;
     border-radius: 50%;
@@ -22,24 +22,24 @@
     animation: spin 2s linear infinite;
 }
 
-.apollo-component-library-loadingstate-component-spinner {
+.sparta-component-library-loadingstate-component-spinner {
     display: inline-block;
 }
 /* LoadingState ends */
 
 
 /* LoadingState size begins*/
-.apollo-component-library-loadingstate-component.small {
+.sparta-component-library-loadingstate-component.small {
     width: 11px;
     height: 11px;
 }
 
-.apollo-component-library-loadingstate-component.medium {
+.sparta-component-library-loadingstate-component.medium {
     width: 60px;
     height: 60px;
 }
 
-.apollo-component-library-loadingstate-component.large {
+.sparta-component-library-loadingstate-component.large {
     width: 120px;
     height: 120px;
 }
@@ -47,11 +47,11 @@
 
 
 /* LoadingState for progress varrient begins*/
-.apollo-component-library-container {
+.sparta-component-library-container {
     max-width: 100%;
 }
 
-.apollo-component-library-loadingstate-component-progressbar {
+.sparta-component-library-loadingstate-component-progressbar {
     border-radius: 20px;
     background-color: #e04542;
     display: flex;
@@ -59,15 +59,15 @@
     transition: width 2s ease-in-out;
 }
 
-.apollo-component-library-loadingstate-component-progressbar.large {
+.sparta-component-library-loadingstate-component-progressbar.large {
     height: 26px;
 }
 
-.apollo-component-library-loadingstate-component-progressbar.medium {
+.sparta-component-library-loadingstate-component-progressbar.medium {
     height: 18px;
 }
 
-.apollo-component-library-loadingstate-component-progressbar.small {
+.sparta-component-library-loadingstate-component-progressbar.small {
     height: 10px;
 }
 /* LoadingState for progress varrient ends*/

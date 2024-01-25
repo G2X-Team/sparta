@@ -1,5 +1,5 @@
 {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -37,19 +37,19 @@
         "trailingComma": "es5",
         "tabWidth": 4
     },
-    "name": "@g2x/apollo",
+    "name": "@g2x/sparta",
     "author": "Eddie Lopez",
     "publishConfig": {
         "access": "public"
     },
-    "module": "dist/apollo.esm.js",
+    "module": "dist/sparta.esm.js",
     "size-limit": [
         {
-            "path": "dist/apollo.cjs.production.min.js",
+            "path": "dist/sparta.cjs.production.min.js",
             "limit": "10 KB"
         },
         {
-            "path": "dist/apollo.esm.js",
+            "path": "dist/sparta.esm.js",
             "limit": "10 KB"
         }
     ],
@@ -84,6 +84,7 @@
         "eslint-plugin-react": "^7.27.1",
         "glob-parent": "^6.0.2",
         "highlight.js": "^11.4.0",
+        "html-webpack-plugin": "^5.6.0",
         "husky": "^7.0.4",
         "identity-obj-proxy": "^3.0.0",
         "jest-axe": "^5.0.1",
@@ -125,6 +126,6 @@
     "dependencies": {
         "lint": "^0.8.19",
         "react-datepicker": "^4.6.0",
-        "react-hook-form": "^7.27.0"
+        "react-hook-form": "7.27.0"
     }
 }

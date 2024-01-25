@@ -17,7 +17,7 @@ const Button: React.FC<Overload<IButton>> = ({
         <button
             {...props}
             disabled={disabled}
-            className={`apollo-component-library-button-group-button-component 
+            className={`sparta-component-library-button-group-button-component 
                 ${className} 
                 ${variant} 
                 ${size}`}

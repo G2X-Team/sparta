@@ -1,4 +1,4 @@
-import type { ApolloTheme, ComponentCSS } from '../interfaces/Theme';
+import type { SpartaTheme, ComponentCSS } from '../interfaces/Theme';
 import type { CSSProperties } from 'react';
 import type * as CSS from 'csstype';
 import { colorNameToHex } from './colornameToHex';
@@ -119,33 +119,33 @@ const getCSSString = (css: CSSProperties): string => {
 };
 
 /**
- * Given valid Apollo CSS, the function will create a style tag with the CSS and append it to the
+ * Given valid Sparta CSS, the function will create a style tag with the CSS and append it to the
  * document's body
  *
  * @param document document to append to
- * @param theme theme to apply Apollo CSS to
+ * @param theme theme to apply Sparta CSS to
  */
-export const createApolloCSS = (document: Document, theme: ApolloTheme): void => {
+export const createSpartaCSS = (document: Document, theme: SpartaTheme): void => {
     // check if css already exists
-    if (document.getElementById('apollo-css')) return;
+    if (document.getElementById('sparta-css')) return;
 
     // create style tag
     const styleTag = document.createElement('style');
-    styleTag.id = 'apollo-css';
+    styleTag.id = 'sparta-css';
 
     // create css string
     let cssString = '';
 
     // loop through every theme
     Object.keys(theme).forEach((themeName) => {
-        // loop through every apollo name
-        Object.keys(theme[themeName]).forEach((apolloName) => {
+        // loop through every sparta name
+        Object.keys(theme[themeName]).forEach((spartaName) => {
             // define component
-            const component = (theme[themeName] as any)[apolloName];
+            const component = (theme[themeName] as any)[spartaName];
 
             // check if component has a variant
-            const [componentName, variant] = apolloName.split('-');
-            let classname = `.apollo[data-apollo="${componentName}"]`;
+            const [componentName, variant] = spartaName.split('-');
+            let classname = `.sparta[data-sparta="${componentName}"]`;
             if (variant) classname += `.${variant}`;
 
             // add css to string
@@ -170,7 +170,7 @@ export const createApolloCSS = (document: Document, theme: ApolloTheme): void =>
     document.body.appendChild(styleTag);
 };
 
-const DefaultTheme: ApolloTheme = {
+const DefaultTheme: SpartaTheme = {
     primary: { color: '#1B75BC' },
     secondary: { color: '#0E214B' },
     tertiary: {
@@ -195,8 +195,8 @@ const DefaultTheme: ApolloTheme = {
  * @param theme theme to fill out
  * @return completed theme
  */
-const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
-    const newTheme: ApolloTheme = theme;
+const createSpartaTheme = (theme: SpartaTheme): SpartaTheme => {
+    const newTheme: SpartaTheme = theme;
 
     // define default presets
     newTheme.text = { ...DefaultTheme.text, ...theme.text };
@@ -210,7 +210,7 @@ const createApolloTheme = (theme: ApolloTheme): ApolloTheme => {
     Object.keys(newTheme).forEach((themeName) => {
         if (themeName === 'text') return;
 
-        // loop through every apollo name
+        // loop through every sparta name
         newTheme[themeName] = {
             // make sure to retain existing theme
             ...(newTheme[themeName] ?? {}),
@@ -255,7 +255,7 @@ const assignCSS = (themeObject: any, values?: CSSProperties): any => {
  * @param themeName name of theme
  * @return Calendar theme
  */
-const getCalenderStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+const getCalenderStyle = (theme: SpartaTheme, themeName: string): SpartaTheme => {
     const currentTheme: any = theme[themeName];
     const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
 
@@ -333,7 +333,7 @@ const getCalenderStyle = (theme: ApolloTheme, themeName: string): ApolloTheme =>
  * @param themeName name of theme;
  * @return Button theme
  */
-const getButtonStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+const getButtonStyle = (theme: SpartaTheme, themeName: string): SpartaTheme => {
     const Button = (theme[themeName] as any)?.Button ?? {};
     const ButtonOutline = (theme[themeName] as any)?.ButtonOutline ?? {};
     const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
@@ -439,7 +439,7 @@ const getButtonStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
  * @param themeName name of theme;
  * @return Avatar theme
  */
-const getAvatarStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+const getAvatarStyle = (theme: SpartaTheme, themeName: string): SpartaTheme => {
     const Avatar = (theme[themeName] as any)?.Avatar ?? {};
     const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
 
@@ -459,7 +459,7 @@ const getAvatarStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
  * @param themeName theme name
  * @return text input theme
  */
-const getTextInputStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+const getTextInputStyle = (theme: SpartaTheme, themeName: string): SpartaTheme => {
     const TextInput = (theme[themeName] as any)?.TextInput ?? {};
     const InputLabel = (theme[themeName] as any)?.TextInputLabel ?? {};
     const InputHint = (theme[themeName] as any)?.TextInputHint ?? {};
@@ -540,7 +540,7 @@ const getTextInputStyle = (theme: ApolloTheme, themeName: string): ApolloTheme =
  * @param themeName theme name
  * @return something
  */
-const getSelectStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+const getSelectStyle = (theme: SpartaTheme, themeName: string): SpartaTheme => {
     const Select = (theme[themeName] as any)?.Select ?? {};
     const SelectLabel = (theme[themeName] as any)?.SelectLabel ?? {};
     const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
@@ -605,7 +605,7 @@ const getSelectStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
  * @param themeName theme name
  * @return something
  */
-const getDateSelectStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+const getDateSelectStyle = (theme: SpartaTheme, themeName: string): SpartaTheme => {
     const DateSelect = (theme[themeName] as any)?.DateSelect ?? {};
     const DateSelectLabel = (theme[themeName] as any)?.DateSelectLabel ?? {};
     const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
@@ -670,7 +670,7 @@ const getDateSelectStyle = (theme: ApolloTheme, themeName: string): ApolloTheme 
  * @param themeName theme name
  * @return Text theme
  */
-const getTextStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+const getTextStyle = (theme: SpartaTheme, themeName: string): SpartaTheme => {
     const Text = (theme[themeName] as any)?.Text ?? {};
     const TextH1 = (theme[themeName] as any)?.TextH1 ?? {};
     const TextH2 = (theme[themeName] as any)?.TextH2 ?? {};
@@ -706,7 +706,7 @@ const getTextStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
  * @param themeName theme name
  * @return Icon theme
  */
-const getIconStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
+const getIconStyle = (theme: SpartaTheme, themeName: string): SpartaTheme => {
     const Icon = (theme[themeName] as any)?.Icon ?? {};
     const themeColor = theme?.[themeName]?.color as CSS.Property.Color;
     const textTheme = theme?.text as CSS.Properties;
@@ -732,19 +732,19 @@ const getIconStyle = (theme: ApolloTheme, themeName: string): ApolloTheme => {
     };
 };
 
-export class ApolloCSS {
+export class SpartaCSS {
     private css: string;
 
-    constructor(t?: ApolloTheme, document?: Document, noOverride?: true) {
+    constructor(t?: SpartaTheme, document?: Document, noOverride?: true) {
         if (noOverride) {
-            if (document?.getElementById('apollo-css')) {
+            if (document?.getElementById('sparta-css')) {
                 this.css = '';
                 return;
             }
         }
 
         // create theme
-        const theme = createApolloTheme(t ?? {});
+        const theme = createSpartaTheme(t ?? {});
 
         // create css string
         let css = '';
@@ -752,15 +752,15 @@ export class ApolloCSS {
         // loop through every theme
         Object.keys(theme).forEach((themeName) => {
             if (themeName === 'text') return;
-            // loop through every apollo name
-            Object.keys(theme[themeName]).forEach((apolloName) => {
+            // loop through every sparta name
+            Object.keys(theme[themeName]).forEach((spartaName) => {
                 // define component
-                const component = (theme[themeName] as any)[apolloName];
+                const component = (theme[themeName] as any)[spartaName];
 
                 // check if component has a variant or target
-                const [cM, variant] = apolloName.split('-');
+                const [cM, variant] = spartaName.split('-');
                 const [componentName, target] = cM.split('/');
-                let classname = `.apollo[data-apollo="${componentName}"].${themeName}${
+                let classname = `.sparta[data-sparta="${componentName}"].${themeName}${
                     target ? ' ' + target : ''
                 }`;
                 if (variant) classname += `.${variant}`;
@@ -788,7 +788,7 @@ export class ApolloCSS {
 
     /**
      * This method will add imports to the css body for given fonts
-     * or other assets to be used in the Apollo CSS
+     * or other assets to be used in the Sparta CSS
      *
      * @param hrefs import links to load in css
      */
@@ -809,16 +809,16 @@ export class ApolloCSS {
      */
     applyCSS(document: Document, noOverride?: boolean): void {
         if (noOverride) {
-            if (document?.getElementById('apollo-css')) return;
+            if (document?.getElementById('sparta-css')) return;
         } else {
-            if (document?.getElementById('apollo-css')) {
-                document.getElementById('apollo-css')?.remove();
+            if (document?.getElementById('sparta-css')) {
+                document.getElementById('sparta-css')?.remove();
             }
         }
 
         // create tag
         const styleTag = document.createElement('style');
-        styleTag.id = 'apollo-css';
+        styleTag.id = 'sparta-css';
         styleTag.innerText = this.css;
 
         // append tag to body
@@ -834,7 +834,7 @@ export class ApolloCSS {
      */
     getCSS(): { id: string; children: string } {
         return {
-            id: 'apollo-css',
+            id: 'sparta-css',
             children: this.css,
         };
     }

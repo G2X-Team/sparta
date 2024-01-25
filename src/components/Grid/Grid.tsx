@@ -4,10 +4,10 @@ import './Grid.css';
 
 import type * as CSS from 'csstype';
 import type { Interface } from '../../interfaces/Overload';
-import type { Apollo } from '../../interfaces/Apollo';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import type { Sparta } from '../../interfaces/Sparta';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
-export interface IGrid extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Grid'> {
+export interface IGrid extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Grid'> {
     /** Grid template rows */
     rows?: CSS.Property.GridTemplateRows;
     /** Grid template columns */
@@ -39,7 +39,7 @@ export const Grid: FC<IGrid> = ({
     children,
     ...props
 }) => {
-    gaurdApolloName(props, 'Grid');
+    guardSpartaName(props, 'Grid');
 
     return (
         <div
@@ -77,4 +77,4 @@ const getGridStyle = ({
     };
 };
 
-Grid.defaultProps = { 'data-apollo': 'Grid' };
+Grid.defaultProps = { 'data-sparta': 'Grid' };

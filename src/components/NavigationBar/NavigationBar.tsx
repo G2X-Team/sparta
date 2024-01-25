@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React, { CSSProperties, useState, useEffect, useRef } from 'react';
 import './NavigationBar.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type {
     ComponentPosition,
     ComponentVerticalOrientation,
@@ -10,13 +10,13 @@ import type {
 } from '../../interfaces/Properties';
 import type * as CSS from 'csstype';
 import FormatChildren from '../../util/formatting/FormatChildren';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import Section from './overload/Section';
 import { RenderAll } from '../../interfaces/Overload';
 
-export interface INavigationBar extends HTMLAttributes<HTMLDivElement>, Apollo<'NavigationBar'> {
+export interface INavigationBar extends HTMLAttributes<HTMLDivElement>, Sparta<'NavigationBar'> {
     /** If the component is not static, it will determine the orientation of the component */
     orientation?: ComponentVerticalOrientation;
     /** Determines the position of the component */
@@ -50,7 +50,7 @@ export const NavigationBar: FC<INavigationBar> = ({
     style,
     ...props
 }: INavigationBar) => {
-    gaurdApolloName(props, 'NavigationBar');
+    guardSpartaName(props, 'NavigationBar');
 
     // refs
     const navigationBar = useRef<HTMLDivElement>(null);
@@ -80,7 +80,7 @@ export const NavigationBar: FC<INavigationBar> = ({
     return (
         <nav
             {...props}
-            className={`apollo
+            className={`sparta
                 ${position} ${orientation} ${className}
             `}
             style={getNavigationStyle(size, style)}
@@ -91,7 +91,7 @@ export const NavigationBar: FC<INavigationBar> = ({
                     header={3}
                     bold
                     onClick={onTitleClick}
-                    className={`apollo-component-library-navigation-bar-component-title 
+                    className={`sparta-component-library-navigation-bar-component-title 
                         ${mobile && 'mobile'} ${onTitleClick && 'clickable'}
                     `}
                 >
@@ -103,7 +103,7 @@ export const NavigationBar: FC<INavigationBar> = ({
     );
 };
 
-NavigationBar.defaultProps = { 'data-apollo': 'NavigationBar' };
+NavigationBar.defaultProps = { 'data-sparta': 'NavigationBar' };
 
 /**
  * Gets the navigation style object

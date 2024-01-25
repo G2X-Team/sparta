@@ -38,7 +38,7 @@ export const CalendarRange: FC<ICalendar> = ({ type, id, selected, updateSelecte
                 value={range.start}
                 hideLabel
             />
-            <div className="apollo-range-divider" />
+            <div className="sparta-range-divider" />
             <TextInput
                 style={{ width: 120 }}
                 name={`${id}-end`}

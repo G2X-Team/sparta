@@ -3,15 +3,15 @@ import React from 'react';
 import './Image.css';
 
 import type * as CSS from 'csstype';
-import type { Apollo } from '../../interfaces/Apollo';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import type { Sparta } from '../../interfaces/Sparta';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import { ComponentSize } from '../../interfaces/Properties';
 import { useProgressiveImage } from '../../util/imageProcessing';
 
 import { View } from '../View/View';
 import { Spinner } from '../Spinner/Spinner';
 
-export interface IImage extends HTMLAttributes<HTMLDivElement>, Apollo<'Image'> {
+export interface IImage extends HTMLAttributes<HTMLDivElement>, Sparta<'Image'> {
     /** source of image */
     src: string;
     /** alt text of image */
@@ -50,7 +50,7 @@ export const Image: FC<IImage> = ({
     children,
     ...props
 }) => {
-    gaurdApolloName(props, 'Image');
+    guardSpartaName(props, 'Image');
 
     // state
     const loaded = useProgressiveImage(src);
@@ -58,7 +58,7 @@ export const Image: FC<IImage> = ({
     return (
         <div
             {...props}
-            className={`apollo ${className} ${
+            className={`sparta ${className} ${
                 loaded === 'loading' ? 'loading' : ''
             } ${spinnerSize}`}
             role="img"
@@ -89,4 +89,4 @@ export const Image: FC<IImage> = ({
     );
 };
 
-Image.defaultProps = { 'data-apollo': 'Image' };
+Image.defaultProps = { 'data-sparta': 'Image' };
