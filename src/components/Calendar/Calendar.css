@@ -1,4 +1,4 @@
-.apollodate {
+.spartadate {
     height: 40px;
     width: 40px;
     background: transparent;
@@ -12,12 +12,12 @@
     justify-content: center;
 }
 
-#apollodate-day {
+#spartadate-day {
     display: flex;
     flex: 1;
 }
 
-#apollodate-day > * {
+#spartadate-day > * {
     height: 40px;
     width: 40px;
     display: flex;
@@ -25,21 +25,21 @@
     justify-content: space-around;
 }
 
-.apollodate:hover {
+.spartadate:hover {
     background: #EDEFF1;
     outline: none;
 }
 
-.apollodate.not-current {
+.spartadate.not-current {
     color: #6c757c;
 }
 
-.apollodate.active {
+.spartadate.active {
     background: #101828;
     color: white;
 }
 
-.apollodate:disabled {
+.spartadate:disabled {
     background-color: transparent;
     color: rgba(16, 16, 16, 0.3);
     cursor: not-allowed;
@@ -52,6 +52,6 @@
     margin-bottom: 15px;
 }
 
-.sparta[data-sparta="Icon"].apollodate-controls {
+.sparta[data-sparta="Icon"].spartadate-controls {
     color: #6c757c
 }

@@ -53,7 +53,7 @@ class FormatChildren {
 
                 if (child?.props?.['sparta-overload']) {
                     const cloned = cloneElement(child, {
-                        apolloRef: {
+                        spartaRef: {
                             componentMap: componentMap,
                             parentProps: {
                                 childIndex: index,

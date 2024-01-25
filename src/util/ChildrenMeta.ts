@@ -16,7 +16,7 @@ interface ComponentMeta<T> {
 
 interface MetaData {
     /** Component available in  */
-    [apolloName: string]: ComponentMeta<any>[];
+    [spartaName: string]: ComponentMeta<any>[];
 }
 
 export default class ChildrenMeta {
@@ -64,12 +64,12 @@ export default class ChildrenMeta {
     /**
      * Gets meta data of component
      *
-     * @param apolloName gets the meta data of given sparta name
+     * @param spartaName gets the meta data of given sparta name
      * @return d
      */
-    get = <T>(apolloName: keyof MetaData): ComponentMeta<T>[] | null => {
-        if (!this.metaData[apolloName]) return null;
-        return this.metaData[apolloName];
+    get = <T>(spartaName: keyof MetaData): ComponentMeta<T>[] | null => {
+        if (!this.metaData[spartaName]) return null;
+        return this.metaData[spartaName];
     };
 
     /**

@@ -5,7 +5,7 @@ import './Option.css';
 import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import type { ComponentWrap } from '../../interfaces/Properties';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 
@@ -34,7 +34,7 @@ export const Option: FC<IOption> = forwardRef(function Option(
     { children, parentProps, className, onClick, wrap, href, ...props }: IOption,
     ref
 ) {
-    gaurdApolloName(props, 'Option');
+    guardSpartaName(props, 'Option');
 
     /** Handles click for option */
     const handleClick = (): void => {

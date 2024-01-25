@@ -3,7 +3,7 @@ import React from 'react';
 import './Alert.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface IAlert extends HTMLAttributes<HTMLParagraphElement>, Sparta<'Alert'> {
     /** Alert needs to exist between tags */
@@ -21,7 +21,7 @@ export interface IAlert extends HTMLAttributes<HTMLParagraphElement>, Sparta<'Al
  * @return Alert component
  */
 export const Alert: FC<IAlert> = ({ children, type = 'danger', ...props }) => {
-    gaurdApolloName(props, 'Alert');
+    guardSpartaName(props, 'Alert');
 
     /**
      * Gets all the special conditions and translates it to a special className combination

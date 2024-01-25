@@ -6,7 +6,7 @@ import type { Sparta } from '../../interfaces/Sparta';
 import type { StyleVariant } from '../../interfaces/Properties';
 
 import { Text } from '../Text/Text';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface ISwitch extends HTMLAttributes<HTMLInputElement>, Sparta<'Switch'> {
     /** Can assign text or element to switch */
@@ -37,7 +37,7 @@ export const Switch: FC<ISwitch> = ({
     required,
     ...props
 }) => {
-    gaurdApolloName(props, 'Switch');
+    guardSpartaName(props, 'Switch');
 
     return (
         <div className="sparta-component-library-switch-component-wrapper">

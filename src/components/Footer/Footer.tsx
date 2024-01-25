@@ -4,7 +4,7 @@ import './Footer.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface IFooter extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Footer'> {
     /** Can have children of any kind */
@@ -17,7 +17,7 @@ export interface IFooter extends Interface<HTMLAttributes<HTMLDivElement>>, Spar
  * @return Footer component
  */
 export const Footer: FC<IFooter> = ({ children, className = '', parentProps, ...props }) => {
-    gaurdApolloName(props, 'Footer');
+    guardSpartaName(props, 'Footer');
 
     return (
         <footer {...props} className={`sparta-component-library-footer-component ${className}`}>

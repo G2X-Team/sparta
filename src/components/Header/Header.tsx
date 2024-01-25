@@ -4,7 +4,7 @@ import './Header.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface IHeader extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Header'> {
     /** Can have children of any kind */
@@ -17,7 +17,7 @@ export interface IHeader extends Interface<HTMLAttributes<HTMLDivElement>>, Spar
  * @return Header component
  */
 export const Header: FC<IHeader> = ({ parentProps, children, className = '', ...props }) => {
-    gaurdApolloName(props, 'Header');
+    guardSpartaName(props, 'Header');
 
     return (
         <header {...props} className={`sparta-component-library-header-component ${className}`}>

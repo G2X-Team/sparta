@@ -5,7 +5,7 @@ import './ErrorMessage.css';
 import type { Sparta } from '../../interfaces/Sparta';
 
 import { Text } from '../Text/Text';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface IErrorMessage extends HTMLAttributes<HTMLDivElement>, Sparta<'ErrorMessage'> {
     /** Error message id */
@@ -22,16 +22,16 @@ export interface IErrorMessage extends HTMLAttributes<HTMLDivElement>, Sparta<'E
  * @return error message components
  */
 export const ErrorMessage: FC<IErrorMessage> = ({
-    'data-sparta': dataApollo = 'ErrorMessage',
+    'data-sparta': dataSparta = 'ErrorMessage',
     active = false,
     className = '',
     children,
     ...props
 }) => {
-    gaurdApolloName({ 'data-sparta': dataApollo }, 'ErrorMessage');
+    guardSpartaName({ 'data-sparta': dataSparta }, 'ErrorMessage');
 
     return active ? (
-        <div {...props} role="alert" data-sparta={dataApollo} className={`sparta ${className}`}>
+        <div {...props} role="alert" data-sparta={dataSparta} className={`sparta ${className}`}>
             <Text color="#F04438" style={{ fontSize: 14 }}>
                 {children}
             </Text>

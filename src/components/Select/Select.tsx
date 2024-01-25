@@ -10,7 +10,7 @@ import type { ComponentOrientation, ComponentAlignment } from '../../interfaces/
 import { Icon } from '../Icon/Icon';
 import { Option } from '../Option/Option';
 import Menu from './components/Menu';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 export interface ISelect
@@ -50,7 +50,7 @@ export interface ISelect
  * @return Select Input
  */
 export const Select: FC<ISelect> = ({
-    'data-sparta': dataApollo = 'Select',
+    'data-sparta': dataSparta = 'Select',
     className = '',
     defaultValue,
     anchor = 'bottom',
@@ -68,7 +68,7 @@ export const Select: FC<ISelect> = ({
     options,
     ...props
 }) => {
-    gaurdApolloName({ 'data-sparta': dataApollo }, 'Select');
+    guardSpartaName({ 'data-sparta': dataSparta }, 'Select');
 
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
@@ -191,7 +191,7 @@ export const Select: FC<ISelect> = ({
     return (
         <label
             className={`sparta ${className} ${theme} ${invalid ? 'invalid' : ''}`}
-            data-sparta={dataApollo}
+            data-sparta={dataSparta}
         >
             <div className="label">{label}</div>
             {renderSelect()}

@@ -4,7 +4,7 @@
     <img src="https://i.pinimg.com/564x/ad/fb/0f/adfb0fd0aa639a744d71f462538e68f1.jpg" width="400px">
 </p>
 
-Sparta (Formaly Apollo) is a React UI/UX component library primarily developed by G2X with an emphasis on productivity and ease of use. This package uses [TSDX](https://www.npmjs.com/package/tsdx) for development, and extends the use of packages like [React Hook Form](https://react-hook-form.com/), and others for the purpose of providing a complete development experience.
+Sparta is a React UI/UX component library primarily developed by G2X with an emphasis on productivity and ease of use. This package uses [TSDX](https://www.npmjs.com/package/tsdx) for development, and extends the use of packages like [React Hook Form](https://react-hook-form.com/), and others for the purpose of providing a complete development experience.
 
 # 🚀 Getting Started
 
@@ -15,7 +15,7 @@ Here is a quick setup of what you need to do to start contributing in Sparta.
 sudo apt-get install -y nodejs
 
 # Clone repo
-git clone https://github.com/MileMarker10/sparta-component-library sparta
+git clone https://github.com/MileMarker10/sparta sparta
 
 # Run the setup script (One time command to install deps and husky)
 yarn setup
@@ -42,7 +42,7 @@ To help guide your way around the repo, here is a quick breakdown of the file st
 ### Breakdown
 
 ```Markdown
-sparta-component-library
+sparta
 ├───example
 │   └───Testing environment for component implementation
 │
@@ -67,7 +67,7 @@ sparta-component-library
 ```
 # 🤔 Have suggestions?
 
-Feel free to use the [Issues](https://github.com/MileMarker10/sparta-component-library/issues) tab on the repo to voice any questions or concerns about the codebase.
+Feel free to use the [Issues](https://github.com/MileMarker10/sparta/issues) tab on the repo to voice any questions or concerns about the codebase.
 
 # Documentation
 Coming soon

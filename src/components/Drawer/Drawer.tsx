@@ -6,7 +6,7 @@ import './Drawer.css';
 import type { Sparta } from '../../interfaces/Sparta';
 import type { ComponentOrientation } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { View } from '../View/View';
 import Menu from './overload/Menu';
@@ -59,7 +59,7 @@ export const Drawer: FC<IDrawer> & { Button: FC<IDrawerButton> } = ({
     style,
     ...props
 }: IDrawer) => {
-    gaurdApolloName(props, 'Drawer');
+    guardSpartaName(props, 'Drawer');
 
     const button = useRef<HTMLButtonElement | null>(null);
 

@@ -3,7 +3,7 @@ import React from 'react';
 import './Radio.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
@@ -48,7 +48,7 @@ export const Radio: FC<IRadio> = ({
     id,
     ...props
 }) => {
-    gaurdApolloName(props, 'Radio');
+    guardSpartaName(props, 'Radio');
 
     // check if the user can use error messages
     useEffect(() => {

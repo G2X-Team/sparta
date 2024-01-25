@@ -4,7 +4,7 @@ import './Card.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
 import FormatChildren from '../../util/formatting/FormatChildren';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import type { RenderAll } from '../../interfaces/Overload';
 
 import { Header } from '../Header/Header';
@@ -22,7 +22,7 @@ export interface ICard extends HTMLAttributes<HTMLDivElement>, Sparta<'Card'> {
  * @return Card component
  */
 export const Card: FC<ICard> = ({ children, className, ...props }) => {
-    gaurdApolloName(props, 'Card');
+    guardSpartaName(props, 'Card');
 
     /**
      * Renderes all components

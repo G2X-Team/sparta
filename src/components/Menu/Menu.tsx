@@ -6,7 +6,7 @@ import type { Sparta } from '../../interfaces/Sparta';
 import type { RenderAll, Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
 import FormatChildren from '../../util/formatting/FormatChildren';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import { handleOutsideClick } from '../../util/detectOutsideClick';
 
 import { Header } from '../Header/Header';
@@ -54,7 +54,7 @@ export const Menu: FC<IMenu> = ({
     label,
     ...props
 }) => {
-    gaurdApolloName(props, 'Menu');
+    guardSpartaName(props, 'Menu');
 
     // refs
     const menu = useRef<HTMLDivElement>(null);

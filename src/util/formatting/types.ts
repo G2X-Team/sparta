@@ -13,7 +13,7 @@ export type ElementDictionary = Record<string, JSX.Element[]>;
 
 export type ComponentRecord = Record<string, FC<any>>;
 
-export interface ApolloRef {
+export interface SpartaRef {
     /** Parent props */
     parentProps: ParentProps;
     /** Record containing replacement components */
@@ -27,5 +27,5 @@ export interface Overloader {
      * This is a reference that is automatically passed by Sparta processing, only used to
      * pass to the `OverloadHandler`
      */
-    apolloRef?: ApolloRef;
+    spartaRef?: SpartaRef;
 }

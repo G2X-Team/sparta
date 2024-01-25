@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './Modal.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import Dialog from './components/Dialog';
 
@@ -44,7 +44,7 @@ export const Modal: FC<IModal> = ({
     toggleModal,
     ...props
 }) => {
-    gaurdApolloName(props, 'Modal');
+    guardSpartaName(props, 'Modal');
 
     // state variables
     const [display, toggleDisplay] = useState(open);

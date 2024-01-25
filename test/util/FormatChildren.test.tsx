@@ -66,9 +66,9 @@ interface IWrappedTarget extends Overloader {
  *
  * @return wrapped target to be replaced
  */
-const WrappedTarget: FC<IWrappedTarget> = ({ children, apolloRef }) => {
+const WrappedTarget: FC<IWrappedTarget> = ({ children, spartaRef }) => {
     return (
-        <OverloadHandler apolloRef={apolloRef}>
+        <OverloadHandler spartaRef={spartaRef}>
             {children}
             <Button>Something else</Button>
         </OverloadHandler>

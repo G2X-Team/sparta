@@ -4,7 +4,7 @@ import './Image.css';
 
 import type * as CSS from 'csstype';
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import { ComponentSize } from '../../interfaces/Properties';
 import { useProgressiveImage } from '../../util/imageProcessing';
 
@@ -28,6 +28,8 @@ export interface IImage extends HTMLAttributes<HTMLDivElement>, Sparta<'Image'> 
     borderRadius?: CSS.Property.BorderRadius;
     /** determines size of loading spinner */
     spinnerSize?: ComponentSize;
+    /** determines the loading behavior of the image */
+    loading?: 'eager' | 'lazy';
 }
 
 /**
@@ -48,7 +50,7 @@ export const Image: FC<IImage> = ({
     children,
     ...props
 }) => {
-    gaurdApolloName(props, 'Image');
+    guardSpartaName(props, 'Image');
 
     // state
     const loaded = useProgressiveImage(src);

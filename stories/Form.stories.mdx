@@ -234,10 +234,10 @@ interface IMyComponent extends Overloader {
     /* your defined props here */
 }
 
-function MyComponent({ apolloRef, ...props }: IMyComponent) {
+function MyComponent({ spartaRef, ...props }: IMyComponent) {
     return (
         // wrap your children in the OverloadHandler
-        <OverloadHandler apolloRef={apolloRef}>
+        <OverloadHandler spartaRef={spartaRef}>
             <TextInput name="my-input" label="Type in me please" />
         </OverloadHander>
     );
@@ -255,7 +255,7 @@ export default function Login() {
 
 To briefly explain what's going on, we are using the `OverloadHandler` to wrap the `TextInput`
 component so that it can be validated. However, the `OverloadHandler` needs additional information,
-and it gets it through the `apolloRef` prop. This prop is automatically added to your component
+and it gets it through the `spartaRef` prop. This prop is automatically added to your component
 when you add the `sparta-override` prop to your component and it's in the `Form`. There is a lot
 of magic going on here, but if you use the type and auto-complete, this will be straightforward.
 

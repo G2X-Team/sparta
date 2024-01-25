@@ -5,7 +5,7 @@ import './Grid.css';
 import type * as CSS from 'csstype';
 import type { Interface } from '../../interfaces/Overload';
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface IGrid extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Grid'> {
     /** Grid template rows */
@@ -39,7 +39,7 @@ export const Grid: FC<IGrid> = ({
     children,
     ...props
 }) => {
-    gaurdApolloName(props, 'Grid');
+    guardSpartaName(props, 'Grid');
 
     return (
         <div

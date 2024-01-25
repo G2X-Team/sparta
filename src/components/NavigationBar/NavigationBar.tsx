@@ -10,7 +10,7 @@ import type {
 } from '../../interfaces/Properties';
 import type * as CSS from 'csstype';
 import FormatChildren from '../../util/formatting/FormatChildren';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import Section from './overload/Section';
@@ -50,7 +50,7 @@ export const NavigationBar: FC<INavigationBar> = ({
     style,
     ...props
 }: INavigationBar) => {
-    gaurdApolloName(props, 'NavigationBar');
+    guardSpartaName(props, 'NavigationBar');
 
     // refs
     const navigationBar = useRef<HTMLDivElement>(null);

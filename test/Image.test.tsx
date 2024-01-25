@@ -35,6 +35,7 @@ describe('Image', () => {
                 // eslint-disable-next-line max-len
                 src="https://i.picsum.photos/id/878/3000/3000.jpg?hmac=xb2kVI4JW-mdX6VW3xiTIeyZZrcGHHYrEpARD1Fcly0"
                 alt="Test"
+                loading="lazy"
             />
         );
 
