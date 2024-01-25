@@ -64,7 +64,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
         <span
             {...props}
             role={clickable ? 'button' : undefined}
-            ref={ref}
+            ref={ref as ForwardedRef<HTMLButtonElement>}
             style={getIconStyle(disabled, color, style)}
             onKeyDown={(event) =>
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
