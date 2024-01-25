@@ -73,20 +73,6 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
                 ${clickable ? 'clickable' : ''} ${className} ${theme}`}
         >
             {name}
-        </button>
-    ) : (
-        <span
-            {...props}
-            role={clickable ? 'button' : undefined}
-            ref={ref}
-            style={getIconStyle(disabled, color, style)}
-            onKeyDown={(event) =>
-                (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
-            }
-            className={`material-icons apollo
-                ${clickable ? 'clickable' : ''} ${className} ${theme}`}
-        >
-            {name}
         </span>
     );
 });
