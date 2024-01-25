@@ -45,13 +45,13 @@
     cursor: not-allowed;
 }
 
-.apollo-range-divider {
+.sparta-range-divider {
     height: 1.5px;
     background: #C1C7CB;
     width: 100%;
     margin-bottom: 15px;
 }
 
-.apollo[data-apollo="Icon"].apollodate-controls {
+.sparta[data-sparta="Icon"].apollodate-controls {
     color: #6c757c
 }

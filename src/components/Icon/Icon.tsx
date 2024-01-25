@@ -2,11 +2,11 @@ import type { HTMLAttributes, FC, ForwardedRef, CSSProperties } from 'react';
 import React, { forwardRef } from 'react';
 import './Icon.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type * as CSS from 'csstype';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
-export interface IIcon extends HTMLAttributes<HTMLSpanElement>, Apollo<'Icon'> {
+export interface IIcon extends HTMLAttributes<HTMLSpanElement>, Sparta<'Icon'> {
     /** The icon name the user wants to render */
     name: string;
     /** Specification of an onClick method will convert icon into a button */
@@ -54,7 +54,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
             onKeyDown={(event) =>
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
-            className={`material-icons apollo
+            className={`material-icons sparta
                 ${clickable ? 'clickable' : ''} ${className} ${theme}`}
             onClick={onClick}
         >
@@ -77,7 +77,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
     );
 });
 
-Icon.defaultProps = { 'data-apollo': 'Icon' };
+Icon.defaultProps = { 'data-sparta': 'Icon' };
 
 /**
  * Gets Icon style object

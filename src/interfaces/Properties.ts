@@ -66,7 +66,7 @@ export type FormSubmitHandler = (data?: FormData, event?: BaseSyntheticEvent) =>
  */
 export type FormErrorHandler = (errors?: FormErrors) => void;
 
-/** Function to be used for Apollo input validation purposes */
+/** Function to be used for Sparta input validation purposes */
 export type FormValidator<T = FormInputData> = (inputData: T) => string | null;
 
 /** Preferred structure for Action Data given by Remix */

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './DateSelect.css';
 
 import type * as CSS from 'csstype';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { RenderAll } from '../../interfaces/Overload';
 import type { ComponentOrientation, ComponentAlignment } from '../../interfaces/Properties';
 
@@ -15,7 +15,7 @@ import { Calendar } from '../Calendar/Calendar';
 
 export interface IDateSelect
     extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>,
-        Apollo<'DateSelect'> {
+        Sparta<'DateSelect'> {
     /** Label, required for accessibility purposes */
     label: string;
     /** input name */
@@ -48,7 +48,7 @@ export interface IDateSelect
  * @return Select Input
  */
 export const DateSelect: FC<IDateSelect> = ({
-    'data-apollo': dataApollo = 'DateSelect',
+    'data-sparta': dataApollo = 'DateSelect',
     className = '',
     defaultValue,
     anchor = 'bottom',
@@ -65,7 +65,7 @@ export const DateSelect: FC<IDateSelect> = ({
     required,
     ...props
 }) => {
-    gaurdApolloName({ 'data-apollo': dataApollo }, 'DateSelect');
+    gaurdApolloName({ 'data-sparta': dataApollo }, 'DateSelect');
 
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
@@ -198,8 +198,8 @@ export const DateSelect: FC<IDateSelect> = ({
 
     return (
         <label
-            className={`apollo ${className} ${theme} ${invalid ? 'invalid' : ''}`}
-            data-apollo={dataApollo}
+            className={`sparta ${className} ${theme} ${invalid ? 'invalid' : ''}`}
+            data-sparta={dataApollo}
         >
             <div className="label">{label}</div>
             {renderSelect()}

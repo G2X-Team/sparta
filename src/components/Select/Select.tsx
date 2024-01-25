@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './Select.css';
 
 import type * as CSS from 'csstype';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { RenderAll } from '../../interfaces/Overload';
 import type { ComponentOrientation, ComponentAlignment } from '../../interfaces/Properties';
 
@@ -15,7 +15,7 @@ import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 export interface ISelect
     extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>,
-        Apollo<'Select'> {
+        Sparta<'Select'> {
     /** Label, required for accessibility purposes */
     label: string;
     /** List of options */
@@ -50,7 +50,7 @@ export interface ISelect
  * @return Select Input
  */
 export const Select: FC<ISelect> = ({
-    'data-apollo': dataApollo = 'Select',
+    'data-sparta': dataApollo = 'Select',
     className = '',
     defaultValue,
     anchor = 'bottom',
@@ -68,7 +68,7 @@ export const Select: FC<ISelect> = ({
     options,
     ...props
 }) => {
-    gaurdApolloName({ 'data-apollo': dataApollo }, 'Select');
+    gaurdApolloName({ 'data-sparta': dataApollo }, 'Select');
 
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
@@ -190,8 +190,8 @@ export const Select: FC<ISelect> = ({
 
     return (
         <label
-            className={`apollo ${className} ${theme} ${invalid ? 'invalid' : ''}`}
-            data-apollo={dataApollo}
+            className={`sparta ${className} ${theme} ${invalid ? 'invalid' : ''}`}
+            data-sparta={dataApollo}
         >
             <div className="label">{label}</div>
             {renderSelect()}

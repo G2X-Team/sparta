@@ -76,7 +76,7 @@ const WrappedTarget: FC<IWrappedTarget> = ({ children, apolloRef }) => {
 };
 
 describe('DeepFormat', () => {
-    it('should render all non-apollo children normally', () => {
+    it('should render all non-sparta children normally', () => {
         // given
         render(
             <TestComponent test="test">
@@ -94,7 +94,7 @@ describe('DeepFormat', () => {
         expect(screen.getByText('This is amazing')).toBeInTheDocument();
     });
 
-    it('should replace apollo components without impacting adjacent children', () => {
+    it('should replace sparta components without impacting adjacent children', () => {
         // given
         render(
             <TestComponent test="test">
@@ -109,7 +109,7 @@ describe('DeepFormat', () => {
         expect(screen.queryByText('Hello')).not.toBeInTheDocument();
     });
 
-    it('should replace apollo components that are deeply nested in Views', () => {
+    it('should replace sparta components that are deeply nested in Views', () => {
         // given
         render(
             <TestComponent test="test">
@@ -128,7 +128,7 @@ describe('DeepFormat', () => {
         expect(screen.queryByText('Hello')).not.toBeInTheDocument();
     });
 
-    it('should replace apollo components that are deeply nested and have adjacent children', () => {
+    it('should replace sparta components that are deeply nested and have adjacent children', () => {
         // given
         render(
             <TestComponent test="test">
@@ -175,7 +175,7 @@ describe('DeepFormat', () => {
         // given
         render(
             <TestComponent test="test">
-                <WrappedTarget apollo-overload>
+                <WrappedTarget sparta-overload>
                     <p>This is pretty cool</p>
                 </WrappedTarget>
             </TestComponent>
@@ -190,7 +190,7 @@ describe('DeepFormat', () => {
         // given
         render(
             <TestComponent test="test">
-                <WrappedTarget apollo-overload>
+                <WrappedTarget sparta-overload>
                     <p>This is pretty cool</p>
                 </WrappedTarget>
                 <Button>This is cool</Button>
@@ -206,9 +206,9 @@ describe('DeepFormat', () => {
         // given
         render(
             <TestComponent test="test">
-                <WrappedTarget apollo-overload>
-                    <WrappedTarget apollo-overload>
-                        <WrappedTarget apollo-overload>
+                <WrappedTarget sparta-overload>
+                    <WrappedTarget sparta-overload>
+                        <WrappedTarget sparta-overload>
                             <p>This is pretty cool</p>
                         </WrappedTarget>
                     </WrappedTarget>

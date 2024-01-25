@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Card.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import FormatChildren from '../../util/formatting/FormatChildren';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 import type { RenderAll } from '../../interfaces/Overload';
@@ -10,7 +10,7 @@ import type { RenderAll } from '../../interfaces/Overload';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 
-export interface ICard extends HTMLAttributes<HTMLDivElement>, Apollo<'Card'> {
+export interface ICard extends HTMLAttributes<HTMLDivElement>, Sparta<'Card'> {
     /** Accepts any kind of children */
     children?: ReactNode;
 }
@@ -45,7 +45,7 @@ export const Card: FC<ICard> = ({ children, className, ...props }) => {
         return (
             <>
                 {header}
-                <div className="apollo-component-library-card-component-body">
+                <div className="sparta-component-library-card-component-body">
                     {formatted.getOther()}
                 </div>
                 {footer}
@@ -54,10 +54,10 @@ export const Card: FC<ICard> = ({ children, className, ...props }) => {
     };
 
     return (
-        <div {...props} className={`apollo-component-library-card-component ${className}`}>
+        <div {...props} className={`sparta-component-library-card-component ${className}`}>
             {renderAll()}
         </div>
     );
 };
 
-Card.defaultProps = { 'data-apollo': 'Card' };
+Card.defaultProps = { 'data-sparta': 'Card' };

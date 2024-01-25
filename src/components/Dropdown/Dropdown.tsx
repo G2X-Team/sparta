@@ -2,7 +2,7 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useRef, useEffect } from 'react';
 import './Dropdown.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
 import { gaurdApolloName } from '../../util/ErrorHandling';
@@ -13,7 +13,7 @@ import Button from './overload/Button';
 import Icon from './overload/Icon';
 import Menu from './overload/Menu';
 
-export interface IDropdown extends HTMLAttributes<HTMLDivElement>, Apollo<'Dropdown'> {
+export interface IDropdown extends HTMLAttributes<HTMLDivElement>, Sparta<'Dropdown'> {
     /** Determines where the menu will appear from */
     anchor?: ComponentOrientation;
     /** Determines menu alignment, when orientation is left or right */
@@ -117,10 +117,10 @@ export const Dropdown: FC<IDropdown> = ({
     };
 
     return (
-        <div {...props} className={`apollo ${className}`}>
+        <div {...props} className={`sparta ${className}`}>
             {renderDropdown()}
         </div>
     );
 };
 
-Dropdown.defaultProps = { 'data-apollo': 'Dropdown' };
+Dropdown.defaultProps = { 'data-sparta': 'Dropdown' };

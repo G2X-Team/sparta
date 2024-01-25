@@ -1,19 +1,19 @@
-.apollo[data-apollo="Dropdown"] {
+.sparta[data-sparta="Dropdown"] {
     position: relative;
     display: inline-block;
 }
 
-.apollo[data-apollo="Dropdown"] button > span {
+.sparta[data-sparta="Dropdown"] button > span {
     display: flex;
     align-items: center;
 }
 
-.apollo[data-apollo="Dropdown"] button > span > span {
+.sparta[data-sparta="Dropdown"] button > span > span {
     padding: 0;
     transition: transform 400ms;
 }
 
-.apollo[data-apollo="Dropdown"] button {
+.sparta[data-sparta="Dropdown"] button {
     display: flex;
     align-items: center;
     background: none;
@@ -22,6 +22,6 @@
     cursor: pointer;
 }
 
-.apollo[data-apollo="Dropdown"] button .apollo[data-apollo="Icon"] {
+.sparta[data-sparta="Dropdown"] button .sparta[data-sparta="Icon"] {
     transition: transform 300ms;
 }

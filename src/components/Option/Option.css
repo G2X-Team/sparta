@@ -1,4 +1,4 @@
-.apollo-component-library-option-component {
+.sparta-component-library-option-component {
     padding: 5px 10px;
     background: white;
     transition: background 300ms, filter 300ms;
@@ -10,10 +10,10 @@
     align-items: center;
 }
 
-.apollo-component-library-option-component:hover {
+.sparta-component-library-option-component:hover {
     background: #A1EFC9;
 }
 
-.apollo-component-library-option-component:active {
+.sparta-component-library-option-component:active {
     filter: brightness(90%);
 }

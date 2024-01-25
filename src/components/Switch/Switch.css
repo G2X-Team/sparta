@@ -1,20 +1,20 @@
-.apollo-component-library-switch-component-label {
+.sparta-component-library-switch-component-label {
     position: relative;
     display: inline-block;
     padding-left: 45px;
 }
 
-.apollo-component-library-switch-component-wrapper {
+.sparta-component-library-switch-component-wrapper {
     padding-bottom: 15px;
 }
 
-.apollo-component-library-switch-component-input {
+.sparta-component-library-switch-component-input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.apollo-component-library-switch-component {
+.sparta-component-library-switch-component {
     position: absolute;
     cursor: pointer;
     left: 5px;
@@ -25,11 +25,11 @@
     border-radius: 20px;
 }
 
-.apollo-component-library-switch-component.invalid {
+.sparta-component-library-switch-component.invalid {
     outline: 2px solid #c90000;
 }
 
-.apollo-component-library-switch-component:before {
+.sparta-component-library-switch-component:before {
     content: ' ';
     position: absolute;
     min-height: 14px;
@@ -41,32 +41,32 @@
     border-radius: 100px;
 }
 
-.apollo-component-library-switch-component-input:checked
-    + .apollo-component-library-switch-component:before {
+.sparta-component-library-switch-component-input:checked
+    + .sparta-component-library-switch-component:before {
     transform: translate(16px);
 }
 
-.apollo-component-library-switch-component-input:checked
-    + .apollo-component-library-switch-component.default:before {
+.sparta-component-library-switch-component-input:checked
+    + .sparta-component-library-switch-component.default:before {
     background: lightcoral;
 }
 
-.apollo-component-library-switch-component-input:checked
-    + .apollo-component-library-switch-component.secondary:before {
+.sparta-component-library-switch-component-input:checked
+    + .sparta-component-library-switch-component.secondary:before {
     background: lightskyblue;
 }
 
-.apollo-component-library-switch-component-input:disabled
-    + .apollo-component-library-switch-component:before {
+.sparta-component-library-switch-component-input:disabled
+    + .sparta-component-library-switch-component:before {
     background: darkgray;
 }
 
-.apollo-component-library-switch-component-input:disabled
-    + .apollo-component-library-switch-component.default:before {
+.sparta-component-library-switch-component-input:disabled
+    + .sparta-component-library-switch-component.default:before {
     background: darkgray;
 }
 
-.apollo-component-library-switch-component-input:disabled
-    + .apollo-component-library-switch-component.secondary:before {
+.sparta-component-library-switch-component-input:disabled
+    + .sparta-component-library-switch-component.secondary:before {
     background: darkgray;
 }

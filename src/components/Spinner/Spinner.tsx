@@ -1,4 +1,4 @@
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type * as CSS from 'csstype';
 import type { CSSProperties, FC } from 'react';
 
@@ -9,7 +9,7 @@ import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import './Spinner.css';
 
-interface ISpinner extends HTMLAttributes<HTMLDivElement>, Apollo<'Spinner'> {
+interface ISpinner extends HTMLAttributes<HTMLDivElement>, Sparta<'Spinner'> {
     /** Determines the color of the spinner */
     color?: CSS.Property.Color;
     /** Determines inner color of the spinner */
@@ -25,7 +25,7 @@ interface ISpinner extends HTMLAttributes<HTMLDivElement>, Apollo<'Spinner'> {
 }
 
 /**
- * This component is the standard spinner for the Apollo Component Library.
+ * This component is the standard spinner for the Sparta Component Library.
  *
  * @return Spinner component
  */
@@ -45,7 +45,7 @@ export const Spinner: FC<ISpinner> = ({
         <div
             {...props}
             style={getSpinnerStyle({ color, size, style, variant })}
-            className="apollo"
+            className="sparta"
             role="status"
             aria-label={label ?? 'Loading...'}
         >
@@ -84,4 +84,4 @@ const getSpinnerStyle = ({ color, size, style, variant }: ISpinner): CSSProperti
     };
 };
 
-Spinner.defaultProps = { 'data-apollo': 'Spinner' };
+Spinner.defaultProps = { 'data-sparta': 'Spinner' };

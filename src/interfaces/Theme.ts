@@ -46,7 +46,7 @@ export type ApolloTheme = {
     [specificTheme: string]:
         | CSSProperties
         | {
-              /** Apollo component to which the theme pattern applies to */
+              /** Sparta component to which the theme pattern applies to */
               [apolloName: string]: ComponentCSS;
           };
 };

@@ -3,14 +3,14 @@ import { HTMLAttributes, ReactNode, FC, ForwardedRef } from 'react';
 import React, { forwardRef } from 'react';
 import './Button.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { Spinner } from '../Spinner/Spinner';
 import { Section } from '../Section/Section';
 
-export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Button'> {
+export interface IButton extends HTMLAttributes<HTMLButtonElement>, Sparta<'Button'> {
     /** Required ReactNode that needs to exist between component tags */
     children: ReactNode;
     /** defines the type of button to be rendered */
@@ -28,7 +28,7 @@ export interface IButton extends HTMLAttributes<HTMLButtonElement>, Apollo<'Butt
 }
 
 /**
- * Button component for the Apollo Component Library
+ * Button component for the Sparta Component Library
  *
  * @return Button component
  */
@@ -51,7 +51,7 @@ export const Button: FC<IButton> = forwardRef(function Button(
             {...props}
             aria-busy={loading}
             disabled={disabled || loading}
-            className={`apollo ${variant} ${theme} ${className}`}
+            className={`sparta ${variant} ${theme} ${className}`}
             ref={ref}
         >
             {!loading ? (
@@ -65,4 +65,4 @@ export const Button: FC<IButton> = forwardRef(function Button(
     );
 });
 
-Button.defaultProps = { 'data-apollo': 'Button' };
+Button.defaultProps = { 'data-sparta': 'Button' };

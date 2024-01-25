@@ -8,7 +8,7 @@ import { IMenu as CIMenu } from '../../Menu/Menu';
 import { Menu as CMenu } from '../../Menu/Menu';
 import { IDrawer } from '../Drawer';
 
-interface IMenu extends Overload<CIMenu>, Omit<IDrawer, 'data-apollo'> {}
+interface IMenu extends Overload<CIMenu>, Omit<IDrawer, 'data-sparta'> {}
 
 /**
  * Formats menu component to be styled like drawer menu
@@ -60,13 +60,13 @@ const Menu: FC<IMenu> = ({
             {type === 'permanent' || display ? (
                 <div
                     {...props}
-                    className={`apollo-component-library-drawer-component-container ${type}`}
+                    className={`sparta-component-library-drawer-component-container ${type}`}
                 >
                     <div>
                         <div
                             style={containerStyle}
                             className={`
-                                apollo-component-library-drawer-component 
+                                sparta-component-library-drawer-component 
                                 ${className} ${type} ${orientation}
                             `}
                         >
@@ -77,7 +77,7 @@ const Menu: FC<IMenu> = ({
                                 label={label}
                                 useOutsideClick={type !== 'permanent' && display}
                                 onOutsideClick={toggleDrawer}
-                                className="apollo-component-library-drawer-component-body"
+                                className="sparta-component-library-drawer-component-body"
                             >
                                 {type === 'absolute' ? (
                                     <Icon
@@ -91,7 +91,7 @@ const Menu: FC<IMenu> = ({
                         </div>
                         {type === 'absolute' ? (
                             <div
-                                className={`apollo-component-library-drawer-component-backdrop 
+                                className={`sparta-component-library-drawer-component-backdrop 
                                     ${type}`}
                                 style={getBackdropStyle(effect)}
                             />

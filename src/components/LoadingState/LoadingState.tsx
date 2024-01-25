@@ -2,12 +2,12 @@ import type { HTMLAttributes, FC } from 'react';
 import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 'react';
 import './LoadingState.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import { gaurdApolloName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 
-export interface ILoadingState extends HTMLAttributes<HTMLDivElement>, Apollo<'LoadingState'> {
+export interface ILoadingState extends HTMLAttributes<HTMLDivElement>, Sparta<'LoadingState'> {
     /**
      * Determines status of the progressbar where
      * progressFilled={0.1} => 10% filled progressbar
@@ -67,13 +67,13 @@ export const LoadingState: FC<ILoadingState> = ({
     const renderLoadingState = (): ReactNode => {
         const containerName =
             type === 'spinner'
-                ? 'apollo-component-library-loadingstate-component-spinner'
-                : 'apollo-component-library-container';
+                ? 'sparta-component-library-loadingstate-component-spinner'
+                : 'sparta-component-library-container';
 
         const loadingType =
             type === 'spinner'
-                ? 'apollo-component-library-loadingstate-component'
-                : 'apollo-component-library-loadingstate-component-progressbar';
+                ? 'sparta-component-library-loadingstate-component'
+                : 'sparta-component-library-loadingstate-component-progressbar';
 
         const loadingStyle: CSSProperties = {};
 
@@ -94,13 +94,13 @@ export const LoadingState: FC<ILoadingState> = ({
             if (label) ariaProps['aria-labelledby'] = label;
         } else {
             ariaProps['aria-busy'] = loading ? 'true' : 'false';
-            ariaProps['aria-labelledby'] = 'apollo-loading-state-description-text';
+            ariaProps['aria-labelledby'] = 'sparta-loading-state-description-text';
         }
 
         return (
             <div {...ariaProps} className={containerName} aria-label={label} ref={progressRef}>
                 {type === 'spinner' ? (
-                    <Text inline id="apollo-loading-state-description-text">
+                    <Text inline id="sparta-loading-state-description-text">
                         {label}
                     </Text>
                 ) : null}
@@ -120,7 +120,7 @@ export const LoadingState: FC<ILoadingState> = ({
         <>
             {loading ? (
                 <div
-                    className="apollo-component-library-loadingstate-component-container"
+                    className="sparta-component-library-loadingstate-component-container"
                     tabIndex={0}
                 >
                     {renderLoadingState()}
@@ -130,4 +130,4 @@ export const LoadingState: FC<ILoadingState> = ({
     );
 };
 
-LoadingState.defaultProps = { 'data-apollo': 'LoadingState' };
+LoadingState.defaultProps = { 'data-sparta': 'LoadingState' };
