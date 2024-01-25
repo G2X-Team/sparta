@@ -1,7 +1,7 @@
 import React, { useState, useRef, MouseEventHandler, useEffect, ReactNode } from 'react';
 import type { FC } from 'react';
 import { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import { Text } from '../Text/Text';
 import './Accordion.css';
 import { Icon } from '../Icon/Icon';
@@ -36,7 +36,7 @@ export const Accordion: FC<IAccordion> = ({
     onClick,
     ...props
 }) => {
-    gaurdApolloName(props, 'Accordion');
+    guardSpartaName(props, 'Accordion');
     const accordion = useAccordion(defaultOpen, panelHeight, override, onClick);
 
     return (

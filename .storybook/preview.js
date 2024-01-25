@@ -1,5 +1,5 @@
 import { configure } from '@storybook/react';
-import { ApolloCSS } from '../src/util/Theming';
+import { SpartaCSS } from '../src/util/Theming';
 
 // https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters
 export const parameters = {
@@ -7,8 +7,8 @@ export const parameters = {
     actions: { argTypesRegex: '^on.*' },
 };
 
-const apolloCSS = new ApolloCSS({}, document, true);
-apolloCSS.applyCSS(document, true);
+const spartaCSS = new SpartaCSS({}, document, true);
+spartaCSS.applyCSS(document, true);
 
 // automatically import all files ending in *.stories.js
 configure(require.context('../src', true, /\.stories\.mdx$/), module);

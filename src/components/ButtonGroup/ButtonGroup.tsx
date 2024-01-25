@@ -6,7 +6,7 @@ import FormatChildren from '../../util/formatting/FormatChildren';
 import type { Sparta } from '../../interfaces/Sparta';
 import type { StyleVariant, ComponentSize } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import Button from './overload/Button';
 
@@ -34,7 +34,7 @@ export const ButtonGroup: FC<IButtonGroup> = ({
     className,
     ...props
 }) => {
-    gaurdApolloName(props, 'ButtonGroup');
+    guardSpartaName(props, 'ButtonGroup');
     /**
      * Renders all button group buttons and caches chlidren
      *

@@ -4,7 +4,7 @@ import './Avatar.css';
 
 import type * as CSS from 'csstype';
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { ComponentSize } from '../../interfaces/Properties';
@@ -51,7 +51,7 @@ export const Avatar: FC<IAvatar> = forwardRef(function Icon(
     }: IAvatar,
     ref
 ) {
-    gaurdApolloName(props, 'Avatar');
+    guardSpartaName(props, 'Avatar');
     const loaded = useProgressiveImage(picture ?? '');
     const newStyle = getAvatarStyle(!!picture && !!loaded, style, color);
 

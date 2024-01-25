@@ -95,7 +95,7 @@ export const Calendar: FC<ICalendar> = ({
                 aria-label="calendar month controls"
             >
                 <Icon
-                    className="apollodate-controls"
+                    className="spartadate-controls"
                     theme={theme}
                     aria-label="previous month"
                     onClick={() => setDate('prev')}
@@ -105,7 +105,7 @@ export const Calendar: FC<ICalendar> = ({
                     {date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </Text>
                 <Icon
-                    className="apollodate-controls"
+                    className="spartadate-controls"
                     theme={theme}
                     aria-label="next month"
                     onClick={() => setDate('next')}

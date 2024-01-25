@@ -4,7 +4,7 @@ import './TextInput.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
 import type { FormTextData, FormValidator } from '../../interfaces/Properties';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
@@ -74,7 +74,7 @@ export const TextInput: FC<ITextInput> = forwardRef(function TextInput(
     }: ITextInput,
     ref
 ) {
-    gaurdApolloName(props, 'TextInput');
+    guardSpartaName(props, 'TextInput');
 
     // will throw if you try to add an error message without a name
     useEffect(() => {

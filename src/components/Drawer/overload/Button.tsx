@@ -18,7 +18,7 @@ export interface IDrawerButton
 const Button: FC<IDrawerButton> = forwardRef(function Button(
     {
         parentProps,
-        ['data-sparta']: apolloName,
+        ['data-sparta']: spartaName,
         onClick,
         children,
         ...props

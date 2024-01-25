@@ -8,7 +8,7 @@ import type { RenderAll } from '../../interfaces/Overload';
 import type { ComponentOrientation, ComponentAlignment } from '../../interfaces/Properties';
 
 import { Icon } from '../Icon/Icon';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import Menu from './components/Menu';
 import { Calendar } from '../Calendar/Calendar';
@@ -48,7 +48,7 @@ export interface IDateSelect
  * @return Select Input
  */
 export const DateSelect: FC<IDateSelect> = ({
-    'data-sparta': dataApollo = 'DateSelect',
+    'data-sparta': dataSparta = 'DateSelect',
     className = '',
     defaultValue,
     anchor = 'bottom',
@@ -65,7 +65,7 @@ export const DateSelect: FC<IDateSelect> = ({
     required,
     ...props
 }) => {
-    gaurdApolloName({ 'data-sparta': dataApollo }, 'DateSelect');
+    guardSpartaName({ 'data-sparta': dataSparta }, 'DateSelect');
 
     // ref
     const inputRef = useRef<HTMLInputElement>(null);
@@ -199,7 +199,7 @@ export const DateSelect: FC<IDateSelect> = ({
     return (
         <label
             className={`sparta ${className} ${theme} ${invalid ? 'invalid' : ''}`}
-            data-sparta={dataApollo}
+            data-sparta={dataSparta}
         >
             <div className="label">{label}</div>
             {renderSelect()}

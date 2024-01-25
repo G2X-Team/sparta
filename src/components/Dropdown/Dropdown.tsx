@@ -5,7 +5,7 @@ import './Dropdown.css';
 import type { Sparta } from '../../interfaces/Sparta';
 import type { ComponentAlignment, ComponentOrientation } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import FormatChildren from '../../util/formatting/FormatChildren';
 
 import Avatar from './overload/Avatar';
@@ -35,7 +35,7 @@ export const Dropdown: FC<IDropdown> = ({
     hideArrow = false,
     ...props
 }) => {
-    gaurdApolloName(props, 'Dropdown');
+    guardSpartaName(props, 'Dropdown');
 
     // reference to buttons
     const buttonRef = useRef<HTMLButtonElement>(null);

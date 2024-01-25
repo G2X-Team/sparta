@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import './DateTimePicker.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -36,7 +36,7 @@ export const DateTimePicker: FC<IDateTimePicker> = ({
     onChange,
     ...props
 }) => {
-    gaurdApolloName(props, 'DateTimePicker');
+    guardSpartaName(props, 'DateTimePicker');
 
     const [startDate, setStartDate] = useState<Date | null>(selectedDate);
     // eslint-disable-next-line require-jsdoc

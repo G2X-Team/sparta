@@ -39,7 +39,7 @@ export type ComponentCSS = CSSProperties & {
     disabledWithin?: CSSProperties;
 };
 
-export type ApolloTheme = {
+export type SpartaTheme = {
     /**
      * CSS Theme Pattern to apply to components
      */
@@ -47,6 +47,6 @@ export type ApolloTheme = {
         | CSSProperties
         | {
               /** Sparta component to which the theme pattern applies to */
-              [apolloName: string]: ComponentCSS;
+              [spartaName: string]: ComponentCSS;
           };
 };

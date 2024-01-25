@@ -4,7 +4,7 @@ import React, { CSSProperties } from 'react';
 import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface ISection extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Section'> {
     /** value that determines the flex style prop of section */
@@ -68,7 +68,7 @@ export const Section: FC<ISection> = ({
     centerHorizontal,
     ...props
 }) => {
-    gaurdApolloName(props, 'Section');
+    guardSpartaName(props, 'Section');
 
     return (
         <div

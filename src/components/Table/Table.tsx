@@ -4,7 +4,7 @@ import type * as CSS from 'csstype';
 import type { TableData } from '../../interfaces/Properties';
 
 import React, { useState } from 'react';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 import { Column, IColumn } from './overload/Column';
 
 import ChildrenMeta from '../../util/ChildrenMeta';
@@ -73,7 +73,7 @@ export const Table: FC<ITable> & { Column: FC<IColumn> } = ({
     columns,
     ...props
 }: ITable) => {
-    gaurdApolloName(props, 'Table');
+    guardSpartaName(props, 'Table');
 
     const [data, setData] = useState(d);
     const [lastSort, setLastSort] = useState<LastSort>(null);

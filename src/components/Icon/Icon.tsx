@@ -4,7 +4,7 @@ import './Icon.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
 import type * as CSS from 'csstype';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface IIcon extends HTMLAttributes<HTMLSpanElement>, Sparta<'Icon'> {
     /** The icon name the user wants to render */
@@ -43,7 +43,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
     }: IIcon,
     ref: ForwardedRef<HTMLSpanElement | HTMLButtonElement>
 ) {
-    gaurdApolloName(props, 'Icon');
+    guardSpartaName(props, 'Icon');
 
     return clickable ? (
         <button
@@ -69,7 +69,7 @@ export const Icon: FC<IIcon> = forwardRef(function Icon(
             onKeyDown={(event) =>
                 (event.key === 'Enter' || event.key === ' ') && onClick && onClick()
             }
-            className={`material-icons apollo
+            className={`material-icons sparta
                 ${clickable ? 'clickable' : ''} ${className} ${theme}`}
         >
             {name}

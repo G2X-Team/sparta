@@ -4,7 +4,7 @@ import React from 'react';
 import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 export interface IView extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'View'> {
     /** May have children */
@@ -29,7 +29,7 @@ export const View: FC<IView> = ({
     style,
     ...props
 }) => {
-    gaurdApolloName(props, 'View');
+    guardSpartaName(props, 'View');
 
     return (
         <div

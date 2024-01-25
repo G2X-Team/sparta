@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 import './Button.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { Spinner } from '../Spinner/Spinner';
@@ -44,7 +44,7 @@ export const Button: FC<IButton> = forwardRef(function Button(
     }: IButton,
     ref: ForwardedRef<HTMLButtonElement>
 ) {
-    gaurdApolloName(props, 'Button');
+    guardSpartaName(props, 'Button');
 
     return (
         <button

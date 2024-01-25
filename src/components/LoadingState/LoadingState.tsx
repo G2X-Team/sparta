@@ -3,7 +3,7 @@ import React, { useState, useEffect, ReactNode, useRef, CSSProperties } from 're
 import './LoadingState.css';
 
 import type { Sparta } from '../../interfaces/Sparta';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 
@@ -39,7 +39,7 @@ export const LoadingState: FC<ILoadingState> = ({
     label,
     ...props
 }) => {
-    gaurdApolloName(props, 'LoadingState');
+    guardSpartaName(props, 'LoadingState');
 
     // ref
     const progressRef = useRef<HTMLHeadingElement>(null);

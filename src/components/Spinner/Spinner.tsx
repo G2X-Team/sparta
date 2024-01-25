@@ -5,7 +5,7 @@ import type { CSSProperties, FC } from 'react';
 import React from 'react';
 import { StyleVariant } from '../../interfaces/Properties';
 import { HTMLAttributes } from 'react';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import './Spinner.css';
 
@@ -39,7 +39,7 @@ export const Spinner: FC<ISpinner> = ({
     label,
     ...props
 }) => {
-    gaurdApolloName(props, 'Spinner');
+    guardSpartaName(props, 'Spinner');
 
     return loading ? (
         <div
