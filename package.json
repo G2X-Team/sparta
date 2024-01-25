@@ -126,6 +126,6 @@
     "dependencies": {
         "lint": "^0.8.19",
         "react-datepicker": "^4.6.0",
-        "react-hook-form": "^7.27.0"
+        "react-hook-form": "7.27.0"
     }
 }
