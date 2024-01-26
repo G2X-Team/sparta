@@ -1,12 +1,12 @@
 /* General Styling */
-.apollo-component-library-drawer-component {
+.sparta-component-library-drawer-component {
     background: white;
     overflow: hidden;
     z-index: 5;
     margin-top: 0;
 }
 
-.apollo-component-library-drawer-component > div {
+.sparta-component-library-drawer-component > div {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -14,7 +14,7 @@
     overflow: auto;
 }
 
-.apollo-component-library-drawer-component-backdrop {
+.sparta-component-library-drawer-component-backdrop {
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -22,25 +22,25 @@
     position: absolute;
 }
 
-.apollo-component-library-drawer-component-backdrop > div {
+.sparta-component-library-drawer-component-backdrop > div {
     position: relative;
 }
 
-.apollo-component-library-drawer-component-body li {
+.sparta-component-library-drawer-component-body li {
     padding: 10px;
 }
 
-.apollo-component-library-drawer-component-body {
+.sparta-component-library-drawer-component-body {
     flex: 1;
     overflow: auto;
 }
 
 /* Absolute Styling */
-.apollo-component-library-drawer-component.absolute {
+.sparta-component-library-drawer-component.absolute {
     position: absolute;
 }
 
-.apollo-component-library-drawer-component-container.absolute {
+.sparta-component-library-drawer-component-container.absolute {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -50,100 +50,100 @@
     overflow: hidden;
 }
 
-.apollo-component-library-drawer-component.absolute.right {
+.sparta-component-library-drawer-component.absolute.right {
     height: 100%;
     border-radius: 15px 0 0 15px;
 }
 
-.apollo-component-library-drawer-component.absolute.left {
+.sparta-component-library-drawer-component.absolute.left {
     height: 100%;
     border-radius: 0 15px 15px 0;
 }
 
-.apollo-component-library-drawer-component.absolute.right > div,
-.apollo-component-library-drawer-component.absolute.left > div {
+.sparta-component-library-drawer-component.absolute.right > div,
+.sparta-component-library-drawer-component.absolute.left > div {
     height: 100%;
 }
 
-.apollo-component-library-drawer-component.absolute.top {
+.sparta-component-library-drawer-component.absolute.top {
     width: 100%;
     border-radius: 0 0 15px 15px;
 }
-.apollo-component-library-drawer-component.absolute.bottom {
+.sparta-component-library-drawer-component.absolute.bottom {
     width: 100%;
     border-radius: 15px 15px 0 0;
 }
-.apollo-component-library-drawer-component.absolute.top > div,
-.apollo-component-library-drawer-component.absolute.bottom > div {
+.sparta-component-library-drawer-component.absolute.top > div,
+.sparta-component-library-drawer-component.absolute.bottom > div {
     width: 100%;
 }
 
 /* Persistent Styling */
-.apollo-component-library-drawer-component.persistent {
+.sparta-component-library-drawer-component.persistent {
     display: inline-block;
 }
 
-.apollo-component-library-drawer-component.persistent.right {
+.sparta-component-library-drawer-component.persistent.right {
     height: 100%;
     border-left: 1px solid lightgray;
 }
-.apollo-component-library-drawer-component.persistent.left {
+.sparta-component-library-drawer-component.persistent.left {
     height: 100%;
     border-right: 1px solid lightgray;
 }
-.apollo-component-library-drawer-component.persistent.right > div,
-.apollo-component-library-drawer-component.permanent.left > div {
+.sparta-component-library-drawer-component.persistent.right > div,
+.sparta-component-library-drawer-component.permanent.left > div {
     height: 100%;
 }
 
-.apollo-component-library-drawer-component.persistent.top {
+.sparta-component-library-drawer-component.persistent.top {
     width: 100%;
     border-bottom: 1px solid lightgray;
 }
-.apollo-component-library-drawer-component.persistent.bottom {
+.sparta-component-library-drawer-component.persistent.bottom {
     width: 100%;
     border-top: 1px solid lightgray;
 }
-.apollo-component-library-drawer-component.persistent.top > div,
-.apollo-component-library-drawer-component.persistent.bottom > div {
+.sparta-component-library-drawer-component.persistent.top > div,
+.sparta-component-library-drawer-component.persistent.bottom > div {
     width: 100%;
 }
 
-.apollo-component-library-drawer-component-container.persistent > div {
+.sparta-component-library-drawer-component-container.persistent > div {
     height: 100%;
 }
 
 /* Permanent Styling */
-.apollo-component-library-drawer-component.permanent {
+.sparta-component-library-drawer-component.permanent {
     display: inline-block;
 }
 
-.apollo-component-library-drawer-component.permanent.right {
+.sparta-component-library-drawer-component.permanent.right {
     height: 100%;
     border-left: 1px solid lightgray;
 }
-.apollo-component-library-drawer-component.permanent.left {
+.sparta-component-library-drawer-component.permanent.left {
     height: 100%;
     border-right: 1px solid lightgray;
 }
-.apollo-component-library-drawer-component.permanent.right > div,
-.apollo-component-library-drawer-component.permanent.left > div {
+.sparta-component-library-drawer-component.permanent.right > div,
+.sparta-component-library-drawer-component.permanent.left > div {
     height: 100%;
 }
 
-.apollo-component-library-drawer-component.permanent.top {
+.sparta-component-library-drawer-component.permanent.top {
     width: 100%;
     border-bottom: 1px solid lightgray;
 }
-.apollo-component-library-drawer-component.permanent.bottom {
+.sparta-component-library-drawer-component.permanent.bottom {
     width: 100%;
     border-top: 1px solid lightgray;
 }
-.apollo-component-library-drawer-component.permanent.top > div,
-.apollo-component-library-drawer-component.permanent.bottom > div {
+.sparta-component-library-drawer-component.permanent.top > div,
+.sparta-component-library-drawer-component.permanent.bottom > div {
     width: 100%;
 }
 
-.apollo-component-library-drawer-component-container.permanent > div {
+.sparta-component-library-drawer-component-container.permanent > div {
     height: 100%;
 }

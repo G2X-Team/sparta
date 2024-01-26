@@ -3,14 +3,14 @@ import React from 'react';
 import './ButtonGroup.css';
 
 import FormatChildren from '../../util/formatting/FormatChildren';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { StyleVariant, ComponentSize } from '../../interfaces/Properties';
 import type { RenderAll } from '../../interfaces/Overload';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import Button from './overload/Button';
 
-export interface IButtonGroup extends HTMLAttributes<HTMLDivElement>, Apollo<'ButtonGroup'> {
+export interface IButtonGroup extends HTMLAttributes<HTMLDivElement>, Sparta<'ButtonGroup'> {
     /** Disables all buttons within button group */
     disabled?: boolean;
     /** toggle between different button group sizes */
@@ -34,7 +34,7 @@ export const ButtonGroup: FC<IButtonGroup> = ({
     className,
     ...props
 }) => {
-    gaurdApolloName(props, 'ButtonGroup');
+    guardSpartaName(props, 'ButtonGroup');
     /**
      * Renders all button group buttons and caches chlidren
      *
@@ -50,10 +50,10 @@ export const ButtonGroup: FC<IButtonGroup> = ({
     };
 
     return (
-        <div {...props} className={`apollo-component-library-button-group-component ${className}`}>
+        <div {...props} className={`sparta-component-library-button-group-component ${className}`}>
             {renderAll()}
         </div>
     );
 };
 
-ButtonGroup.defaultProps = { 'data-apollo': 'ButtonGroup' };
+ButtonGroup.defaultProps = { 'data-sparta': 'ButtonGroup' };

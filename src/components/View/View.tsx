@@ -1,12 +1,12 @@
 import type { HTMLAttributes, ReactNode, FC, CSSProperties } from 'react';
 import React from 'react';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
-export interface IView extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'View'> {
+export interface IView extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'View'> {
     /** May have children */
     children?: ReactNode;
     /** Change the display style of View */
@@ -29,12 +29,12 @@ export const View: FC<IView> = ({
     style,
     ...props
 }) => {
-    gaurdApolloName(props, 'View');
+    guardSpartaName(props, 'View');
 
     return (
         <div
             {...props}
-            className={`apollo ${className}`}
+            className={`sparta ${className}`}
             style={getViewStyle({ display, position, style })}
         >
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
@@ -42,7 +42,7 @@ export const View: FC<IView> = ({
     );
 };
 
-View.defaultProps = { 'data-apollo': 'View' };
+View.defaultProps = { 'data-sparta': 'View' };
 
 /**
  * Gets the style object for the View given props

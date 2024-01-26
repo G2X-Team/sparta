@@ -1,12 +1,12 @@
 import type { HTMLAttributes, FC } from 'react';
 import React, { CSSProperties } from 'react';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
 import type * as CSS from 'csstype';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
-export interface ISection extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Section'> {
+export interface ISection extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Section'> {
     /** value that determines the flex style prop of section */
     flex?: CSS.Property.Flex;
     /** Makes flex direction equal to column */
@@ -68,7 +68,7 @@ export const Section: FC<ISection> = ({
     centerHorizontal,
     ...props
 }) => {
-    gaurdApolloName(props, 'Section');
+    guardSpartaName(props, 'Section');
 
     return (
         <div
@@ -97,7 +97,7 @@ export const Section: FC<ISection> = ({
     );
 };
 
-Section.defaultProps = { 'data-apollo': 'Section' };
+Section.defaultProps = { 'data-sparta': 'Section' };
 
 /**
  * Gets section style objects from properties

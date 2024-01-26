@@ -66,7 +66,7 @@ export const CalendarCell: FC<ICalendarCell> = ({
 
     return (
         <button
-            data-apollo="CalendarDate"
+            data-sparta="CalendarDate"
             key={`day-${day}`}
             disabled={!isValid}
             style={{ fontSize }}
@@ -77,10 +77,10 @@ export const CalendarCell: FC<ICalendarCell> = ({
                 day: 'numeric',
             })}${marked ? ', marked' : ''}`}
             className={`
-                apollo
+                sparta
                 ${covered ? 'covered' : ''}
                 ${theme}
-                apollodate 
+                spartadate 
                 ${currentMonth !== dateMonth ? 'not-current' : ''}
                 ${active ? 'selected' : ''}
             `}
@@ -89,8 +89,8 @@ export const CalendarCell: FC<ICalendarCell> = ({
         >
             <Text>{date.getDate()}</Text>
             <div
-                className={`apollo ${theme}  ${active ? 'selected' : ''}`}
-                data-apollo="CalendarMark"
+                className={`sparta ${theme}  ${active ? 'selected' : ''}`}
+                data-sparta="CalendarMark"
                 style={{ opacity: marked ? 1 : 0 }}
             />
         </button>
@@ -105,8 +105,8 @@ export const CalendarCell: FC<ICalendarCell> = ({
  */
 const handleNavigation = (event: KeyboardEvent, id: string): void => {
     // check if there is an active element within scope of our calendar
-    const apolloDate = document?.activeElement?.id;
-    if (!apolloDate?.startsWith(`apollodate-${id}`)) return;
+    const spartaDate = document?.activeElement?.id;
+    if (!spartaDate?.startsWith(`spartadate-${id}`)) return;
 
     // prevent default behavior for arrow keys
     if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(event.code) > -1) {
@@ -114,13 +114,13 @@ const handleNavigation = (event: KeyboardEvent, id: string): void => {
     }
 
     // extract relevant information from id
-    const [, , weekIndexStr, dayIndexStr] = apolloDate.split('-');
+    const [, , weekIndexStr, dayIndexStr] = spartaDate.split('-');
     const weekIndex = parseInt(weekIndexStr);
     const dayIndex = parseInt(dayIndexStr);
 
     // get date bounds
     const [, boundsStr] =
-        document.querySelector(`[id^="apollodateBounds${id}-"]`)?.id?.split('-') ?? [];
+        document.querySelector(`[id^="spartadateBounds${id}-"]`)?.id?.split('-') ?? [];
     const bounds = parseInt(boundsStr);
 
     // switch based on key
@@ -165,4 +165,4 @@ const handleNavigation = (event: KeyboardEvent, id: string): void => {
  * @return date id
  */
 const getDateId = (weekIndex: number, dayIndex: number, id: string): string =>
-    `apollodate-${id}-${weekIndex}-${dayIndex}`;
+    `spartadate-${id}-${weekIndex}-${dayIndex}`;

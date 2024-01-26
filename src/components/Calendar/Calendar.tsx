@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type * as CSS from 'csstype';
 import { CalendarGrid } from './components/CalendarGrid';
 import './Calendar.css';
@@ -8,7 +8,7 @@ import { Icon } from '../Icon/Icon';
 import { Text } from '../Text/Text';
 import { getTimezoneDate } from './util';
 
-export interface ICalendar extends Apollo<'Calendar'> {
+export interface ICalendar extends Sparta<'Calendar'> {
     /** Determines whether the calender is used for date ranges or single dates */
     type?: 'single' | 'range';
     /**
@@ -95,7 +95,7 @@ export const Calendar: FC<ICalendar> = ({
                 aria-label="calendar month controls"
             >
                 <Icon
-                    className="apollodate-controls"
+                    className="spartadate-controls"
                     theme={theme}
                     aria-label="previous month"
                     onClick={() => setDate('prev')}
@@ -105,7 +105,7 @@ export const Calendar: FC<ICalendar> = ({
                     {date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </Text>
                 <Icon
-                    className="apollodate-controls"
+                    className="spartadate-controls"
                     theme={theme}
                     aria-label="next month"
                     onClick={() => setDate('next')}

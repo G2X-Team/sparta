@@ -2,13 +2,13 @@ import { HTMLAttributes, ReactNode, FC, useEffect } from 'react';
 import React from 'react';
 import './Checkbox.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import type { Sparta } from '../../interfaces/Sparta';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
-export interface ICheckbox extends HTMLAttributes<HTMLInputElement>, Apollo<'Checkbox'> {
+export interface ICheckbox extends HTMLAttributes<HTMLInputElement>, Sparta<'Checkbox'> {
     /** String that identifies the checkbox */
     id?: string;
     /**  Can have children between tags */
@@ -48,7 +48,7 @@ export const Checkbox: FC<ICheckbox> = ({
     errorMessage,
     ...props
 }) => {
-    gaurdApolloName(props, 'Checkbox');
+    guardSpartaName(props, 'Checkbox');
 
     // check if the user can use error messages
     useEffect(() => {
@@ -62,7 +62,7 @@ export const Checkbox: FC<ICheckbox> = ({
         <>
             <label
                 className={`
-                    apollo-component-library-checkbox-component-label 
+                    sparta-component-library-checkbox-component-label 
                     ${inline ? 'inline' : ''}
                 `}
             >
@@ -76,7 +76,7 @@ export const Checkbox: FC<ICheckbox> = ({
                     type="checkbox"
                     disabled={disabled}
                     className={`
-                        apollo-component-library-checkbox-component 
+                        sparta-component-library-checkbox-component 
                         ${invalid ? 'invalid' : ''}
                         ${className || ''}
                     `}
@@ -101,4 +101,4 @@ export const Checkbox: FC<ICheckbox> = ({
     );
 };
 
-Checkbox.defaultProps = { 'data-apollo': 'Checkbox' };
+Checkbox.defaultProps = { 'data-sparta': 'Checkbox' };

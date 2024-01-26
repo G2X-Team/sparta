@@ -3,7 +3,7 @@ import type { ParentProps } from '../../interfaces/Overload';
 import type { ElementDictionary, ComponentRecord, FoundChildren } from './types';
 
 class FormatChildren {
-    /** an object containing all subsets of children organized by apollo name */
+    /** an object containing all subsets of children organized by sparta name */
     foundChildren: FoundChildren = { other: [], user: [] };
     /** all cihldren */
     allChildren: JSX.Element[] = [];
@@ -22,12 +22,12 @@ class FormatChildren {
         // loop through all children
         Children.forEach(children, (child: JSX.Element, index: number) => {
             const childName =
-                child && child.props && child?.props['data-apollo']
-                    ? child.props['data-apollo']
+                child && child.props && child?.props['data-sparta']
+                    ? child.props['data-sparta']
                     : 'not-found';
 
             // hande whether sought out component is found
-            if (componentMap[childName] || child?.props?.['apollo-overload']) {
+            if (componentMap[childName] || child?.props?.['sparta-overload']) {
                 if (!this.foundChildren[childName]) this.foundChildren[childName] = [];
 
                 // get required props
@@ -51,9 +51,9 @@ class FormatChildren {
                  */
                 const getChildrenSize = (): number => this.allChildren.length;
 
-                if (child?.props?.['apollo-overload']) {
+                if (child?.props?.['sparta-overload']) {
                     const cloned = cloneElement(child, {
-                        apolloRef: {
+                        spartaRef: {
                             componentMap: componentMap,
                             parentProps: {
                                 childIndex: index,
@@ -135,8 +135,8 @@ class FormatChildren {
         // removes all instances of the child
         this.allChildren = this.allChildren.filter((child: JSX.Element) => {
             const name: string =
-                child && child.props && child.props['data-apollo']
-                    ? child.props['data-apollo']
+                child && child.props && child.props['data-sparta']
+                    ? child.props['data-sparta']
                     : 'not-found';
 
             // determine whether display name is present in both maps

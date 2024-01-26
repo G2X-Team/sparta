@@ -1,16 +1,16 @@
-.apollo-component-library-checkbox-component {
+.sparta-component-library-checkbox-component {
     margin-right: 5px;
 }
 
-.apollo-component-library-checkbox-component-label {
+.sparta-component-library-checkbox-component-label {
     display: block;
     padding-bottom: 5px;
 }
 
-.apollo-component-library-checkbox-component.invalid {
+.sparta-component-library-checkbox-component.invalid {
     outline: 2px solid #c70000;
 }
 
-.apollo-component-library-checkbox-component-label.inline{
+.sparta-component-library-checkbox-component-label.inline{
     display: inline-block;
 }

@@ -1,8 +1,8 @@
-.apollo[data-apollo='Image'] {
+.sparta[data-sparta='Image'] {
     position: relative;
 }
 
-.apollo[data-apollo="Image"] > .apollo[data-apollo="View"]:first-child {
+.sparta[data-sparta="Image"] > .sparta[data-sparta="View"]:first-child {
     position: absolute;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     height: 100%;
 }
 
-.apollo[data-apollo='Image'] > .apollo[data-apollo='View']:last-child {
+.sparta[data-sparta='Image'] > .sparta[data-sparta='View']:last-child {
     position: absolute;
     top: 0;
     left: 0;

@@ -2,11 +2,11 @@ import type { HTMLAttributes, ReactNode, FC } from 'react';
 import React from 'react';
 import './Header.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 import type { Interface } from '../../interfaces/Overload';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
-export interface IHeader extends Interface<HTMLAttributes<HTMLDivElement>>, Apollo<'Header'> {
+export interface IHeader extends Interface<HTMLAttributes<HTMLDivElement>>, Sparta<'Header'> {
     /** Can have children of any kind */
     children?: ReactNode;
 }
@@ -17,13 +17,13 @@ export interface IHeader extends Interface<HTMLAttributes<HTMLDivElement>>, Apol
  * @return Header component
  */
 export const Header: FC<IHeader> = ({ parentProps, children, className = '', ...props }) => {
-    gaurdApolloName(props, 'Header');
+    guardSpartaName(props, 'Header');
 
     return (
-        <header {...props} className={`apollo-component-library-header-component ${className}`}>
+        <header {...props} className={`sparta-component-library-header-component ${className}`}>
             {parentProps?.renderAll ? parentProps?.renderAll(children) : children}
         </header>
     );
 };
 
-Header.defaultProps = { 'data-apollo': 'Header' };
+Header.defaultProps = { 'data-sparta': 'Header' };

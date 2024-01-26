@@ -1,4 +1,4 @@
-.apollo[data-apollo='Accordion'] > button {
+.sparta[data-sparta='Accordion'] > button {
     background: white;
     border: none;
     width: 100%;
@@ -11,19 +11,19 @@
     transition: filter 300ms;
 }
 
-.apollo[data-apollo='Accordion'] > button:hover {
+.sparta[data-sparta='Accordion'] > button:hover {
     filter: brightness(0.95);
 }
 
-.apollo[data-apollo='Accordion'] span {
+.sparta[data-sparta='Accordion'] span {
     transition: transform 300ms ease;
 }
 
-.apollo[data-apollo='Accordion'] .open {
+.sparta[data-sparta='Accordion'] .open {
     transform: rotate(90deg);
 }
 
-.apollo[data-apollo='Accordion'] section {
+.sparta[data-sparta='Accordion'] section {
     border-bottom: 1.5px solid #E7EBEC;
     transition: height 300ms;
     overflow: hidden;

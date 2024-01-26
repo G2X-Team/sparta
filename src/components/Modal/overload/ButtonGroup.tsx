@@ -28,7 +28,7 @@ const ButtonGroup: FC<Overload<IButtonGroup>> = ({
         throw new Error('Only buttons are allowed in button groups');
 
     return (
-        <div className={`apollo-component-library-modal-component-button-group ${className}`}>
+        <div className={`sparta-component-library-modal-component-button-group ${className}`}>
             {formattedButtonGroup.getAll()}
         </div>
     );

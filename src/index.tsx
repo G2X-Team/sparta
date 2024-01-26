@@ -30,7 +30,7 @@ export { Avatar } from './components/Avatar/Avatar';
 export { Grid } from './components/Grid/Grid';
 export { Image } from './components/Image/Image';
 export { Spinner } from './components/Spinner/Spinner';
-export { ApolloCSS } from './util/Theming';
+export { SpartaCSS } from './util/Theming';
 export { Calendar } from './components/Calendar/Calendar';
 export { Accordion } from './components/Accordion/Accordion';
 export { DateSelect } from './components/DateSelect/DateSelect';
@@ -48,7 +48,7 @@ export type {
     TableData,
     DataRenderer,
 } from './interfaces/Properties';
-export type { ApolloTheme } from './interfaces/Theme';
+export type { SpartaTheme } from './interfaces/Theme';
 
 export type { Overloader } from './util/formatting/types';
 export { OverloadHandler } from './util/formatting/OverloadHandler';

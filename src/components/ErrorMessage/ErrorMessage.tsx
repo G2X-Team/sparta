@@ -2,12 +2,12 @@ import type { FC, HTMLAttributes, ReactNode } from 'react';
 import React from 'react';
 import './ErrorMessage.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
+import type { Sparta } from '../../interfaces/Sparta';
 
 import { Text } from '../Text/Text';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
-export interface IErrorMessage extends HTMLAttributes<HTMLDivElement>, Apollo<'ErrorMessage'> {
+export interface IErrorMessage extends HTMLAttributes<HTMLDivElement>, Sparta<'ErrorMessage'> {
     /** Error message id */
     id: string;
     /** Must have an error message */
@@ -17,21 +17,21 @@ export interface IErrorMessage extends HTMLAttributes<HTMLDivElement>, Apollo<'E
 }
 
 /**
- * Apollo's error message component, used to display error messages
+ * Sparta's error message component, used to display error messages
  *
  * @return error message components
  */
 export const ErrorMessage: FC<IErrorMessage> = ({
-    'data-apollo': dataApollo = 'ErrorMessage',
+    'data-sparta': dataSparta = 'ErrorMessage',
     active = false,
     className = '',
     children,
     ...props
 }) => {
-    gaurdApolloName({ 'data-apollo': dataApollo }, 'ErrorMessage');
+    guardSpartaName({ 'data-sparta': dataSparta }, 'ErrorMessage');
 
     return active ? (
-        <div {...props} role="alert" data-apollo={dataApollo} className={`apollo ${className}`}>
+        <div {...props} role="alert" data-sparta={dataSparta} className={`sparta ${className}`}>
             <Text color="#F04438" style={{ fontSize: 14 }}>
                 {children}
             </Text>

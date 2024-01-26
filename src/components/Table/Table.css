@@ -1,32 +1,32 @@
-.apollo[data-apollo-id='TableWrapper'] > table {
+.sparta[data-sparta-id='TableWrapper'] > table {
     border-collapse: collapse;
 }
 
-.apollo[data-apollo-id='TableWrapper'] > div {    
+.sparta[data-sparta-id='TableWrapper'] > div {    
     border-top: 2px solid #eef1f2;
     padding: 12px 20px;
 }
 
-.apollo[data-apollo-id='TableWrapper'] > div > button {    
+.sparta[data-sparta-id='TableWrapper'] > div > button {    
     padding: 8px 10px;
 }
 
-.apollo[data-apollo-id='TableWrapper'] {
+.sparta[data-sparta-id='TableWrapper'] {
     box-shadow: 0 0 0 1.5px #EAEDEE;
     border-radius: 10px;
 }
 
-.apollo[data-apollo-id='TableWrapper'].has-columns > table {
+.sparta[data-sparta-id='TableWrapper'].has-columns > table {
     display: grid;
 }
 
-.apollo[data-apollo-id='TableWrapper'].has-columns thead,
-.apollo[data-apollo-id='TableWrapper'].has-columns tbody,
-.apollo[data-apollo-id='TableWrapper'].has-columns tr {
+.sparta[data-sparta-id='TableWrapper'].has-columns thead,
+.sparta[data-sparta-id='TableWrapper'].has-columns tbody,
+.sparta[data-sparta-id='TableWrapper'].has-columns tr {
     display: contents;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th {
+.sparta[data-sparta-id='TableWrapper'] th {
     padding: 12px 24px;
     background: #eef1f2;
     color: #404654;
@@ -36,85 +36,85 @@
     align-items: center;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th > span,
-.apollo[data-apollo-id='TableWrapper'] td > span {
+.sparta[data-sparta-id='TableWrapper'] th > span,
+.sparta[data-sparta-id='TableWrapper'] td > span {
     display: flex;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th > button {
+.sparta[data-sparta-id='TableWrapper'] th > button {
     color: inherit;
 }
 
-.apollo[data-apollo-id='TableWrapper'] td {
+.sparta[data-sparta-id='TableWrapper'] td {
     padding: 12px 24px;
     font-weight: normal;
     box-sizing: border-box;
 }
 
-.apollo[data-apollo-id='TableWrapper'] td.left,
-.apollo[data-apollo-id='TableWrapper'] th.left {
+.sparta[data-sparta-id='TableWrapper'] td.left,
+.sparta[data-sparta-id='TableWrapper'] th.left {
     text-align: left;
 }
 
-.apollo[data-apollo-id='TableWrapper'] td.right,
-.apollo[data-apollo-id='TableWrapper'] th.right {
+.sparta[data-sparta-id='TableWrapper'] td.right,
+.sparta[data-sparta-id='TableWrapper'] th.right {
     text-align: right;
     justify-content: end;
 }
 
-.apollo[data-apollo-id='TableWrapper'] td.center,
-.apollo[data-apollo-id='TableWrapper'] th.center {
+.sparta[data-sparta-id='TableWrapper'] td.center,
+.sparta[data-sparta-id='TableWrapper'] th.center {
     text-align: center;
 }
 
-.apollo[data-apollo-id='TableWrapper'].has-columns th.center,
-.apollo[data-apollo-id='TableWrapper'].has-columns td.center  {
+.sparta[data-sparta-id='TableWrapper'].has-columns th.center,
+.sparta[data-sparta-id='TableWrapper'].has-columns td.center  {
     align-items: center;
     justify-content: center;
 }
 
-.apollo[data-apollo-id='TableWrapper'].has-columns th {
+.sparta[data-sparta-id='TableWrapper'].has-columns th {
     display: flex;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th.center > button {
+.sparta[data-sparta-id='TableWrapper'] th.center > button {
     transform: translate(10px);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th.right > button { 
+.sparta[data-sparta-id='TableWrapper'] th.right > button { 
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th.center > span,
-.apollo[data-apollo-id='TableWrapper'] td.center > span {
+.sparta[data-sparta-id='TableWrapper'] th.center > span,
+.sparta[data-sparta-id='TableWrapper'] td.center > span {
     justify-content: space-around;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th.right > span, 
-.apollo[data-apollo-id='TableWrapper'] td.right > span {
+.sparta[data-sparta-id='TableWrapper'] th.right > span, 
+.sparta[data-sparta-id='TableWrapper'] td.right > span {
     justify-content: flex-end;
 }
 
-.apollo[data-apollo-id='TableWrapper'].has-columns td {
+.sparta[data-sparta-id='TableWrapper'].has-columns td {
     display: flex;
     align-items: center;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th:first-child {
+.sparta[data-sparta-id='TableWrapper'] th:first-child {
     border-radius: 10px 0 0 0;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th:last-child {
+.sparta[data-sparta-id='TableWrapper'] th:last-child {
     border-radius: 0 10px 0 0;
 }
 
 /* sort styling */
-.apollo[data-apollo-id='TableWrapper'] th > button {
+.sparta[data-sparta-id='TableWrapper'] th > button {
     background: none;
     border: none;
     cursor: pointer;
@@ -124,46 +124,46 @@
     width: 100%;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th > button > span:first-child {
+.sparta[data-sparta-id='TableWrapper'] th > button > span:first-child {
     padding-right: 5px;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th > button > span:last-child {
+.sparta[data-sparta-id='TableWrapper'] th > button > span:last-child {
     font-size: 1.2rem;
     opacity: 0;
     transition: opacity 300ms, transform 300ms;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th.active > button > span:last-child {
+.sparta[data-sparta-id='TableWrapper'] th.active > button > span:last-child {
     opacity: 1;
 }
 
-.apollo[data-apollo-id='TableWrapper'] th.active.up > button > span:last-child {
+.sparta[data-sparta-id='TableWrapper'] th.active.up > button > span:last-child {
     transform: rotate(180deg);
 }
 
-.apollo[data-apollo-id='TableWrapper'] th.inactive:hover > button > span:last-child,
-.apollo[data-apollo-id='TableWrapper'] th.inactive:focus > button > span:last-child {
+.sparta[data-sparta-id='TableWrapper'] th.inactive:hover > button > span:last-child,
+.sparta[data-sparta-id='TableWrapper'] th.inactive:focus > button > span:last-child {
     opacity: 1;
 }
 
 /* grid styling */
-.apollo[data-apollo-id='TableWrapper'].grid-horizontal tbody > tr > td,
-.apollo[data-apollo-id='TableWrapper'].grid-both tbody > tr > td {
+.sparta[data-sparta-id='TableWrapper'].grid-horizontal tbody > tr > td,
+.sparta[data-sparta-id='TableWrapper'].grid-both tbody > tr > td {
     border-bottom: 1.5px solid #eef1f2;
 }
 
-.apollo[data-apollo-id='TableWrapper'].grid-horizontal tbody > tr:last-child > td,
-.apollo[data-apollo-id='TableWrapper'].grid-both tbody > tr:last-child > td {
+.sparta[data-sparta-id='TableWrapper'].grid-horizontal tbody > tr:last-child > td,
+.sparta[data-sparta-id='TableWrapper'].grid-both tbody > tr:last-child > td {
     border-bottom: none;
 }
 
-.apollo[data-apollo-id='TableWrapper'].grid-vertical tbody > tr > td,
-.apollo[data-apollo-id='TableWrapper'].grid-both tbody > tr > td {
+.sparta[data-sparta-id='TableWrapper'].grid-vertical tbody > tr > td,
+.sparta[data-sparta-id='TableWrapper'].grid-both tbody > tr > td {
     border-right: 1.5px solid #eef1f2;
 }
 
-.apollo[data-apollo-id='TableWrapper'].grid-vertical tbody > tr > td:last-child,
-.apollo[data-apollo-id='TableWrapper'].grid-both tbody > tr > td:last-child {
+.sparta[data-sparta-id='TableWrapper'].grid-vertical tbody > tr > td:last-child,
+.sparta[data-sparta-id='TableWrapper'].grid-both tbody > tr > td:last-child {
     border-right: none;
 }

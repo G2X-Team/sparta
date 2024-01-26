@@ -56,13 +56,13 @@ export const CalendarGrid: FC<ICalendarGrid> = ({
             />
             <Section
                 column
-                id={`apollodateBounds${id}-${calendarData.length}`}
+                id={`spartadateBounds${id}-${calendarData.length}`}
                 aria-label="select a calendar date"
                 tabIndex={0}
                 height="100%"
                 width="100%"
             >
-                <div id="apollodate-day" className={`apollo ${theme}`} data-apollo="CalendarDay">
+                <div id="spartadate-day" className={`sparta ${theme}`} data-sparta="CalendarDay">
                     <Text style={{ fontSize }}>Su</Text>
                     <Text style={{ fontSize }}>Mo</Text>
                     <Text style={{ fontSize }}>Tu</Text>

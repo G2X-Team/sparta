@@ -4,8 +4,8 @@
  * @param props component properties
  * @param name expected name of component
  */
-export const gaurdApolloName = (props: any, name: string): void => {
-    if (props['data-apollo'] !== name) {
-        throw new Error(`Apollo component name must be ${name}`);
+export const guardSpartaName = (props: any, name: string): void => {
+    if (props['data-sparta'] !== name) {
+        throw new Error(`Sparta component name must be ${name}`);
     }
 };

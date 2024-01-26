@@ -2,13 +2,13 @@ import { HTMLAttributes, ReactNode, FC, useEffect } from 'react';
 import React from 'react';
 import './Radio.css';
 
-import type { Apollo } from '../../interfaces/Apollo';
-import { gaurdApolloName } from '../../util/ErrorHandling';
+import type { Sparta } from '../../interfaces/Sparta';
+import { guardSpartaName } from '../../util/ErrorHandling';
 
 import { Text } from '../Text/Text';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
-export interface IRadio extends HTMLAttributes<HTMLInputElement>, Apollo<'Radio'> {
+export interface IRadio extends HTMLAttributes<HTMLInputElement>, Sparta<'Radio'> {
     /** String that identifies the radio */
     id?: string;
     /** You can define an element pertaining to radio */
@@ -48,7 +48,7 @@ export const Radio: FC<IRadio> = ({
     id,
     ...props
 }) => {
-    gaurdApolloName(props, 'Radio');
+    guardSpartaName(props, 'Radio');
 
     // check if the user can use error messages
     useEffect(() => {
@@ -62,7 +62,7 @@ export const Radio: FC<IRadio> = ({
         <>
             <label
                 className={`
-                    apollo-component-library-radio-component-label 
+                    sparta-component-library-radio-component-label 
                     ${inline ? 'inline' : ''}
                 `}
             >
@@ -75,7 +75,7 @@ export const Radio: FC<IRadio> = ({
                     aria-errormessage={id ? `${id}-error` : `${value}-error`}
                     type="radio"
                     className={`
-                        apollo-component-library-radio-component 
+                        sparta-component-library-radio-component 
                         ${className}
                         ${invalid ? 'invalid' : ''}
                     `}
@@ -100,4 +100,4 @@ export const Radio: FC<IRadio> = ({
     );
 };
 
-Radio.defaultProps = { 'data-apollo': 'Radio' };
+Radio.defaultProps = { 'data-sparta': 'Radio' };

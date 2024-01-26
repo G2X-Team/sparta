@@ -26,7 +26,7 @@ export const Divider: FC<IDivider> = ({
         <hr
             role="separator"
             {...props}
-            className={`apollo-component-library-divider-component ${className}`}
+            className={`sparta-component-library-divider-component ${className}`}
             style={getStyle(style, height, color)}
         />
     );
