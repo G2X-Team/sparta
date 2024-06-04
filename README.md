@@ -67,7 +67,7 @@ sparta
 ```
 # 🤔 Have suggestions?
 
-Feel free to use the [Issues](https://github.com/MileMarker10/sparta/issues) tab on the repo to voice any questions or concerns about the codebase.
+Feel free to use the [Issues](https://github.com/G2X-Team/sparta/issues) tab on the repo to voice any questions or concerns about the codebase.
 
 # Documentation
 Coming soon
