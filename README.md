@@ -15,7 +15,7 @@ Here is a quick setup of what you need to do to start contributing in Sparta.
 sudo apt-get install -y nodejs
 
 # Clone repo
-git clone https://github.com/MileMarker10/sparta sparta
+git clone https://github.com/G2X-Team/sparta sparta
 
 # Run the setup script (One time command to install deps and husky)
 yarn setup
